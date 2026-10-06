@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Remove ads now also catches creator posts TikTok runs as ads. They don't carry TikTok's ad flag, so they were getting through, but TikTok marks them in the post's commerce details and Hushfeed reads the same mark TikTok does. The filter report counts them under AdSignals. Skip the splash ad also stops the startup tasks that preload TopView takeover ads and ask the server for a real-time splash.
+
 * **TikTok:** Feed filter has a new Hide unpersonalized For You videos switch. It hides the fill-in videos TikTok pads For You with when it hasn't picked anything for you, the ones it sends from its for_you_page_999 pool with no reason attached. If a whole batch is fill-in, the batch stays, so the feed never stalls on it. The filter report counts each For You batch by the pool TikTok says it came from, next to how many the switch took out. Creator exceptions get through it the same way they get through the other preference filters.
 
 ## 0.68.0 (2026-10-06)
