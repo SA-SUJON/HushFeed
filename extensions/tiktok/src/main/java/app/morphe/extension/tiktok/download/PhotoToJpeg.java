@@ -18,33 +18,40 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
 /**
- * Saves a HEIF photo again as a JPEG of the same size.
+ * Saves a HEIF or WebP photo again as a JPEG of the same size.
  *
- * <p>TikTok 47.1.4 lists only HEIF copies of a post's photos, and its own HEIF rewrite leaves
- * signed addresses alone, so there's no JPEG to ask the server for. A .heif is a file plenty of
- * galleries and computers won't open (#105). Anything that isn't HEIF, a HEIF this Android can't
- * decode (before 9) and a photo that won't read back all keep exactly what TikTok sent.
+ * <p>TikTok lists each photo of a post as a HEIF copy and a WebP copy, and its own HEIF rewrite
+ * leaves signed addresses alone, so there's no JPEG to ask the server for. A .heif is a file plenty
+ * of galleries and computers won't open (#105), and a .webp is one some computers and apps still
+ * won't. Samsung's decoder turns TikTok's HEIF down as well ("invalid input" on the S22), so
+ * {@link OriginalPhotos} fetches the WebP first and this rewrites whichever one came. Any other
+ * format keeps exactly what TikTok sent, and so does a photo this Android can't decode (before 9,
+ * or a HEIF the phone won't read), an animated one and a see-through one.
  */
-final class HeifToJpeg {
+final class PhotoToJpeg {
     /** High enough that the second encoding can't be told from the first at full size. */
     static final int QUALITY = 95;
     /** Far above any TikTok photo; a bigger one stays HEIF rather than risk the memory. */
     static final long MAX_PIXELS = 25_000_000L;
 
-    private HeifToJpeg() {}
+    private PhotoToJpeg() {}
 
     /**
-     * Rewrites {@code file} as a JPEG when {@code extension}, read from its header, says HEIF.
+     * Rewrites {@code file} as a JPEG when {@code extension}, read from its header, says HEIF or WebP.
      *
      * @return the extension the file holds afterwards: "jpg" once converted, else {@code extension}.
      */
     static String convert(Context context, File file, String extension) {
-        if (!"heif".equals(extension) && !"heic".equals(extension)) return extension;
+        if (!"heif".equals(extension) && !"heic".equals(extension) && !"webp".equals(extension)) {
+            return extension;
+        }
         if (Build.VERSION.SDK_INT < 28) return extension;
         File jpeg = null;
         Bitmap bitmap = null;
         try {
             bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(file), (decoder, info, source) -> {
+                // A JPEG would keep the first frame and drop the rest.
+                if (info.isAnimated()) throw new IllegalArgumentException("Animated photo kept as sent");
                 if ((long) info.getSize().getWidth() * info.getSize().getHeight() > MAX_PIXELS) {
                     throw new IllegalArgumentException("Photo too large to convert: " + info.getSize());
                 }
@@ -62,7 +69,7 @@ final class HeifToJpeg {
             Files.move(jpeg.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             return "jpg";
         } catch (IOException | RuntimeException | OutOfMemoryError error) {
-            Logger.printInfo(() -> "Kept the HEIF photo TikTok sent: " + error);
+            Logger.printInfo(() -> "Kept the " + extension + " photo TikTok sent: " + error);
             return extension;
         } finally {
             if (bitmap != null) bitmap.recycle();

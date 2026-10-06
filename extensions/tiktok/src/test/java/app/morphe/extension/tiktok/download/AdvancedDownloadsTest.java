@@ -300,23 +300,32 @@ public class AdvancedDownloadsTest {
 
     /**
      * TikTok leads a photo's list with a HEIF encoding, and that was what got saved: a .heif
-     * that plenty of galleries can't open (#105). The JPEG copy goes first, a JPEG named only in
-     * the query doesn't count, and the rest keep TikTok's order behind it as fallbacks.
+     * that plenty of galleries can't open (#105). The JPEG copy goes first, and a JPEG named only
+     * in the query doesn't count. The WebP comes before the HEIF, since a Samsung can't decode
+     * TikTok's HEIF to make a JPEG of it (S22, 47.0.3, every photo listed as "heic, webp").
      */
-    @Test public void photosPreferTheirJpegCopy() {
+    @Test public void photosTryJpegThenWebpBeforeHeif() {
         String heic = "https://p16-sign.example.com/obj/abc~tplv-photomode-image.heic?x-expires=1&name=a.jpeg";
         String webp = "https://p16-sign.example.com/obj/abc~tplv-photomode-image.webp?x-expires=1";
         String jpeg = "https://p16-sign.example.com/obj/abc~tplv-photomode-image.jpeg?x-expires=1";
         String upper = "https://p19-sign.example.com/obj/def~tplv-photomode-image.JPG";
+        String avif = "https://p16-sign.example.com/obj/ghi~tplv-photomode-image.avif?x-expires=1";
+        String png = "https://p16-sign.example.com/obj/ghi~tplv-photomode-image.png";
         Post post = new Post(List.of(
                 new Photo(new Address(null, 100).encodings(heic, webp, jpeg)),
                 new Photo(new Address(null, 100).encodings(webp, upper)),
-                new Photo(new Address(null, 100).encodings(heic, webp))));
-        assertEquals(List.of(List.of(jpeg, heic, webp), List.of(upper, webp), List.of(heic, webp)),
+                new Photo(new Address(null, 100).encodings(heic, webp)),
+                new Photo(new Address(null, 100).encodings(avif, heic, png, webp))));
+        assertEquals(List.of(List.of(jpeg, webp, heic), List.of(upper, webp), List.of(webp, heic),
+                        List.of(png, webp, avif, heic)),
                 OriginalPhotos.sources(post));
         // What a debug report says of each list: the path's ending only, never the signed query.
         assertEquals(List.of("heic", "webp", "jpeg", "jpg", "?"), OriginalPhotos.encodings(
                 List.of(heic, webp, jpeg, upper, "https://p16-sign.example.com/obj/abc")));
+        // The log redacts before it prints, and "encodings: [heic" lost its heic to it.
+        String listing = OriginalPhotos.listing(1, List.of(heic, webp));
+        assertEquals("Original photo 1 is listed as heic, webp", listing);
+        assertEquals(listing, app.morphe.extension.shared.diagnostics.DiagnosticRedactor.redact(listing));
     }
 
     /**

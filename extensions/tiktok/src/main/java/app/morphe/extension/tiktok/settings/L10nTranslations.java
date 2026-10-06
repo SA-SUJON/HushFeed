@@ -2171,8 +2171,8 @@ public final class L10nTranslations {
                 "Saxlama ləğv edildi. Heç nə saxlanılmadı.");
         table.put("Save details beside the video",
                 "Təfərrüatları videonun yanında saxlayın");
-        table.put("Save every photo in the post as TikTok received it, not as the screen shows it.",
-                "Paylaşımdakı hər fotonu ekranda göründüyü kimi deyil, TikTok-un aldığı kimi saxlayın.");
+        table.put("Save every photo in the post at full size as a JPEG, not as the screen shows it.",
+                "Paylaşımdakı hər fotonu ekranda göründüyü kimi deyil, tam ölçüdə JPEG kimi saxlayın.");
         table.put("Save field values",
                 "Sahə dəyərlərini saxlayın");
     }
@@ -5314,8 +5314,8 @@ public final class L10nTranslations {
                 "Speichern abgebrochen. Es wurde nichts gespeichert.");
         table.put("Save details beside the video",
                 "Details neben dem Video speichern");
-        table.put("Save every photo in the post as TikTok received it, not as the screen shows it.",
-                "Jedes Foto des Beitrags so speichern, wie TikTok es empfangen hat, nicht so, wie der Bildschirm es zeigt.");
+        table.put("Save every photo in the post at full size as a JPEG, not as the screen shows it.",
+                "Jedes Foto des Beitrags in voller Größe als JPEG speichern, nicht so, wie der Bildschirm es zeigt.");
         table.put("Save field values",
                 "Feldwerte speichern");
     }
@@ -8457,8 +8457,8 @@ public final class L10nTranslations {
                 "Guardado cancelado. No se guardó nada.");
         table.put("Save details beside the video",
                 "Guardar detalles junto al video");
-        table.put("Save every photo in the post as TikTok received it, not as the screen shows it.",
-                "Guardar cada foto de la publicación tal como la recibió TikTok, no como la muestra la pantalla.");
+        table.put("Save every photo in the post at full size as a JPEG, not as the screen shows it.",
+                "Guardar cada foto de la publicación a tamaño completo como JPEG, no como la muestra la pantalla.");
         table.put("Save field values",
                 "Guardar los valores de los campos");
     }
@@ -11600,8 +11600,8 @@ public final class L10nTranslations {
                 "Penyimpanan dibatalkan. Tidak ada yang disimpan.");
         table.put("Save details beside the video",
                 "Simpan detail di samping video");
-        table.put("Save every photo in the post as TikTok received it, not as the screen shows it.",
-                "Simpan setiap foto dalam unggahan seperti yang diterima TikTok, bukan seperti yang ditampilkan layar.");
+        table.put("Save every photo in the post at full size as a JPEG, not as the screen shows it.",
+                "Simpan setiap foto dalam unggahan dalam ukuran penuh sebagai JPEG, bukan seperti yang ditampilkan layar.");
         table.put("Save field values",
                 "Simpan nilai bidang");
     }
@@ -14743,8 +14743,8 @@ public final class L10nTranslations {
                 "Salvataggio annullato. Non è stato salvato nulla.");
         table.put("Save details beside the video",
                 "Salva i dettagli insieme al video");
-        table.put("Save every photo in the post as TikTok received it, not as the screen shows it.",
-                "Salva ogni foto del post così come l'ha ricevuta TikTok, non come la mostra lo schermo.");
+        table.put("Save every photo in the post at full size as a JPEG, not as the screen shows it.",
+                "Salva ogni foto del post a dimensione piena in JPEG, non come la mostra lo schermo.");
         table.put("Save field values",
                 "Salva i valori dei campi");
     }
@@ -17886,8 +17886,8 @@ public final class L10nTranslations {
                 "Salvamento cancelado. Nada foi salvo.");
         table.put("Save details beside the video",
                 "Salvar detalhes junto ao vídeo");
-        table.put("Save every photo in the post as TikTok received it, not as the screen shows it.",
-                "Salvar cada foto da publicação como o TikTok a recebeu, não como a tela a mostra.");
+        table.put("Save every photo in the post at full size as a JPEG, not as the screen shows it.",
+                "Salvar cada foto da publicação em tamanho completo como JPEG, não como a tela a mostra.");
         table.put("Save field values",
                 "Salvar os valores dos campos");
     }
@@ -21253,8 +21253,8 @@ public final class L10nTranslations {
                 "Сохранение отменено. Ничего не сохранено.");
         table.put("Save details beside the video",
                 "Сохранять детали рядом с видео");
-        table.put("Save every photo in the post as TikTok received it, not as the screen shows it.",
-                "Сохранять каждое фото публикации в том виде, в каком его получил TikTok, а не как оно показано на экране.");
+        table.put("Save every photo in the post at full size as a JPEG, not as the screen shows it.",
+                "Сохранять каждое фото публикации в полном размере в формате JPEG, а не как оно показано на экране.");
         table.put("Save field values",
                 "Сохранить значения полей");
         table.put("Save full report",
@@ -24456,8 +24456,8 @@ public final class L10nTranslations {
                 "Kaydetme iptal edildi. Hiçbir şey kaydedilmedi.");
         table.put("Save details beside the video",
                 "Ayrıntıları videonun yanına kaydet");
-        table.put("Save every photo in the post as TikTok received it, not as the screen shows it.",
-                "Gönderideki her fotoğrafı ekranın gösterdiği gibi değil, TikTok'un aldığı gibi kaydet.");
+        table.put("Save every photo in the post at full size as a JPEG, not as the screen shows it.",
+                "Gönderideki her fotoğrafı ekranın gösterdiği gibi değil, tam boyutta JPEG olarak kaydet.");
         table.put("Save field values",
                 "Alan değerlerini kaydet");
     }
