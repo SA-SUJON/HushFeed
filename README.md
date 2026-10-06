@@ -1,7 +1,7 @@
 ![Hushfeed. Take back your feed with focused controls for filtering, gestures, playback, downloads and privacy.](assets/readme-hero.png)
 
 <p align="center">
-  <a href="CHANGELOG.md"><img alt="version" src="https://img.shields.io/badge/version-0.67.1-6f42c1.svg" /></a>
+  <a href="CHANGELOG.md"><img alt="version" src="https://img.shields.io/badge/version-0.68.0-6f42c1.svg" /></a>
   <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/license-GPLv3-blue.svg" /></a>
   <a href="https://www.android.com/"><img alt="platform" src="https://img.shields.io/badge/platform-Android-3ddc84.svg" /></a>
   <a href="https://github.com/MorpheApp/morphe-manager"><img alt="Morphe" src="https://img.shields.io/badge/works%20with-Morphe-00b894.svg" /></a>
@@ -20,7 +20,7 @@ Hushfeed is a [Morphe](https://github.com/MorpheApp/morphe-manager) patch bundle
 
 Hushfeed v0.67.1 contains 106 patches for TikTok 47.0.3, 47.1.3 and 47.1.4. New in this one: the buttons Hushfeed draws on videos start off and sit together under Feed screen > Buttons on videos, the settings pages are regrouped, and a TikTok with a single language patches with everything selected. It needs Morphe Manager 1.33.0 or newer.
 
-The main branch contains 106 patches, the same set as v0.67.1.
+The main branch contains 106 patches, the same set as v0.68.0.
 
 ## Pick what changes
 
