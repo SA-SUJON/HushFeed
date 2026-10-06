@@ -139,6 +139,17 @@ public class AuthorRegionTest {
         assertEquals("My path forward", name.getText().toString());
     }
 
+    /** TikTok keeps the post time GONE unless the publish date shows; the row is still the author's (#75). */
+    @Test
+    public void aHiddenPostTimeStillMarksTheAuthorRow() {
+        LinearLayout row = feedRow("My path forward");
+        row.getChildAt(1).setVisibility(View.GONE);
+        assertSame(row.getChildAt(0), AuthorRegion.findName(row));
+
+        row.getChildAt(0).setVisibility(View.GONE);
+        assertNull(AuthorRegion.findName(row));
+    }
+
     @Test
     public void aCommentRowIsNotTheAuthorRow() {
         assertNull(AuthorRegion.findName(commentRow("Joshbetancourt28")));

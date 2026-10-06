@@ -174,14 +174,16 @@ public final class AuthorRegion {
 
     /** Every author row's name under {@code view}, skipping whatever is hidden. */
     private static void collectNames(View view, List<TextView> names) {
-        if (view.getVisibility() != View.VISIBLE) {
-            return;
-        }
+        // The post time marks the row even while it's hidden: TikTok keeps it GONE in the feed
+        // unless the publish date is shown, and the name beside it still needs the country.
         if (view.getId() == postTimeViewId && view.getParent() instanceof ViewGroup) {
             View name = ((ViewGroup) view.getParent()).findViewById(nameViewId);
-            if (name instanceof TextView) {
+            if (name instanceof TextView && name.getVisibility() == View.VISIBLE) {
                 names.add((TextView) name);
             }
+        }
+        if (view.getVisibility() != View.VISIBLE) {
+            return;
         }
         if (view instanceof ViewGroup) {
             ViewGroup group = (ViewGroup) view;
