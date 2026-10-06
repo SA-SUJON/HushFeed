@@ -4,6 +4,7 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Switch rows in Hushfeed's settings change shape when the screen is narrow and the text is large. The switch moves under the text, at the end of the row, and the title and description get the whole width. A German title at twice the text size on a small phone no longer breaks mid-word into four short lines. Wider screens keep the usual layout, and a row scrolled from one shape into the other changes back.
 * **TikTok:** Every Guava request in the build now resolves to 33.7.2, the release outside GHSA-xxph-c9ww-hj94, across the settings, plugin and project graphs rather than only where the catalog's pin reached. Its checksums were verified against Maven Central before the strict dependency check accepted them. Guava stays on the build and patching side: the patch bundle and the extension carry none of it. The check that patch sources don't import Guava directly used to pass without reading a file. It reads them now.
 
 * **TikTok:** What's new now tells you the notes are in English when the rest of the settings are in your language. The notes are also marked as English text for screen readers.
