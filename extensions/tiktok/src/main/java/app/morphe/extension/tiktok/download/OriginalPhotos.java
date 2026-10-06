@@ -209,9 +209,34 @@ public final class OriginalPhotos {
             }
             // Never silently save just part of a post whose original sources are missing.
             if (candidates.isEmpty()) return Collections.emptyList();
-            result.add(candidates);
+            result.add(jpegFirst(candidates));
         }
         return result;
+    }
+
+    /**
+     * The photo's addresses with its JPEG copies first, each group in TikTok's order.
+     *
+     * <p>TikTok lists every photo in several encodings and usually leads with a HEIF one, which
+     * was what got saved: a .heif that plenty of galleries can't open (#105). The other copies
+     * stay behind the JPEG in case it fails.
+     */
+    static List<String> jpegFirst(List<String> urls) {
+        List<String> ordered = new ArrayList<>(urls.size());
+        for (String url : urls) if (isJpeg(url)) ordered.add(url);
+        for (String url : urls) if (!isJpeg(url)) ordered.add(url);
+        return ordered;
+    }
+
+    /** Whether the address names a JPEG, read from its path so a query can't pass for one. */
+    private static boolean isJpeg(String url) {
+        int end = url.length();
+        int query = url.indexOf('?');
+        if (query >= 0) end = query;
+        int fragment = url.indexOf('#');
+        if (fragment >= 0 && fragment < end) end = fragment;
+        String path = url.substring(0, end).toLowerCase(java.util.Locale.ROOT);
+        return path.endsWith(".jpeg") || path.endsWith(".jpg");
     }
 
 }
