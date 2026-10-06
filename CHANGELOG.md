@@ -4,7 +4,7 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
-* **TikTok:** What's new now tells you the notes are in English when the rest of the settings are in your language, and screen readers read the notes with English pronunciation.
+* **TikTok:** What's new now tells you the notes are in English when the rest of the settings are in your language. The notes are also marked as English text for screen readers.
 
 * **TikTok:** Settings search now finds every box in a checklist, ticked or not, so searching "counts" finds Counts under the buttons in the right column list. Opening a box's result opens the list scrolled to that box without changing it. A list that's open when the screen rotates comes back with your unsaved ticks.
 
