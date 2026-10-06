@@ -197,6 +197,21 @@ public class AdsFilterTest {
     }
 
     @Test public void aCreatorPostTikTokRunsAsAnAdIsAnAdAndIsCounted() {
+        Video pseudo = video(null);
+        Commerce both = new Commerce();
+        both.pseudoAd = true;
+        both.pseudoAdData = new AwemeRawAd();
+        pseudo.commerceVideoAuthInfo = both;
+
+        assertTrue(filter.getFiltered(pseudo));
+        assertTrue(FeedFilterCounters.report().toString(),
+                FeedFilterCounters.report().contains("AdSignals: 0 lists, 0 items, 0 removed. Kinds: pseudo ad 1"));
+    }
+
+    /** TikTok's isPseudoAd returns false unless the flag and the ad data are both there. */
+    @Test public void theFlagOrTheAdDataAloneIsNotAPseudoAd() {
+        Video ordinary = video(null);
+        ordinary.commerceVideoAuthInfo = new Commerce();
         Video flagged = video(null);
         Commerce flag = new Commerce();
         flag.pseudoAd = true;
@@ -206,17 +221,9 @@ public class AdsFilterTest {
         data.pseudoAdData = new AwemeRawAd();
         carrying.commerceVideoAuthInfo = data;
 
-        assertTrue(filter.getFiltered(flagged));
-        assertTrue(filter.getFiltered(carrying));
-        assertTrue(FeedFilterCounters.report().toString(),
-                FeedFilterCounters.report().contains("AdSignals: 0 lists, 0 items, 0 removed. Kinds: pseudo ad 2"));
-    }
-
-    @Test public void anOrdinaryCommerceStructIsNotAPseudoAd() {
-        Video ordinary = video(null);
-        ordinary.commerceVideoAuthInfo = new Commerce();
-
         assertFalse(filter.getFiltered(ordinary));
+        assertFalse(filter.getFiltered(flagged));
+        assertFalse(filter.getFiltered(carrying));
         assertTrue(FeedFilterCounters.report().isEmpty());
     }
 

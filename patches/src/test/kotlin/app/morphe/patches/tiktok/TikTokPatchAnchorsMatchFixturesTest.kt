@@ -415,6 +415,8 @@ class TikTokPatchAnchorsMatchFixturesTest {
     /**
      * AdsFilter.isPseudoAd reads the commerce struct by name. TikTok's own AwemeExtKt.isPseudoAd
      * has to read exactly those three members on every build, or the two tests have drifted apart.
+     * Its shape is pinned too: each read returns false early, so only the flag and the ad data
+     * together make a pseudo ad, which is how AdsFilter combines them.
      */
     @Test
     fun `pseudo ad check reads the members TikTok's own isPseudoAd reads on every fixture`() {
@@ -431,6 +433,12 @@ class TikTokPatchAnchorsMatchFixturesTest {
                 "$commerce->isPseudoAd()Z",
                 "$commerce->getPseudoAdData()${model}AwemeRawAd;",
             ), check.implementation!!.instructions.filterIsInstance<ReferenceInstruction>().map { it.reference.toString() })
+            assertEquals("${apk.name}: TikTok's pseudo ad test needs both signals", listOf(
+                "invoke-virtual", "move-result-object", "const/4", "if-nez", "return",
+                "invoke-virtual", "move-result", "if-nez", "return",
+                "invoke-virtual", "move-result-object", "if-nez", "return",
+                "const/4", "return",
+            ), check.implementation!!.instructions.map { it.opcode.name })
         }
     }
 

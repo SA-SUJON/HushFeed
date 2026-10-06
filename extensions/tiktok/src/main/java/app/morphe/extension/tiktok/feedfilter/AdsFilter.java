@@ -35,15 +35,15 @@ public class AdsFilter implements IFilter {
 
     /**
      * A creator's own post that TikTok runs as an ad. isAd and the raw ad stay empty on it, so
-     * TikTok's AwemeExtKt.isPseudoAd reads the commerce struct instead: its isPseudoAd flag or the
-     * ad data it carries. This is that same test. Both are defaults on an ordinary post (false
-     * and null), unlike the struct itself, which rides along on most of the feed.
+     * TikTok's AwemeExtKt.isPseudoAd reads the commerce struct instead, and needs both its
+     * isPseudoAd flag and the ad data it carries: either one alone is not an ad to TikTok. This
+     * is that same test. The struct itself rides along on most of the feed.
      */
     static boolean isPseudoAd(Aweme item) {
         Object commerce = Reflect.property(item, "getCommerceVideoAuthInfo", "commerceVideoAuthInfo");
         if (commerce == null) return false;
         boolean pseudo = Boolean.TRUE.equals(Reflect.property(commerce, "isPseudoAd", "isPseudoAd"))
-                || Reflect.property(commerce, "getPseudoAdData", "pseudoAdData") != null;
+                && Reflect.property(commerce, "getPseudoAdData", "pseudoAdData") != null;
         if (pseudo) FeedFilterCounters.sawKind(AD_SIGNALS_SOURCE, "pseudo ad");
         return pseudo;
     }
