@@ -670,7 +670,9 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                 String member = getArguments().getString(ARG_TARGET_MEMBER);
                 Preference row = findPreference(targetKey);
                 if (state == null && member != null && row instanceof SwitchListPreference) {
-                    list.post(() -> ((SwitchListPreference) row).showChoicesAt(member));
+                    list.post(() -> {
+                        if (isAdded()) ((SwitchListPreference) row).showChoicesAt(member);
+                    });
                 }
             }
         }
