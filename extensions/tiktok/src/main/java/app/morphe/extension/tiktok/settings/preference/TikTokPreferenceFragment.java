@@ -73,7 +73,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     private static final String ARG_TARGET_KEY = "morphe_settings_target_key";
     /** A checklist row's one box: the setting key of the member search landed on. */
     private static final String ARG_TARGET_MEMBER = "morphe_settings_target_member";
-    private static TikTokPreferenceFragment activeFragment;
+    // Volatile: a file read or write's worker looks it up to report in the page open now.
+    private static volatile TikTokPreferenceFragment activeFragment;
     /** Pinned to the top of this page while a restart is owed; off the page otherwise. */
     private RestartPendingPreference restartPending;
     /** Rows on this page whose sentence was swapped for "Restart pending.", to swap back. */
@@ -1328,6 +1329,26 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     }
 
     void refreshBackupSettings() { updateUIToSettingValues(); }
+
+    /**
+     * The settings page in front now, or null. After a rotation or a return from the file picker
+     * it is not the page a file read or write started on, and that page is gone.
+     */
+    static TikTokPreferenceFragment active() {
+        TikTokPreferenceFragment current = activeFragment;
+        return current != null && current.isAdded() ? current : null;
+    }
+
+    /**
+     * Where a file read or write reports its outcome: the page open now, else the window it
+     * started in, else the fallback, which the banner turns into a toast.
+     */
+    static Context reportWindow(java.lang.ref.WeakReference<Activity> started, Context fallback) {
+        TikTokPreferenceFragment open = active();
+        Activity activity = open != null ? open.getActivity() : null;
+        if (activity == null) activity = started.get();
+        return activity != null ? activity : fallback;
+    }
 
     /** Reconciles a preset's batch write with the rows and the restart debt on this page. */
     static void onSettingsBatchChanged(java.util.Map<Setting<?>, Object> previousValues) {

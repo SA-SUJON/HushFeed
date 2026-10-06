@@ -1651,3 +1651,10 @@ No cleared videos fit the current history limits.	Ни одно удалённо
 Putting seen videos back	Восстановление просмотренных видео
 # context: a line above the What's new release notes, which come from the English changelog and are not translated.
 These notes are in English.	Эти заметки на английском языке.
+Still waiting for the file app. Tap to stop waiting.	Приложение для файлов всё ещё не ответило. Нажмите, чтобы перестать ждать.
+Stopped waiting for the file app. Nothing was changed.	Ожидание приложения для файлов остановлено. Ничего не изменено.
+Stopped waiting for the file app. It hasn't said yet whether the backup was saved.	Ожидание приложения для файлов остановлено. Оно ещё не сообщило, сохранена ли резервная копия.
+The backup wasn't saved. Back up again when the file app is ready.	Резервная копия не сохранена. Создайте её снова, когда приложение для файлов будет готово.
+The file app still has the last file. Try again once it lets go, or restart TikTok.	Приложение для файлов всё ещё держит последний файл. Повторите попытку, когда оно его отпустит, или перезапустите TikTok.
+Waiting for the file app to let go of the last file. Restart TikTok if it doesn't.	Ждём, пока приложение для файлов отпустит последний файл. Если этого не произойдёт, перезапустите TikTok.
+Stopped waiting for the file app. Nothing was imported.	Ожидание приложения для файлов остановлено. Ничего не импортировано.

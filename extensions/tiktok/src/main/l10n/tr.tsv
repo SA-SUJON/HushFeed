@@ -1513,3 +1513,10 @@ No cleared videos fit the current history limits.	Silinen videoların hiçbiri g
 Putting seen videos back	İzlenen videolar geri yükleniyor
 # context: a line above the What's new release notes, which come from the English changelog and are not translated.
 These notes are in English.	Bu notlar İngilizcedir.
+Still waiting for the file app. Tap to stop waiting.	Dosya uygulaması hâlâ bekleniyor. Beklemeyi bırakmak için dokun.
+Stopped waiting for the file app. Nothing was changed.	Dosya uygulaması artık beklenmiyor. Hiçbir şey değiştirilmedi.
+Stopped waiting for the file app. It hasn't said yet whether the backup was saved.	Dosya uygulaması artık beklenmiyor. Yedeğin kaydedilip kaydedilmediğini henüz bildirmedi.
+The backup wasn't saved. Back up again when the file app is ready.	Yedek kaydedilmedi. Dosya uygulaması hazır olduğunda yeniden yedekle.
+The file app still has the last file. Try again once it lets go, or restart TikTok.	Dosya uygulaması son dosyayı hâlâ tutuyor. Bıraktığında tekrar dene ya da TikTok'u yeniden başlat.
+Waiting for the file app to let go of the last file. Restart TikTok if it doesn't.	Dosya uygulamasının son dosyayı bırakması bekleniyor. Bırakmazsa TikTok'u yeniden başlat.
+Stopped waiting for the file app. Nothing was imported.	Dosya uygulaması artık beklenmiyor. Hiçbir şey içe aktarılmadı.

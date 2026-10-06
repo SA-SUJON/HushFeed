@@ -1516,3 +1516,10 @@ No cleared videos fit the current history limits.	Keine gelöschten Videos passe
 Putting seen videos back	Gesehene Videos werden zurückgeholt
 # context: a line above the What's new release notes, which come from the English changelog and are not translated.
 These notes are in English.	Diese Hinweise sind auf Englisch.
+Still waiting for the file app. Tap to stop waiting.	Es wird noch auf die Datei-App gewartet. Tippe, um nicht mehr zu warten.
+Stopped waiting for the file app. Nothing was changed.	Warten auf die Datei-App beendet. Es wurde nichts geändert.
+Stopped waiting for the file app. It hasn't said yet whether the backup was saved.	Warten auf die Datei-App beendet. Sie hat noch nicht gemeldet, ob die Sicherung gespeichert wurde.
+The backup wasn't saved. Back up again when the file app is ready.	Die Sicherung wurde nicht gespeichert. Sichere erneut, wenn die Datei-App bereit ist.
+The file app still has the last file. Try again once it lets go, or restart TikTok.	Die Datei-App hält die letzte Datei noch fest. Versuch es erneut, sobald sie sie freigibt, oder starte TikTok neu.
+Waiting for the file app to let go of the last file. Restart TikTok if it doesn't.	Warte, bis die Datei-App die letzte Datei freigibt. Starte TikTok neu, wenn sie es nicht tut.
+Stopped waiting for the file app. Nothing was imported.	Warten auf die Datei-App beendet. Es wurde nichts importiert.

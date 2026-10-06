@@ -1508,3 +1508,10 @@ Seen videos put back: %1$s of %2$s,Video ditonton yang dipulihkan: %1$s dari %2$
 No cleared videos fit the current history limits.,Tidak ada video yang dihapus yang memenuhi batas riwayat saat ini.
 Putting seen videos back,Memulihkan video yang ditonton
 These notes are in English.,Catatan ini dalam bahasa Inggris.
+Still waiting for the file app. Tap to stop waiting.,Masih menunggu aplikasi file. Ketuk untuk berhenti menunggu.
+Stopped waiting for the file app. Nothing was changed.,Berhenti menunggu aplikasi file. Tidak ada yang diubah.
+Stopped waiting for the file app. It hasn't said yet whether the backup was saved.,Berhenti menunggu aplikasi file. Aplikasi itu belum memberi tahu apakah cadangan sudah tersimpan.
+The backup wasn't saved. Back up again when the file app is ready.,Cadangan tidak tersimpan. Cadangkan lagi saat aplikasi file sudah siap.
+"The file app still has the last file. Try again once it lets go, or restart TikTok.","Aplikasi file masih memegang file terakhir. Coba lagi setelah dilepas, atau mulai ulang TikTok."
+Waiting for the file app to let go of the last file. Restart TikTok if it doesn't.,Menunggu aplikasi file melepas file terakhir. Mulai ulang TikTok jika tidak dilepas.
+Stopped waiting for the file app. Nothing was imported.,Berhenti menunggu aplikasi file. Tidak ada yang diimpor.
