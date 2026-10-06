@@ -751,12 +751,20 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
             return;
         }
 
+        // A hit on a whole word comes first, each group in page order. "counts" listed Hide
+        // verified accounts and Blocked creators, where it sits inside "accounts", above the
+        // rows that are about counts.
         List<SearchResult> matches = new ArrayList<>();
+        List<SearchResult> insideWords = new ArrayList<>();
         for (SearchResult result : searchIndex) {
-            if (result.normalized.contains(normalizedQuery)) {
+            if (!result.normalized.contains(normalizedQuery)) continue;
+            if (app.morphe.extension.tiktok.settings.SearchText.containsWord(result.normalized, normalizedQuery)) {
                 matches.add(result);
+            } else {
+                insideWords.add(result);
             }
         }
+        matches.addAll(insideWords);
         if (searchInput != null) searchInput.showResultCount(matches.size());
         if (matches.isEmpty()) {
             // A switch from a patch left unticked in the Manager is on no page and in no index, and
