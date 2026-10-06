@@ -59,7 +59,7 @@ final class DocumentOperation {
         STOPPED,
         /** Stopped while the file app had the backup, so only the worker's return says how it went. */
         STOPPED_WHILE_PUBLISHING,
-        /** The worker has returned without being stopped. */
+        /** The file app has taken the whole backup, or the worker has returned without being stopped. */
         DONE
     }
 
@@ -77,6 +77,18 @@ final class DocumentOperation {
 
     /** How long a file app may take before the row offers to stop waiting. Tests shorten it. */
     static volatile long stallMillis = 4_000;
+
+    /**
+     * Wraps the streams the work reads and writes. Only tests set it, to hold a read or a write
+     * the way a cloud file app does when the pipe comes back at once and the data comes late.
+     */
+    interface Streams {
+        InputStream reading(InputStream input);
+        OutputStream writing(OutputStream output);
+    }
+
+    /** Null outside tests. */
+    static volatile Streams streams;
 
     private static final ConcurrentHashMap<Kind, DocumentOperation> WORKERS = new ConcurrentHashMap<>();
 
@@ -149,6 +161,15 @@ final class DocumentOperation {
         return advance(Stage.PUBLISHING);
     }
 
+    /**
+     * Marks a handed-over backup as kept once the file app has taken all of it, so a stop after
+     * this can't call the outcome open. A stop that came first is answered by the outcome the
+     * worker reports next.
+     */
+    void finish() {
+        if (stage.compareAndSet(Stage.PUBLISHING, Stage.DONE)) changed();
+    }
+
     private boolean advance(Stage next) {
         if (!stage.compareAndSet(Stage.PREPARING, next)) return false;
         changed();
@@ -177,12 +198,16 @@ final class DocumentOperation {
 
     /** The document, read through the descriptor the file app hands over. */
     InputStream openForRead(ContentResolver resolver, Uri uri) throws IOException {
-        return open(resolver, uri, "r").createInputStream();
+        InputStream input = open(resolver, uri, "r").createInputStream();
+        Streams wrap = streams;
+        return wrap == null ? input : wrap.reading(input);
     }
 
     /** The document, written through the descriptor the file app hands over. */
     OutputStream openForWrite(ContentResolver resolver, Uri uri, String mode) throws IOException {
-        return open(resolver, uri, mode).createOutputStream();
+        OutputStream output = open(resolver, uri, mode).createOutputStream();
+        Streams wrap = streams;
+        return wrap == null ? output : wrap.writing(output);
     }
 
     /**

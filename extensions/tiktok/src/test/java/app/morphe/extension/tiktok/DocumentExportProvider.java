@@ -27,7 +27,8 @@ import org.robolectric.shadows.ShadowContentResolver;
  * A SAF document whose real DocumentsProvider dispatch distinguishes deleteDocument from delete,
  * and which can stand in for a slow file app: an open can be held until the test lets it go,
  * and the provider either gives up when the caller cancels or, like a file app that has hung,
- * ignores it.
+ * ignores it. With {@link #contents} it is a file the user chose to replace; without, the empty
+ * one the picker made.
  */
 public final class DocumentExportProvider extends DocumentsProvider {
     public static final String AUTHORITY = "app.morphe.test.export.documents";
@@ -47,6 +48,8 @@ public final class DocumentExportProvider extends DocumentsProvider {
     public volatile boolean readOnlyWrites;
     /** Whether a held open gives up when the caller cancels, as a cooperative file app does. */
     public volatile boolean honorCancel;
+    /** Leaves the size out of the document's row, as some file apps do. */
+    public volatile boolean sizeUnknown;
     public volatile int deleteCalls;
     public File file;
     private volatile CountDownLatch hold;
@@ -100,10 +103,12 @@ public final class DocumentExportProvider extends DocumentsProvider {
                 DocumentsContract.Document.COLUMN_DOCUMENT_ID,
                 DocumentsContract.Document.COLUMN_DISPLAY_NAME,
                 DocumentsContract.Document.COLUMN_MIME_TYPE,
-                DocumentsContract.Document.COLUMN_FLAGS});
+                DocumentsContract.Document.COLUMN_FLAGS,
+                DocumentsContract.Document.COLUMN_SIZE});
         if (exists) cursor.addRow(new Object[]{"backup", "backup.json", "application/json",
                 DocumentsContract.Document.FLAG_SUPPORTS_WRITE
-                        | DocumentsContract.Document.FLAG_SUPPORTS_DELETE});
+                        | DocumentsContract.Document.FLAG_SUPPORTS_DELETE,
+                sizeUnknown ? null : file.length()});
         return cursor;
     }
 

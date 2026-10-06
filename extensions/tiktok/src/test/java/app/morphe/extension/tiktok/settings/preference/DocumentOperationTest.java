@@ -1,8 +1,10 @@
 package app.morphe.extension.tiktok.settings.preference;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -23,11 +25,14 @@ import app.morphe.extension.tiktok.settings.SettingsBackup;
 import app.morphe.extension.tiktok.settings.SettingsPagesTest;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -83,6 +88,7 @@ public class DocumentOperationTest {
     @After public void tearDown() throws Exception {
         for (CountDownLatch hold : holds) hold.countDown();
         Utils.awaitBackgroundTasksForTests();
+        DocumentOperation.streams = null;
         Shadows.shadowOf(Looper.getMainLooper()).idle();
         assertFalse("a test left a settings file worker out",
                 DocumentOperation.busy(DocumentOperation.Kind.SETTINGS_FILE));
@@ -137,6 +143,7 @@ public class DocumentOperationTest {
             work.publish();
             published.countDown();
             await(release);
+            work.finish();
         }, null);
         assertTrue(published.await(5, TimeUnit.SECONDS));
 
@@ -144,9 +151,38 @@ public class DocumentOperationTest {
         assertTrue(DocumentOperation.heldAfterStop(DocumentOperation.Kind.SETTINGS_FILE));
         release.countDown();
         Utils.awaitBackgroundTasksForTests();
-        assertEquals("the worker's return overwrote how it was stopped",
+        assertEquals("the worker's finish or return overwrote how it was stopped",
                 DocumentOperation.Stage.STOPPED_WHILE_PUBLISHING, operation.stage());
         assertFalse(DocumentOperation.busy(DocumentOperation.Kind.SETTINGS_FILE));
+    }
+
+    /**
+     * Once the file app has taken the whole backup, it's saved, and a stop tapped before the
+     * worker gets to say so can't call the outcome open: that used to follow "Settings backup
+     * saved" with "It hasn't said yet whether the backup was saved".
+     */
+    @Test public void aBackupTheFileAppHasTakenCanNoLongerBeStopped() throws Exception {
+        CountDownLatch finished = new CountDownLatch(1);
+        CountDownLatch release = hold();
+        AtomicInteger changes = new AtomicInteger();
+        DocumentOperation operation = DocumentOperation.start(DocumentOperation.Kind.SETTINGS_FILE, work -> {
+            work.publish();
+            work.finish();
+            finished.countDown();
+            await(release);
+        }, changes::incrementAndGet);
+        assertTrue(finished.await(5, TimeUnit.SECONDS));
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+        assertTrue("the rows weren't told the backup was taken", changes.get() >= 2);
+        stall();
+
+        assertFalse("the row offered a stop after the backup was saved", operation.offersStop());
+        assertEquals(DocumentOperation.Stage.DONE, operation.stop());
+        assertFalse(operation.isStopped());
+        assertFalse(DocumentOperation.heldAfterStop(DocumentOperation.Kind.SETTINGS_FILE));
+        release.countDown();
+        Utils.awaitBackgroundTasksForTests();
+        assertEquals(DocumentOperation.Stage.DONE, operation.stage());
     }
 
     @Test public void eachKindHasOneWorkerAndTheStopIsOfferedOnlyOnceTheFileAppStalls() throws Exception {
@@ -254,10 +290,14 @@ public class DocumentOperationTest {
         assertEquals(7, (int) Settings.MAX_VIDEO_SECONDS.get());
     }
 
-    /** A backup the slot refuses still removes the empty file the picker made for it. */
-    @Test public void aHeldSlotRefusesABackupAndRemovesItsNewDocument() throws Exception {
+    /**
+     * A backup the slot refuses removes the empty file the picker made for it, but a file the
+     * user chose to replace is left as it was: nothing was written to it.
+     */
+    @Test public void aHeldSlotRefusesABackupAndRemovesOnlyAnEmptyNewDocument() throws Exception {
         TikTokPreferenceFragment fragment = attachBackupPage();
         DocumentExportProvider provider = restoreSource();
+        byte[] chosen = Files.readAllBytes(provider.file.toPath());
         CountDownLatch release = holdOpens(provider);
         fragment.onActivityResult(7312, Activity.RESULT_OK, new Intent().setData(provider.uri));
         assertTrue(provider.awaitOpening());
@@ -267,6 +307,14 @@ public class DocumentOperationTest {
         Shadows.shadowOf(Looper.getMainLooper()).idle();
 
         ShadowToast.reset();
+        fragment.onActivityResult(7311, Activity.RESULT_OK, new Intent().setData(provider.uri));
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+        assertEquals(SLOT_REFUSAL, ShadowToast.getTextOfLatestToast());
+        awaitBackupCleanup();
+        assertEquals("a refused backup removed the file the user chose to replace", 0, provider.deleteCalls);
+        assertArrayEquals(chosen, Files.readAllBytes(provider.file.toPath()));
+
+        provider.contents(new byte[0]);
         fragment.onActivityResult(7311, Activity.RESULT_OK, new Intent().setData(provider.uri));
         Shadows.shadowOf(Looper.getMainLooper()).idle();
         assertEquals(SLOT_REFUSAL, ShadowToast.getTextOfLatestToast());
@@ -363,6 +411,136 @@ public class DocumentOperationTest {
         assertResting(rebuilt);
     }
 
+    /**
+     * The picker hands back a file the user chose to replace, and the file app stalls opening it.
+     * Stopping can't say whether the file app will take the backup, but once it gives up without
+     * having opened the file, the file still holds the older backup and stays.
+     */
+    @Test public void aBackupStoppedBeforeTheFileAppOpenedTheFileItReplacesLeavesThatFileAlone() throws Exception {
+        TikTokPreferenceFragment fragment = attachBackupPage();
+        byte[] older = "{\"format\":\"hushfeed-settings\",\"older\":true}".getBytes(StandardCharsets.UTF_8);
+        DocumentExportProvider provider = DocumentExportProvider.register(activity).contents(older);
+        provider.honorCancel = true;
+        CountDownLatch release = holdOpens(provider);
+        fragment.onActivityResult(7311, Activity.RESULT_OK, new Intent().setData(provider.uri));
+        assertTrue(provider.awaitOpening());
+        stall();
+        Preference backup = fragment.findPreference(BACKUP);
+        backup.getOnPreferenceClickListener().onPreferenceClick(backup);
+        assertEquals("Stopped waiting for the file app. It hasn't said yet whether the backup was saved.",
+                ShadowToast.getTextOfLatestToast());
+        Utils.awaitBackgroundTasksForTests();
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+        assertEquals("The backup wasn't saved. Back up again when the file app is ready.",
+                ShadowToast.getTextOfLatestToast());
+        assertEquals("the file the user chose to replace was removed", 0, provider.deleteCalls);
+        assertTrue(provider.exists);
+        assertArrayEquals(older, Files.readAllBytes(provider.file.toPath()));
+        assertResting(fragment);
+        release.countDown();
+    }
+
+    /**
+     * A cloud file app hands the restore its file at once and then trickles the data. Stopping
+     * closes the descriptor under the read, which wakes it, and the restore changes nothing.
+     */
+    @Test public void aRestoreStoppedWhileTheFileAppTricklesTheFileChangesNothing() throws Exception {
+        TikTokPreferenceFragment fragment = attachBackupPage();
+        DocumentExportProvider provider = restoreSource();
+        SlowTransfers transfers = SlowTransfers.install(provider, hold());
+        fragment.onActivityResult(7312, Activity.RESULT_OK, new Intent().setData(provider.uri));
+        assertTrue("the read never started", transfers.awaitStarted());
+        stall();
+        Preference restore = fragment.findPreference(RESTORE);
+        assertEquals(STOP_OFFER, String.valueOf(restore.getSummary()));
+
+        restore.getOnPreferenceClickListener().onPreferenceClick(restore);
+        assertEquals("Stopped waiting for the file app. Nothing was changed.", ShadowToast.getTextOfLatestToast());
+        assertFalse("the stop left the read's descriptor open",
+                provider.handedOut.get(0).getFileDescriptor().valid());
+        Utils.awaitBackgroundTasksForTests();
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+        assertEquals("the read's end said something after the stop",
+                "Stopped waiting for the file app. Nothing was changed.", ShadowToast.getTextOfLatestToast());
+        assertEquals("a stopped restore changed settings", 73, (int) Settings.MAX_VIDEO_SECONDS.get());
+        assertFalse("a stopped restore saved an Undo copy", SettingsBackup.hasUndo(activity));
+        assertFalse(AbstractPreferenceFragment.settingImportInProgress);
+        assertResting(fragment);
+    }
+
+    /**
+     * The same trickle on the way out: the file app has the backup's file and takes the bytes
+     * slowly. Stopping can't say whether it kept them, and when the write fails on the closed
+     * descriptor the backup is called unsaved and its partly written file goes.
+     */
+    @Test public void aBackupStoppedWhileTheFileAppTakesItSlowlyIsCalledUnsavedAndRemoved() throws Exception {
+        TikTokPreferenceFragment fragment = attachBackupPage();
+        DocumentExportProvider provider = DocumentExportProvider.register(activity);
+        SlowTransfers transfers = SlowTransfers.install(provider, hold());
+        fragment.onActivityResult(7311, Activity.RESULT_OK, new Intent().setData(provider.uri));
+        assertTrue("the write never started", transfers.awaitStarted());
+        stall();
+        Preference backup = fragment.findPreference(BACKUP);
+        assertEquals(STOP_OFFER, String.valueOf(backup.getSummary()));
+
+        backup.getOnPreferenceClickListener().onPreferenceClick(backup);
+        assertEquals("Stopped waiting for the file app. It hasn't said yet whether the backup was saved.",
+                ShadowToast.getTextOfLatestToast());
+        Utils.awaitBackgroundTasksForTests();
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+        assertEquals("The backup wasn't saved. Back up again when the file app is ready.",
+                ShadowToast.getTextOfLatestToast());
+        assertEquals("the partly written backup was left behind", 1, provider.deleteCalls);
+        assertFalse(provider.exists);
+        assertResting(fragment);
+    }
+
+    /**
+     * Turning the phone while the file app has the restore's file rebuilds the whole window, not
+     * just the page. The restore keeps going, the new window's rows stay out of reach until it
+     * ends, and its outcome lands in the new window rather than the destroyed one.
+     */
+    @Test public void aRestoreKeepsGoingThroughARebuiltWindowAndReportsInTheNewOne() throws Exception {
+        TikTokPreferenceFragment started = attachBackupPage();
+        activity.findViewById(android.R.id.content).setTag(SettingsActionBanner.CONTENT_ROOT_TAG);
+        DocumentExportProvider provider = restoreSource();
+        CountDownLatch release = holdOpens(provider);
+        started.onActivityResult(7312, Activity.RESULT_OK, new Intent().setData(provider.uri));
+        assertTrue(provider.awaitOpening());
+
+        Activity before = activity;
+        owner.recreate();
+        activity = owner.get();
+        assertNotSame("the window wasn't rebuilt", before, activity);
+        assertTrue(before.isDestroyed());
+        activity.findViewById(android.R.id.content).setTag(SettingsActionBanner.CONTENT_ROOT_TAG);
+        TikTokPreferenceFragment rebuilt = (TikTokPreferenceFragment)
+                activity.getFragmentManager().findFragmentById(android.R.id.content);
+        assertNotNull("the backup page didn't come back with the window", rebuilt);
+        assertNotSame(started, rebuilt);
+        Preference restore = rebuilt.findPreference(RESTORE);
+        restore.getView(null, null);
+        assertFalse(restore.isEnabled());
+        assertEquals("Restoring your settings", String.valueOf(restore.getSummary()));
+        assertFalse(rebuilt.findPreference(BACKUP).isEnabled());
+
+        ShadowToast.reset();
+        release.countDown();
+        Utils.awaitBackgroundTasksForTests();
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+        assertEquals(7, (int) Settings.MAX_VIDEO_SECONDS.get());
+        android.view.View banner = activity.getWindow().getDecorView()
+                .findViewWithTag("hushfeed_settings_action_banner");
+        assertNotNull("the outcome didn't reach the rebuilt window", banner);
+        android.widget.TextView message = banner.findViewWithTag("hushfeed_settings_action_message");
+        assertEquals("Settings restored. Restart TikTok to apply all changes.", String.valueOf(message.getText()));
+        assertEquals("the outcome went to a toast instead of the window", 0, ShadowToast.shownToastCount());
+        assertResting(rebuilt);
+    }
+
     /** A backup holding 7 seconds, with 73 on the phone. */
     private DocumentExportProvider restoreSource() throws Exception {
         Settings.MAX_VIDEO_SECONDS.save(7);
@@ -389,6 +567,13 @@ public class DocumentOperationTest {
 
     private static void stall() {
         Shadows.shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(DocumentOperation.stallMillis));
+    }
+
+    /** Waits for the rows' cleanup worker, which removes or keeps a refused backup's file. */
+    private static void awaitBackupCleanup() throws Exception {
+        Field field = SettingsBackupPreference.class.getDeclaredField("EXPORT_CLEANUP");
+        field.setAccessible(true);
+        ((ExecutorService) field.get(null)).submit(() -> { }).get(5, TimeUnit.SECONDS);
     }
 
     private void assertResting(TikTokPreferenceFragment fragment) {

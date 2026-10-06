@@ -291,6 +291,44 @@ public class ImportSeenVideoHistoryPreferenceTest {
         }
     }
 
+    /**
+     * A cloud file app hands the file over at once and trickles the data. Stopping closes the
+     * descriptor under the read, which wakes it, and the import adds nothing.
+     */
+    @Test public void aReadStoppedWhileTheFileAppTricklesItImportsNothing() throws Exception {
+        Settings.HIDE_SEEN_VIDEOS.save(true);
+        Settings.SEEN_VIDEO_RETENTION_DAYS.save(0);
+        Uri uri = reviewedFile();
+        java.util.concurrent.CountDownLatch release = new java.util.concurrent.CountDownLatch(1);
+        SlowTransfers transfers = SlowTransfers.install(provider, release);
+        try {
+            ImportSeenVideoHistoryPreference.pickFile(fragment);
+            fragment.onActivityResult(ImportSeenVideoHistoryPreference.REQUEST_IMPORT, Activity.RESULT_OK,
+                    new Intent().setData(uri));
+            assertTrue("the read never started", transfers.awaitStarted());
+            Shadows.shadowOf(android.os.Looper.getMainLooper())
+                    .idleFor(java.time.Duration.ofMillis(DocumentOperation.stallMillis));
+            ImportSeenVideoHistoryPreference row = row();
+            assertEquals("Still waiting for the file app. Tap to stop waiting.", row.getSummary().toString());
+
+            row.getOnPreferenceClickListener().onPreferenceClick(row);
+            assertEquals("Stopped waiting for the file app. Nothing was imported.", bannerMessage());
+            assertFalse("the stop left the read's descriptor open",
+                    provider.handedOut.get(0).getFileDescriptor().valid());
+            finishWorkers();
+            assertEquals("the read's end said something after the stop",
+                    "Stopped waiting for the file app. Nothing was imported.", bannerMessage());
+            assertFalse("a stopped import added history", SeenVideoHistory.shouldHide("7420104946231577888"));
+            assertTrue(row().isEnabled());
+            assertTrue(row().getSummary().toString().contains("this phone's time zone"));
+            assertFalse(DocumentOperation.busy(DocumentOperation.Kind.WATCH_HISTORY_FILE));
+        } finally {
+            release.countDown();
+            finishWorkers();
+            DocumentOperation.streams = null;
+        }
+    }
+
     /** An account switch while the file app is slow to hand the file over adds nothing anywhere. */
     @Test public void anAccountSwitchDuringASlowReadImportsNothing() throws Exception {
         Settings.HIDE_SEEN_VIDEOS.save(true);

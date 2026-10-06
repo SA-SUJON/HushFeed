@@ -1605,6 +1605,55 @@ public class SettingsBackupTest {
         }
     }
 
+    /**
+     * The picker can hand back a file the user chose to replace. A backup that fails before it
+     * opens that file has written nothing to it, so the older backup in it stays: the cleanup
+     * used to remove it, which left no backup at all.
+     */
+    @Test public void aBackupThatFailsBeforeWritingLeavesTheFileItWouldHaveReplaced() throws Exception {
+        try (var owner = Robolectric.buildActivity(SettingsPagesTest.PageActivity.class).setup().visible()) {
+            var activity = owner.get();
+            Utils.setContext(activity);
+            var fragment = attachBackupPage(activity);
+            byte[] older = "{\"format\":\"hushfeed-settings\",\"older\":true}".getBytes(StandardCharsets.UTF_8);
+            var provider = app.morphe.extension.tiktok.DocumentExportProvider.register(activity).contents(older);
+            storedByAnOlderBuild(Settings.LOCAL_HIDDEN_CREATORS, ruleEntries(FeedRuleLimits.MAX_ENTRIES + 1));
+            ShadowToast.reset();
+            fragment.onActivityResult(7311, android.app.Activity.RESULT_OK, new Intent().setData(provider.uri));
+            Utils.awaitBackgroundTasksForTests();
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            String message = ShadowToast.getTextOfLatestToast();
+            assertNotNull(message);
+            assertTrue("the oversized list wasn't named: " + message, message.contains("is too long for a settings backup"));
+            assertFalse("a file that was left alone was called partial: " + message, message.contains("partial file"));
+            assertEquals("the file the user chose to replace was removed", 0, provider.deleteCalls);
+            assertTrue(provider.exists);
+            assertArrayEquals(older, java.nio.file.Files.readAllBytes(provider.file.toPath()));
+        }
+    }
+
+    /**
+     * A file app that doesn't say how big the file is can't show it's the empty one the picker
+     * made, so a failed backup leaves it rather than risk removing an older backup.
+     */
+    @Test public void aFailedBackupKeepsAFileWhoseSizeTheFileAppDoesntGive() throws Exception {
+        try (var owner = Robolectric.buildActivity(SettingsPagesTest.PageActivity.class).setup().visible()) {
+            var activity = owner.get();
+            Utils.setContext(activity);
+            var fragment = attachBackupPage(activity);
+            var provider = app.morphe.extension.tiktok.DocumentExportProvider.register(activity);
+            provider.failOpen = true;
+            provider.sizeUnknown = true;
+            ShadowToast.reset();
+            fragment.onActivityResult(7311, android.app.Activity.RESULT_OK, new Intent().setData(provider.uri));
+            Utils.awaitBackgroundTasksForTests();
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            assertEquals("Couldn't save the settings backup. Try again.", ShadowToast.getTextOfLatestToast());
+            assertEquals(0, provider.deleteCalls);
+            assertTrue(provider.exists);
+        }
+    }
+
     @Test public void aSuccessfulSafBackupIsKeptAndCanBeReadAsJson() throws Exception {
         try (var owner = Robolectric.buildActivity(SettingsPagesTest.PageActivity.class).setup().visible()) {
             var activity = owner.get();

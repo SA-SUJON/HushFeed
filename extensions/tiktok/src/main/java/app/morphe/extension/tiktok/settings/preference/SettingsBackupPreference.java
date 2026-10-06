@@ -47,7 +47,7 @@ public final class SettingsBackupPreference extends Preference
     private static String runningLine;
     /** The file read or write the acting row waits on, null for Reset and Undo. Main thread only. */
     private static DocumentOperation operation;
-    /** The document that read or write is for, which a backup stopped before the handover removes. */
+    /** The document that read or write is for, which a backup stopped before the handover removes if it's empty. */
     private static Uri operationUri;
     /** The four rows on the page right now, so a run can take them all out of reach. */
     private static final java.util.List<java.lang.ref.WeakReference<SettingsBackupPreference>> ROWS =
@@ -241,13 +241,19 @@ public final class SettingsBackupPreference extends Preference
         int settingsSkipped = 0;
         java.util.List<app.morphe.extension.tiktok.download.DownloadDestination.Kind> foldersKept =
                 java.util.Collections.emptyList();
+        // Whether the write has the file. Before that, a file the user chose to replace still
+        // holds what it held, so a backup that doesn't happen must leave it alone.
+        boolean opened = false;
         try {
             if (action == EXPORT) {
                 byte[] bytes = SettingsBackup.export().getBytes(StandardCharsets.UTF_8);
                 if (!file.publish()) return;
                 try (OutputStream output = file.openForWrite(context.getContentResolver(), uri, "wt")) {
+                    opened = true;
                     output.write(bytes);
                 }
+                // Saved, and a stop from here on can't say otherwise.
+                file.finish();
             } else if (action == IMPORT) {
                 // Read with the reasons a restore gives, so an unreadable or oversized file
                 // is refused with one. Read on its own, those two came out as a bare
@@ -328,7 +334,7 @@ public final class SettingsBackupPreference extends Preference
                     "%1$s is too long for a settings backup. Shorten it, then save the backup again.",
                     L10n.t(tooLarge.listTitle));
             SettingsActionBanner.showNotice(TikTokPreferenceFragment.reportWindow(window, context),
-                    exportFailure(context, action, uri, message));
+                    exportFailure(context, action, uri, opened, message));
         } catch (Exception error) {
             // Stopped before the gate: nothing changed and the stop already said so.
             if (file != null && file.stage() == DocumentOperation.Stage.STOPPED) return;
@@ -338,7 +344,7 @@ public final class SettingsBackupPreference extends Preference
                     ? L10n.t("The backup wasn't saved. Back up again when the file app is ready.")
                     : L10n.t(failureMessage(action, error));
             SettingsActionBanner.showNotice(TikTokPreferenceFragment.reportWindow(window, context), exportFailure(
-                    context, action, uri, failure));
+                    context, action, uri, opened, failure));
         } finally {
             Utils.runOnMainThread(() -> finishRun(run, action, owner));
         }
@@ -365,8 +371,9 @@ public final class SettingsBackupPreference extends Preference
     /**
      * Stops waiting on a file app that has kept the acting row waiting. A restore stopped before
      * its gate changes nothing and a backup stopped before its handover removes the empty file
-     * the picker made. Once the file app has the backup, nothing here can say whether it kept
-     * it, so the row says so and the worker reports the outcome when the file app answers.
+     * the picker made, or leaves a file the user chose to replace as it was. Once the file app
+     * has the backup, nothing here can say whether it kept it, so the row says so and the worker
+     * reports the outcome when the file app answers.
      */
     private static void stopWaiting(Activity activity) {
         DocumentOperation acting = operation;
@@ -399,18 +406,43 @@ public final class SettingsBackupPreference extends Preference
         }
     }
 
-    private static String exportFailure(Context context, int action, Uri uri, String failure) {
-        if (action != EXPORT || deleteCreatedDocument(context.getContentResolver(), uri)) return failure;
+    private static String exportFailure(Context context, int action, Uri uri, boolean opened, String failure) {
+        if (action != EXPORT || removeUnsavedBackup(context.getContentResolver(), uri, opened)) return failure;
         return failure + " " + L10n.t(context,
                 "The partial file couldn't be removed. Delete it from the folder you chose.");
     }
 
-    private static boolean deleteCreatedDocument(ContentResolver resolver, Uri uri) {
+    /**
+     * Removes the file a backup that didn't happen was going to fill. The picker can hand back a
+     * file the user chose to replace, and until the write opens it, it still holds what it held,
+     * so it goes only once the write has had it or when the file app says it's empty. False only
+     * when it should have gone and couldn't.
+     */
+    private static boolean removeUnsavedBackup(ContentResolver resolver, Uri uri, boolean opened) {
         if (resolver == null || uri == null) return false;
+        if (!opened && !reportsEmpty(resolver, uri)) return true;
         try {
             return DocumentsContract.deleteDocument(resolver, uri);
         } catch (Exception error) {
             Logger.printException(() -> "Settings backup export cleanup failed", error);
+            return false;
+        }
+    }
+
+    /** Whether the file app says the document holds nothing. A size it doesn't give counts as something. */
+    private static boolean reportsEmpty(ContentResolver resolver, Uri uri) {
+        String[] size = {android.provider.OpenableColumns.SIZE};
+        // From Android 8 a DocumentsProvider implements only the Bundle form of query, and the
+        // older form reaches it only through the platform resolver's conversion.
+        try (android.database.Cursor cursor = android.os.Build.VERSION.SDK_INT >= 26
+                ? resolver.query(uri, size, null, null)
+                : resolver.query(uri, size, null, null, null)) {
+            if (cursor == null || !cursor.moveToFirst()) return false;
+            // By name, since a file app may answer with columns of its own.
+            int column = cursor.getColumnIndex(android.provider.OpenableColumns.SIZE);
+            return column >= 0 && !cursor.isNull(column) && cursor.getLong(column) == 0;
+        } catch (RuntimeException error) {
+            Logger.printInfo(() -> "Could not read the size of the backup's file: " + error);
             return false;
         }
     }
@@ -421,7 +453,7 @@ public final class SettingsBackupPreference extends Preference
         WeakReference<Context> feedback = new WeakReference<>(window);
         EXPORT_CLEANUP.execute(() -> {
             ContentResolver resolver = context == null ? null : context.getContentResolver();
-            if (!deleteCreatedDocument(resolver, uri)) {
+            if (!removeUnsavedBackup(resolver, uri, false)) {
                 Context current = feedback.get();
                 SettingsActionBanner.showNotice(current == null ? context : current, L10n.t(context,
                         "The backup didn't start and its partial file couldn't be removed. Delete it from the folder you chose."));
