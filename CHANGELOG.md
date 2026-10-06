@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Hushfeed now builds on Morphe patcher 1.15.1, so it needs Morphe Manager 1.34.0 or newer. Manager 1.33.0 asks for an update before it loads the bundle. ARSCLib follows the patcher to 9b742c412d, with its hashes checked against the downloaded files, and the release checks patch with desktop CLI 1.18.1.
+
 * **TikTok:** Feature Gate Lab's Export loaded values and Import loaded values don't get stuck behind a slow file app anymore. If the file app hasn't answered after a few seconds, the Lab offers to stop waiting, and stopping before anything was read or written changes nothing, not even a file you picked to replace. Tapping either one again while a file is still out says so, where it used to queue another to run whenever the first one ended. Exporting over an older, bigger export no longer leaves the end of the old file behind, which made the new one unreadable.
 * **TikTok:** Settings search lists the rows where your search is a whole word first. Searching "counts" used to put Hide verified accounts and Blocked creators, where it only turns up inside "accounts", above the rows that are about counts. Rows that match only inside a longer word still follow, in page order, and translated settings sort by the same rule.
 * **TikTok:** Saving a diagnostic report or a feature gate report runs on a thread of its own, so a slow media store can't hold up the threads the rest of Hushfeed shares. Tapping Save again while a report is still saving says so instead of starting a second one.
