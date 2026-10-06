@@ -1665,8 +1665,8 @@ public final class L10nTranslations {
                 "Media saxlama");
         table.put("Message",
                 "Mesaj");
-        table.put("Message bubble colors and Inbox archive",
-                "Mesaj balonu rəngləri və Gələnlər arxivi");
+        table.put("Message bubble colors, Inbox archive and sharing to more chats",
+                "Mesaj balonu rəngləri, Gələnlər arxivi və daha çox söhbətə paylaşma");
         table.put("Messages, profiles and search still work.",
                 "Mesajlar, profillər və axtarış yenə də işləyir.");
         table.put("Microphone in use",
@@ -4852,8 +4852,8 @@ public final class L10nTranslations {
                 "Medienspeicherung");
         table.put("Message",
                 "Nachricht");
-        table.put("Message bubble colors and Inbox archive",
-                "Farben der Nachrichtenblasen und Posteingangsarchiv");
+        table.put("Message bubble colors, Inbox archive and sharing to more chats",
+                "Farben der Nachrichtenblasen, Posteingangsarchiv und Teilen an mehr Chats");
         table.put("Messages, profiles and search still work.",
                 "Nachrichten, Profile und die Suche funktionieren weiterhin.");
         table.put("Microphone in use",
@@ -8039,8 +8039,8 @@ public final class L10nTranslations {
                 "Guardado de contenido");
         table.put("Message",
                 "Mensaje");
-        table.put("Message bubble colors and Inbox archive",
-                "Colores de las burbujas de mensajes y archivo de la Bandeja de entrada");
+        table.put("Message bubble colors, Inbox archive and sharing to more chats",
+                "Colores de las burbujas de mensajes, archivo de la Bandeja de entrada y compartir con más chats");
         table.put("Messages, profiles and search still work.",
                 "Los mensajes, los perfiles y la búsqueda siguen funcionando.");
         table.put("Microphone in use",
@@ -11226,8 +11226,8 @@ public final class L10nTranslations {
                 "Penyimpanan media");
         table.put("Message",
                 "Pesan");
-        table.put("Message bubble colors and Inbox archive",
-                "Warna gelembung pesan dan arsip Kotak Masuk");
+        table.put("Message bubble colors, Inbox archive and sharing to more chats",
+                "Warna gelembung pesan, arsip Kotak Masuk, dan berbagi ke lebih banyak chat");
         table.put("Messages, profiles and search still work.",
                 "Pesan, profil dan pencarian masih berfungsi.");
         table.put("Microphone in use",
@@ -14413,8 +14413,8 @@ public final class L10nTranslations {
                 "Salvataggio media");
         table.put("Message",
                 "Messaggio");
-        table.put("Message bubble colors and Inbox archive",
-                "Colori delle bolle dei messaggi e archivio della Posta in arrivo");
+        table.put("Message bubble colors, Inbox archive and sharing to more chats",
+                "Colori delle bolle dei messaggi, archivio della Posta in arrivo e condivisione con più chat");
         table.put("Messages, profiles and search still work.",
                 "Messaggi, profili e ricerca continuano a funzionare.");
         table.put("Microphone in use",
@@ -17600,8 +17600,8 @@ public final class L10nTranslations {
                 "Salvamento de mídia");
         table.put("Message",
                 "Mensagem");
-        table.put("Message bubble colors and Inbox archive",
-                "Cores dos balões de mensagem e arquivo da Caixa de entrada");
+        table.put("Message bubble colors, Inbox archive and sharing to more chats",
+                "Cores dos balões de mensagem, arquivo da Caixa de entrada e compartilhar com mais conversas");
         table.put("Messages, profiles and search still work.",
                 "As mensagens, os perfis e a busca continuam funcionando.");
         table.put("Microphone in use",
@@ -20993,8 +20993,8 @@ public final class L10nTranslations {
                 "Сохранение медиафайла");
         table.put("Message",
                 "Сообщение");
-        table.put("Message bubble colors and Inbox archive",
-                "Цвета пузырей сообщений и архив Входящих");
+        table.put("Message bubble colors, Inbox archive and sharing to more chats",
+                "Цвета пузырей сообщений, архив Входящих и отправка в большее число чатов");
         table.put("Messages, profiles and search still work.",
                 "Сообщения, профили и поиск по-прежнему работают.");
         table.put("Microphone in use",
@@ -24258,8 +24258,8 @@ public final class L10nTranslations {
                 "Medya kaydı");
         table.put("Message",
                 "Mesaj");
-        table.put("Message bubble colors and Inbox archive",
-                "Mesaj balonu renkleri ve Gelen Kutusu arşivi");
+        table.put("Message bubble colors, Inbox archive and sharing to more chats",
+                "Mesaj balonu renkleri, Gelen Kutusu arşivi ve daha fazla sohbete paylaşma");
         table.put("Messages, profiles and search still work.",
                 "Mesajlar, profiller ve arama çalışmaya devam eder.");
         table.put("Microphone in use",

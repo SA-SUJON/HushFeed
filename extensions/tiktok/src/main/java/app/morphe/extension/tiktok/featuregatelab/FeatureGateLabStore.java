@@ -512,8 +512,8 @@ public final class FeatureGateLabStore {
      * One reviewed preset: AB rules written as key:TYPE:value, and the builds whose catalogs they
      * were checked against. Most turn on what other TikTok mods force on by flag; the values are
      * the ones those mods ship. FeatureGatePresetsTest reads every listed build's shipped catalog
-     * and fails on a key the build doesn't register, a type it registers differently, a value the
-     * Lab would refuse or a value that is already the build's default.
+     * and fails on a key the build doesn't register, a type it registers differently or a value
+     * the Lab would refuse. A preset may pin the in-code default, since the server overrides it.
      */
     static final class Preset {
         final String id;
@@ -570,7 +570,7 @@ public final class FeatureGateLabStore {
             new Preset("comment_dislike", "Comment sort and dislike styles", CATALOG_BUILDS,
                     "comment_sort_opt_style:INT:1", "comment_hate_opt:INT:1",
                     "tt_comment_hate_animation_opt:INT:2"),
-            new Preset("messages", "Message bubble colors and Inbox archive", CATALOG_BUILDS,
+            new Preset("messages", "Message bubble colors, Inbox archive and sharing to more chats", CATALOG_BUILDS,
                     "dm_customize_message_bubble:INT:1", "inbox_bb_archive_enable:INT:1",
                     "im_contacts_multi_select_limit:INT:999"),
             new Preset("manage_topics", "Manage topics", CATALOG_BUILDS,
