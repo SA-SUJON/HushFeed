@@ -24,6 +24,7 @@ import app.morphe.extension.tiktok.blockauthor.FeedVisibility;
 import app.morphe.extension.tiktok.blockauthor.Reflect;
 import app.morphe.extension.tiktok.interaction.GestureActions;
 import app.morphe.extension.tiktok.settings.Settings;
+import app.morphe.extension.tiktok.settings.SettingsStatus;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -77,7 +78,7 @@ public final class AuthorRegion {
     private AuthorRegion() {
     }
 
-    /** Called from the patched {@code MainActivity.onCreate}; the work is posted. */
+    /** Called from the patched {@code MainActivity.onCreate} and {@code DetailActivity.onCreate}; the work is posted. */
     public static void install(Activity activity) {
         if (activity == null) {
             return;
@@ -121,14 +122,12 @@ public final class AuthorRegion {
                 restore();
             }
             if (activity.isFinishing()) {
-                LAYOUT_HOOK.detach();
-                restore();
+                stop();
                 return;
             }
             ViewGroup root = activity.findViewById(android.R.id.content);
             if (root == null) {
-                LAYOUT_HOOK.detach();
-                restore();
+                stop();
                 Logger.printInfo(() -> "Author region found no content view to watch");
                 return;
             }
@@ -139,8 +138,7 @@ public final class AuthorRegion {
                 postTimeViewId = activity.getResources().getIdentifier(POST_TIME_ID, "id", activity.getPackageName());
             }
             if (nameViewId == 0 || postTimeViewId == 0) {
-                LAYOUT_HOOK.detach();
-                restore();
+                stop();
                 Logger.printInfo(() -> "Author region could not resolve the feed name row");
                 return;
             }
@@ -155,6 +153,29 @@ public final class AuthorRegion {
         }
     }
 
+    /**
+     * Takes the hook off and forgets the window it was on. Remembering it would leave the feed
+     * bare: a detail page that finishes as it resumes takes the hook, and when the feed comes
+     * back it still looks like the window the hook is on, so nothing installs it again.
+     */
+    private static void stop() {
+        LAYOUT_HOOK.detach();
+        restore();
+        activityReference = new WeakReference<>(null);
+    }
+
+    /**
+     * The player moved on to another video. A layout pass usually follows and does this anyway,
+     * but a detail page lays out first while the feed's video is still the current one, and
+     * nothing on it may lay out again once its own video starts.
+     */
+    public static void onVideoChanged() {
+        if (!SettingsStatus.authorRegionEnabled || activityReference.get() == null) {
+            return;
+        }
+        Utils.runOnMainThread(AuthorRegion::apply);
+    }
+
     private static void apply() {
         try {
             Activity activity = activityReference.get();
@@ -163,8 +184,7 @@ public final class AuthorRegion {
                 return;
             }
             if (activity.isFinishing()) {
-                LAYOUT_HOOK.detach();
-                restore();
+                stop();
                 return;
             }
 
@@ -203,8 +223,14 @@ public final class AuthorRegion {
         }
         List<TextView> names = new ArrayList<>(3);
         collectNames(root, names);
-        if (names.size() <= 1) {
-            return names.isEmpty() ? null : names.get(0);
+        if (names.isEmpty()) {
+            return null;
+        }
+        // Outside the pager there is no neighbour to mistake it for. Inside, a lone row still
+        // has to be on screen: on a LIVE preview or an ad with no author row, the only row left
+        // can be the cell beside it, and it would take this video's country.
+        if (names.size() == 1 && GestureActions.cellOf(names.get(0)) == names.get(0)) {
+            return names.get(0);
         }
         Rect visible = new Rect();
         TextView best = null;
@@ -259,11 +285,7 @@ public final class AuthorRegion {
         if (ours && Objects.equals(handle, decoratedHandle) && Objects.equals(region, decoratedRegion)) {
             // Already saying this. Every layout pass lands here, and the first one after the
             // write is when a name TikTok cut short can be fitted.
-            CharSequence fitted = fit(name, label(originalName, handle), region);
-            if (fitted != null && !fitted.toString().equals(current.toString())) {
-                decoratedText = fitted;
-                name.setText(fitted);
-            }
+            refit(name, originalName, handle, region);
             return;
         }
 
@@ -284,6 +306,18 @@ public final class AuthorRegion {
         decoratedHandle = handle;
         decoratedRegion = region;
         name.setText(updated);
+        // A row with a fixed width takes the new text without a layout pass, so no later pass
+        // would come to fit it. Its layout is already rebuilt here; a wrap_content row has none
+        // yet and is fitted on the pass it asked for.
+        refit(name, text, handle, region);
+    }
+
+    private static void refit(TextView name, CharSequence original, String handle, String region) {
+        CharSequence fitted = fit(name, label(original, handle), region);
+        if (fitted != null && !fitted.toString().equals(String.valueOf(name.getText()))) {
+            decoratedText = fitted;
+            name.setText(fitted);
+        }
     }
 
     /**

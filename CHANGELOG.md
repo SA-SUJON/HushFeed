@@ -4,7 +4,7 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
-* **TikTok:** Show where a video was posted now works on videos where TikTok hides the post time, which is most of For You unless Always show publish date is on. It also shows on videos you open from search or a creator's profile. A long name gets shortened a little so the country isn't cut off along with it.
+* **TikTok:** Show where a video was posted now works on videos where TikTok hides the post time, which is most of For You unless Always show publish date is on. It also shows on videos you open from search, a creator's profile or a shared link, and it switches to the right country as soon as an opened video starts instead of keeping the one from the feed. A long name gets shortened a little so the country isn't cut off along with it.
 
 * **TikTok:** In Feature Gate Lab, turning overrides on from a gate's own page now unlocks its Forced result switch right away. Before, it stayed greyed out until you left the page and came back.
 
