@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Every Guava request in the build now resolves to 33.7.2, the release outside GHSA-xxph-c9ww-hj94, across the settings, plugin and project graphs rather than only where the catalog's pin reached. Its checksums were verified against Maven Central before the strict dependency check accepted them. Guava stays on the build and patching side: the patch bundle and the extension carry none of it. The check that patch sources don't import Guava directly used to pass without reading a file. It reads them now.
+
 * **TikTok:** What's new now tells you the notes are in English when the rest of the settings are in your language. The notes are also marked as English text for screen readers.
 
 * **TikTok:** Settings search now finds every box in a checklist, ticked or not, so searching "counts" finds Counts under the buttons in the right column list. Opening a box's result opens the list scrolled to that box without changing it. A list that's open when the screen rotates comes back with your unsaved ticks.
