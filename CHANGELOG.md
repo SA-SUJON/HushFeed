@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** What's new now tells you the notes are in English when the rest of the settings are in your language, and screen readers read the notes with English pronunciation.
+
 * **TikTok:** Settings search now finds every box in a checklist, ticked or not, so searching "counts" finds Counts under the buttons in the right column list. Opening a box's result opens the list scrolled to that box without changing it. A list that's open when the screen rotates comes back with your unsaved ticks.
 
 * **TikTok:** An edit to the Java extension alone no longer reruns the fingerprint checks against the APK fixtures, since those never read it. Full test commands and release checks still cover every test, and a change to a patch, a test, a dependency or a fixture still reruns them.
