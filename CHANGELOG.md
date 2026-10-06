@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Settings search now finds every box in a checklist, ticked or not, so searching "counts" finds Counts under the buttons in the right column list. Opening a box's result opens the list scrolled to that box without changing it. A list that's open when the screen rotates comes back with your unsaved ticks.
+
 * **TikTok:** An edit to the Java extension alone no longer reruns the fingerprint checks against the APK fixtures, since those never read it. Full test commands and release checks still cover every test, and a change to a patch, a test, a dependency or a fixture still reruns them.
 
 * **TikTok:** Hiding the status bar now also removes the black strip TikTok keeps above videos for it, and on Android 14 and older the video draws behind the camera cutout instead of below it. A new Hide the Clear display controls switch takes the close button, progress bar and pause and speed buttons off the screen while Clear display is on, along with the close button photo posts show in the corner. They're back the moment you leave Clear display.
