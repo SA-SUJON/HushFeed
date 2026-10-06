@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import android.provider.DocumentsContract;
 import android.view.View;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
@@ -407,44 +406,9 @@ public final class SettingsBackupPreference extends Preference
     }
 
     private static String exportFailure(Context context, int action, Uri uri, boolean opened, String failure) {
-        if (action != EXPORT || removeUnsavedBackup(context.getContentResolver(), uri, opened)) return failure;
+        if (action != EXPORT || DocumentOperation.removeUnsaved(context.getContentResolver(), uri, opened)) return failure;
         return failure + " " + L10n.t(context,
                 "The partial file couldn't be removed. Delete it from the folder you chose.");
-    }
-
-    /**
-     * Removes the file a backup that didn't happen was going to fill. The picker can hand back a
-     * file the user chose to replace, and until the write opens it, it still holds what it held,
-     * so it goes only once the write has had it or when the file app says it's empty. False only
-     * when it should have gone and couldn't.
-     */
-    private static boolean removeUnsavedBackup(ContentResolver resolver, Uri uri, boolean opened) {
-        if (resolver == null || uri == null) return false;
-        if (!opened && !reportsEmpty(resolver, uri)) return true;
-        try {
-            return DocumentsContract.deleteDocument(resolver, uri);
-        } catch (Exception error) {
-            Logger.printException(() -> "Settings backup export cleanup failed", error);
-            return false;
-        }
-    }
-
-    /** Whether the file app says the document holds nothing. A size it doesn't give counts as something. */
-    private static boolean reportsEmpty(ContentResolver resolver, Uri uri) {
-        String[] size = {android.provider.OpenableColumns.SIZE};
-        // From Android 8 a DocumentsProvider implements only the Bundle form of query, and the
-        // older form reaches it only through the platform resolver's conversion.
-        try (android.database.Cursor cursor = android.os.Build.VERSION.SDK_INT >= 26
-                ? resolver.query(uri, size, null, null)
-                : resolver.query(uri, size, null, null, null)) {
-            if (cursor == null || !cursor.moveToFirst()) return false;
-            // By name, since a file app may answer with columns of its own.
-            int column = cursor.getColumnIndex(android.provider.OpenableColumns.SIZE);
-            return column >= 0 && !cursor.isNull(column) && cursor.getLong(column) == 0;
-        } catch (RuntimeException error) {
-            Logger.printInfo(() -> "Could not read the size of the backup's file: " + error);
-            return false;
-        }
     }
 
     /** Only ACTION_CREATE_DOCUMENT results belong here; imports are existing user files. */
@@ -453,7 +417,7 @@ public final class SettingsBackupPreference extends Preference
         WeakReference<Context> feedback = new WeakReference<>(window);
         EXPORT_CLEANUP.execute(() -> {
             ContentResolver resolver = context == null ? null : context.getContentResolver();
-            if (!removeUnsavedBackup(resolver, uri, false)) {
+            if (!DocumentOperation.removeUnsaved(resolver, uri, false)) {
                 Context current = feedback.get();
                 SettingsActionBanner.showNotice(current == null ? context : current, L10n.t(context,
                         "The backup didn't start and its partial file couldn't be removed. Delete it from the folder you chose."));

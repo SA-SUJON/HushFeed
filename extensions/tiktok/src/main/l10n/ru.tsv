@@ -1659,3 +1659,8 @@ The file app still has the last file. Try again once it lets go, or restart TikT
 Waiting for the file app to let go of the last file. Restart TikTok if it doesn't.	Ждём, пока приложение для файлов отпустит последний файл. Если этого не произойдёт, перезапустите TikTok.
 Stopped waiting for the file app. Nothing was imported.	Ожидание приложения для файлов остановлено. Ничего не импортировано.
 The last report is still being saved	Последний отчёт всё ещё сохраняется
+Still waiting for the file app.	Приложение для файлов всё ещё не ответило.
+Stop waiting	Перестать ждать
+Stopped waiting for the file app. Nothing was exported.	Ожидание приложения для файлов остановлено. Ничего не экспортировано.
+Stopped waiting for the file app. It hasn't said yet whether the export was saved.	Ожидание приложения для файлов остановлено. Оно ещё не сообщило, сохранён ли экспорт.
+The export wasn't saved. Export again when the file app is ready.	Экспорт не сохранён. Экспортируйте снова, когда приложение для файлов будет готово.

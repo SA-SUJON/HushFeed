@@ -1521,3 +1521,8 @@ The file app still has the last file. Try again once it lets go, or restart TikT
 Waiting for the file app to let go of the last file. Restart TikTok if it doesn't.	Dosya uygulamasının son dosyayı bırakması bekleniyor. Bırakmazsa TikTok'u yeniden başlat.
 Stopped waiting for the file app. Nothing was imported.	Dosya uygulaması artık beklenmiyor. Hiçbir şey içe aktarılmadı.
 The last report is still being saved	Son rapor hâlâ kaydediliyor
+Still waiting for the file app.	Dosya uygulaması hâlâ bekleniyor.
+Stop waiting	Beklemeyi bırak
+Stopped waiting for the file app. Nothing was exported.	Dosya uygulaması artık beklenmiyor. Hiçbir şey dışa aktarılmadı.
+Stopped waiting for the file app. It hasn't said yet whether the export was saved.	Dosya uygulaması artık beklenmiyor. Dışa aktarımın kaydedilip kaydedilmediğini henüz bildirmedi.
+The export wasn't saved. Export again when the file app is ready.	Dışa aktarım kaydedilmedi. Dosya uygulaması hazır olduğunda yeniden dışa aktar.

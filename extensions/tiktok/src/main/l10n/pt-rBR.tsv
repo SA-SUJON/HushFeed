@@ -1521,3 +1521,8 @@ The file app still has the last file. Try again once it lets go, or restart TikT
 Waiting for the file app to let go of the last file. Restart TikTok if it doesn't.	Aguardando o app de arquivos liberar o último arquivo. Reinicie o TikTok se ele não liberar.
 Stopped waiting for the file app. Nothing was imported.	A espera pelo app de arquivos foi interrompida. Nada foi importado.
 The last report is still being saved	O último relatório ainda está sendo salvo
+Still waiting for the file app.	Ainda aguardando o app de arquivos.
+Stop waiting	Parar de esperar
+Stopped waiting for the file app. Nothing was exported.	A espera pelo app de arquivos foi interrompida. Nada foi exportado.
+Stopped waiting for the file app. It hasn't said yet whether the export was saved.	A espera pelo app de arquivos foi interrompida. Ele ainda não informou se a exportação foi salva.
+The export wasn't saved. Export again when the file app is ready.	A exportação não foi salva. Exporte de novo quando o app de arquivos estiver pronto.

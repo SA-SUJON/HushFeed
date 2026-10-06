@@ -13,6 +13,8 @@ import android.net.Uri;
 import android.os.CancellationSignal;
 import android.os.OperationCanceledException;
 import android.os.RemoteException;
+import android.provider.DocumentsContract;
+import android.provider.OpenableColumns;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
@@ -44,11 +46,13 @@ import java.util.concurrent.atomic.AtomicReference;
  * never handed over. A worker the file app is still holding keeps its kind's slot until it
  * returns, so stopping and trying again can't pile up workers or open files behind a file app
  * that ignores the cancellation.
+ *
+ * <p>Public for the Feature Gate Lab, whose loaded-value files go the same way.
  */
-final class DocumentOperation {
-    enum Kind { SETTINGS_FILE, WATCH_HISTORY_FILE }
+public final class DocumentOperation {
+    public enum Kind { SETTINGS_FILE, WATCH_HISTORY_FILE, LAB_FILE }
 
-    enum Stage {
+    public enum Stage {
         /** Opening or reading the file, or getting a backup ready. Stopping here changes nothing. */
         PREPARING,
         /** The change the file asked for is being made, and can't be stopped any more. */
@@ -64,12 +68,12 @@ final class DocumentOperation {
     }
 
     /** The read or write itself, run on the operation's own worker. */
-    interface Work {
+    public interface Work {
         void run(DocumentOperation operation) throws Exception;
     }
 
     /** What the work is thrown once it has been stopped, so it unwinds without a result. */
-    static final class Stopped extends IOException {
+    public static final class Stopped extends IOException {
         Stopped(Throwable cause) {
             super("Stopped waiting for the file app", cause);
         }
@@ -89,6 +93,10 @@ final class DocumentOperation {
 
     /** Null outside tests. */
     static volatile Streams streams;
+
+    public static long stallMillisForTests() {
+        return stallMillis;
+    }
 
     private static final ConcurrentHashMap<Kind, DocumentOperation> WORKERS = new ConcurrentHashMap<>();
 
@@ -110,7 +118,7 @@ final class DocumentOperation {
      * still out, stopped or not. onChange runs on the main thread when the stage or the stall
      * changes and once the worker has returned.
      */
-    static DocumentOperation start(Kind kind, Work work, Runnable onChange) {
+    public static DocumentOperation start(Kind kind, Work work, Runnable onChange) {
         DocumentOperation operation = new DocumentOperation(kind, onChange);
         if (WORKERS.putIfAbsent(kind, operation) != null) return null;
         if (!Utils.runOnOwnThread("Hushfeed-" + kind, () -> operation.runWork(work))) {
@@ -122,7 +130,7 @@ final class DocumentOperation {
     }
 
     /** Whether a worker of this kind is still out. A stopped one counts until its file app lets go. */
-    static boolean busy(Kind kind) {
+    public static boolean busy(Kind kind) {
         return WORKERS.containsKey(kind);
     }
 
@@ -131,33 +139,33 @@ final class DocumentOperation {
      * worker that wasn't stopped stays out for a moment after its run has ended, which isn't
      * worth showing.
      */
-    static boolean heldAfterStop(Kind kind) {
+    public static boolean heldAfterStop(Kind kind) {
         DocumentOperation out = WORKERS.get(kind);
         return out != null && out.isStopped();
     }
 
-    Stage stage() {
+    public Stage stage() {
         return stage.get();
     }
 
-    boolean isStopped() {
+    public boolean isStopped() {
         Stage now = stage.get();
         return now == Stage.STOPPED || now == Stage.STOPPED_WHILE_PUBLISHING;
     }
 
     /** Whether the row should offer to stop: the file app has kept it waiting, and stopping still can. */
-    boolean offersStop() {
+    public boolean offersStop() {
         Stage now = stage.get();
         return stalled && (now == Stage.PREPARING || now == Stage.PUBLISHING);
     }
 
     /** Shuts the gate an import passes before it changes anything. False once it has been stopped. */
-    boolean commit() {
+    public boolean commit() {
         return advance(Stage.COMMITTING);
     }
 
     /** Shuts the gate a backup passes before the file app is handed it. False once it has been stopped. */
-    boolean publish() {
+    public boolean publish() {
         return advance(Stage.PUBLISHING);
     }
 
@@ -166,7 +174,7 @@ final class DocumentOperation {
      * this can't call the outcome open. A stop that came first is answered by the outcome the
      * worker reports next.
      */
-    void finish() {
+    public void finish() {
         if (stage.compareAndSet(Stage.PUBLISHING, Stage.DONE)) changed();
     }
 
@@ -181,7 +189,7 @@ final class DocumentOperation {
      * has the backup, how it went stays open until the worker returns. Returns the stage the
      * operation is left in, which is the one it was already in once stopping can't change it.
      */
-    Stage stop() {
+    public Stage stop() {
         while (true) {
             Stage now = stage.get();
             Stage stopped = now == Stage.PREPARING ? Stage.STOPPED
@@ -197,17 +205,52 @@ final class DocumentOperation {
     }
 
     /** The document, read through the descriptor the file app hands over. */
-    InputStream openForRead(ContentResolver resolver, Uri uri) throws IOException {
+    public InputStream openForRead(ContentResolver resolver, Uri uri) throws IOException {
         InputStream input = open(resolver, uri, "r").createInputStream();
         Streams wrap = streams;
         return wrap == null ? input : wrap.reading(input);
     }
 
     /** The document, written through the descriptor the file app hands over. */
-    OutputStream openForWrite(ContentResolver resolver, Uri uri, String mode) throws IOException {
+    public OutputStream openForWrite(ContentResolver resolver, Uri uri, String mode) throws IOException {
         OutputStream output = open(resolver, uri, mode).createOutputStream();
         Streams wrap = streams;
         return wrap == null ? output : wrap.writing(output);
+    }
+
+    /**
+     * Removes the document a write that didn't happen was going to fill. The picker can hand back
+     * a file the user chose to replace, and until the write opens it, it still holds what it held,
+     * so it goes only once the write has had it or when the file app says it's empty. False only
+     * when it should have gone and couldn't.
+     */
+    public static boolean removeUnsaved(ContentResolver resolver, Uri uri, boolean opened) {
+        if (resolver == null || uri == null) return false;
+        if (!opened && !reportsEmpty(resolver, uri)) return true;
+        try {
+            return DocumentsContract.deleteDocument(resolver, uri);
+        } catch (Exception error) {
+            Logger.printException(() -> "Could not remove an unsaved file", error);
+            return false;
+        }
+    }
+
+    /** Whether the file app says the document holds nothing. A size it doesn't give counts as something. */
+    private static boolean reportsEmpty(ContentResolver resolver, Uri uri) {
+        String[] size = {OpenableColumns.SIZE};
+        // From Android 8 a DocumentsProvider implements only the Bundle form of query, and the
+        // older form reaches it only through the platform resolver's conversion.
+        try (android.database.Cursor cursor = android.os.Build.VERSION.SDK_INT >= 26
+                ? resolver.query(uri, size, null, null)
+                : resolver.query(uri, size, null, null, null)) {
+            if (cursor == null || !cursor.moveToFirst()) return false;
+            // By name, since a file app may answer with columns of its own.
+            int column = cursor.getColumnIndex(OpenableColumns.SIZE);
+            return column >= 0 && !cursor.isNull(column) && cursor.getLong(column) == 0;
+        } catch (RuntimeException error) {
+            Logger.printInfo(() -> "Could not read the size of a file the file app made: " + error);
+            return false;
+        }
     }
 
     /**
