@@ -11,17 +11,24 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Looper;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.tiktok.blockauthor.CurrentVideoAuthor;
 import app.morphe.extension.tiktok.settings.Settings;
 
 import com.ss.android.ugc.aweme.common.widget.VerticalViewPager;
+import com.ss.android.ugc.aweme.detail.ui.DetailActivity;
+import com.ss.android.ugc.aweme.main.MainActivity;
+
+import java.lang.reflect.Method;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +39,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.GraphicsMode;
 
 /**
  * The feed's author row and a comment row both carry a {@code title} view, so the row is
@@ -390,5 +398,101 @@ public class AuthorRegionTest {
 
             assertNull(AuthorRegion.findName(activity.findViewById(android.R.id.content)));
         }
+    }
+
+    /** Stands in for VideoItemParams, which hands the player its Aweme. */
+    public static final class Params {
+        public final Clip aweme;
+
+        Params(Clip aweme) {
+            this.aweme = aweme;
+        }
+    }
+
+    /** Tells CurrentVideoAuthor this clip is the one playing, the way the player hooks do. */
+    private static void play(Clip clip) throws Exception {
+        Method update = CurrentVideoAuthor.class.getDeclaredMethod("update", Object.class);
+        update.setAccessible(true);
+        update.invoke(null, new Params(clip));
+        Method onPlaying = CurrentVideoAuthor.class.getDeclaredMethod("onPlaying", String.class);
+        onPlaying.setAccessible(true);
+        onPlaying.invoke(null, clip.aid);
+    }
+
+    private static void layOut(View root) {
+        root.measure(View.MeasureSpec.makeMeasureSpec(400, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(800, View.MeasureSpec.EXACTLY));
+        root.layout(0, 0, 400, 800);
+    }
+
+    /** #75: a video opened from search plays in a detail pager of its own, and gets the country too. */
+    @Test
+    public void aVideoOpenedInTheDetailPagerGetsTheCountry() throws Exception {
+        Method reset = CurrentVideoAuthor.class.getDeclaredMethod("resetForTests");
+        reset.setAccessible(true);
+        reset.invoke(null);
+        Settings.SHOW_AUTHOR_HANDLE.save(false);
+        Settings.SHOW_AUTHOR_REGION.save(true);
+        try (ActivityController<MainActivity> feed = Robolectric.buildActivity(MainActivity.class).setup().visible()) {
+            Utils.setContext(feed.get());
+            AuthorRegion.install(feed.get());
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            feed.pause();
+
+            try (ActivityController<DetailActivity> pager = Robolectric.buildActivity(DetailActivity.class).setup().visible()) {
+                LinearLayout row = feedRow("aittaac");
+                pager.get().setContentView(row);
+                play(new Clip("opened", "aittaac", "aittaac", "AZ"));
+                Shadows.shadowOf(Looper.getMainLooper()).idle();
+                layOut(row.getRootView());
+                row.getViewTreeObserver().dispatchOnGlobalLayout();
+
+                assertEquals("aittaac · AZ", ((TextView) row.getChildAt(0)).getText().toString());
+                pager.pause().stop();
+            }
+        } finally {
+            AuthorRegion.restore();
+            Settings.SHOW_AUTHOR_HANDLE.resetToDefault();
+            Settings.SHOW_AUTHOR_REGION.resetToDefault();
+            reset.invoke(null);
+        }
+    }
+
+    /** #75: TikTok cuts a long name with an ellipsis, and the country after it went too. */
+    @Test
+    @GraphicsMode(GraphicsMode.Mode.NATIVE)
+    public void aLongNameIsShortenedSoTheCountryStaysWhole() {
+        String full = "Aysel_Salehli_Coach_Yasam_Kocu_Spiritual_Mentor_Official";
+        LinearLayout row = new LinearLayout(context);
+        TextView name = new TextView(context);
+        name.setId(NAME_ID);
+        name.setSingleLine(true);
+        name.setEllipsize(TextUtils.TruncateAt.END);
+        name.setText(full);
+        row.addView(name, new LinearLayout.LayoutParams(160, ViewGroup.LayoutParams.WRAP_CONTENT));
+        TextView postTime = new TextView(context);
+        postTime.setId(POST_TIME_ID);
+        postTime.setVisibility(View.GONE);
+        row.addView(postTime);
+
+        AuthorRegion.decorate(name, null, "AZ");
+        layOut(row);
+        assertTrue("the fixture name isn't long enough to be cut", name.getLayout().getEllipsisCount(0) > 0);
+
+        // The next layout pass fits it.
+        AuthorRegion.decorate(name, null, "AZ");
+        layOut(row);
+        String shown = name.getText().toString();
+        assertTrue(shown, shown.endsWith(" · AZ"));
+        assertTrue(shown, shown.startsWith("Aysel_"));
+        assertTrue(shown, shown.contains("…"));
+        assertEquals(shown, 0, name.getLayout().getEllipsisCount(0));
+
+        // Settled, so later passes leave it as it is.
+        AuthorRegion.decorate(name, null, "AZ");
+        assertEquals(shown, name.getText().toString());
+
+        AuthorRegion.restore();
+        assertEquals(full, name.getText().toString());
     }
 }

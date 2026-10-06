@@ -7,7 +7,10 @@
 package app.morphe.extension.tiktok.feed;
 
 import android.app.Activity;
+import android.app.Application;
 import android.graphics.Rect;
+import android.os.Bundle;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +29,11 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
- * Puts the country a video was posted from next to the creator's name on the feed.
+ * Puts the country a video was posted from next to the creator's name on the feed, and on a
+ * video opened from search, a profile or a sound, which plays in a detail pager of its own.
  *
  * The name lives in a {@code title} button, which is a generic id the comment rows use as
  * well, so the row is identified structurally instead: the feed's author row is the parent
@@ -56,6 +61,12 @@ public final class AuthorRegion {
     /** Exactly what was written over it, so a row TikTok has since rebound is left alone. */
     private static CharSequence decoratedText;
 
+    /** What that text was asked to say, so a name shortened to fit still counts as settled. */
+    private static String decoratedHandle;
+    private static String decoratedRegion;
+
+    private static WeakReference<Application> followed = new WeakReference<>(null);
+
     /** The region is read by reflection, so it is resolved once per video, not per frame. */
     private static WeakReference<Object> regionAweme = new WeakReference<>(null);
     private static String regionValue;
@@ -71,11 +82,44 @@ public final class AuthorRegion {
         if (activity == null) {
             return;
         }
-        Utils.runOnMainThread(() -> installNow(activity));
+        Utils.runOnMainThread(() -> {
+            follow(activity.getApplication());
+            installNow(activity);
+        });
+    }
+
+    /**
+     * A video opened from search, a profile or a sound plays in its own activity, with the same
+     * author row, and the hook only watched the main feed's window, so those videos never got a
+     * country (#75). The hook moves to whichever feed window comes to the front.
+     */
+    private static void follow(Application application) {
+        if (application == null || followed.get() == application) {
+            return;
+        }
+        followed = new WeakReference<>(application);
+        application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+            @Override public void onActivityResumed(Activity resumed) {
+                if (FeedVisibility.isFeedWindow(resumed) && resumed != activityReference.get()) {
+                    installNow(resumed);
+                }
+            }
+
+            @Override public void onActivityCreated(Activity created, Bundle state) { }
+            @Override public void onActivityStarted(Activity started) { }
+            @Override public void onActivityPaused(Activity paused) { }
+            @Override public void onActivityStopped(Activity stopped) { }
+            @Override public void onActivitySaveInstanceState(Activity activity, Bundle state) { }
+            @Override public void onActivityDestroyed(Activity destroyed) { }
+        });
     }
 
     private static void installNow(Activity activity) {
         try {
+            if (activity != activityReference.get()) {
+                // The row in the window left behind gets its own name back.
+                restore();
+            }
             if (activity.isFinishing()) {
                 LAYOUT_HOOK.detach();
                 restore();
@@ -89,8 +133,11 @@ public final class AuthorRegion {
                 return;
             }
             // The running package, not TikTok's: a cloned build renames it, resource table and all (#59).
-            nameViewId = activity.getResources().getIdentifier(NAME_ID, "id", activity.getPackageName());
-            postTimeViewId = activity.getResources().getIdentifier(POST_TIME_ID, "id", activity.getPackageName());
+            // Both windows share it, so once found the ids hold for the process.
+            if (nameViewId == 0 || postTimeViewId == 0) {
+                nameViewId = activity.getResources().getIdentifier(NAME_ID, "id", activity.getPackageName());
+                postTimeViewId = activity.getResources().getIdentifier(POST_TIME_ID, "id", activity.getPackageName());
+            }
             if (nameViewId == 0 || postTimeViewId == 0) {
                 LAYOUT_HOOK.detach();
                 restore();
@@ -209,12 +256,15 @@ public final class AuthorRegion {
         boolean ours = name == decoratedName.get() && current != null && written != null
                 && current.toString().equals(written.toString());
 
-        if (ours) {
-            CharSequence settled = build(originalName, handle, region);
-            if (settled != null && settled.toString().equals(current.toString())) {
-                // Already saying this. Every layout pass lands here.
-                return;
+        if (ours && Objects.equals(handle, decoratedHandle) && Objects.equals(region, decoratedRegion)) {
+            // Already saying this. Every layout pass lands here, and the first one after the
+            // write is when a name TikTok cut short can be fitted.
+            CharSequence fitted = fit(name, label(originalName, handle), region);
+            if (fitted != null && !fitted.toString().equals(current.toString())) {
+                decoratedText = fitted;
+                name.setText(fitted);
             }
+            return;
         }
 
         // Put back whatever was written before, then read the name again: on a video
@@ -231,7 +281,32 @@ public final class AuthorRegion {
         decoratedName = new WeakReference<>(name);
         originalName = text;
         decoratedText = updated;
+        decoratedHandle = handle;
+        decoratedRegion = region;
         name.setText(updated);
+    }
+
+    /**
+     * TikTok cuts a long name short with an ellipsis, and the country after it went with it
+     * (#75). Once the row has been laid out cut, the name itself is shortened so the country
+     * reads whole. Null when the row fits, isn't laid out yet, or has no room for the country.
+     */
+    static CharSequence fit(TextView name, CharSequence label, String region) {
+        if (label == null || region == null) {
+            return null;
+        }
+        Layout layout = name.getLayout();
+        if (layout == null || layout.getLineCount() != 1 || layout.getEllipsisCount(0) == 0) {
+            return null;
+        }
+        String tail = SEPARATOR + region;
+        float room = name.getWidth() - name.getCompoundPaddingLeft() - name.getCompoundPaddingRight()
+                - name.getPaint().measureText(tail);
+        if (room <= 0) {
+            return null;
+        }
+        CharSequence shortened = TextUtils.ellipsize(label, name.getPaint(), room, TextUtils.TruncateAt.END);
+        return shortened.length() == 0 ? null : TextUtils.concat(shortened, tail);
     }
 
     /**
@@ -240,11 +315,19 @@ public final class AuthorRegion {
      * styled name keeps its spans.
      */
     private static CharSequence build(CharSequence original, String handle, String region) {
+        CharSequence text = label(original, handle);
+        if (text == null) {
+            return null;
+        }
+        return region == null ? text : TextUtils.concat(text, SEPARATOR + region);
+    }
+
+    /** The name part of the row: the handle when asked for, otherwise TikTok's own name. */
+    private static CharSequence label(CharSequence original, String handle) {
         if (original == null) {
             return null;
         }
-        CharSequence text = handle == null ? original : "@" + handle;
-        return region == null ? text : TextUtils.concat(text, SEPARATOR + region);
+        return handle == null ? original : "@" + handle;
     }
 
     /** Lets a test drive the ids the activity's resources would otherwise supply. */
@@ -308,6 +391,8 @@ public final class AuthorRegion {
         decoratedName = new WeakReference<>(null);
         originalName = null;
         decoratedText = null;
+        decoratedHandle = null;
+        decoratedRegion = null;
 
         if (name == null || previous == null || written == null) {
             return;
