@@ -314,6 +314,9 @@ public class AdvancedDownloadsTest {
                 new Photo(new Address(null, 100).encodings(heic, webp))));
         assertEquals(List.of(List.of(jpeg, heic, webp), List.of(upper, webp), List.of(heic, webp)),
                 OriginalPhotos.sources(post));
+        // What a debug report says of each list: the path's ending only, never the signed query.
+        assertEquals(List.of("heic", "webp", "jpeg", "jpg", "?"), OriginalPhotos.encodings(
+                List.of(heic, webp, jpeg, upper, "https://p16-sign.example.com/obj/abc")));
     }
 
     /**

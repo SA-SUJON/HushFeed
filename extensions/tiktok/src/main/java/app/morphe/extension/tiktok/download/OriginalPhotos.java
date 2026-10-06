@@ -151,7 +151,8 @@ public final class OriginalPhotos {
                     MediaBudget.checkDiskSpace(app.getCacheDir(), -1L);
                     File temp = MediaCache.createTempFile(app, "original-photo-", ".tmp");
                     try {
-                        String extension = RemoteMedia.fetch(photoSnapshot.get(i), temp, RemoteMedia.Kind.IMAGE);
+                        String extension = HeifToJpeg.convert(app, temp,
+                                RemoteMedia.fetch(photoSnapshot.get(i), temp, RemoteMedia.Kind.IMAGE));
                         String mime = "jpg".equals(extension) ? "image/jpeg" : "image/" + extension;
                         // Numbered by the photo's place in the post, also when only some are saved.
                         String named = names.get(i);
@@ -209,6 +210,8 @@ public final class OriginalPhotos {
             }
             // Never silently save just part of a post whose original sources are missing.
             if (candidates.isEmpty()) return Collections.emptyList();
+            int position = result.size() + 1;
+            Logger.printDebug(() -> "Original photo " + position + " encodings: " + encodings(candidates));
             result.add(jpegFirst(candidates));
         }
         return result;
@@ -217,9 +220,10 @@ public final class OriginalPhotos {
     /**
      * The photo's addresses with its JPEG copies first, each group in TikTok's order.
      *
-     * <p>TikTok lists every photo in several encodings and usually leads with a HEIF one, which
-     * was what got saved: a .heif that plenty of galleries can't open (#105). The other copies
-     * stay behind the JPEG in case it fails.
+     * <p>A HEIF copy that leads the list was what got saved: a .heif that plenty of galleries
+     * can't open (#105). TikTok's web lists a JPEG copy too, so it goes first where there is one
+     * and the others stay behind it in case it fails. 47.1.4 lists only HEIF, which
+     * {@link HeifToJpeg} turns into a JPEG once it's saved.
      */
     static List<String> jpegFirst(List<String> urls) {
         List<String> ordered = new ArrayList<>(urls.size());
@@ -230,13 +234,28 @@ public final class OriginalPhotos {
 
     /** Whether the address names a JPEG, read from its path so a query can't pass for one. */
     private static boolean isJpeg(String url) {
+        String path = path(url);
+        return path.endsWith(".jpeg") || path.endsWith(".jpg");
+    }
+
+    /** What each address's path ends in, which says the encoding without its signed query. */
+    static List<String> encodings(List<String> urls) {
+        List<String> encodings = new ArrayList<>(urls.size());
+        for (String url : urls) {
+            String path = path(url);
+            int dot = path.lastIndexOf('.');
+            encodings.add(dot < 0 || dot < path.lastIndexOf('/') ? "?" : path.substring(dot + 1));
+        }
+        return encodings;
+    }
+
+    private static String path(String url) {
         int end = url.length();
         int query = url.indexOf('?');
         if (query >= 0) end = query;
         int fragment = url.indexOf('#');
         if (fragment >= 0 && fragment < end) end = fragment;
-        String path = url.substring(0, end).toLowerCase(java.util.Locale.ROOT);
-        return path.endsWith(".jpeg") || path.endsWith(".jpg");
+        return url.substring(0, end).toLowerCase(java.util.Locale.ROOT);
     }
 
 }
