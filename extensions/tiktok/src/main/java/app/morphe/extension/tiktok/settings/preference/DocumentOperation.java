@@ -273,8 +273,12 @@ final class DocumentOperation {
             // The work reports its own outcome. This is only what it let through.
             Logger.printException(() -> "File work for " + kind + " failed", failure);
         } finally {
-            stage.updateAndGet(now -> now == Stage.STOPPED || now == Stage.STOPPED_WHILE_PUBLISHING
-                    ? now : Stage.DONE);
+            // A stopped worker stays stopped. A CAS loop rather than updateAndGet, which is API 24.
+            while (true) {
+                Stage now = stage.get();
+                if (now == Stage.STOPPED || now == Stage.STOPPED_WHILE_PUBLISHING
+                        || stage.compareAndSet(now, Stage.DONE)) break;
+            }
             closeHeld();
             WORKERS.remove(kind, this);
             changed();
