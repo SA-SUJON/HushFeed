@@ -1429,7 +1429,7 @@
     },
     {
       "name": "Custom launcher icon",
-      "description": "Gives TikTok's launcher icon a themed version, so on Android 13 and up it takes your wallpaper's color when themed icons are on. Its options can also swap in a black background or a plain one-color note on Android 8 and up.",
+      "description": "Gives TikTok's launcher icon a themed version, so on Android 13 and up it takes your wallpaper's color when themed icons are on. Its options can also swap in a black background or a plain one-color note on Android 8 and up, or put a PNG of your own in the note's place.",
       "category": "Settings",
       "use": false,
       "dependencies": [],
@@ -1497,6 +1497,15 @@
             "White on black": "white-on-black",
             "Black on white": "black-on-white"
           }
+        },
+        {
+          "key": "iconPicture",
+          "title": "Icon picture",
+          "description": "The path of a square PNG of your own, from 432 to 1024 pixels a side, to show in place of TikTok's note. Launchers cut the icon to their own shape, so keep what matters in the middle two thirds. With a picture the style only sets the color behind it, and the icon has no themed version. Leave it empty to keep the note.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": null,
+          "values": null
         }
       ]
     },
