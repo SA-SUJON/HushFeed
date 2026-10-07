@@ -930,6 +930,7 @@ Pick the buttons to take off the column. The rest stay where they are.,Pick the 
 "Pick the shortcuts to remove from the row under a profile's bio, such as TikTok Studio or Your orders. Restart TikTok to apply this.","Pick the shortcuts to remove from the row under a profile's bio, such as TikTok Studio or Your orders. Restart TikTok to apply this."
 Play SDR instead of HDR,Play SDR instead of HDR
 "Play feed videos without sound and leave the phone's volume alone. Music from another app keeps playing while it's on. DMs, stories and LIVE keep their sound.","Play feed videos without sound and leave the phone's volume alone. Music from another app keeps playing while it's on. DMs, stories and LIVE keep their sound."
+Play the H.264 version of videos TikTok also offers in HEVC or ByteVC2. It's easier on phones that stutter or run hot playing those. Videos without an H.264 version still play.,Play the H.264 version of videos TikTok also offers in HEVC or ByteVC2. It's easier on phones that stutter or run hot playing those. Videos without an H.264 version still play.
 "Play the standard version of videos that also come in HDR, so the screen doesn't jump to full brightness when one starts. Videos TikTok only offers in HDR still play.","Play the standard version of videos that also come in HDR, so the screen doesn't jump to full brightness when one starts. Videos TikTok only offers in HDR still play."
 Play videos TikTok has classified without the overlay asking to be tapped through first.,Play videos TikTok has classified without the overlay asking to be tapped through first.
 Playback,Playback
@@ -939,6 +940,7 @@ Popular,Popular
 Popups,Popups
 Post age,Post age
 Post dates in the feed,Post dates in the feed
+Prefer H.264 video,Prefer H.264 video
 Preset,Preset
 Preset applied. Restart TikTok to use it.,Preset applied. Restart TikTok to use it.
 Preset saved. Turn on overrides in the Lab to use it.,Preset saved. Turn on overrides in the Lab to use it.

@@ -29,7 +29,7 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
     /** Whether this page has anything on it. The row into it asks the same question. */
     public static boolean isAvailable() {
         return SettingsStatus.playbackQualityEnabled || SettingsStatus.sdrPlaybackEnabled
-                || SettingsStatus.playbackSpeedEnabled
+                || SettingsStatus.h264PlaybackEnabled || SettingsStatus.playbackSpeedEnabled
                 || SettingsStatus.autoAdvanceEnabled || SettingsStatus.videoFitEnabled
                 || SettingsStatus.fullScreenHoldEnabled || SettingsStatus.feedMuteEnabled
                 || SettingsStatus.backgroundPlayEnabled
@@ -203,7 +203,8 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                     new String[]{"1.25x", "1.5x", "1.75x", "2x", "2.5x", "3x"},
                     new String[]{"1.25", "1.5", "1.75", "2", "2.5", "3"}));
         }
-        if (SettingsStatus.playbackQualityEnabled || SettingsStatus.sdrPlaybackEnabled) {
+        if (SettingsStatus.playbackQualityEnabled || SettingsStatus.sdrPlaybackEnabled
+                || SettingsStatus.h264PlaybackEnabled) {
             addPreference(new SectionHeadingPreference(context, "Quality"));
         }
         if (SettingsStatus.playbackQualityEnabled) {
@@ -220,6 +221,13 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                             + "doesn't jump to full brightness when one starts. Videos TikTok only "
                             + "offers in HDR still play.",
                     Settings.PLAY_SDR));
+        }
+        if (SettingsStatus.h264PlaybackEnabled) {
+            addPreference(new TogglePreference(context, "Prefer H.264 video",
+                    "Play the H.264 version of videos TikTok also offers in HEVC or ByteVC2. "
+                            + "It's easier on phones that stutter or run hot playing those. Videos "
+                            + "without an H.264 version still play.",
+                    Settings.PREFER_H264));
         }
     }
 }

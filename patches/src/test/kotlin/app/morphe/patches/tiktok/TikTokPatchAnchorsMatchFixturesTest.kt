@@ -53,6 +53,9 @@ import app.morphe.patches.tiktok.interaction.videooverlays.*
 import app.morphe.patches.tiktok.interaction.quality.ForceHdrOffFingerprint
 import app.morphe.patches.tiktok.interaction.quality.SimVideoSetBitRateFingerprint
 import app.morphe.patches.tiktok.interaction.quality.SimVideoUrlModelSetBitRateFingerprint
+import app.morphe.patches.tiktok.interaction.quality.SIM_BIT_RATE
+import app.morphe.patches.tiktok.interaction.quality.requireGearCodecField
+import app.morphe.patches.tiktok.interaction.quality.requirePlayerGearSetter
 import app.morphe.patches.tiktok.misc.comment.BIO_EDITOR_CLASSES
 import app.morphe.patches.tiktok.misc.comment.CommentInputLimitFingerprint
 import app.morphe.patches.tiktok.misc.comment.REPOST_NOTE_INPUTS
@@ -65,6 +68,9 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.value.StringEncodedValue
 import com.android.tools.smali.dexlib2.iface.instruction.NarrowLiteralInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
@@ -559,6 +565,70 @@ class TikTokPatchAnchorsMatchFixturesTest {
                 instructions.filterIsInstance<NarrowLiteralInstruction>().map { it.narrowLiteral })
             assertEquals("${apk.name}: SimBitRate.isHdr reads", List(2) { "${models}SimBitRate;->getHdrType()I" },
                 instructions.filterIsInstance<ReferenceInstruction>().map { it.reference.toString() })
+        }
+    }
+
+    /**
+     * Prefer H.264 playback hooks both player gear setters and keeps the gears whose
+     * SimBitRate.getCodecType is 0. That getter has to return the field a converter fills from the
+     * feed's is_bytevc1 (0 H.264, 1 ByteVC1, 2 ByteVC2), and the patch's own shape checks have to
+     * pass, on every declared build.
+     */
+    @Test
+    fun `H264 playback hooks the gear setters and getCodecType reads is_bytevc1 on every declared build`() {
+        val models = "Lcom/ss/android/ugc/playerkit/simapicommon/model/"
+        val bitRate = "Lcom/ss/android/ugc/aweme/feed/model/BitRate;"
+        val expected = mapOf(
+            SimVideoSetBitRateFingerprint to "${models}SimVideo;->setBitRate(Ljava/util/List;)V",
+            SimVideoUrlModelSetBitRateFingerprint to "${models}SimVideoUrlModel;->setBitRate(Ljava/util/List;)V",
+        )
+        Fixtures.forEachDeclared { apk ->
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            val classes = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }.toList()
+            for ((fingerprint, signature) in expected) {
+                val taken = classes.flatMap { classDef ->
+                    classDef.methods.filter { fingerprint.takes(it, classDef) }
+                }
+                assertEquals(signature, listOf(signature), taken.map { it.anchorSignature() })
+                requirePlayerGearSetter(taken.single())
+            }
+
+            val byType = classes.associateBy { it.type }
+            val codec = requireGearCodecField { byType[it] }
+            fun Method.fieldReads() = implementation!!.instructions
+                .mapNotNull { ((it as? ReferenceInstruction)?.reference as? FieldReference)?.toString() }.toList()
+            val gear = byType.getValue(SIM_BIT_RATE)
+            assertEquals("SimBitRate.isBytevc1 reads the codec field", listOf(codec.toString()),
+                gear.methods.single { it.name == "isBytevc1" && it.parameterTypes.isEmpty() }.fieldReads())
+
+            // The feed model's is_bytevc1 is the field its isBytevc1() returns.
+            val feedField = byType.getValue(bitRate).fields.single { field ->
+                field.annotations.any { annotation ->
+                    annotation.elements.any { (it.value as? StringEncodedValue)?.value == "is_bytevc1" }
+                }
+            }
+            assertEquals("I", feedField.type)
+            assertEquals(listOf("$bitRate->${feedField.name}:I"),
+                byType.getValue(bitRate).methods.single { it.name == "isBytevc1" && it.parameterTypes.isEmpty() }
+                    .fieldReads())
+
+            // And a converter hands BitRate.isBytevc1() straight to the gear's codec setter.
+            val feedCodec = "$bitRate->isBytevc1()I"
+            val gearCodec = setOf("$SIM_BIT_RATE->setCodecType(I)V", "$SIM_BIT_RATE->setBytevc1(I)V")
+            val converters = classes.flatMap { it.methods }.filter { method ->
+                val instructions = method.implementation?.instructions?.toList() ?: return@filter false
+                instructions.indices.any { index ->
+                    val read = (instructions[index] as? ReferenceInstruction)?.reference?.toString() == feedCodec
+                    val result = instructions.getOrNull(index + 1) as? OneRegisterInstruction
+                    read && result != null && result.opcode == Opcode.MOVE_RESULT &&
+                        instructions.drop(index + 2).firstOrNull { it.opcode.name.startsWith("invoke") }?.let { call ->
+                            (call as ReferenceInstruction).reference.toString() in gearCodec &&
+                                (call as FiveRegisterInstruction).registerD == result.registerA
+                        } == true
+                }
+            }
+            assertTrue("no converter copies BitRate.isBytevc1 into a gear's codec", converters.isNotEmpty())
         }
     }
 

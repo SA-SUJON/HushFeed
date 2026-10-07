@@ -29,6 +29,8 @@ public class SettingsStatus {
     public static void enablePlaybackQuality() { playbackQualityEnabled = true; }
     public static boolean sdrPlaybackEnabled;
     public static void enableSdrPlayback() { sdrPlaybackEnabled = true; }
+    public static boolean h264PlaybackEnabled;
+    public static void enableH264Playback() { h264PlaybackEnabled = true; }
     public static boolean advancedDownloadsEnabled;
     public static void enableAdvancedDownloads() { advancedDownloadsEnabled = true; }
     public static boolean doubleTapEnabled;
