@@ -583,4 +583,43 @@ public class AutomaticClearDisplayTest {
             app.morphe.extension.tiktok.UiCapture.save(activity.getWindow().getDecorView(), "clear-display-settings.png");
         }
     }
+    @Test public void hidingTheControlsSitsUnderTheAutomaticSwitch() throws Exception {
+        // It sat at the end of Around the video, where the #84 reporter couldn't find it next to
+        // the switch it goes with.
+        boolean overlays = SettingsStatus.videoOverlaysEnabled;
+        try (var owner = Robolectric.buildActivity(
+                app.morphe.extension.tiktok.interaction.GestureActionsTest.TestActivity.class).setup()) {
+            var activity = owner.get();
+            Utils.setContext(activity);
+            SettingsStatus.videoOverlaysEnabled = true;
+            SettingsStatus.automaticClearDisplayEnabled = true;
+            List<String> titles = feedScreenTitles(activity);
+            int heading = titles.indexOf("Clear display");
+            assertTrue(titles.toString(), heading >= 0);
+            assertEquals(List.of("Clear display", "Automatic clear display", "Clear display delay",
+                    "Hide the Clear display controls"), titles.subList(heading, heading + 4));
+            assertEquals(1, titles.stream().filter("Hide the Clear display controls"::equals).count());
+
+            // The row belongs to the overlay patch, so a bundle without the automatic one still
+            // shows it, under its own heading.
+            SettingsStatus.automaticClearDisplayEnabled = false;
+            titles = feedScreenTitles(activity);
+            heading = titles.indexOf("Clear display");
+            assertTrue(titles.toString(), heading >= 0);
+            assertEquals("Hide the Clear display controls", titles.get(heading + 1));
+            assertFalse(titles.contains("Automatic clear display"));
+        } finally {
+            SettingsStatus.videoOverlaysEnabled = overlays;
+        }
+    }
+
+    private static List<String> feedScreenTitles(android.preference.PreferenceActivity activity) {
+        var screen = activity.getPreferenceManager().createPreferenceScreen(activity);
+        var category = new InterfacePreferenceCategory(activity, screen);
+        List<String> titles = new ArrayList<>();
+        for (int i = 0; i < category.getPreferenceCount(); i++) {
+            titles.add(String.valueOf(category.getPreference(i).getTitle()));
+        }
+        return titles;
+    }
 }
