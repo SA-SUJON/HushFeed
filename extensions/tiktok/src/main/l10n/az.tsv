@@ -1598,3 +1598,5 @@ Saved the photos as a video in %1$s	Fotolar video kimi %1$s yerinə saxlanıldı
 Saved the photos as a video in %1$s. The sound couldn't be added, so it's silent.	Fotolar video kimi %1$s yerinə saxlanıldı. Səs əlavə edilə bilmədi, ona görə video səssizdir.
 The video couldn't be made from these photos. Try again.	Bu fotolardan video hazırlana bilmədi. Yenidən cəhd edin.
 Video of photos	Fotolardan video
+# context: search words for the Log diagnostics switch. Never shown, only matched when someone searches settings. Give the words people type for debug logging in this language, separated by spaces.
+debug debugging logs logging	sazlama xəta axtarışı jurnallar loglar

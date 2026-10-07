@@ -1736,3 +1736,5 @@ Saved the photos as a video in %1$s	Фото сохранены как виде�
 Saved the photos as a video in %1$s. The sound couldn't be added, so it's silent.	Фото сохранены как видео в %1$s. Не удалось добавить звук, поэтому видео без звука.
 The video couldn't be made from these photos. Try again.	Не удалось создать видео из этих фото. Попробуйте ещё раз.
 Video of photos	Видео из фото
+# context: search words for the Log diagnostics switch. Never shown, only matched when someone searches settings. Give the words people type for debug logging in this language, separated by spaces.
+debug debugging logs logging	отладка дебаг логи журналы

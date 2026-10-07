@@ -56,7 +56,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildAz() {
-        Map<String, String> table = new HashMap<>(3188);
+        Map<String, String> table = new HashMap<>(3190);
         fillAz0(table);
         fillAz1(table);
         fillAz2(table);
@@ -3350,6 +3350,8 @@ public final class L10nTranslations {
                 "Sıfır bunu söndürür. Pleyerin lentdə işlədiyi dəqiqələri sayın. Mesajlarda, profildə və ya axtarışda keçirilən vaxt sayılmır.");
         table.put("collapsed",
                 "yığılıb");
+        table.put("debug debugging logs logging",
+                "sazlama xəta axtarışı jurnallar loglar");
         table.put("expanded",
                 "açılıb");
         table.put("this creator",
@@ -3357,7 +3359,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(3188);
+        Map<String, String> table = new HashMap<>(3190);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -6651,6 +6653,8 @@ public final class L10nTranslations {
                 "Null schaltet das aus. Zählt die Minuten, die der Player im Feed läuft. Zeit in Nachrichten, auf einem Profil oder in der Suche zählt nicht.");
         table.put("collapsed",
                 "Eingeklappt");
+        table.put("debug debugging logs logging",
+                "Fehlersuche Debugging Protokolle Logs");
         table.put("expanded",
                 "Ausgeklappt");
         table.put("this creator",
@@ -6658,7 +6662,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(3188);
+        Map<String, String> table = new HashMap<>(3190);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -9952,6 +9956,8 @@ public final class L10nTranslations {
                 "Cero lo desactiva. Cuenta los minutos que el reproductor pasa funcionando en el feed. El tiempo en mensajes, un perfil o la búsqueda no cuenta.");
         table.put("collapsed",
                 "Contraído");
+        table.put("debug debugging logs logging",
+                "depurar depuración registros logs");
         table.put("expanded",
                 "Expandido");
         table.put("this creator",
@@ -9959,7 +9965,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(3188);
+        Map<String, String> table = new HashMap<>(3190);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -13253,6 +13259,8 @@ public final class L10nTranslations {
                 "Nol mematikan ini. Menghitung menit saat pemutar berjalan di feed. Waktu di pesan, profil, atau pencarian tidak dihitung.");
         table.put("collapsed",
                 "Diciutkan");
+        table.put("debug debugging logs logging",
+                "debug debugging log catatan");
         table.put("expanded",
                 "Diperluas");
         table.put("this creator",
@@ -13260,7 +13268,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIt() {
-        Map<String, String> table = new HashMap<>(3188);
+        Map<String, String> table = new HashMap<>(3190);
         fillIt0(table);
         fillIt1(table);
         fillIt2(table);
@@ -16554,6 +16562,8 @@ public final class L10nTranslations {
                 "Zero disattiva questa funzione. Conta i minuti in cui il player è attivo nel feed. Il tempo in messaggi, su un profilo o nella ricerca non viene conteggiato.");
         table.put("collapsed",
                 "compresso");
+        table.put("debug debugging logs logging",
+                "debug risoluzione problemi registri log");
         table.put("expanded",
                 "espanso");
         table.put("this creator",
@@ -16561,7 +16571,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(3188);
+        Map<String, String> table = new HashMap<>(3190);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -19855,6 +19865,8 @@ public final class L10nTranslations {
                 "Zero desliga isso. Conta os minutos que o player passa rodando no feed. Tempo em mensagens, num perfil ou na busca não conta.");
         table.put("collapsed",
                 "Recolhido");
+        table.put("debug debugging logs logging",
+                "depurar depuração registros logs");
         table.put("expanded",
                 "Expandido");
         table.put("this creator",
@@ -19862,7 +19874,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildRu() {
-        Map<String, String> table = new HashMap<>(3464);
+        Map<String, String> table = new HashMap<>(3466);
         fillRu0(table);
         fillRu1(table);
         fillRu2(table);
@@ -23440,6 +23452,8 @@ public final class L10nTranslations {
                 "Ноль отключает это. Считать минуты, которые плеер работает в ленте. Время в сообщениях, профиле или поиске не учитывается.");
         table.put("collapsed",
                 "свёрнуто");
+        table.put("debug debugging logs logging",
+                "отладка дебаг логи журналы");
         table.put("expanded",
                 "развёрнуто");
         table.put("this creator",
@@ -23447,7 +23461,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildTr() {
-        Map<String, String> table = new HashMap<>(3188);
+        Map<String, String> table = new HashMap<>(3190);
         fillTr0(table);
         fillTr1(table);
         fillTr2(table);
@@ -26741,6 +26755,8 @@ public final class L10nTranslations {
                 "Sıfır bunu kapatır. Oynatıcının akışta çalışarak geçirdiği dakikaları say. Mesajlarda, bir profilde veya aramada geçen süre sayılmaz.");
         table.put("collapsed",
                 "daraltıldı");
+        table.put("debug debugging logs logging",
+                "hata ayıklama günlükler loglar");
         table.put("expanded",
                 "genişletildi");
         table.put("this creator",

@@ -1591,5 +1591,6 @@ Your seen history changed before the import finished. Choose the file again.,You
 "Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past.","Zero switches this off. Count every video that comes up in the feed, however you got to it, and say so once the count is reached. This is separate from the auto-advance session limit under Playback, which only counts videos Hushfeed itself advanced past."
 "Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search doesn't count.","Zero switches this off. Count the minutes the player spends running in the feed. Time on messages, a profile or search doesn't count."
 collapsed,collapsed
+debug debugging logs logging,debug debugging logs logging
 expanded,expanded
 this creator,this creator

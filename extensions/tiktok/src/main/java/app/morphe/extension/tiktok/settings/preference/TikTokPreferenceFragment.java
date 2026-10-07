@@ -136,9 +136,19 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         /** Folded once when the index is built: it never changes, and a query is typed a letter
          *  at a time over about 170 of these. */
         final String normalized;
+        /** The title alone, folded the same way, so a hit there ranks above a description hit. */
+        final String normalizedTitle;
 
         SearchResult(Section section, String key, String title, String summary, String category) {
-            this(section, key, null, title, summary, category, title + " " + summary + " " + category);
+            this(section, key, title, summary, category, "");
+        }
+
+        /** {@code keywords} are searched but never shown: words a reader types for the row that
+         *  its title and description don't use. */
+        SearchResult(Section section, String key, String title, String summary, String category,
+                String keywords) {
+            this(section, key, null, title, summary, category,
+                    title + " " + summary + " " + category + " " + keywords);
         }
 
         private SearchResult(Section section, String key, String member, String title,
@@ -150,6 +160,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
             this.summary = summary;
             this.category = category;
             this.normalized = normalizeSearchText(searched);
+            this.normalizedTitle = normalizeSearchText(title);
         }
 
         /**
@@ -753,17 +764,25 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
 
         // A hit on a whole word comes first, each group in page order. "counts" listed Hide
         // verified accounts and Blocked creators, where it sits inside "accounts", above the
-        // rows that are about counts.
+        // rows that are about counts. Inside each group a hit in the title comes before one only
+        // in the description: "original photos" listed Photo filename, whose description names
+        // Download original photos, above that switch.
         List<SearchResult> matches = new ArrayList<>();
+        List<SearchResult> words = new ArrayList<>();
+        List<SearchResult> titleInsideWords = new ArrayList<>();
         List<SearchResult> insideWords = new ArrayList<>();
         for (SearchResult result : searchIndex) {
             if (!result.normalized.contains(normalizedQuery)) continue;
             if (app.morphe.extension.tiktok.settings.SearchText.containsWord(result.normalized, normalizedQuery)) {
-                matches.add(result);
+                (app.morphe.extension.tiktok.settings.SearchText.containsWord(result.normalizedTitle, normalizedQuery)
+                        ? matches : words).add(result);
             } else {
-                insideWords.add(result);
+                (result.normalizedTitle.contains(normalizedQuery) ? titleInsideWords : insideWords)
+                        .add(result);
             }
         }
+        matches.addAll(words);
+        matches.addAll(titleInsideWords);
         matches.addAll(insideWords);
         if (searchInput != null) searchInput.showResultCount(matches.size());
         if (matches.isEmpty()) {
@@ -966,7 +985,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                     preference.getKey(),
                     title.toString(),
                     summary == null ? "" : summary.toString(),
-                    categoryTitle
+                    categoryTitle,
+                    searchKeywords(preference.getContext(), preference.getKey())
             ));
             // The row's summary names only the boxes that are ticked, so "counts" found nothing
             // while Counts under the buttons sat unticked inside it. Every box is a result of
@@ -978,6 +998,16 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                 }
             }
         }
+    }
+
+    /** Bug report templates ask for "debug logs", and "debug" found nothing: Log diagnostics never
+     *  says the word. English stays searchable beside the translation, since that's the word
+     *  the templates and guides use. */
+    static final String LOG_DIAGNOSTICS_KEYWORDS = "debug debugging logs logging";
+
+    private static String searchKeywords(Context context, String key) {
+        if (!BaseSettings.DEBUG.key.equals(key)) return "";
+        return LOG_DIAGNOSTICS_KEYWORDS + " " + L10n.t(context, LOG_DIAGNOSTICS_KEYWORDS);
     }
 
     private static String normalizeSearchText(String value) {

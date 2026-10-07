@@ -56,6 +56,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Feed filter has a new Hide unpersonalized For You videos switch. It hides the fill-in videos TikTok pads For You with when it hasn't picked anything for you, the ones it sends from its for_you_page_999 pool with no reason attached. If a whole batch is fill-in, the batch stays, so the feed never stalls on it. The filter report counts each For You batch by the pool TikTok says it came from, next to how many the switch took out. Creator exceptions get through it the same way they get through the other preference filters.
 
+* **TikTok:** Searching Hushfeed's settings puts a setting whose name matches above one that only mentions those words in its description, so "original photos" now lists Download original photos first and Photo filename after it. Searching "debug", "debugging", "logs" or "logging" finds Log diagnostics, and each translation has its own words for it too.
+
 * **Docs:** The FAQ explains the pure black Profile and Inbox some people see without AMOLED dark theme. It comes from TikTok 47.1.4's own dark mode, and a build without that patch shows the same colors with Hushfeed paused (#69).
 
 ## 0.68.0 (2026-10-06)

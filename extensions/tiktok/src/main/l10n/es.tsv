@@ -1598,3 +1598,5 @@ Saved the photos as a video in %1$s	Fotos guardadas como vídeo en %1$s
 Saved the photos as a video in %1$s. The sound couldn't be added, so it's silent.	Fotos guardadas como vídeo en %1$s. No se pudo añadir el sonido, así que no tiene audio.
 The video couldn't be made from these photos. Try again.	No se pudo crear el vídeo con estas fotos. Inténtalo de nuevo.
 Video of photos	Vídeo de fotos
+# context: search words for the Log diagnostics switch. Never shown, only matched when someone searches settings. Give the words people type for debug logging in this language, separated by spaces.
+debug debugging logs logging	depurar depuración registros logs

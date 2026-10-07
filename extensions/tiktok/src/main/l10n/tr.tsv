@@ -1598,3 +1598,5 @@ Saved the photos as a video in %1$s	Fotoğraflar video olarak %1$s konumuna kayd
 Saved the photos as a video in %1$s. The sound couldn't be added, so it's silent.	Fotoğraflar video olarak %1$s konumuna kaydedildi. Ses eklenemedi, bu yüzden video sessiz.
 The video couldn't be made from these photos. Try again.	Bu fotoğraflardan video oluşturulamadı. Tekrar deneyin.
 Video of photos	Fotoğraflardan video
+# context: search words for the Log diagnostics switch. Never shown, only matched when someone searches settings. Give the words people type for debug logging in this language, separated by spaces.
+debug debugging logs logging	hata ayıklama günlükler loglar

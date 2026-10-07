@@ -1598,3 +1598,5 @@ Saved the photos as a video in %1$s	Foto salvate come video in %1$s
 Saved the photos as a video in %1$s. The sound couldn't be added, so it's silent.	Foto salvate come video in %1$s. Non è stato possibile aggiungere l'audio, quindi è muto.
 The video couldn't be made from these photos. Try again.	Non è stato possibile creare il video da queste foto. Riprova.
 Video of photos	Video di foto
+# context: search words for the Log diagnostics switch. Never shown, only matched when someone searches settings. Give the words people type for debug logging in this language, separated by spaces.
+debug debugging logs logging	debug risoluzione problemi registri log
