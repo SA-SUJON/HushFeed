@@ -179,7 +179,7 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
         if (SettingsStatus.keepPulledSoundsEnabled) {
             addPreference(new TogglePreference(context, "Play sounds TikTok pulled",
                     "Play the audio on videos TikTok silenced because their sound was pulled for "
-                            + "copyright or in your region. TikTok still says the sound isn't "
+                            + "copyright or in your region. TikTok may still say the sound isn't "
                             + "available.",
                     Settings.KEEP_PULLED_SOUNDS));
         }
