@@ -117,6 +117,8 @@ final class UnfinishedSaves {
                 return L10n.t(context, "Sticker");
             case "comment live photo":
                 return L10n.t(context, "Live photo clip");
+            case "photo video":
+                return L10n.t(context, "Video of photos");
             default:
                 return L10n.t(context, "Media save");
         }

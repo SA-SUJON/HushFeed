@@ -1586,3 +1586,15 @@ Use screen lock	Ekran kilidini kullan
 TikTok is locked	TikTok kilitli
 Unlock	Kilidi aç
 TikTok isn't locked because this phone has no screen lock	Bu telefonda ekran kilidi olmadığı için TikTok kilitli değil
+Save photo posts as a video	Fotoğraf gönderilerini video olarak kaydet
+Download video on a one-photo post makes the MP4 here, with the post's sound and no TikTok logo or end card. On a post with several photos, Download asks whether you want the photos you picked as full-size originals or as one video.	Tek fotoğraflı bir gönderide "Videoyu indir", MP4'ü gönderinin sesiyle ve TikTok logosu ya da kapanış ekranı olmadan burada oluşturur. Birden fazla fotoğraflı bir gönderide "İndir", seçtiğin fotoğrafları tam boyutlu orijinaller olarak mı yoksa tek bir video olarak mı istediğini sorar.
+Seconds per photo	Fotoğraf başına saniye
+How long each photo stays on screen in a video made from a photo post.	Bir fotoğraf gönderisinden yapılan videoda her fotoğrafın ekranda ne kadar kalacağı.
+Save photos or a video?	Fotoğraflar mı, video mu kaydedilsin?
+Save photos	Fotoğrafları kaydet
+Save as video	Video olarak kaydet
+Making a video of the photos	Fotoğraflardan video oluşturuluyor
+Saved the photos as a video in %1$s	Fotoğraflar video olarak %1$s konumuna kaydedildi
+Saved the photos as a video in %1$s. The sound couldn't be added, so it's silent.	Fotoğraflar video olarak %1$s konumuna kaydedildi. Ses eklenemedi, bu yüzden video sessiz.
+The video couldn't be made from these photos. Try again.	Bu fotoğraflardan video oluşturulamadı. Tekrar deneyin.
+Video of photos	Fotoğraflardan video

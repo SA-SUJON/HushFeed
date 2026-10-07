@@ -1724,3 +1724,15 @@ Use screen lock	Использовать блокировку экрана
 TikTok is locked	TikTok заблокирован
 Unlock	Разблокировать
 TikTok isn't locked because this phone has no screen lock	TikTok не заблокирован, потому что на этом телефоне нет блокировки экрана
+Save photo posts as a video	Сохранять фотопубликации как видео
+Download video on a one-photo post makes the MP4 here, with the post's sound and no TikTok logo or end card. On a post with several photos, Download asks whether you want the photos you picked as full-size originals or as one video.	«Скачать видео» в публикации с одним фото создаёт MP4 здесь, со звуком публикации и без логотипа TikTok и финальной заставки. В публикации с несколькими фото «Скачать» спрашивает, сохранить выбранные фото как оригиналы в полном размере или как одно видео.
+Seconds per photo	Секунд на фото
+How long each photo stays on screen in a video made from a photo post.	Сколько каждое фото остаётся на экране в видео из фотопубликации.
+Save photos or a video?	Сохранить фото или видео?
+Save photos	Сохранить фото
+Save as video	Сохранить как видео
+Making a video of the photos	Создаём видео из фото
+Saved the photos as a video in %1$s	Фото сохранены как видео в %1$s
+Saved the photos as a video in %1$s. The sound couldn't be added, so it's silent.	Фото сохранены как видео в %1$s. Не удалось добавить звук, поэтому видео без звука.
+The video couldn't be made from these photos. Try again.	Не удалось создать видео из этих фото. Попробуйте ещё раз.
+Video of photos	Видео из фото

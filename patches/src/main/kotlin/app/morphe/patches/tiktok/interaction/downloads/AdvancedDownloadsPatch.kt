@@ -265,7 +265,7 @@ internal fun MutableMethod.interceptPhotoVideoConversion() {
 @Suppress("unused")
 val advancedDownloadsPatch = bytecodePatch(
     name = "Advanced downloads",
-    description = "Adds download quality choices, original Photo Mode images, separate audio files and optional video details. It can check for an existing saved video before downloading another copy. Long presses save profile pictures and stories. Switch: Hushfeed settings > Downloads.",
+    description = "Adds download quality choices, original Photo Mode images, separate audio files and optional video details. A photo post can also save as one video with its sound and no TikTok logo. It can check for an existing saved video before downloading another copy. Long presses save profile pictures and stories. Switch: Hushfeed settings > Downloads.",
     default = false,
 ) {
     category("Downloads")

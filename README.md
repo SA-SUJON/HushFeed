@@ -105,6 +105,8 @@ A bid from a patched TikTok can fail with "Bidding is temporarily unavailable", 
 
 On a post that's one photo with a sound, TikTok's Download asks whether you want a video or the image. That video isn't one TikTok's servers keep. The post only carries the photo and the sound, so TikTok builds the video on your phone and adds its logo, the creator's handle and an end card while it does. Hushfeed's watermark-free saving swaps in the clean copy the server holds for a real video, and there isn't one here. Choose Download image for a clean copy of the photo, and with Advanced downloads, Download original photos saves it at the full size TikTok received.
 
+If you want the video without TikTok's marks, turn on **Save photo posts as a video** under **Hushfeed settings > Downloads**. Download video then makes the MP4 itself from the original photo and the post's sound. It adds no logo, handle or end card. On a post with several photos, Download asks whether you want the photos you picked as full-size originals or one video of them.
+
 Turn on **Download original photos** under **Hushfeed settings > Downloads** to save the selected slides as separate source images. TikTok lists each of those photos as a HEIF copy first, a format plenty of galleries and computers can't open and some phones, Samsungs included, can't even decode. So on Android 9 and newer each photo is saved as a full-size JPEG instead, made from the WebP copy TikTok lists beside the HEIF. Video quality and Remove sound don't take over photo posts. A selected live photo saved as a motion clip keeps TikTok's native save. If the original images are unavailable, Hushfeed says so before letting the native save run.
 
 ### Patching stops at 24 or 25 percent
@@ -179,7 +181,7 @@ The eleven optional patches in the Performance group were measured on a Galaxy S
 
 | Patch | Description |
 |---|---|
-| `Advanced downloads` | Adds download quality choices, original Photo Mode images, separate audio files and optional video details. It can check for an existing saved video before downloading another copy. Long presses save profile pictures and stories. Switch: Hushfeed settings > Downloads. |
+| `Advanced downloads` | Adds download quality choices, original Photo Mode images, separate audio files and optional video details. A photo post can also save as one video with its sound and no TikTok logo. It can check for an existing saved video before downloading another copy. Long presses save profile pictures and stories. Switch: Hushfeed settings > Downloads. |
 | `Allow Duet and Stitch` | Ignores the creator's Duet and Stitch setting so the entries appear for videos that closed them. Everything else the app checks still applies: a photo post, a private video or one with music it may not reuse is still refused, and whether the upload is accepted is the server's decision, not the app's. Switch: Hushfeed settings > Share sheet. |
 | `Allow screenshots and Circle to Search` | Removes secure window flags and disables the Circle to Search block. Off by default. Restart after changing. Switch: Hushfeed settings > App. |
 | `Always show publish date` | Always shows the publish date in video author information. Switch: Hushfeed settings > Feed screen. |
@@ -419,6 +421,8 @@ With `Advanced downloads`, **Save details beside the video** writes a TXT file c
 **Show download progress**, under Downloads, adds a progress bar while a video saves. It shows a percentage when the video stream's size is known, then stays busy while the sound is fetched or the file is prepared and written. The switch starts off. It also works with Automatic quality. A save finished before the share sheet closes skips the progress row and shows its result. Screen readers hear the start once; changing percentages stay quiet.
 
 <img src="assets/settings/single-save-progress.png" alt="A single video save at 50 percent" width="328" />
+
+**Save photo posts as a video** turns a photo post into one MP4. Each photo stays on screen for **Seconds per photo** (3 by default, anything from 1 to 10) and sits in the middle of the frame with black bars where its shape doesn't fill it. The post's sound plays under it, cut where the last photo ends or started again from the top when it's shorter. If the sound can't be fetched, the video still saves without it and the notice says so. It goes to your video destination and shows the same progress and banners as a video save. Live photos keep TikTok's own save. The switch starts off.
 
 If TikTok closes while saves are still going, the next time you open it a banner names the ones that didn't finish, or that Hushfeed can't confirm, and how many of their files are missing. Files that already reached your gallery count as saved and are left alone. Nothing picks a save up again by itself, so save it again if you still want it. The note Hushfeed keeps for this stays inside TikTok's own storage and holds no links or tokens. On Android 9 and older, a file that's still being written is noted by its own path, which is the name it's saved under and can include the creator and the video ID, until it's confirmed. Each save's entry goes when the save ends or once the banner has named it.
 

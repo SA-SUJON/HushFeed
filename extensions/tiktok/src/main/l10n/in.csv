@@ -1581,3 +1581,15 @@ Use screen lock,Gunakan kunci layar
 TikTok is locked,TikTok terkunci
 Unlock,Buka kunci
 TikTok isn't locked because this phone has no screen lock,TikTok tidak terkunci karena ponsel ini tidak punya kunci layar
+Save photo posts as a video,Simpan unggahan foto sebagai video
+"Download video on a one-photo post makes the MP4 here, with the post's sound and no TikTok logo or end card. On a post with several photos, Download asks whether you want the photos you picked as full-size originals or as one video.","Unduh video di unggahan berisi satu foto membuat MP4 di sini, dengan suara unggahan dan tanpa logo TikTok atau layar penutup. Di unggahan berisi beberapa foto, Unduh menanyakan apakah kamu ingin foto yang dipilih sebagai foto asli ukuran penuh atau sebagai satu video."
+Seconds per photo,Detik per foto
+How long each photo stays on screen in a video made from a photo post.,Berapa lama setiap foto tampil di layar dalam video yang dibuat dari unggahan foto.
+Save photos or a video?,Simpan foto atau video?
+Save photos,Simpan foto
+Save as video,Simpan sebagai video
+Making a video of the photos,Membuat video dari foto
+Saved the photos as a video in %1$s,Foto disimpan sebagai video di %1$s
+"Saved the photos as a video in %1$s. The sound couldn't be added, so it's silent.","Foto disimpan sebagai video di %1$s. Suara tidak dapat ditambahkan, jadi videonya tanpa suara."
+The video couldn't be made from these photos. Try again.,Video tidak dapat dibuat dari foto ini. Coba lagi.
+Video of photos,Video dari foto

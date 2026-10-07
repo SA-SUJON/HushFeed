@@ -258,7 +258,8 @@ final class AnimatedWebpMp4Converter {
         drainEncoder(encoder, muxer, endOfStream, state, null);
     }
 
-    private static void drainEncoder(
+    /** Package-private for {@link SlideshowEncoder}, which drains its encoder the same way. */
+    static void drainEncoder(
             MediaCodec encoder,
             MediaMuxer muxer,
             boolean endOfStream,
@@ -360,7 +361,8 @@ final class AnimatedWebpMp4Converter {
         boolean muxerStarted;
     }
 
-    private static final class CodecSurface {
+    /** The encoder's input surface behind EGL. {@link SlideshowEncoder} draws its photos through it too. */
+    static final class CodecSurface {
         private static final float[] VERTICES = {
                 -1f, -1f, 0f, 1f,
                 1f, -1f, 1f, 1f,
@@ -452,9 +454,15 @@ final class AnimatedWebpMp4Converter {
         }
 
         void draw(Bitmap bitmap, long presentationTimeNs) {
-            GLES20.glViewport(0, 0, width, height);
-            GLES20.glClearColor(0f, 0f, 0f, 0f);
-            GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
+            upload(bitmap);
+            present(presentationTimeNs);
+        }
+
+        /**
+         * Puts {@code bitmap} in the texture every later {@link #present} draws. A slideshow holds
+         * one photo for many frames, and uploading eight megabytes for each of them bought nothing.
+         */
+        void upload(Bitmap bitmap) {
             GLES20.glUseProgram(program);
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture);
             // The flag is sticky and nothing else here reads it, so program and texture setup
@@ -469,10 +477,18 @@ final class AnimatedWebpMp4Converter {
             // caller writes the WebP as it came instead, which beats writing a black MP4.
             int uploadError = GLES20.glGetError();
             if (uploadError != GLES20.GL_NO_ERROR) {
-                throw new IllegalStateException("Could not upload a sticker frame to the GPU, "
+                throw new IllegalStateException("Could not upload a frame to the GPU, "
                         + "OpenGL error 0x" + Integer.toHexString(uploadError));
             }
+        }
 
+        /** Draws the uploaded texture as one frame stamped {@code presentationTimeNs}. */
+        void present(long presentationTimeNs) {
+            GLES20.glViewport(0, 0, width, height);
+            GLES20.glClearColor(0f, 0f, 0f, 0f);
+            GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
+            GLES20.glUseProgram(program);
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture);
             int positionLocation = GLES20.glGetAttribLocation(program, "aPosition");
             int textureLocation = GLES20.glGetAttribLocation(program, "aTexCoord");
             vertices.position(0);

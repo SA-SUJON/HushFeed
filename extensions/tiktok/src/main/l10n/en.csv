@@ -408,6 +408,7 @@ Don't start the feed on returning,Don't start the feed on returning
 Done,Done
 Double tap,Double tap
 Download original photos,Download original photos
+"Download video on a one-photo post makes the MP4 here, with the post's sound and no TikTok logo or end card. On a post with several photos, Download asks whether you want the photos you picked as full-size originals or as one video.","Download video on a one-photo post makes the MP4 here, with the post's sound and no TikTok logo or end card. On a post with several photos, Download asks whether you want the photos you picked as full-size originals or as one video."
 Downloads,Downloads
 "Drag to move, release to place","Drag to move, release to place"
 Drama and Series,Drama and Series
@@ -670,6 +671,7 @@ Hold the feed after the budget,Hold the feed after the budget
 Home,Home
 Hook status,Hook status
 How far each edge press moves the video.,How far each edge press moves the video.
+How long each photo stays on screen in a video made from a photo post.,How long each photo stays on screen in a video made from a photo post.
 How much of a video you watch before it's hidden next time. Zero counts it after a few seconds.,How much of a video you watch before it's hidden next time. Zero counts it after a few seconds.
 Hushfeed can't read the creator pattern %1$s,Hushfeed can't read the creator pattern %1$s
 Hushfeed hid a TikTok CAPTCHA. Turn off Hide CAPTCHA popups if something stops working.,Hushfeed hid a TikTok CAPTCHA. Turn off Hide CAPTCHA popups if something stops working.
@@ -774,6 +776,7 @@ Look like the store app to TikTok's checks,Look like the store app to TikTok's c
 Looking for apps,Looking for apps
 Lowest,Lowest
 Make TikTok yours.,Make TikTok yours.
+Making a video of the photos,Making a video of the photos
 Manage topics,Manage topics
 Manager,Manager
 Marked as not interested,Marked as not interested
@@ -1051,6 +1054,7 @@ Save Hushfeed settings and Feature Gate Lab rules to a JSON file.,Save Hushfeed 
 Save a profile picture on a long press,Save a profile picture on a long press
 Save a story on a long press,Save a story on a long press
 Save again,Save again
+Save as video,Save as video
 Save build details,Save build details
 Save cancelled. Nothing was saved.,Save cancelled. Nothing was saved.
 Save comments to Favorites,Save comments to Favorites
@@ -1059,6 +1063,9 @@ Save details beside the video,Save details beside the video
 Save field values,Save field values
 Save full report,Save full report
 Save media,Save media
+Save photo posts as a video,Save photo posts as a video
+Save photos,Save photos
+Save photos or a video?,Save photos or a video?
 Save report,Save report
 Save subtitles beside videos,Save subtitles beside videos
 "Save the caption, creator, link and publication date in a TXT file. On Android 10 and later, the pair uses Download or Documents under the same folder name. Applies to saves handled here.","Save the caption, creator, link and publication date in a TXT file. On Android 10 and later, the pair uses Download or Documents under the same folder name. Applies to saves handled here."
@@ -1078,6 +1085,8 @@ Saved %1$s of %2$s photos before the story failed,Saved %1$s of %2$s photos befo
 Saved %1$s of %2$s. The server asked us to wait. Try again later.,Saved %1$s of %2$s. The server asked us to wait. Try again later.
 Saved %1$s original photos,Saved %1$s original photos
 Saved one original photo,Saved one original photo
+Saved the photos as a video in %1$s,Saved the photos as a video in %1$s
+"Saved the photos as a video in %1$s. The sound couldn't be added, so it's silent.","Saved the photos as a video in %1$s. The sound couldn't be added, so it's silent."
 Saved videos forgotten. The files are still there.,Saved videos forgotten. The files are still there.
 Saved videos put back,Saved videos put back
 "Saved, override off","Saved, override off"
@@ -1110,6 +1119,7 @@ Search share actions,Search share actions
 Search these comments,Search these comments
 "Search translated titles and descriptions, then open the original setting.","Search translated titles and descriptions, then open the original setting."
 Search within comments,Search within comments
+Seconds per photo,Seconds per photo
 "Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed isn't empty.","Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed isn't empty."
 Seek by,Seek by
 Seek from the edges,Seek from the edges
@@ -1364,6 +1374,7 @@ The sticker couldn't be saved. Try again.,The sticker couldn't be saved. Try aga
 The story couldn't be saved. Try again.,The story couldn't be saved. Try again.
 "The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.","The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks."
 The time of day the message goes out.,The time of day the message goes out.
+The video couldn't be made from these photos. Try again.,The video couldn't be made from these photos. Try again.
 "The video couldn't be saved. Try again, or choose Automatic.","The video couldn't be saved. Try again, or choose Automatic."
 "The video was saved, but its record couldn't be updated. A later save may make another copy.","The video was saved, but its record couldn't be updated. A later save may make another copy."
 "The video you're watching keeps playing to its end after you leave TikTok or turn the screen off, with TikTok's own media notification to pause it. TikTok's background play switch stays on while this is on. Restart TikTok to apply this.","The video you're watching keeps playing to its end after you leave TikTok or turn the screen off, with TikTok's own media notification to pause it. TikTok's background play switch stays on while this is on. Restart TikTok to apply this."
@@ -1522,6 +1533,7 @@ Video destination,Video destination
 Video download quality,Video download quality
 Video filename,Video filename
 Video info,Video info
+Video of photos,Video of photos
 Video playback quality,Video playback quality
 Video player settings,Video player settings
 Video saved,Video saved

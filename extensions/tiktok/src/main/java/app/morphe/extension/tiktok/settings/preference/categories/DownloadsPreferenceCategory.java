@@ -132,6 +132,14 @@ public class DownloadsPreferenceCategory extends ConditionalPreferenceCategory {
         if (SettingsStatus.advancedDownloadsEnabled) {
             addPreference(new TogglePreference(context, "Download original photos",
                     "Save every photo in the post at full size as a JPEG, not as the screen shows it.", Settings.DOWNLOAD_ORIGINAL_PHOTOS));
+            addPreference(new TogglePreference(context, "Save photo posts as a video",
+                    "Download video on a one-photo post makes the MP4 here, with the post's sound "
+                            + "and no TikTok logo or end card. On a post with several photos, Download "
+                            + "asks whether you want the photos you picked as full-size originals or "
+                            + "as one video.", Settings.DOWNLOAD_PHOTOS_AS_VIDEO));
+            addPreference(new NumberInputPreference(context, "Seconds per photo",
+                    "How long each photo stays on screen in a video made from a photo post.",
+                    Settings.PHOTO_VIDEO_SECONDS, "%1$s second", "%1$s seconds"));
         }
         if (SettingsStatus.downloadEnabled) {
             addPreference(new ChoicePreference(context, "Animated sticker format", Settings.DOWNLOAD_STICKER_FORMAT,
