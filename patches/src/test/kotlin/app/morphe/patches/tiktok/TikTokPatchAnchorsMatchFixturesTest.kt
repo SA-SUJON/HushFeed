@@ -30,6 +30,10 @@ import app.morphe.patches.tiktok.misc.commenttools.isCompactCommentHeaderBind
 import app.morphe.patches.tiktok.misc.commenttools.resolveCompactCommentHeader
 import app.morphe.patches.tiktok.misc.commenttools.resolveLikeTouchListener
 import app.morphe.patches.tiktok.interaction.videooverlays.*
+import app.morphe.patches.tiktok.interaction.quality.ForceHdrOffFingerprint
+import app.morphe.patches.tiktok.interaction.quality.SimVideoSetBitRateFingerprint
+import app.morphe.patches.tiktok.interaction.quality.SimVideoUrlModelSetBitRateFingerprint
+import app.morphe.takes
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
@@ -493,6 +497,34 @@ class TikTokPatchAnchorsMatchFixturesTest {
             assertTrue("${apk.name}: ${formatters.size} count formatters", formatters.size in COUNT_FORMATTERS)
             assertTrue("${apk.name}: a formatter without the hook's register",
                 formatters.all { it.isCountFormatter() })
+     * Play SDR instead of HDR hooks TikTok's own HDR-off answer and both player gear setters, one
+     * method each. SdrPlayback counts hdrType 1 and 2 as HDR because SimBitRate.isHdr does.
+     */
+    @Test
+    fun `SDR playback hooks land on one method each and isHdr keeps its HDR types on every fixture`() {
+        val models = "Lcom/ss/android/ugc/playerkit/simapicommon/model/"
+        val expected = mapOf(
+            ForceHdrOffFingerprint to "Lcom/ss/android/ugc/aweme/video/simplayer/PlayerConfigImpl;->isForceHdrOff()Z",
+            SimVideoSetBitRateFingerprint to "${models}SimVideo;->setBitRate(Ljava/util/List;)V",
+            SimVideoUrlModelSetBitRateFingerprint to "${models}SimVideoUrlModel;->setBitRate(Ljava/util/List;)V",
+        )
+        for (apk in fixtures()) {
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            val classes = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }.toList()
+            for ((fingerprint, signature) in expected) {
+                val taken = classes.flatMap { classDef ->
+                    classDef.methods.filter { fingerprint.takes(it, classDef) }
+                }
+                assertEquals("${apk.name}: $signature", listOf(signature), taken.map { it.anchorSignature() })
+            }
+            val isHdr = classes.single { it.type == "${models}SimBitRate;" }
+                .methods.single { it.name == "isHdr" && it.parameterTypes.isEmpty() }
+            val instructions = isHdr.implementation!!.instructions.toList()
+            assertEquals("${apk.name}: SimBitRate.isHdr literals", listOf(1, 2, 0),
+                instructions.filterIsInstance<NarrowLiteralInstruction>().map { it.narrowLiteral })
+            assertEquals("${apk.name}: SimBitRate.isHdr reads", List(2) { "${models}SimBitRate;->getHdrType()I" },
+                instructions.filterIsInstance<ReferenceInstruction>().map { it.reference.toString() })
         }
     }
 

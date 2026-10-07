@@ -1545,3 +1545,5 @@ TikTok's background play and auto-scroll	TikTok'un arka planda oynatma ve otomat
 Post dates in the feed	Akışta gönderi tarihleri
 Show exact counts	Tam sayıları göster
 Show counts as full numbers, like 1,234,567 instead of 1.2M.	Sayıları tam olarak gösterir, örneğin 1.2M yerine 1.234.567.
+Play SDR instead of HDR	HDR yerine SDR oynat
+Play the standard version of videos that also come in HDR, so the screen doesn't jump to full brightness when one starts. Videos TikTok only offers in HDR still play.	HDR sürümü de olan videoların normal sürümünü oynat, böylece biri başladığında ekran tam parlaklığa sıçramaz. TikTok'un yalnızca HDR olarak sunduğu videolar yine oynatılır.
