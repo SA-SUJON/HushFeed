@@ -64,7 +64,7 @@ public class PauseAnswersUnpatchedTest {
             "morphe_last_time_app_was_launched", "morphe_experimental_app_target_confirmed",
             "hushfeed_paused", "hushfeed_safe_mode",
             // Guests need their saved settings entry to resume Hushfeed after closing settings.
-            "home_tab_opens_settings",
+            "home_tab_opens_settings", "app_lock", "app_lock_timeout",
             "launcher_shortcuts_removed", "feed_navigation_observed_tabs",
             "bottom_navigation_observed_tabs", "down_path", "download_paths_migrated",
             "remembered_speed_v2", "session_budget_state", "block_author_button_position",

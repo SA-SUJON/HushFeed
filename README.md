@@ -133,7 +133,7 @@ TikTok already does this. Open your profile, tap Following, then Manage at the r
 
 Hushfeed settings > Pause Hushfeed turns off everything a switch, list or limit controls, from the next start. TikTok then runs the way it ships. If the problem is still there, it isn't coming from any of that. Your settings stay exactly as they were, and switching Pause off brings every one of them back after a restart, with no patching again. A diagnostic export made while paused says so at the top.
 
-Pausing also turns off your screen-time budget, so a day you've locked refuses it until the day starts over.
+Pausing also turns off your screen-time budget, so a day you've locked refuses it until the day starts over. App lock is the other way around: it stays on while Hushfeed is paused, so pausing can't be used to get past it.
 
 A few patches change TikTok with no switch in front of them, and Pause can't reach those:
 
