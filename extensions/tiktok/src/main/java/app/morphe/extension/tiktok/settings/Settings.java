@@ -391,6 +391,11 @@ public class Settings extends BaseSettings {
      */
     public static final BooleanSetting STOP_LIVE_AUTO_ENTER = new BooleanSetting("stop_live_auto_enter", FALSE);
     /**
+     * Shows a LIVE's exact viewer count in its room instead of TikTok's rounded one; the LIVE
+     * controls patch. Read each time the count is drawn, so no restart.
+     */
+    public static final BooleanSetting SHOW_EXACT_LIVE_VIEWERS = new BooleanSetting("show_exact_live_viewers", FALSE);
+    /**
      * Plays the audio TikTok mutes on a post whose sound was pulled; the Keep pulled sounds
      * patch. Read as each video starts, so no restart.
      */

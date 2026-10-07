@@ -99,6 +99,10 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                     "A LIVE in the feed can count down and take you into the room on its own. "
                             + "This keeps you in the feed until you tap it.",
                     Settings.STOP_LIVE_AUTO_ENTER));
+            addPreference(new TogglePreference(context, "Show exact LIVE viewer counts",
+                    "A LIVE room shows how many people are watching as a rounded number like 1.2K. "
+                            + "This shows the exact count instead.",
+                    Settings.SHOW_EXACT_LIVE_VIEWERS));
         }
         if (SettingsStatus.stopVideoLoopingEnabled) {
             addPreference(new TogglePreference(

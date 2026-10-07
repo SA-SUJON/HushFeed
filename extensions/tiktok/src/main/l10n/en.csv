@@ -99,6 +99,7 @@ source,target
 1 video left,1 video left
 "2, from Keep playing in the background","2, from Keep playing in the background"
 A LIVE in the feed can count down and take you into the room on its own. This keeps you in the feed until you tap it.,A LIVE in the feed can count down and take you into the room on its own. This keeps you in the feed until you tap it.
+A LIVE room shows how many people are watching as a rounded number like 1.2K. This shows the exact count instead.,A LIVE room shows how many people are watching as a rounded number like 1.2K. This shows the exact count instead.
 A Lab change is already running,A Lab change is already running
 A change that loosens the budget waits until the day starts over and one that tightens it applies at once. A higher budget or no budget loosens it. So do a shorter hold and more times to open the feed anyway. Moving the hour the day starts and turning this off wait too. A restored backup follows the same rule and Start today over is off while this is on.,A change that loosens the budget waits until the day starts over and one that tightens it applies at once. A higher budget or no budget loosens it. So do a shorter hold and more times to open the feed anyway. Moving the hour the day starts and turning this off wait too. A restored backup follows the same rule and Start today over is off while this is on.
 A comment poll shows how many picked each answer before you vote. Tapping an answer still votes.,A comment poll shows how many picked each answer before you vote. Tapping an answer still votes.
@@ -983,6 +984,7 @@ Play Store,Play Store
 Play sounds TikTok pulled,Play sounds TikTok pulled
 Play the H.264 version of videos TikTok also offers in HEVC or ByteVC2. It's easier on phones that stutter or run hot playing those. Videos without an H.264 version still play.,Play the H.264 version of videos TikTok also offers in HEVC or ByteVC2. It's easier on phones that stutter or run hot playing those. Videos without an H.264 version still play.
 Play the audio on videos TikTok silenced because their sound was pulled for copyright or in your region. TikTok may still say the sound isn't available.,Play the audio on videos TikTok silenced because their sound was pulled for copyright or in your region. TikTok may still say the sound isn't available.
+Play the audio on videos TikTok silenced because their sound was pulled for copyright or in your region. TikTok still says the sound isn't available.,Play the audio on videos TikTok silenced because their sound was pulled for copyright or in your region. TikTok still says the sound isn't available.
 "Play the standard version of videos that also come in HDR, so the screen doesn't jump to full brightness when one starts. Videos TikTok only offers in HDR still play.","Play the standard version of videos that also come in HDR, so the screen doesn't jump to full brightness when one starts. Videos TikTok only offers in HDR still play."
 Play videos TikTok has classified without the overlay asking to be tapped through first.,Play videos TikTok has classified without the overlay asking to be tapped through first.
 Playback,Playback
@@ -1210,6 +1212,7 @@ Show a video preview thumbnail while dragging the progress bar.,Show a video pre
 "Show counts as full numbers, like 1,234,567 instead of 1.2M.","Show counts as full numbers, like 1,234,567 instead of 1.2M."
 Show download progress,Show download progress
 Show engagement rate,Show engagement rate
+Show exact LIVE viewer counts,Show exact LIVE viewer counts
 Show exact counts,Show exact counts
 Show failures on screen,Show failures on screen
 Show follow status,Show follow status

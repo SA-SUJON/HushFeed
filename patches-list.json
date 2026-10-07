@@ -4354,7 +4354,7 @@
     },
     {
       "name": "LIVE controls",
-      "description": "Adds a switch that stops a LIVE in the feed counting down and taking you into the room on its own, so you stay in the feed until you tap it. Switch: Hushfeed settings > Playback.",
+      "description": "Adds a switch that stops a LIVE in the feed counting down and taking you into the room on its own, so you stay in the feed until you tap it, and one that shows a LIVE's exact viewer count instead of TikTok's rounded one. Switches: Hushfeed settings > Playback.",
       "category": "Playback",
       "use": true,
       "dependencies": [
