@@ -193,7 +193,8 @@ public class SeenHistoryFilePreferenceTest {
                 new Intent().setData(provider.uri));
         finishWorkers();
 
-        assertEquals("Added 2 seen videos. 2 videos were already recorded.", bannerMessage());
+        assertEquals("the repeated 202 is one video, not one already recorded",
+                "Added 2 seen videos. 1 video was already recorded.", bannerMessage());
         assertTrue(SeenVideoHistory.shouldHide("7555000000000000202"));
         assertTrue(SeenVideoHistory.shouldHide("7555000000000000203"));
         assertEquals(1700000000500L, lastSeen(account, "7555000000000000201"));

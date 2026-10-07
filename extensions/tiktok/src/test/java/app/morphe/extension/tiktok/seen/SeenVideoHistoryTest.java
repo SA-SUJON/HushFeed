@@ -1553,6 +1553,7 @@ public class SeenVideoHistoryTest {
         SeenVideoHistory.ImportResult result = importAndWait(SeenVideoHistory.captureImportTarget(),
                 new WatchHistoryImport.Records(file, 1, 6));
         assertEquals(2, result.imported);
+        assertEquals("22 was there already and the file moved its date later", 1, result.refreshed);
         assertEquals("21 was recorded later than the file has it", 1, result.alreadyRecorded);
         assertEquals("23 is older than retention keeps", 1, result.expired);
         assertEquals("24 is dated ahead of the clock", 1, result.future);

@@ -106,13 +106,19 @@ public final class SeenVideoHistory {
         public final int capped;
         /** Videos the account already had that the cap pruned to make room for the batch. */
         public final int displaced;
+        /**
+         * Of {@link #imported}, the videos the account already had, whose date the batch moved
+         * later. A report that says what was added counts these as already there.
+         */
+        public final int refreshed;
 
         private ImportResult(ImportStatus status, int imported, int skipped) {
-            this(status, imported, skipped, false, 0, 0, 0, 0, 0);
+            this(status, imported, skipped, false, 0, 0, 0, 0, 0, 0);
         }
 
         private ImportResult(ImportStatus status, int imported, int skipped, boolean undoRetired,
-                             int alreadyRecorded, int expired, int future, int capped, int displaced) {
+                             int alreadyRecorded, int expired, int future, int capped, int displaced,
+                             int refreshed) {
             this.status = status;
             this.imported = imported;
             this.skipped = skipped;
@@ -122,6 +128,7 @@ public final class SeenVideoHistory {
             this.future = future;
             this.capped = capped;
             this.displaced = displaced;
+            this.refreshed = refreshed;
         }
     }
 
@@ -790,7 +797,12 @@ public final class SeenVideoHistory {
                 writable.endTransaction();
             }
             int imported = 0;
-            for (String id : changed.keySet()) if (after.containsKey(id)) imported++;
+            int refreshed = 0;
+            for (String id : changed.keySet()) {
+                if (!after.containsKey(id)) continue;
+                imported++;
+                if (before.containsKey(id)) refreshed++;
+            }
             // Rows inside retention that the account had and the cap took for the batch.
             int displaced = 0;
             for (Map.Entry<String, Long> row : before.entrySet()) {
@@ -821,7 +833,7 @@ public final class SeenVideoHistory {
             }
             notifyImport(callback, new ImportResult(ImportStatus.IMPORTED, imported,
                     records.skipped + records.videos.size() - imported, undoRetired,
-                    alreadyRecorded, expired, future, changed.size() - imported, displaced));
+                    alreadyRecorded, expired, future, changed.size() - imported, displaced, refreshed));
         } catch (ImportStopped stopped) {
             notifyImport(callback, new ImportResult(stopped.status, 0, 0));
         } catch (Exception failure) {

@@ -306,8 +306,10 @@ public final class SeenHistoryFilePreference extends Preference {
                 "Couldn't restore seen history. Your saved history is unchanged.");
         NumberFormat numbers = NumberFormat.getInstance();
         String newest = numbers.format(SeenVideoHistory.MAX_RECORDS);
-        // A repeat in the file is a video the file had already recorded.
-        int already = outcome.alreadyRecorded + contents.repeats;
+        // A video whose date the file moved later was already there, so it isn't one added. A
+        // repeat in the file isn't a video at all, so it's left out of both.
+        int already = outcome.alreadyRecorded + outcome.refreshed;
+        int added = outcome.imported - outcome.refreshed;
         StringBuilder notes = new StringBuilder();
         if (already > 0) notes.append(' ').append(L10n.quantity(context, already,
                 "%1$s video was already recorded.", "%1$s videos were already recorded.",
@@ -329,12 +331,12 @@ public final class SeenHistoryFilePreference extends Preference {
                 numbers.format(outcome.displaced), newest));
         if (outcome.undoRetired) notes.append(' ').append(L10n.t(context,
                 "Importing new history ended Undo for the earlier clear. You can clear the imported history."));
-        String added = numbers.format(outcome.imported);
+        String addedText = numbers.format(added);
         // One sentence on its own takes no full stop; it takes one with others after it.
-        if (notes.length() == 0) return L10n.quantity(context, outcome.imported,
-                "Added 1 seen video", "Added %1$s seen videos", added);
-        return L10n.quantity(context, outcome.imported,
-                "Added 1 seen video.", "Added %1$s seen videos.", added) + notes;
+        if (notes.length() == 0) return L10n.quantity(context, added,
+                "Added 1 seen video", "Added %1$s seen videos", addedText);
+        return L10n.quantity(context, added,
+                "Added 1 seen video.", "Added %1$s seen videos.", addedText) + notes;
     }
 
     static String failureMessage(Context context, Throwable failure) {
