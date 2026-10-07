@@ -321,6 +321,7 @@ public final class VideoOverlayHider {
             boolean installed = LAYOUT_HOOK.install(root, VideoOverlayHider::refresh);
             activityReference = new WeakReference<>(activity);
             LiveStatusBar.follow(activity);
+            EdgeSwipeLevels.sync(activity);
             follow(activity.getApplication());
             if (installed) {
                 Logger.printDebug(() -> "Video overlay hider installed on " + activity.getClass().getSimpleName());
@@ -345,7 +346,7 @@ public final class VideoOverlayHider {
 
             @Override public void onActivityCreated(Activity created, Bundle state) { }
             @Override public void onActivityStarted(Activity started) { }
-            @Override public void onActivityPaused(Activity paused) { }
+            @Override public void onActivityPaused(Activity paused) { EdgeSwipeLevels.onPaused(paused); }
             @Override public void onActivityStopped(Activity stopped) { }
             @Override public void onActivitySaveInstanceState(Activity activity, Bundle state) { }
             @Override public void onActivityDestroyed(Activity destroyed) { }
@@ -372,6 +373,9 @@ public final class VideoOverlayHider {
             if (activity.isFinishing()) {
                 return;
             }
+            // Swipe for brightness and volume wraps the window once, and gives the brightness
+            // back on this pass when its switch goes off or Hushfeed is paused.
+            EdgeSwipeLevels.sync(activity);
             // The names above the feed follow their own switch on the strip TikTok's tab filter
             // hides; this pass is the one thing that runs on every layout, so it carries the ask.
             NavigationTabsFilter.refreshTopTabStrips();

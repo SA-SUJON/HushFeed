@@ -158,6 +158,14 @@ public class Settings extends BaseSettings {
     /** What a left swipe on a feed video does: TikTok's creator profile, nothing, or the comments. */
     public static final StringSetting SWIPE_LEFT_ACTION = new StringSetting("swipe_left_action", "default");
     public static final BooleanSetting EDGE_SEEK = new BooleanSetting("edge_seek", FALSE);
+    /**
+     * A vertical drag along the left edge of a feed video changes the window's brightness and along
+     * the right edge the music volume. Off by default; a drag starting anywhere else is untouched.
+     */
+    public static final BooleanSetting SWIPE_LEVELS = new BooleanSetting("swipe_levels", FALSE);
+    /** How wide each edge strip is, as a percent of the screen width. */
+    public static final IntegerSetting SWIPE_LEVELS_STRIP_PERCENT =
+            new IntegerSetting("swipe_levels_strip_percent", 15, false, Setting.parent(SWIPE_LEVELS)).withRange(5, 30);
     public static final BooleanSetting FIT_VIDEO_TO_SCREEN =
             new BooleanSetting("fit_video_to_screen", FALSE);
     /** The opposite: crop the video until it covers the window (issue #29). Fit wins when both are on. */

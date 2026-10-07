@@ -485,9 +485,19 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                 || SettingsStatus.longPressSpeedLockEnabled
                 || SettingsStatus.disableLongPressQuickShareEnabled
                 || SettingsStatus.disableLongPressRepostEnabled
-                || SettingsStatus.confirmInteractionsEnabled;
+                || SettingsStatus.confirmInteractionsEnabled
+                || SettingsStatus.videoOverlaysEnabled;
         if (!any) return;
         addPreference(new SectionHeadingPreference(context, "Gestures"));
+        if (SettingsStatus.videoOverlaysEnabled) {
+            addPreference(new TogglePreference(context, "Swipe for brightness and volume",
+                    "Drag up or down along the left edge of a video to change the screen brightness, or along "
+                            + "the right edge to change the volume. Swiping anywhere else still scrolls the feed.",
+                    Settings.SWIPE_LEVELS));
+            addPreference(new NumberInputPreference(context, "Edge strip width",
+                    "How wide each edge strip is, as a percent of the screen width.",
+                    Settings.SWIPE_LEVELS_STRIP_PERCENT, "%1$s%%"));
+        }
         if (SettingsStatus.doubleTapEnabled) {
             addPreference(new ChoicePreference(context, "Double tap", Settings.DOUBLE_TAP_ACTION,
                     new String[]{"TikTok default", "Do nothing", "Open comments"},

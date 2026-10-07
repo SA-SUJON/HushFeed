@@ -1771,3 +1771,9 @@ Play Store	Play Store
 Galaxy Store	Galaxy Store
 AppGallery	AppGallery
 Amazon Appstore	Amazon Appstore
+Swipe for brightness and volume	Свайп для яркости и громкости
+Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.	Проведите вверх или вниз у левого края видео, чтобы изменить яркость экрана, или у правого края, чтобы изменить громкость. В любом другом месте лента листается как обычно.
+Edge strip width	Ширина боковых полос
+How wide each edge strip is, as a percent of the screen width.	Ширина каждой боковой полосы в процентах от ширины экрана.
+Brightness	Яркость
+Volume	Громкость

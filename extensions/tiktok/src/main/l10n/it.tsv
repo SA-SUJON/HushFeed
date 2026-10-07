@@ -1630,3 +1630,9 @@ Play Store	Play Store
 Galaxy Store	Galaxy Store
 AppGallery	AppGallery
 Amazon Appstore	Amazon Appstore
+Swipe for brightness and volume	Scorri per luminosità e volume
+Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.	Scorri su o giù lungo il bordo sinistro di un video per cambiare la luminosità dello schermo, o lungo il bordo destro per cambiare il volume. Altrove il feed continua a scorrere come sempre.
+Edge strip width	Larghezza delle fasce laterali
+How wide each edge strip is, as a percent of the screen width.	Larghezza di ogni fascia laterale, in percentuale della larghezza dello schermo.
+Brightness	Luminosità
+Volume	Volume

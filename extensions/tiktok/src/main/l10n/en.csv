@@ -234,6 +234,7 @@ Blocked sound names,Blocked sound names
 Blocked sounds,Blocked sounds
 Blocking,Blocking
 Bottom tabs to keep,Bottom tabs to keep
+Brightness,Brightness
 Browse,Browse
 Build details,Build details
 Build details copied to the clipboard,Build details copied to the clipboard
@@ -418,10 +419,12 @@ Download original photos,Download original photos
 "Download video on a one-photo post makes the MP4 here, with the post's sound and no TikTok logo or end card. On a post with several photos, Download asks whether you want the photos you picked as full-size originals or as one video.","Download video on a one-photo post makes the MP4 here, with the post's sound and no TikTok logo or end card. On a post with several photos, Download asks whether you want the photos you picked as full-size originals or as one video."
 Downloads,Downloads
 "Drag to move, release to place","Drag to move, release to place"
+"Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.","Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed."
 Drama and Series,Drama and Series
 "Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.","Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this."
 "Each area, how many of the things it looks for are in this build and how many aren't.","Each area, how many of the things it looks for are in this build and how many aren't."
 Easier comment likes,Easier comment likes
+Edge strip width,Edge strip width
 Empty,Empty
 "Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.","Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it."
 Enable,Enable
@@ -689,6 +692,7 @@ Hook status,Hook status
 How far each edge press moves the video.,How far each edge press moves the video.
 How long each photo stays on screen in a video made from a photo post.,How long each photo stays on screen in a video made from a photo post.
 How much of a video you watch before it's hidden next time. Zero counts it after a few seconds.,How much of a video you watch before it's hidden next time. Zero counts it after a few seconds.
+"How wide each edge strip is, as a percent of the screen width.","How wide each edge strip is, as a percent of the screen width."
 Hushfeed can't read the creator pattern %1$s,Hushfeed can't read the creator pattern %1$s
 Hushfeed hid a TikTok CAPTCHA. Turn off Hide CAPTCHA popups if something stops working.,Hushfeed hid a TikTok CAPTCHA. Turn off Hide CAPTCHA popups if something stops working.
 Hushfeed is active,Hushfeed is active
@@ -1294,6 +1298,7 @@ Streak,Streak
 Structured value observed,Structured value observed
 Subtitle language,Subtitle language
 Subtitles,Subtitles
+Swipe for brightness and volume,Swipe for brightness and volume
 Swipe left,Swipe left
 System,System
 "Take the Add comment bar off videos you open from a profile, a hashtag, a sound or search, so the video fills the screen down to the bottom. The comment button on the right still opens comments.","Take the Add comment bar off videos you open from a profile, a hashtag, a sound or search, so the video fills the screen down to the bottom. The comment button on the right still opens comments."
@@ -1572,6 +1577,7 @@ Video saved with %1$s subtitles in %2$s,Video saved with %1$s subtitles in %2$s
 "Videos can't be saved to the folder in that file, so your video folder was kept","Videos can't be saved to the folder in that file, so your video folder was kept"
 Views range,Views range
 Visual search,Visual search
+Volume,Volume
 Wait a day to loosen the budget,Wait a day to loosen the budget
 "Wait a day to loosen the budget is on, so Hushfeed stays on","Wait a day to loosen the budget is on, so Hushfeed stays on"
 Wait before hiding the controls.,Wait before hiding the controls.

@@ -1630,3 +1630,9 @@ Play Store	Play Store
 Galaxy Store	Galaxy Store
 AppGallery	AppGallery
 Amazon Appstore	Amazon Appstore
+Swipe for brightness and volume	Parlaklık ve ses için kaydır
+Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.	Ekran parlaklığını değiştirmek için videonun sol kenarı boyunca, sesi değiştirmek için sağ kenarı boyunca yukarı veya aşağı kaydırın. Başka yerde kaydırmak akışı yine eskisi gibi kaydırır.
+Edge strip width	Kenar şeridi genişliği
+How wide each edge strip is, as a percent of the screen width.	Her kenar şeridinin genişliği, ekran genişliğinin yüzdesi olarak.
+Brightness	Parlaklık
+Volume	Ses
