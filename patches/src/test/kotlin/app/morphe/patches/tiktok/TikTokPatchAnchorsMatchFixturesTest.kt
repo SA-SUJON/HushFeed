@@ -523,6 +523,10 @@ class TikTokPatchAnchorsMatchFixturesTest {
             assertTrue("${apk.name}: ${formatters.size} count formatters", formatters.size in COUNT_FORMATTERS)
             assertTrue("${apk.name}: a formatter without the hook's register",
                 formatters.all { it.isCountFormatter() })
+        }
+    }
+
+    /**
      * Play SDR instead of HDR hooks TikTok's own HDR-off answer and both player gear setters, one
      * method each. SdrPlayback counts hdrType 1 and 2 as HDR because SimBitRate.isHdr does.
      */
