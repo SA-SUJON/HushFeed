@@ -178,7 +178,7 @@ public final class AppLock {
         return known;
     }
 
-    /** False while Hushfeed is paused, like every switch. */
+    /** Kept while Hushfeed is paused, so pausing is no way past the lock. */
     private static boolean enabled() {
         return Settings.APP_LOCK.get();
     }
