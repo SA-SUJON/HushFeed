@@ -61,6 +61,7 @@ public class SettingsStatus {
     public static boolean nonPersonalizedSearchEnabled = false;
     public static boolean hideSearchSuggestionsEnabled = false;
     public static boolean searchAutoplayEnabled = false;
+    public static boolean hdUploadEnabled = false;
     public static boolean liveSearchEnabled = false;
     public static boolean seekbarThumbnailEnabled = false;
     public static boolean stopVideoLoopingEnabled = false;
@@ -253,6 +254,10 @@ public class SettingsStatus {
 
     public static void enableSearchAutoplay() {
         searchAutoplayEnabled = true;
+    }
+
+    public static void enableHdUpload() {
+        hdUploadEnabled = true;
     }
 
     public static void enableLiveSearch() {

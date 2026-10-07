@@ -19,7 +19,7 @@ import app.morphe.extension.tiktok.settings.preference.SectionHeadingPreference;
 import app.morphe.extension.tiktok.settings.preference.TogglePreference;
 
 /**
- * The app around the feed: its layout, search, the profile and the system it runs on. The
+ * The app around the feed: its layout, search, the profile, posting and the system it runs on. The
  * feed's own buttons and gestures are on Feed screen, the player's rows on Playback and Duet
  * and Stitch on Share sheet, beside the rows they belong with.
  */
@@ -52,6 +52,7 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                 || SettingsStatus.profileShortcutsEnabled
                 || SettingsStatus.followStatusEnabled
                 || SettingsStatus.copyIdsEnabled
+                || SettingsStatus.hdUploadEnabled
                 || SettingsStatus.refreshRateEnabled
                 || SettingsStatus.launcherShortcutsEnabled
                 || SettingsStatus.screenCaptureEnabled
@@ -175,6 +176,16 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     "Comma separated names exactly as the row under a profile's bio shows them, "
                             + "such as TikTok Studio or Your orders. Restart TikTok to apply this.",
                     Settings.HIDDEN_PROFILE_SHORTCUTS
+            ));
+        }
+        if (SettingsStatus.hdUploadEnabled) {
+            addPreference(new SectionHeadingPreference(context, "Posting"));
+            addPreference(new TogglePreference(
+                    context,
+                    "Always upload in HD",
+                    "Post every video as if you'd turned on TikTok's own HD upload on the post page. "
+                            + "A clip TikTok doesn't count as high quality posts as before.",
+                    Settings.ALWAYS_UPLOAD_HD
             ));
         }
         // The whole app, not the feed: screenshots and the status bar used to be on Feed screen and
