@@ -33,6 +33,12 @@ import app.morphe.patches.tiktok.interaction.videooverlays.*
 import app.morphe.patches.tiktok.interaction.quality.ForceHdrOffFingerprint
 import app.morphe.patches.tiktok.interaction.quality.SimVideoSetBitRateFingerprint
 import app.morphe.patches.tiktok.interaction.quality.SimVideoUrlModelSetBitRateFingerprint
+import app.morphe.patches.tiktok.misc.comment.BIO_EDITOR_CLASSES
+import app.morphe.patches.tiktok.misc.comment.CommentInputLimitFingerprint
+import app.morphe.patches.tiktok.misc.comment.REPOST_NOTE_INPUTS
+import app.morphe.patches.tiktok.misc.comment.bioLimitConstants
+import app.morphe.patches.tiktok.misc.comment.lengthFilterConstructions
+import app.morphe.patches.tiktok.misc.comment.repostNoteInputFingerprints
 import app.morphe.takes
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import com.android.tools.smali.dexlib2.AccessFlags
@@ -559,6 +565,43 @@ class TikTokPatchAnchorsMatchFixturesTest {
                 method.implementation?.instructions?.toList()?.isLiveResults()?.size ?: 0
             }
             assertTrue("${apk.name}: AvatarLiveDataAdapter reads User.isLive", adapterReads > 0)
+        }
+    }
+
+    /**
+     * Lift text length limits: the comment keyboard's limit getter, the length filters each
+     * repost note box builds (two alternatives in the video repost and reply boxes, one in the
+     * LIVE repost note box) and the bio editor's three comparisons with 160, on every declared
+     * build. The getter and both filter classes are R8 names that move each build.
+     */
+    @Test
+    fun `length limit hooks resolve on every declared build`() {
+        val filtersPerBox = REPOST_NOTE_INPUTS.zip(listOf(2, 1, 2)).toMap()
+        for (apk in Fixtures.declaredVersions().map(Fixtures::apkOf)) {
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            val classes = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }.associateBy { it.type }
+            fun taken(fingerprint: app.morphe.patcher.Fingerprint) = classes.values.flatMap { classDef ->
+                classDef.methods.filter { fingerprint.takes(it, classDef) }
+            }
+            val limitGetters = taken(CommentInputLimitFingerprint)
+            assertEquals("${apk.name}: comment limit getter", 1, limitGetters.size)
+            assertTrue("${apk.name}: the comment limit getter returns",
+                limitGetters.single().implementation!!.instructions.any { it.opcode == Opcode.RETURN })
+            val isInputFilter = { type: String ->
+                classes[type]?.interfaces?.contains("Landroid/text/InputFilter;") == true
+            }
+            for (fingerprint in repostNoteInputFingerprints) {
+                val method = taken(fingerprint).single()
+                assertEquals("${apk.name}: ${method.definingClass} length filters", filtersPerBox[method.definingClass],
+                    method.implementation!!.instructions.toList().lengthFilterConstructions(isInputFilter).size)
+            }
+            val bioSites = BIO_EDITOR_CLASSES.sumOf { type ->
+                classes.getValue(type).methods.sumOf { method ->
+                    method.implementation?.instructions?.toList()?.bioLimitConstants()?.size ?: 0
+                }
+            }
+            assertEquals("${apk.name}: bio limit comparisons", 3, bioSites)
         }
     }
 

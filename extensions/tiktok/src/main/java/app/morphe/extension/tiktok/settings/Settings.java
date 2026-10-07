@@ -637,6 +637,8 @@ public class Settings extends BaseSettings {
     // Remove avatar rings: the story ring and the LIVE ring, each on its own switch.
     public static final BooleanSetting HIDE_STORY_RINGS = new BooleanSetting("hide_story_rings", FALSE);
     public static final BooleanSetting HIDE_LIVE_RING = new BooleanSetting("hide_live_ring", FALSE);
+    // Lift text length limits: comments, repost notes and the bio.
+    public static final BooleanSetting LIFT_LENGTH_LIMITS = new BooleanSetting("lift_length_limits", FALSE);
     public static final BooleanSetting KEEP_FAVORITES_TAB =
             new BooleanSetting("keep_favorites_tab", TRUE, true);
     /** The Following and For You names above the feed; the pager under them keeps swiping (issue #32). */

@@ -13,14 +13,14 @@
 
 Hushfeed is a [Morphe](https://github.com/MorpheApp/morphe-manager) patch bundle for people who want TikTok to behave differently. It can cut feed clutter, guard risky taps, improve downloads and expose controls TikTok leaves buried or unavailable. Every selected patch is configured from one native settings screen inside the app.
 
-**[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse the 108 source patches](#patches)
+**[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse the 109 source patches](#patches)
 
 > [!IMPORTANT]
 > Hushfeed targets the global TikTok package, `com.zhiliaoapp.musically`, versions [47.0.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-0-3-release/tiktok-47-0-3-3-android-apk-download/), [47.1.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-1-3-release/tiktok-47-1-3-android-apk-download/) and [47.1.4](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-1-4-release/tiktok-47-1-4-2-android-apk-download/). Use one of those exact APKs when patching. See [Supported target](#supported-target) for the verified build details.
 
 Hushfeed v0.68.0 contains 106 patches for TikTok 47.0.3, 47.1.3 and 47.1.4. New in this one: original photos save as full-size JPEGs, hiding the status bar takes TikTok's black strip with it, a switch clears the controls left on Clear display, and Back up, Restore and the Lab's file actions stop waiting on a stuck file app when you ask. It needs Morphe Manager 1.34.0 or newer.
 
-The main branch contains 108 patches, two more than v0.68.0.
+The main branch contains 109 patches, three more than v0.68.0.
 
 ## Pick what changes
 
@@ -241,6 +241,7 @@ The eleven optional patches in the Performance group were measured on a Galaxy S
 | `Keep playing in the background` | Keeps TikTok's own background play on, whatever its server says, so the video you're watching keeps playing after you leave the app or turn the screen off, and TikTok's media notification pauses and resumes it. It also covers photo posts and the videos on your own profile, private ones included, which TikTok leaves out. A feed video plays to its end, because TikTok doesn't loop or move on in the feed while it's in the background, and another app's sound still pauses it. TikTok's own background play switch in the long-press menu stays on while this is on. Off by default. Restart TikTok after changing it. Switch: Hushfeed settings > Playback. |
 | `Keep the Favorites tab` | Keeps the Favorites tab on your profile when TikTok's server puts the account into an experiment that empties it. Two people saw that after patching: the tab was there and the saved videos were not. Switch: Hushfeed settings > App. |
 | `Keep the screen's refresh rate` | Stops TikTok asking the screen to run slower than it can, which it does by asking for the frame rate of the video it is playing. On a 90 or 120 Hz phone that ask takes the whole app down to that rate, scrolling included. A request that is not slower than the screen is left alone. Switch: Hushfeed settings > App. |
+| `Lift text length limits` | Adds a switch that lets comments, repost notes and your bio run past the length TikTok's app stops at. TikTok's servers can still turn down a long one. Switch: Hushfeed settings > Comments. |
 | `Limit background traffic` | Turns off TikTok's buffer-preload gate. Videos may start buffering later. Push setup stays on unless Skip push setup is enabled in the patch options. |
 | `Location access governor` | Answers TikTok's location requests with nothing: the last known location comes back empty and update requests never fire. The SIM and region spoof change the locale and timezone, not the coordinates. This patch stops the coordinates. Switch: Hushfeed settings > Privacy. |
 | `Long-press controls` | Lets a long press on a video keep TikTok's own action, do nothing, open the video's comments, save the original sound, copy the link to the video or its sound, or look the sound up on YouTube Music. It can also turn a press on the left or right third of the screen into a jump back or forward, and make a long press on Comment, Share or Favorites play at the hold speed instead of opening TikTok's menu. Brings Double-tap controls with it, which supplies the comment control. Switch: Hushfeed settings > Feed screen. |

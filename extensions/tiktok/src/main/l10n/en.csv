@@ -728,10 +728,12 @@ Leave when TikTok says time is up,Leave when TikTok says time is up
 Length and views per like,Length and views per like
 Less than a minute left,Less than a minute left
 Let a LIVE fill the screen up to the top edge. The status bar comes back when you leave the LIVE. Swipe down from the top to peek at it.,Let a LIVE fill the screen up to the top edge. The status bar comes back when you leave the LIVE. Swipe down from the top to peek at it.
+"Let comments, repost notes and your bio run past the length TikTok's app stops at. TikTok's servers can still turn down a long one.","Let comments, repost notes and your bio run past the length TikTok's app stops at. TikTok's servers can still turn down a long one."
 "Let screenshots, screen recording and Circle to Search work on TikTok again. Restart TikTok to apply this.","Let screenshots, screen recording and Circle to Search work on TikTok again. Restart TikTok to apply this."
 Let the Offline videos menu use your own limit instead of TikTok's fixed one. Restart TikTok to apply this.,Let the Offline videos menu use your own limit instead of TikTok's fixed one. Restart TikTok to apply this.
 Let the last video finish,Let the last video finish
 Licenses,Licenses
+Lift text length limits,Lift text length limits
 Like,Like
 Likes range,Likes range
 Limits,Limits
@@ -1521,6 +1523,7 @@ Window width needed to enable the layout. Restart TikTok to apply this.,Window w
 "Words, countries and languages","Words, countries and languages"
 Working,Working
 "Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos.","Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos."
+Writing,Writing
 YTDLnis background mode,YTDLnis background mode
 YTDLnis download type,YTDLnis download type
 Yes,Yes

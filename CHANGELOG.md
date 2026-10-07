@@ -6,6 +6,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** New Show exact counts switch in Feed screen > Right column. It shows likes, comments, shares and other counts as the full number, like 1,234,567 instead of 1.2M, using your phone's digit grouping.
 
+* **TikTok:** New patch, Lift text length limits. Its switch under Comments > Writing lets a comment, a repost note or your bio run past the length TikTok's app stops typing at, instead of cutting you off at the counter. TikTok's servers still decide how long a text they'll take.
+
 * **TikTok:** New patch, Remove avatar rings. Two switches under Feed screen > Right column take the story ring and the pulsing LIVE ring off profile pictures on the feed and in comments, and the story ring off profiles too. With them on, tapping the picture opens the creator's profile instead of their story or their LIVE.
 
 * **TikTok:** New patch, Play SDR instead of HDR. Turn it on under Playback and videos that also come in HDR play their standard version, so the screen doesn't jump to full brightness when one starts. A video TikTok only offers in HDR still plays. With Playback quality on too, it picks among the standard versions.
