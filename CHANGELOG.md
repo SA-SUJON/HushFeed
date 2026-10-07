@@ -6,6 +6,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** New Show exact counts switch in Feed screen > Right column. It shows likes, comments, shares and other counts as the full number, like 1,234,567 instead of 1.2M, using your phone's digit grouping.
 
+* **TikTok:** New patch, Custom launcher icon. It gives TikTok's icon a themed layer, so with themed icons on in Android 13 and up the note takes your wallpaper's color. Its Icon style option also swaps in a black background, or a plain white-on-black or black-on-white note, on Android 8 and up.
+
 * **TikTok:** New patch, Lift text length limits. Its switch under Comments > Writing lets a comment, a repost note or your bio run past the length TikTok's app stops typing at, instead of cutting you off at the counter. TikTok's servers still decide how long a text they'll take.
 
 * **TikTok:** New patch, Remove avatar rings. Two switches under Feed screen > Right column take the story ring and the pulsing LIVE ring off profile pictures on the feed and in comments, and the story ring off profiles too. With them on, tapping the picture opens the creator's profile instead of their story or their LIVE.
