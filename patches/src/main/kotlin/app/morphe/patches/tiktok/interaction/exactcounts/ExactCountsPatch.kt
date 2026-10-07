@@ -17,7 +17,11 @@ import app.morphe.patches.tiktok.misc.settings.settingsPatch
 import app.morphe.util.addInstruction
 import app.morphe.util.addInstructionsWithLabels
 import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.Method
+import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.WideLiteralInstruction
+import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
 private const val EXACT_COUNTS_DESCRIPTOR = "Lapp/morphe/extension/tiktok/feed/ExactCounts;"
 
@@ -44,6 +48,36 @@ internal object CountFormatterFingerprint : Fingerprint(
 /** How many count formatters a build may have: the main one and up to three copies. */
 internal val COUNT_FORMATTERS = 2..4
 
+/** Calls in this method to TikTok's general number formatter, (Number, style, I, Boolean, I) to text. */
+internal fun Method.compactNumberFormatterCalls(): Int =
+    implementation?.instructions?.count { instruction ->
+        val reference = (instruction as? ReferenceInstruction)?.reference as? MethodReference
+        instruction.opcode == Opcode.INVOKE_STATIC && reference != null &&
+            reference.returnType == "Ljava/lang/CharSequence;" &&
+            reference.parameterTypes.map { it.toString() }.let {
+                it.size == 5 && it[0] == "Ljava/lang/Number;" && it[2] == "I" &&
+                    it[3] == "Ljava/lang/Boolean;" && it[4] == "I"
+            }
+    } ?: 0
+
+/**
+ * The compact count formatters, which print the like, comment, share and save counts on the feed
+ * rail, and comment likes and repost counts. They don't carry "1.0M": each keeps a count under
+ * 10,000 whole and hands the rest to TikTok's general number formatter, once per style. Every
+ * declared build has four (X/09Fm, X/0HAE, X/0Zwb and X/0ZFf on 47.1.4).
+ */
+internal object CompactCountFormatterFingerprint : Fingerprint(
+    returnType = "Ljava/lang/String;",
+    parameters = listOf("J"),
+    custom = { method, _ ->
+        method.isCountFormatter() && method.compactNumberFormatterCalls() == 2 &&
+            method.implementation!!.instructions.any { (it as? WideLiteralInstruction)?.wideLiteral == 10_000L }
+    },
+)
+
+/** How many compact count formatters a build may have. */
+internal val COMPACT_COUNT_FORMATTERS = 4..5
+
 @Suppress("unused")
 val showExactCountsPatch = bytecodePatch(
     name = "Show exact counts",
@@ -66,7 +100,14 @@ val showExactCountsPatch = bytecodePatch(
                 "Show exact counts: ${formatters.size} count formatters: ${formatters.map { it.originalClassDef.type }}",
             )
         }
-        formatters.forEach { match ->
+        val compactFormatters = CompactCountFormatterFingerprint.matchAll()
+        if (compactFormatters.size !in COMPACT_COUNT_FORMATTERS) {
+            throw PatchException(
+                "Show exact counts: ${compactFormatters.size} compact count formatters: " +
+                    "${compactFormatters.map { it.originalClassDef.type }}",
+            )
+        }
+        (formatters + compactFormatters).forEach { match ->
             val method = match.method
             // p0 and p1 hold the long. v0 is a local the method writes before it reads.
             method.addInstructionsWithLabels(
