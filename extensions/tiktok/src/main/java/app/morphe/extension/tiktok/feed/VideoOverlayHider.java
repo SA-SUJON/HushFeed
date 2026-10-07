@@ -100,6 +100,13 @@ public final class VideoOverlayHider {
     private static final String[] ACTION_BAR_IDS = {"47.0.3:liy", "47.1.3:llj", "47.1.4:llj"};
     private static final String[] SURVEY_IDS = {"47.0.3:f7u", "47.1.3:f98", "47.1.4:f98"};
     private static final String[] TAB_STRIP_IDS = {"47.0.3:uvy", "47.1.3:uzf", "47.1.4:uzf"};
+    /**
+     * The bottom tab bar (Home, Friends, the create button, Inbox, Profile). TikTok takes it away
+     * when Clear display starts, but the automatic path can switch the mode on before the bar is
+     * laid out after a cold start, and then the bar stays over the first video (#84). It sits
+     * outside the cells, under the feed.
+     */
+    private static final String[] BOTTOM_TABS_IDS = {"47.0.3:omy", "47.1.3:opp", "47.1.4:opp"};
     /** The story-count button is a sibling of the main feed, outside its tab strip and cells. */
     private static final String[] FOLLOWING_STORY_IDS = {"47.0.3:wq0", "47.1.3:wtr", "47.1.4:wtr"};
     /**
@@ -223,6 +230,7 @@ public final class VideoOverlayHider {
     private static final int STATUS_BAR_SPACER_TARGET = COUNT_TEXT_TARGET_START
             + RAIL_COUNT_TEXT_IDS.length;
     private static final int CLEAR_PHOTO_EXIT_TARGET = STATUS_BAR_SPACER_TARGET + 1;
+    private static final int BOTTOM_TABS_TARGET = CLEAR_PHOTO_EXIT_TARGET + 1;
     private static final String[][] TRAVERSAL_TARGET_IDS = traversalTargetIds();
     private static final int LOGICAL_TARGET_COUNT = TRAVERSAL_TARGET_IDS.length;
     private static final int TRAVERSAL_TARGET_COUNT = candidateCount(TRAVERSAL_TARGET_IDS);
@@ -406,6 +414,7 @@ public final class VideoOverlayHider {
                 wanted[ACTION_BAR_TARGET] = actionBar;
                 wanted[SURVEY_TARGET] = surveys;
                 wanted[TAB_STRIP_TARGET] = tabStrip;
+                wanted[BOTTOM_TABS_TARGET] = tabStrip;
                 wanted[FOLLOWING_STORY_TARGET] = tabStrip && !FeedVisibility.isStoryVisible(activity);
                 wanted[DETAIL_COMMENT_BAR_TARGET] = detailCommentBar;
                 wanted[DETAIL_COMMENT_STRIP_TARGET] = detailCommentBar;
@@ -613,7 +622,7 @@ public final class VideoOverlayHider {
     }
 
     private static String[][] traversalTargetIds() {
-        String[][] targets = new String[CLEAR_PHOTO_EXIT_TARGET + 1][];
+        String[][] targets = new String[BOTTOM_TABS_TARGET + 1][];
         targets[CAPTION_TARGET] = CAPTION_IDS;
         targets[MUSIC_TARGET] = MUSIC_IDS;
         targets[ACTION_BAR_TARGET] = ACTION_BAR_IDS;
@@ -634,15 +643,16 @@ public final class VideoOverlayHider {
         }
         targets[STATUS_BAR_SPACER_TARGET] = STATUS_BAR_SPACER_IDS;
         targets[CLEAR_PHOTO_EXIT_TARGET] = CLEAR_PHOTO_EXIT_IDS;
+        targets[BOTTOM_TABS_TARGET] = BOTTOM_TABS_IDS;
         return targets;
     }
 
     /**
-     * Main-feed tabs and story count, the Clear display controls, and the detail pager's comment
-     * bar are outside the cells.
+     * Main-feed tabs (top and bottom) and story count, the Clear display controls, and the
+     * detail pager's comment bar are outside the cells.
      */
     private static boolean outsideCells(int target) {
-        return target >= TAB_STRIP_TARGET && target < RAIL_TARGET_START;
+        return (target >= TAB_STRIP_TARGET && target < RAIL_TARGET_START) || target == BOTTOM_TABS_TARGET;
     }
 
     private static int candidateCount(String[][] targets) {

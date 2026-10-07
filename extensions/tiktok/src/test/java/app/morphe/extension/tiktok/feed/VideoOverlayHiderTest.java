@@ -852,6 +852,50 @@ public class VideoOverlayHiderTest {
         }
     }
 
+    /**
+     * The automatic path can turn Clear display on before the bottom tabs are laid out after a
+     * cold start, and TikTok then leaves them over the first video (#84). They sit outside the
+     * cells, go while the mode is on, and come back when it ends. An opened video has no such bar.
+     */
+    @Test
+    public void clearDisplayTakesTheBottomTabsAwayOnTheMainFeedOnly() {
+        int tabsId = 0x7f0a0b20;
+        int cellId = 0x7f0a0b21;
+        VideoOverlayHider.resolveForTests("47.0.3:omy", tabsId);
+        VideoOverlayHider.resolveForTests("view_rootview", cellId);
+        try (var main = Robolectric.buildActivity(Activity.class).setup();
+             var detail = Robolectric.buildActivity(
+                     com.ss.android.ugc.aweme.detail.ui.DetailActivity.class).setup()) {
+            Utils.setContext(main.get());
+            FrameLayout root = new FrameLayout(main.get());
+            FrameLayout cell = new FrameLayout(main.get());
+            cell.setId(cellId);
+            root.addView(cell);
+            View tabs = new View(main.get());
+            tabs.setId(tabsId);
+            root.addView(tabs);
+            main.get().setContentView(root);
+            View detailTabs = new View(detail.get());
+            detailTabs.setId(tabsId);
+            detail.get().setContentView(detailTabs);
+
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+            VideoOverlayHider.applyTo(main.get());
+            assertEquals(View.GONE, tabs.getVisibility());
+            VideoOverlayHider.applyTo(detail.get());
+            assertEquals(View.VISIBLE, detailTabs.getVisibility());
+
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+            VideoOverlayHider.applyTo(main.get());
+            assertEquals(View.VISIBLE, tabs.getVisibility());
+        } finally {
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+        }
+    }
+
     @Test
     public void clearDisplayHidesFollowingStoriesOutsideTheCellsAndRestoresNativeVisibility() {
         int storyId = 0x7f0a0b10;
