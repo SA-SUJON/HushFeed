@@ -192,6 +192,12 @@ public class CommentsPreferenceCategory extends ConditionalPreferenceCategory {
             ));
             addPreference(new TogglePreference(
                     context,
+                    "Hide comment surveys",
+                    "Hide the question cards TikTok sometimes puts in a comment list to ask what you think.",
+                    Settings.HIDE_COMMENT_SURVEYS
+            ));
+            addPreference(new TogglePreference(
+                    context,
                     "Show poll results before voting",
                     "A comment poll shows how many picked each answer before you vote. Tapping an answer still votes.",
                     Settings.SHOW_POLL_RESULTS

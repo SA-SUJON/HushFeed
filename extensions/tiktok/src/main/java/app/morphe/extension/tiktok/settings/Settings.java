@@ -795,6 +795,8 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting COMMENT_LINKS = new BooleanSetting("comment_links", TRUE);
     public static final BooleanSetting HIDE_COMMENT_MEDIA = new BooleanSetting("hide_comment_media", FALSE);
     public static final BooleanSetting HIDE_COMMENT_POLLS = new BooleanSetting("hide_comment_polls", FALSE);
+    /** Answers no survey from TikTok's comment survey config, so a comment list carries none. */
+    public static final BooleanSetting HIDE_COMMENT_SURVEYS = new BooleanSetting("hide_comment_surveys", FALSE);
     /** Draws a comment poll's results before the reader votes, from the counts TikTok already sends. */
     public static final BooleanSetting SHOW_POLL_RESULTS = new BooleanSetting("show_poll_results", FALSE);
     /** Tapping "more" under a video opens its comments with the caption at the top (upstream #156). */
