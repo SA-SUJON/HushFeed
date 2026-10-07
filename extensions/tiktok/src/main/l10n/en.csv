@@ -214,6 +214,7 @@ Block location,Block location
 Block motion sensors,Block motion sensors
 Block new bottom tabs,Block new bottom tabs
 Block new feed tabs,Block new feed tabs
+Block popups,Block popups
 Block suggested video notifications,Block suggested video notifications
 "Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts.","Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts."
 Block this commenter,Block this commenter
@@ -844,6 +845,7 @@ No matching countries. Try a country name or a two-letter code.,No matching coun
 No matching diagnostics found,No matching diagnostics found
 No matching settings,No matching settings
 No other app takes shared text,No other app takes shared text
+No popups have been seen yet,No popups have been seen yet
 No preset selected. Choose a preset above.,No preset selected. Choose a preset above.
 No presets have been reviewed for TikTok %1$s yet,No presets have been reviewed for TikTok %1$s yet
 No profile shortcuts have been seen yet,No profile shortcuts have been seen yet
@@ -949,6 +951,7 @@ Photos and stickers,Photos and stickers
 "Pick apps to add to the Share via row, before More. Each gets the same link the other apps get.","Pick apps to add to the Share via row, before More. Each gets the same link the other apps get."
 Pick the actions to remove from the share sheet. Names you typed by hand that TikTok hasn't shown yet stay in the list above.,Pick the actions to remove from the share sheet. Names you typed by hand that TikTok hasn't shown yet stay in the list above.
 Pick the buttons to take off the column. The rest stay where they are.,Pick the buttons to take off the column. The rest stay where they are.
+"Pick the popups to stop. The list holds the ones TikTok has tried to show on this phone, so a popup appears here after its first showing. CAPTCHA, verification, sign-in, age, ban and legal consent screens are never listed or blocked.","Pick the popups to stop. The list holds the ones TikTok has tried to show on this phone, so a popup appears here after its first showing. CAPTCHA, verification, sign-in, age, ban and legal consent screens are never listed or blocked."
 "Pick the shortcuts to remove from the row under a profile's bio, such as TikTok Studio or Your orders. Restart TikTok to apply this.","Pick the shortcuts to remove from the row under a profile's bio, such as TikTok Studio or Your orders. Restart TikTok to apply this."
 Play SDR instead of HDR,Play SDR instead of HDR
 "Play feed videos without sound and leave the phone's volume alone. Music from another app keeps playing while it's on. DMs, stories and LIVE keep their sound.","Play feed videos without sound and leave the phone's volume alone. Music from another app keeps playing while it's on. DMs, stories and LIVE keep their sound."
@@ -1518,6 +1521,7 @@ Unpersonalized For You videos,Unpersonalized For You videos
 "Use 0 for TikTok's size, or %1$d to %2$d. Sizes the description below the author's name and keeps Android's font scaling.","Use 0 for TikTok's size, or %1$d to %2$d. Sizes the description below the author's name and keeps Android's font scaling."
 Use Calm feed,Use Calm feed
 Use Save report for this large report,Use Save report for this large report
+Use TikTok for a while. A popup shows up here after TikTok first tries to show it.,Use TikTok for a while. A popup shows up here after TikTok first tries to show it.
 "Use TikTok's own hold, pull down and release gesture to keep playing at the hold speed, 2x unless Playback sets another.","Use TikTok's own hold, pull down and release gesture to keep playing at the hold speed, 2x unless Playback sets another."
 Use a default playback speed,Use a default playback speed
 Use non-personalized search,Use non-personalized search

@@ -1755,3 +1755,7 @@ More than %1$d comments were loaded, so the rest aren't in the file.	Загру�
 Lock the feed	Заблокировать ленту
 For You, Following and the other feed tabs stay behind a calm panel and won't swipe. Messages, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of the feed.	«Для вас», «Подписки» и другие вкладки ленты остаются за спокойной панелью и не листаются. Сообщения, профили и поиск работают как обычно, ссылка на одно видео по-прежнему открывает это видео, а приложение запускается во входящих, а не в ленте.
 The feed is locked	Лента заблокирована
+Block popups	Блокировка всплывающих окон
+Pick the popups to stop. The list holds the ones TikTok has tried to show on this phone, so a popup appears here after its first showing. CAPTCHA, verification, sign-in, age, ban and legal consent screens are never listed or blocked.	Выберите всплывающие окна, которые нужно отключить. В списке те, что TikTok пытался показать на этом телефоне, поэтому окно появляется здесь после первого показа. Экраны CAPTCHA, проверки, входа, возраста, блокировки и обязательного по закону согласия никогда не попадают в список и не блокируются.
+No popups have been seen yet	Всплывающих окон пока не было
+Use TikTok for a while. A popup shows up here after TikTok first tries to show it.	Попользуйтесь TikTok какое-то время. Окно появится здесь, когда TikTok впервые попытается его показать.

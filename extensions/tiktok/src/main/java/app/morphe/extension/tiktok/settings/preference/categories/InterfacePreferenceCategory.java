@@ -19,6 +19,7 @@ import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
 import app.morphe.extension.tiktok.settings.preference.ChoicePreference;
 import app.morphe.extension.tiktok.settings.preference.NumberInputPreference;
+import app.morphe.extension.tiktok.settings.preference.PopupLabelChecklistPreference;
 import app.morphe.extension.tiktok.settings.preference.SectionHeadingPreference;
 import app.morphe.extension.tiktok.settings.preference.SwitchListPreference;
 import app.morphe.extension.tiktok.settings.preference.TogglePreference;
@@ -54,6 +55,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                 || SettingsStatus.promotionalBannersEnabled
                 || SettingsStatus.captchaPopupSuppressionEnabled
                 || SettingsStatus.sensitiveWarningsEnabled
+                || SettingsStatus.popupLabelsEnabled
                 || SettingsStatus.subtitleToolsEnabled
                 || SettingsStatus.blockAuthorEnabled
                 || SettingsStatus.notInterestedEnabled
@@ -382,6 +384,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
         boolean any = SettingsStatus.promotionalBannersEnabled
                 || SettingsStatus.captchaPopupSuppressionEnabled
                 || SettingsStatus.sensitiveWarningsEnabled
+                || SettingsStatus.popupLabelsEnabled
                 || SettingsStatus.videoOverlaysEnabled;
         if (!any) return;
         addPreference(new SectionHeadingPreference(context, "Popups"));
@@ -402,6 +405,9 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             captcha.setEnabled(false);
             captcha.setSelectable(false);
             addPreference(captcha);
+        }
+        if (SettingsStatus.popupLabelsEnabled) {
+            addPreference(new PopupLabelChecklistPreference(context));
         }
         if (SettingsStatus.sensitiveWarningsEnabled) {
             addPreference(new TogglePreference(

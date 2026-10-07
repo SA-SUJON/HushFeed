@@ -73,6 +73,8 @@ public class PauseAnswersUnpatchedTest {
             "diagnostic_report_salt",
             // The profile shortcuts TikTok has sent, recorded for the checklist like share actions.
             "profile_shortcut_catalog",
+            // The popup labels TikTok has tried to show, recorded for the checklist the same way.
+            "popup_label_catalog",
             // The budget's day is worked out from this hour, paused or not.
             "session_budget_reset_hour",
             // The day the streak's message last went, so a pause can't send a second one.
