@@ -181,6 +181,15 @@ public final class InboxPreferenceCategory extends ConditionalPreferenceCategory
             ));
             addPreference(new TogglePreference(
                     context,
+                    "Turn off push notifications",
+                    "TikTok's push service stays off and nothing it sends reaches the drawer. "
+                            + "It can't keep your phone awake either. You won't hear about new "
+                            + "messages until you open TikTok, and a notification dropped while "
+                            + "this is on doesn't come back. Ongoing ones like media controls stay.",
+                    Settings.TURN_OFF_PUSH_NOTIFICATIONS
+            ));
+            addPreference(new TogglePreference(
+                    context,
                     "Hide message streaks",
                     "Hide the streak button in a chat and the reminder message that goes "
                             + "with it.",

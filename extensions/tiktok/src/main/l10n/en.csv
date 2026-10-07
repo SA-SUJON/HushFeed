@@ -1612,6 +1612,7 @@ TikTok's messages didn't start in time. It tries again at %1$s.,TikTok's message
 TikTok's own name,TikTok's own name
 TikTok's own value,TikTok's own value
 TikTok's play and pause button and its previous and next buttons appear on the feed. TikTok otherwise shows them only to people who use a screen reader. TikTok's analytics note the row and each press on it.,TikTok's play and pause button and its previous and next buttons appear on the feed. TikTok otherwise shows them only to people who use a screen reader. TikTok's analytics note the row and each press on it.
+"TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification dropped while this is on doesn't come back. Ongoing ones like media controls stay.","TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification dropped while this is on doesn't come back. Ongoing ones like media controls stay."
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.,TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.
 TikTok's size,TikTok's size
 TikTok's suggested reply cells and their intro banner stop showing in a chat. Messages you type or receive are untouched.,TikTok's suggested reply cells and their intro banner stop showing in a chat. Messages you type or receive are untouched.
@@ -1643,6 +1644,7 @@ Try a different word or clear the search. Switches from patches you didn't tick 
 "Try again, or go back to TikTok.","Try again, or go back to TikTok."
 Turn Hushfeed back on,Turn Hushfeed back on
 Turn off haptics,Turn off haptics
+Turn off push notifications,Turn off push notifications
 Turn off screen transitions,Turn off screen transitions
 Turn off the timer (TikTok closes at %1$s),Turn off the timer (TikTok closes at %1$s)
 Turn on %1$s first.,Turn on %1$s first.

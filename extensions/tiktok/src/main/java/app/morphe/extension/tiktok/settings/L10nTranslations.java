@@ -56,7 +56,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildAz() {
-        Map<String, String> table = new HashMap<>(3558);
+        Map<String, String> table = new HashMap<>(3562);
         fillAz0(table);
         fillAz1(table);
         fillAz2(table);
@@ -3395,6 +3395,8 @@ public final class L10nTranslations {
                 "TikTok-un öz dəyəri");
         table.put("TikTok's play and pause button and its previous and next buttons appear on the feed. TikTok otherwise shows them only to people who use a screen reader. TikTok's analytics note the row and each press on it.",
                 "TikTok-un oxut və dayandır düyməsi, eləcə də əvvəlki və növbəti düymələri lentdə görünür. TikTok bunları əks halda yalnız ekran oxuyucudan istifadə edənlərə göstərir. TikTok-un analitikası sətri və ona hər basışı qeyd edir.");
+        table.put("TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification dropped while this is on doesn't come back. Ongoing ones like media controls stay.",
+                "TikTok-un push xidməti söndürülü qalır və onun göndərdiyi heç nə bildiriş pərdəsinə çatmır. Telefonunuzu oyaq da saxlaya bilməz. Yeni mesajlardan yalnız TikTok-u açanda xəbər tutacaqsınız, bu açıq olarkən atılan bildiriş isə geri qayıtmır. Media idarəetməsi kimi davam edən bildirişlər qalır.");
         table.put("TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
                 "TikTok-un serveri hesabı profilinizdəki Favoritlər nişanını boşaldan təcrübəyə daxil edə bilər. Nişanı və onun saxlanılmış videolarını saxlayın.");
         table.put("TikTok's size",
@@ -3407,11 +3409,11 @@ public final class L10nTranslations {
                 "Lenti yenə də açmaq üçün imkan sayı");
         table.put("Today can't start over while Wait a day to loosen the budget is on. The day starts over at %1$s.",
                 "Büdcəni yumşaltmaq üçün bir gün gözləyin seçimi açıq olduqda bu gün yenidən başlaya bilməz. Gün %1$s vaxtında yenidən başlayır.");
-        table.put("Today has moved on, so there's nothing to put back",
-                "Bu gün irəlilədi, ona görə geri qaytarılacaq heç nə yoxdur");
     }
 
     private static void fillAz27(Map<String, String> table) {
+        table.put("Today has moved on, so there's nothing to put back",
+                "Bu gün irəlilədi, ona görə geri qaytarılacaq heç nə yoxdur");
         table.put("Today is back where it was",
                 "Bu gün əvvəlki vəziyyətinə qayıtdı");
         table.put("Today started over. Tap again to put the counts back.",
@@ -3460,6 +3462,8 @@ public final class L10nTranslations {
                 "Hushfeed-i yenidən yandırın");
         table.put("Turn off haptics",
                 "Haptik titrəməni söndürün");
+        table.put("Turn off push notifications",
+                "Push bildirişlərini söndürün");
         table.put("Turn off screen transitions",
                 "Ekran keçidlərini söndürün");
         table.put("Turn off the timer (TikTok closes at %1$s)",
@@ -3528,13 +3532,13 @@ public final class L10nTranslations {
                 "TikTok-un ölçüsü üçün 0 və ya %1$d - %2$d aralığında dəyər istifadə edin. Növbəti başlığa tətbiq olunur.");
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Sizes the author's name and keeps Android's font scaling.",
                 "TikTok-un ölçüsü üçün 0 və ya %1$d - %2$d aralığında dəyər istifadə edin. Müəllifin adının ölçüsünü təyin edir və Android-in şrift miqyasını saxlayır.");
+    }
+
+    private static void fillAz28(Map<String, String> table) {
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Sizes the description below the author's name and keeps Android's font scaling.",
                 "TikTok-un ölçüsü üçün 0 və ya %1$d - %2$d aralığında dəyər istifadə edin. Müəllifin adının altındakı təsvirin ölçüsünü təyin edir və Android-in şrift miqyasını saxlayır.");
         table.put("Use Calm feed",
                 "Sakit lentdən istifadə edin");
-    }
-
-    private static void fillAz28(Map<String, String> table) {
         table.put("Use Save report for this large report",
                 "Bu böyük hesabat üçün Hesabatı saxla düyməsini istifadə edin");
         table.put("Use TikTok for a while. A popup shows up here after TikTok first tries to show it.",
@@ -3651,13 +3655,13 @@ public final class L10nTranslations {
                 "Hər gün nə göndərilir.");
         table.put("What's new",
                 "Yeniliklər");
+    }
+
+    private static void fillAz29(Map<String, String> table) {
         table.put("When TikTok requests this key, return the selected value below",
                 "TikTok bu açarı tələb edəndə aşağıdakı seçilmiş dəyəri qaytarın");
         table.put("When a video ends in full screen, stay on it instead of moving to the next one. Swiping still moves on.",
                 "Video tam ekranda bitəndə növbətiyə keçmək əvəzinə onda qalın. Sürüşdürmək yenə də davam edir.");
-    }
-
-    private static void fillAz29(Map<String, String> table) {
         table.put("When the budget runs out, the video on screen plays to its end before the hold covers the feed, and the feed won't swipe to another video meanwhile. A time budget the fade already dimmed goes straight to the hold. Needs a hold to wait for. It waits %1$d minutes at most.",
                 "Büdcə bitəndə ekrandakı video fasilə lenti örtməzdən əvvəl sonuna qədər oxunur və bu müddətdə lent başqa videoya sürüşmür. Qaralmanın artıq sönükləşdirdiyi vaxt büdcəsi birbaşa fasiləyə keçir. Gözləmək üçün fasilə lazımdır. Ən çox %1$d dəqiqə gözləyir.");
         table.put("When to send",
@@ -3739,7 +3743,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(3558);
+        Map<String, String> table = new HashMap<>(3562);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -7078,6 +7082,8 @@ public final class L10nTranslations {
                 "TikToks eigener Wert");
         table.put("TikTok's play and pause button and its previous and next buttons appear on the feed. TikTok otherwise shows them only to people who use a screen reader. TikTok's analytics note the row and each press on it.",
                 "TikToks Taste für Wiedergabe und Pause sowie die Tasten für das vorherige und das nächste Video erscheinen im Feed. Sonst zeigt TikTok sie nur Menschen, die einen Screenreader nutzen. TikToks Analyse erfasst die Leiste und jeden Druck darauf.");
+        table.put("TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification dropped while this is on doesn't come back. Ongoing ones like media controls stay.",
+                "TikToks Push-Dienst bleibt aus, und nichts, was TikTok schickt, landet in der Leiste. Dein Handy kann es auch nicht mehr wach halten. Von neuen Nachrichten erfährst du erst, wenn du TikTok öffnest, und eine Benachrichtigung, die verworfen wird, solange das an ist, kommt nicht zurück. Laufende wie die Mediensteuerung bleiben.");
         table.put("TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
                 "TikToks Server kann ein Konto in ein Experiment stecken, das den Favoriten-Tab im Profil leert. Behält den Tab und seine gespeicherten Videos.");
         table.put("TikTok's size",
@@ -7090,11 +7096,11 @@ public final class L10nTranslations {
                 "Wie oft du den Feed trotzdem öffnen kannst");
         table.put("Today can't start over while Wait a day to loosen the budget is on. The day starts over at %1$s.",
                 "Heute kann nicht neu beginnen, solange Lockerungen des Budgets einen Tag warten lassen an ist. Der Tag beginnt um %1$s neu.");
-        table.put("Today has moved on, so there's nothing to put back",
-                "Der Tag ist weitergezogen, es gibt nichts zurückzuholen");
     }
 
     private static void fillDe27(Map<String, String> table) {
+        table.put("Today has moved on, so there's nothing to put back",
+                "Der Tag ist weitergezogen, es gibt nichts zurückzuholen");
         table.put("Today is back where it was",
                 "Der heutige Tag ist wieder wie zuvor");
         table.put("Today started over. Tap again to put the counts back.",
@@ -7143,6 +7149,8 @@ public final class L10nTranslations {
                 "Hushfeed wieder einschalten");
         table.put("Turn off haptics",
                 "Haptisches Feedback ausschalten");
+        table.put("Turn off push notifications",
+                "Push-Benachrichtigungen ausschalten");
         table.put("Turn off screen transitions",
                 "Bildschirmübergänge ausschalten");
         table.put("Turn off the timer (TikTok closes at %1$s)",
@@ -7211,13 +7219,13 @@ public final class L10nTranslations {
                 "0 für TikToks Größe, sonst %1$d bis %2$d. Gilt ab dem nächsten Untertitel.");
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Sizes the author's name and keeps Android's font scaling.",
                 "Mit 0 gilt TikToks Größe, sonst %1$d bis %2$d. Ändert die Größe des Creatornamens und behält die Schriftvergrößerung von Android bei.");
+    }
+
+    private static void fillDe28(Map<String, String> table) {
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Sizes the description below the author's name and keeps Android's font scaling.",
                 "Mit 0 gilt TikToks Größe, sonst %1$d bis %2$d. Ändert die Beschreibung unter dem Creatornamen und behält die Schriftvergrößerung von Android bei.");
         table.put("Use Calm feed",
                 "„Ruhiger Feed“ verwenden");
-    }
-
-    private static void fillDe28(Map<String, String> table) {
         table.put("Use Save report for this large report",
                 "Nutze für diesen großen Bericht „Bericht speichern“");
         table.put("Use TikTok for a while. A popup shows up here after TikTok first tries to show it.",
@@ -7334,13 +7342,13 @@ public final class L10nTranslations {
                 "Was jeden Tag geschickt wird.");
         table.put("What's new",
                 "Neu in Hushfeed");
+    }
+
+    private static void fillDe29(Map<String, String> table) {
         table.put("When TikTok requests this key, return the selected value below",
                 "Wenn TikTok diesen Schlüssel abfragt, den unten gewählten Wert zurückgeben");
         table.put("When a video ends in full screen, stay on it instead of moving to the next one. Swiping still moves on.",
                 "Wenn ein Video im Vollbild endet, bleibt es stehen, statt zum nächsten zu wechseln. Wischen führt weiterhin weiter.");
-    }
-
-    private static void fillDe29(Map<String, String> table) {
         table.put("When the budget runs out, the video on screen plays to its end before the hold covers the feed, and the feed won't swipe to another video meanwhile. A time budget the fade already dimmed goes straight to the hold. Needs a hold to wait for. It waits %1$d minutes at most.",
                 "Wenn das Budget aufgebraucht ist, läuft das Video auf dem Bildschirm zu Ende, bevor die Sperre den Feed abdeckt, und der Feed lässt sich so lange nicht zum nächsten Video wischen. Ein Zeitbudget, das schon ausgeblendet wurde, geht direkt in die Sperre. Braucht eine Sperre, auf die gewartet werden kann. Es wird höchstens %1$d Minuten gewartet.");
         table.put("When to send",
@@ -7422,7 +7430,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(3558);
+        Map<String, String> table = new HashMap<>(3562);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -10761,6 +10769,8 @@ public final class L10nTranslations {
                 "Valor propio de TikTok");
         table.put("TikTok's play and pause button and its previous and next buttons appear on the feed. TikTok otherwise shows them only to people who use a screen reader. TikTok's analytics note the row and each press on it.",
                 "El botón de reproducir y pausar de TikTok y sus botones de anterior y siguiente aparecen en el feed. Si no, TikTok solo los muestra a quienes usan un lector de pantalla. Las analíticas de TikTok registran la fila y cada toque en ella.");
+        table.put("TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification dropped while this is on doesn't come back. Ongoing ones like media controls stay.",
+                "El servicio push de TikTok queda apagado y nada de lo que envía llega al panel. Tampoco puede mantener tu teléfono despierto. No sabrás de mensajes nuevos hasta que abras TikTok, y una notificación descartada mientras esto está activado no vuelve. Las que están en curso, como los controles multimedia, se quedan.");
         table.put("TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
                 "El servidor de TikTok puede meter una cuenta en un experimento que vacía la pestaña Favoritos de tu perfil. Mantiene la pestaña y sus vídeos guardados.");
         table.put("TikTok's size",
@@ -10773,11 +10783,11 @@ public final class L10nTranslations {
                 "Veces que puedes abrir el feed de todas formas");
         table.put("Today can't start over while Wait a day to loosen the budget is on. The day starts over at %1$s.",
                 "Hoy no puede empezar de nuevo mientras Esperar un día para aflojar el presupuesto esté activado. El día vuelve a empezar a las %1$s.");
-        table.put("Today has moved on, so there's nothing to put back",
-                "El día ha avanzado, así que no hay nada que recuperar");
     }
 
     private static void fillEs27(Map<String, String> table) {
+        table.put("Today has moved on, so there's nothing to put back",
+                "El día ha avanzado, así que no hay nada que recuperar");
         table.put("Today is back where it was",
                 "Hoy está como estaba");
         table.put("Today started over. Tap again to put the counts back.",
@@ -10826,6 +10836,8 @@ public final class L10nTranslations {
                 "Volver a activar Hushfeed");
         table.put("Turn off haptics",
                 "Desactivar la respuesta háptica");
+        table.put("Turn off push notifications",
+                "Desactivar las notificaciones push");
         table.put("Turn off screen transitions",
                 "Desactivar las transiciones de pantalla");
         table.put("Turn off the timer (TikTok closes at %1$s)",
@@ -10894,13 +10906,13 @@ public final class L10nTranslations {
                 "Usa 0 para el tamaño de TikTok, o de %1$d a %2$d. Se aplica al siguiente subtítulo.");
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Sizes the author's name and keeps Android's font scaling.",
                 "Usa 0 para el tamaño de TikTok, o de %1$d a %2$d. Cambia el tamaño del nombre del creador y mantiene el ajuste de fuente de Android.");
+    }
+
+    private static void fillEs28(Map<String, String> table) {
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Sizes the description below the author's name and keeps Android's font scaling.",
                 "Usa 0 para el tamaño de TikTok, o de %1$d a %2$d. Cambia el tamaño de la descripción bajo el nombre del creador y mantiene el ajuste de fuente de Android.");
         table.put("Use Calm feed",
                 "Usar Feed tranquilo");
-    }
-
-    private static void fillEs28(Map<String, String> table) {
         table.put("Use Save report for this large report",
                 "Usa «Guardar informe» para este informe grande");
         table.put("Use TikTok for a while. A popup shows up here after TikTok first tries to show it.",
@@ -11017,13 +11029,13 @@ public final class L10nTranslations {
                 "Lo que se envía cada día.");
         table.put("What's new",
                 "Novedades");
+    }
+
+    private static void fillEs29(Map<String, String> table) {
         table.put("When TikTok requests this key, return the selected value below",
                 "Cuando TikTok pida esta clave, devolver el valor elegido abajo");
         table.put("When a video ends in full screen, stay on it instead of moving to the next one. Swiping still moves on.",
                 "Cuando un vídeo termina a pantalla completa, se queda en él en lugar de pasar al siguiente. Deslizar sigue avanzando.");
-    }
-
-    private static void fillEs29(Map<String, String> table) {
         table.put("When the budget runs out, the video on screen plays to its end before the hold covers the feed, and the feed won't swipe to another video meanwhile. A time budget the fade already dimmed goes straight to the hold. Needs a hold to wait for. It waits %1$d minutes at most.",
                 "Cuando se agota el presupuesto, el vídeo en pantalla se reproduce hasta el final antes de que la pausa cubra el feed, y mientras tanto el feed no se desliza a otro vídeo. Un presupuesto de tiempo que el atenuado ya oscureció pasa directo a la pausa. Necesita una pausa que esperar. Espera %1$d minutos como máximo.");
         table.put("When to send",
@@ -11105,7 +11117,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(3558);
+        Map<String, String> table = new HashMap<>(3562);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -14444,6 +14456,8 @@ public final class L10nTranslations {
                 "Nilai milik TikTok");
         table.put("TikTok's play and pause button and its previous and next buttons appear on the feed. TikTok otherwise shows them only to people who use a screen reader. TikTok's analytics note the row and each press on it.",
                 "Tombol putar dan jeda TikTok serta tombol sebelumnya dan berikutnya muncul di feed. Selain itu TikTok hanya menampilkannya kepada pengguna pembaca layar. Analitik TikTok mencatat baris ini dan setiap ketukan di atasnya.");
+        table.put("TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification dropped while this is on doesn't come back. Ongoing ones like media controls stay.",
+                "Layanan push TikTok tetap mati dan tidak ada kiriman TikTok yang masuk ke laci notifikasi. TikTok juga tidak bisa membuat ponselmu tetap terjaga. Kamu baru tahu ada pesan baru setelah membuka TikTok, dan notifikasi yang dibuang selama ini aktif tidak akan muncul lagi. Notifikasi yang sedang berjalan seperti kontrol media tetap ada.");
         table.put("TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
                 "Server TikTok bisa memasukkan akun ke eksperimen yang mengosongkan tab Favorit di profil kamu. Pertahankan tab itu beserta video yang tersimpan.");
         table.put("TikTok's size",
@@ -14456,11 +14470,11 @@ public final class L10nTranslations {
                 "Berapa kali kamu bisa tetap membuka feed");
         table.put("Today can't start over while Wait a day to loosen the budget is on. The day starts over at %1$s.",
                 "Hari ini tidak bisa dimulai ulang selama Tunggu sehari untuk melonggarkan anggaran aktif. Hari dimulai ulang pukul %1$s.");
-        table.put("Today has moved on, so there's nothing to put back",
-                "Hari sudah berganti, jadi tidak ada yang bisa dikembalikan");
     }
 
     private static void fillIn27(Map<String, String> table) {
+        table.put("Today has moved on, so there's nothing to put back",
+                "Hari sudah berganti, jadi tidak ada yang bisa dikembalikan");
         table.put("Today is back where it was",
                 "Hari ini kembali seperti semula");
         table.put("Today started over. Tap again to put the counts back.",
@@ -14509,6 +14523,8 @@ public final class L10nTranslations {
                 "Aktifkan Hushfeed lagi");
         table.put("Turn off haptics",
                 "Matikan getaran haptik");
+        table.put("Turn off push notifications",
+                "Matikan notifikasi push");
         table.put("Turn off screen transitions",
                 "Matikan transisi layar");
         table.put("Turn off the timer (TikTok closes at %1$s)",
@@ -14577,13 +14593,13 @@ public final class L10nTranslations {
                 "Gunakan 0 untuk ukuran TikTok, atau %1$d sampai %2$d. Berlaku untuk teks berikutnya.");
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Sizes the author's name and keeps Android's font scaling.",
                 "Gunakan 0 untuk ukuran TikTok, atau %1$d hingga %2$d. Mengatur ukuran nama kreator dan tetap mengikuti skala font Android.");
+    }
+
+    private static void fillIn28(Map<String, String> table) {
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Sizes the description below the author's name and keeps Android's font scaling.",
                 "Gunakan 0 untuk ukuran TikTok, atau %1$d hingga %2$d. Mengatur ukuran deskripsi di bawah nama kreator dan tetap mengikuti skala font Android.");
         table.put("Use Calm feed",
                 "Gunakan Feed tenang");
-    }
-
-    private static void fillIn28(Map<String, String> table) {
         table.put("Use Save report for this large report",
                 "Gunakan Simpan laporan untuk laporan besar ini");
         table.put("Use TikTok for a while. A popup shows up here after TikTok first tries to show it.",
@@ -14700,13 +14716,13 @@ public final class L10nTranslations {
                 "Yang dikirim setiap hari.");
         table.put("What's new",
                 "Yang baru");
+    }
+
+    private static void fillIn29(Map<String, String> table) {
         table.put("When TikTok requests this key, return the selected value below",
                 "Saat TikTok meminta kunci ini, kembalikan nilai yang dipilih di bawah");
         table.put("When a video ends in full screen, stay on it instead of moving to the next one. Swiping still moves on.",
                 "Saat video selesai dalam layar penuh, tetap di video itu alih-alih pindah ke berikutnya. Menggeser tetap berpindah.");
-    }
-
-    private static void fillIn29(Map<String, String> table) {
         table.put("When the budget runs out, the video on screen plays to its end before the hold covers the feed, and the feed won't swipe to another video meanwhile. A time budget the fade already dimmed goes straight to the hold. Needs a hold to wait for. It waits %1$d minutes at most.",
                 "Saat anggaran habis, video di layar diputar sampai selesai sebelum penahanan menutupi feed, dan selama itu feed tidak bisa digeser ke video lain. Anggaran waktu yang sudah diredupkan langsung masuk ke penahanan. Perlu penahanan yang ditunggu. Menunggu paling lama %1$d menit.");
         table.put("When to send",
@@ -14788,7 +14804,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIt() {
-        Map<String, String> table = new HashMap<>(3558);
+        Map<String, String> table = new HashMap<>(3562);
         fillIt0(table);
         fillIt1(table);
         fillIt2(table);
@@ -18127,6 +18143,8 @@ public final class L10nTranslations {
                 "Il valore originale di TikTok");
         table.put("TikTok's play and pause button and its previous and next buttons appear on the feed. TikTok otherwise shows them only to people who use a screen reader. TikTok's analytics note the row and each press on it.",
                 "Il pulsante di riproduzione e pausa di TikTok e i pulsanti per il video precedente e successivo compaiono nel feed. Altrimenti TikTok li mostra solo a chi usa uno screen reader. Le analisi di TikTok registrano la barra e ogni tocco su di essa.");
+        table.put("TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification dropped while this is on doesn't come back. Ongoing ones like media controls stay.",
+                "Il servizio push di TikTok resta spento e nulla di quello che invia arriva nel pannello delle notifiche. Non può nemmeno tenere sveglio il telefono. Dei nuovi messaggi saprai solo quando apri TikTok, e una notifica scartata mentre questa opzione è attiva non torna. Quelle in corso, come i controlli multimediali, restano.");
         table.put("TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
                 "Il server di TikTok può inserire un account in un esperimento che svuota la scheda Preferiti nel profilo. Mantiene la scheda e i video salvati al suo interno.");
         table.put("TikTok's size",
@@ -18139,11 +18157,11 @@ public final class L10nTranslations {
                 "Numero di volte in cui puoi aprire comunque il feed");
         table.put("Today can't start over while Wait a day to loosen the budget is on. The day starts over at %1$s.",
                 "Oggi non può ricominciare finché \"Aspetta un giorno prima di allentare il budget\" è attivo. La giornata ricomincia alle %1$s.");
-        table.put("Today has moved on, so there's nothing to put back",
-                "La giornata è già andata avanti, quindi non c'è nulla da ripristinare");
     }
 
     private static void fillIt27(Map<String, String> table) {
+        table.put("Today has moved on, so there's nothing to put back",
+                "La giornata è già andata avanti, quindi non c'è nulla da ripristinare");
         table.put("Today is back where it was",
                 "La giornata è tornata com'era");
         table.put("Today started over. Tap again to put the counts back.",
@@ -18192,6 +18210,8 @@ public final class L10nTranslations {
                 "Riattiva Hushfeed");
         table.put("Turn off haptics",
                 "Disattiva il feedback aptico");
+        table.put("Turn off push notifications",
+                "Disattiva le notifiche push");
         table.put("Turn off screen transitions",
                 "Disattiva le transizioni tra schermate");
         table.put("Turn off the timer (TikTok closes at %1$s)",
@@ -18260,13 +18280,13 @@ public final class L10nTranslations {
                 "Usa 0 per la dimensione di TikTok, oppure da %1$d a %2$d. Si applica dal prossimo sottotitolo.");
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Sizes the author's name and keeps Android's font scaling.",
                 "Usa 0 per la dimensione di TikTok, oppure da %1$d a %2$d. Modifica la dimensione del nome del creator e mantiene il ridimensionamento dei caratteri di Android.");
+    }
+
+    private static void fillIt28(Map<String, String> table) {
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Sizes the description below the author's name and keeps Android's font scaling.",
                 "Usa 0 per la dimensione di TikTok, oppure da %1$d a %2$d. Modifica la dimensione della descrizione sotto il nome del creator e mantiene il ridimensionamento dei caratteri di Android.");
         table.put("Use Calm feed",
                 "Usa \"Feed tranquillo\"");
-    }
-
-    private static void fillIt28(Map<String, String> table) {
         table.put("Use Save report for this large report",
                 "Usa Salva rapporto per questo rapporto di grandi dimensioni");
         table.put("Use TikTok for a while. A popup shows up here after TikTok first tries to show it.",
@@ -18383,13 +18403,13 @@ public final class L10nTranslations {
                 "Cosa viene inviato ogni giorno.");
         table.put("What's new",
                 "Novità");
+    }
+
+    private static void fillIt29(Map<String, String> table) {
         table.put("When TikTok requests this key, return the selected value below",
                 "Quando TikTok richiede questa chiave, restituisci il valore selezionato qui sotto");
         table.put("When a video ends in full screen, stay on it instead of moving to the next one. Swiping still moves on.",
                 "Quando un video finisce a schermo intero, resta su di esso invece di passare al successivo. Scorrere con il dito continua a far avanzare.");
-    }
-
-    private static void fillIt29(Map<String, String> table) {
         table.put("When the budget runs out, the video on screen plays to its end before the hold covers the feed, and the feed won't swipe to another video meanwhile. A time budget the fade already dimmed goes straight to the hold. Needs a hold to wait for. It waits %1$d minutes at most.",
                 "Quando il budget si esaurisce, il video sullo schermo arriva alla fine prima che il blocco copra il feed, e nel frattempo il feed non si può scorrere verso un altro video. Un budget di tempo già attenuato dalla dissolvenza passa direttamente al blocco. Richiede un blocco da attendere. Si attende al massimo %1$d minuti.");
         table.put("When to send",
@@ -18471,7 +18491,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(3558);
+        Map<String, String> table = new HashMap<>(3562);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -21810,6 +21830,8 @@ public final class L10nTranslations {
                 "Valor do próprio TikTok");
         table.put("TikTok's play and pause button and its previous and next buttons appear on the feed. TikTok otherwise shows them only to people who use a screen reader. TikTok's analytics note the row and each press on it.",
                 "O botão de reproduzir e pausar do TikTok e os botões de anterior e próximo aparecem no feed. Fora isso, o TikTok só os mostra para quem usa um leitor de tela. As análises do TikTok registram a fileira e cada toque nela.");
+        table.put("TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification dropped while this is on doesn't come back. Ongoing ones like media controls stay.",
+                "O serviço de push do TikTok fica desligado e nada do que ele envia chega à gaveta. Ele também não consegue manter o celular acordado. Você só vai saber de mensagens novas quando abrir o TikTok, e uma notificação descartada enquanto isto está ativado não volta. As que estão em andamento, como os controles de mídia, continuam.");
         table.put("TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
                 "O servidor do TikTok pode colocar uma conta em um experimento que esvazia a aba Favoritos do seu perfil. Mantém a aba e os vídeos salvos nela.");
         table.put("TikTok's size",
@@ -21822,11 +21844,11 @@ public final class L10nTranslations {
                 "Vezes que você pode abrir o feed mesmo assim");
         table.put("Today can't start over while Wait a day to loosen the budget is on. The day starts over at %1$s.",
                 "O dia de hoje não pode recomeçar enquanto Esperar um dia para afrouxar o limite estiver ligado. O dia recomeça às %1$s.");
-        table.put("Today has moved on, so there's nothing to put back",
-                "O dia já andou, então não há nada para trazer de volta");
     }
 
     private static void fillPt_rBR27(Map<String, String> table) {
+        table.put("Today has moved on, so there's nothing to put back",
+                "O dia já andou, então não há nada para trazer de volta");
         table.put("Today is back where it was",
                 "Hoje está como estava");
         table.put("Today started over. Tap again to put the counts back.",
@@ -21875,6 +21897,8 @@ public final class L10nTranslations {
                 "Ativar o Hushfeed de novo");
         table.put("Turn off haptics",
                 "Desativar a resposta tátil");
+        table.put("Turn off push notifications",
+                "Desativar as notificações push");
         table.put("Turn off screen transitions",
                 "Desativar as transições de tela");
         table.put("Turn off the timer (TikTok closes at %1$s)",
@@ -21943,13 +21967,13 @@ public final class L10nTranslations {
                 "Use 0 para o tamanho do TikTok, ou de %1$d a %2$d. Vale para a próxima legenda.");
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Sizes the author's name and keeps Android's font scaling.",
                 "Use 0 para o tamanho do TikTok, ou de %1$d a %2$d. Ajusta o nome do criador e mantém a escala de fontes do Android.");
+    }
+
+    private static void fillPt_rBR28(Map<String, String> table) {
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Sizes the description below the author's name and keeps Android's font scaling.",
                 "Use 0 para o tamanho do TikTok, ou de %1$d a %2$d. Ajusta a descrição abaixo do nome do criador e mantém a escala de fontes do Android.");
         table.put("Use Calm feed",
                 "Usar Feed tranquilo");
-    }
-
-    private static void fillPt_rBR28(Map<String, String> table) {
         table.put("Use Save report for this large report",
                 "Use “Salvar relatório” para este relatório grande");
         table.put("Use TikTok for a while. A popup shows up here after TikTok first tries to show it.",
@@ -22066,13 +22090,13 @@ public final class L10nTranslations {
                 "O que é enviado todo dia.");
         table.put("What's new",
                 "Novidades");
+    }
+
+    private static void fillPt_rBR29(Map<String, String> table) {
         table.put("When TikTok requests this key, return the selected value below",
                 "Quando o TikTok pedir esta chave, devolver o valor escolhido abaixo");
         table.put("When a video ends in full screen, stay on it instead of moving to the next one. Swiping still moves on.",
                 "Quando um vídeo termina em tela cheia, fica nele em vez de passar para o próximo. Deslizar ainda avança.");
-    }
-
-    private static void fillPt_rBR29(Map<String, String> table) {
         table.put("When the budget runs out, the video on screen plays to its end before the hold covers the feed, and the feed won't swipe to another video meanwhile. A time budget the fade already dimmed goes straight to the hold. Needs a hold to wait for. It waits %1$d minutes at most.",
                 "Quando o limite acaba, o vídeo na tela toca até o fim antes que a pausa cubra o feed, e enquanto isso o feed não desliza para outro vídeo. Um limite de tempo que o escurecimento já apagou vai direto para a pausa. Precisa de uma pausa para esperar. Espera no máximo %1$d minutos.");
         table.put("When to send",
@@ -22154,7 +22178,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildRu() {
-        Map<String, String> table = new HashMap<>(3888);
+        Map<String, String> table = new HashMap<>(3892);
         fillRu0(table);
         fillRu1(table);
         fillRu2(table);
@@ -25805,6 +25829,8 @@ public final class L10nTranslations {
                 "Собственное значение TikTok");
         table.put("TikTok's play and pause button and its previous and next buttons appear on the feed. TikTok otherwise shows them only to people who use a screen reader. TikTok's analytics note the row and each press on it.",
                 "Кнопка воспроизведения и паузы TikTok, а также кнопки предыдущего и следующего видео появляются в ленте. В остальных случаях TikTok показывает их только людям, использующим программы чтения с экрана. Аналитика TikTok фиксирует эту панель и каждое нажатие на ней.");
+        table.put("TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification dropped while this is on doesn't come back. Ongoing ones like media controls stay.",
+                "Push-служба TikTok не запускается, и ничего из того, что он присылает, не попадает в шторку. Удерживать телефон в активном режиме он тоже не сможет. О новых сообщениях вы узнаете, только открыв TikTok, а уведомление, отброшенное, пока это включено, не вернётся. Текущие, например управление воспроизведением, остаются.");
         table.put("TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
                 "Сервер TikTok может включить аккаунт в эксперимент, который опустошает вкладку «Избранное» в профиле. Сохранять вкладку и сохранённые в ней видео.");
         table.put("TikTok's size",
@@ -25877,11 +25903,13 @@ public final class L10nTranslations {
                 "Повторите попытку или вернитесь в TikTok.");
         table.put("Turn Hushfeed back on",
                 "Снова включить Hushfeed");
-        table.put("Turn off haptics",
-                "Отключить тактильную отдачу");
     }
 
     private static void fillRu30(Map<String, String> table) {
+        table.put("Turn off haptics",
+                "Отключить тактильную отдачу");
+        table.put("Turn off push notifications",
+                "Отключить push-уведомления");
         table.put("Turn off screen transitions",
                 "Отключить анимацию переходов");
         table.put("Turn off the timer (TikTok closes at %1$s)",
@@ -25998,13 +26026,13 @@ public final class L10nTranslations {
                 "Использовать свой лимит офлайн-видео");
         table.put("User ID copied",
                 "ID пользователя скопирован");
+    }
+
+    private static void fillRu31(Map<String, String> table) {
         table.put("Username copied",
                 "Имя пользователя скопировано");
         table.put("Using TikTok's value",
                 "Используется значение TikTok");
-    }
-
-    private static void fillRu31(Map<String, String> table) {
         table.put("Value",
                 "Значение");
         table.put("Value to return",
@@ -26121,13 +26149,13 @@ public final class L10nTranslations {
                 "Сохранять звук видео рядом с ним в виде файла .m4a. На Android 10 и новее аудио хранится отдельно и попадает в Music, в папку с тем же именем, что и ваши видео.");
         table.put("Writing",
                 "Написание");
+    }
+
+    private static void fillRu32(Map<String, String> table) {
         table.put("YTDLnis background mode",
                 "Фоновый режим YTDLnis");
         table.put("YTDLnis download type",
                 "Тип загрузки YTDLnis");
-    }
-
-    private static void fillRu32(Map<String, String> table) {
         table.put("Yes",
                 "Да");
         table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
@@ -26179,7 +26207,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildTr() {
-        Map<String, String> table = new HashMap<>(3558);
+        Map<String, String> table = new HashMap<>(3562);
         fillTr0(table);
         fillTr1(table);
         fillTr2(table);
@@ -29518,6 +29546,8 @@ public final class L10nTranslations {
                 "TikTok'un kendi değeri");
         table.put("TikTok's play and pause button and its previous and next buttons appear on the feed. TikTok otherwise shows them only to people who use a screen reader. TikTok's analytics note the row and each press on it.",
                 "TikTok'un oynat ve duraklat düğmesi ile önceki ve sonraki düğmeleri akışta görünür. Aksi halde TikTok bunları yalnızca ekran okuyucu kullananlara gösterir. TikTok'un analizleri satırı ve üzerindeki her dokunuşu kaydeder.");
+        table.put("TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification dropped while this is on doesn't come back. Ongoing ones like media controls stay.",
+                "TikTok'un anlık bildirim hizmeti kapalı kalır ve gönderdiği hiçbir şey bildirim paneline ulaşmaz. Telefonunu uyanık da tutamaz. Yeni mesajları ancak TikTok'u açınca görürsün ve bu açıkken atılan bir bildirim geri gelmez. Medya kontrolleri gibi süren bildirimler kalır.");
         table.put("TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.",
                 "TikTok'un sunucusu, bir hesabı profilindeki Favoriler sekmesini boşaltan bir deneye sokabilir. Sekmeyi ve kayıtlı videolarını koru.");
         table.put("TikTok's size",
@@ -29530,11 +29560,11 @@ public final class L10nTranslations {
                 "Akışı yine de açabileceğin sefer sayısı");
         table.put("Today can't start over while Wait a day to loosen the budget is on. The day starts over at %1$s.",
                 "Bütçeyi gevşetmek için bir gün bekle açıkken bugün baştan başlatılamaz. Gün %1$s saatinde yeniden başlar.");
-        table.put("Today has moved on, so there's nothing to put back",
-                "Bugün ilerledi, bu yüzden geri konacak bir şey yok");
     }
 
     private static void fillTr27(Map<String, String> table) {
+        table.put("Today has moved on, so there's nothing to put back",
+                "Bugün ilerledi, bu yüzden geri konacak bir şey yok");
         table.put("Today is back where it was",
                 "Bugün eski haline döndü");
         table.put("Today started over. Tap again to put the counts back.",
@@ -29583,6 +29613,8 @@ public final class L10nTranslations {
                 "Hushfeed'i yeniden aç");
         table.put("Turn off haptics",
                 "Dokunsal titreşimi kapat");
+        table.put("Turn off push notifications",
+                "Anlık bildirimleri kapat");
         table.put("Turn off screen transitions",
                 "Ekran geçişlerini kapat");
         table.put("Turn off the timer (TikTok closes at %1$s)",
@@ -29651,13 +29683,13 @@ public final class L10nTranslations {
                 "TikTok'un boyutu için 0, ya da %1$d ile %2$d arasında bir değer kullan. Bir sonraki altyazıya uygulanır.");
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Sizes the author's name and keeps Android's font scaling.",
                 "TikTok'un boyutu için 0, ya da %1$d ile %2$d arasında bir değer kullan. İçerik üreticisinin adını boyutlandırır ve Android'in yazı tipi ölçeklendirmesini korur.");
+    }
+
+    private static void fillTr28(Map<String, String> table) {
         table.put("Use 0 for TikTok's size, or %1$d to %2$d. Sizes the description below the author's name and keeps Android's font scaling.",
                 "TikTok'un boyutu için 0, ya da %1$d ile %2$d arasında bir değer kullan. İçerik üreticisinin adının altındaki açıklamayı boyutlandırır ve Android'in yazı tipi ölçeklendirmesini korur.");
         table.put("Use Calm feed",
                 "Sakin akışı kullan");
-    }
-
-    private static void fillTr28(Map<String, String> table) {
         table.put("Use Save report for this large report",
                 "Bu büyük rapor için \"Raporu kaydet\"i kullan");
         table.put("Use TikTok for a while. A popup shows up here after TikTok first tries to show it.",
@@ -29774,13 +29806,13 @@ public final class L10nTranslations {
                 "Her gün gönderilecek olan.");
         table.put("What's new",
                 "Yenilikler");
+    }
+
+    private static void fillTr29(Map<String, String> table) {
         table.put("When TikTok requests this key, return the selected value below",
                 "TikTok bu anahtarı istediğinde aşağıda seçilen değeri döndür");
         table.put("When a video ends in full screen, stay on it instead of moving to the next one. Swiping still moves on.",
                 "Tam ekranda bir video bittiğinde bir sonrakine geçmek yerine onda kalır. Kaydırmak yine ilerletir.");
-    }
-
-    private static void fillTr29(Map<String, String> table) {
         table.put("When the budget runs out, the video on screen plays to its end before the hold covers the feed, and the feed won't swipe to another video meanwhile. A time budget the fade already dimmed goes straight to the hold. Needs a hold to wait for. It waits %1$d minutes at most.",
                 "Bütçe dolduğunda ekrandaki video, bekletme akışın üstünü örtmeden önce sonuna kadar oynar ve bu sırada akış başka bir videoya kaydırılamaz. Karartmanın zaten söndürdüğü bir süre bütçesi doğrudan bekletmeye geçer. Beklenecek bir bekletme gerekir. En fazla %1$d dakika bekler.");
         table.put("When to send",

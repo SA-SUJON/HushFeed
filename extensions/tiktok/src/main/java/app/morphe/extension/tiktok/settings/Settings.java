@@ -211,6 +211,13 @@ public class Settings extends BaseSettings {
             new BooleanSetting("allow_duet_and_stitch", FALSE);
     public static final BooleanSetting HIDE_FOLLOWER_NOTIFICATIONS =
             new BooleanSetting("hide_follower_notifications", FALSE);
+    /**
+     * Notification controls' push switch: no push setup at launch, nothing in the drawer but
+     * ongoing notifications, and no wake locks but the kept ones. Push setup is a startup task,
+     * so a change waits for the next launch. See PushShutoff.
+     */
+    public static final BooleanSetting TURN_OFF_PUSH_NOTIFICATIONS =
+            new BooleanSetting("turn_off_push_notifications", FALSE, true);
     /** TikTok's "Videos you might like" pushes. On by default: they're promotion, not people. */
     public static final BooleanSetting BLOCK_SUGGESTED_VIDEO_NOTIFICATIONS =
             new BooleanSetting("block_suggested_video_notifications", TRUE);
