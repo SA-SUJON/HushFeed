@@ -1182,6 +1182,7 @@ Save as video,Save as video
 Save build details,Save build details
 Save cancelled. Nothing was saved.,Save cancelled. Nothing was saved.
 Save comments to Favorites,Save comments to Favorites
+Save details as JSON,Save details as JSON
 Save details beside the video,Save details beside the video
 "Save every photo in the post at full size as a JPEG, not as the screen shows it.","Save every photo in the post at full size as a JPEG, not as the screen shows it."
 Save field values,Save field values
@@ -1420,6 +1421,7 @@ Subtitles: %1$s,Subtitles: %1$s
 Swipe for brightness and volume,Swipe for brightness and volume
 Swipe left,Swipe left
 System,System
+Tag saved videos with their details,Tag saved videos with their details
 "Take the Add comment bar off videos you open from a profile, a hashtag, a sound or search, so the video fills the screen down to the bottom. The comment button on the right still opens comments.","Take the Add comment bar off videos you open from a profile, a hashtag, a sound or search, so the video fills the screen down to the bottom. The comment button on the right still opens comments."
 Take the pulsing LIVE ring off profile pictures on the feed and in comments. Tapping the picture of a creator who's live opens their profile instead of the LIVE.,Take the pulsing LIVE ring off profile pictures on the feed and in comments. Tapping the picture of a creator who's live opens their profile instead of the LIVE.
 "Take the story ring off profile pictures on the feed, in comments and on profiles. Tapping a picture opens the profile instead of the story.","Take the story ring off profile pictures on the feed, in comments and on profiles. Tapping a picture opens the profile instead of the story."
@@ -1752,6 +1754,8 @@ Window width needed to enable the layout. Restart TikTok to apply this.,Window w
 "Word rules only, not every feed filter:","Word rules only, not every feed filter:"
 "Words, countries and languages","Words, countries and languages"
 Working,Working
+"Write the caption, creator, publication date and link into the video file itself, where media players and tools like ffprobe can read them. Applies to saves handled here.","Write the caption, creator, publication date and link into the video file itself, where media players and tools like ffprobe can read them. Applies to saves handled here."
+"Write the details file as JSON instead of plain text, for scripts and archive tools.","Write the details file as JSON instead of plain text, for scripts and archive tools."
 "Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos.","Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos."
 Writing,Writing
 YTDLnis background mode,YTDLnis background mode

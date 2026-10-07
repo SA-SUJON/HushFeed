@@ -1786,3 +1786,7 @@ Hide comment box buttons	Şərh qutusundakı düymələri gizlədin
 Hide the photo, @ and gift buttons in the box where you write a comment. Emoji and sending work as before.	Şərh yazdığınız qutudakı foto, @ və hədiyyə düymələrini gizlədin. Emoji və göndərmə əvvəlki kimi işləyir.
 Turn off push notifications	Push bildirişlərini söndürün
 TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification dropped while this is on doesn't come back. Ongoing ones like media controls stay.	TikTok-un push xidməti söndürülü qalır və onun göndərdiyi heç nə bildiriş pərdəsinə çatmır. Telefonunuzu oyaq da saxlaya bilməz. Yeni mesajlardan yalnız TikTok-u açanda xəbər tutacaqsınız, bu açıq olarkən atılan bildiriş isə geri qayıtmır. Media idarəetməsi kimi davam edən bildirişlər qalır.
+Save details as JSON	Təfərrüatları JSON kimi saxlayın
+Write the details file as JSON instead of plain text, for scripts and archive tools.	Təfərrüat faylını adi mətn əvəzinə JSON kimi yazın, skriptlər və arxiv alətləri üçün.
+Tag saved videos with their details	Saxlanılan videolara təfərrüatlarını etiket kimi yazın
+Write the caption, creator, publication date and link into the video file itself, where media players and tools like ffprobe can read them. Applies to saves handled here.	Başlığı, yaradıcını, dərc tarixini və linki video faylının özünə yazın ki, media pleyerlər və ffprobe kimi alətlər onları oxuya bilsin. Burada idarə olunan saxlamalara aiddir.

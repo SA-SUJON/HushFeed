@@ -80,7 +80,10 @@ public final class DownloadNamePreview {
             if (AudioDownloads.enabled()) {
                 lines.add(L10n.f("Sound: %1$s", AudioDownloads.audioPath(path) + "/" + stem + ".m4a"));
             }
-            if (details) lines.add(L10n.f("Details: %1$s", path + "/" + stem + ".txt"));
+            if (details) {
+                String extension = Settings.DOWNLOAD_DETAILS_JSON.get() ? ".json" : ".txt";
+                lines.add(L10n.f("Details: %1$s", path + "/" + stem + extension));
+            }
             // The made-up post has English captions only, which every language choice falls back to.
             if (subtitles) lines.add(L10n.f("Subtitles: %1$s", path + "/" + stem + ".en.srt"));
         }

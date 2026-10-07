@@ -122,6 +122,12 @@ public class DownloadsPreferenceCategory extends ConditionalPreferenceCategory {
             addPreference(new TogglePreference(context, "Save details beside the video",
                     "Save the caption, creator, link and publication date in a TXT file. On Android 10 and later, the pair uses Download or Documents under the same folder name. Applies to saves handled here.",
                     Settings.DOWNLOAD_DETAILS));
+            addPreference(new TogglePreference(context, "Save details as JSON",
+                    "Write the details file as JSON instead of plain text, for scripts and archive tools.",
+                    Settings.DOWNLOAD_DETAILS_JSON));
+            addPreference(new TogglePreference(context, "Tag saved videos with their details",
+                    "Write the caption, creator, publication date and link into the video file itself, where media players and tools like ffprobe can read them. Applies to saves handled here.",
+                    Settings.DOWNLOAD_TAGS));
             addPreference(new TogglePreference(context, "Check for already-saved videos",
                     L10n.f(context, "Remember up to %1$s video saves made here while this is on. If the file still exists, offer Open or Save again before downloading another copy.",
                             java.text.NumberFormat.getIntegerInstance().format(SavedVideoArchive.LIMIT)),

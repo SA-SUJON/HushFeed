@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -62,11 +63,13 @@ final class VideoDownloads {
         String quality = Settings.DOWNLOAD_VIDEO_QUALITY.get();
         boolean muted = Settings.DOWNLOAD_WITHOUT_SOUND.get();
         boolean withDetails = Settings.DOWNLOAD_DETAILS.get();
+        boolean detailsAsJson = Settings.DOWNLOAD_DETAILS_JSON.get();
+        boolean withTags = Settings.DOWNLOAD_TAGS.get();
         boolean checkSaved = Settings.CHECK_SAVED_VIDEOS.get();
         // Read as the save is accepted: a forget in settings while it runs leaves it unrecorded.
         long archiveGeneration = SavedVideoArchive.generation();
         boolean showProgress = Settings.DOWNLOAD_PROGRESS.get();
-        boolean extras = withDetails || checkSaved || showProgress;
+        boolean extras = withDetails || withTags || checkSaved || showProgress;
         // Photo posts can carry a video model too. Quality, mute and subtitle choices must
         // not intercept their save before OriginalPhotos or TikTok's still/live-photo job.
         if (Reflect.property(aweme, "getPhotoModeImageInfo", "photoModeImageInfo") != null) return false;
@@ -101,7 +104,9 @@ final class VideoDownloads {
         if (id == null) return false;
         Context app = context.getApplicationContext();
         String name, path;
-        DownloadDetails details = withDetails ? new DownloadDetails(aweme) : null;
+        DownloadDetails facts = withDetails || withTags ? new DownloadDetails(aweme, detailsAsJson) : null;
+        DownloadDetails details = withDetails ? facts : null;
+        Map<String, String> tags = withTags ? Mp4Tags.of(facts) : Collections.emptyMap();
         try {
             name = DownloadFilenameFormatter.formatSelectedVideoName(aweme);
             String destination = DownloadFilenameFormatter.destinationPath(aweme, false);
@@ -192,6 +197,7 @@ final class VideoDownloads {
                                 result = temp(app, temporary);
                                 TrackMuxer.videoOnly(picture[0], result);
                             }
+                            if (!tags.isEmpty()) result = tagged(app, temporary, result, tags);
                             published[0] = MediaFileWriter.publishForResult(app, result, name, "video/mp4", path, true);
                         } catch (IOException | RuntimeException failure) {
                             progress.stop();
@@ -301,6 +307,24 @@ final class VideoDownloads {
         File file = MediaCache.createTempFile(context, "selected-video-", ".mp4");
         files.add(file);
         return file;
+    }
+
+    /**
+     * The video with its details written in, or the same file when they can't be. The tags are a
+     * nicety, so a file this can't rewrite is still saved, just without them.
+     */
+    private static File tagged(Context context, List<File> files, File video, Map<String, String> tags) throws IOException {
+        try {
+            File withTags = temp(context, files);
+            if (Mp4Tags.write(video, withTags, tags)) return withTags;
+            Logger.printInfo(() -> "Saved the video without tags: its layout isn't one they can be written into");
+        } catch (MediaBudget.StopException stop) {
+            // Out of time or space is the save's answer, not the tags'.
+            throw stop;
+        } catch (IOException | RuntimeException exception) {
+            Logger.printException(() -> "Could not write the video's tags, so it's saved without them", exception);
+        }
+        return video;
     }
 
     /** Every address the video itself can be fetched from, best first. */

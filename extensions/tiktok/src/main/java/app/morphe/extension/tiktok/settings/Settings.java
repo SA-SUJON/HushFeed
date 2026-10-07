@@ -128,6 +128,11 @@ public class Settings extends BaseSettings {
             new BooleanSetting("download_without_sound", FALSE);
     public static final BooleanSetting DOWNLOAD_PROGRESS = new BooleanSetting("download_progress", false);
     public static final BooleanSetting DOWNLOAD_DETAILS = new BooleanSetting("download_details", FALSE);
+    /** The details file as JSON rather than plain text. */
+    public static final BooleanSetting DOWNLOAD_DETAILS_JSON = new BooleanSetting(
+            "download_details_json", FALSE, false, Setting.parent(DOWNLOAD_DETAILS));
+    /** The caption, creator, date and link written into the saved MP4 as tags players read. */
+    public static final BooleanSetting DOWNLOAD_TAGS = new BooleanSetting("download_tags", FALSE);
     public static final BooleanSetting CHECK_SAVED_VIDEOS = new BooleanSetting("check_saved_videos", FALSE);
     public static final StringSetting EXTERNAL_DOWNLOADER_PACKAGE =
             new StringSetting("external_downloader_package", "");

@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Advanced downloads has two new switches under Video, both off by default. Tag saved videos with their details writes the caption, creator, publication date and link into the saved MP4, where media players and ffprobe read them as the title, artist, date, comment and description. Save details as JSON makes the details file beside the video a JSON file instead of plain text. A video whose layout the tags can't be written into is still saved, just without them.
+
 * **TikTok:** Comment tools has another new switch, Hide comment box buttons, off by default. It takes the photo, @ and gift buttons out of the box where you write a comment. The emoji button stays, and typing and sending don't change. It's under Hushfeed settings > Comments, and Pause Hushfeed turns it off.
 
 * **TikTok:** Comment tools has a new switch, Hide comment surveys, off by default. TikTok sometimes puts a question card in a comment list to ask what you think, and with the switch on the list is built the way it is for an account TikTok sends no survey to. It sits under Hushfeed settings > Comments, below Hide comment polls, and Pause Hushfeed turns it off.
