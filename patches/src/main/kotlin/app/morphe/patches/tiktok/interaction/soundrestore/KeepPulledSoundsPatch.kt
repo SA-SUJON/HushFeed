@@ -109,7 +109,8 @@ internal fun MutableMethod.passMuteAnswersThroughExtension() {
 
 @Suppress("unused")
 val keepPulledSoundsPatch = bytecodePatch(
-    name = PATCH,
+    // The README table check reads this literal; PATCH carries the same text for the messages.
+    name = "Keep pulled sounds",
     description = "Adds a switch that plays the audio on videos TikTok silenced because their sound was pulled " +
         "for copyright or in your region. TikTok still labels the sound as unavailable. " +
         "Switch: Hushfeed settings > Playback.",
