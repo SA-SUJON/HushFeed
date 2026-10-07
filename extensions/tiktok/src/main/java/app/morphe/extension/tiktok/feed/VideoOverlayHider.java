@@ -123,6 +123,13 @@ public final class VideoOverlayHider {
      */
     private static final String[] CLEAR_PHOTO_EXIT_IDS = {"47.0.3:uxv", "47.1.3:v1c", "47.1.4:v1c"};
     /**
+     * The anchor row under the caption: a related search, a place, a product or a template.
+     * Clear display only fades it, so it stayed tappable while out of sight and a tap near the
+     * bottom of the picture opened a search (#84). It goes invisible rather than gone, which
+     * takes it out of reach without moving the caption above it.
+     */
+    private static final String[] ANCHOR_IDS = {"47.0.3:bql", "47.1.3:bqv", "47.1.4:bqv"};
+    /**
      * The blank TikTok keeps above the video on tall screens, as tall as the status bar, so the
      * bar never covers the picture. With the bar hidden it's only a black strip (#97).
      */
@@ -231,6 +238,7 @@ public final class VideoOverlayHider {
             + RAIL_COUNT_TEXT_IDS.length;
     private static final int CLEAR_PHOTO_EXIT_TARGET = STATUS_BAR_SPACER_TARGET + 1;
     private static final int BOTTOM_TABS_TARGET = CLEAR_PHOTO_EXIT_TARGET + 1;
+    private static final int ANCHOR_TARGET = BOTTOM_TABS_TARGET + 1;
     private static final String[][] TRAVERSAL_TARGET_IDS = traversalTargetIds();
     private static final int LOGICAL_TARGET_COUNT = TRAVERSAL_TARGET_IDS.length;
     private static final int TRAVERSAL_TARGET_COUNT = candidateCount(TRAVERSAL_TARGET_IDS);
@@ -397,6 +405,8 @@ public final class VideoOverlayHider {
             // alone wherever the bar isn't found (see the pairing after the walk).
             boolean detailCommentBar = (detailPager && Settings.HIDE_DETAIL_COMMENT_BAR.get())
                     || (!HushfeedPause.isPaused() && (RememberClearDisplayPatch.isClearDisplayNow() || carry));
+            boolean anchor = !HushfeedPause.isPaused()
+                    && (RememberClearDisplayPatch.isClearDisplayNow() || carry);
             // Asked for here and confirmed after the walk by TikTok's own bar being on screen,
             // which it shows only in Clear display; see gateClearControls.
             boolean clearControls = !HushfeedPause.isPaused() && Settings.HIDE_CLEAR_DISPLAY_CONTROLS.get();
@@ -418,7 +428,8 @@ public final class VideoOverlayHider {
             } catch (NumberFormatException ignored) {
             }
             touchScale = Math.min(MAX_TOUCH_SCALE, Math.max(1f, touchScale));
-            if (caption || music || actionBar || surveys || tabStrip || carry || detailCommentBar || clearControls
+            if (caption || music || actionBar || surveys || tabStrip || carry || detailCommentBar || anchor
+                    || clearControls
                     || statusBar || anyRail || !HIDDEN_HERE.isEmpty() || !FADED_HERE.isEmpty()
                     || touchScale != 1f || scaledLastPass) {
                 ViewGroup root = activity.findViewById(android.R.id.content);
@@ -440,6 +451,7 @@ public final class VideoOverlayHider {
                 wanted[CLEAR_PLAYBACK_TARGET] = clearControls;
                 wanted[CLEAR_SEEK_BAR_TARGET] = clearControls;
                 wanted[CLEAR_PHOTO_EXIT_TARGET] = clearControls;
+                wanted[ANCHOR_TARGET] = anchor;
                 wanted[STATUS_BAR_SPACER_TARGET] = statusBar;
                 for (int i = 0; i < RAIL_BUTTON_IDS.length; i++) {
                     wanted[RAIL_TARGET_START + i] = rail[i] || carry;
@@ -640,7 +652,7 @@ public final class VideoOverlayHider {
     }
 
     private static String[][] traversalTargetIds() {
-        String[][] targets = new String[BOTTOM_TABS_TARGET + 1][];
+        String[][] targets = new String[ANCHOR_TARGET + 1][];
         targets[CAPTION_TARGET] = CAPTION_IDS;
         targets[MUSIC_TARGET] = MUSIC_IDS;
         targets[ACTION_BAR_TARGET] = ACTION_BAR_IDS;
@@ -662,6 +674,7 @@ public final class VideoOverlayHider {
         targets[STATUS_BAR_SPACER_TARGET] = STATUS_BAR_SPACER_IDS;
         targets[CLEAR_PHOTO_EXIT_TARGET] = CLEAR_PHOTO_EXIT_IDS;
         targets[BOTTOM_TABS_TARGET] = BOTTOM_TABS_IDS;
+        targets[ANCHOR_TARGET] = ANCHOR_IDS;
         return targets;
     }
 
@@ -774,6 +787,7 @@ public final class VideoOverlayHider {
                     // The progress bar only goes see-through, so a drag along the bottom edge
                     // still seeks while it's out of sight (#84).
                     if (target == CLEAR_SEEK_BAR_TARGET) setTransparent(view, wanted);
+                    else if (target == ANCHOR_TARGET) setHidden(view, wanted, View.INVISIBLE);
                     else setHidden(view, wanted);
                 }
             // A survey is content TikTok inserts only on selected posts. Its absence from an
@@ -998,21 +1012,29 @@ public final class VideoOverlayHider {
      * had its own reason for that.
      */
     static void setHidden(View view, boolean hidden) {
+        setHidden(view, hidden, View.GONE);
+    }
+
+    /**
+     * The same with INVISIBLE, which keeps the view's space: only a showing view is taken, so
+     * one TikTok had already put away stays as TikTok left it.
+     */
+    static void setHidden(View view, boolean hidden, int hiddenAs) {
         if (view == null) {
             return;
         }
 
         if (hidden) {
             int visibility = view.getVisibility();
-            if (visibility != View.GONE) {
+            if (hiddenAs == View.GONE ? visibility != View.GONE : visibility == View.VISIBLE) {
                 HIDDEN_HERE.put(view, visibility);
-                view.setVisibility(View.GONE);
+                view.setVisibility(hiddenAs);
             }
             return;
         }
 
         Integer before = HIDDEN_HERE.remove(view);
-        if (before != null && view.getVisibility() == View.GONE) {
+        if (before != null && view.getVisibility() == hiddenAs) {
             view.setVisibility(before);
         }
     }

@@ -1320,6 +1320,58 @@ public class VideoOverlayHiderTest {
     }
 
     /**
+     * Clear display only fades the anchor row under the caption, and a tap on the faded row still
+     * opened its search (#84). It goes invisible, keeping its space so the caption doesn't move,
+     * and comes back when Clear display ends. A row TikTok had put away stays as it was.
+     */
+    @Test
+    public void clearDisplayTakesTheAnchorRowOutOfReach() {
+        int cellId = 0x7f0a0c71;
+        int anchorId = 0x7f0a0c72;
+        VideoOverlayHider.resolveForTests("view_rootview", cellId);
+        VideoOverlayHider.resolveForTests("47.0.3:bql", anchorId);
+        try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
+            Activity activity = controller.get();
+            Utils.setContext(activity);
+            LinearLayout root = new LinearLayout(activity);
+            FrameLayout cell = new FrameLayout(activity);
+            cell.setId(cellId);
+            View anchor = new View(activity);
+            anchor.setId(anchorId);
+            cell.addView(anchor);
+            FrameLayout emptyCell = new FrameLayout(activity);
+            emptyCell.setId(cellId);
+            View putAway = new View(activity);
+            putAway.setId(anchorId);
+            putAway.setVisibility(View.GONE);
+            emptyCell.addView(putAway);
+            root.addView(cell);
+            root.addView(emptyCell);
+            activity.setContentView(root);
+
+            VideoOverlayHider.applyTo(activity);
+            assertEquals("the anchor went with Clear display off", View.VISIBLE, anchor.getVisibility());
+
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+            VideoOverlayHider.applyTo(activity);
+            assertEquals("the faded anchor still takes taps", View.INVISIBLE, anchor.getVisibility());
+            assertEquals(View.GONE, putAway.getVisibility());
+
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+            VideoOverlayHider.applyTo(activity);
+            assertEquals(View.VISIBLE, anchor.getVisibility());
+            assertEquals(View.GONE, putAway.getVisibility());
+        } finally {
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+            Settings.CLEAR_DISPLAY.save(false);
+            VideoOverlayHider.resolveForTests("view_rootview", 0);
+        }
+    }
+
+    /**
      * The bar and the strip go together. With the bar missing, a collapsed strip would grow the
      * pager under nothing, or under a bar a build renamed, which then covers the caption. With
      * the strip missing, hiding the bar alone leaves the black strip.

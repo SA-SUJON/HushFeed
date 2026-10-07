@@ -20,6 +20,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** With Automatic clear display on and no delay, the next video stays cleared while you swipe to it, instead of showing its buttons, caption, progress bar and tabs for a moment (#84). Tapping Restore display still brings everything back.
 
+* **TikTok:** In Clear display, the search, place or product link under the caption can't be tapped by accident anymore. TikTok only faded it out, so a tap near the bottom of a video could open a search you couldn't see (#84).
+
 * **TikTok:** Clear display now also takes the Add comment bar off photos and videos you open from search or a profile, and Restore display brings it back (#84). Before, it stayed at the bottom unless Hide the comment bar on opened videos was on.
 
 * **TikTok:** With Hide the Clear display controls on, the progress bar is still there to drag, just invisible, so you can move through a video along the bottom edge without leaving Clear display (#84).
