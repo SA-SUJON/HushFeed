@@ -88,19 +88,20 @@ public final class StartPage {
             Intent intent = activity == null ? null : activity.getIntent();
             // A link to one video: the feed lock lets that video through. It never reaches the
             // start tab below, since a link keeps the tab it asked for.
-            if (intent != null && intent.getData() != null) FeedLock.noteLinkEntry();
+            if (FeedLock.isVideoLink(intent)) FeedLock.noteLinkEntry();
             String choice = Settings.START_PAGE.get();
-            // With the feed lock on, a start that would land on a feed lands on Inbox, or on
-            // Profile for a phone with no Inbox to open, so the app doesn't open on a blank feed.
-            boolean locked = FeedLock.isOn() && !INBOX.equals(choice) && !PROFILE.equals(choice)
-                    && (!TIKTOK.equals(choice) || HOME_TAG.equals(tag));
-            if (TIKTOK.equals(choice) && !locked) return tag;
+            boolean locking = FeedLock.isOn();
+            if (TIKTOK.equals(choice) && !(locking && HOME_TAG.equals(tag))) return tag;
             if (!isLauncherStart(intent)) return tag;
-            if (locked) {
+            String target = TIKTOK.equals(choice) ? null : tagFor(choice);
+            // With the feed lock on, a start that would land on a feed, or on a tab this phone
+            // can't show, lands on Inbox, or on Profile for a phone with no Inbox to open, so the
+            // app doesn't open on a blank feed.
+            if (locking && (target == null || landsOnFeed(target))) {
                 choice = tagFor(INBOX) != null ? INBOX : PROFILE;
+                target = tagFor(choice);
                 HookStatus.bound(FAMILY, "feed lock start");
             }
-            String target = tagFor(choice);
             if (target == null) return tag;
             String top = topTagFor(choice);
             if (top != null) {
@@ -243,6 +244,11 @@ public final class StartPage {
         if (FOR_YOU.equals(choice)) return FOR_YOU_TOP_TAG;
         if (FOLLOWING.equals(choice)) return FOLLOWING_TOP_TAG;
         return null;
+    }
+
+    /** Whether a tab's tag is one of the feeds the feed lock covers. */
+    private static boolean landsOnFeed(String target) {
+        return HOME_TAG.equals(target) || FRIENDS_TAB_TAG.equals(target) || FRIENDS_FEED_TAG.equals(target);
     }
 
     private static boolean bottomTabShown(String key) {

@@ -6,12 +6,17 @@ package app.morphe.extension.tiktok.wellbeing;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.SystemClock;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.tiktok.blockauthor.FeedVisibility;
 import app.morphe.extension.tiktok.settings.Settings;
+import app.morphe.extension.tiktok.settings.SettingsStatus;
+
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 /**
  * A feed that stays shut: For You, Following and the other feed tabs sit behind a calm panel and
@@ -52,9 +57,21 @@ public final class FeedLock {
     private FeedLock() {
     }
 
-    /** Whether the switch is on. Paused, the setting answers its unpatched value, off. */
+    /** A video's own page, as a link or a share opens it. */
+    private static final Pattern VIDEO_PATH = Pattern.compile(
+            "/(?:share/video/|v/|@[^/]*/video/)[0-9]{1,20}/?");
+    /** The short links a share sheet hands out, which TikTok resolves to one video. */
+    private static final Pattern SHORT_PATH = Pattern.compile("/(?:t/)?[A-Za-z0-9]{4,20}/?");
+    /** The app's own scheme for a video: aweme://aweme/detail/{id}, also under snssdk{n}. */
+    private static final Pattern DETAIL_PATH = Pattern.compile("/detail/[0-9]{1,20}/?");
+
+    /**
+     * Whether the switch is on. Paused, the setting answers its unpatched value, off. It also
+     * needs the hooks its row's page stands on: without them a switch left on by a restored
+     * backup or a repatch would cover the feed with nothing in the app to turn it off.
+     */
     public static boolean isOn() {
-        return Settings.FEED_LOCK.get();
+        return SettingsStatus.blockAuthorEnabled && Settings.FEED_LOCK.get();
     }
 
     /** Whether the lock wants the feed covered right now: on, and no link video to let through. */
@@ -66,10 +83,9 @@ public final class FeedLock {
         if (linkPending) {
             if (clock.now() - linkAt > LINK_WINDOW_MS) {
                 linkPending = false;
-            } else if (baseline == null) {
-                // A start from a link: nothing was playing, and the link's video is on its way.
-                return true;
             }
+            // Until the link's video is known the feed stays covered: a link start has no
+            // earlier video to tell it from, so the first one reported is the link's.
         }
         String video = permitted;
         return video != null && video.equals(SessionPlaybackHold.currentAwemeId());
@@ -87,9 +103,39 @@ public final class FeedLock {
     /** Called with the intent TikTok's main activity is handed while it is already running. */
     public static void onNewIntent(Intent intent) {
         try {
-            if (intent != null && intent.getData() != null) noteLinkEntry();
+            if (isVideoLink(intent)) noteLinkEntry();
         } catch (Throwable failure) {
             Logger.printException(() -> "The feed lock could not read a new intent", failure);
+        }
+    }
+
+    /**
+     * Whether an intent is a link to one video: a VIEW of a TikTok video page, a share's short
+     * link, or the app's own detail address. Any other intent with an address (a profile, a
+     * hashtag, a sound, a search, a web page) opens something that isn't a single video, so it
+     * stays covered like the rest of the feed.
+     */
+    public static boolean isVideoLink(Intent intent) {
+        try {
+            if (intent == null || !Intent.ACTION_VIEW.equals(intent.getAction())) return false;
+            Uri data = intent.getData();
+            if (data == null || data.getScheme() == null) return false;
+            String scheme = data.getScheme().toLowerCase(Locale.ROOT);
+            String path = data.getPath();
+            if (path == null) return false;
+            if (scheme.equals("aweme") || scheme.startsWith("snssdk")) {
+                return "aweme".equalsIgnoreCase(data.getHost()) && DETAIL_PATH.matcher(path).matches();
+            }
+            String host = data.getHost() == null ? "" : data.getHost().toLowerCase(Locale.ROOT);
+            if (!(scheme.equals("https") || scheme.equals("http"))
+                    || !(host.equals("tiktok.com") || host.endsWith(".tiktok.com"))) {
+                return false;
+            }
+            if (VIDEO_PATH.matcher(path).matches()) return true;
+            boolean shortHost = host.startsWith("vm.") || host.startsWith("vt.") || host.startsWith("vn.");
+            return (shortHost || path.startsWith("/t/")) && SHORT_PATH.matcher(path).matches();
+        } catch (Throwable unreadable) {
+            return false;
         }
     }
 

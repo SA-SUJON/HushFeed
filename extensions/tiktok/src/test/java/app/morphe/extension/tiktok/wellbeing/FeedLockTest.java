@@ -21,6 +21,7 @@ import app.morphe.extension.tiktok.SettingsContextRule;
 import app.morphe.extension.tiktok.blockauthor.FeedVisibility;
 import app.morphe.extension.tiktok.navigation.StartPage;
 import app.morphe.extension.tiktok.settings.Settings;
+import app.morphe.extension.tiktok.settings.SettingsStatus;
 
 import com.ss.android.ugc.aweme.common.widget.VerticalViewPager;
 import com.ss.android.ugc.aweme.detail.ui.DetailActivity;
@@ -61,6 +62,7 @@ public class FeedLockTest {
 
     @Before public void setUp() {
         Utils.setContext(RuntimeEnvironment.getApplication());
+        SettingsStatus.blockAuthorEnabled = true;
         reset();
         FeedLock.setClockForTests(now::get);
     }
@@ -69,6 +71,7 @@ public class FeedLockTest {
         reset();
         seedHomeTab(null);
         PausedProcess.set(false);
+        SettingsStatus.blockAuthorEnabled = false;
     }
 
     private static void reset() {
@@ -173,7 +176,7 @@ public class FeedLockTest {
             assertEquals("a link keeps the tab it asked for", "HOME",
                     StartPage.coldStartTag(host, "HOME", null));
 
-            assertFalse("the link's video was covered before it came up", FeedLock.covers());
+            assertTrue("the feed was open before the link's video was known", FeedLock.covers());
             report("linked");
             assertNull("the linked video was covered", overlay());
             assertTrue("the feed swipe stayed on for the linked video", FinishLastVideo.holdsSwipe(pager));
@@ -192,7 +195,7 @@ public class FeedLockTest {
             report("old");
             assertNotNull(overlay());
 
-            FeedLock.onNewIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://vm.tiktok.com/x")));
+            FeedLock.onNewIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://vm.tiktok.com/ZMabc123/")));
             assertTrue("the panel came down before the linked video did", FeedLock.covers());
             report("old");
             assertTrue("the video that was already there became the link's", FeedLock.covers());
@@ -218,7 +221,7 @@ public class FeedLockTest {
         assertTrue("a plain return to the app opened the feed", FeedLock.covers());
 
         // A link whose video never arrives is forgotten, so the first feed video isn't taken for it.
-        FeedLock.onNewIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://vm.tiktok.com/x")));
+        FeedLock.onNewIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://vm.tiktok.com/ZMabc123/")));
         now.addAndGet(FeedLock.LINK_WINDOW_MS + 1);
         report("late");
         assertTrue("a late video was let through as the link's", FeedLock.covers());
@@ -276,6 +279,64 @@ public class FeedLockTest {
             Settings.BOTTOM_NAVIGATION.resetToDefault();
             Settings.BOTTOM_NAVIGATION_TABS.resetToDefault();
         }
+    }
+
+    @Test public void withoutTheHooksItsRowLivesOnTheLockIsOff() {
+        Settings.FEED_LOCK.save(true);
+        assertTrue(FeedLock.isOn());
+        SettingsStatus.blockAuthorEnabled = false;
+        assertFalse("a lock nobody can turn off was on", FeedLock.isOn());
+        assertFalse(FeedLock.covers());
+    }
+
+    @Test public void onlyALinkToOneVideoIsAPass() {
+        assertTrue(FeedLock.isVideoLink(view("https://www.tiktok.com/@a.b/video/7123456789")));
+        assertTrue(FeedLock.isVideoLink(view("https://www.tiktok.com/share/video/7123456789/")));
+        assertTrue(FeedLock.isVideoLink(view("https://vm.tiktok.com/ZMabc123/")));
+        assertTrue(FeedLock.isVideoLink(view("https://www.tiktok.com/t/ZTabc123/")));
+        assertTrue(FeedLock.isVideoLink(view("aweme://aweme/detail/7123456789")));
+        assertFalse("a profile", FeedLock.isVideoLink(view("https://www.tiktok.com/@someone")));
+        assertFalse("a tag", FeedLock.isVideoLink(view("https://www.tiktok.com/tag/cats")));
+        assertFalse("a search", FeedLock.isVideoLink(view("aweme://search?keyword=cats")));
+        assertFalse("another site", FeedLock.isVideoLink(view("https://example.com/@a/video/7123456789")));
+        assertFalse("a lookalike host", FeedLock.isVideoLink(view("https://nottiktok.com/@a/video/7123456789")));
+        assertFalse("a launcher start with data", FeedLock.isVideoLink(
+                new Intent(Intent.ACTION_MAIN, Uri.parse("https://www.tiktok.com/@a/video/7123456789"))));
+        assertFalse(FeedLock.isVideoLink(null));
+    }
+
+    @Test public void aProfileLinkOnAColdStartDoesNotOpenTheFeed() {
+        Settings.FEED_LOCK.save(true);
+        try (var main = Robolectric.buildActivity(MainActivity.class).setup().visible()) {
+            standOnTheFeed(main.get());
+            Utils.setActivity(main.get());
+            LinkHost host = new LinkHost();
+            host.start(view("https://www.tiktok.com/@someone"));
+            StartPage.coldStartTag(host, "HOME", null);
+            FeedLock.onNewIntent(view("aweme://search?keyword=cats"));
+            assertTrue("a profile or search link uncovered the feed", FeedLock.covers());
+            report("first");
+            assertNotNull("the feed was open after a profile link", overlay());
+        }
+    }
+
+    @Test public void anInboxStartWithNoInboxFallsBackToProfile() {
+        Settings.FEED_LOCK.save(true);
+        Settings.START_PAGE.save(StartPage.INBOX);
+        Settings.BOTTOM_NAVIGATION.save(true);
+        Settings.BOTTOM_NAVIGATION_TABS.save("HOME,PROFILE");
+        LinkHost launcher = new LinkHost();
+        launcher.start(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER));
+        try {
+            assertEquals("USER", StartPage.coldStartTag(launcher, "HOME", null));
+        } finally {
+            Settings.BOTTOM_NAVIGATION.resetToDefault();
+            Settings.BOTTOM_NAVIGATION_TABS.resetToDefault();
+        }
+    }
+
+    private static Intent view(String url) {
+        return new Intent(Intent.ACTION_VIEW, Uri.parse(url));
     }
 
     private static void report(String awemeId) {
