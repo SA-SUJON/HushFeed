@@ -10,6 +10,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** New patch, Block popups. Its checklist under Feed screen > Popups lists each popup TikTok has tried to show on your phone, like the follow-your-friends card, and stops the ones you tick the next time they come up. Nothing is blocked until you tick something. CAPTCHA, verification, sign-in, age, ban and legal consent screens never show up in the list and are never blocked.
 
+* **TikTok:** New patch, Story controls. Two switches under Playback, both off until you turn them on. Loop a story replays a story from the start when it ends instead of moving to the next one, and Hold a photo story keeps a photo on screen until you tap or swipe. Tap or swipe still moves on either way.
+
 * **TikTok:** Export comments, a new switch under Comments, adds Export CSV and Export JSON under the comment search box. Each one saves the comments and replies the video has loaded to a file you pick, with the author, text, time, likes, reply count, pinned, creator liked, picture count and language for every row, and a count beside the buttons that matches the rows in the file. Open the reply threads you want first, since TikTok only loads a thread's replies when you do. If your file app stalls, the app offers Stop waiting. It's off until you turn it on, and it needs Search within comments.
 
 * **TikTok:** Remove feed ads now also keeps the "Find fresh ideas on Lemon8" card out of For You. It's an install promo TikTok slots between videos, so no ad flag marks it. Hushfeed stops TikTok asking for it and drops it from the feed if one arrives anyway, and it shows up in the feed filter report under Ads.

@@ -158,7 +158,7 @@ public final class StoryDownloads {
      * own objects. Two at the shallowest level naming different stories is an answer nobody can
      * trust, so it is none.
      */
-    static Object boundParams(Object monitor) {
+    public static Object boundParams(Object monitor) {
         Set<Object> seen = Collections.newSetFromMap(new java.util.IdentityHashMap<>());
         seen.add(monitor);
         List<Object> level = Collections.singletonList(monitor);

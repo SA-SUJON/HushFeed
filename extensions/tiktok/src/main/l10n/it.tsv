@@ -1621,3 +1621,7 @@ No popups have been seen yet	Nessun popup visto finora
 Use TikTok for a while. A popup shows up here after TikTok first tries to show it.	Usa TikTok per un po'. Un popup compare qui dopo che TikTok prova a mostrarlo per la prima volta.
 Fade the video controls	Attenua i controlli del video
 Fade the buttons, caption and tabs over the video to this level instead of hiding them. 100 leaves them as TikTok draws them. Faded controls still take taps. At 0 the buttons and caption are hidden, and the tabs stay at 10.	Attenua i pulsanti, la didascalia e le schede sopra il video fino a questo livello invece di nasconderli. Con 100 restano come li disegna TikTok. I controlli attenuati rispondono ancora al tocco. Con 0 i pulsanti e la didascalia vengono nascosti, mentre le schede restano a 10.
+Loop a story	Ripeti una storia
+Replay a story from the start when it ends instead of moving to the next one. Tap or swipe to move on.	Riavvia una storia dall'inizio quando finisce invece di passare alla successiva. Tocca o scorri per andare avanti.
+Hold a photo story	Mantieni una storia con foto
+Keep a photo story on screen until you tap or swipe, instead of moving on after a few seconds.	Mantiene una storia con foto sullo schermo finché non tocchi o scorri, invece di passare avanti dopo qualche secondo.

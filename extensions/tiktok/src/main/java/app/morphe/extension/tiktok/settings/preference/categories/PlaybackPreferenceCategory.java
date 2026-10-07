@@ -31,7 +31,8 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
         return SettingsStatus.playbackQualityEnabled || SettingsStatus.sdrPlaybackEnabled
                 || SettingsStatus.h264PlaybackEnabled || SettingsStatus.playbackSpeedEnabled
                 || SettingsStatus.autoAdvanceEnabled || SettingsStatus.videoFitEnabled
-                || SettingsStatus.fullScreenHoldEnabled || SettingsStatus.feedMuteEnabled
+                || SettingsStatus.fullScreenHoldEnabled || SettingsStatus.storyControlsEnabled
+                || SettingsStatus.feedMuteEnabled
                 || SettingsStatus.backgroundPlayEnabled
                 || SettingsStatus.showSeekbarEnabled || SettingsStatus.seekbarThumbnailEnabled
                 || SettingsStatus.stopVideoLoopingEnabled || SettingsStatus.resumeVideoAfterScrollEnabled
@@ -66,7 +67,7 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
         // you on the video you're on, paused behind the comments, held or stopped at its end, or
         // picked up where you left it.
         if (SettingsStatus.commentToolsEnabled || SettingsStatus.fullScreenHoldEnabled
-                || SettingsStatus.stopVideoLoopingEnabled || SettingsStatus.resumeVideoAfterScrollEnabled) {
+                || SettingsStatus.storyControlsEnabled || SettingsStatus.stopVideoLoopingEnabled || SettingsStatus.resumeVideoAfterScrollEnabled) {
             addPreference(new SectionHeadingPreference(context, "Staying on a video"));
         }
         if (SettingsStatus.commentToolsEnabled) {
@@ -80,6 +81,16 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                     "When a video ends in full screen, stay on it instead of moving to the next "
                             + "one. Swiping still moves on.",
                     Settings.FULL_SCREEN_HOLD));
+        }
+        if (SettingsStatus.storyControlsEnabled) {
+            addPreference(new TogglePreference(context, "Loop a story",
+                    "Replay a story from the start when it ends instead of moving to the next one. "
+                            + "Tap or swipe to move on.",
+                    Settings.STORY_LOOP));
+            addPreference(new TogglePreference(context, "Hold a photo story",
+                    "Keep a photo story on screen until you tap or swipe, instead of moving on "
+                            + "after a few seconds.",
+                    Settings.STORY_PHOTO_HOLD));
         }
         if (SettingsStatus.stopVideoLoopingEnabled) {
             addPreference(new TogglePreference(

@@ -1621,3 +1621,7 @@ No popups have been seen yet	Henüz açılır pencere görülmedi
 Use TikTok for a while. A popup shows up here after TikTok first tries to show it.	TikTok'u bir süre kullanın. Bir açılır pencere, TikTok onu ilk kez göstermeye çalıştığında burada görünür.
 Fade the video controls	Video kontrollerini soluklaştır
 Fade the buttons, caption and tabs over the video to this level instead of hiding them. 100 leaves them as TikTok draws them. Faded controls still take taps. At 0 the buttons and caption are hidden, and the tabs stay at 10.	Videonun üzerindeki düğmeleri, açıklamayı ve sekmeleri gizlemek yerine bu düzeye kadar soluklaştırır. 100, TikTok'un çizdiği hâlini korur. Soluk kontroller dokunuşları almaya devam eder. 0'da düğmeler ve açıklama gizlenir, sekmeler 10'da kalır.
+Loop a story	Hikayeyi tekrarla
+Replay a story from the start when it ends instead of moving to the next one. Tap or swipe to move on.	Bir hikaye bitince sonrakine geçmek yerine baştan oynatır. İlerlemek için dokunun veya kaydırın.
+Hold a photo story	Fotoğraflı hikayeyi tut
+Keep a photo story on screen until you tap or swipe, instead of moving on after a few seconds.	Fotoğraflı bir hikayeyi siz dokunana veya kaydırana kadar ekranda tutar, birkaç saniye sonra geçmez.

@@ -358,6 +358,10 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting STOP_VIDEO_LOOPING = new BooleanSetting("stop_video_looping", FALSE, true);
     /** Keeps the full-screen viewer on a video when it ends; the Stay on the video in full screen patch. */
     public static final BooleanSetting FULL_SCREEN_HOLD = new BooleanSetting("full_screen_hold", FALSE, true);
+    /** Replays a story instead of moving on when it ends; the Story controls patch. */
+    public static final BooleanSetting STORY_LOOP = new BooleanSetting("story_loop", FALSE, true);
+    /** Keeps a photo story on screen until you tap or swipe; the Story controls patch. */
+    public static final BooleanSetting STORY_PHOTO_HOLD = new BooleanSetting("story_photo_hold", FALSE, true);
     public static final BooleanSetting RESUME_VIDEO_AFTER_SCROLL = new BooleanSetting(
             "resume_video_after_scroll",
             TRUE,
