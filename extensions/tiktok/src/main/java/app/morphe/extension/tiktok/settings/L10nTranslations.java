@@ -3176,8 +3176,8 @@ public final class L10nTranslations {
                 "Büdcə bitəndə ekrandakı video fasilə lenti örtməzdən əvvəl sonuna qədər oxunur və bu müddətdə lent başqa videoya sürüşmür. Qaralmanın artıq sönükləşdirdiyi vaxt büdcəsi birbaşa fasiləyə keçir. Gözləmək üçün fasilə lazımdır. Ən çox %1$d dəqiqə gözləyir.");
         table.put("When to send",
                 "Nə vaxt göndərilsin");
-        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. To leave Clear display, press and hold the video and tap Restore display.",
-                "Təmiz ekran açıq olanda aşağıdakı irəliləmə zolağını, bağlama düyməsini, fasilə və sürət düymələrini də gizlədin. Təmiz ekrandan çıxmaq üçün videonu basıb saxlayın və Ekranı bərpa et düyməsinə toxunun.");
+        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. You can still drag along the bottom edge to move through the video. To leave Clear display, press and hold the video and tap Restore display.",
+                "Təmiz ekran açıq olanda aşağıdakı irəliləmə zolağını, bağlama düyməsini, fasilə və sürət düymələrini də gizlədin. Videoda irəli-geri keçmək üçün yenə də aşağı kənar boyunca sürüşdürə bilərsiniz. Təmiz ekrandan çıxmaq üçün videonu basıb saxlayın və Ekranı bərpa et düyməsinə toxunun.");
         table.put("While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.",
                 "Diaqnostik qeydiyyat açıq olduqda mesaj Hushfeed-in hansı hissəsinin uğursuz olduğunu bildirir. Qapalı olduqda uğursuzluqlar yalnız hesabatda qalır.");
         table.put("Who to message",
@@ -6363,8 +6363,8 @@ public final class L10nTranslations {
                 "Wenn das Budget aufgebraucht ist, läuft das Video auf dem Bildschirm zu Ende, bevor die Sperre den Feed abdeckt, und der Feed lässt sich so lange nicht zum nächsten Video wischen. Ein Zeitbudget, das schon ausgeblendet wurde, geht direkt in die Sperre. Braucht eine Sperre, auf die gewartet werden kann. Es wird höchstens %1$d Minuten gewartet.");
         table.put("When to send",
                 "Wann senden");
-        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. To leave Clear display, press and hold the video and tap Restore display.",
-                "Bei freier Ansicht auch den Fortschrittsbalken, die Schließen-Schaltfläche und die Pause- und Tempo-Schaltflächen unten ausblenden. Um die freie Ansicht zu verlassen, halte das Video gedrückt und tippe auf Anzeige wiederherstellen.");
+        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. You can still drag along the bottom edge to move through the video. To leave Clear display, press and hold the video and tap Restore display.",
+                "Bei freier Ansicht auch den Fortschrittsbalken, die Schließen-Schaltfläche und die Pause- und Tempo-Schaltflächen unten ausblenden. Du kannst trotzdem am unteren Rand entlang ziehen, um im Video zu spulen. Um die freie Ansicht zu verlassen, halte das Video gedrückt und tippe auf Anzeige wiederherstellen.");
         table.put("While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.",
                 "Solange die Diagnoseprotokollierung läuft, nennt eine Meldung den Teil von Hushfeed, der fehlgeschlagen ist. Aus behält Fehler nur im Bericht.");
         table.put("Who to message",
@@ -9550,8 +9550,8 @@ public final class L10nTranslations {
                 "Cuando se agota el presupuesto, el vídeo en pantalla se reproduce hasta el final antes de que la pausa cubra el feed, y mientras tanto el feed no se desliza a otro vídeo. Un presupuesto de tiempo que el atenuado ya oscureció pasa directo a la pausa. Necesita una pausa que esperar. Espera %1$d minutos como máximo.");
         table.put("When to send",
                 "Cuándo enviar");
-        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. To leave Clear display, press and hold the video and tap Restore display.",
-                "Con Controles ocultos activado, oculta también la barra de progreso, el botón de cerrar y los botones de pausa y velocidad de abajo. Para salir de Controles ocultos, mantén presionado el video y toca Restaurar pantalla.");
+        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. You can still drag along the bottom edge to move through the video. To leave Clear display, press and hold the video and tap Restore display.",
+                "Con Controles ocultos activado, oculta también la barra de progreso, el botón de cerrar y los botones de pausa y velocidad de abajo. Aún puedes arrastrar por el borde inferior para moverte por el video. Para salir de Controles ocultos, mantén presionado el video y toca Restaurar pantalla.");
         table.put("While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.",
                 "Mientras el registro de diagnóstico está activado, un mensaje indica la parte de Hushfeed que falló. Desactivado, los fallos solo quedan en el informe.");
         table.put("Who to message",
@@ -12737,8 +12737,8 @@ public final class L10nTranslations {
                 "Saat anggaran habis, video di layar diputar sampai selesai sebelum penahanan menutupi feed, dan selama itu feed tidak bisa digeser ke video lain. Anggaran waktu yang sudah diredupkan langsung masuk ke penahanan. Perlu penahanan yang ditunggu. Menunggu paling lama %1$d menit.");
         table.put("When to send",
                 "Kapan dikirim");
-        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. To leave Clear display, press and hold the video and tap Restore display.",
-                "Saat Tampilan bersih aktif, sembunyikan juga bilah progres, tombol tutup, serta tombol jeda dan kecepatan di bagian bawah. Untuk keluar dari Tampilan bersih, tekan lama video lalu ketuk Pulihkan tampilan.");
+        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. You can still drag along the bottom edge to move through the video. To leave Clear display, press and hold the video and tap Restore display.",
+                "Saat Tampilan bersih aktif, sembunyikan juga bilah progres, tombol tutup, serta tombol jeda dan kecepatan di bagian bawah. Kamu tetap bisa menggeser di sepanjang tepi bawah untuk berpindah di dalam video. Untuk keluar dari Tampilan bersih, tekan lama video lalu ketuk Pulihkan tampilan.");
         table.put("While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.",
                 "Selama pencatatan diagnostik aktif, sebuah pesan menyebutkan bagian Hushfeed yang gagal. Jika nonaktif, kegagalan hanya tercatat di laporan.");
         table.put("Who to message",
@@ -15924,8 +15924,8 @@ public final class L10nTranslations {
                 "Quando il budget si esaurisce, il video sullo schermo arriva alla fine prima che il blocco copra il feed, e nel frattempo il feed non si può scorrere verso un altro video. Un budget di tempo già attenuato dalla dissolvenza passa direttamente al blocco. Richiede un blocco da attendere. Si attende al massimo %1$d minuti.");
         table.put("When to send",
                 "Quando inviare");
-        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. To leave Clear display, press and hold the video and tap Restore display.",
-                "Con la vista pulita attiva, nascondi anche la barra di avanzamento, il pulsante di chiusura e i pulsanti di pausa e velocità in basso. Per uscire dalla vista pulita, tieni premuto il video e tocca Ripristina visualizzazione.");
+        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. You can still drag along the bottom edge to move through the video. To leave Clear display, press and hold the video and tap Restore display.",
+                "Con la vista pulita attiva, nascondi anche la barra di avanzamento, il pulsante di chiusura e i pulsanti di pausa e velocità in basso. Puoi comunque trascinare lungo il bordo inferiore per spostarti nel video. Per uscire dalla vista pulita, tieni premuto il video e tocca Ripristina visualizzazione.");
         table.put("While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.",
                 "Quando la registrazione diagnostica è attiva, un messaggio indica quale parte di Hushfeed ha avuto un problema. Se disattivata, gli errori restano solo nel rapporto.");
         table.put("Who to message",
@@ -19111,8 +19111,8 @@ public final class L10nTranslations {
                 "Quando o limite acaba, o vídeo na tela toca até o fim antes que a pausa cubra o feed, e enquanto isso o feed não desliza para outro vídeo. Um limite de tempo que o escurecimento já apagou vai direto para a pausa. Precisa de uma pausa para esperar. Espera no máximo %1$d minutos.");
         table.put("When to send",
                 "Quando enviar");
-        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. To leave Clear display, press and hold the video and tap Restore display.",
-                "Com a tela limpa ativada, esconde também a barra de progresso, o botão de fechar e os botões de pausa e velocidade na parte de baixo. Para sair da tela limpa, toque e segure o vídeo e toque em Restaurar tela.");
+        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. You can still drag along the bottom edge to move through the video. To leave Clear display, press and hold the video and tap Restore display.",
+                "Com a tela limpa ativada, esconde também a barra de progresso, o botão de fechar e os botões de pausa e velocidade na parte de baixo. Você ainda pode arrastar pela borda de baixo para avançar ou voltar no vídeo. Para sair da tela limpa, toque e segure o vídeo e toque em Restaurar tela.");
         table.put("While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.",
                 "Enquanto o registro de diagnóstico estiver ligado, uma mensagem indica a parte do Hushfeed que falhou. Desligado, as falhas ficam só no relatório.");
         table.put("Who to message",
@@ -22582,8 +22582,8 @@ public final class L10nTranslations {
                 "Когда лимит заканчивается, видео на экране доигрывает до конца, прежде чем пауза закроет ленту, и всё это время лента не переключается на другое видео свайпом. Лимит времени, который уже начал гаснуть, переходит прямо к паузе. Нужна пауза, которую можно дождаться. Ожидание длится не более %1$d минут.");
         table.put("When to send",
                 "Когда отправлять");
-        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. To leave Clear display, press and hold the video and tap Restore display.",
-                "В чистом виде также скрывать полосу прогресса, кнопку закрытия и кнопки паузы и скорости внизу. Чтобы выйти из чистого вида, нажмите на видео и удерживайте, затем выберите «Восстановить экран».");
+        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. You can still drag along the bottom edge to move through the video. To leave Clear display, press and hold the video and tap Restore display.",
+                "В чистом виде также скрывать полосу прогресса, кнопку закрытия и кнопки паузы и скорости внизу. По нижнему краю по-прежнему можно провести пальцем, чтобы перемотать видео. Чтобы выйти из чистого вида, нажмите на видео и удерживайте, затем выберите «Восстановить экран».");
         table.put("While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.",
                 "Пока включено диагностическое логирование, сообщение называет часть Hushfeed, в которой произошёл сбой. При выключенном логировании сбои остаются только в отчёте.");
         table.put("Who to message",
@@ -25769,8 +25769,8 @@ public final class L10nTranslations {
                 "Bütçe dolduğunda ekrandaki video, bekletme akışın üstünü örtmeden önce sonuna kadar oynar ve bu sırada akış başka bir videoya kaydırılamaz. Karartmanın zaten söndürdüğü bir süre bütçesi doğrudan bekletmeye geçer. Beklenecek bir bekletme gerekir. En fazla %1$d dakika bekler.");
         table.put("When to send",
                 "Ne zaman gönderilsin");
-        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. To leave Clear display, press and hold the video and tap Restore display.",
-                "Temiz ekran açıkken alttaki ilerleme çubuğunu, kapatma düğmesini, duraklatma ve hız düğmelerini de gizle. Temiz ekrandan çıkmak için videoya basılı tut ve Ekranı geri yükle'ye dokun.");
+        table.put("While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. You can still drag along the bottom edge to move through the video. To leave Clear display, press and hold the video and tap Restore display.",
+                "Temiz ekran açıkken alttaki ilerleme çubuğunu, kapatma düğmesini, duraklatma ve hız düğmelerini de gizle. Videoda ileri geri gitmek için yine de alt kenar boyunca sürükleyebilirsin. Temiz ekrandan çıkmak için videoya basılı tut ve Ekranı geri yükle'ye dokun.");
         table.put("While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.",
                 "Tanılama günlüğü açıkken bir mesaj, Hushfeed'in hata veren bölümünün adını söyler. Kapalıyken hatalar yalnızca raporda kalır.");
         table.put("Who to message",

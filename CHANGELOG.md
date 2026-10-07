@@ -20,6 +20,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Clear display now also takes the Add comment bar off photos and videos you open from search or a profile, and Restore display brings it back (#84). Before, it stayed at the bottom unless Hide the comment bar on opened videos was on.
 
+* **TikTok:** With Hide the Clear display controls on, the progress bar is still there to drag, just invisible, so you can move through a video along the bottom edge without leaving Clear display (#84).
+
 * **TikTok:** Feature Gate Lab has 13 new reviewed presets for features other TikTok mods unlock by flag. There's repost with a comment, the profile banner with the new profile layout, live photo, camera and audio comments, comments saved to Favorites, comment sort and dislike styles, message bubble colors with the Inbox archive and sharing to more chats at once, Manage topics, visual search, AI Self, the long-press menu on every post, TikTok's own hold to speed up, its background play and auto-scroll, and post dates in the feed. Every preset was checked against 47.0.3, 47.1.3 and 47.1.4. Show See translation was 47.1.3 only and now covers all three. The list shows just the presets for the TikTok you have installed. Some of these features also depend on what TikTok's servers allow for your account.
 
 * **TikTok:** Remove ads now also catches creator posts TikTok runs as ads. They don't carry TikTok's ad flag, so they were getting through, but TikTok marks them in the post's commerce details and Hushfeed reads the same mark TikTok does. The filter report counts them under AdSignals. Skip the splash ad also stops the startup tasks that preload TopView takeover ads and ask the server for a real-time splash.

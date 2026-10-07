@@ -425,7 +425,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             addPreference(new TogglePreference(
                     context,
                     "Hide the Clear display controls",
-                    "While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. To leave Clear display, press and hold the video and tap Restore display.",
+                    "While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. You can still drag along the bottom edge to move through the video. To leave Clear display, press and hold the video and tap Restore display.",
                     Settings.HIDE_CLEAR_DISPLAY_CONTROLS
             ));
         }

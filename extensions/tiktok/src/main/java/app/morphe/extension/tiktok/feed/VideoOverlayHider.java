@@ -249,6 +249,9 @@ public final class VideoOverlayHider {
      */
     private static final Map<View, Integer> HIDDEN_HERE = new WeakHashMap<>();
 
+    /** Views this class made see-through instead of hiding, with the alpha each had before. */
+    private static final Map<View, Float> FADED_HERE = new WeakHashMap<>();
+
     /**
      * How long a status bar may stay visible before it is hidden again on Android 11 and
      * up. A swipe from the top shows the bar transiently and the system takes it away by
@@ -412,7 +415,8 @@ public final class VideoOverlayHider {
             }
             touchScale = Math.min(MAX_TOUCH_SCALE, Math.max(1f, touchScale));
             if (caption || music || actionBar || surveys || tabStrip || carry || detailCommentBar || clearControls
-                    || statusBar || anyRail || !HIDDEN_HERE.isEmpty() || touchScale != 1f || scaledLastPass) {
+                    || statusBar || anyRail || !HIDDEN_HERE.isEmpty() || !FADED_HERE.isEmpty()
+                    || touchScale != 1f || scaledLastPass) {
                 ViewGroup root = activity.findViewById(android.R.id.content);
                 int[] ids = TRAVERSAL.ids;
                 boolean[] hidden = TRAVERSAL.hidden;
@@ -762,7 +766,12 @@ public final class VideoOverlayHider {
                 String diagnostic = String.join("|", names);
                 HookStatus.recoveredViewId("overlay", diagnostic);
                 HookStatus.bound("overlay", names[chosen - candidateAt]);
-                for (View view : found.get(chosen)) setHidden(view, wanted);
+                for (View view : found.get(chosen)) {
+                    // The progress bar only goes see-through, so a drag along the bottom edge
+                    // still seeks while it's out of sight (#84).
+                    if (target == CLEAR_SEEK_BAR_TARGET) setTransparent(view, wanted);
+                    else setHidden(view, wanted);
+                }
             // A survey is content TikTok inserts only on selected posts. Its absence from an
             // ordinary feed cell says nothing about whether this build still has the anchor.
             } else if (target != SURVEY_TARGET && (wanted || (scaling
@@ -1001,6 +1010,27 @@ public final class VideoOverlayHider {
         Integer before = HIDDEN_HERE.remove(view);
         if (before != null && view.getVisibility() == View.GONE) {
             view.setVisibility(before);
+        }
+    }
+
+    /**
+     * Makes a view see-through but leaves it on screen and touchable, or puts back one this
+     * class faded. Every pass sets it again, since TikTok may fade its own bar back in.
+     */
+    static void setTransparent(View view, boolean transparent) {
+        if (view == null) {
+            return;
+        }
+
+        if (transparent) {
+            if (!FADED_HERE.containsKey(view)) FADED_HERE.put(view, view.getAlpha());
+            if (view.getAlpha() != 0f) view.setAlpha(0f);
+            return;
+        }
+
+        Float before = FADED_HERE.remove(view);
+        if (before != null && view.getAlpha() == 0f) {
+            view.setAlpha(before);
         }
     }
 

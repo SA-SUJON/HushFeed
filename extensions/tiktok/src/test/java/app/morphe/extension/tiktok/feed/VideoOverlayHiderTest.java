@@ -1383,7 +1383,9 @@ public class VideoOverlayHiderTest {
             VideoOverlayHider.applyTo(activity);
             assertEquals(View.GONE, exit.getVisibility());
             assertEquals(View.GONE, playback.getVisibility());
-            assertEquals(View.GONE, seekBar.getVisibility());
+            assertEquals("the progress bar left the screen and can't be dragged",
+                    View.VISIBLE, seekBar.getVisibility());
+            assertEquals(0f, seekBar.getAlpha(), 0f);
 
             // Restore display: TikTok takes its bar down and everything is TikTok's again.
             clearBar.setVisibility(View.GONE);
@@ -1391,14 +1393,18 @@ public class VideoOverlayHiderTest {
             assertEquals(View.VISIBLE, exit.getVisibility());
             assertEquals(View.VISIBLE, playback.getVisibility());
             assertEquals(View.VISIBLE, seekBar.getVisibility());
+            assertEquals(1f, seekBar.getAlpha(), 0f);
 
             clearBar.setVisibility(View.VISIBLE);
             VideoOverlayHider.applyTo(activity);
-            assertEquals(View.GONE, seekBar.getVisibility());
+            assertEquals("the progress bar left the screen and can't be dragged",
+                    View.VISIBLE, seekBar.getVisibility());
+            assertEquals(0f, seekBar.getAlpha(), 0f);
             app.morphe.extension.shared.settings.PausedProcess.set(true);
             VideoOverlayHider.applyTo(activity);
             assertEquals(View.VISIBLE, exit.getVisibility());
             assertEquals(View.VISIBLE, seekBar.getVisibility());
+            assertEquals(1f, seekBar.getAlpha(), 0f);
             app.morphe.extension.shared.settings.PausedProcess.set(false);
 
             VideoOverlayHider.applyTo(activity);
@@ -1408,6 +1414,7 @@ public class VideoOverlayHiderTest {
             assertEquals(View.VISIBLE, exit.getVisibility());
             assertEquals(View.VISIBLE, playback.getVisibility());
             assertEquals(View.VISIBLE, seekBar.getVisibility());
+            assertEquals(1f, seekBar.getAlpha(), 0f);
         } finally {
             app.morphe.extension.shared.settings.PausedProcess.set(false);
             Settings.HIDE_CLEAR_DISPLAY_CONTROLS.save(false);
