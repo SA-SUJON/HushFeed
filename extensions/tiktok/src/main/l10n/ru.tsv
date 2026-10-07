@@ -1827,3 +1827,21 @@ If that name is taken, Android adds a number to the new file.	Если тако�
 If that name is taken, Hushfeed adds a number to the new file.	Если такое имя уже занято, Hushfeed добавит к новому файлу номер.
 Don't start the first video	Не запускать первое видео
 When you open TikTok from its icon, the first video in the feed waits for one tap before it plays. A link, a notification or a shortcut opens as usual. Takes effect the next time TikTok starts.	Когда вы открываете TikTok с иконки, первое видео в ленте ждёт одного касания, прежде чем начать. Ссылка, уведомление или ярлык открываются как обычно. Действует со следующего запуска TikTok.
+Network proxy	Сетевой прокси
+Send TikTok through a proxy	Пускать TikTok через прокси
+Sends TikTok's own network stack, which carries the feed, search, comments and the rest of its API, through the proxy below. Videos and LIVE streams load through TikTok's player, which connects on its own, so they stay direct. Other apps aren't affected.	Направляет собственный сетевой стек TikTok, по которому идут лента, поиск, комментарии и остальной его API, через прокси ниже. Видео и LIVE-трансляции загружает плеер TikTok, который подключается сам, поэтому они идут напрямую. Другие приложения это не затрагивает.
+Proxy type	Тип прокси
+HTTP	HTTP
+SOCKS5	SOCKS5
+Proxy host	Хост прокси
+The proxy's address, like 192.168.1.20 or proxy.example.com.	Адрес прокси, например 192.168.1.20 или proxy.example.com.
+Proxy port	Порт прокси
+The port the proxy listens on, like 8080 or 1080.	Порт, на котором работает прокси, например 8080 или 1080.
+Proxy user name	Имя пользователя прокси
+Optional. TikTok's own network stack can't sign in to a proxy, so only plain Java connections use this. Leave it empty for a proxy without a password.	Необязательно. Собственный сетевой стек TikTok не умеет входить в прокси, поэтому это используют только обычные Java-соединения. Оставьте поле пустым для прокси без пароля.
+Proxy password	Пароль прокси
+Optional, used with the user name. It isn't shown, logged or put in a backup.	Необязательно, используется вместе с именем пользователя. Он не показывается, не пишется в журнал и не попадает в резервную копию.
+Enter a host name or IP address, without a scheme or port	Введите имя хоста или IP-адрес без схемы и порта
+A port is a whole number from 1 to 65535	Порт должен быть целым числом от 1 до 65535
+The proxy at %1$s asks for a password. TikTok's own network stack can't send one, so use a proxy that doesn't need one.	Прокси %1$s запрашивает пароль. Собственный сетевой стек TikTok не может его отправить, поэтому используйте прокси без пароля.
+Couldn't reach the proxy at %1$s. TikTok may not load until it's back or you turn the proxy off.	Не удалось подключиться к прокси %1$s. TikTok может не загружаться, пока прокси не заработает или пока вы его не выключите.

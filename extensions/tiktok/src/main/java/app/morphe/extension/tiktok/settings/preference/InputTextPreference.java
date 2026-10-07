@@ -15,6 +15,7 @@ import android.preference.EditTextPreference;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -86,6 +87,12 @@ public class InputTextPreference extends EditTextPreference {
     /** How many characters of a value to show before truncating. */
     private static final int VALUE_DISPLAY_LIMIT = 60;
 
+    /** What a hidden value shows as on its row: it says one is saved and nothing about it. */
+    static final String HIDDEN_VALUE = "••••••";
+
+    /** Whether the value is a password, shown as dots on the row and while it's typed. */
+    private boolean secret;
+
     public InputTextPreference(Context context, String title, String summary, StringSetting setting) {
         super(context);
         setTitle(title);
@@ -108,8 +115,10 @@ public class InputTextPreference extends EditTextPreference {
     private void rebuildSummary() {
         String value = getText();
         String shown;
-        if (value == null || value.trim().isEmpty()) {
+        if (value == null || value.isEmpty() || (!secret && value.trim().isEmpty())) {
             shown = L10n.t(getContext(), "Empty");
+        } else if (secret) {
+            shown = HIDDEN_VALUE;
         } else if (value.length() > VALUE_DISPLAY_LIMIT) {
             shown = value.substring(0, VALUE_DISPLAY_LIMIT).trim() + "…";
         } else {
@@ -175,6 +184,18 @@ public class InputTextPreference extends EditTextPreference {
     public InputTextPreference withNameKeyboard() {
         getEditText().setRawInputType(InputType.TYPE_CLASS_TEXT
                 | InputType.TYPE_TEXT_VARIATION_URI | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        return this;
+    }
+
+    /**
+     * Hides the value: the row says one is saved without showing it, and the editor shows dots
+     * as it's typed. Raw, for the same reason as {@link #withNameKeyboard()}.
+     */
+    public InputTextPreference withSecret() {
+        secret = true;
+        getEditText().setRawInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        getEditText().setTransformationMethod(PasswordTransformationMethod.getInstance());
+        rebuildSummary();
         return this;
     }
 

@@ -826,6 +826,20 @@ public class Settings extends BaseSettings {
     public static final StringSetting SIM_SPOOF_ISO = new StringSetting("simspoof_iso", "us");
     public static final StringSetting SIMSPOOF_MCCMNC = new StringSetting("simspoof_mccmnc", "310260");
     public static final StringSetting SIMSPOOF_OP_NAME = new StringSetting("simspoof_op_name", "T-Mobile");
+    // Network proxy. Off by default, and every value is read once as TikTok starts, before its
+    // network stack is built, so each one takes a restart. The user name and password stay out
+    // of backups: a backup file is easy to pass around.
+    public static final BooleanSetting NETWORK_PROXY = new BooleanSetting("network_proxy", FALSE, true);
+    public static final StringSetting NETWORK_PROXY_TYPE = new StringSetting(
+            "network_proxy_type", "http", true, Setting.parent(NETWORK_PROXY));
+    public static final StringSetting NETWORK_PROXY_HOST = new StringSetting(
+            "network_proxy_host", "", true, Setting.parent(NETWORK_PROXY));
+    public static final StringSetting NETWORK_PROXY_PORT = new StringSetting(
+            "network_proxy_port", "", true, Setting.parent(NETWORK_PROXY));
+    public static final StringSetting NETWORK_PROXY_USER = new StringSetting(
+            "network_proxy_user", "", true, false, null, Setting.parent(NETWORK_PROXY));
+    public static final StringSetting NETWORK_PROXY_PASSWORD = new StringSetting(
+            "network_proxy_password", "", true, false, null, Setting.parent(NETWORK_PROXY));
 
     /**
      * Made once per install so a hashed account id in a diagnostic report cannot be checked

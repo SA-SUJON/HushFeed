@@ -1686,3 +1686,21 @@ If that name is taken, Android adds a number to the new file.	Bu ad artıq varsa
 If that name is taken, Hushfeed adds a number to the new file.	Bu ad artıq varsa, Hushfeed yeni fayla nömrə əlavə edir.
 Don't start the first video	İlk videonu başlatmayın
 When you open TikTok from its icon, the first video in the feed waits for one tap before it plays. A link, a notification or a shortcut opens as usual. Takes effect the next time TikTok starts.	TikTok-u ikonundan açanda lentdəki ilk video oynamazdan əvvəl bir toxunuş gözləyir. Keçid, bildiriş və ya qısayol həmişəki kimi açılır. TikTok növbəti dəfə başlayanda qüvvəyə minir.
+Network proxy	Şəbəkə proksisi
+Send TikTok through a proxy	TikTok-u proksi ilə göndərin
+Sends TikTok's own network stack, which carries the feed, search, comments and the rest of its API, through the proxy below. Videos and LIVE streams load through TikTok's player, which connects on its own, so they stay direct. Other apps aren't affected.	TikTok-un lenti, axtarışı, şərhləri və API-sinin qalanını daşıyan öz şəbəkə yığınını aşağıdakı proksi ilə göndərir. Videolar və LIVE yayımlar TikTok-un özü qoşulan pleyeri ilə yüklənir, ona görə də birbaşa qalır. Digər tətbiqlərə təsir etmir.
+Proxy type	Proksi növü
+HTTP	HTTP
+SOCKS5	SOCKS5
+Proxy host	Proksi hostu
+The proxy's address, like 192.168.1.20 or proxy.example.com.	Proksinin ünvanı, məsələn 192.168.1.20 və ya proxy.example.com.
+Proxy port	Proksi portu
+The port the proxy listens on, like 8080 or 1080.	Proksinin dinlədiyi port, məsələn 8080 və ya 1080.
+Proxy user name	Proksi istifadəçi adı
+Optional. TikTok's own network stack can't sign in to a proxy, so only plain Java connections use this. Leave it empty for a proxy without a password.	İstəyə bağlı. TikTok-un öz şəbəkə yığını proksiyə daxil ola bilmir, ona görə də bunu yalnız sadə Java bağlantıları istifadə edir. Parolsuz proksi üçün boş saxlayın.
+Proxy password	Proksi parolu
+Optional, used with the user name. It isn't shown, logged or put in a backup.	İstəyə bağlı, istifadəçi adı ilə istifadə olunur. Göstərilmir, jurnala yazılmır və ehtiyat nüsxəyə düşmür.
+Enter a host name or IP address, without a scheme or port	Sxem və port olmadan host adı və ya IP ünvanı daxil edin
+A port is a whole number from 1 to 65535	Port 1 ilə 65535 arasında tam ədəddir
+The proxy at %1$s asks for a password. TikTok's own network stack can't send one, so use a proxy that doesn't need one.	%1$s ünvanındakı proksi parol istəyir. TikTok-un öz şəbəkə yığını parol göndərə bilmir, ona görə də parol tələb etməyən proksi istifadə edin.
+Couldn't reach the proxy at %1$s. TikTok may not load until it's back or you turn the proxy off.	%1$s ünvanındakı proksiyə qoşulmaq alınmadı. Proksi geri qayıdana və ya siz onu söndürənə qədər TikTok yüklənməyə bilər.

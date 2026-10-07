@@ -1680,3 +1680,21 @@ TikTok's own name,Nama bawaan TikTok
 "If that name is taken, Hushfeed adds a number to the new file.","Jika nama itu sudah dipakai, Hushfeed menambahkan angka pada file baru."
 Don't start the first video,Jangan mulai video pertama
 "When you open TikTok from its icon, the first video in the feed waits for one tap before it plays. A link, a notification or a shortcut opens as usual. Takes effect the next time TikTok starts.","Saat kamu membuka TikTok dari ikonnya, video pertama di feed menunggu satu ketukan sebelum diputar. Tautan, notifikasi, atau pintasan tetap terbuka seperti biasa. Berlaku saat TikTok dimulai lagi."
+Network proxy,Proksi jaringan
+Send TikTok through a proxy,Kirim TikTok lewat proksi
+"Sends TikTok's own network stack, which carries the feed, search, comments and the rest of its API, through the proxy below. Videos and LIVE streams load through TikTok's player, which connects on its own, so they stay direct. Other apps aren't affected.","Mengirim tumpukan jaringan TikTok sendiri, yang membawa feed, pencarian, komentar, dan sisa API-nya, lewat proksi di bawah. Video dan siaran LIVE dimuat lewat pemutar TikTok, yang terhubung sendiri, jadi tetap langsung. Aplikasi lain tidak terpengaruh."
+Proxy type,Jenis proksi
+HTTP,HTTP
+SOCKS5,SOCKS5
+Proxy host,Host proksi
+"The proxy's address, like 192.168.1.20 or proxy.example.com.","Alamat proksi, seperti 192.168.1.20 atau proxy.example.com."
+Proxy port,Port proksi
+"The port the proxy listens on, like 8080 or 1080.","Port yang didengarkan proksi, seperti 8080 atau 1080."
+Proxy user name,Nama pengguna proksi
+"Optional. TikTok's own network stack can't sign in to a proxy, so only plain Java connections use this. Leave it empty for a proxy without a password.","Opsional. Tumpukan jaringan TikTok sendiri tidak bisa masuk ke proksi, jadi hanya koneksi Java biasa yang memakainya. Biarkan kosong untuk proksi tanpa kata sandi."
+Proxy password,Kata sandi proksi
+"Optional, used with the user name. It isn't shown, logged or put in a backup.","Opsional, dipakai bersama nama pengguna. Tidak ditampilkan, dicatat, atau dimasukkan ke cadangan."
+"Enter a host name or IP address, without a scheme or port","Masukkan nama host atau alamat IP, tanpa skema atau port"
+A port is a whole number from 1 to 65535,Port adalah bilangan bulat dari 1 sampai 65535
+"The proxy at %1$s asks for a password. TikTok's own network stack can't send one, so use a proxy that doesn't need one.","Proksi di %1$s meminta kata sandi. Tumpukan jaringan TikTok sendiri tidak bisa mengirimnya, jadi pakai proksi yang tidak memerlukannya."
+Couldn't reach the proxy at %1$s. TikTok may not load until it's back or you turn the proxy off.,Tidak bisa menjangkau proksi di %1$s. TikTok mungkin tidak memuat sampai proksi kembali atau kamu mematikannya.

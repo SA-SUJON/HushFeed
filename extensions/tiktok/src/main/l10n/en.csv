@@ -116,6 +116,7 @@ A long press on Comment plays the video at the hold speed instead of opening the
 A long press on Favorites plays the video at the hold speed instead of offering a new collection. It needs Long press on TikTok default and Seek from the edges off.,A long press on Favorites plays the video at the hold speed instead of offering a new collection. It needs Long press on TikTok default and Seek from the edges off.
 A long press on Share plays the video at the hold speed instead of opening the quick share row. It needs Long press on TikTok default and Seek from the edges off.,A long press on Share plays the video at the hold speed instead of opening the quick share row. It needs Long press on TikTok default and Seek from the edges off.
 A message is already on its way,A message is already on its way
+A port is a whole number from 1 to 65535,A port is a whole number from 1 to 65535
 "A screen's layout is recorded. Export the diagnostic report to send it, or tap to record another.","A screen's layout is recorded. Export the diagnostic report to send it, or tap to record another."
 "A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.","A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out."
 A tap on Home or on the For You tab while For You is showing no longer reloads it. The video you're on stays.,A tap on Home or on the For You tab while For You is showing no longer reloads it. The video you're on stays.
@@ -351,6 +352,7 @@ Couldn't open the file picker to export. Try again.,Couldn't open the file picke
 Couldn't open the file picker to import. Try again.,Couldn't open the file picker to import. Try again.
 Couldn't put back the diagnostic data. Try again.,Couldn't put back the diagnostic data. Try again.
 Couldn't put the saved videos back. Try again.,Couldn't put the saved videos back. Try again.
+Couldn't reach the proxy at %1$s. TikTok may not load until it's back or you turn the proxy off.,Couldn't reach the proxy at %1$s. TikTok may not load until it's back or you turn the proxy off.
 Couldn't read TikTok's current values (%1$s). Refresh values from the menu to try again.,Couldn't read TikTok's current values (%1$s). Refresh values from the menu to try again.
 Couldn't read that file. Choose it again.,Couldn't read that file. Choose it again.
 Couldn't read who posted this comment. Open their profile and block them there.,Couldn't read who posted this comment. Open their profile and block them there.
@@ -439,6 +441,7 @@ Enabled,Enabled
 Enter a JSON object or array.,Enter a JSON object or array.
 Enter a creator handle or id,Enter a creator handle or id
 Enter a finite number.,Enter a finite number.
+"Enter a host name or IP address, without a scheme or port","Enter a host name or IP address, without a scheme or port"
 Enter a number.,Enter a number.
 Enter a valid structured value.,Enter a valid structured value.
 Enter a valid two-letter country code,Enter a valid two-letter country code
@@ -535,6 +538,7 @@ Ghost mode,Ghost mode
 Ghost mode diagnostics,Ghost mode diagnostics
 Go to the screen now. Hushfeed records its layout in %1$d seconds.,Go to the screen now. Hushfeed records its layout in %1$d seconds.
 Got it,Got it
+HTTP,HTTP
 "Hand TikTok a blank advertising id, the same one Android gives after you reset yours, so this device can't be matched across apps by it.","Hand TikTok a blank advertising id, the same one Android gives after you reset yours, so this device can't be matched across apps by it."
 Hand-off,Hand-off
 Handle or id,Handle or id
@@ -856,6 +860,7 @@ Music disc,Music disc
 Mute feed videos,Mute feed videos
 Muted,Muted
 Nearby,Nearby
+Network proxy,Network proxy
 Never from these countries,Never from these countries
 New value,New value
 Next message: today at %1$s.,Next message: today at %1$s.
@@ -962,6 +967,8 @@ Open the story again and try once more,Open the story again and try once more
 Opens github.com in your browser,Opens github.com in your browser
 Operator code,Operator code
 Operator name,Operator name
+"Optional, used with the user name. It isn't shown, logged or put in a backup.","Optional, used with the user name. It isn't shown, logged or put in a backup."
+"Optional. TikTok's own network stack can't sign in to a proxy, so only plain Java connections use this. Leave it empty for a proxy without a password.","Optional. TikTok's own network stack can't sign in to a proxy, so only plain Java connections use this. Leave it empty for a proxy without a password."
 Original language,Original language
 Original photos,Original photos
 Original sound,Original sound
@@ -1034,6 +1041,11 @@ Profile share actions,Profile share actions
 Promotional music,Promotional music
 Proof,Proof
 Protect external pages in TikTok's browser,Protect external pages in TikTok's browser
+Proxy host,Proxy host
+Proxy password,Proxy password
+Proxy port,Proxy port
+Proxy type,Proxy type
+Proxy user name,Proxy user name
 Pulling down at the top of For You no longer reloads it.,Pulling down at the top of For You no longer reloads it.
 Put %1$s in %2$s first.,Put %1$s in %2$s first.
 Put back the settings saved before the last restore or reset.,Put back the settings saved before the last restore or reset.
@@ -1110,6 +1122,7 @@ Right away,Right away
 Right column,Right column
 Rows,Rows
 SIM country preset,SIM country preset
+SOCKS5,SOCKS5
 STEM,STEM
 Sanitize sharing links,Sanitize sharing links
 Save,Save
@@ -1197,10 +1210,12 @@ Select,Select
 Select at least one field.,Select at least one field.
 Select every tab,Select every tab
 Selected,Selected
+Send TikTok through a proxy,Send TikTok through a proxy
 Send it now,Send it now
 Send links to another app,Send links to another app
 Sending feedback,Sending feedback
 Sending the message,Sending the message
+"Sends TikTok's own network stack, which carries the feed, search, comments and the rest of its API, through the proxy below. Videos and LIVE streams load through TikTok's player, which connects on its own, so they stay direct. Other apps aren't affected.","Sends TikTok's own network stack, which carries the feed, search, comments and the rest of its API, through the proxy below. Videos and LIVE streams load through TikTok's player, which connects on its own, so they stay direct. Other apps aren't affected."
 "Sends one message a day to each person below at the time below, so your streaks keep going on days you don't open TikTok.","Sends one message a day to each person below at the time below, so your streaks keep going on days you don't open TikTok."
 Sends today's message right away. The daily one then waits for tomorrow.,Sends today's message right away. The daily one then waits for tomorrow.
 Sent to %1$d/%2$d chats. The rest still need a message.,Sent to %1$d/%2$d chats. The rest still need a message.
@@ -1434,8 +1449,11 @@ The original photos aren't available. No video was saved.,The original photos ar
 "The override couldn't be applied: %1$s. Edit the field values, or reset the override.","The override couldn't be applied: %1$s. Edit the field values, or reset the override."
 "The override doesn't say what list to return. Edit the field values, or reset the override.","The override doesn't say what list to return. Edit the field values, or reset the override."
 The partial file couldn't be removed. Delete it from the folder you chose.,The partial file couldn't be removed. Delete it from the folder you chose.
+"The port the proxy listens on, like 8080 or 1080.","The port the proxy listens on, like 8080 or 1080."
 The presets couldn't load. Open the Lab again.,The presets couldn't load. Open the Lab again.
 The profile picture couldn't be saved. Try again.,The profile picture couldn't be saved. Try again.
+"The proxy at %1$s asks for a password. TikTok's own network stack can't send one, so use a proxy that doesn't need one.","The proxy at %1$s asks for a password. TikTok's own network stack can't send one, so use a proxy that doesn't need one."
+"The proxy's address, like 192.168.1.20 or proxy.example.com.","The proxy's address, like 192.168.1.20 or proxy.example.com."
 "The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.","The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings."
 The report couldn't be saved. Try again.,The report couldn't be saved. Try again.
 The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.,The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.

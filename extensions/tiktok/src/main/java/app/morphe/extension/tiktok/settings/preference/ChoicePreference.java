@@ -22,7 +22,13 @@ public final class ChoicePreference extends ListPreference {
         setEntries(labels);
         setEntryValues(values);
         setValue(setting.savedValue());
-        setSummary("%s");
+        if (setting.rebootApp) {
+            // A choice TikTok reads only as it starts says so under the value, like every other
+            // restart-gated row. The note is translated here, so it goes past the lookup.
+            super.setSummary("%s\n" + L10n.t(context, TogglePreference.RESTART_SENTENCE));
+        } else {
+            setSummary("%s");
+        }
         // Left unset, the platform's own Cancel shows, in the phone's language rather than the
         // one the rest of the dialog is translated into.
         setNegativeButtonText(L10n.t(context, "Cancel"));
