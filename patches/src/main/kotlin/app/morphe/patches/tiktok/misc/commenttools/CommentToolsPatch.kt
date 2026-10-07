@@ -132,6 +132,7 @@ val commentToolsPatch = bytecodePatch(
         "the thumbs down on each comment into a block button that shows the block symbol, " +
         "makes links tappable, can show a poll's results before you vote and can hide pictures, polls, surveys or TikTok's suggested-search banner above comments. " +
         "Compact comment header removes the count, controls and suggestion space above the list. " +
+        "Another switch hides the photo, @ and gift buttons in the comment box. " +
         "Easier comment likes extends the heart's touch area into nearby blank space without changing row spacing. " +
         "A separate search box filters comments already loaded on the video. Tapping more under a video can open " +
         "its comments with the caption at the top, and the comment button can open them that way too. " +
@@ -202,6 +203,12 @@ val commentToolsPatch = bytecodePatch(
                     )
                 }
                 write
+            },
+            {
+                // The comment box's photo, @ and gift buttons go to Hide comment box buttons as the
+                // input's setup stores them. The bar's click listeners say which field is which.
+                val fields = commentBoxButtonFields(FakeInputViewCreatedFingerprint.method) { classDefByOrNull(it) }
+                CommentInputViewCreatedFingerprint.method.resolveCommentBoxButtons(fields)
             },
             {
                 // Tapping more under a video can open its comments with the caption at the top

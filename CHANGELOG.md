@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Comment tools has another new switch, Hide comment box buttons, off by default. It takes the photo, @ and gift buttons out of the box where you write a comment. The emoji button stays, and typing and sending don't change. It's under Hushfeed settings > Comments, and Pause Hushfeed turns it off.
+
 * **TikTok:** Comment tools has a new switch, Hide comment surveys, off by default. TikTok sometimes puts a question card in a comment list to ask what you think, and with the switch on the list is built the way it is for an account TikTok sends no survey to. It sits under Hushfeed settings > Comments, below Hide comment polls, and Pause Hushfeed turns it off.
 
 * **TikTok:** Screen time has a new switch, Open shared videos alone, off by default. A link to one video, like one a friend sends you in another app, opens just that video, and the feed won't swipe past it, so there's no next video to fall into. It swipes again once another video plays, like after a refresh or a tap on Following, or when you come back to TikTok after 10 minutes or more away. Auto-advance doesn't move on from it either. The row needs the Block author button and Feed tab navigation patches, and Pause Hushfeed turns it off.
