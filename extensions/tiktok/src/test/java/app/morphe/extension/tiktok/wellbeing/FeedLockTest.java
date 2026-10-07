@@ -281,6 +281,53 @@ public class FeedLockTest {
         }
     }
 
+    @Test public void aClearedScreenStaysCoveredAndSwipeLocked() {
+        Settings.FEED_LOCK.save(true);
+        try (var main = Robolectric.buildActivity(MainActivity.class).setup().visible()) {
+            ViewGroup root = main.get().findViewById(android.R.id.content);
+            // Clear display puts the tab bar away and leaves the tab itself visible and selected.
+            android.widget.FrameLayout bar = new android.widget.FrameLayout(main.get());
+            View home = new View(main.get());
+            bar.addView(home, new android.widget.FrameLayout.LayoutParams(96, 100));
+            root.addView(bar, new android.widget.FrameLayout.LayoutParams(300, 100,
+                    android.view.Gravity.BOTTOM));
+            home.setSelected(true);
+            seedHomeTab(home);
+            bar.setVisibility(View.GONE);
+            View pager = pagerIn(main.get());
+            Utils.setActivity(main.get());
+            report("cleared");
+            assertNotNull("the lock let go of a cleared feed", overlay());
+            assertTrue("a cleared feed swipes", FinishLastVideo.holdsSwipe(pager));
+        }
+    }
+
+    @Test public void theBottomFriendsTabsFeedIsCoveredToo() {
+        Settings.FEED_LOCK.save(true);
+        try (var main = Robolectric.buildActivity(MainActivity.class).setup().visible()) {
+            View home = standOnTheFeed(main.get());
+            ViewGroup root = main.get().findViewById(android.R.id.content);
+            View friends = new View(main.get());
+            root.addView(friends, new android.widget.FrameLayout.LayoutParams(96, 100,
+                    android.view.Gravity.BOTTOM));
+            ReflectionHelpers.setStaticField(FeedVisibility.class, "friendsTabReference",
+                    new WeakReference<>(friends));
+            View pager = pagerIn(main.get());
+            Utils.setActivity(main.get());
+            home.setSelected(false);
+            friends.setSelected(true);
+            report("friends");
+            assertNotNull("the Friends tab's feed was open", overlay());
+            assertTrue(FinishLastVideo.holdsSwipe(pager));
+            // Neither selected: Inbox or Profile, which the lock leaves alone.
+            friends.setSelected(false);
+            SessionLockOverlay.sync();
+            assertEquals(View.GONE, overlay().getVisibility());
+            ReflectionHelpers.setStaticField(FeedVisibility.class, "friendsTabReference",
+                    new WeakReference<View>(null));
+        }
+    }
+
     @Test public void withoutTheHooksItsRowLivesOnTheLockIsOff() {
         Settings.FEED_LOCK.save(true);
         assertTrue(FeedLock.isOn());

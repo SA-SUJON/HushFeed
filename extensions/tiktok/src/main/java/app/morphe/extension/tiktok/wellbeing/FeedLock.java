@@ -171,13 +171,13 @@ public final class FeedLock {
         if (!covers() || main == null) return false;
         Activity front = Utils.getVisibleActivity();
         if (front != null && front != main) return false;
-        return FeedVisibility.onRecommendationFeed(main);
+        return FeedVisibility.onFeedTab(main);
     }
 
     /** Called at the pager's touch methods, so the idle case is a couple of volatile reads. */
     static boolean holdsSwipe(Activity activity) {
         // The swipe stays off through a link's video: it opens that video, and nothing past it.
-        return isOn() && activity != null && FeedVisibility.onRecommendationFeed(activity);
+        return isOn() && activity != null && FeedVisibility.onFeedTab(activity);
     }
 
     static void resetForTests() {
