@@ -478,7 +478,7 @@ The Lab uses a compact toolbar so more gates fit on small screens. Tap the warni
 
 ## Building from source
 
-`tools/gen-release-notes.py` generates the in-app What's new text from published CHANGELOG entries starting at 0.60.0. It joins chunks at runtime so long notes and international text stay within Java's string-constant limit. Run `python -m unittest discover -s tools -p test_gen_release_notes.py` to check large notes through Java compilation and exact text round trips.
+`tools/gen-release-notes.py` generates the in-app What's new text from published CHANGELOG entries starting at 0.60.0. It joins chunks at runtime so long notes and international text stay within Java's string-constant limit. Translated notes go in `extensions/tiktok/src/main/l10n/notes/<table>.txt`, one file per settings table in the CHANGELOG's own shape. A phone whose settings are translated reads a release in its own language when that file has it, and English otherwise. The generator refuses a release that's translated for some tables but not all of them, or whose bullet count doesn't match the CHANGELOG. Run `python -m unittest discover -s tools -p test_gen_release_notes.py` to check large notes through Java compilation and exact text round trips.
 
 The full `:patches:test` command includes `:patches:nativeTest` and `:patches:documentationTest`. README and artwork edits rerun the documentation checks while unchanged APK fixture results remain reusable. An edit to the Java extension reruns only the tests that read the extension, so the fingerprint checks against the fixtures are reused. Patch source, catalog, dependency and fixture changes still rerun the affected tests. Release validation checks all three result directories.
 

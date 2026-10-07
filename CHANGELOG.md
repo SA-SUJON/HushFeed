@@ -61,6 +61,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** A photo TikTok only sends as HEIF now has a second way to become a JPEG. Samsung's image decoder turns TikTok's HEIF down, so Hushfeed reads it the way the phone's media scanner does instead, and keeps the file TikTok sent only when neither one can read it.
 
+* **TikTok:** What's new can show a release in the phone's language now (#91). The 0.68.0 and 0.67.1 notes are translated into all eight languages Hushfeed's settings come in, and older releases stay in English with a short line saying so.
+
 * **Docs:** The FAQ explains the pure black Profile and Inbox some people see without AMOLED dark theme. It comes from TikTok 47.1.4's own dark mode, and a build without that patch shows the same colors with Hushfeed paused (#69).
 
 ## 0.68.0 (2026-10-06)
