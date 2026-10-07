@@ -10,6 +10,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import android.os.Looper;
+
 import app.morphe.extension.shared.settings.PausedProcess;
 import app.morphe.extension.tiktok.SettingsContextRule;
 import app.morphe.extension.tiktok.settings.Settings;
@@ -24,6 +26,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 
 /** Block popups' Pop Suite campaigns and its LIVE bubble switch. */
@@ -40,6 +43,22 @@ public class PopupSwitchesTest {
 
     /** A config shape the hook doesn't know. */
     public static final class Unnamed {
+    }
+
+    /** Stands in for the Kotlin Function0 Pop Suite's caller hands the trigger. */
+    public static final class Callback {
+        int runs;
+        public Object invoke() {
+            runs++;
+            return null;
+        }
+    }
+
+    /** A caller's callback that throws. */
+    public static final class Throwing {
+        public Object invoke() {
+            throw new IllegalStateException("the caller's own failure");
+        }
     }
 
     @Before @After public void reset() {
@@ -88,6 +107,29 @@ public class PopupSwitchesTest {
         Campaign blank = new Campaign(null);
         assertSame(blank, PopupSwitches.campaign(blank));
         assertEquals(new ArrayList<String>(), catalog());
+    }
+
+    @Test public void aDroppedCampaignTellsItsCallerItDidNotShow() {
+        // The caller's callback is how it hears a popup was turned down, and the profile guide
+        // resets its own state there. A dropped campaign never gets the task that would run it.
+        Settings.POPUP_LABEL_PICKS.save("tns_upsell_sheet");
+        assertNull(PopupSwitches.campaign(new Campaign("tns_upsell_sheet")));
+        Callback callback = new Callback();
+        PopupSwitches.campaignDropped(callback);
+        assertEquals("it ran inside the trigger, before the caller was done", 0, callback.runs);
+        idle();
+        assertEquals(1, callback.runs);
+    }
+
+    @Test public void aCallbackThatFailsOrCannotBeCalledStaysInsideTheHook() {
+        PopupSwitches.campaignDropped(new Throwing());
+        PopupSwitches.campaignDropped(new Unnamed());
+        PopupSwitches.campaignDropped(null);
+        idle();
+    }
+
+    private static void idle() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
     }
 
     @Test public void theLiveBubbleShowsUntilTurnedOff() {

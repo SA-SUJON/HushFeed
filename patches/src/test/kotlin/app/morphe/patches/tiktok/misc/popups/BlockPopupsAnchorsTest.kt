@@ -15,12 +15,17 @@ import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethodImplementation
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
+import com.android.tools.smali.dexlib2.iface.instruction.RegisterRangeInstruction
+import com.android.tools.smali.dexlib2.immutable.ImmutableMethodParameter
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertThrows
 import org.junit.Assert.assertTrue
 import org.junit.Test
+
+private const val ACTIVITY = "Landroid/app/Activity;"
+private const val FUNCTION0 = "Lkotlin/jvm/functions/Function0;"
 
 class BlockPopupsAnchorsTest {
     private val filter = "Lx/Filter;->filterTask(Lx/Ctx;Lx/Task;Ljava/lang/String;Lx/Obs;)Z"
@@ -171,9 +176,20 @@ class BlockPopupsAnchorsTest {
         check-cast v2, Lcom/ss/android/ugc/aweme/IPopSuiteManagerService${'$'}PopupConfigObject;
     """
 
+    /** Pop Suite's trigger: this, the activity, the frequency cache and the failure callback in p3 (v11). */
+    private fun trigger(smali: String, parameters: List<String> = listOf(ACTIVITY, "Lx/FreqCache;", FUNCTION0)) =
+        MutableMethod(
+            ImmutableMethod(
+                "Lcom/ss/android/ugc/aweme/services/popsuite/PopSuiteManagerService;", "popSuiteTriggerPopupInternal",
+                parameters.map { ImmutableMethodParameter(it, null, null) }, "V",
+                AccessFlags.PUBLIC.value or AccessFlags.FINAL.value, null, null,
+                ImmutableMethodImplementation(12, emptyList(), null, null),
+            ),
+        ).apply { addInstructionsWithLabels(0, smali) }
+
     @Test
     fun `a Pop Suite campaign goes through the checklist between its cast and its null check`() {
-        val m = method(
+        val m = trigger(
             """
                 $campaignRead
                 if-nez v2, :shows
@@ -184,23 +200,54 @@ class BlockPopupsAnchorsTest {
             """,
         )
         assertEquals(3, campaignCast(m))
+        assertEquals(3, failureCallbackRegister(m))
         m.passCampaignToChecklist()
         val code = m.implementation!!.instructions.toList()
         assertEquals(
             listOf(
                 Opcode.IGET_OBJECT, Opcode.INVOKE_VIRTUAL, Opcode.MOVE_RESULT_OBJECT, Opcode.CHECK_CAST,
-                Opcode.INVOKE_STATIC_RANGE, Opcode.MOVE_RESULT_OBJECT, Opcode.CHECK_CAST,
+                Opcode.IF_EQZ, Opcode.INVOKE_STATIC_RANGE, Opcode.MOVE_RESULT_OBJECT, Opcode.CHECK_CAST,
+                Opcode.IF_NEZ, Opcode.INVOKE_STATIC_RANGE,
                 Opcode.IF_NEZ, Opcode.RETURN_VOID, Opcode.CONST_4, Opcode.RETURN_VOID,
             ),
             code.map { it.opcode },
         )
         assertEquals(
             "Lapp/morphe/extension/tiktok/popups/PopupSwitches;->campaign(Ljava/lang/Object;)Ljava/lang/Object;",
-            ((code[4] as ReferenceInstruction).reference as MethodReference).toString(),
+            ((code[5] as ReferenceInstruction).reference as MethodReference).toString(),
         )
-        for (index in 5..7) assertEquals(2, (code[index] as OneRegisterInstruction).registerA)
-        assertEquals("a campaign that comes back goes on as before", 9,
-            (code[7] as BuilderOffsetInstruction).target.location.index)
+        assertEquals(2, (code[5] as RegisterRangeInstruction).startRegister)
+        for (index in listOf(4, 6, 7, 8)) assertEquals(2, (code[index] as OneRegisterInstruction).registerA)
+        assertEquals("a campaign that was already null takes the method's own check", 10,
+            (code[4] as BuilderOffsetInstruction).target.location.index)
+        assertEquals("a campaign that comes back skips the callback", 10,
+            (code[8] as BuilderOffsetInstruction).target.location.index)
+        assertEquals(
+            "Lapp/morphe/extension/tiktok/popups/PopupSwitches;->campaignDropped(Ljava/lang/Object;)V",
+            ((code[9] as ReferenceInstruction).reference as MethodReference).toString(),
+        )
+        val callback = code[9] as RegisterRangeInstruction
+        assertEquals("the dropped campaign's callback is p3", 11, callback.startRegister)
+        assertEquals(1, callback.registerCount)
+        assertEquals("a campaign that comes back goes on as before", 12,
+            (code[10] as BuilderOffsetInstruction).target.location.index)
+    }
+
+    @Test
+    fun `a trigger without exactly one failure callback is refused`() {
+        val shape = """
+            $campaignRead
+            if-nez v2, :shows
+            return-void
+            :shows
+            return-void
+        """
+        val none = trigger(shape, listOf(ACTIVITY, "Lx/FreqCache;"))
+        assertNull(failureCallbackRegister(none))
+        assertThrows(PatchException::class.java) { none.passCampaignToChecklist() }
+        assertNull(failureCallbackRegister(trigger(shape, listOf(FUNCTION0, ACTIVITY, FUNCTION0))))
+        assertEquals("a wide parameter takes two registers", 4,
+            failureCallbackRegister(trigger(shape, listOf("J", ACTIVITY, FUNCTION0))))
     }
 
     @Test
@@ -254,6 +301,7 @@ class BlockPopupsAnchorsTest {
             val trigger = classes.flatMap { classDef -> classDef.methods.filter { PopSuiteTriggerFingerprint.takes(it, classDef) } }
             assertEquals("${apk.name}: Pop Suite trigger took ${trigger.map { it.name }}", 1, trigger.size)
             assertNotNull("${apk.name}: Pop Suite reads its campaign differently", campaignCast(trigger.single()))
+            assertEquals("${apk.name}: the failure callback's register", 3, failureCallbackRegister(trigger.single()))
             // The extension reads the campaign's name by reflection, so it has to stay a public String.
             val campaign = classes.single { it.type == "Lcom/ss/android/ugc/aweme/IPopSuiteManagerService\$PopupConfigObject;" }
             assertTrue(

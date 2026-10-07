@@ -7,8 +7,10 @@ package app.morphe.extension.tiktok.popups;
 import androidx.annotation.Nullable;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import app.morphe.extension.shared.Logger;
+import app.morphe.extension.shared.Utils;
 import app.morphe.extension.tiktok.settings.Settings;
 
 /**
@@ -19,7 +21,7 @@ import app.morphe.extension.tiktok.settings.Settings;
  * them. The campaign's name now goes through the checklist the same way a label does: recorded the
  * first time, dropped once ticked, and never recorded or dropped when it reads like a prompt the
  * account has to answer. A dropped campaign is handed back as null, which Pop Suite already treats
- * as nothing to show.
+ * as nothing to show, and its caller's failure callback runs as if the popup had been turned down.
  *
  * <p>The LIVE bubble is the one TikTok floats at the top of the feed when someone is live. It's
  * raised from LiveBubbleUtil's check, outside the popup layer altogether, and with its switch on
@@ -47,6 +49,33 @@ public final class PopupSwitches {
         } catch (Throwable failure) {
             Logger.printException(() -> "Block popups: could not read a campaign's name", failure);
             return config;
+        }
+    }
+
+    /**
+     * Injection point, right after {@link #campaign} dropped one. Pop Suite's caller hands it a
+     * callback for a popup that didn't show, and its popup task runs that when the popup layer
+     * turns the popup down. The profile guide, for one, resets its own state there. A dropped
+     * campaign never gets a task, so the callback runs here instead, posted to the main thread
+     * the way the task's report arrives, after the trigger has returned.
+     */
+    public static void campaignDropped(@Nullable Object callback) {
+        if (callback == null) return;
+        try {
+            Utils.runOnMainThread(() -> runCallback(callback));
+        } catch (Throwable failure) {
+            Logger.printException(() -> "Block popups: could not report a skipped campaign", failure);
+        }
+    }
+
+    /** Runs a Kotlin Function0 this can't name by its invoke(). */
+    static void runCallback(Object callback) {
+        try {
+            Method invoke = callback.getClass().getMethod("invoke");
+            invoke.setAccessible(true);
+            invoke.invoke(callback);
+        } catch (Throwable failure) {
+            Logger.printException(() -> "Block popups: could not report a skipped campaign", failure);
         }
     }
 

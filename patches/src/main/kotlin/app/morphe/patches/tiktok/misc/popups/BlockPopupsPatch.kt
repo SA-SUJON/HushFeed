@@ -14,7 +14,6 @@ import app.morphe.patches.tiktok.misc.extension.sharedExtensionPatch
 import app.morphe.patches.tiktok.misc.settings.SettingsStatusLoadFingerprint
 import app.morphe.patches.tiktok.misc.settings.settingsPatch
 import app.morphe.util.addInstruction
-import app.morphe.util.addInstructions
 import app.morphe.util.addInstructionsAtControlFlowLabel
 import app.morphe.util.addInstructionsWithLabels
 import app.morphe.util.getFreeRegisterProvider
@@ -37,6 +36,7 @@ private const val FILTER_TASK = "filterTask"
 private const val POPUP_SWITCHES = "Lapp/morphe/extension/tiktok/popups/PopupSwitches;"
 private const val POP_SUITE = "Lcom/ss/android/ugc/aweme/services/popsuite/PopSuiteManagerService;"
 private const val CAMPAIGN = "Lcom/ss/android/ugc/aweme/IPopSuiteManagerService\$PopupConfigObject;"
+private const val FUNCTION0 = "Lkotlin/jvm/functions/Function0;"
 
 /**
  * TikTok's popup layer runs a queue of popup tasks. The method that starts one asks a filter
@@ -153,21 +153,41 @@ internal fun campaignCast(method: Method): Int? {
 }
 
 /**
+ * The p register of the trigger's failure callback, its one Function0 parameter, or null when it
+ * takes none or more than one. Pop Suite's popup task runs it when the popup layer turns the popup
+ * down, and callers reset their own state there.
+ */
+internal fun failureCallbackRegister(method: Method): Int? {
+    val types = method.parameterTypes.map { it.toString() }
+    if (types.count { it == FUNCTION0 } != 1) return null
+    val before = types.take(types.indexOf(FUNCTION0)).sumOf { if (it == "J" || it == "D") 2 else 1 }
+    return before + if (AccessFlags.STATIC.isSet(method.accessFlags)) 0 else 1
+}
+
+/**
  * Hands the campaign to the checklist right after its cast. A ticked one comes back null, which
  * the null check below already treats as nothing to show, so Pop Suite returns before it builds
- * the sheet, queues a task or records a showing.
+ * the sheet, queues a task or records a showing. With no task the failure callback would never
+ * run, so a dropped campaign hands it to the extension, which runs it the way a turned-down popup
+ * does. A campaign that was already null takes the method's own path untouched, as before.
  */
 internal fun MutableMethod.passCampaignToChecklist() {
     val index = campaignCast(this)
         ?: throw PatchException("Block popups: Pop Suite no longer reads its campaign the way the hook expects.")
+    val callback = failureCallbackRegister(this)
+        ?: throw PatchException("Block popups: Pop Suite's trigger no longer takes one failure callback.")
     val register = (getInstruction(index) as OneRegisterInstruction).registerA
-    addInstructions(
+    addInstructionsWithLabels(
         index + 1,
         """
+            if-eqz v$register, :morphe_pop_suite_null_check
             invoke-static/range {v$register .. v$register}, $POPUP_SWITCHES->campaign(Ljava/lang/Object;)Ljava/lang/Object;
             move-result-object v$register
             check-cast v$register, $CAMPAIGN
+            if-nez v$register, :morphe_pop_suite_null_check
+            invoke-static/range {p$callback .. p$callback}, $POPUP_SWITCHES->campaignDropped(Ljava/lang/Object;)V
         """,
+        ExternalLabel("morphe_pop_suite_null_check", getInstruction(index + 1)),
     )
 }
 
