@@ -63,6 +63,8 @@ public class PauseAnswersUnpatchedTest {
             "morphe_check_environment_warnings_issued", "morphe_language", "morphe_show_menu_icons",
             "morphe_last_time_app_was_launched", "morphe_experimental_app_target_confirmed",
             "hushfeed_paused", "hushfeed_safe_mode",
+            // A timed diagnostic capture logs while paused, like the switch it stands beside.
+            "hushfeed_debug_capture",
             // Guests need their saved settings entry to resume Hushfeed after closing settings.
             "home_tab_opens_settings", "app_lock", "app_lock_timeout",
             "launcher_shortcuts_removed", "feed_navigation_observed_tabs",

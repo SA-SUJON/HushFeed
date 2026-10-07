@@ -808,7 +808,6 @@ One minute left	Осталась одна минута
 One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.	У одной из кавычек в этом списке нет пары, поэтому остаток строки читается как единая фраза. Добавьте недостающую кавычку или уберите лишнюю.
 One value per line	По одному значению в строке
 Only bottom tabs TikTok has loaded on this device are shown here. This doesn't force unavailable tabs to appear.	Здесь показаны только нижние вкладки, которые TikTok загрузил на этом устройстве. Это не заставляет появляться недоступные вкладки.
-Turn this on while you record logs for a bug report, then turn it off again. While it's on, TikTok can feel slower and may crash.	Включайте это, пока записываете логи для отчёта об ошибке, а затем выключайте снова. Пока это включено, TikTok может работать медленнее и иногда вылетать.
 Only fields the Lab can check and copy safely are shown.	Показаны только поля, которые Lab может безопасно проверить и скопировать.
 Only from these countries	Только из этих стран
 Only tabs TikTok has loaded on this device are shown here. This doesn't force unavailable tabs to appear.	Здесь показаны только вкладки, которые TikTok загрузил на этом устройстве. Это не заставляет появляться недоступные вкладки.
@@ -1808,3 +1807,9 @@ Pause	Пауза
 Posting	Публикация
 Always upload in HD	Всегда загружать в HD
 Post every video as if you'd turned on TikTok's own HD upload on the post page. A clip TikTok doesn't count as high quality posts as before.	Публиковать каждое видео так, будто вы сами включили HD-загрузку TikTok на странице публикации. Ролик, который TikTok не считает высококачественным, публикуется как раньше.
+Keeps logging until you turn it off, even after a restart. TikTok can feel slower while it's on.	Записывает, пока вы не выключите, даже после перезапуска. Пока это включено, TikTok может работать медленнее.
+Log diagnostics for 15 minutes	Записывать диагностику 15 минут
+Logs for 15 minutes, then stops on its own. Restarting TikTok doesn't move the end, and the switch above stays as you set it.	Записывает 15 минут, затем останавливается само. Перезапуск TikTok не сдвигает окончание, а переключатель выше остаётся таким, как вы его поставили.
+Logging until %1$s. Tap to stop now.	Запись до %1$s. Нажмите, чтобы остановить сейчас.
+Logging diagnostics until %1$s	Диагностика записывается до %1$s
+Timed logging stopped	Запись по таймеру остановлена

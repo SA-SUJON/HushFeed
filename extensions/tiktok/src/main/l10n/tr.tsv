@@ -777,7 +777,6 @@ One minute left	Bir dakika kaldı
 One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.	Bu listedeki tırnak işaretlerinden birinin kapanışı yok, bu yüzden satırın geri kalanı tek bir ifade olarak okunuyor. Eksik tırnağı ekle veya fazla olanı çıkar.
 One value per line	Her satıra bir değer
 Only bottom tabs TikTok has loaded on this device are shown here. This doesn't force unavailable tabs to appear.	Burada yalnızca TikTok'un bu cihazda yüklediği alt sekmeler gösterilir. Bu, kullanılamayan sekmeleri görünmeye zorlamaz.
-Turn this on while you record logs for a bug report, then turn it off again. While it's on, TikTok can feel slower and may crash.	Bunu bir sorunu bildirmek için günlük kaydederken aç, sonra yeniden kapat. Açıkken TikTok yavaşlayabilir ve çökebilir.
 Only fields the Lab can check and copy safely are shown.	Yalnızca Lab'in denetleyip güvenle kopyalayabildiği alanlar gösterilir.
 Only from these countries	Yalnızca bu ülkelerden
 Only tabs TikTok has loaded on this device are shown here. This doesn't force unavailable tabs to appear.	Burada yalnızca TikTok'un bu cihazda yüklediği sekmeler gösterilir. Bu, kullanılamayan sekmeleri görünmeye zorlamaz.
@@ -1667,3 +1666,9 @@ Pause	Duraklat
 Posting	Paylaşım
 Always upload in HD	Her zaman HD yükle
 Post every video as if you'd turned on TikTok's own HD upload on the post page. A clip TikTok doesn't count as high quality posts as before.	Her videoyu, paylaşım sayfasında TikTok'un kendi HD yüklemesini açmışsın gibi paylaş. TikTok'un yüksek kalite saymadığı bir klip eskisi gibi paylaşılır.
+Keeps logging until you turn it off, even after a restart. TikTok can feel slower while it's on.	Siz kapatana kadar, yeniden başlatmadan sonra bile günlüğe kaydetmeye devam eder. Açıkken TikTok yavaşlayabilir.
+Log diagnostics for 15 minutes	Tanılamayı 15 dakika günlüğe kaydet
+Logs for 15 minutes, then stops on its own. Restarting TikTok doesn't move the end, and the switch above stays as you set it.	15 dakika boyunca kaydeder, sonra kendiliğinden durur. TikTok'u yeniden başlatmak bitişi değiştirmez ve yukarıdaki anahtar sizin ayarladığınız gibi kalır.
+Logging until %1$s. Tap to stop now.	%1$s saatine kadar kaydediliyor. Şimdi durdurmak için dokunun.
+Logging diagnostics until %1$s	Tanılama %1$s saatine kadar kaydediliyor
+Timed logging stopped	Süreli kayıt durduruldu

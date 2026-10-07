@@ -745,7 +745,6 @@ One minute left	Queda un minuto
 One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.	Una de las comillas de esa lista no tiene con qué cerrarse, así que el resto de la línea se lee como una sola frase. Añade la comilla que falta o quita la que sobra.
 One value per line	Un valor por línea
 Only bottom tabs TikTok has loaded on this device are shown here. This doesn't force unavailable tabs to appear.	Aquí solo están las pestañas inferiores que TikTok ha cargado en este dispositivo. Esto no hace aparecer las que no están disponibles.
-Turn this on while you record logs for a bug report, then turn it off again. While it's on, TikTok can feel slower and may crash.	Actívalo mientras grabas registros para informar de un problema y luego vuelve a apagarlo. Mientras esté activado, TikTok puede ir más lento y fallar.
 Only fields the Lab can check and copy safely are shown.	Solo se muestran los campos que el Lab puede comprobar y copiar con seguridad.
 Only from these countries	Solo desde estos países
 Only tabs TikTok has loaded on this device are shown here. This doesn't force unavailable tabs to appear.	Aquí solo están las pestañas que TikTok ha cargado en este dispositivo. Esto no hace aparecer las que no están disponibles.
@@ -1667,3 +1666,9 @@ Pause	Pausar
 Posting	Publicar
 Always upload in HD	Subir siempre en HD
 Post every video as if you'd turned on TikTok's own HD upload on the post page. A clip TikTok doesn't count as high quality posts as before.	Publica cada video como si hubieras activado la subida en HD de TikTok en la página de publicación. Un clip que TikTok no considera de alta calidad se publica como antes.
+Keeps logging until you turn it off, even after a restart. TikTok can feel slower while it's on.	Sigue registrando hasta que lo apagues, incluso después de reiniciar. Mientras esté activado, TikTok puede ir más lento.
+Log diagnostics for 15 minutes	Registrar diagnósticos durante 15 minutos
+Logs for 15 minutes, then stops on its own. Restarting TikTok doesn't move the end, and the switch above stays as you set it.	Registra durante 15 minutos y luego se detiene solo. Reiniciar TikTok no cambia el final, y el interruptor de arriba se queda como lo dejaste.
+Logging until %1$s. Tap to stop now.	Registrando hasta las %1$s. Toca para detenerlo ahora.
+Logging diagnostics until %1$s	Registrando diagnósticos hasta las %1$s
+Timed logging stopped	Registro temporal detenido

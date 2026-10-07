@@ -748,7 +748,6 @@ One minute left	Noch eine Minute
 One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.	Eines der Anführungszeichen in dieser Liste wird nicht geschlossen, deshalb liest sich der Rest der Zeile als eine einzige Wendung. Ergänze das fehlende Anführungszeichen oder entferne das überzählige.
 One value per line	Ein Wert pro Zeile
 Only bottom tabs TikTok has loaded on this device are shown here. This doesn't force unavailable tabs to appear.	Hier stehen nur die unteren Tabs, die TikTok auf diesem Gerät geladen hat. Nicht verfügbare Tabs erscheinen dadurch nicht.
-Turn this on while you record logs for a bug report, then turn it off again. While it's on, TikTok can feel slower and may crash.	Schalte das ein, während du Protokolle für eine Fehlermeldung aufzeichnest, und danach wieder aus. Solange es an ist, kann TikTok träge wirken und abstürzen.
 Only fields the Lab can check and copy safely are shown.	Es werden nur Felder gezeigt, die das Lab prüfen und gefahrlos kopieren kann.
 Only from these countries	Nur aus diesen Ländern
 Only tabs TikTok has loaded on this device are shown here. This doesn't force unavailable tabs to appear.	Hier stehen nur die Tabs, die TikTok auf diesem Gerät geladen hat. Nicht verfügbare Tabs erscheinen dadurch nicht.
@@ -1670,3 +1669,9 @@ Pause	Pausieren
 Posting	Posten
 Always upload in HD	Immer in HD hochladen
 Post every video as if you'd turned on TikTok's own HD upload on the post page. A clip TikTok doesn't count as high quality posts as before.	Jedes Video so posten, als hättest du TikToks eigenen HD-Upload auf der Posting-Seite eingeschaltet. Ein Clip, den TikTok nicht als hochwertig einstuft, wird wie bisher gepostet.
+Keeps logging until you turn it off, even after a restart. TikTok can feel slower while it's on.	Protokolliert, bis du es ausschaltest, auch nach einem Neustart. Solange es an ist, kann TikTok träger wirken.
+Log diagnostics for 15 minutes	Diagnose 15 Minuten lang protokollieren
+Logs for 15 minutes, then stops on its own. Restarting TikTok doesn't move the end, and the switch above stays as you set it.	Protokolliert 15 Minuten lang und hört dann von selbst auf. Ein Neustart von TikTok verschiebt das Ende nicht, und der Schalter darüber bleibt, wie du ihn eingestellt hast.
+Logging until %1$s. Tap to stop now.	Protokolliert bis %1$s. Tippe, um jetzt aufzuhören.
+Logging diagnostics until %1$s	Diagnose wird bis %1$s protokolliert
+Timed logging stopped	Zeitlich begrenztes Protokoll beendet

@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Diagnostics has a new row, Log diagnostics for 15 minutes. Tap it before you reproduce a bug and everything is logged for a quarter hour, then logging stops by itself. The row shows when it ends and a second tap stops it early. Restarting TikTok keeps the same end, setting the phone's clock back can't stretch it, and a phone restart ends it. It never moves the Log diagnostics switch, so logging you left on stays on, and backups leave it out. The Log diagnostics switch now says plainly that it stays on until you turn it off.
+
 * **TikTok:** Block the advertising id in Device privacy guard now covers every place TikTok reads it. Two ad SDKs inside the app ask Google's ad service for the id on their own instead of going through Play Services, and they still got the real one. With the switch on they get the blank id too, and every check of whether you've opted out of ads personalization says you have, which is what Android tells apps once you delete your advertising id. Pause Hushfeed still hands TikTok the real answers.
 
 * **TikTok:** New patch, Picture-in-picture. Turn on Keep watching in a small window in Hushfeed settings > Playback, and when you leave TikTok while a video plays it keeps going over your other apps. The window has a play and pause button and takes the video's own shape. It works in the feed and on videos you open from a profile, search or a sound, and needs Android 8 or later. It's off by default.
