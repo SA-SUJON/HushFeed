@@ -819,6 +819,20 @@ val feedFilterPatch = bytecodePatch(
             """,
         )
 
+        // An empty list is the app's own "no card to ask for", so the Lemon8 promo is never
+        // requested and never arrives. Remove feed ads also drops it from the list if it came
+        // another way.
+        Lemon8CardRequestFingerprint.method.requireLocals("Feed filter", 1)
+        Lemon8CardRequestFingerprint.method.guardAtEntry(
+            "Feed filter",
+            "invoke-static {}, $CARD_FILTERS_CLASS_DESCRIPTOR->shouldSkipLemon8PromoRequest()Z",
+            """
+                new-instance v0, Ljava/util/ArrayList;
+                invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
+                return-object v0
+            """,
+        )
+
         DramaBlockingAdFingerprint.method.apply {
             // Every return, not the first one. This fingerprint does not even name its method,
             // so a build that answers false down one path and true down another would have had
