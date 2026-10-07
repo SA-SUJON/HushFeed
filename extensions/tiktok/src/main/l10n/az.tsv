@@ -1714,3 +1714,5 @@ Matches the rule: %1$s	Uyğun gələn qayda: %1$s
 Only the first %1$s characters of the sample were checked.	Nümunənin yalnız ilk %1$s simvolu yoxlandı.
 Sample caption to test	Sınamaq üçün nümunə təsvir
 Sample category to test	Sınamaq üçün nümunə kateqoriya
+Keep videos out of Watch history	Videoları Baxış tarixçəsindən kənarda saxlayın
+Stops the view report TikTok sends for each video you watch, which is how videos get into Activity center > Watch history. Your views stop adding to view counts and For You has less to learn from. Videos already there stay, and TikTok still sees likes, follows, searches and its usage logs.	TikTok-un baxdığınız hər video üçün göndərdiyi baxış hesabatını dayandırır, videolar Fəaliyyət mərkəzi > Baxış tarixçəsinə məhz belə düşür. Baxışlarınız baxış saylarına əlavə olunmur və For You-nun öyrənəcəyi az olur. Artıq orada olan videolar qalır, TikTok isə bəyənmələri, izləmələri, axtarışları və öz istifadə jurnallarını yenə görür.

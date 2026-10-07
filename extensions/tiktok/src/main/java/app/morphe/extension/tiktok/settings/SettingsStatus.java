@@ -131,6 +131,7 @@ public class SettingsStatus {
     public static boolean sanitizeShareUrlsEnabled = false;
     public static boolean contactListBlockerEnabled = false;
     public static boolean searchHistoryEnabled = false;
+    public static boolean watchHistoryEnabled = false;
     public static boolean installedAppsBlockerEnabled = false;
     public static boolean locationGovernorEnabled = false;
     public static boolean devicePrivacyGuardEnabled = false;
@@ -146,6 +147,10 @@ public class SettingsStatus {
 
     public static void enableSearchHistory() {
         searchHistoryEnabled = true;
+    }
+
+    public static void enableWatchHistory() {
+        watchHistoryEnabled = true;
     }
 
     public static void enableInstalledAppsBlocker() {

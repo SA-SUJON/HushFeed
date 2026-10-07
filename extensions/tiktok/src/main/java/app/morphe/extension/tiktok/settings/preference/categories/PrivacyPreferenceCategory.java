@@ -38,7 +38,7 @@ public final class PrivacyPreferenceCategory extends ConditionalPreferenceCatego
 
     private static boolean hasTracking() {
         return SettingsStatus.disableTelemetryEnabled || SettingsStatus.ghostModeEnabled
-                || SettingsStatus.searchHistoryEnabled;
+                || SettingsStatus.searchHistoryEnabled || SettingsStatus.watchHistoryEnabled;
     }
 
     private static boolean hasDeviceAccess() {
@@ -115,6 +115,17 @@ public final class PrivacyPreferenceCategory extends ConditionalPreferenceCatego
                             + "Searches already there stay until you delete them, and TikTok's servers "
                             + "may still keep their own record.",
                     Settings.STOP_SEARCH_HISTORY
+            ));
+        }
+        if (SettingsStatus.watchHistoryEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Keep videos out of Watch history",
+                    "Stops the view report TikTok sends for each video you watch, which is how videos get "
+                            + "into Activity center > Watch history. Your views stop adding to view counts and "
+                            + "For You has less to learn from. Videos already there stay, and TikTok still sees "
+                            + "likes, follows, searches and its usage logs.",
+                    Settings.STOP_WATCH_HISTORY
             ));
         }
 

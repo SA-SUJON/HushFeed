@@ -709,6 +709,9 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting BLOCK_MOTION_SENSORS = new BooleanSetting("block_motion_sensors", TRUE);
     // On by default for the same reason, and read at each history write, so no restart.
     public static final BooleanSetting STOP_SEARCH_HISTORY = new BooleanSetting("stop_search_history", TRUE);
+    // Off even with its patch picked, unlike the one above: people use Watch history to find a
+    // video again, and the report it holds back also counts views and feeds For You.
+    public static final BooleanSetting STOP_WATCH_HISTORY = new BooleanSetting("stop_watch_history", FALSE);
     // Off by default, unlike the blocks above: it rides on the sensor patch, so picking that
     // patch is not a choice about the benchmark (#64). Put into effect by BenchmarkRuns.
     public static final BooleanSetting STOP_BENCHMARK_RUNS = new BooleanSetting("stop_benchmark_runs", FALSE);

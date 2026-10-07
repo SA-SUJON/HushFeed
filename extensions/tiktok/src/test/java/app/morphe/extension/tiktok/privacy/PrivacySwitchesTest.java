@@ -74,12 +74,14 @@ public class PrivacySwitchesTest {
                 Settings.BLOCK_CONTACT_LIST, Settings.BLOCK_INSTALLED_APPS, Settings.BLOCK_LOCATION,
                 Settings.BLOCK_CLIPBOARD_READS, Settings.HIDE_VPN, Settings.BLOCK_ADVERTISING_ID,
                 Settings.BLOCK_MOTION_SENSORS, Settings.STOP_BENCHMARK_RUNS,
-                Settings.BLOCK_WEBVIEW_JS_INTERFACES, Settings.CAMERA_MIC_INDICATOR, Settings.STOP_SEARCH_HISTORY}) {
+                Settings.BLOCK_WEBVIEW_JS_INTERFACES, Settings.CAMERA_MIC_INDICATOR, Settings.STOP_SEARCH_HISTORY,
+                Settings.STOP_WATCH_HISTORY}) {
             setting.save(setting.defaultValue);
         }
         CameraMicIndicator.resetForTests();
         SettingsStatus.contactListBlockerEnabled = false;
         SettingsStatus.searchHistoryEnabled = false;
+        SettingsStatus.watchHistoryEnabled = false;
         SettingsStatus.installedAppsBlockerEnabled = false;
         SettingsStatus.locationGovernorEnabled = false;
         SettingsStatus.devicePrivacyGuardEnabled = false;
@@ -406,6 +408,43 @@ public class PrivacySwitchesTest {
             PausedProcess.set(false);
         }
         assertTrue("the next search after the pause is skipped again", SearchHistoryRecording.shouldSkip());
+    }
+
+    @Test public void viewReportsAreHeldBackOnlyWhileTheSwitchIsOnAndHushfeedRuns() {
+        assertEquals("picking the patch isn't enough, since people use Watch history",
+                Boolean.FALSE, Settings.STOP_WATCH_HISTORY.defaultValue);
+        SettingsStatus.watchHistoryEnabled = true;
+        assertFalse("off by default: TikTok reports the view", WatchHistoryRecording.shouldSkip());
+
+        Settings.STOP_WATCH_HISTORY.save(true);
+        assertTrue("on: both senders leave before building a report", WatchHistoryRecording.shouldSkip());
+        SettingsStatus.watchHistoryEnabled = false;
+        assertFalse("a switch saved on by a build with the patch does nothing without it",
+                WatchHistoryRecording.shouldSkip());
+
+        SettingsStatus.watchHistoryEnabled = true;
+        PausedProcess.set(true);
+        try {
+            assertFalse("paused: TikTok reports as it ships", WatchHistoryRecording.shouldSkip());
+            assertEquals("the saved choice is kept for after the pause",
+                    Boolean.TRUE, Settings.STOP_WATCH_HISTORY.savedValue());
+        } finally {
+            PausedProcess.set(false);
+        }
+        assertTrue("the next video after the pause is held back again", WatchHistoryRecording.shouldSkip());
+    }
+
+    @Test public void theWatchHistorySwitchAloneOpensThePrivacyPageUnderTracking() {
+        SettingsStatus.watchHistoryEnabled = true;
+        assertTrue(app.morphe.extension.tiktok.settings.preference.categories.PrivacyPreferenceCategory.isAvailable());
+        try (var owner = Robolectric.buildActivity(Activity.class).setup().visible()) {
+            Activity activity = owner.get();
+            Utils.setContext(activity);
+            List<String> keys = keysOn(open(activity, "PRIVACY"));
+            assertEquals(List.of(Settings.STOP_WATCH_HISTORY.key), keys.stream()
+                    .filter(key -> key.startsWith("block_") || key.startsWith("stop_") || key.equals(Settings.GHOST_MODE.key))
+                    .toList());
+        }
     }
 
     @Test public void theSearchHistorySwitchAloneOpensThePrivacyPageUnderTracking() {

@@ -1855,3 +1855,5 @@ Matches the rule: %1$s	Подходит правило: %1$s
 Only the first %1$s characters of the sample were checked.	Проверены только первые %1$s символов примера.
 Sample caption to test	Пример подписи для проверки
 Sample category to test	Пример категории для проверки
+Keep videos out of Watch history	Не добавлять видео в историю просмотров
+Stops the view report TikTok sends for each video you watch, which is how videos get into Activity center > Watch history. Your views stop adding to view counts and For You has less to learn from. Videos already there stay, and TikTok still sees likes, follows, searches and its usage logs.	Останавливает отчёт о просмотре, который TikTok отправляет для каждого просмотренного видео: именно так видео попадают в Центр активности > История просмотров. Ваши просмотры перестают добавляться к счётчикам, а у ленты «Рекомендации» становится меньше данных для обучения. Видео, которые уже там, остаются, а TikTok по-прежнему видит лайки, подписки, поиски и свои журналы использования.

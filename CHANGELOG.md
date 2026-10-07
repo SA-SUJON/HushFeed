@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** New patch, Stop recording watch history, with a Privacy switch that stays off until you turn it on. It holds back the view report TikTok sends for each video you watch, which is how videos get into Activity center > Watch history. Your views stop adding to view counts and For You has less to learn from, and TikTok still sees likes, follows, searches and its own usage logs. Videos already in Watch history stay.
+
 * **TikTok:** The Blocked caption words and Hidden LIVE categories editors in Hushfeed settings > Feed filter have a sample box now. Type a caption or a category under your rules and the editor says which rule matches it, that nothing matches, or what's wrong with a rule, before you save anything. It runs the same matching the feed uses, and it only covers these word rules, not every filter. Nothing is saved, counted or sent while you try it.
 
 * **TikTok:** Screen time has a new switch, Don't start the first video, off by default (#83). When you open TikTok from its icon the first video in the feed waits for one tap, the same catcher Don't start the feed on returning uses, with the tab bar still free. Opening TikTok from a link, a notification or a shortcut isn't held. The catcher now also leaves room for a tab bar drawn after it went up.
