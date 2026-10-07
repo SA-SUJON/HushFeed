@@ -9,6 +9,7 @@ package app.morphe.extension.tiktok.playback;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -85,6 +86,16 @@ public final class PausePlayback {
      * an activity that never left, and the reader did not go anywhere.
      */
     private static boolean wasAway;
+
+    /** The feed's activity, from install: only its resumes are the feed coming up. */
+    private static Class<?> feedClass;
+
+    /**
+     * Set at install when this process started from the launcher, and spent at the feed's first
+     * resume either way. A link, a notification or a shortcut starts TikTok for something else,
+     * and a hold in front of it would only be in the way.
+     */
+    private static boolean firstStartPending;
 
     private PausePlayback() {
     }
@@ -256,6 +267,8 @@ public final class PausePlayback {
             Application application = activity.getApplication();
             if (application == null) return;
             installed = true;
+            feedClass = activity.getClass();
+            firstStartPending = startedFromTheLauncher(activity.getIntent());
             // Called from onCreate, ahead of this activity's own start, which adds it again.
             STARTED.add(activity);
             // The activity that shows the feed. These callbacks come for every activity in the
@@ -344,6 +357,17 @@ public final class PausePlayback {
             }
             // The same for a sheet drawn into the activity, let go as the app went away.
             if (activity != null && panelActivityReference.get() == activity) syncPanel();
+            if (firstStartPending && activity != null && activity.getClass() == feedClass) {
+                firstStartPending = false;
+                // At the first resume the tab bar isn't drawn yet and the feed reads as showing.
+                // If the app opens on another tab, the catcher's watch takes it down at once.
+                if (Settings.PAUSE_FIRST_VIDEO.get() && !SessionBudget.isLocked()
+                        && FeedVisibility.isOnFeed(activity)) {
+                    quieten();
+                    waitForATap(activity);
+                    return;
+                }
+            }
             if (!wasAway) return;
             wasAway = false;
             if (!Settings.NO_RESUME_ON_FOREGROUND.get()) return;
@@ -355,6 +379,12 @@ public final class PausePlayback {
         } catch (Throwable error) {
             Logger.printException(() -> "Could not hold the feed on returning", error);
         }
+    }
+
+    /** A tap on TikTok's icon, as the launcher sends it, and nothing that came with a page to open. */
+    static boolean startedFromTheLauncher(Intent intent) {
+        return intent != null && Intent.ACTION_MAIN.equals(intent.getAction())
+                && intent.hasCategory(Intent.CATEGORY_LAUNCHER) && intent.getData() == null;
     }
 
     /**
@@ -428,13 +458,25 @@ public final class PausePlayback {
     private static void watchTheFeed(Activity activity, ViewGroup root) {
         stopWatchingTheFeed();
         feedWatcher = () -> {
-            if (catcherReference.get() == null) {
+            View catcher = catcherReference.get();
+            if (catcher == null) {
                 stopWatchingTheFeed();
                 return;
             }
             if (!app.morphe.extension.tiktok.blockauthor.FeedVisibility.isOnFeed(activity)) {
                 removeCatcher();
                 unquieten();
+                return;
+            }
+            // On a cold start the tab bar is drawn after the catcher goes up, so the room left
+            // for it is measured again until it's there.
+            if (catcher.getLayoutParams() instanceof FrameLayout.LayoutParams) {
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) catcher.getLayoutParams();
+                int clear = SessionLockOverlay.navigationHeight(activity, root);
+                if (params.bottomMargin != clear) {
+                    params.bottomMargin = clear;
+                    catcher.setLayoutParams(params);
+                }
             }
         };
         watchedRootReference = new WeakReference<>(root);
@@ -554,6 +596,8 @@ public final class PausePlayback {
         installed = false;
         STARTED.clear();
         wasAway = false;
+        feedClass = null;
+        firstStartPending = false;
         sheetReference = new WeakReference<>(null);
         MAIN.removeCallbacks(PANEL_CHECK);
         View watched = panelWatchedReference.get();

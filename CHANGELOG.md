@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Screen time has a new switch, Don't start the first video, off by default (#83). When you open TikTok from its icon the first video in the feed waits for one tap, the same catcher Don't start the feed on returning uses, with the tab bar still free. Opening TikTok from a link, a notification or a shortcut isn't held. The catcher now also leaves room for a tab bar drawn after it went up.
+
 * **TikTok:** The Video, Photo and Comment media filename editors in Hushfeed settings > Downloads now preview the template as you type it. You see the folder and file name a made-up post would get from Hushfeed's downloader and from TikTok's own, plus the sound, details and subtitle files you have on, and any {word} that isn't a token is named so a typo doesn't go unnoticed until the next save.
 
 * **TikTok:** Diagnostics has a new row, Log diagnostics for 15 minutes. Tap it before you reproduce a bug and everything is logged for a quarter hour, then logging stops by itself. The row shows when it ends and a second tap stops it early. Restarting TikTok keeps the same end, setting the phone's clock back can't stretch it, and a phone restart ends it. It never moves the Log diagnostics switch, so logging you left on stays on, and backups leave it out. The Log diagnostics switch now says plainly that it stays on until you turn it off.

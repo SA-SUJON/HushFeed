@@ -447,6 +447,12 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting NO_RESUME_ON_FOREGROUND = new BooleanSetting(
             "no_resume_on_foreground", FALSE, true);
     /**
+     * Holds the first feed video of a start from the launcher until the reader taps, once per
+     * start (#83). Off by default. A link, a notification or a shortcut opens what it was for.
+     */
+    public static final BooleanSetting PAUSE_FIRST_VIDEO = new BooleanSetting(
+            "pause_first_video", FALSE, true);
+    /**
      * Keep a paused video paused. It reads the player in the pre-pause callback, which arrived in
      * Android 10, so older versions have nothing to read it by and the row is greyed there.
      */
