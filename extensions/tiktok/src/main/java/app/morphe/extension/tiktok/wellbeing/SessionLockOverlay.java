@@ -94,8 +94,11 @@ public final class SessionLockOverlay {
                 ticking = false;
                 return;
             }
+            // A change to the feed lock that waited for the day to start over lands here, since
+            // nothing counts for a lock that has no budget behind it.
+            BudgetChanges.applyDue(SessionBudget.now());
             sync();
-            if (!SessionBudget.isLocked()) {
+            if (!wantsTick()) {
                 ticking = false;
                 return;
             }
@@ -134,6 +137,20 @@ public final class SessionLockOverlay {
     private SessionLockOverlay() {
     }
 
+    static void resetForTests() {
+        ticking = false;
+    }
+
+    /**
+     * Whether the timer has anything to do: a hold running, or the feed lock's panel in place,
+     * shown or tucked away. The lock has no countdown, but it has a panel that must come down
+     * the moment a bottom tab leaves the feed and go back up when one returns to it, and a
+     * paused video sends no progress to say so.
+     */
+    private static boolean wantsTick() {
+        return SessionBudget.isLocked() || (FeedLock.isOn() && overlayReference.get() != null);
+    }
+
     /** The app left the screen: the countdown stops on its next tick and the panel stays as it is. */
     public static void onBackground() {
         foreground = false;
@@ -142,6 +159,7 @@ public final class SessionLockOverlay {
     /** The app is back: a hold still running gets its countdown back. */
     public static void onForeground() {
         foreground = true;
+        BudgetChanges.applyDue(SessionBudget.now());
         ensureRunning();
         // A hold that ended while nothing ticked, the app away past the reset hour, left its
         // panel up with nothing to take it down: the tick needs a running hold to start, and the
@@ -163,9 +181,9 @@ public final class SessionLockOverlay {
      * the already-running case must not reach the budget's monitor at all.
      */
     public static void ensureRunning() {
-        if (ticking || !SessionBudget.isLocked()) return;
+        if (ticking || !(SessionBudget.isLocked() || FeedLock.isOn())) return;
         Utils.runOnMainThread(() -> {
-            if (ticking || !SessionBudget.isLocked()) return;
+            if (ticking || !(SessionBudget.isLocked() || FeedLock.isOn())) return;
             ticking = true;
             MAIN.post(TICK);
         });
@@ -222,6 +240,9 @@ public final class SessionLockOverlay {
                 return;
             }
             updateNavigationMargin(activity, parentOf(overlay), overlay);
+            // The lock's panel follows the tabs by this timer: no tick or progress report comes
+            // for a paused video on a tab the reader just left.
+            if (!budgetHold) ensureRunning();
             // A panel that was just built, or one coming back from the reader being away on
             // messages or search. Not every tick: a tick that asked again would be asking a
             // phone call to give the sound back once a second, for as long as the hold runs.
@@ -235,7 +256,7 @@ public final class SessionLockOverlay {
                 // A retained panel shown again after the reader was away on messages or search.
                 // From P the pane title announces the arrival each time; before it, the one
                 // announcement made at attach has already been spent.
-                overlay.announceForAccessibility(SessionBudgetNotice.spentMessage());
+                overlay.announceForAccessibility(holdTitle());
             }
             // Only as the panel goes up. Whether there is an Inbox tab changes when TikTok
             // rebuilds its tab bar, not second by second, and for a reader who has hidden Inbox
@@ -276,8 +297,15 @@ public final class SessionLockOverlay {
         boolean budgetHold = SessionBudget.isLocked();
         // The title, the countdown and the way out belong to the budget's hold. The feed lock
         // alone is a calm panel with the title and the way to messages.
-        SettingsUi.setTextIfChanged(titleReference.get(), budgetHold
-                ? SessionBudgetNotice.spentMessage() : L10n.t("The feed is locked"));
+        // Whichever reason holds the panel now: a budget hold can take over a lock's panel and
+        // give it back, and the pane title is what a screen reader announces on each arrival.
+        String titleText = holdTitle();
+        SettingsUi.setTextIfChanged(titleReference.get(), titleText);
+        View panel = overlayReference.get();
+        if (panel != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
+                && !titleText.contentEquals(String.valueOf(panel.getAccessibilityPaneTitle()))) {
+            panel.setAccessibilityPaneTitle(titleText);
+        }
         TextView countdown = remainingReference.get();
         if (countdown != null) countdown.setVisibility(budgetHold ? View.VISIBLE : View.GONE);
         boolean locked = SessionBudget.lockedToday();
@@ -286,7 +314,10 @@ public final class SessionLockOverlay {
             int left = SessionBudget.passesLeftToday();
             // Spent is the same as locked as far as this control goes: there is no way through
             // today. The hint below still says what does work, so the panel is not a dead end.
-            release.setVisibility(!budgetHold || locked || left == 0 ? View.GONE : View.VISIBLE);
+            // The pass is the budget's. While the feed lock is on it would only say the feed is open
+            // again over a panel that stays up, so it isn't offered.
+            release.setVisibility(!budgetHold || FeedLock.isOn() || locked || left == 0
+                    ? View.GONE : View.VISIBLE);
             String label = releaseLabel(left);
             // Both only when they moved: a content description is announced the same way the
             // text is, so writing it back unchanged is the same interruption.
@@ -299,7 +330,7 @@ public final class SessionLockOverlay {
         if (hint == null) return;
         // One literal, because the translation gate reads the literal handed to L10n and a
         // string built from two of them is two entries it cannot find.
-        SettingsUi.setTextIfChanged(hint, budgetHold && locked
+        SettingsUi.setTextIfChanged(hint, budgetHold && locked && !FeedLock.isOn()
                 ? L10n.f("Today's budget is locked. The feed opens again at %1$s. Messages, profiles and search still work.", resetTimeLabel())
                 : L10n.t("Messages, profiles and search still work."));
     }
@@ -349,6 +380,11 @@ public final class SessionLockOverlay {
         return L10n.f("%1$s left", clock);
     }
 
+    /** What the panel says it is for right now: the budget's message, or the feed lock's. */
+    private static String holdTitle() {
+        return SessionBudget.isLocked() ? SessionBudgetNotice.spentMessage() : L10n.t("The feed is locked");
+    }
+
     private static View attach(Activity activity) {
         View existing = overlayReference.get();
         ViewGroup root = activity.findViewById(android.R.id.content);
@@ -372,8 +408,7 @@ public final class SessionLockOverlay {
         // for anything that changes anywhere under it.
 
         TextView title = new TextView(activity);
-        String titleText = SessionBudget.isLocked()
-                ? SessionBudgetNotice.spentMessage() : L10n.t("The feed is locked");
+        String titleText = holdTitle();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             panel.setAccessibilityPaneTitle(titleText);
         }
@@ -436,7 +471,7 @@ public final class SessionLockOverlay {
             // The model refuses this on a locked day and on a day whose passes are spent.
             // Checked through its answer, so a refused tap says nothing rather than claiming
             // the feed opened.
-            if (SessionBudget.lockedToday()) return;
+            if (FeedLock.isOn() || SessionBudget.lockedToday()) return;
             if (!SessionBudget.releaseLock()) {
                 sync();
                 return;

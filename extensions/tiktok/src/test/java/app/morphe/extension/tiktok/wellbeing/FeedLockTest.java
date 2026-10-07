@@ -83,6 +83,7 @@ public class FeedLockTest {
         FeedLock.resetForTests();
         ReflectionHelpers.setStaticField(SessionPlaybackHold.class, "current", null);
         SessionBudget.resetForTests();
+        SessionLockOverlay.resetForTests();
         SessionLockOverlay.sync();
     }
 
@@ -162,6 +163,76 @@ public class FeedLockTest {
             report("from-a-message");
             assertNull("a video opened from a message was covered", overlay());
             assertFalse(FinishLastVideo.holdsSwipe(pager));
+        }
+    }
+
+    @Test public void aTabChangeAfterTheFeedWasCoveredTakesThePanelOffInboxAndBack() {
+        Settings.FEED_LOCK.save(true);
+        try (var main = Robolectric.buildActivity(MainActivity.class).setup().visible()) {
+            View home = standOnTheFeed(main.get());
+            Utils.setActivity(main.get());
+            report("a");
+            View panel = overlay();
+            assertNotNull(panel);
+            assertEquals(View.VISIBLE, panel.getVisibility());
+
+            // A tap on Inbox: nothing reports progress, as a paused video doesn't.
+            home.setSelected(false);
+            idleFor(1_500);
+            assertEquals("the panel stayed over Inbox", View.GONE, panel.getVisibility());
+
+            home.setSelected(true);
+            idleFor(1_500);
+            assertEquals("the panel didn't come back over the feed", View.VISIBLE, panel.getVisibility());
+
+            // Switched off, the timer has nothing left to do and the panel goes.
+            Settings.FEED_LOCK.save(false);
+            idleFor(1_500);
+            assertNull(overlay());
+        }
+    }
+
+    @Test public void theBudgetsPassIsNotOfferedWhileTheLockKeepsThePanelUp() {
+        Settings.FEED_LOCK.save(true);
+        Settings.SESSION_BUDGET_VIDEOS.save(1);
+        Settings.SESSION_BUDGET_LOCK_MINUTES.save(10);
+        SessionBudget.noteVideo("only");
+        assertTrue(SessionBudget.claimNotice());
+        try (var main = Robolectric.buildActivity(MainActivity.class).setup().visible()) {
+            standOnTheFeed(main.get());
+            Utils.setActivity(main.get());
+            report("a");
+            View panel = overlay();
+            assertNotNull(panel);
+            assertTrue("a pass was offered under the feed lock", texts(panel).stream().noneMatch(
+                    t -> t.getVisibility() == View.VISIBLE
+                            && t.getText().toString().startsWith("Open the feed anyway")));
+
+            Settings.FEED_LOCK.save(false);
+            SessionLockOverlay.sync();
+            assertTrue("the pass went missing without the lock", texts(overlay()).stream().anyMatch(
+                    t -> t.getVisibility() == View.VISIBLE
+                            && t.getText().toString().startsWith("Open the feed anyway")));
+        }
+    }
+
+    @Test public void thePanelIsNamedForWhicheverReasonHoldsItNow() {
+        Settings.FEED_LOCK.save(true);
+        try (var main = Robolectric.buildActivity(MainActivity.class).setup().visible()) {
+            standOnTheFeed(main.get());
+            Utils.setActivity(main.get());
+            report("a");
+            View panel = overlay();
+            assertEquals("The feed is locked", String.valueOf(panel.getAccessibilityPaneTitle()));
+
+            Settings.SESSION_BUDGET_VIDEOS.save(1);
+            Settings.SESSION_BUDGET_LOCK_MINUTES.save(10);
+            SessionBudget.noteVideo("only");
+            assertTrue(SessionBudget.claimNotice());
+            SessionLockOverlay.sync();
+            assertEquals("a budget hold kept the lock's title for a screen reader",
+                    SessionBudgetNotice.spentMessage(), String.valueOf(panel.getAccessibilityPaneTitle()));
+            assertEquals(SessionBudgetNotice.spentMessage(), texts(panel).get(0).getText().toString());
         }
     }
 
@@ -425,6 +496,10 @@ public class FeedLockTest {
         WeakReference<View> reference =
                 ReflectionHelpers.getStaticField(SessionLockOverlay.class, "overlayReference");
         return reference.get();
+    }
+
+    private static void idleFor(long ms) {
+        Shadows.shadowOf(Looper.getMainLooper()).idleFor(java.time.Duration.ofMillis(ms));
     }
 
     private static void idle() {
