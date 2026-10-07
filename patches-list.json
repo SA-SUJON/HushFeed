@@ -2767,7 +2767,7 @@
     },
     {
       "name": "Ghost mode",
-      "description": "Block hooked story, profile and typing reports. The switch shows local activity and retains a warning after a known story-reporting failure. Viewer-list privacy still needs a two-account check. Online status is unchanged. Switch and diagnostics: Hushfeed settings > Privacy.",
+      "description": "Block hooked story, profile and typing reports. The switch shows local activity and retains a warning after a known story-reporting failure. Viewer-list privacy still needs a two-account check. Online status stays visible unless you also turn on Hide online status. Switch and diagnostics: Hushfeed settings > Privacy.",
       "category": "Privacy",
       "use": false,
       "dependencies": [
