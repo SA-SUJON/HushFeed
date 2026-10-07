@@ -113,12 +113,13 @@ public class CustomOfflineVideosLimitPatchTest {
 
     @Test
     public void theStorageEstimateIsTheSizeTikTokIsToldInBytes() {
-        assertEquals(2L * 1024 * 1024, CustomOfflineVideosLimitPatch.storageBytes(1));
-        assertEquals(10_000L * 2 * 1024 * 1024, CustomOfflineVideosLimitPatch.storageBytes(10_000));
+        assertEquals(2_000_000L, CustomOfflineVideosLimitPatch.storageBytes(1));
+        assertEquals("20 GB at the most, not the 21 a 1024-based megabyte makes it",
+                20_000_000_000L, CustomOfflineVideosLimitPatch.storageBytes(10_000));
         assertEquals("clamped like the limit", CustomOfflineVideosLimitPatch.storageBytes(10_000),
                 CustomOfflineVideosLimitPatch.storageBytes(50_000));
         Settings.CUSTOM_OFFLINE_VIDEO_LIMIT.save(5000);
-        assertEquals(CustomOfflineVideosLimitPatch.getCustomOfflineVideoSizeMbOrOriginal(60) * 1024L * 1024L,
+        assertEquals(CustomOfflineVideosLimitPatch.getCustomOfflineVideoSizeMbOrOriginal(60) * 1_000_000L,
                 CustomOfflineVideosLimitPatch.storageBytes(5000));
     }
 }

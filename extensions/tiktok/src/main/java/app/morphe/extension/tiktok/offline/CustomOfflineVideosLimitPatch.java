@@ -79,9 +79,13 @@ public final class CustomOfflineVideosLimitPatch {
         return getCustomOfflineVideoLimit() * STORAGE_MB_PER_VIDEO;
     }
 
-    /** About how much room the offline list takes at {@code limit} videos, by TikTok's own reckoning. */
+    /**
+     * About how much room the offline list takes at {@code limit} videos, by TikTok's own reckoning
+     * of 2 MB a video. In decimal megabytes, the base Android's file sizes use from 8.0 on, so the
+     * row reads 20 GB at 10,000 videos rather than 21.
+     */
     public static long storageBytes(int limit) {
-        return clamp(limit) * STORAGE_MB_PER_VIDEO * 1024L * 1024L;
+        return clamp(limit) * STORAGE_MB_PER_VIDEO * 1_000_000L;
     }
 
     private static int clamp(int value) {
