@@ -89,6 +89,16 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                             + "animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.",
                     Settings.SYSTEM_FONT
             ));
+            // Its own hook, in androidx EmojiCompat rather than the font engine, but the same
+            // patch: picking Use system font brings both switches.
+            addPreference(new TogglePreference(
+                    context,
+                    "Use system emoji",
+                    "Draw every emoji with your device's emoji font. TikTok normally draws the newest "
+                            + "ones your device doesn't have yet with Google's emoji, and those may show "
+                            + "as a box or in pieces with this on.",
+                    Settings.SYSTEM_EMOJI
+            ));
         }
         if (SettingsStatus.turnOffHapticsEnabled) {
             addPreference(new TogglePreference(

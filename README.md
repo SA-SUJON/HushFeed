@@ -326,7 +326,7 @@ The eleven optional patches in the Performance group were measured on a Galaxy S
 | `Turn off haptics` | Stops the short vibrations TikTok plays on its own taps and gestures. Your keyboard and your phone's own haptics stay. Its switch starts on once you pick the patch. Switch: Hushfeed settings > App. |
 | `Turn off screen transitions` | Opens and closes TikTok's screens without their slide. Swipes inside a screen still follow your finger. Its switch starts on once you pick the patch. Switch: Hushfeed settings > App. |
 | `Use non-personalized search` | Uses TikTok's non-personalized search mode instead of its saved account choice. Switch: Hushfeed settings > App. |
-| `Use system font` | Draws TikTok's text in your device's font instead of TikTok Sans. The icons, the gift animations and the @ and # glyphs keep their own fonts. Off by default. Restart after changing. Switch: Hushfeed settings > App. |
+| `Use system font` | Draws TikTok's text in your device's font instead of TikTok Sans. The icons, the gift animations and the @ and # glyphs keep their own fonts. A second switch draws every emoji with your device's emoji font instead of filling in the newest ones with Google's. Both are off by default. Restart after changing. Switches: Hushfeed settings > App. |
 
 ## Settings tour
 
