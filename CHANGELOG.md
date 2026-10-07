@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** New patch, Picture-in-picture. Turn on Keep watching in a small window in Hushfeed settings > Playback, and when you leave TikTok while a video plays it keeps going over your other apps. The window has a play and pause button and takes the video's own shape. It works in the feed and on videos you open from a profile, search or a sound, and needs Android 8 or later. It's off by default.
+
 * **TikTok:** New patch, Keep pulled sounds. When a sound gets pulled for copyright or in your region, TikTok mutes every video that uses it. Turn on Play sounds TikTok pulled in Hushfeed settings > Playback and those videos play with their audio again, in the feed and in search. TikTok may still show the sound as unavailable. It's off by default.
 
 * **TikTok:** Region spoof has a new switch, Match region fields in requests, in Hushfeed settings > Region. Every request TikTok sends carries the region its servers last saved on your phone and your network's country code, and neither one followed the preset before. With the switch on, both do. The other region fields in a request already follow Match locale and timezone to country. It's off by default.

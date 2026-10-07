@@ -400,6 +400,11 @@ public class Settings extends BaseSettings {
      * patch. Read as each video starts, so no restart.
      */
     public static final BooleanSetting KEEP_PULLED_SOUNDS = new BooleanSetting("keep_pulled_sounds", FALSE);
+    /**
+     * Keeps the playing video going in a small window when the reader leaves TikTok; the
+     * Picture-in-picture patch. Read as the reader leaves, so no restart.
+     */
+    public static final BooleanSetting PICTURE_IN_PICTURE = new BooleanSetting("picture_in_picture", FALSE);
     public static final BooleanSetting RESUME_VIDEO_AFTER_SCROLL = new BooleanSetting(
             "resume_video_after_scroll",
             TRUE,

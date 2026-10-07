@@ -34,7 +34,7 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                 || SettingsStatus.fullScreenHoldEnabled || SettingsStatus.storyControlsEnabled
                 || SettingsStatus.liveControlsEnabled
                 || SettingsStatus.feedMuteEnabled || SettingsStatus.keepPulledSoundsEnabled
-                || SettingsStatus.backgroundPlayEnabled
+                || SettingsStatus.backgroundPlayEnabled || SettingsStatus.pictureInPictureEnabled
                 || SettingsStatus.showSeekbarEnabled || SettingsStatus.seekbarThumbnailEnabled
                 || SettingsStatus.stopVideoLoopingEnabled || SettingsStatus.resumeVideoAfterScrollEnabled
                 // The comment sheet switch is a playback switch, and on a bundle with the
@@ -124,7 +124,8 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
         // leave. The bar rows were on App and the frame rows under Quality, which they aren't.
         if (SettingsStatus.showSeekbarEnabled || SettingsStatus.seekbarThumbnailEnabled
                 || SettingsStatus.videoFitEnabled || SettingsStatus.feedMuteEnabled
-                || SettingsStatus.keepPulledSoundsEnabled || SettingsStatus.backgroundPlayEnabled) {
+                || SettingsStatus.keepPulledSoundsEnabled || SettingsStatus.backgroundPlayEnabled
+                || SettingsStatus.pictureInPictureEnabled) {
             addPreference(new SectionHeadingPreference(context, "Player"));
         }
         if (SettingsStatus.showSeekbarEnabled) {
@@ -194,6 +195,14 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                             + "to pause it. TikTok's background play switch stays on while this is "
                             + "on. Restart TikTok to apply this.",
                     Settings.BACKGROUND_PLAY));
+        }
+        if (SettingsStatus.pictureInPictureEnabled) {
+            addPreference(new TogglePreference(context, "Keep watching in a small window",
+                    "When you leave TikTok while a video plays, it keeps playing in a small window "
+                            + "over your other apps, with a button to pause it. Works in the feed and "
+                            + "on videos you open from a profile, search or a sound. Needs Android 8 "
+                            + "or later.",
+                    Settings.PICTURE_IN_PICTURE));
         }
 
         if (SettingsStatus.playbackSpeedEnabled) {

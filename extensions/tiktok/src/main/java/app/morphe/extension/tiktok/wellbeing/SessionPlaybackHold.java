@@ -248,6 +248,35 @@ public final class SessionPlaybackHold {
         return playing instanceof Boolean ? (Boolean) playing : null;
     }
 
+    /**
+     * Plays or pauses the video on screen with TikTok's own controls, for a button that toggles it
+     * the way a tap on the video does (the picture-in-picture window's). Does nothing while the
+     * daily panel, a pause switch or the app lock holds the video, since each of those hands it
+     * back itself. Main thread.
+     *
+     * @return whether TikTok's player took the command
+     */
+    public static boolean setCurrentPlaying(boolean play) {
+        if (SessionBudget.isLocked() || switchWanted || lockWanted) return false;
+        Target target = current;
+        if (target == null) return false;
+        Object controller = target.controller.get();
+        if (controller == null || !target.isCurrentCell(controller)) return false;
+        return control(Reflect.invoke(controller, "getPlayerManager"), !play);
+    }
+
+    /** The post the player of the last reported video has on screen, or null. */
+    public static Object currentPlayingAweme() {
+        Target target = current;
+        Object controller = target == null ? null : target.controller.get();
+        if (controller == null) return null;
+        try {
+            return currentAweme(controller);
+        } catch (RuntimeException notAController) {
+            return null;
+        }
+    }
+
     /** Runs on each visible hold sync, not only when the panel is first attached. */
     static void pauseIfPlaying() {
         Target target = current;

@@ -68,6 +68,7 @@ public class SettingsStatus {
     public static boolean storyControlsEnabled = false;
     public static boolean liveControlsEnabled = false;
     public static boolean keepPulledSoundsEnabled = false;
+    public static boolean pictureInPictureEnabled = false;
     public static boolean resumeVideoAfterScrollEnabled = false;
     public static boolean externalBrowserEnabled = false;
     public static boolean alwaysShowPublishDateEnabled = false;
@@ -280,6 +281,10 @@ public class SettingsStatus {
 
     public static void enableKeepPulledSounds() {
         keepPulledSoundsEnabled = true;
+    }
+
+    public static void enablePictureInPicture() {
+        pictureInPictureEnabled = true;
     }
 
     public static void enableFullScreenHold() {
