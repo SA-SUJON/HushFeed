@@ -29,7 +29,6 @@ import app.morphe.patches.tiktok.misc.settings.isSettingsComposeRowsMethod
 import app.morphe.patches.tiktok.misc.optimizer.backendBuilderCall
 import app.morphe.patches.tiktok.misc.optimizer.cachingStrategyRead
 import app.morphe.patches.tiktok.misc.optimizer.framePreparerGateIndex
-import app.morphe.takes
 import app.morphe.patches.tiktok.interaction.exactcounts.COMPACT_COUNT_FORMATTERS
 import app.morphe.patches.tiktok.interaction.exactcounts.COUNT_FORMATTERS
 import app.morphe.patches.tiktok.interaction.exactcounts.CompactCountFormatterFingerprint
@@ -60,7 +59,6 @@ import app.morphe.patches.tiktok.misc.comment.REPOST_NOTE_INPUTS
 import app.morphe.patches.tiktok.misc.comment.bioLimitConstants
 import app.morphe.patches.tiktok.misc.comment.lengthFilterConstructions
 import app.morphe.patches.tiktok.misc.comment.repostNoteInputFingerprints
-import app.morphe.takes
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
