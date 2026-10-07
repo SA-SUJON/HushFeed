@@ -77,6 +77,9 @@ final class Mp4Tags {
                     return false;
                 }
                 if (size > length - position) return false;
+                // A fragmented file can carry absolute offsets in its fragments and random-access
+                // index that the chunk offset shift below never sees, so it's saved untagged.
+                if (type == fourCc("moof") || type == fourCc("mfra")) return false;
                 if (type == fourCc("moov")) {
                     if (moovStart >= 0) return false;
                     moovStart = position;

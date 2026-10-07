@@ -119,6 +119,17 @@ public class Mp4TagsTest {
         assertFalse("cut off", Mp4Tags.write(source, target, tags()));
     }
 
+    @Test public void aFragmentedFileIsLeftAlone() throws Exception {
+        byte[] whole = streaming(false, null);
+        write(whole);
+        assertTrue("the same file unfragmented", Mp4Tags.write(source, target, tags()));
+        byte[] fragment = concat(box("moof", box("mfhd", new byte[8])), box("mdat", PAYLOAD));
+        write(concat(whole, fragment));
+        assertFalse("a movie fragment", Mp4Tags.write(source, target, tags()));
+        write(concat(whole, box("mfra", box("mfro", new byte[8]))));
+        assertFalse("a fragment index", Mp4Tags.write(source, target, tags()));
+    }
+
     @Test public void noTagsMeansNoRewrite() throws Exception {
         write(streaming(false, null));
         assertFalse(Mp4Tags.write(source, target, new LinkedHashMap<>()));
