@@ -1762,3 +1762,7 @@ That file lists more than %1$s videos. Nothing was restored.	Die Datei enthält 
 That isn't a seen-history file saved by Hushfeed. For TikTok's own data export, use Import watch history.	Das ist keine von Hushfeed gesicherte Verlaufsdatei. Für TikToks eigenen Datenexport nimm Wiedergabeverlauf importieren.
 That file was saved by a newer Hushfeed. Update Hushfeed, then try again.	Die Datei stammt von einer neueren Hushfeed-Version. Aktualisiere Hushfeed und versuch es dann noch einmal.
 That seen-history file is damaged or was edited. Nothing was restored.	Die Verlaufsdatei ist beschädigt oder wurde bearbeitet. Es wurde nichts wiederhergestellt.
+Turn off haptics	Haptisches Feedback ausschalten
+Stop the short vibrations TikTok plays on its own taps and gestures. Your keyboard and your phone's own haptics stay as they are.	Stoppt die kurzen Vibrationen, die TikTok bei seinen eigenen Tippern und Gesten abspielt. Deine Tastatur und die eigene Haptik deines Handys bleiben, wie sie sind.
+Turn off screen transitions	Bildschirmübergänge ausschalten
+Open and close TikTok's screens without their slide. Swipes inside a screen still follow your finger.	Öffnet und schließt TikToks Bildschirme ohne ihre Schiebeanimation. Wischgesten innerhalb eines Bildschirms folgen weiter deinem Finger.

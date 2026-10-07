@@ -1759,3 +1759,7 @@ That file lists more than %1$s videos. Nothing was restored.	Bu dosyada %1$s vid
 That isn't a seen-history file saved by Hushfeed. For TikTok's own data export, use Import watch history.	Bu, Hushfeed'in kaydettiği bir geçmiş dosyası değil. TikTok'un kendi veri dışa aktarımı için İzleme geçmişini içe aktar'ı kullanın.
 That file was saved by a newer Hushfeed. Update Hushfeed, then try again.	Bu dosya Hushfeed'in daha yeni bir sürümüyle kaydedilmiş. Hushfeed'i güncelleyip tekrar deneyin.
 That seen-history file is damaged or was edited. Nothing was restored.	Bu geçmiş dosyası bozuk ya da düzenlenmiş. Hiçbir şey geri yüklenmedi.
+Turn off haptics	Dokunsal titreşimi kapat
+Stop the short vibrations TikTok plays on its own taps and gestures. Your keyboard and your phone's own haptics stay as they are.	TikTok'un kendi dokunuşlarında ve hareketlerinde çaldığı kısa titreşimleri durdurur. Klavyen ve telefonunun kendi dokunsal titreşimleri olduğu gibi kalır.
+Turn off screen transitions	Ekran geçişlerini kapat
+Open and close TikTok's screens without their slide. Swipes inside a screen still follow your finger.	TikTok ekranlarını kaydırma animasyonu olmadan açar ve kapatır. Bir ekranın içindeki kaydırmalar parmağını izlemeye devam eder.

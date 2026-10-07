@@ -76,6 +76,8 @@ public class SettingsStatus {
     public static boolean externalBrowserEnabled = false;
     public static boolean alwaysShowPublishDateEnabled = false;
     public static boolean systemFontEnabled = false;
+    public static boolean turnOffHapticsEnabled = false;
+    public static boolean screenTransitionsEnabled = false;
     public static boolean diagnosticsEnabled = false;
     public static boolean blockAuthorEnabled = false;
     public static boolean authorRegionEnabled = false;
@@ -317,6 +319,14 @@ public class SettingsStatus {
 
     public static void enableSystemFont() {
         systemFontEnabled = true;
+    }
+
+    public static void enableTurnOffHaptics() {
+        turnOffHapticsEnabled = true;
+    }
+
+    public static void enableScreenTransitions() {
+        screenTransitionsEnabled = true;
     }
 
     public static void enableAlwaysShowPublishDate() {

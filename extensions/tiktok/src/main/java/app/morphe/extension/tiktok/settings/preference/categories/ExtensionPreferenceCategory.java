@@ -43,6 +43,8 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
     public static boolean isAvailable() {
         return SettingsStatus.foldableSplitViewEnabled
                 || SettingsStatus.systemFontEnabled
+                || SettingsStatus.turnOffHapticsEnabled
+                || SettingsStatus.screenTransitionsEnabled
                 || SettingsStatus.nonPersonalizedSearchEnabled
                 || SettingsStatus.liveSearchEnabled
                 || SettingsStatus.hideSearchSuggestionsEnabled
@@ -75,14 +77,35 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     "Split comment minimum width", "Window width needed to enable the layout. Restart TikTok to apply this.",
                     Settings.FOLDABLE_SPLIT_VIEW_MIN_WIDTH_DP, "%1$s dp", "%1$s dp"));
         }
-        if (SettingsStatus.systemFontEnabled) {
+        if (SettingsStatus.systemFontEnabled || SettingsStatus.turnOffHapticsEnabled
+                || SettingsStatus.screenTransitionsEnabled) {
             addPreference(new SectionHeadingPreference(context, "Appearance"));
+        }
+        if (SettingsStatus.systemFontEnabled) {
             addPreference(new TogglePreference(
                     context,
                     "Use system font",
                     "Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift "
                             + "animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.",
                     Settings.SYSTEM_FONT
+            ));
+        }
+        if (SettingsStatus.turnOffHapticsEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Turn off haptics",
+                    "Stop the short vibrations TikTok plays on its own taps and gestures. Your "
+                            + "keyboard and your phone's own haptics stay as they are.",
+                    Settings.TURN_OFF_HAPTICS
+            ));
+        }
+        if (SettingsStatus.screenTransitionsEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Turn off screen transitions",
+                    "Open and close TikTok's screens without their slide. Swipes inside a screen "
+                            + "still follow your finger.",
+                    Settings.TURN_OFF_SCREEN_TRANSITIONS
             ));
         }
         boolean hasSearch = SettingsStatus.nonPersonalizedSearchEnabled || SettingsStatus.liveSearchEnabled
