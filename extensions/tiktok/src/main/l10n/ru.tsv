@@ -1560,8 +1560,8 @@ Couldn't save the change. Try again.	Не удалось сохранить из
 Off. TikTok can report views and typing.	Выкл. TikTok может сообщать о просмотрах и наборе текста.
 Hushfeed is paused. Ghost mode isn't active.	Hushfeed на паузе. Режим призрака не активен.
 Problem detected. Story views may still be reported. Check Ghost mode diagnostics. The warning stays until TikTok restarts.	Обнаружена проблема. Просмотры историй всё ещё могут отправляться. Проверьте диагностику режима призрака. Предупреждение остаётся до перезапуска TikTok.
-Reporting calls were blocked here. Viewer-list privacy hasn't been verified. Online status is unchanged.	Вызовы отправки отчётов здесь заблокированы. Скрытие в списке зрителей не проверено. Статус «в сети» не меняется.
-On. No reporting call has been observed in this process. Online status is unchanged.	Вкл. В этом процессе не зафиксировано ни одного вызова отправки отчётов. Статус «в сети» не меняется.
+Reporting calls were blocked here. Viewer-list privacy hasn't been verified.	Вызовы отправки отчётов здесь заблокированы. Скрытие в списке зрителей не проверено.
+On. No reporting call has been observed in this process.	Вкл. В этом процессе не зафиксировано ни одного вызова отправки отчётов.
 Ghost mode diagnostics	Диагностика режима призрака
 The partial file couldn't be removed. Delete it from the folder you chose.	Не удалось удалить неполный файл. Удалите его из выбранной папки.
 The backup didn't start and its partial file couldn't be removed. Delete it from the folder you chose.	Резервное копирование не началось, и не удалось удалить его неполный файл. Удалите его из выбранной папки.
@@ -1786,3 +1786,5 @@ Hide sticker suggestions	Скрывать подсказки стикеров
 The sticker suggestion banner stops showing in a chat. Your own stickers are still in the sticker picker.	Баннер с подсказками стикеров больше не показывается в чате. Ваши стикеры остаются в выборе стикеров.
 Hide suggested replies	Скрывать предложенные ответы
 TikTok's suggested reply cells and their intro banner stop showing in a chat. Messages you type or receive are untouched.	Предложенные ответы TikTok и баннер, который их представляет, больше не показываются в чате. Сообщения, которые вы пишете или получаете, не затрагиваются.
+Hide online status	Скрыть статус «в сети»
+Stop sending TikTok's activity reports, so friends don't see a green dot or Active now while you're in the app. It works only while Ghost mode is on. The same report brings back your friends' status, so theirs may stop updating for you while it's on. Your last status can stay visible for a while.	Останавливает отправку отчётов об активности TikTok, чтобы друзья не видели зелёную точку или «Сейчас в сети», пока вы в приложении. Работает только при включённом режиме призрака. Тот же отчёт возвращает статусы ваших друзей, поэтому, пока это включено, их статус у вас может перестать обновляться. Ваш последний статус может ещё какое-то время оставаться видимым.

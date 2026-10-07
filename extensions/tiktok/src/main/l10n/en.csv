@@ -579,6 +579,7 @@ Hide message streaks,Hide message streaks
 Hide mini dramas,Hide mini dramas
 Hide new follower notifications,Hide new follower notifications
 Hide new followers,Hide new followers
+Hide online status,Hide online status
 Hide paid partnerships,Hide paid partnerships
 Hide people and options by name,Hide people and options by name
 Hide photo posts,Hide photo posts
@@ -907,7 +908,7 @@ On,On
 On mobile data,On mobile data
 On or off,On or off
 "On the Friends tab, hide posts, reposts and LIVEs from accounts that aren't a mutual follow, suggested accounts included. Your own posts stay.","On the Friends tab, hide posts, reposts and LIVEs from accounts that aren't a mutual follow, suggested accounts included. Your own posts stay."
-On. No reporting call has been observed in this process. Online status is unchanged.,On. No reporting call has been observed in this process. Online status is unchanged.
+On. No reporting call has been observed in this process.,On. No reporting call has been observed in this process.
 On. Restore puts back the feed setup you had before.,On. Restore puts back the feed setup you had before.
 "Once today's budget runs out, the hold stays and can't be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.","Once today's budget runs out, the hold stays and can't be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out."
 One area was checked and everything it needs is here.,One area was checked and everything it needs is here.
@@ -1040,7 +1041,7 @@ Removed %1$s,Removed %1$s
 Replace values when TikTok asks for them,Replace values when TikTok asks for them
 Replay a story from the start when it ends instead of moving to the next one. Tap or swipe to move on.,Replay a story from the start when it ends instead of moving to the next one. Tap or swipe to move on.
 Report saved to %1$s,Report saved to %1$s
-Reporting calls were blocked here. Viewer-list privacy hasn't been verified. Online status is unchanged.,Reporting calls were blocked here. Viewer-list privacy hasn't been verified. Online status is unchanged.
+Reporting calls were blocked here. Viewer-list privacy hasn't been verified.,Reporting calls were blocked here. Viewer-list privacy hasn't been verified.
 Repost with a comment,Repost with a comment
 Required,Required
 Researched,Researched
@@ -1281,6 +1282,7 @@ Stop a long press on Share from opening TikTok's quick share action.,Stop a long
 Stop analytics and tracking,Stop analytics and tracking
 Stop feature gate recording,Stop feature gate recording
 Stop search results playing on their own,Stop search results playing on their own
+"Stop sending TikTok's activity reports, so friends don't see a green dot or Active now while you're in the app. It works only while Ghost mode is on. The same report brings back your friends' status, so theirs may stop updating for you while it's on. Your last status can stay visible for a while.","Stop sending TikTok's activity reports, so friends don't see a green dot or Active now while you're in the app. It works only while Ghost mode is on. The same report brings back your friends' status, so theirs may stop updating for you while it's on. Your last status can stay visible for a while."
 Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.,Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.
 Stop the bubble that asks you to share a video with friends after you like it.,Stop the bubble that asks you to share a video with friends after you like it.
 "Stop the notifications TikTok sends about popular videos it picked for you. Messages, comments, likes, follows and videos from accounts you follow still come through.","Stop the notifications TikTok sends about popular videos it picked for you. Messages, comments, likes, follows and videos from accounts you follow still come through."

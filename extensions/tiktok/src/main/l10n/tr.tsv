@@ -1422,8 +1422,8 @@ Couldn't save the change. Try again.	Değişiklik kaydedilemedi. Tekrar dene.
 Off. TikTok can report views and typing.	Kapalı. TikTok görüntülemeleri ve yazıyor durumunu bildirebilir.
 Hushfeed is paused. Ghost mode isn't active.	Hushfeed duraklatıldı. Hayalet modu etkin değil.
 Problem detected. Story views may still be reported. Check Ghost mode diagnostics. The warning stays until TikTok restarts.	Sorun algılandı. Hikâye görüntülemeleri yine de bildirilebilir. Hayalet modu tanılamasına bak. Uyarı, TikTok yeniden başlatılana kadar kalır.
-Reporting calls were blocked here. Viewer-list privacy hasn't been verified. Online status is unchanged.	Bildirim çağrıları burada engellendi. İzleyici listesindeki gizlilik doğrulanmadı. Çevrimiçi durumu değişmez.
-On. No reporting call has been observed in this process. Online status is unchanged.	Açık. Bu işlemde henüz bir bildirim çağrısı gözlenmedi. Çevrimiçi durumu değişmez.
+Reporting calls were blocked here. Viewer-list privacy hasn't been verified.	Bildirim çağrıları burada engellendi. İzleyici listesindeki gizlilik doğrulanmadı.
+On. No reporting call has been observed in this process.	Açık. Bu işlemde henüz bir bildirim çağrısı gözlenmedi.
 Ghost mode diagnostics	Hayalet modu tanılaması
 The partial file couldn't be removed. Delete it from the folder you chose.	Eksik dosya kaldırılamadı. Seçtiğin klasörden sil.
 The backup didn't start and its partial file couldn't be removed. Delete it from the folder you chose.	Yedekleme başlamadı ve eksik dosyası kaldırılamadı. Seçtiğin klasörden sil.
@@ -1645,3 +1645,5 @@ Hide sticker suggestions	Çıkartma önerilerini gizle
 The sticker suggestion banner stops showing in a chat. Your own stickers are still in the sticker picker.	Çıkartma önerisi bannerı sohbette artık gösterilmez. Kendi çıkartmaların çıkartma seçicide durur.
 Hide suggested replies	Önerilen yanıtları gizle
 TikTok's suggested reply cells and their intro banner stop showing in a chat. Messages you type or receive are untouched.	TikTok'un önerdiği yanıtlar ve bunları tanıtan banner sohbette artık gösterilmez. Yazdığın veya aldığın mesajlara dokunulmaz.
+Hide online status	Çevrimiçi durumunu gizle
+Stop sending TikTok's activity reports, so friends don't see a green dot or Active now while you're in the app. It works only while Ghost mode is on. The same report brings back your friends' status, so theirs may stop updating for you while it's on. Your last status can stay visible for a while.	TikTok'un etkinlik raporlarını göndermeyi durdurur, böylece uygulamadayken arkadaşların yeşil nokta ya da Şu an etkin görmez. Yalnızca Hayalet modu açıkken çalışır. Aynı rapor arkadaşlarının durumunu da getirir, bu yüzden bu açıkken onların durumu sende güncellenmeyebilir. Son durumun bir süre görünür kalabilir.

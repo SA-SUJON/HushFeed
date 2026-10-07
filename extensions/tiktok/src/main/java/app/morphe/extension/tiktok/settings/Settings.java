@@ -647,6 +647,10 @@ public class Settings extends BaseSettings {
 
     // Privacy.
     public static final BooleanSetting GHOST_MODE = new BooleanSetting("ghost_mode", FALSE);
+    // Stops the client's own activity status report. Off by default, and only meaningful while
+    // Ghost mode is on, so it sits under that switch.
+    public static final BooleanSetting GHOST_HIDE_ONLINE_STATUS =
+            new BooleanSetting("ghost_hide_online_status", FALSE, false, Setting.parent(GHOST_MODE));
     public static final BooleanSetting DISABLE_ANALYTICS = new BooleanSetting("disable_analytics", FALSE);
     // One switch per device-access patch, on by default: the patch was chosen to block, so it
     // blocks until the reader says otherwise. Each is read at the intercepted call, so none

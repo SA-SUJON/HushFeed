@@ -1422,8 +1422,8 @@ Couldn't save the change. Try again.	Non è stato possibile salvare la modifica.
 Off. TikTok can report views and typing.	Disattivato. TikTok può segnalare le visualizzazioni e l'attività di digitazione.
 Hushfeed is paused. Ghost mode isn't active.	Hushfeed è in pausa. La modalità fantasma non è attiva.
 Problem detected. Story views may still be reported. Check Ghost mode diagnostics. The warning stays until TikTok restarts.	Problema rilevato. Le visualizzazioni delle storie potrebbero continuare a essere segnalate. Controlla la diagnostica della modalità fantasma. L'avviso resta finché TikTok non viene riavviato.
-Reporting calls were blocked here. Viewer-list privacy hasn't been verified. Online status is unchanged.	Le chiamate di segnalazione sono state bloccate qui. La privacy della lista spettatori non è stata verificata. Lo stato online resta invariato.
-On. No reporting call has been observed in this process. Online status is unchanged.	Attivo. In questo processo non è stata osservata nessuna chiamata di segnalazione. Lo stato online resta invariato.
+Reporting calls were blocked here. Viewer-list privacy hasn't been verified.	Le chiamate di segnalazione sono state bloccate qui. La privacy della lista spettatori non è stata verificata.
+On. No reporting call has been observed in this process.	Attivo. In questo processo non è stata osservata nessuna chiamata di segnalazione.
 Ghost mode diagnostics	Diagnostica della modalità fantasma
 The partial file couldn't be removed. Delete it from the folder you chose.	Non è stato possibile rimuovere il file parziale. Eliminalo dalla cartella che hai scelto.
 The backup didn't start and its partial file couldn't be removed. Delete it from the folder you chose.	Il backup non è stato avviato e non è stato possibile rimuovere il suo file parziale. Eliminalo dalla cartella che hai scelto.
@@ -1645,3 +1645,5 @@ Hide sticker suggestions	Nascondi i suggerimenti di sticker
 The sticker suggestion banner stops showing in a chat. Your own stickers are still in the sticker picker.	Il banner dei suggerimenti di sticker non compare più in una chat. I tuoi sticker restano nel selettore degli sticker.
 Hide suggested replies	Nascondi le risposte suggerite
 TikTok's suggested reply cells and their intro banner stop showing in a chat. Messages you type or receive are untouched.	Le risposte suggerite di TikTok e il banner che le presenta non compaiono più in una chat. I messaggi che scrivi o ricevi non vengono toccati.
+Hide online status	Nascondi lo stato online
+Stop sending TikTok's activity reports, so friends don't see a green dot or Active now while you're in the app. It works only while Ghost mode is on. The same report brings back your friends' status, so theirs may stop updating for you while it's on. Your last status can stay visible for a while.	Blocca l'invio dei rapporti di attività di TikTok, così gli amici non vedono un punto verde o Attivo ora mentre sei nell'app. Funziona solo con la Modalità fantasma attiva. Lo stesso rapporto riporta anche lo stato dei tuoi amici, quindi il loro potrebbe smettere di aggiornarsi per te finché è attivo. Il tuo ultimo stato può restare visibile per un po'.

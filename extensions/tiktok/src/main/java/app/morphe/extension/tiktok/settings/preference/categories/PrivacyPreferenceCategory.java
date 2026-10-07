@@ -92,6 +92,16 @@ public final class PrivacyPreferenceCategory extends ConditionalPreferenceCatego
         }
         if (SettingsStatus.ghostModeEnabled) {
             addPreference(new GhostModePreference(context));
+            addPreference(new TogglePreference(
+                    context,
+                    "Hide online status",
+                    "Stop sending TikTok's activity reports, so friends don't see a green dot or "
+                            + "Active now while you're in the app. It works only while Ghost mode is "
+                            + "on. The same report brings back your friends' status, so theirs may "
+                            + "stop updating for you while it's on. Your last status can stay "
+                            + "visible for a while.",
+                    Settings.GHOST_HIDE_ONLINE_STATUS
+            ));
             HookStatusPreference diagnostics = new HookStatusPreference(context);
             diagnostics.setKey("action_ghost_mode_diagnostics");
             diagnostics.setTitle(L10n.t(context, "Ghost mode diagnostics"));
