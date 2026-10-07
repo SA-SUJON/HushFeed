@@ -1845,3 +1845,13 @@ Enter a host name or IP address, without a scheme or port	Введите имя 
 A port is a whole number from 1 to 65535	Порт должен быть целым числом от 1 до 65535
 The proxy at %1$s asks for a password. TikTok's own network stack can't send one, so use a proxy that doesn't need one.	Прокси %1$s запрашивает пароль. Собственный сетевой стек TikTok не может его отправить, поэтому используйте прокси без пароля.
 Couldn't reach the proxy at %1$s. TikTok may not load until it's back or you turn the proxy off.	Не удалось подключиться к прокси %1$s. TikTok может не загружаться, пока прокси не заработает или пока вы его не выключите.
+Word rules only, not every feed filter:	Только правила для слов, а не все фильтры ленты:
+This list is too long to preview here. Saving still follows the usual limit.	Этот список слишком длинный для предпросмотра. При сохранении действует обычный лимит.
+Can't check yet: %1$s	Пока нельзя проверить: %1$s
+No rules yet, so nothing would match.	Правил пока нет, поэтому ничего не совпадёт.
+Type some sample text to see whether these rules match it.	Введите пример текста, чтобы увидеть, подходят ли ему эти правила.
+No rule matches this text.	Ни одно правило не подходит к этому тексту.
+Matches the rule: %1$s	Подходит правило: %1$s
+Only the first %1$s characters of the sample were checked.	Проверены только первые %1$s символов примера.
+Sample caption to test	Пример подписи для проверки
+Sample category to test	Пример категории для проверки

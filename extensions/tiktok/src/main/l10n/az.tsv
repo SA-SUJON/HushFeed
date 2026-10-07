@@ -1704,3 +1704,13 @@ Enter a host name or IP address, without a scheme or port	Sxem və port olmadan 
 A port is a whole number from 1 to 65535	Port 1 ilə 65535 arasında tam ədəddir
 The proxy at %1$s asks for a password. TikTok's own network stack can't send one, so use a proxy that doesn't need one.	%1$s ünvanındakı proksi parol istəyir. TikTok-un öz şəbəkə yığını parol göndərə bilmir, ona görə də parol tələb etməyən proksi istifadə edin.
 Couldn't reach the proxy at %1$s. TikTok may not load until it's back or you turn the proxy off.	%1$s ünvanındakı proksiyə qoşulmaq alınmadı. Proksi geri qayıdana və ya siz onu söndürənə qədər TikTok yüklənməyə bilər.
+Word rules only, not every feed filter:	Yalnız söz qaydaları, lentdəki bütün filtrlər deyil:
+This list is too long to preview here. Saving still follows the usual limit.	Bu siyahı burada önbaxış üçün çox uzundur. Saxlayanda adi limit keçərli qalır.
+Can't check yet: %1$s	Hələ yoxlamaq olmur: %1$s
+No rules yet, so nothing would match.	Hələ qayda yoxdur, ona görə heç nə uyğun gəlməz.
+Type some sample text to see whether these rules match it.	Bu qaydaların uyğun gəlib-gəlmədiyini görmək üçün nümunə mətn yazın.
+No rule matches this text.	Heç bir qayda bu mətnə uyğun gəlmir.
+Matches the rule: %1$s	Uyğun gələn qayda: %1$s
+Only the first %1$s characters of the sample were checked.	Nümunənin yalnız ilk %1$s simvolu yoxlandı.
+Sample caption to test	Sınamaq üçün nümunə təsvir
+Sample category to test	Sınamaq üçün nümunə kateqoriya

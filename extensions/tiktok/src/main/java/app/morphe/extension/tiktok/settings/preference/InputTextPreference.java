@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
@@ -72,6 +73,21 @@ public class InputTextPreference extends EditTextPreference {
 
     @Nullable
     private Preview preview;
+
+    /**
+     * Like {@link Preview}, with a second box under the field for sample text. Answers from the
+     * typed value and the sample together, so the field can be tried on a caption before it is
+     * saved. The sample is never saved and never leaves the dialog.
+     */
+    public interface SamplePreview {
+        @Nullable
+        String text(String typed, String sample);
+    }
+
+    @Nullable
+    private SamplePreview samplePreview;
+    private String sampleHint = "";
+    private int sampleMaxChars = 4_000;
 
     /** The editor is the same view every time the dialog opens, so its one watcher is kept. */
     @Nullable
@@ -169,6 +185,20 @@ public class InputTextPreference extends EditTextPreference {
 
     public InputTextPreference withPreview(Preview preview) {
         this.preview = preview;
+        return this;
+    }
+
+    /**
+     * Adds a sample box under the field and a result line that follows both. The result is a
+     * live region, so a screen reader hears it change as either box is typed in.
+     *
+     * @param hint     what the sample box is for, shown and spoken as its name
+     * @param maxChars the most the sample box takes
+     */
+    public InputTextPreference withSamplePreview(String hint, int maxChars, SamplePreview preview) {
+        this.sampleHint = hint;
+        this.sampleMaxChars = maxChars;
+        this.samplePreview = preview;
         return this;
     }
 
@@ -281,7 +311,27 @@ public class InputTextPreference extends EditTextPreference {
 
         if (previewWatcher != null) editText.removeTextChangedListener(previewWatcher);
         previewWatcher = null;
-        if (preview != null) {
+        if (preview != null || samplePreview != null) {
+            // The sample box is made fresh with the dialog and starts empty: nothing typed in it
+            // is read back from, or written to, a setting.
+            EditText sampleBox = null;
+            if (samplePreview != null) {
+                sampleBox = new EditText(context);
+                sampleBox.setHint(sampleHint);
+                sampleBox.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                sampleBox.setMinLines(2);
+                sampleBox.setMaxLines(5);
+                sampleBox.setFilters(new InputFilter[]{new InputFilter.LengthFilter(sampleMaxChars)});
+                SettingsUi.styleEditText(sampleBox);
+                SettingsUi.labelEditor(sampleBox, sampleHint);
+                LinearLayout.LayoutParams sampleParams = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+                sampleParams.setMargins(0, SettingsUi.dp(context, 10), 0, 0);
+                dialogView.addView(sampleBox, sampleParams);
+            }
+            final EditText sample = sampleBox;
             TextView shown = SettingsUi.text(
                     context,
                     "",
@@ -289,6 +339,7 @@ public class InputTextPreference extends EditTextPreference {
                     SettingsUi.textSecondary(),
                     android.graphics.Typeface.NORMAL
             );
+            if (sample != null) shown.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
             LinearLayout.LayoutParams previewParams = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
@@ -303,26 +354,32 @@ public class InputTextPreference extends EditTextPreference {
                 }
 
                 @Override public void afterTextChanged(Editable text) {
-                    showPreview(shown, String.valueOf(text));
+                    showPreview(shown, String.valueOf(editText.getText()),
+                            sample == null ? null : String.valueOf(sample.getText()));
                 }
             };
             editText.addTextChangedListener(previewWatcher);
-            showPreview(shown, String.valueOf(editText.getText()));
+            if (sample != null) sample.addTextChangedListener(previewWatcher);
+            showPreview(shown, String.valueOf(editText.getText()),
+                    sample == null ? null : String.valueOf(sample.getText()));
         }
 
         return dialogView;
     }
 
-    private void showPreview(TextView shown, String typed) {
+    private void showPreview(TextView shown, String typed, @Nullable String sample) {
         String text;
         try {
-            text = preview == null ? null : preview.text(typed);
+            text = samplePreview != null && sample != null
+                    ? samplePreview.text(typed, sample)
+                    : preview == null ? null : preview.text(typed);
         } catch (RuntimeException failure) {
             // A preview that can't be worked out is left out; the field still saves.
             Logger.printException(() -> "Could not preview the typed value", failure);
             text = null;
         }
-        shown.setText(text == null ? "" : text);
+        // Unchanged text is not written again, so a live region doesn't repeat itself.
+        SettingsUi.setTextIfChanged(shown, text == null ? "" : text);
         shown.setVisibility(text == null || text.isEmpty() ? View.GONE : View.VISIBLE);
     }
 

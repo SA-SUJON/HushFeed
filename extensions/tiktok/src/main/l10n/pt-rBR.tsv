@@ -1704,3 +1704,13 @@ Enter a host name or IP address, without a scheme or port	Digite um nome de host
 A port is a whole number from 1 to 65535	Uma porta é um número inteiro de 1 a 65535
 The proxy at %1$s asks for a password. TikTok's own network stack can't send one, so use a proxy that doesn't need one.	O proxy em %1$s pede uma senha. A pilha de rede do próprio TikTok não consegue enviar uma, então use um proxy que não precise.
 Couldn't reach the proxy at %1$s. TikTok may not load until it's back or you turn the proxy off.	Não foi possível acessar o proxy em %1$s. O TikTok pode não carregar até ele voltar ou você desligar o proxy.
+Word rules only, not every feed filter:	Só regras de palavras, não todos os filtros do feed:
+This list is too long to preview here. Saving still follows the usual limit.	Esta lista é longa demais para a prévia aqui. Ao salvar, o limite de sempre continua valendo.
+Can't check yet: %1$s	Ainda não dá para verificar: %1$s
+No rules yet, so nothing would match.	Ainda não há regras, então nada corresponderia.
+Type some sample text to see whether these rules match it.	Digite um texto de exemplo para ver se estas regras correspondem.
+No rule matches this text.	Nenhuma regra corresponde a este texto.
+Matches the rule: %1$s	Corresponde à regra: %1$s
+Only the first %1$s characters of the sample were checked.	Só os primeiros %1$s caracteres do exemplo foram verificados.
+Sample caption to test	Legenda de exemplo para testar
+Sample category to test	Categoria de exemplo para testar

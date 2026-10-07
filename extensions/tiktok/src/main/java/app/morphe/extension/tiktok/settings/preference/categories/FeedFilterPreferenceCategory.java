@@ -248,7 +248,10 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         addPreference(new InputTextPreference(context, "Blocked caption words",
                 "Comma separated words or phrases. Videos whose caption matches are hidden. Case doesn't matter. Two phrases in quotes can be joined: \"a\" & \"b\" needs both, \"a\" !& \"b\" needs the first without the second.",
                 Settings.BLOCKED_CAPTION_WORDS)
-                .withCheck(app.morphe.extension.tiktok.feedfilter.KeywordRules::problem));
+                .withCheck(app.morphe.extension.tiktok.feedfilter.KeywordRules::problem)
+                .withSamplePreview(app.morphe.extension.tiktok.settings.L10n.t("Sample caption to test"),
+                        app.morphe.extension.tiktok.feedfilter.KeywordRulePreview.MAX_SAMPLE_CHARS,
+                        app.morphe.extension.tiktok.feedfilter.KeywordRulePreview::result));
         addPreference(new InputTextPreference(context, "Only from these countries",
                 "Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.",
                 Settings.REGION_ONLY_FROM)
@@ -293,7 +296,10 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
                 "Comma separated words, like music, chat. A LIVE is hidden when its category, topic "
                         + "tags or game name contains one. Case doesn't matter.",
                 Settings.LIVE_HIDDEN_CATEGORIES)
-                .withCheck(app.morphe.extension.tiktok.feedfilter.KeywordRules::problem));
+                .withCheck(app.morphe.extension.tiktok.feedfilter.KeywordRules::problem)
+                .withSamplePreview(app.morphe.extension.tiktok.settings.L10n.t("Sample category to test"),
+                        app.morphe.extension.tiktok.feedfilter.KeywordRulePreview.MAX_SAMPLE_CHARS,
+                        app.morphe.extension.tiktok.feedfilter.KeywordRulePreview::result));
         addPreference(new RangeValuePreference(context, "LIVE viewers range",
                 "Show only LIVEs with this many people watching.",
                 Settings.LIVE_MIN_MAX_VIEWERS));

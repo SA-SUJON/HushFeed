@@ -252,6 +252,7 @@ Calm feed is on.,Calm feed is on.
 Calm feed is on. Restart TikTok to apply all changes.,Calm feed is on. Restart TikTok to apply all changes.
 Camera and microphone in use,Camera and microphone in use
 Camera in use,Camera in use
+Can't check yet: %1$s,Can't check yet: %1$s
 Cancel,Cancel
 Caption above comments,Caption above comments
 Caption background,Caption background
@@ -834,6 +835,7 @@ Manager,Manager
 Marked as not interested,Marked as not interested
 Match locale and timezone to country,Match locale and timezone to country
 Match region fields in requests,Match region fields in requests
+Matches the rule: %1$s,Matches the rule: %1$s
 Maximum,Maximum
 Maximum post age,Maximum post age
 Maximum video length,Maximum video length
@@ -893,6 +895,8 @@ No preset selected. Choose a preset above.,No preset selected. Choose a preset a
 No presets have been reviewed for TikTok %1$s yet,No presets have been reviewed for TikTok %1$s yet
 No profile shortcuts have been seen yet,No profile shortcuts have been seen yet
 "No recording yet. Start one, use a feature, then return here.","No recording yet. Start one, use a feature, then return here."
+No rule matches this text.,No rule matches this text.
+"No rules yet, so nothing would match.","No rules yet, so nothing would match."
 No seen videos recorded yet.,No seen videos recorded yet.
 No share actions have been seen yet,No share actions have been seen yet
 No share actions match this search,No share actions match this search
@@ -948,6 +952,7 @@ Only bottom tabs TikTok has loaded on this device are shown here. This doesn't f
 Only fields the Lab can check and copy safely are shown.,Only fields the Lab can check and copy safely are shown.
 Only from these countries,Only from these countries
 Only tabs TikTok has loaded on this device are shown here. This doesn't force unavailable tabs to appear.,Only tabs TikTok has loaded on this device are shown here. This doesn't force unavailable tabs to appear.
+Only the first %1$s characters of the sample were checked.,Only the first %1$s characters of the sample were checked.
 Only these caption languages,Only these caption languages
 Open,Open
 Open TikTok on,Open TikTok on
@@ -1124,6 +1129,8 @@ Rows,Rows
 SIM country preset,SIM country preset
 SOCKS5,SOCKS5
 STEM,STEM
+Sample caption to test,Sample caption to test
+Sample category to test,Sample category to test
 Sanitize sharing links,Sanitize sharing links
 Save,Save
 Save Hushfeed settings and Feature Gate Lab rules to a JSON file.,Save Hushfeed settings and Feature Gate Lab rules to a JSON file.
@@ -1493,6 +1500,7 @@ This gate type isn't supported.,This gate type isn't supported.
 "This key isn't in Hushfeed's list, so its type can't be checked. Reset the override.","This key isn't in Hushfeed's list, so its type can't be checked. Reset the override."
 "This key touches account safety. Forcing it can change login, region, payment or security checks.","This key touches account safety. Forcing it can change login, region, payment or security checks."
 "This line opens a rule and doesn't finish it: %1$s. Write two phrases as ""a"" & ""b"" for both, or ""a"" !& ""b"" for the first without the second.","This line opens a rule and doesn't finish it: %1$s. Write two phrases as ""a"" & ""b"" for both, or ""a"" !& ""b"" for the first without the second."
+This list is too long to preview here. Saving still follows the usual limit.,This list is too long to preview here. Saving still follows the usual limit.
 "This phone has no file picker, so there's no way to choose a file here","This phone has no file picker, so there's no way to choose a file here"
 This phone has no folder picker. Type the folder into the row instead.,This phone has no folder picker. Type the folder into the row instead.
 This preset doesn't match the installed gates. Nothing changed.,This preset doesn't match the installed gates. Nothing changed.
@@ -1579,6 +1587,7 @@ Turned off 1 gate. Restart TikTok to apply this.,Turned off 1 gate. Restart TikT
 Turns off at %1$s,Turns off at %1$s
 "Two letters, like us, gb or jp.","Two letters, like us, gb or jp."
 Type,Type
+Type some sample text to see whether these rules match it.,Type some sample text to see whether these rules match it.
 Unavailable,Unavailable
 Unavailable on these TikTok builds. All verification challenges stay visible.,Unavailable on these TikTok builds. All verification challenges stay visible.
 Unblock,Unblock
@@ -1668,6 +1677,7 @@ When to send,When to send
 "While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.","While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only."
 Who to message,Who to message
 Window width needed to enable the layout. Restart TikTok to apply this.,Window width needed to enable the layout. Restart TikTok to apply this.
+"Word rules only, not every feed filter:","Word rules only, not every feed filter:"
 "Words, countries and languages","Words, countries and languages"
 Working,Working
 "Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos.","Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos."
