@@ -32,10 +32,25 @@ private object RegionService : Fingerprint(
     name = "getRegion", parameters = emptyList(), returnType = "Ljava/lang/String;",
 )
 
+/**
+ * AppLog's common-parameter builder, an instance method taking (Context, isApi, Map, level): the
+ * one place the query fields every TTNet and AppLog request carries are put together, from the
+ * device ids, the fields cached once at startup and the network_common_params feature map. R8
+ * renames it on every build; the two query keys only it loads as literals find it
+ * (RegionSpoofAnchorsTest). carrier_region, sys_region and region in that map are the region hub's
+ * getters, which the hooks below already wrap; current_region, residence and carrier_region_v2
+ * come from caches no getter hook reaches.
+ */
+internal object CommonParamsBuilderFingerprint : Fingerprint(
+    returnType = "V",
+    parameters = listOf("Landroid/content/Context;", "Z", "Ljava/util/Map;", "L"),
+    strings = listOf("ssmix", "_rticket"),
+)
+
 @Suppress("unused")
 val regionSpoofPatch = bytecodePatch(
     name = "Region spoof",
-    description = "Matches locale, timezone and native region getters to the SIM preset, with a separate experimental store-region switch. Switch: Hushfeed settings > Region.",
+    description = "Matches locale, timezone and native region getters to the SIM preset, with separate switches for the store region (experimental) and the region fields sent with each request. Switch: Hushfeed settings > Region.",
     default = false,
 ) {
     category("Settings")
@@ -126,6 +141,36 @@ val regionSpoofPatch = bytecodePatch(
                         move-result-object v$register
                     """)
                 }
+        }
+
+        // The request fields: the map is p3, and the builder only ever puts into it, so each
+        // return hands the extension the map TikTok is about to send.
+        CommonParamsBuilderFingerprint.method.apply {
+            if (AccessFlags.STATIC.isSet(accessFlags)) {
+                throw PatchException("Region spoof: the common-parameter builder is static, so p3 is not its map.")
+            }
+            val body = implementationOrPatchException("Region spoof")
+            val map = body.registerCount - 2
+            val overwrites = body.instructions.filter { instruction ->
+                if (!instruction.opcode.setsRegister()) return@filter false
+                val target = (instruction as? OneRegisterInstruction)?.registerA ?: return@filter false
+                target == map || (instruction.opcode.setsWideRegister() && target + 1 == map)
+            }
+            if (overwrites.isNotEmpty()) {
+                throw PatchException(
+                    "Region spoof: the common-parameter builder writes its map register: ${overwrites.map { it.opcode.name }}.",
+                )
+            }
+            val returns = body.instructions.withIndex().filter { it.value.opcode == Opcode.RETURN_VOID }.map { it.index }
+            if (returns.isEmpty()) {
+                throw PatchException("Region spoof: the common-parameter builder has no return to hook.")
+            }
+            returns.reversed().forEach { index ->
+                addInstructionsAtControlFlowLabel(
+                    index,
+                    "invoke-static/range { p3 .. p3 }, $EXTENSION->requestParams(Ljava/util/Map;)V",
+                )
+            }
         }
         SettingsStatusLoadFingerprint.method.addInstruction(0,
             "invoke-static {}, Lapp/morphe/extension/tiktok/settings/SettingsStatus;->enableRegionSpoof()V")

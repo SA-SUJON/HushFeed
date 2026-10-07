@@ -77,6 +77,21 @@ public class Settings extends BaseSettings {
                 }
             }
     );
+    // The same two switches as the store row, and the row names the one to turn on the same way.
+    public static final BooleanSetting REGION_REQUEST_SPOOF = new BooleanSetting(
+            "region_request_spoof",
+            FALSE,
+            true,
+            new Setting.Availability() {
+                @Override public boolean isAvailable() {
+                    return SIM_SPOOF.savedValue() && REGION_SPOOF.savedValue();
+                }
+
+                @Override public java.util.List<Setting<?>> getParentSettings() {
+                    return java.util.Collections.singletonList(REGION_SPOOF.savedValue() ? SIM_SPOOF : REGION_SPOOF);
+                }
+            }
+    );
     public static final BooleanSetting FOLDABLE_SPLIT_VIEW = new BooleanSetting("foldable_split_view", FALSE, true);
     public static final IntegerSetting FOLDABLE_SPLIT_VIEW_MIN_WIDTH_DP = new IntegerSetting("foldable_split_view_min_width_dp", 600, true).withRange(320, 1600);
     public static final BooleanSetting DOWNLOAD_SUBTITLES = new BooleanSetting("download_subtitles", FALSE);

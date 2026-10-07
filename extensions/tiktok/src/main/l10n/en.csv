@@ -162,6 +162,7 @@ Already marked as not interested,Already marked as not interested
 Also apply these filters to downloaded videos TikTok uses when the feed can't load enough new items.,Also apply these filters to downloaded videos TikTok uses when the feed can't load enough new items.
 Also change the region TikTok reports internally. Keeps your interface language. Your IP address and your account's own rules still apply.,Also change the region TikTok reports internally. Keeps your interface language. Your IP address and your account's own rules still apply.
 "Also on a block list, so still hidden: %1$s","Also on a block list, so still hidden: %1$s"
+"Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Your IP address and your account's own rules still apply.","Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Your IP address and your account's own rules still apply."
 Always show publish date,Always show publish date
 Always show the publish date in video author information. Restart TikTok to apply this.,Always show the publish date in video author information. Restart TikTok to apply this.
 Amazon Appstore,Amazon Appstore
@@ -814,6 +815,7 @@ Manage topics,Manage topics
 Manager,Manager
 Marked as not interested,Marked as not interested
 Match locale and timezone to country,Match locale and timezone to country
+Match region fields in requests,Match region fields in requests
 Maximum,Maximum
 Maximum post age,Maximum post age
 Maximum video length,Maximum video length

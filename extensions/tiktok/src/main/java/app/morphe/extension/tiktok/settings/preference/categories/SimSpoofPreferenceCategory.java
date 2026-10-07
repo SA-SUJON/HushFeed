@@ -53,6 +53,8 @@ public class SimSpoofPreferenceCategory extends ConditionalPreferenceCategory {
                     "Also change the region TikTok reports internally. Keeps your interface language. Your IP address and your account's own rules still apply.", Settings.REGION_SPOOF));
             addPreference(new TogglePreference(context, "Override store region (experimental)",
                     "Use the preset for the region TikTok reports for your account and its shop too. May affect search.", Settings.REGION_STORE_SPOOF));
+            addPreference(new TogglePreference(context, "Match region fields in requests",
+                    "Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Your IP address and your account's own rules still apply.", Settings.REGION_REQUEST_SPOOF));
         }
         InputTextPreference countryIsoPreference = new InputTextPreference(
                 context,

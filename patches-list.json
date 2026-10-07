@@ -5278,7 +5278,7 @@
     },
     {
       "name": "Region spoof",
-      "description": "Matches locale, timezone and native region getters to the SIM preset, with a separate experimental store-region switch. Switch: Hushfeed settings > Region.",
+      "description": "Matches locale, timezone and native region getters to the SIM preset, with separate switches for the store region (experimental) and the region fields sent with each request. Switch: Hushfeed settings > Region.",
       "category": "Settings",
       "use": false,
       "dependencies": [

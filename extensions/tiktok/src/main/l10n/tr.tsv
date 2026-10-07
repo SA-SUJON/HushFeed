@@ -1655,3 +1655,5 @@ Stop LIVE previews opening by themselves	LIVE önizlemelerinin kendiliğinden a�
 A LIVE in the feed can count down and take you into the room on its own. This keeps you in the feed until you tap it.	Akıştaki bir LIVE geri sayım yapıp seni kendiliğinden odaya götürebilir. Bu, ona dokunana kadar seni akışta tutar.
 Play sounds TikTok pulled	TikTok'un kaldırdığı sesleri çal
 Play the audio on videos TikTok silenced because their sound was pulled for copyright or in your region. TikTok may still say the sound isn't available.	Sesi telif hakkı nedeniyle ya da bölgende kaldırıldığı için TikTok'un sessize aldığı videolarda sesi çalar. TikTok yine de sesin kullanılamadığını söyleyebilir.
+Match region fields in requests	İsteklerdeki bölge alanlarını eşleştir
+Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Your IP address and your account's own rules still apply.	TikTok sunucularının bu telefona kaydettiği bölge ve ağın ülke kodu yerine her istekle giden hazır ayarı da gönder. IP adresin ve hesabının kendi kuralları geçerli olmaya devam eder.

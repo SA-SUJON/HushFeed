@@ -7,13 +7,19 @@
 package app.morphe.extension.tiktok.spoof.region;
 
 import android.os.Build;
+import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.shared.settings.BaseSettings;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.spoof.sim.SimPreset;
 import app.morphe.extension.tiktok.spoof.sim.SimPresets;
+import app.morphe.extension.tiktok.spoof.sim.SpoofSimPatch;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
 
@@ -74,6 +80,85 @@ public final class RegionSpoof {
 
     public static String storeCountry(String original) {
         return Utils.getContext() != null && Settings.REGION_STORE_SPOOF.get() ? country(original) : original;
+    }
+
+    /*
+     * The region fields AppLog's common-parameter builder puts on every request TikTok sends.
+     * carrier_region, sys_region and region are the region hub's own answers, which the getter
+     * hooks already turn into the preset, so they are only looked at here, never written.
+     * current_region and residence are what TikTok's servers last told this phone, kept in its
+     * preferences, and carrier_region_v2 is the network's country code (an MCC) read from the
+     * system configuration. No getter hook reaches those three.
+     */
+    static final String[] SAVED_REGION_FIELDS = {"current_region", "residence"};
+    static final String NETWORK_COUNTRY_FIELD = "carrier_region_v2";
+    static final String[] HUB_REGION_FIELDS = {"carrier_region", "sys_region", "region"};
+    private static volatile String lastRequestReport = "";
+
+    /**
+     * Called with the parameter map at the end of the builder. Only fields TikTok already put in
+     * the map are changed: one it left out stays out.
+     */
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public static void requestParams(Map params) {
+        try {
+            if (params == null || Utils.getContext() == null || !Settings.REGION_REQUEST_SPOOF.get()) return;
+            String country = selectedCountry();
+            if (country.isEmpty()) return;
+            List<String> set = new ArrayList<>();
+            for (String field : SAVED_REGION_FIELDS) {
+                if (params.get(field) instanceof String) {
+                    params.put(field, country);
+                    set.add(field);
+                }
+            }
+            Object network = params.get(NETWORK_COUNTRY_FIELD);
+            String mcc = presetMcc();
+            if (mcc != null && network instanceof String && isMcc((String) network)) {
+                params.put(NETWORK_COUNTRY_FIELD, mcc);
+                set.add(NETWORK_COUNTRY_FIELD);
+            }
+            report(params, country, set);
+        } catch (RuntimeException error) {
+            Logger.printException(() -> "Region spoof could not set a request's region fields", error);
+        }
+    }
+
+    /** The first three digits of the SIM preset's operator code, or null when there isn't a usable one. */
+    private static String presetMcc() {
+        String code = Settings.SIMSPOOF_MCCMNC.get();
+        if (code == null || !SpoofSimPatch.validMccMnc(code)) return null;
+        return code.trim().substring(0, 3);
+    }
+
+    private static boolean isMcc(String value) {
+        if (value.length() != 3) return false;
+        for (int index = 0; index < 3; index++) {
+            if (value.charAt(index) < '0' || value.charAt(index) > '9') return false;
+        }
+        return true;
+    }
+
+    /*
+     * One debug line each time the outcome changes, not one per request. It names fields and says
+     * whether the hub's fields already carry the preset, and never prints a value the phone had
+     * before, since that is the real region.
+     */
+    @SuppressWarnings("rawtypes")
+    private static void report(Map params, String country, List<String> set) {
+        if (!BaseSettings.DEBUG.get()) return;
+        List<String> matching = new ArrayList<>();
+        List<String> other = new ArrayList<>();
+        for (String field : HUB_REGION_FIELDS) {
+            Object value = params.get(field);
+            if (!(value instanceof String)) continue;
+            (country.equalsIgnoreCase((String) value) ? matching : other).add(field);
+        }
+        String line = "Request region fields for " + country + ". Set to the preset " + set
+                + ", already the preset " + matching + ", something else " + other;
+        if (line.equals(lastRequestReport)) return;
+        lastRequestReport = line;
+        Logger.printDebug(() -> line);
     }
 
     public static Locale locale(Locale original) {
