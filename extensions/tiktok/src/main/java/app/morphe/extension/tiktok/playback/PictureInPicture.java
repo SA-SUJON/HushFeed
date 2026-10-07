@@ -60,6 +60,14 @@ import java.util.List;
 public final class PictureInPicture {
     static final String ACTION_TOGGLE = "app.morphe.extension.tiktok.PICTURE_IN_PICTURE_TOGGLE";
 
+    /**
+     * Carried by the window's own button. Before Android 13 a receiver registered at run time
+     * can't be kept from other apps, so any of them could send the action and pause or play
+     * the video. They can't read this, since only the button's PendingIntent holds it.
+     */
+    static final String EXTRA_TOKEN = "app.morphe.extension.tiktok.PICTURE_IN_PICTURE_TOKEN";
+    private static final String TOKEN = java.util.UUID.randomUUID().toString();
+
     /** Android's limits on a window's shape: no narrower than 1:2.39 and no wider than 2.39:1. */
     static final Rational NARROWEST = new Rational(100, 239);
     static final Rational WIDEST = new Rational(239, 100);
@@ -290,8 +298,9 @@ public final class PictureInPicture {
     }
 
     @RequiresApi(26)
-    private static List<RemoteAction> actions(Activity activity, boolean playing) {
-        Intent intent = new Intent(ACTION_TOGGLE).setPackage(activity.getPackageName());
+    static List<RemoteAction> actions(Activity activity, boolean playing) {
+        Intent intent = new Intent(ACTION_TOGGLE).setPackage(activity.getPackageName())
+                .putExtra(EXTRA_TOKEN, TOKEN);
         PendingIntent pending = PendingIntent.getBroadcast(activity, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         String label = playing ? L10n.t("Pause") : L10n.t("Play");
@@ -305,7 +314,7 @@ public final class PictureInPicture {
         toggle = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                onToggle();
+                if (fromTheButton(intent)) onToggle();
             }
         };
         Context app = activity.getApplicationContext();
@@ -314,6 +323,15 @@ public final class PictureInPicture {
             app.registerReceiver(toggle, filter, Context.RECEIVER_NOT_EXPORTED);
         } else {
             app.registerReceiver(toggle, filter);
+        }
+    }
+
+    static boolean fromTheButton(Intent intent) {
+        try {
+            return intent != null && TOKEN.equals(intent.getStringExtra(EXTRA_TOKEN));
+        } catch (RuntimeException unreadable) {
+            // Another app's extras can name a class this process can't unparcel.
+            return false;
         }
     }
 

@@ -7,6 +7,7 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Looper;
 import android.util.Rational;
 import android.view.TextureView;
@@ -79,6 +80,21 @@ public class PictureInPictureTest {
         SettingsStatus.pictureInPictureEnabled = false;
         Settings.PICTURE_IN_PICTURE.save(Settings.PICTURE_IN_PICTURE.defaultValue);
         owner.pause().stop().destroy();
+    }
+
+    @Test public void onlyTheWindowsOwnButtonCanPauseOrPlay() {
+        Activity activity = owner.get();
+        Intent sent = Shadows.shadowOf(
+                PictureInPicture.actions(activity, true).get(0).getActionIntent()).getSavedIntent();
+        assertTrue(PictureInPicture.fromTheButton(sent));
+
+        // Another app sending the action, before Android 13 let a receiver refuse it.
+        Intent bare = new Intent(PictureInPicture.ACTION_TOGGLE)
+                .setPackage(activity.getPackageName());
+        assertFalse(PictureInPicture.fromTheButton(bare));
+        assertFalse(PictureInPicture.fromTheButton(
+                new Intent(bare).putExtra(PictureInPicture.EXTRA_TOKEN, "guess")));
+        assertFalse(PictureInPicture.fromTheButton(null));
     }
 
     @Test public void offByDefault() {
