@@ -1632,3 +1632,10 @@ Brightness,Kecerahan
 Volume,Volume
 Stop search results playing on their own,Hentikan hasil pencarian diputar sendiri
 Videos in search results show their cover and play when you open them. The feed and the videos you open play as usual.,Video di hasil pencarian menampilkan sampulnya dan diputar saat kamu membukanya. Feed dan video yang kamu buka diputar seperti biasa.
+In a chat,Di obrolan
+Hide call buttons,Sembunyikan tombol panggilan
+"The voice and video call buttons leave the top of a chat. Calls still ring, and the chat details button stays.","Tombol panggilan suara dan video hilang dari bagian atas obrolan. Panggilan tetap berdering, dan tombol detail obrolan tetap ada."
+Hide sticker suggestions,Sembunyikan saran stiker
+The sticker suggestion banner stops showing in a chat. Your own stickers are still in the sticker picker.,Banner saran stiker tidak lagi muncul di obrolan. Stiker Anda sendiri tetap ada di pemilih stiker.
+Hide suggested replies,Sembunyikan balasan yang disarankan
+TikTok's suggested reply cells and their intro banner stop showing in a chat. Messages you type or receive are untouched.,Balasan yang disarankan TikTok dan banner pengantarnya tidak lagi muncul di obrolan. Pesan yang Anda ketik atau terima tidak diubah.

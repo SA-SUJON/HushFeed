@@ -592,6 +592,13 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting HIDE_INBOX_ACTIVITY_STATUS =
             new BooleanSetting("hide_inbox_activity_status", FALSE);
     public static final BooleanSetting EXPAND_ACTIVITY_LIST = new BooleanSetting("expand_activity_list", FALSE);
+    /** Chat screen clutter. Each is off by default and read live when a chat opens. */
+    public static final BooleanSetting HIDE_CHAT_CALL_BUTTONS =
+            new BooleanSetting("hide_chat_call_buttons", FALSE);
+    public static final BooleanSetting HIDE_CHAT_STICKER_BANNER =
+            new BooleanSetting("hide_chat_sticker_banner", FALSE);
+    public static final BooleanSetting HIDE_CHAT_AI_REPLIES =
+            new BooleanSetting("hide_chat_ai_replies", FALSE);
     public static final StringSetting HIDE_INBOX_CUSTOM_TITLES =
             new StringSetting("hide_inbox_custom_titles", "");
     // Feed filter additions. The list based ones are read live, so a sound blocked from

@@ -1638,3 +1638,10 @@ Brightness	Parlaklık
 Volume	Ses
 Stop search results playing on their own	Arama sonuçları kendiliğinden oynatılmasın
 Videos in search results show their cover and play when you open them. The feed and the videos you open play as usual.	Arama sonuçlarındaki videolar kapaklarını gösterir ve onları açtığında oynar. Akış ve açtığın videolar her zamanki gibi oynar.
+In a chat	Bir sohbette
+Hide call buttons	Arama düğmelerini gizle
+The voice and video call buttons leave the top of a chat. Calls still ring, and the chat details button stays.	Sesli ve görüntülü arama düğmeleri sohbetin üst kısmından kalkar. Aramalar yine çalar, sohbet ayrıntıları düğmesi ise yerinde kalır.
+Hide sticker suggestions	Çıkartma önerilerini gizle
+The sticker suggestion banner stops showing in a chat. Your own stickers are still in the sticker picker.	Çıkartma önerisi bannerı sohbette artık gösterilmez. Kendi çıkartmaların çıkartma seçicide durur.
+Hide suggested replies	Önerilen yanıtları gizle
+TikTok's suggested reply cells and their intro banner stop showing in a chat. Messages you type or receive are untouched.	TikTok'un önerdiği yanıtlar ve bunları tanıtan banner sohbette artık gösterilmez. Yazdığın veya aldığın mesajlara dokunulmaz.

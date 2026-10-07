@@ -99,6 +99,7 @@ public class SettingsStatus {
     public static boolean autoStreakEnabled = false;
     public static boolean hideSuggestedAccountsEnabled = false;
     public static boolean hideInboxStoriesEnabled = false;
+    public static boolean chatDeclutterEnabled = false;
     public static boolean expandActivityListEnabled = false;
     public static boolean commentToolsEnabled = false;
     public static boolean hideCommentEggsEnabled = false;
@@ -317,6 +318,10 @@ public class SettingsStatus {
 
     public static void enableHideInboxStories() {
         hideInboxStoriesEnabled = true;
+    }
+
+    public static void enableChatDeclutter() {
+        chatDeclutterEnabled = true;
     }
 
     public static void enableExpandActivityList() {

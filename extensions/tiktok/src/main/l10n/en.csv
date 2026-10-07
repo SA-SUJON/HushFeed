@@ -558,6 +558,7 @@ Hide activity status,Hide activity status
 Hide archive,Hide archive
 Hide bottom tabs TikTok adds later unless you allow them.,Hide bottom tabs TikTok adds later unless you allow them.
 Hide buttons in the right column,Hide buttons in the right column
+Hide call buttons,Hide call buttons
 Hide comment polls,Hide comment polls
 Hide comment popup ads,Hide comment popup ads
 Hide comment typing suggestions,Hide comment typing suggestions
@@ -598,10 +599,12 @@ Hide share actions,Hide share actions
 Hide sharing apps,Hide sharing apps
 Hide shopping LIVEs,Hide shopping LIVEs
 Hide sponsored LIVEs,Hide sponsored LIVEs
+Hide sticker suggestions,Hide sticker suggestions
 Hide stories,Hide stories
 Hide stories from the feed.,Hide stories from the feed.
 Hide stories tray,Hide stories tray
 Hide suggested accounts,Hide suggested accounts
+Hide suggested replies,Hide suggested replies
 Hide suggestions on the search page,Hide suggestions on the search page
 Hide surveys,Hide surveys
 Hide tabs TikTok adds later unless you allow them.,Hide tabs TikTok adds later unless you allow them.
@@ -707,6 +710,7 @@ Imported %1$d values,Imported %1$d values
 Imported %1$d values. Undo last Lab change is in the menu.,Imported %1$d values. Undo last Lab change is in the menu.
 Importing new history ended Undo for the earlier clear. You can clear the imported history.,Importing new history ended Undo for the earlier clear. You can clear the imported history.
 Importing watch history,Importing watch history
+In a chat,In a chat
 Inbox,Inbox
 Include diagnostic events,Include diagnostic events
 Included diagnostics,Included diagnostics
@@ -1406,6 +1410,7 @@ The settings backup was rejected. Nothing was altered.,The settings backup was r
 The smallest value is above the largest,The smallest value is above the largest
 The sound couldn't be saved. Try again.,The sound couldn't be saved. Try again.
 The sticker couldn't be saved. Try again.,The sticker couldn't be saved. Try again.
+The sticker suggestion banner stops showing in a chat. Your own stickers are still in the sticker picker.,The sticker suggestion banner stops showing in a chat. Your own stickers are still in the sticker picker.
 The story couldn't be saved. Try again.,The story couldn't be saved. Try again.
 "The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks.","The thumbs down on each comment blocks the commenter instead of disliking. The comment dims, an undo banner follows, and a second tap unblocks."
 The time of day the message goes out.,The time of day the message goes out.
@@ -1413,6 +1418,7 @@ The video couldn't be made from these photos. Try again.,The video couldn't be m
 "The video couldn't be saved. Try again, or choose Automatic.","The video couldn't be saved. Try again, or choose Automatic."
 "The video was saved, but its record couldn't be updated. A later save may make another copy.","The video was saved, but its record couldn't be updated. A later save may make another copy."
 "The video you're watching keeps playing to its end after you leave TikTok or turn the screen off, with TikTok's own media notification to pause it. TikTok's background play switch stays on while this is on. Restart TikTok to apply this.","The video you're watching keeps playing to its end after you leave TikTok or turn the screen off, with TikTok's own media notification to pause it. TikTok's background play switch stays on while this is on. Restart TikTok to apply this."
+"The voice and video call buttons leave the top of a chat. Calls still ring, and the chat details button stays.","The voice and video call buttons leave the top of a chat. Calls still ring, and the chat details button stays."
 "Their usernames, separated by commas or new lines. Each person must already have a chat with you.","Their usernames, separated by commas or new lines. Each person must already have a chat with you."
 There is no Lab change to undo.,There is no Lab change to undo.
 There is no diagnostic data to clear,There is no diagnostic data to clear
@@ -1478,6 +1484,7 @@ TikTok's own value,TikTok's own value
 TikTok's play and pause button and its previous and next buttons appear on the feed. TikTok otherwise shows them only to people who use a screen reader. TikTok's analytics note the row and each press on it.,TikTok's play and pause button and its previous and next buttons appear on the feed. TikTok otherwise shows them only to people who use a screen reader. TikTok's analytics note the row and each press on it.
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.,TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.
 TikTok's size,TikTok's size
+TikTok's suggested reply cells and their intro banner stop showing in a chat. Messages you type or receive are untouched.,TikTok's suggested reply cells and their intro banner stop showing in a chat. Messages you type or receive are untouched.
 Times you can open the feed anyway,Times you can open the feed anyway
 Today can't start over while Wait a day to loosen the budget is on. The day starts over at %1$s.,Today can't start over while Wait a day to loosen the budget is on. The day starts over at %1$s.
 "Today has moved on, so there's nothing to put back","Today has moved on, so there's nothing to put back"

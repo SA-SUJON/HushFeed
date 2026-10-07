@@ -247,7 +247,7 @@ The eleven optional patches in the Performance group were measured on a Galaxy S
 | `Hide feed save button` | Hide the save button from video feeds. Switch: Hushfeed settings > Feed screen. |
 | `Hide feed search button` | Hide the search button at the top right of video feeds. Switch: Hushfeed settings > Feed screen. |
 | `Hide floating promotions` | Removes floating promotional badges from the feed and can hide the rewards shortcut on Profile. Switches: Hushfeed settings > Feed screen and App. |
-| `Hide inbox items` | Adds a switch for each row and header control on the Inbox tab, so message requests, TikTok Tako, TikTok Shop, the stories tray and the rest can be hidden individually. Switch: Hushfeed settings > Inbox. |
+| `Hide inbox items` | Adds a switch for each row and header control on the Inbox tab, so message requests, TikTok Tako, TikTok Shop, the stories tray and the rest can be hidden individually, and switches for the call buttons, sticker suggestions and suggested replies inside a chat. Switch: Hushfeed settings > Inbox. |
 | `Hide inbox stories` | Hides the stories tray at the top of the Inbox and restores it immediately when the switch is turned off. Shares its switch with Hide inbox items. Switch: Hushfeed settings > Inbox. |
 | `Hide comment typing suggestions` | Hides automatic emoji and sticker suggestions above the comment box. Manual buttons stay available. Switch: Hushfeed settings > Comments. |
 | `Hide profile shortcuts` | Hides the shortcuts you pick from the row under a profile's bio, like TikTok Studio or Your orders. TikTok's server decides what goes in that row, so the checklist offers the ones it has sent to your phone, and you can also type names. Restart TikTok after a change. Switch: Hushfeed settings > App. |

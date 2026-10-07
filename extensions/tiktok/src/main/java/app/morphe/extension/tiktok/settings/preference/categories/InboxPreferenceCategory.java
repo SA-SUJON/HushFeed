@@ -31,6 +31,7 @@ public final class InboxPreferenceCategory extends ConditionalPreferenceCategory
         return SettingsStatus.inboxFilterEnabled
                 || SettingsStatus.hideSuggestedAccountsEnabled
                 || SettingsStatus.hideInboxStoriesEnabled
+                || SettingsStatus.chatDeclutterEnabled
                 || SettingsStatus.expandActivityListEnabled
                 || SettingsStatus.notificationControlsEnabled
                 || SettingsStatus.suggestedVideoPushBlockEnabled
@@ -130,6 +131,30 @@ public final class InboxPreferenceCategory extends ConditionalPreferenceCategory
                 "The accounts TikTok suggests you follow no longer take up rows in the Inbox.",
                 Settings.HIDE_INBOX_SUGGESTED_ACCOUNTS
         ));
+        }
+        if (SettingsStatus.chatDeclutterEnabled) {
+            addPreference(new SectionHeadingPreference(context, "In a chat"));
+            addPreference(new TogglePreference(
+                    context,
+                    "Hide call buttons",
+                    "The voice and video call buttons leave the top of a chat. Calls still ring, "
+                            + "and the chat details button stays.",
+                    Settings.HIDE_CHAT_CALL_BUTTONS
+            ));
+            addPreference(new TogglePreference(
+                    context,
+                    "Hide sticker suggestions",
+                    "The sticker suggestion banner stops showing in a chat. Your own stickers "
+                            + "are still in the sticker picker.",
+                    Settings.HIDE_CHAT_STICKER_BANNER
+            ));
+            addPreference(new TogglePreference(
+                    context,
+                    "Hide suggested replies",
+                    "TikTok's suggested reply cells and their intro banner stop showing in a "
+                            + "chat. Messages you type or receive are untouched.",
+                    Settings.HIDE_CHAT_AI_REPLIES
+            ));
         }
         if (SettingsStatus.notificationControlsEnabled || SettingsStatus.expandActivityListEnabled
                 || SettingsStatus.suggestedVideoPushBlockEnabled) {
