@@ -378,8 +378,13 @@ public final class VideoOverlayHider {
             // the first swipe. Following the live state keeps it away until the tap that ends
             // the mode. The persisted setting cannot be used here: the automatic path never
             // writes it, so it would answer false for exactly the case this is meant to fix.
+            // Automatic clear display with no delay clears each video as it starts, so between
+            // a swipe and that clear the incoming video would show its buttons, caption, music,
+            // the tabs and (with the controls hidden) TikTok's ordinary progress bar (#84).
+            // Carried over, they stay away across the swipe.
+            boolean carry = !HushfeedPause.isPaused() && RememberClearDisplayPatch.isCarryingClear();
             boolean tabStrip = !detailPager && !HushfeedPause.isPaused()
-                    && RememberClearDisplayPatch.isClearDisplayNow();
+                    && (RememberClearDisplayPatch.isClearDisplayNow() || carry);
             // The comment bar is the detail pager's own; the main feed has the tabs there.
             boolean detailCommentBar = detailPager && Settings.HIDE_DETAIL_COMMENT_BAR.get();
             // Asked for here and confirmed after the walk by TikTok's own bar being on screen,
@@ -403,14 +408,14 @@ public final class VideoOverlayHider {
             } catch (NumberFormatException ignored) {
             }
             touchScale = Math.min(MAX_TOUCH_SCALE, Math.max(1f, touchScale));
-            if (caption || music || actionBar || surveys || tabStrip || detailCommentBar || clearControls
+            if (caption || music || actionBar || surveys || tabStrip || carry || detailCommentBar || clearControls
                     || statusBar || anyRail || !HIDDEN_HERE.isEmpty() || touchScale != 1f || scaledLastPass) {
                 ViewGroup root = activity.findViewById(android.R.id.content);
                 int[] ids = TRAVERSAL.ids;
                 boolean[] hidden = TRAVERSAL.hidden;
                 boolean[] wanted = TRAVERSAL.wanted;
-                wanted[CAPTION_TARGET] = caption;
-                wanted[MUSIC_TARGET] = music;
+                wanted[CAPTION_TARGET] = caption || carry;
+                wanted[MUSIC_TARGET] = music || carry;
                 wanted[ACTION_BAR_TARGET] = actionBar;
                 wanted[SURVEY_TARGET] = surveys;
                 wanted[TAB_STRIP_TARGET] = tabStrip;
@@ -426,12 +431,12 @@ public final class VideoOverlayHider {
                 wanted[CLEAR_PHOTO_EXIT_TARGET] = clearControls;
                 wanted[STATUS_BAR_SPACER_TARGET] = statusBar;
                 for (int i = 0; i < RAIL_BUTTON_IDS.length; i++) {
-                    wanted[RAIL_TARGET_START + i] = rail[i];
+                    wanted[RAIL_TARGET_START + i] = rail[i] || carry;
                 }
                 for (int i = 0; i < RAIL_COUNT_ROW_IDS.length; i++) {
                     boolean hideCount = counts || rail[RAIL_COUNT_BUTTON_INDEX[i]];
-                    wanted[COUNT_ROW_TARGET_START + i] = hideCount;
-                    wanted[COUNT_TEXT_TARGET_START + i] = hideCount;
+                    wanted[COUNT_ROW_TARGET_START + i] = hideCount || carry;
+                    wanted[COUNT_TEXT_TARGET_START + i] = hideCount || carry;
                 }
 
                 int candidateAt = 0;
@@ -461,7 +466,7 @@ public final class VideoOverlayHider {
                     }
                     selectCurrentTargets(found, TRAVERSAL.selected);
                     pairDetailCommentBar(hidden, TRAVERSAL.selected);
-                    gateClearControls(hidden, found, TRAVERSAL.selected);
+                    gateClearControls(hidden, found, TRAVERSAL.selected, carry);
                     applySelectedTargets(ids, hidden, found, TRAVERSAL.selected,
                             touchScale != 1f);
                     // The size goes on the icon inside each button, not the button. The slots
@@ -704,7 +709,8 @@ public final class VideoOverlayHider {
      * shares its id with the one TikTok shows outside Clear display, so without this the switch
      * would take that away too; and when TikTok takes the bar down, all three come back.
      */
-    private static void gateClearControls(boolean[] hidden, List<List<View>> found, int[] selected) {
+    private static void gateClearControls(boolean[] hidden, List<List<View>> found, int[] selected,
+                                          boolean carry) {
         // A photo's close button carries its own signal: TikTok shows its parent only in Clear
         // display. Put back once that parent is gone, the button stays out of sight and out of reach.
         int photoExit = selected[CLEAR_PHOTO_EXIT_TARGET];
@@ -715,7 +721,9 @@ public final class VideoOverlayHider {
         if (exit >= 0 && anyParentShown(found.get(exit))) return;
         hidden[firstCandidate(CLEAR_EXIT_TARGET)] = false;
         hidden[firstCandidate(CLEAR_PLAYBACK_TARGET)] = false;
-        hidden[firstCandidate(CLEAR_SEEK_BAR_TARGET)] = false;
+        // Across a carried swipe the bar on screen is the incoming video's ordinary one, which
+        // its own clear is about to take; it stays away until then.
+        if (!carry) hidden[firstCandidate(CLEAR_SEEK_BAR_TARGET)] = false;
     }
 
     private static boolean anyParentShown(List<View> views) {
