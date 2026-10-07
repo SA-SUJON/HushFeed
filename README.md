@@ -97,6 +97,18 @@ Login trouble is the most common complaint about any patched TikTok. These are t
 - Facebook login can't work on a patched build. Facebook checks the app's signing key, and a patched TikTok carries your manager's key instead of TikTok's. Log in with your email or phone number and a code, or with Google.
 - Since v0.67.0, Hide CAPTCHA popups isn't available and every verification challenge stays visible. Older builds still have the switch, so turn it off and restart TikTok when you're looking into a stalled login.
 
+### Can Feature Gate Lab hide CAPTCHA popups?
+
+Not today. A CAPTCHA is TikTok's servers asking you to prove you're a person, and none of the Lab's reviewed presets touch it. Hide CAPTCHA popups stays unavailable until it's been checked on a phone against a real challenge, so a hidden one can't quietly stop a login or a like.
+
+What the Lab does is change values the app reads for its own features, the same flags other TikTok mods flip. To try one:
+
+1. Open Hushfeed settings and search for Feature Gate.
+2. Open the Lab's menu, choose Reviewed presets and pick one. The preview shows each value before you apply it.
+3. Tap Apply, turn on the overrides switch and restart TikTok.
+
+Undo last Lab change puts the old values back. A gate that isn't in a reviewed preset can break sign-in or the feed, so leave those alone unless you know what it does. Some features also need TikTok's servers to allow them for your account, and no Lab value changes that.
+
 ### A LIVE auction says bidding is unavailable
 
 A bid from a patched TikTok can fail with "Bidding is temporarily unavailable", and other payments may be refused the same way. The likely cause is TikTok's security library, which signs the requests TikTok's network stack sends and reads the app's signing certificate while it does. A patched TikTok carries your manager's certificate instead of TikTok's, and Hushfeed doesn't pass itself off as TikTok's own signed app for payment checks. Bid and buy from the official app.

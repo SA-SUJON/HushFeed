@@ -82,6 +82,8 @@ Every Hushfeed release, newest first.
 
 * **Docs:** The FAQ explains the pure black Profile and Inbox some people see without AMOLED dark theme. It comes from TikTok 47.1.4's own dark mode, and a build without that patch shows the same colors with Hushfeed paused (#69).
 
+* **Docs:** Troubleshooting now answers whether Feature Gate Lab can hide CAPTCHA popups (it can't), and walks through trying one of the Lab's reviewed presets (#111).
+
 ## 0.68.0 (2026-10-06)
 
 * **TikTok:** Download original photos saves every photo as a JPEG (#105). TikTok lists each photo as a HEIF copy first, so they were landing as .heif files that a lot of gallery apps and computers can't open, and some phones, Samsungs included, can't decode TikTok's HEIF at all. Hushfeed now takes the WebP copy TikTok lists beside each HEIF and saves it again as a full-size JPEG on Android 9 and newer. When TikTok lists a JPEG copy, that one is saved byte for byte instead. A photo that can't be converted keeps the file TikTok sent, and so does one with see-through parts. The setting's description says JPEG now too, and story photos work the same way.
