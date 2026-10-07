@@ -203,6 +203,9 @@ public final class CommentExport {
     }
 
     private static StringBuilder appendField(StringBuilder out, String value) {
+        // A spreadsheet runs a cell that starts like a formula, so a comment reading
+        // =HYPERLINK(...) would become a live link. A leading apostrophe keeps it text.
+        if (!value.isEmpty() && "=+-@\t\r".indexOf(value.charAt(0)) >= 0) value = "'" + value;
         boolean quote = false;
         for (int index = 0; index < value.length(); index++) {
             char c = value.charAt(index);
@@ -223,14 +226,22 @@ public final class CommentExport {
 
     /** The header counts what the file holds, so a reader can tell a partial export from a whole one. */
     static String toJson(List<Row> rows, String exportedAt) throws JSONException {
+        return toJson(rows, exportedAt, false);
+    }
+
+    /** As above; {@code truncated} says the sheet held more than the search keeps. */
+    static String toJson(List<Row> rows, String exportedAt, boolean truncated) throws JSONException {
         JSONObject root = new JSONObject();
         int top = topLevel(rows);
         root.put("exported_at", exportedAt);
         root.put("comment_count", top);
         root.put("reply_count", rows.size() - top);
         root.put("total", rows.size());
+        root.put("truncated", truncated);
         root.put("note", "Comments and replies the sheet had loaded when this was exported. "
-                + "Reply threads that weren't opened aren't included.");
+                + "Reply threads that weren't opened aren't included."
+                + (truncated ? " The sheet had more comments loaded than Hushfeed keeps, so the "
+                        + "later ones aren't in this file either." : ""));
         JSONArray comments = new JSONArray();
         for (Row row : rows) {
             JSONObject item = new JSONObject();
@@ -263,7 +274,12 @@ public final class CommentExport {
 
     /** The bytes of the file. CSV leads with a byte order mark so a spreadsheet reads emoji right. */
     static byte[] encode(Format format, List<Row> rows, String exportedAt) throws JSONException {
-        if (format == Format.JSON) return toJson(rows, exportedAt).getBytes(StandardCharsets.UTF_8);
+        return encode(format, rows, exportedAt, false);
+    }
+
+    static byte[] encode(Format format, List<Row> rows, String exportedAt, boolean truncated)
+            throws JSONException {
+        if (format == Format.JSON) return toJson(rows, exportedAt, truncated).getBytes(StandardCharsets.UTF_8);
         byte[] body = toCsv(rows).getBytes(StandardCharsets.UTF_8);
         byte[] out = new byte[body.length + 3];
         out[0] = (byte) 0xEF;
@@ -281,11 +297,17 @@ public final class CommentExport {
     /** What the tap saw, held for the picker's answer. Main thread only. */
     private static Format pendingFormat;
     private static List<Row> pendingRows;
+    private static boolean pendingTruncated;
     private static DocumentOperation fileOperation;
     private static boolean stopOffered;
 
     /** From the Export button: takes the rows now, so the file is what the count beside it said. */
     static void begin(Activity activity, Format format, Collection<?> loaded) {
+        begin(activity, format, loaded, false);
+    }
+
+    /** {@code truncated}: the sheet stopped keeping comments, so the file and notice say so. */
+    static void begin(Activity activity, Format format, Collection<?> loaded, boolean truncated) {
         if (activity == null) return;
         try {
             if (DocumentOperation.busy(DocumentOperation.Kind.COMMENT_FILE)) {
@@ -299,6 +321,7 @@ public final class CommentExport {
             }
             pendingFormat = format;
             pendingRows = rows;
+            pendingTruncated = truncated;
             Request request = new Request();
             Bundle arguments = new Bundle();
             arguments.putString("name", fileName(format));
@@ -329,11 +352,9 @@ public final class CommentExport {
         @Override
         public void onCreate(Bundle state) {
             super.onCreate(state);
-            // Restored with its screen already up, or already answered: nothing to start.
-            if (state != null) {
-                leave();
-                return;
-            }
+            // Restored with the picker already up: stay, so its answer still lands here after a
+            // rotation or a theme change.
+            if (state != null) return;
             Bundle arguments = getArguments();
             try {
                 Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT)
@@ -358,9 +379,16 @@ public final class CommentExport {
             Uri uri = result == Activity.RESULT_OK && data != null ? data.getData() : null;
             Format format = pendingFormat;
             List<Row> rows = pendingRows;
+            boolean truncated = pendingTruncated;
             pendingRows = null;
-            if (uri == null || format == null || rows == null || activity == null) return;
-            write(activity.getApplicationContext(), activity, uri, format, rows);
+            if (uri == null || activity == null) return;
+            if (format == null || rows == null) {
+                // The process restarted under the picker, which already made an empty file.
+                DocumentOperation.removeUnsaved(activity.getContentResolver(), uri, false);
+                notice(activity, L10n.t(activity, "Couldn't open the file picker to export. Try again."));
+                return;
+            }
+            write(activity.getApplicationContext(), activity, uri, format, rows, truncated);
         }
 
         private void leave() {
@@ -369,10 +397,11 @@ public final class CommentExport {
         }
     }
 
-    private static void write(Context context, Activity window, Uri uri, Format format, List<Row> rows) {
+    private static void write(Context context, Activity window, Uri uri, Format format, List<Row> rows,
+            boolean truncated) {
         DocumentOperation[] started = new DocumentOperation[1];
         started[0] = DocumentOperation.start(DocumentOperation.Kind.COMMENT_FILE,
-                file -> exportTo(context, window, uri, format, rows, file),
+                file -> exportTo(context, window, uri, format, rows, truncated, file),
                 () -> fileOperationChanged(window, started[0]));
         if (started[0] != null) {
             fileOperation = started[0];
@@ -385,11 +414,11 @@ public final class CommentExport {
     }
 
     private static void exportTo(Context context, Activity window, Uri uri, Format format,
-            List<Row> rows, DocumentOperation file) {
+            List<Row> rows, boolean truncated, DocumentOperation file) {
         ContentResolver resolver = context.getContentResolver();
         boolean opened = false;
         try {
-            byte[] bytes = encode(format, rows, iso(System.currentTimeMillis() / 1000L));
+            byte[] bytes = encode(format, rows, iso(System.currentTimeMillis() / 1000L), truncated);
             if (!file.publish()) {
                 DocumentOperation.removeUnsaved(resolver, uri, false);
                 return;
@@ -400,7 +429,12 @@ public final class CommentExport {
             }
             file.finish();
             int top = topLevel(rows);
-            notice(window, L10n.f(context, "Exported %1$d comments and %2$d replies", top, rows.size() - top));
+            String exported = L10n.f(context, "Exported %1$d comments and %2$d replies", top, rows.size() - top);
+            if (truncated) {
+                exported += " " + L10n.f(context, "More than %1$d comments were loaded, so the rest aren't in the file.",
+                        CommentSearch.MAX_LOADED_COMMENTS);
+            }
+            notice(window, exported);
         } catch (IOException | JSONException | RuntimeException | OutOfMemoryError error) {
             // Stopped before the file app had anything: the stop has said what happened.
             if (file.stage() == DocumentOperation.Stage.STOPPED) {

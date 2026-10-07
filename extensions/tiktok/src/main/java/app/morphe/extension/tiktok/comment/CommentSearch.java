@@ -79,7 +79,7 @@ public final class CommentSearch {
      */
     private static final Map<ViewGroup, LoadedComments> LOADED_COMMENTS = new WeakHashMap<>();
     /** Enough to count honestly on any sheet a reader will scroll; past it the line says so. */
-    private static final int MAX_LOADED_COMMENTS = 2000;
+    static final int MAX_LOADED_COMMENTS = 2000;
 
     /** One sheet's comments and whether it stopped taking them. */
     private static final class LoadedComments {
@@ -365,7 +365,8 @@ public final class CommentSearch {
         button.setOnClickListener(view -> {
             LoadedComments loaded = LOADED_COMMENTS.get(listView);
             android.app.Activity activity = activityOf(view.getContext());
-            CommentExport.begin(activity, format, loaded == null ? null : loaded.byId.values());
+            CommentExport.begin(activity, format, loaded == null ? null : loaded.byId.values(),
+                    loaded != null && loaded.truncated);
         });
         return button;
     }
@@ -552,11 +553,19 @@ public final class CommentSearch {
             }
         }
 
+        /** How many loaded comments the count beside the buttons was last worked out from. */
+        private int countedFrom = -1;
+
         /** What the buttons would write: every comment and reply the sheet has loaded. */
         void updateExportCount(java.util.Collection<Object> loaded) {
             if (exports == null) return;
             View view = exports.findViewWithTag(EXPORT_COUNT_TAG);
             if (!(view instanceof TextView)) return;
+            // Every row bind lands here, and counting reads each loaded comment through
+            // reflection. The set only grows, so its size says whether there's anything new.
+            int size = loaded == null ? 0 : loaded.size();
+            if (size == countedFrom) return;
+            countedFrom = size;
             int total = loaded == null ? 0 : CommentExport.count(loaded);
             Context context = view.getContext();
             SettingsUi.setTextIfChanged((TextView) view, L10n.quantity(context, total,

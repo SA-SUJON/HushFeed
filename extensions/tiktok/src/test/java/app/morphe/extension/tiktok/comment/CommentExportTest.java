@@ -131,6 +131,30 @@ public class CommentExportTest {
         assertTrue(CommentExport.toCsv(rows).contains(",user_1,"));
     }
 
+    /** A spreadsheet runs a cell that starts like a formula; the CSV keeps every one of them text. */
+    @Test public void csvKeepsFormulaLookingCommentsAsText() {
+        String[] formulas = {"=HYPERLINK(\"https://x\",\"hi\")", "+1+1", "-2+3", "@SUM(A1)", "\tlead", "\rlead"};
+        List<CommentExport.Row> rows = new java.util.ArrayList<>();
+        for (int index = 0; index < formulas.length; index++) rows.add(row(String.valueOf(index), "", formulas[index]));
+        rows.add(row("9", "", "a = b, not a formula"));
+        List<List<String>> parsed = parseCsv(CommentExport.toCsv(rows));
+        for (int index = 0; index < formulas.length; index++) {
+            assertEquals("'" + formulas[index], parsed.get(index + 1).get(5));
+        }
+        assertEquals("a = b, not a formula", parsed.get(formulas.length + 1).get(5));
+    }
+
+    @Test public void aTruncatedSheetSaysSoInTheJsonHeader() throws Exception {
+        List<CommentExport.Row> rows = Arrays.asList(row("1", "", "=HYPERLINK(\"x\")"));
+        JSONObject whole = new JSONObject(CommentExport.toJson(rows, "2026-10-07T00:00:00Z"));
+        assertEquals(false, whole.getBoolean("truncated"));
+        // JSON is no spreadsheet, so its text stays exactly as written.
+        assertEquals("=HYPERLINK(\"x\")", whole.getJSONArray("comments").getJSONObject(0).getString("text"));
+        JSONObject cut = new JSONObject(CommentExport.toJson(rows, "2026-10-07T00:00:00Z", true));
+        assertEquals(true, cut.getBoolean("truncated"));
+        assertTrue(cut.getString("note"), cut.getString("note").contains("more comments loaded than Hushfeed keeps"));
+    }
+
     @Test public void csvFileLeadsWithAByteOrderMarkAndJsonDoesNot() throws Exception {
         List<CommentExport.Row> rows = Arrays.asList(row("1", "", "hi 😀"));
         byte[] csv = CommentExport.encode(CommentExport.Format.CSV, rows, "2026-10-07T00:00:00Z");

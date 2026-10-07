@@ -805,6 +805,7 @@ Mini dramas,Mini dramas
 Minimum,Minimum
 More opens the comments,More opens the comments
 More options,More options
+"More than %1$d comments were loaded, so the rest aren't in the file.","More than %1$d comments were loaded, so the rest aren't in the file."
 Move down,Move down
 Move left,Move left
 Move right,Move right

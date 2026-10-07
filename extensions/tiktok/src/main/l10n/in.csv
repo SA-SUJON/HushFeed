@@ -1604,3 +1604,4 @@ No comments are loaded to export yet.,Belum ada komentar yang dimuat untuk dieks
 Exported %1$d comments and %2$d replies,%1$d komentar dan %2$d balasan diekspor
 Comment export failed,Ekspor komentar gagal
 Some of these notes are in English.,Sebagian catatan ini dalam bahasa Inggris.
+"More than %1$d comments were loaded, so the rest aren't in the file.","Lebih dari %1$d komentar dimuat, jadi sisanya tidak ada di berkas."
