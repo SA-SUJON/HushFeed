@@ -410,13 +410,6 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             addPreference(new PopupLabelChecklistPreference(context));
             addPreference(new TogglePreference(
                     context,
-                    "Hide the two-step verification suggestion",
-                    "Stop the sheet suggesting you turn on two-step verification. Sign-in checks "
-                            + "and codes still show.",
-                    Settings.HIDE_2SV_SUGGESTION
-            ));
-            addPreference(new TogglePreference(
-                    context,
                     "Hide the LIVE bubble",
                     "Stop the bubble TikTok floats at the top of the feed to point you to a LIVE.",
                     Settings.HIDE_LIVE_BUBBLE

@@ -14,6 +14,7 @@ import app.morphe.patches.tiktok.misc.extension.sharedExtensionPatch
 import app.morphe.patches.tiktok.misc.settings.SettingsStatusLoadFingerprint
 import app.morphe.patches.tiktok.misc.settings.settingsPatch
 import app.morphe.util.addInstruction
+import app.morphe.util.addInstructions
 import app.morphe.util.addInstructionsAtControlFlowLabel
 import app.morphe.util.addInstructionsWithLabels
 import app.morphe.util.getFreeRegisterProvider
@@ -26,12 +27,16 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.RegisterRangeInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
+import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
+import com.android.tools.smali.dexlib2.iface.reference.TypeReference
 
 private const val POPUP_LABELS_DESCRIPTOR = "Lapp/morphe/extension/tiktok/popups/PopupLabels;"
 private const val POPUP_TASK_EXECUTOR = "Lcom/bytedance/poplayer/core/PopupTaskExecutor;"
 private const val FILTER_TASK = "filterTask"
 private const val POPUP_SWITCHES = "Lapp/morphe/extension/tiktok/popups/PopupSwitches;"
+private const val POP_SUITE = "Lcom/ss/android/ugc/aweme/services/popsuite/PopSuiteManagerService;"
+private const val CAMPAIGN = "Lcom/ss/android/ugc/aweme/IPopSuiteManagerService\$PopupConfigObject;"
 
 /**
  * TikTok's popup layer runs a queue of popup tasks. The method that starts one asks a filter
@@ -112,16 +117,59 @@ internal fun MutableMethod.hookPopupFilterCall(call: PopupFilterCall) {
 }
 
 /**
- * The pop suite's intro sheet, which is how the two-step verification suggestion reaches the
- * screen. Its name is the service interface's, so it isn't renamed; the sheet's tag pins this copy.
- * The popup layer task behind it carries no label, so the checklist never sees it.
+ * Where Pop Suite picks up the campaign it's about to show. Pop Suite is how TikTok's server sends
+ * its own sheets and floating cards, and every one of them comes through here, named by the
+ * campaign. The popup layer task it queues carries no label, so without this the checklist never
+ * sees them. The service keeps its own names on 47.0.3, 47.1.3 and 47.1.4.
  */
-internal object IntroPopSheetFingerprint : Fingerprint(
-    definingClass = "Lcom/ss/android/ugc/aweme/services/popsuite/PopSuiteManagerService;",
-    name = "showCommonTuxIntroPopSheet",
-    returnType = "Landroidx/fragment/app/DialogFragment;",
-    strings = listOf("UPSELL_2SV_POPUP"),
+internal object PopSuiteTriggerFingerprint : Fingerprint(
+    definingClass = POP_SUITE,
+    name = "popSuiteTriggerPopupInternal",
+    returnType = "V",
 )
+
+/**
+ * The check-cast that types the campaign Pop Suite has just read from currPopupConfigObj, with the
+ * null check that ends the method right after it: the cast's index, or null when the method reads
+ * its campaign any other way.
+ */
+internal fun campaignCast(method: Method): Int? {
+    val instructions = method.implementation?.instructions?.toList() ?: return null
+    for ((index, instruction) in instructions.withIndex()) {
+        if (instruction.opcode != Opcode.CHECK_CAST) continue
+        if (((instruction as ReferenceInstruction).reference as? TypeReference)?.type != CAMPAIGN) continue
+        val register = (instruction as OneRegisterInstruction).registerA
+        val result = instructions.getOrNull(index - 1)
+        if (result?.opcode != Opcode.MOVE_RESULT_OBJECT || (result as OneRegisterInstruction).registerA != register) return null
+        val get = (instructions.getOrNull(index - 2) as? ReferenceInstruction)?.reference as? MethodReference
+        if (get == null || get.definingClass != "Ljava/util/concurrent/atomic/AtomicReference;" || get.name != "get") return null
+        val field = (instructions.getOrNull(index - 3) as? ReferenceInstruction)?.reference as? FieldReference
+        if (field?.name != "currPopupConfigObj") return null
+        val check = instructions.getOrNull(index + 1)
+        if (check?.opcode != Opcode.IF_NEZ || (check as OneRegisterInstruction).registerA != register) return null
+        return index
+    }
+    return null
+}
+
+/**
+ * Hands the campaign to the checklist right after its cast. A ticked one comes back null, which
+ * the null check below already treats as nothing to show, so Pop Suite returns before it builds
+ * the sheet, queues a task or records a showing.
+ */
+internal fun MutableMethod.passCampaignToChecklist() {
+    val index = campaignCast(this)
+        ?: throw PatchException("Block popups: Pop Suite no longer reads its campaign the way the hook expects.")
+    val register = (getInstruction(index) as OneRegisterInstruction).registerA
+    addInstructions(
+        index + 1,
+        """
+            invoke-static/range {v$register .. v$register}, $POPUP_SWITCHES->campaign(Ljava/lang/Object;)Ljava/lang/Object;
+            move-result-object v$register
+            check-cast v$register, $CAMPAIGN
+        """,
+    )
+}
 
 /**
  * LiveBubbleUtil's check before it floats the LIVE bubble at the top of the feed: renamed on each
@@ -161,7 +209,7 @@ internal fun MutableMethod.returnEarlyWhen(switch: String, returning: String) {
 @Suppress("unused")
 val blockPopupsPatch = bytecodePatch(
     name = "Block popups",
-    description = "Lets you stop TikTok's own popups one at a time, like the follow-your-friends card or an upsell. The checklist lists each popup TikTok has tried to show on your phone, so one appears there after its first showing. Tick it and it stays away from then on. Two switches beside it hide the sheet suggesting two-step verification and the LIVE bubble at the top of the feed, which never reach the checklist. Nothing is blocked until you tick something or turn one on. CAPTCHA, verification, sign-in, age, ban and legal consent screens are never listed and never blocked. Switch: Hushfeed settings > Feed screen.",
+    description = "Lets you stop TikTok's own popups one at a time, like the follow-your-friends card or an upsell. The checklist lists each popup TikTok has tried to show on your phone, the sheets its server sends as campaigns included, so one appears there after its first showing. Tick it and it stays away from then on. A switch beside it hides the LIVE bubble at the top of the feed, which never reaches the checklist. Nothing is blocked until you tick something or turn it on. CAPTCHA, verification, sign-in, age, ban and legal consent screens are never listed and never blocked. Switch: Hushfeed settings > Feed screen.",
     default = true,
 ) {
     category("Feed")
@@ -179,11 +227,7 @@ val blockPopupsPatch = bytecodePatch(
         // Later calls first, so an earlier insert doesn't move the index of the next one.
         for (call in calls.asReversed()) method.hookPopupFilterCall(call)
 
-        // Null is the popup layer's own "nothing to show": it logs a failed show and moves on.
-        IntroPopSheetFingerprint.method.returnEarlyWhen(
-            "hideIntroSheet",
-            "const/4 v0, 0x0\n            return-object v0",
-        )
+        PopSuiteTriggerFingerprint.method.passCampaignToChecklist()
         LiveBubbleCheckFingerprint.method.returnEarlyWhen("hideLiveBubble", "return-void")
     }
 }

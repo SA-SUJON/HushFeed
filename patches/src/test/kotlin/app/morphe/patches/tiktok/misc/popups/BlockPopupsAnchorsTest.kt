@@ -7,6 +7,7 @@ import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.takes
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.builder.BuilderOffsetInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ThreeRegisterInstruction
@@ -14,7 +15,6 @@ import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethodImplementation
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
-import com.android.tools.smali.dexlib2.iface.reference.StringReference
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
@@ -159,6 +159,70 @@ class BlockPopupsAnchorsTest {
             ((code[0] as ReferenceInstruction).reference as MethodReference).toString(),
         )
         assertEquals(0, (code[1] as OneRegisterInstruction).registerA)
+        assertEquals("a no lands on the method's own first instruction", 4,
+            (code[2] as BuilderOffsetInstruction).target.location.index)
+        assertEquals(0, (code[2] as OneRegisterInstruction).registerA)
+    }
+
+    private val campaignRead = """
+        iget-object v0, v1, Lcom/ss/android/ugc/aweme/services/popsuite/PopSuiteManagerService;->currPopupConfigObj:Ljava/util/concurrent/atomic/AtomicReference;
+        invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicReference;->get()Ljava/lang/Object;
+        move-result-object v2
+        check-cast v2, Lcom/ss/android/ugc/aweme/IPopSuiteManagerService${'$'}PopupConfigObject;
+    """
+
+    @Test
+    fun `a Pop Suite campaign goes through the checklist between its cast and its null check`() {
+        val m = method(
+            """
+                $campaignRead
+                if-nez v2, :shows
+                return-void
+                :shows
+                const/4 v1, 0x1
+                return-void
+            """,
+        )
+        assertEquals(3, campaignCast(m))
+        m.passCampaignToChecklist()
+        val code = m.implementation!!.instructions.toList()
+        assertEquals(
+            listOf(
+                Opcode.IGET_OBJECT, Opcode.INVOKE_VIRTUAL, Opcode.MOVE_RESULT_OBJECT, Opcode.CHECK_CAST,
+                Opcode.INVOKE_STATIC_RANGE, Opcode.MOVE_RESULT_OBJECT, Opcode.CHECK_CAST,
+                Opcode.IF_NEZ, Opcode.RETURN_VOID, Opcode.CONST_4, Opcode.RETURN_VOID,
+            ),
+            code.map { it.opcode },
+        )
+        assertEquals(
+            "Lapp/morphe/extension/tiktok/popups/PopupSwitches;->campaign(Ljava/lang/Object;)Ljava/lang/Object;",
+            ((code[4] as ReferenceInstruction).reference as MethodReference).toString(),
+        )
+        for (index in 5..7) assertEquals(2, (code[index] as OneRegisterInstruction).registerA)
+        assertEquals("a campaign that comes back goes on as before", 9,
+            (code[7] as BuilderOffsetInstruction).target.location.index)
+    }
+
+    @Test
+    fun `a campaign read in any other shape is refused`() {
+        val noCheck = method(
+            """
+                $campaignRead
+                return-void
+            """,
+        )
+        assertNull(campaignCast(noCheck))
+        assertThrows(PatchException::class.java) { noCheck.passCampaignToChecklist() }
+        val otherRegister = method(
+            """
+                $campaignRead
+                if-nez v3, :shows
+                return-void
+                :shows
+                return-void
+            """,
+        )
+        assertNull(campaignCast(otherRegister))
     }
 
     @Test
@@ -173,30 +237,30 @@ class BlockPopupsAnchorsTest {
     }
 
     @Test
-    fun `the intro sheet and the LIVE bubble check are one method each, with room for the answer, on every declared build`() {
+    fun `Pop Suite's trigger and the LIVE bubble check are one method each, hookable, on every declared build`() {
         Fixtures.forEachDeclared { apk ->
             val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
             val classes = container.dexEntryNames.asSequence()
                 .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
                 .toList()
-            for (fingerprint in listOf(IntroPopSheetFingerprint, LiveBubbleCheckFingerprint)) {
-                val taken = classes.flatMap { classDef -> classDef.methods.filter { fingerprint.takes(it, classDef) } }
-                assertEquals("${apk.name}: ${fingerprint.javaClass.simpleName} took ${taken.map { it.name }}", 1, taken.size)
-                val found = taken.single()
-                val ins = found.parameterTypes.sumOf { type -> if (type.toString() == "J" || type.toString() == "D") 2 else 1 } +
-                    if (AccessFlags.STATIC.isSet(found.accessFlags)) 0 else 1
-                assertTrue("${apk.name}: ${found.name} has no local register", found.implementation!!.registerCount > ins)
-            }
-            // The skipped sheet hands the popup layer null, which it has to take as a failed show.
-            val executor = classes.single { it.type == "Lcom/bytedance/poplayer/core/PopupTaskExecutor;" }
-            val strings = executor.methods.flatMap { method ->
-                method.implementation?.instructions?.mapNotNull {
-                    ((it as? ReferenceInstruction)?.reference as? StringReference)?.string
-                }.orEmpty()
-            }
+
+            val bubble = classes.flatMap { classDef -> classDef.methods.filter { LiveBubbleCheckFingerprint.takes(it, classDef) } }
+            assertEquals("${apk.name}: LIVE bubble check took ${bubble.map { it.name }}", 1, bubble.size)
+            val found = bubble.single()
+            val ins = found.parameterTypes.sumOf { type -> if (type.toString() == "J" || type.toString() == "D") 2 else 1 } +
+                if (AccessFlags.STATIC.isSet(found.accessFlags)) 0 else 1
+            assertTrue("${apk.name}: ${found.name} has no local register", found.implementation!!.registerCount > ins)
+
+            val trigger = classes.flatMap { classDef -> classDef.methods.filter { PopSuiteTriggerFingerprint.takes(it, classDef) } }
+            assertEquals("${apk.name}: Pop Suite trigger took ${trigger.map { it.name }}", 1, trigger.size)
+            assertNotNull("${apk.name}: Pop Suite reads its campaign differently", campaignCast(trigger.single()))
+            // The extension reads the campaign's name by reflection, so it has to stay a public String.
+            val campaign = classes.single { it.type == "Lcom/ss/android/ugc/aweme/IPopSuiteManagerService\$PopupConfigObject;" }
             assertTrue(
-                "${apk.name}: the popup layer no longer handles a null show",
-                strings.any { it.contains("showPopup_returns_null") },
+                "${apk.name}: the campaign has no public String popupName",
+                campaign.fields.any {
+                    it.name == "popupName" && it.type == "Ljava/lang/String;" && AccessFlags.PUBLIC.isSet(it.accessFlags)
+                },
             )
         }
     }
