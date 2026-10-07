@@ -88,7 +88,7 @@ val avatarRingsPatch = bytecodePatch(
         "pictures, so a tap opens the profile. Switch: Hushfeed settings > Feed screen.",
     default = true,
 ) {
-    category("Feed screen")
+    category("Feed")
     compatibleWith(*AppCompatibilities.tiktok())
     dependsOn(settingsPatch, sharedExtensionPatch)
     execute {
