@@ -124,6 +124,8 @@ public class Settings extends BaseSettings {
     public static final IntegerSetting PHOTO_VIDEO_SECONDS = new IntegerSetting("photo_video_seconds", 3, false,
             Setting.parent(DOWNLOAD_PHOTOS_AS_VIDEO)).withRange(1, 10);
     public static final BooleanSetting DOWNLOAD_AUDIO_TRACK = new BooleanSetting("download_audio_track", FALSE);
+    /** The video's cover, at the largest size it comes in, saved with each Download. */
+    public static final BooleanSetting DOWNLOAD_COVER = new BooleanSetting("download_cover", FALSE);
     public static final BooleanSetting DOWNLOAD_WITHOUT_SOUND =
             new BooleanSetting("download_without_sound", FALSE);
     public static final BooleanSetting DOWNLOAD_PROGRESS = new BooleanSetting("download_progress", false);

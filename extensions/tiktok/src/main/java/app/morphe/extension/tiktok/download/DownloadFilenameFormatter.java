@@ -288,6 +288,16 @@ public final class DownloadFilenameFormatter {
         return boundTemplatedName(sanitizeBaseName(video + "_" + suffix), MAX_BASENAME_LENGTH, suffix) + ".jpg";
     }
 
+    /**
+     * A cover takes its video's own name, so it sorts beside the video and its frames:
+     * {@code <video name>_cover.<extension>}. The extension is the one the fetched bytes end up as.
+     */
+    static String formatCoverName(Object aweme, String extension) {
+        String video = stripExtension(formatSourceName(aweme, 1, "jpg", false));
+        return boundTemplatedName(sanitizeBaseName(video + "_cover"), MAX_BASENAME_LENGTH, "cover")
+                + "." + sanitizeExtension(extension);
+    }
+
     /** A position as minutes and two-digit seconds, 65,400 ms as 1m05s. */
     static String frameTime(long positionMs) {
         long seconds = Math.max(0, positionMs) / 1000;

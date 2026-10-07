@@ -1790,3 +1790,11 @@ Save details as JSON	Təfərrüatları JSON kimi saxlayın
 Write the details file as JSON instead of plain text, for scripts and archive tools.	Təfərrüat faylını adi mətn əvəzinə JSON kimi yazın, skriptlər və arxiv alətləri üçün.
 Tag saved videos with their details	Saxlanılan videolara təfərrüatlarını etiket kimi yazın
 Write the caption, creator, publication date and link into the video file itself, where media players and tools like ffprobe can read them. Applies to saves handled here.	Başlığı, yaradıcını, dərc tarixini və linki video faylının özünə yazın ki, media pleyerlər və ffprobe kimi alətlər onları oxuya bilsin. Burada idarə olunan saxlamalara aiddir.
+Save the video's cover	Videonun örtüyünü saxlayın
+Save the cover as well	Örtüyü də saxla
+Save the video's cover picture at the largest size TikTok has, each time you tap Download. It goes to your photo folder, named after the video.	Hər dəfə Endir düyməsinə toxunduqda videonun örtük şəklini TikTok-da olan ən böyük ölçüdə saxlayın. O, videonun adı ilə foto qovluğunuza düşür.
+This video has no cover to save	Bu videoda saxlanılacaq örtük yoxdur
+Allow storage for TikTok in Android settings to save covers	Örtükləri saxlamaq üçün Android ayarlarında TikTok üçün yaddaşa icazə verin
+The cover couldn't be saved. Try again.	Örtük saxlanıla bilmədi. Yenidən cəhd edin.
+Cover saved to %1$s	Örtük %1$s yerinə saxlanıldı
+Saving the cover	Örtük saxlanılır

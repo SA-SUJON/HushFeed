@@ -20,6 +20,7 @@ import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.diagnostics.HookStatus;
 import app.morphe.extension.tiktok.blockauthor.CurrentVideoAuthor;
 import app.morphe.extension.tiktok.blockauthor.Reflect;
+import app.morphe.extension.tiktok.download.CoverSaver;
 import app.morphe.extension.tiktok.download.OriginalSoundDownloads;
 import app.morphe.extension.tiktok.download.ExternalDownloader;
 import app.morphe.extension.tiktok.download.FrameSaver;
@@ -102,7 +103,8 @@ public final class GestureActions {
         return "nothing".equals(action) || "comments".equals(action)
                 || "original_sound".equals(action) || "copy_link".equals(action)
                 || "copy_sound_link".equals(action) || "youtube_music".equals(action)
-                || "sleep_timer".equals(action) || "save_frame".equals(action);
+                || "sleep_timer".equals(action) || "save_frame".equals(action)
+                || "save_cover".equals(action);
     }
 
     /**
@@ -215,6 +217,10 @@ public final class GestureActions {
             Object aweme = onScreenAweme();
             String videoId = Reflect.string(aweme, "getAid", "aid");
             FrameSaver.save(Utils.getVisibleActivity(), aweme, FeedSeek.positionOf(videoId));
+            return true;
+        }
+        if ("save_cover".equals(action)) {
+            CoverSaver.save(Utils.getActivity(), onScreenAweme());
             return true;
         }
         if (!"comments".equals(action)) return false;

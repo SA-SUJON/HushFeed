@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Video covers can be saved. Advanced downloads has a new switch under Video, Save the cover as well, off by default. With it on, each tap on Download also saves the video's cover at the largest size TikTok sends. Long press controls has a matching choice, Save the video's cover. Covers go to your photo folder, named after the video, and a HEIF or WebP cover comes out as a JPEG when Android can convert it.
+
 * **TikTok:** Custom launcher icon has a new option, Icon picture. Give it the path of a square PNG from 432 to 1024 pixels a side and it puts your picture where TikTok's note was, on Android 8 and up. The icon style still picks the color behind it, and with a picture there's no themed version. If the file can't be used, patching stops and says why before anything in TikTok changes.
 
 * **TikTok:** Advanced downloads has two new switches under Video, both off by default. Tag saved videos with their details writes the caption, creator, publication date and link into the saved MP4, where media players and ffprobe read them as the title, artist, date, comment and description. Save details as JSON makes the details file beside the video a JSON file instead of plain text. A video whose layout the tags can't be written into is still saved, just without them.

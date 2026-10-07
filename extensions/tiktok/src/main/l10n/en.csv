@@ -173,6 +173,7 @@ All events,All events
 All loaded tabs,All loaded tabs
 Allow Duet and Stitch anyway,Allow Duet and Stitch anyway
 Allow screenshots and Circle to Search,Allow screenshots and Circle to Search
+Allow storage for TikTok in Android settings to save covers,Allow storage for TikTok in Android settings to save covers
 Allow storage for TikTok in Android settings to save frames,Allow storage for TikTok in Android settings to save frames
 Allow storage for TikTok in Android settings to save profile pictures,Allow storage for TikTok in Android settings to save profile pictures
 Allow storage for TikTok in Android settings to save sounds,Allow storage for TikTok in Android settings to save sounds
@@ -405,6 +406,7 @@ Country and network preferences,Country and network preferences
 Country code,Country code
 Country filters,Country filters
 Counts under the buttons,Counts under the buttons
+Cover saved to %1$s,Cover saved to %1$s
 Create,Create
 Creator exceptions,Creator exceptions
 Creators and sounds,Creators and sounds
@@ -1195,10 +1197,13 @@ Save report,Save report
 Save seen history to a file,Save seen history to a file
 Save subtitles beside videos,Save subtitles beside videos
 "Save the caption, creator, link and publication date in a TXT file. On Android 10 and later, the pair uses Download or Documents under the same folder name. Applies to saves handled here.","Save the caption, creator, link and publication date in a TXT file. On Android 10 and later, the pair uses Download or Documents under the same folder name. Applies to saves handled here."
+Save the cover as well,Save the cover as well
 Save the frame on screen as a photo,Save the frame on screen as a photo
 Save the latest available TikTok crash report for diagnostic export.,Save the latest available TikTok crash report for diagnostic export.
 Save the original sound,Save the original sound
 Save the sound as well,Save the sound as well
+Save the video's cover,Save the video's cover
+"Save the video's cover picture at the largest size TikTok has, each time you tap Download. It goes to your photo folder, named after the video.","Save the video's cover picture at the largest size TikTok has, each time you tap Download. It goes to your photo folder, named after the video."
 "Save the videos @%1$s has seen, and when, to a JSON file. Anyone who opens the file can see that viewing history.","Save the videos @%1$s has seen, and when, to a JSON file. Anyone who opens the file can see that viewing history."
 "Save this account's seen videos, and when they were watched, to a JSON file. Anyone who opens the file can see that viewing history.","Save this account's seen videos, and when they were watched, to a JSON file. Anyone who opens the file can see that viewing history."
 Save videos without sound,Save videos without sound
@@ -1230,6 +1235,7 @@ Saving a frame from this video needs Android 7 or newer,Saving a frame from this
 Saving one original photo,Saving one original photo
 Saving seen history,Saving seen history
 Saving settings backup,Saving settings backup
+Saving the cover,Saving the cover
 Saving the frame,Saving the frame
 Saving the live photo's clip,Saving the live photo's clip
 Saving the profile picture,Saving the profile picture
@@ -1494,6 +1500,7 @@ The backup didn't start and its partial file couldn't be removed. Delete it from
 The backup wasn't saved. Back up again when the file app is ready.,The backup wasn't saved. Back up again when the file app is ready.
 The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.,The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.
 The comment button also opens a video's comments with its caption at the top. The caption over the video goes away while this is on.,The comment button also opens a video's comments with its caption at the top. The caption over the video goes away while this is on.
+The cover couldn't be saved. Try again.,The cover couldn't be saved. Try again.
 The diagnostic report couldn't be saved yet. Try again in a moment.,The diagnostic report couldn't be saved yet. Try again in a moment.
 The diagnostic report couldn't be saved. Try again.,The diagnostic report couldn't be saved. Try again.
 The downloader app you chose isn't installed. Check Send links to another app under Downloads.,The downloader app you chose isn't installed. Check Send links to another app under Downloads.
@@ -1575,6 +1582,7 @@ This profile picture isn't available to save,This profile picture isn't availabl
 "This setting's value can't be copied on this build, so it can't be overridden. Reset the override.","This setting's value can't be copied on this build, so it can't be overridden. Reset the override."
 This story isn't available to save,This story isn't available to save
 This value is required.,This value is required.
+This video has no cover to save,This video has no cover to save
 This video has no link to copy,This video has no link to copy
 "This video has no link to send, so TikTok's own save runs instead","This video has no link to send, so TikTok's own save runs instead"
 This video has no original sound to save,This video has no original sound to save

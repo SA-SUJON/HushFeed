@@ -189,7 +189,7 @@ public class GestureActionsTest {
         }
     }
 
-    @Test public void longPressPatchHasNineReachableChoices() throws Exception {
+    @Test public void longPressPatchHasTenReachableChoices() throws Exception {
         try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
             var activity = controller.get();
             Utils.setContext(activity);
@@ -199,8 +199,8 @@ public class GestureActionsTest {
             ChoicePreference choice = (ChoicePreference) screen.findPreference("long_press_action");
             assertNotNull(choice);
             assertArrayEquals(new String[]{"default", "nothing", "comments", "original_sound",
-                    "copy_link", "copy_sound_link", "youtube_music", "sleep_timer", "save_frame"},
-                    choice.getEntryValues());
+                    "copy_link", "copy_sound_link", "youtube_music", "sleep_timer", "save_frame",
+                    "save_cover"}, choice.getEntryValues());
             assertEquals("every value needs a label to pick it by",
                     choice.getEntryValues().length, choice.getEntries().length);
             // The edge seek rides on the same patch, so its two controls come with it.
@@ -274,6 +274,27 @@ public class GestureActionsTest {
             org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle();
             assertEquals(L10n.t("There's no video on screen to save a frame from"),
                     ShadowToast.getTextOfLatestToast());
+        } finally {
+            Settings.LONG_PRESS_ACTION.resetToDefault();
+            Settings.EDGE_SEEK.resetToDefault();
+        }
+    }
+
+    /** Save the cover is Hushfeed's press too, and says so when the post on screen has no cover. */
+    @Test public void longPressSaveCoverTakesThePressAndSaysWhenThereIsNoCover() {
+        try (var controller = Robolectric.buildActivity(android.app.Activity.class).setup().visible()) {
+            var activity = controller.get();
+            Utils.setContext(activity);
+            Utils.setActivity(activity);
+            Settings.EDGE_SEEK.save(false);
+            Settings.LONG_PRESS_ACTION.save("save_cover");
+            assertTrue(GestureActions.takesLongPress("save_cover"));
+            assertFalse("TikTok's own edge speedup stays off under it", GestureActions.allowNativeEdgeSpeedup(0));
+
+            ShadowToast.reset();
+            assertTrue(GestureActions.onLongPress(middleOf(activity)));
+            org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle();
+            assertEquals(L10n.t("This video has no cover to save"), ShadowToast.getTextOfLatestToast());
         } finally {
             Settings.LONG_PRESS_ACTION.resetToDefault();
             Settings.EDGE_SEEK.resetToDefault();

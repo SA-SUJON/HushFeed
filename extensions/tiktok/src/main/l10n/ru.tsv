@@ -1955,3 +1955,11 @@ Save details as JSON	Сохранять сведения в JSON
 Write the details file as JSON instead of plain text, for scripts and archive tools.	Записывать файл со сведениями в формате JSON вместо обычного текста, для скриптов и программ архивации.
 Tag saved videos with their details	Записывать сведения в теги сохранённых видео
 Write the caption, creator, publication date and link into the video file itself, where media players and tools like ffprobe can read them. Applies to saves handled here.	Записывать подпись, автора, дату публикации и ссылку в сам видеофайл, где их прочитают медиаплееры и инструменты вроде ffprobe. Действует для сохранений, выполняемых здесь.
+Save the video's cover	Сохранять обложку видео
+Save the cover as well	Сохранять обложку тоже
+Save the video's cover picture at the largest size TikTok has, each time you tap Download. It goes to your photo folder, named after the video.	Сохранять обложку видео в самом большом размере, какой есть у TikTok, каждый раз, когда вы нажимаете «Скачать». Она попадает в папку с фото и называется как видео.
+This video has no cover to save	У этого видео нет обложки для сохранения
+Allow storage for TikTok in Android settings to save covers	Разрешите TikTok доступ к хранилищу в настройках Android, чтобы сохранять обложки
+The cover couldn't be saved. Try again.	Не удалось сохранить обложку. Повторите попытку.
+Cover saved to %1$s	Обложка сохранена в %1$s
+Saving the cover	Обложка сохраняется

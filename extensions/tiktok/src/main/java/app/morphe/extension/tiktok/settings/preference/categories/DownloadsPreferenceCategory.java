@@ -117,6 +117,9 @@ public class DownloadsPreferenceCategory extends ConditionalPreferenceCategory {
                             + "the .m4a beside it if you want both.", Settings.DOWNLOAD_WITHOUT_SOUND));
             addPreference(new TogglePreference(context, "Save the sound as well",
                     "Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos.", Settings.DOWNLOAD_AUDIO_TRACK));
+            addPreference(new TogglePreference(context, "Save the cover as well",
+                    "Save the video's cover picture at the largest size TikTok has, each time you tap Download. It goes to your photo folder, named after the video.",
+                    Settings.DOWNLOAD_COVER));
             addPreference(new TogglePreference(context, "Show download progress",
                     "Show a progress bar while a video saves.", Settings.DOWNLOAD_PROGRESS));
             addPreference(new TogglePreference(context, "Save details beside the video",

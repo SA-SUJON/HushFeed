@@ -1784,3 +1784,11 @@ Save details as JSON,Simpan detail sebagai JSON
 "Write the details file as JSON instead of plain text, for scripts and archive tools.","Tulis file detail sebagai JSON, bukan teks biasa, untuk skrip dan alat arsip."
 Tag saved videos with their details,Beri tag detail pada video yang disimpan
 "Write the caption, creator, publication date and link into the video file itself, where media players and tools like ffprobe can read them. Applies to saves handled here.","Tulis keterangan, kreator, tanggal publikasi, dan tautan ke dalam file video itu sendiri, tempat pemutar media dan alat seperti ffprobe bisa membacanya. Berlaku untuk penyimpanan yang ditangani di sini."
+Save the video's cover,Simpan sampul video
+Save the cover as well,Simpan sampulnya juga
+"Save the video's cover picture at the largest size TikTok has, each time you tap Download. It goes to your photo folder, named after the video.","Simpan gambar sampul video dengan ukuran terbesar yang dimiliki TikTok, setiap kali kamu mengetuk Unduh. Gambar masuk ke folder fotomu, dinamai sesuai videonya."
+This video has no cover to save,Video ini tidak punya sampul untuk disimpan
+Allow storage for TikTok in Android settings to save covers,Izin penyimpanan dibutuhkan untuk menyimpan sampul
+The cover couldn't be saved. Try again.,Sampul tidak bisa disimpan. Coba lagi.
+Cover saved to %1$s,Sampul disimpan di %1$s
+Saving the cover,Menyimpan sampul

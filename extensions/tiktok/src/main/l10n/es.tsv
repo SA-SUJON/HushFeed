@@ -1790,3 +1790,11 @@ Save details as JSON	Guardar los detalles como JSON
 Write the details file as JSON instead of plain text, for scripts and archive tools.	Escribe el archivo de detalles en JSON en vez de texto sin formato, para scripts y herramientas de archivo.
 Tag saved videos with their details	Etiquetar los vídeos guardados con sus detalles
 Write the caption, creator, publication date and link into the video file itself, where media players and tools like ffprobe can read them. Applies to saves handled here.	Escribe la descripción, el creador, la fecha de publicación y el enlace dentro del propio archivo de vídeo, donde los reproductores y herramientas como ffprobe pueden leerlos. Se aplica a las descargas hechas aquí.
+Save the video's cover	Guardar la portada del vídeo
+Save the cover as well	Guardar también la portada
+Save the video's cover picture at the largest size TikTok has, each time you tap Download. It goes to your photo folder, named after the video.	Guarda la imagen de portada del vídeo en el tamaño más grande que tenga TikTok, cada vez que toques Descargar. Va a tu carpeta de fotos, con el nombre del vídeo.
+This video has no cover to save	Este vídeo no tiene portada que guardar
+Allow storage for TikTok in Android settings to save covers	Hace falta permiso de almacenamiento para guardar una portada
+The cover couldn't be saved. Try again.	No se pudo guardar la portada. Inténtalo otra vez.
+Cover saved to %1$s	Portada guardada en %1$s
+Saving the cover	Guardando la portada
