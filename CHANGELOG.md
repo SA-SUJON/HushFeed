@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** New patch, LIVE controls. A LIVE that shows up in your feed can count down and drop you into the room without a tap. Turn on Stop LIVE previews opening by themselves in Hushfeed settings > Playback and it stays a preview until you tap it. It's off by default.
+
 * **TikTok:** New patch, Stop search autoplay. Turn on Stop search results playing on their own in Hushfeed settings > App and the videos in your search results stay on their cover until you open one. The feed plays as usual.
 
 * **TikTok:** Ghost mode has a new Hide online status switch under it in Hushfeed settings > Privacy. With both on, TikTok stops sending the activity report that shows your friends a green dot or Active now while you're in the app. That same report brings back your friends' status, so theirs may stop updating for you while it's on. It's off by default.

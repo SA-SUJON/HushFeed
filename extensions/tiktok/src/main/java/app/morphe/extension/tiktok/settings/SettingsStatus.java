@@ -66,6 +66,7 @@ public class SettingsStatus {
     public static boolean stopVideoLoopingEnabled = false;
     public static boolean fullScreenHoldEnabled = false;
     public static boolean storyControlsEnabled = false;
+    public static boolean liveControlsEnabled = false;
     public static boolean resumeVideoAfterScrollEnabled = false;
     public static boolean externalBrowserEnabled = false;
     public static boolean alwaysShowPublishDateEnabled = false;
@@ -270,6 +271,10 @@ public class SettingsStatus {
 
     public static void enableStoryControls() {
         storyControlsEnabled = true;
+    }
+
+    public static void enableLiveControls() {
+        liveControlsEnabled = true;
     }
 
     public static void enableFullScreenHold() {

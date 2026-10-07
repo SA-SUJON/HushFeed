@@ -98,6 +98,7 @@ source,target
 1 result so far,1 result so far
 1 video left,1 video left
 "2, from Keep playing in the background","2, from Keep playing in the background"
+A LIVE in the feed can count down and take you into the room on its own. This keeps you in the feed until you tap it.,A LIVE in the feed can count down and take you into the room on its own. This keeps you in the feed until you tap it.
 A Lab change is already running,A Lab change is already running
 A change that loosens the budget waits until the day starts over and one that tightens it applies at once. A higher budget or no budget loosens it. So do a shorter hold and more times to open the feed anyway. Moving the hour the day starts and turning this off wait too. A restored backup follows the same rule and Start today over is off while this is on.,A change that loosens the budget waits until the day starts over and one that tightens it applies at once. A higher budget or no budget loosens it. So do a shorter hold and more times to open the feed anyway. Moving the hour the day starts and turning this off wait too. A restored backup follows the same rule and Start today over is off while this is on.
 A comment poll shows how many picked each answer before you vote. Tapping an answer still votes.,A comment poll shows how many picked each answer before you vote. Tapping an answer still votes.
@@ -1273,6 +1274,7 @@ Still saving the last one,Still saving the last one
 Still waiting for the file app.,Still waiting for the file app.
 Still waiting for the file app. Tap to stop waiting.,Still waiting for the file app. Tap to stop waiting.
 "Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them.","Stop ByteDance AppLog events, AppsFlyer attribution, explicit Firebase screen reports and crash reporting from being sent. TikTok's own diagnostics go quiet with them."
+Stop LIVE previews opening by themselves,Stop LIVE previews opening by themselves
 "Stop TikTok asking the screen to run at the frame rate of the video it's playing. On a 90 or 120 Hz phone that ask slows the whole app down to the video's rate, scrolling included.","Stop TikTok asking the screen to run at the frame rate of the video it's playing. On a 90 or 120 Hz phone that ask slows the whole app down to the video's rate, scrolling included."
 "Stop TikTok listening to the accelerometer, gyroscope, magnetometer and the other motion sensors it uses to fingerprint the phone.","Stop TikTok listening to the accelerometer, gyroscope, magnetometer and the other motion sensors it uses to fingerprint the phone."
 Stop TikTok reading what you copied. Copying a link from TikTok still works.,Stop TikTok reading what you copied. Copying a link from TikTok still works.

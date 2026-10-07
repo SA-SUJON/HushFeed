@@ -370,6 +370,11 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting STORY_LOOP = new BooleanSetting("story_loop", FALSE, true);
     /** Keeps a photo story on screen until you tap or swipe; the Story controls patch. */
     public static final BooleanSetting STORY_PHOTO_HOLD = new BooleanSetting("story_photo_hold", FALSE, true);
+    /**
+     * Keeps a LIVE preview in the feed from counting down into the room; the LIVE controls patch.
+     * Read each time a preview would start its countdown, so no restart.
+     */
+    public static final BooleanSetting STOP_LIVE_AUTO_ENTER = new BooleanSetting("stop_live_auto_enter", FALSE);
     public static final BooleanSetting RESUME_VIDEO_AFTER_SCROLL = new BooleanSetting(
             "resume_video_after_scroll",
             TRUE,

@@ -4292,6 +4292,67 @@
       "options": []
     },
     {
+      "name": "LIVE controls",
+      "description": "Adds a switch that stops a LIVE in the feed counting down and taking you into the room on its own, so you stay in the feed until you tap it. Switch: Hushfeed settings > Playback.",
+      "category": "Playback",
+      "use": true,
+      "dependencies": [
+        "BytecodePatch",
+        "Settings"
+      ],
+      "compatiblePackages": {
+        "com.zhiliaoapp.musically": [
+          "47.0.3",
+          "47.1.3",
+          "47.1.4"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "TikTok",
+          "packageName": "com.zhiliaoapp.musically",
+          "description": null,
+          "appIconColor": 16657493,
+          "signatures": [
+            "9041803e91bcb814b4b4399fb5c85a91640b755e5e8ba76813814bf4cf2ab5ba"
+          ],
+          "targets": [
+            {
+              "version": "47.0.3",
+              "experimental": false,
+              "versionCodes": {
+                "ARM64_V8A": 2024700030,
+                "ARMEABI_V7A": 2024700030,
+                "X86": 2024700030,
+                "X86_64": 2024700030
+              }
+            },
+            {
+              "version": "47.1.3",
+              "experimental": false,
+              "versionCodes": {
+                "ARM64_V8A": 2024701030,
+                "ARMEABI_V7A": 2024701030,
+                "X86": 2024701030,
+                "X86_64": 2024701030
+              }
+            },
+            {
+              "version": "47.1.4",
+              "experimental": false,
+              "versionCodes": {
+                "ARM64_V8A": 2024701040,
+                "ARMEABI_V7A": 2024701040,
+                "X86": 2024701040,
+                "X86_64": 2024701040
+              }
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Lift text length limits",
       "description": "Adds a switch that lets comments, repost notes and your bio run past the length TikTok's app stops at. TikTok's servers can still turn down a long one. Switch: Hushfeed settings > Comments.",
       "category": "Comments",

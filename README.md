@@ -13,14 +13,14 @@
 
 Hushfeed is a [Morphe](https://github.com/MorpheApp/morphe-manager) patch bundle for people who want TikTok to behave differently. It can cut feed clutter, guard risky taps, improve downloads and expose controls TikTok leaves buried or unavailable. Every selected patch is configured from one native settings screen inside the app.
 
-**[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse the 119 source patches](#patches)
+**[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse the 120 source patches](#patches)
 
 > [!IMPORTANT]
 > Hushfeed targets the global TikTok package, `com.zhiliaoapp.musically`, versions [47.0.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-0-3-release/tiktok-47-0-3-3-android-apk-download/), [47.1.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-1-3-release/tiktok-47-1-3-android-apk-download/) and [47.1.4](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-1-4-release/tiktok-47-1-4-2-android-apk-download/). Use one of those exact APKs when patching. See [Supported target](#supported-target) for the verified build details.
 
 Hushfeed v0.68.0 contains 106 patches for TikTok 47.0.3, 47.1.3 and 47.1.4. New in this one: original photos save as full-size JPEGs, hiding the status bar takes TikTok's black strip with it, a switch clears the controls left on Clear display, and Back up, Restore and the Lab's file actions stop waiting on a stuck file app when you ask. It needs Morphe Manager 1.34.0 or newer.
 
-The main branch contains 119 patches, thirteen more than v0.68.0.
+The main branch contains 120 patches, fourteen more than v0.68.0.
 
 ## Pick what changes
 
@@ -265,6 +265,7 @@ The eleven optional patches in the Performance group were measured on a Galaxy S
 | `Keep the screen's refresh rate` | Stops TikTok asking the screen to run slower than it can, which it does by asking for the frame rate of the video it is playing. On a 90 or 120 Hz phone that ask takes the whole app down to that rate, scrolling included. A request that is not slower than the screen is left alone. Switch: Hushfeed settings > App. |
 | `Lift text length limits` | Adds a switch that lets comments, repost notes and your bio run past the length TikTok's app stops at. TikTok's servers can still turn down a long one. Switch: Hushfeed settings > Comments. |
 | `Limit background traffic` | Turns off TikTok's buffer-preload gate. Videos may start buffering later. Push setup stays on unless Skip push setup is enabled in the patch options. |
+| `LIVE controls` | Adds a switch that stops a LIVE in the feed counting down and taking you into the room on its own, so you stay in the feed until you tap it. Switch: Hushfeed settings > Playback. |
 | `Location access governor` | Answers TikTok's location requests with nothing: the last known location comes back empty and update requests never fire. The SIM and region spoof change the locale and timezone, not the coordinates. This patch stops the coordinates. Switch: Hushfeed settings > Privacy. |
 | `Long-press controls` | Lets a long press on a video keep TikTok's own action, do nothing, open the video's comments, save the original sound, copy the link to the video or its sound, or look the sound up on YouTube Music. It can also turn a press on the left or right third of the screen into a jump back or forward, and make a long press on Comment, Share or Favorites play at the hold speed instead of opening TikTok's menu. Brings Double-tap controls with it, which supplies the comment control. Switch: Hushfeed settings > Feed screen. |
 | `Look like the store app` | Answers TikTok's own checks of how it was signed and installed the way the Play Store app would. Its signature hash reads as TikTok's certificate and its installer reads as the Play Store, or another store you pick. For a follow or a like that undoes itself on a refresh on a patched build. TikTok can also read the APK from native code, which no patch reaches, so it may not be enough on its own. Off by default. Switch: Hushfeed settings > App. |
@@ -639,7 +640,7 @@ APKMirror also offers some TikTok releases as bundles, using an `.apkm` file. Mo
 
 ### Why those versions and not a newer one
 
-Patches use named components where TikTok retains them and code patterns where names are stripped. Both can change between builds. On main, 47.0.3, 47.1.3 and 47.1.4 are the declared targets. 47.0.3 stays declared alongside the two 47.1 builds. All 119 patches apply to all three reviewed APKs, and the retained 46.2.3, 46.7.3, 46.8.3 and 46.9.3 builds remain regression fixtures rather than advertised targets. Another build can fail loudly when an anchor moves or, worse, accept the wrong shape.
+Patches use named components where TikTok retains them and code patterns where names are stripped. Both can change between builds. On main, 47.0.3, 47.1.3 and 47.1.4 are the declared targets. 47.0.3 stays declared alongside the two 47.1 builds. All 120 patches apply to all three reviewed APKs, and the retained 46.2.3, 46.7.3, 46.8.3 and 46.9.3 builds remain regression fixtures rather than advertised targets. Another build can fail loudly when an anchor moves or, worse, accept the wrong shape.
 
 Only the global package is declared in the compatibility metadata.
 

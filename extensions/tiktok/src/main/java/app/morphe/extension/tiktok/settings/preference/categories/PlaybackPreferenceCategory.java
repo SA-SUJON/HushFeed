@@ -32,6 +32,7 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                 || SettingsStatus.h264PlaybackEnabled || SettingsStatus.playbackSpeedEnabled
                 || SettingsStatus.autoAdvanceEnabled || SettingsStatus.videoFitEnabled
                 || SettingsStatus.fullScreenHoldEnabled || SettingsStatus.storyControlsEnabled
+                || SettingsStatus.liveControlsEnabled
                 || SettingsStatus.feedMuteEnabled
                 || SettingsStatus.backgroundPlayEnabled
                 || SettingsStatus.showSeekbarEnabled || SettingsStatus.seekbarThumbnailEnabled
@@ -67,7 +68,8 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
         // you on the video you're on, paused behind the comments, held or stopped at its end, or
         // picked up where you left it.
         if (SettingsStatus.commentToolsEnabled || SettingsStatus.fullScreenHoldEnabled
-                || SettingsStatus.storyControlsEnabled || SettingsStatus.stopVideoLoopingEnabled || SettingsStatus.resumeVideoAfterScrollEnabled) {
+                || SettingsStatus.storyControlsEnabled || SettingsStatus.liveControlsEnabled
+                || SettingsStatus.stopVideoLoopingEnabled || SettingsStatus.resumeVideoAfterScrollEnabled) {
             addPreference(new SectionHeadingPreference(context, "Staying on a video"));
         }
         if (SettingsStatus.commentToolsEnabled) {
@@ -91,6 +93,12 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                     "Keep a photo story on screen until you tap or swipe, instead of moving on "
                             + "after a few seconds.",
                     Settings.STORY_PHOTO_HOLD));
+        }
+        if (SettingsStatus.liveControlsEnabled) {
+            addPreference(new TogglePreference(context, "Stop LIVE previews opening by themselves",
+                    "A LIVE in the feed can count down and take you into the room on its own. "
+                            + "This keeps you in the feed until you tap it.",
+                    Settings.STOP_LIVE_AUTO_ENTER));
         }
         if (SettingsStatus.stopVideoLoopingEnabled) {
             addPreference(new TogglePreference(
