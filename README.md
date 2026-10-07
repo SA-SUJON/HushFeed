@@ -141,7 +141,7 @@ Yes. Every release is patched with all of them selected before it ships, so no t
 
 Morphe's own patch bundle has Clone app, which gives the patched TikTok a new package name so Android installs it next to the one from the store. Keep its Update permissions and Update providers options on, or Android refuses the install. Clone app alone isn't enough for TikTok, though. The copy reports its new name when it registers your phone, TikTok's servers don't give it a device ID, and logging in fails. Select Run beside the store app from Hushfeed as well and the copy registers under TikTok's own name. Change app name helps tell the two icons apart. Each app keeps its own data and its own login.
 
-Facebook sign-in checks the app's signing key, so it won't work in the copy, and Google sign-in hasn't been tried there yet. Log in to the copy with your email or phone number and a code.
+Google and Facebook sign-in check the app's package name and signing key, so they can't work in the copy. Log in to the copy with your email or phone number and a code.
 
 ### Unfollowing a lot of accounts at once
 
