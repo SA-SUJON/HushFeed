@@ -151,29 +151,18 @@ Every Hushfeed release, newest first.
 * **TikTok:** Hide the music line now hides the track name and its "Contains:" song credit on feed and opened videos (#68). The music disc still has its own switch.
 
 * **TikTok:** The README's install steps and TikTok badge list all three supported builds, and it explains which patch-time removals need a new APK to undo. The settings tour uses the current Share page, without the removed friend-send confirmation.
-
 * **TikTok:** Video quality and Remove sound no longer intercept photo posts that also carry a video model (#71). Download original photos keeps control of still-image saves, and selected live-photo motion clips keep TikTok's native route.
-
 * **TikTok:** Download video on a photo post now queues original stills before TikTok starts video conversion. Missing originals produce an error, and even one or two images show a file count and Cancel. Live Photo video choices retain their native route (#71).
 
 * **TikTok:** The LIVE feed you open with the LIVE button can be filtered now (#57). Feed filter has a LIVE feed section that hides gaming, Shop and sponsored LIVEs, verified creators, categories you name, and rooms outside a viewer or follower range. Blocked creators, Creators hidden on this phone and Blocked caption words carry over (words are matched against each LIVE's title), and Creator exceptions lets chosen creators past the gaming, verified, category and count rules, though never past a block, a blocked word, Shop or sponsored. The first room comes with the LIVE button itself, so the rules start with the one after it. When they hide every room on five pages in a row, one room gets through, because a page with nothing on it makes TikTok ask for the next one about once a second. TikTok's LIVE feed doesn't say when a stream started or when an account was made, so there's no rule for either. The diagnostic report's LIVE FEED section counts pages, rooms and what each rule hid.
-
 * **TikTok:** A double tap, long press or left swipe set to open comments opens the comments of the video on screen (#63). Right after a swipe it could open the comments of the video before or after it, show that video's "restricted comments" message, or say comments weren't available. It went by the video the player was naming, and the player names a new video only once it starts playing. When what's on screen has no comment button of its own, you get the "not available" message rather than another video's comments.
-
 * **TikTok:** The other long press choices go by the video on screen too (#63). Copy the video link, Copy the sound link, Save the original sound and Find the sound on YouTube Music took the video before right after a swipe, so a link copied then was that video's. When what's on screen has no comment button of its own, like a LIVE, they say there's nothing there for them instead. Seek from the edges no longer moves the video before either, and if the new one hasn't started playing yet it says nothing is playing. In a video opened from a profile, a comments gesture never reaches the feed behind it.
-
 * **TikTok:** Hide the status bar now also keeps it away on videos you open from a profile, a hashtag, a sound or search (#50). It used to stop at the main feed, so the clock and status icons stayed over those videos.
-
 * **TikTok:** A new switch on the Feed screen page, Hide the comment bar on opened videos, takes the Add comment bar off videos you open from a profile, a hashtag, a sound or search, and the video grows into the room it held (#50). TikTok's Clear display hides that bar but leaves a black strip where it was. The comment button on the right still opens comments. It's off by default.
-
 * **TikTok:** A new switch on the Privacy page, Stop TikTok's benchmark runs, keeps TikTok's phone benchmark from starting (#64). TikTok's servers sometimes ask it to time the phone, and it does that in a background process of its own that held about 194 MB on one phone. The switch turns that process's service off, so it can't start. A run that's already going ends when TikTok restarts, and turning the switch off or pausing Hushfeed hands the service back. Turn it off before you patch TikTok again without that patch, or the benchmark stays off until TikTok is reinstalled. It comes with the Resource and battery governor patch and is off by default.
-
 * **TikTok:** New patch, Hide profile shortcuts, takes the shortcuts you pick off the row under a profile's bio, like TikTok Studio or Your orders (#49). TikTok's server decides what goes in that row, so Hushfeed settings > App > Hide profile shortcuts lists the ones TikTok has sent to your phone once you've opened your profile, and the row beside it takes names you type. A change shows once TikTok restarts. Hide all of them and the row goes away with no gap left behind. Nothing is hidden until you pick something.
-
 * **TikTok:** Hushfeed works in a second copy of TikTok made with Morphe's Clone app patch (#59). That patch gives the copy a new package name and renames TikTok's own resources to match, so the share sheet tools couldn't find their views, and neither could hiding video overlays, the captions settings, the comment tools or the author line. They now look views up under whatever name the app runs as. Logging in to a cloned TikTok was refused on the first try in testing, so the copy may only be usable logged out.
-
 * **TikTok:** Remove unused language packs keeps every language now unless you list the ones you want in Languages to keep (#67). It used to keep only English out of the box, so picking every patch in Manager left TikTok in English for everyone else. To keep removing them, set Languages to keep to your codes, such as en or en, tr. If your TikTok lost its language this way, patch it again with this patch off (or with your language listed) and install it over the one you have. You stay signed in.
-
 * **TikTok:** In Feed tabs, the Explore option is called Explore or Community now (#62). Some accounts see that tab as Community, and unticking Explore hid it with nothing in the list saying so.
 
 * **TikTok:** Hushfeed now needs Morphe Manager 1.33.0 or newer, because it's built against Morphe patcher 1.15.0. Older Managers say the bundle needs a Manager update. In a test with memory held near what Manager gets on a phone (768 MB), patcher 1.14.1 ran out of memory while saving patched TikTok 47.1.4, and 1.15.0 finished.
@@ -181,135 +170,74 @@ Every Hushfeed release, newest first.
 ## 0.66.0 (2026-10-01)
 
 * **TikTok:** Hushfeed's settings now come in Italian (#61) and Russian (#60). Both are first passes, and corrections from Italian and Russian speakers are very welcome. Russian counts use all three of the language's forms, so 2, 5 and 21 results each read the way Russian says them.
-
 * **TikTok:** New patch, Change app name, puts a name you choose under the app's icon and in Android's app list, so a patched TikTok is easy to tell from another one (#59). Type the name in the patch's options in Morphe Manager. It's off by default, inside the app everything still says TikTok, and like Hide Play Store update offer it has the manager decode TikTok's resources, which takes more memory.
-
 * **TikTok:** Fit the video to the screen fits a video again when the space around it changes size (#29). A Pixel 9 showed a video fitted to about two thirds of the screen's height with bars on every side: the fit had been worked out against a space TikTok then laid out bigger, and nothing fitted the video again. The diagnostic report also has a VIDEO FIT section with the last few fits and the sizes each was worked out from, so a report taken when it happens shows where a wrong size came from.
-
 * **TikTok:** A phone set to English first and another language second shows Hushfeed's settings in English, as TikTok does, instead of in the second language. Counts also follow the rules of the language the settings are shown in. A phone whose language has no table yet showed "1 results", and one set to Japanese and then Russian showed "1 результатов".
-
 * **TikTok:** In Brazilian Portuguese a count of zero read as one, "1 resultado" for no results at all, because Portuguese counts 0 together with 1 and that form is written for exactly one. A count other than 1 now always shows its own number. A language whose one form covers more counts, like Russian's 21 and 31, gets a row of its own for them.
-
 * **TikTok:** The diagnostic report has a FEED MUTE section, so a report of a feed with no sound can tell Hushfeed's mute apart from everything else (#58). It shows whether Mute feed videos and its button on the feed are on, how many feed players it has muted since TikTok started, and how many audio focus requests it has turned down. When Hushfeed is paused it says so, since the feed then plays with its sound.
-
 * **TikTok:** The share sheet no longer shows "Tap again to send" on a friend you never touched (#58). That message came from the Confirm before sending to a friend switch, which was hooked to the code TikTok runs when a friend's picture scrolls into view, not to a tap, so it could ring a friend as the sheet opened and it never held back a real tap. On every TikTok version Hushfeed supports, tapping a friend only picks them and nothing goes out until you press Send, so the switch is gone rather than moved.
-
 * **TikTok:** You can add apps of your own to the share sheet's Share via row. Pick them under Hushfeed settings > Share sheet > Add apps to Share via, from every installed app that takes a shared link. Each one shows up just before More with its own icon and gets the same link the other apps get, so Sanitize sharing links cleans it too. An app TikTok already shows is left alone, and one you've since uninstalled drops out of the row until it's back.
-
 * **TikTok:** New patch, Look like the store app, for a follow or a like that undoes itself on a refresh on a patched build (#55). A patched TikTok is re-signed with the patcher's key and installed by Morphe Manager, and TikTok reports both about itself: its signature hash and its installer. This answers those reports the way the Play Store app would, so TikTok's signature hash carries TikTok's own certificate and its installer reads as the Play Store. TikTok can also read the APK on disk from native code, which no patch reaches, so this may not be enough on its own. It's off by default, under Hushfeed settings > Privacy, and needs a restart to take effect.
-
 * **TikTok:** New patch, Keep a streak going, sends one message a day to someone you pick, at a time you pick, so your message streak with them doesn't lapse on a day you don't open TikTok. Set it up under Hushfeed settings > Inbox > Streak: their username, the time and the message, which is a 🔥 unless you change it. It goes out through TikTok's own notification reply, and TikTok doesn't have to be open. When it can't send, it tries again every 15 minutes, up to three more times, and a message that still didn't go out that day is sent if you open TikTok later the same day. Send it now sends today's right away, and the line under the switch says when the last one went and when the next one goes. Turning it on, or picking someone new, after today's time has passed starts it tomorrow, and nobody gets two messages in one day, even if you switch away from them and back. It only sends from the account you set it up on. The diagnostic report gets a section on how the last try went, without naming who it's for. The patch is off by default, and it adds the exact alarm and start at boot permissions the daily alarm needs.
-
 * **TikTok:** New switch on the Screen time page, Let the last video finish. When the budget runs out, the video on screen plays to its end before the hold covers the feed, and the feed won't swipe to another video until then. A budget of five videos used to put the hold over the fifth, so you got four. Only the feed's swipe stops. It waits three minutes at most and it's off by default.
-
 * **TikTok:** Hushfeed supports TikTok 47.1.4 as well as 47.0.3 and 47.1.3 (#56), and 47.0.3 stays supported. Every patch applies to each of the three. The trimming patches know 47.1.4's rebuilt libraries and language packs, and Block P2P video relay has nothing to remove from 47.1.4's split bundle, which leaves those libraries out, so it says so instead of refusing the bundle.
-
 * **TikTok:** A new switch on the Feed screen page, Hide effect and template tags, takes the "Try effect", template, CapCut and AI style tags off the strip above a video's description (#51). Place, film and drama tags stay, and Diagnostics counts the tags it took away. The "Contains:" song credit belongs to the music line, which Hide the music line already hides.
-
 * **TikTok:** Patching takes less time (#54). The privacy patches, Ghost mode and Allow screenshots each read every call in TikTok to find the few they change, and a dozen patches searched the whole app for code they could have looked up by class. Now they look only where it can be. On a desktop the patch step for all 98 patches dropped from about 240 seconds to 140, and at a phone-like 768 MB memory limit from about 280 to 180. The patched app comes out byte for byte the same. On a Galaxy S22 in Morphe Manager at 640 MB, the recommended patches plus AMOLED dark theme went from about 8 3/4 minutes to 6 1/2.
-
 * **TikTok:** New patch, Keep playing in the background, keeps TikTok's own background play on whatever its server says (#52). The video you're watching keeps going after you leave TikTok or turn the screen off, and TikTok's media notification pauses and resumes it. It also covers photo posts and the videos on your own profile, private ones included, which TikTok leaves out. A feed video stops at its end, since TikTok doesn't loop or move on in the feed while it's in the background, and another app's sound still pauses it. TikTok's own background play switch in the long-press menu stays on while this is on. It's off by default. The switch is under Hushfeed settings > Playback, and TikTok needs a restart after you change it. Feature Gate Lab shows the switch deciding TikTok's background play value. Mute feed videos now stays muted when the notification resumes a video in the background.
-
 * **TikTok:** Stop on-device AI profiling does something again. Both of the places it looked for had gone from all three supported TikTok builds, so it applied without changing anything, and it searched all of TikTok for them on every patch. It now keeps TikTok's Pitaya plugin from starting. Pitaya's native engine doesn't load, and TikTok no longer hands it a copy of every analytics event it logs. TikTok carries on the way it does when the plugin isn't installed, and patching fails if a TikTok update moves any of this.
 
 ## 0.65.0 (2026-09-29)
 
 * **TikTok:** The Screen time page shows Start today over's result straight away, and a page left open while the day starts over shows what the new day changed. Both used to keep the old numbers and switches until you left the page and opened it again.
-
 * **TikTok:** Resource and battery governor's description, and the Block motion sensors switch it adds to Hushfeed's settings, no longer claim a battery saving that was never measured. They say which sensors it stops TikTok listening to.
-
 * **TikTok:** The README and the patch descriptions in Morphe Manager now give measured numbers for the optional trimming patches instead of adjectives: the storage each one saves, and what they did to memory use on a Galaxy S22 (alone or all together, nothing beyond the run-to-run spread, apart from about 13 MB less loaded code with all of them on).
-
 * **TikTok:** AMOLED dark theme's description and the README no longer say it needs a 768 MB memory limit to patch. Measured on two phones, it still finishes at 640 MB, just slower, so 768 MB or more is now advice rather than a requirement.
-
 * **TikTok:** The keyboard no longer rewrites an app's package name in Send links to another app, or a host in Share links through another host. A keyboard like SwiftKey used to capitalize it and add a space after every dot, so com.dv.adm came out as "Com. Dv. Adm" and the field refused it. The fields for handles, country and language codes, sound ids, filename templates and speeds get the same plain keyboard.
-
 * **TikTok:** A list or text setting saved right as you left the settings screen could keep its old value until TikTok restarted, even though the row and the saved file both already showed the new one. Closing a dialog is its own step after the tap on OK, and leaving the screen a beat too soon used to skip past it.
-
 * **TikTok:** When TikTok closes in the middle of a save, the next time you open it a banner says which saves didn't finish, or might not have, and how many of their files are missing. Files that already reached your gallery count as saved, and nothing restarts on its own, so save it again if you still want it. If another message covers the banner before its time is up, it comes back the next time you open TikTok. The start-up cleanup of half-written files from a day or more ago also runs now. It was meant to run every time TikTok started but never did.
-
 * **TikTok:** A save's progress row sitting on one of TikTok's pop-up sheets could close TikTok when the save ended or a second row came up. It stays where the sheet puts it now.
-
 * **TikTok:** With `{creator}/` at the start of the file name, the sound saved beside a video or a story now goes into that creator's folder with it. It went to the download folder one level up, so the two split apart. On Android 10 and newer it goes to the matching creator folder under Music.
-
 * **TikTok:** Every save says it's been taken the moment you ask, sounds, profile pictures, stickers and a live photo's clip included. Hushfeed runs three saves at once and lines up the rest, and a save in line used to show nothing until it started. Now a save with a progress row shows it straight away as waiting, with Cancel to take it out of line, and one without a row says how many saves are ahead of it. Past three rows, a single line counts the rest, with a Cancel that takes the last save in line out of it. Asking again for something already in line says whether it's still waiting or already saving, where it used to do nothing.
-
 * **TikTok:** On Android 10 and older, tapping the block button over a video, Unblock on its banner or Save media on a sticker no longer closes TikTok. Each of them marked itself busy in a way those Android versions refuse.
-
 * **TikTok:** Diagnostics can record a screen's layout for a "please hide this" report. Tap Record a screen's layout, go to the screen, and twenty seconds later the next exported report carries how that screen and any sheet over it are built, without any of its text.
-
 * **TikTok:** The block control, the mute button and Hushfeed's other buttons over the video now show on a video opened from a creator's profile, a hashtag or a sound, and come back to the feed with you. They stayed on the feed behind that screen, where nobody could see them. Mute feed videos mutes those videos too, so the button means what it says there.
-
 * **TikTok:** The budget label and the fade before the hold go as soon as you switch to Profile, Inbox or another tab. Only the playing video moved them, so they could stay over those tabs, the fade nearly black. The fade also stops above the tab row now.
-
 * **TikTok:** When the time budget runs out partway through a long video, the notice and the hold come right then. They waited for the next video, so a long or looping one could play well past the budget. Lowering the budget below what you've already watched today brings them on the same video too.
-
 * **TikTok:** New row under Downloads, Forget saved videos. It empties the record behind the already-saved check, keeps the files and your settings, and offers Undo while its notice is up. A save that was already running when you forgot doesn't add itself back.
-
 * **TikTok:** Mute feed videos leaves another app's music playing in two more cases. Turning mute on from the settings page now gives the sound back when you return to the feed, and turning the sound back on while a video is paused makes the feed ask for it when it plays again, rather than playing over the other app. The mute button also stays off stories and LIVE replays, which keep their sound.
-
 * **TikTok:** Blocking a commenter from the comments is remembered for the account that did it. After switching accounts, someone the first account blocked showed as blocked for the second, and the first tap there sent an unblock. A tap on the row while the banner's Undo is still working no longer sends a second unblock.
-
 * **TikTok:** Hushfeed now needs Morphe Manager 1.32.0 or newer, because it's built against Morphe patcher 1.14.1. Older Managers say the bundle needs a Manager update. The new patcher writes Hushfeed's changes into TikTok's own resource table instead of rebuilding it, so everything the patches don't touch stays exactly as TikTok shipped it. The old one dropped the quote marks around about 70 translated phrases in TikTok's effect tools and widened the type of five attributes. Patched code is the same with either patcher on both supported TikTok builds.
-
 * **TikTok:** Press and hold the Home tab to open Hushfeed's settings (#45), rather than going through Profile, the menu and TikTok's own settings. A tap on Home works as before. It comes with Feed tab navigation and has its own switch under Feed tabs.
-
 * **TikTok:** Settings say more exactly what's going on. A Reset or Undo that fails names itself instead of reporting a failed restore, and Reset no longer leaves Calm feed offering to bring back the setup from before it. The YTDLnis rows say to put its package name in Send links to another app, which is a text field, not a switch. The store region row names Override SIM details when that's the switch that's off. Start the day at takes 06:00 or 0600, which it used to read as 23:00. A long restore result now stays on screen long enough to read. Two playback rows moved out from under Auto-advance, where they didn't belong, and the Feature Gate Lab says when Undo stops covering a preset.
-
 * **TikTok:** Saves now connect only to the server address Hushfeed checked. It used to check that a download's host was a public address and then let the phone look the name up again as it connected, so a name that switched to a local address in between could still have been reached. Each download now goes straight to a checked address over HTTPS, and the certificate is still checked against the original name. Checked on a phone with a video, a photo, subtitles and an animated sticker.
-
 * **TikTok:** Mute feed videos works on TikTok 47.1.3 now, and on 47.0.3 it silences photo posts with a sound too. TikTok gets the next videos ready before you reach them and starts most of them by a route the mute never heard, so it never knew which videos were the feed's. It follows the feed's own list now, and a video is already silent when you swipe to it. It stays silent when you come back after watching the same video from a DM, and after scrolling a long profile grid or search results. On 47.0.3 ordinary videos went quiet before, but only because TikTok's request for the sound was turned down.
-
 * **TikTok:** The README has a troubleshooting entry for unfollowing many accounts at once. TikTok's own Manage view on the Following list does it with checkboxes, and the 10,000 follow limit is TikTok's server rule, which no patch can change.
-
 * **TikTok:** The feed filter table in a diagnostic report now has a line for each route that hands the feed one cached video at a time: the cache chain, the video TikTok slips in when playback lags, and the one it delivers when the feed reaches its end. They never had a line, so a report couldn't tell whether they ran.
-
 * **TikTok:** In the SIM country preset list, the chosen preset's operator line now sits level with every other row's, at any font size. The mark beside the chosen country made its title taller and pushed that line down, and with large text a long country name wrapped only once it was chosen. Every row now keeps a column for the mark, like Android's own choice lists.
-
 * **TikTok:** The README says why a one-photo post saved with TikTok's Download video keeps TikTok's watermark. The server holds no video for such a post, only the photo and its sound, so TikTok renders one on the phone with its logo, the creator's handle and an end card. Download image gives the clean photo.
-
 * **TikTok:** Exported diagnostics keep room for the events that matter. Playback quality wrote a line for nearly every video, since gear names and bitrates change each time, and a busy export was almost nothing else. It now writes one line per mode and size ladder.
 
 ## 0.64.0 (2026-09-28)
 
 * **TikTok:** Hiding buttons in the right column now works on videos opened from a creator's profile, a hashtag or a sound too (#47). Those play in a screen of their own, which the hides never reached, so only the feed lost its Like, Save or Share button.
-
 * **TikTok:** Hide TikTok Shop also hides a LIVE that is selling while it streams (#46). Only Hide LIVE videos took those away before, and that hides every LIVE.
-
 * **TikTok:** Tapping Pause Hushfeed in the settings search no longer closes TikTok. It opens the main settings page with that row picked out.
-
 * **TikTok:** The settings search finds rows that stay greyed out until another switch is on, such as Auto-advance session limit. Their page says which switch that is, where the search used to say nothing matched.
-
 * **TikTok:** Default playback speed, Subtitle language, the delay before controls hide and the edge press step grey out while the switch that uses them is off, and say which switch that is. A greyed choice puts that note on its own line under its value.
-
 * **TikTok:** Undo last restore or reset keeps whatever it replaces, so pressing it a second time brings back the changes you made after the restore. A restore that also wrote Feature Gate Lab rules retires the Lab's own Undo, which would have taken those rules back.
-
 * **TikTok:** A restore that kept one of your download folders is no longer undone at the next start when TikTok closed before it finished tidying up.
-
 * **TikTok:** The daily budget's countdown keeps running after you come back from messages, a creator's video or Hushfeed's settings, and Wait for a tap after a return only stops the feed when you actually left TikTok. A hold that ended while TikTok was in the background takes its panel down when you come back.
-
 * **TikTok:** With the feed muted, opening the comments or coming back to TikTok no longer pauses the music another app is playing.
-
 * **TikTok:** Clear all on the Inbox's suggested accounts works on TikTok 47.1.3. It found nothing to press there.
-
 * **TikTok:** A story saved with its sound is no longer reported as failed when only the sound ran out of space or time, so a retry doesn't make a second copy.
-
 * **TikTok:** The already-saved choice opens on the screen you're looking at, a video opened from a profile or search included. It used to open behind it, where nobody could see it, and hold the save until you went back to the feed.
-
 * **TikTok:** With Remove watermark off, Automatic saves keep TikTok's watermark even when Hushfeed makes the save for its details, progress row or saved-video check.
-
 * **TikTok:** With only Show download progress on, a video Hushfeed can't fetch as one file goes to TikTok's own save instead of being refused. A save that fails no longer announces "Stopping after this file".
-
 * **TikTok:** Only these caption languages reads three-letter codes such as eng or spa as their two-letter forms. Before, eng matched nothing and hid every English video it was meant to keep.
-
 * **TikTok:** A clip shorter than a second can now count as seen. It never played to the one-second mark, so it kept coming back.
-
 * **TikTok:** The like and follow confirmations let a tap through when TikTok hasn't said which video is playing, as on some photo posts. The button did nothing at all there.
-
 * **TikTok:** The Feature Gate Lab says why a change was refused, for example that none of the chosen gates had an override to reset, and shows its rule limit, instead of asking you to try again. A reviewed preset waits until the whole gate list has loaded rather than refusing as not matching.
-
 * **TikTok:** In the Feature Gate Lab the list ends above the selection bar at any text size, and the bar drops its hint line at large text. Switch Access, Voice Access and TalkBack's actions menu can open and select gates.
-
 * **TikTok:** Diagnostic reports leave out network addresses, your phone's own IPv6 address among them, TikTok's US and EU server names, and the video ids in saved file names. With SIM spoofing on, debug logging no longer records your real carrier and country.
 
 ## 0.63.0 (2026-09-27)
@@ -317,29 +245,17 @@ Every Hushfeed release, newest first.
 Includes the changes developed in 0.62.0, which wasn't published as a separate bundle.
 
 * **TikTok:** Diagnostic messages remove quoted credentials, headers and account identifiers before reaching system logs, the in-memory buffer or crash files. Long inputs and exception chains are bounded, and a long dotted hostname no longer overflows the redactor's stack.
-
 * **TikTok:** Opening links in an external browser preserves ordinary sites' `target` parameters. Only TikTok's known link-safety routes unwrap that parameter. Lookalike characters in a hostname no longer pass that check.
-
 * **TikTok:** Ghost mode shows whether this process has seen a reporting call and warns when a story-reporting check fails. Clearing diagnostics or toggling the switch doesn't erase that warning. A diagnostics row sits beside the switch. Blocking a local call still doesn't verify TikTok's viewer list (#39).
-
 * **TikTok:** Delayed budget changes survive a failed save and can be retried. Tightening a limit saves the new value and cancels its scheduled change together. A restore saves the delayed changes with the rest of its settings, and recovery restores both. A failed edit keeps its dialog open instead of claiming it was scheduled.
-
 * **TikTok:** A settings transaction that throws puts every live value back. A queued screen-time reminder also checks that its original screen is still active and the feature is still on before leaving TikTok.
-
 * **TikTok:** Failed settings and Lab exports remove the file created by the picker. If the provider refuses cleanup, the message points to the folder you chose. Backup actions stay disabled while a write is running, including after the settings page is recreated.
-
 * **TikTok:** Structured Lab edits keep their draft after a failed save. Discard returns to the last successful save, newer edits survive an older save finishing, and untouched null fields keep their original values. Reset refreshes the fields to the value it restored.
-
 * **TikTok:** Multi-file saves stop on a storage refusal or deadline instead of trying another mirror or counting the last file as an ordinary skip. Counted audio saves preserve the same reason.
-
 * **TikTok:** Sticker saves check free space in their destination before writing and again while PNG, GIF and video output grows. Running out of space removes the unfinished output and keeps an older saved file intact.
-
 * **TikTok:** Share-action and button checklists keep your choices open when a save fails. Apply saves the whole selection together, and you can retry without choosing everything again.
-
 * **TikTok:** Clear seen videos waits for storage before announcing success. Failed clears keep the record and earlier Undo, and completion from a previous account can't offer recovery on the current account.
-
 * **TikTok:** Undo and Unblock controls respect Android's requested time to act. The Calm feed preset keeps its heading and action visible at larger text sizes in both themes.
-
 * **TikTok:** New release receipts check the source commit and clean source snapshots embedded during the build. A dirty build stays ineligible after its files are restored, even with a matching timestamp. Ignored source files also make it ineligible. Equivalent checkout line endings keep the same metadata. Builds whose before-and-after source bytes differ stay ineligible. Previously published receipts are accepted only when their exact recorded bytes and bundle identity match the verified archive.
 
 ## 0.62.0 (2026-09-27)
@@ -357,57 +273,31 @@ Source changes included in the v0.63.0 release.
 * **TikTok:** The Feature Gate Lab now has Reviewed presets in its menu. The first restores See translation on 47.1.3 by setting both required gates together. You can review the values before applying and undo the whole change. A preset for another TikTok version won't apply.
 
 * **TikTok:** New patch, Mute feed videos. It adds a movable button beside the block control, and a switch under Playback, that play the feed without sound while the phone's volume stays where it is. Music from another app keeps playing while the feed is muted, since TikTok no longer takes the audio over for it. DMs, stories and LIVE keep their sound, and the button says Muted or Sound on to a screen reader.
-
 * **TikTok:** With a playback quality set, a video's quality list is read once instead of on every switch. TikTok asks for it through two getters and reads the next video's list in between, and Hushfeed kept only the last one, so each switch parsed the whole list again. It keeps the last four now.
-
 * **TikTok:** New switch under Feed screen, Hide the status bar in LIVE rooms (#38). A LIVE then fills the screen up to the top edge, camera cutout included, and TikTok's buttons at the top move up into the space the bar left. The status bar comes back as soon as you leave the LIVE or switch apps. Hide the status bar never reached LIVE rooms, since TikTok opens them as a separate screen. It's part of Hide video overlays.
-
 * **TikTok:** New row in Feed filter, Only these caption languages. List the languages you understand, like en, es, and a video whose original caption is in another language is hidden. It goes by the caption TikTok marks as the original, so a video with no caption, only translated captions, or a tag that isn't a language always stays. It takes effect without a restart, leaves profile pages alone and counts what it hides in the diagnostic report. The section it sits in is now called Words, countries and languages.
-
 * **TikTok:** Restoring a settings backup no longer takes a download folder that can't hold what it's for. A backup from before the three download folders were split names one folder for everything, and a Pictures folder there used to become the video and sticker folder too, while those saves quietly went to DCIM/TikTok. Now that folder keeps what you had, and the restore says so in its banner. Undo still puts every folder back as it was.
-
 * **TikTok:** A number setting greyed out by another switch shows "Turn on ... first." on a line of its own. It used to run straight on from the current value, as in "Current: Off Turn on Auto-advance videos first."
-
 * **TikTok:** Plainer words in the Feature Gate Lab and the number editors. A gate's source line says whether TikTok declares it and whether it has a current value, where it used to say "generated registry" and "current cache". Player config is now Video player settings and Save JSON is Save report. An empty number field shows the range it takes, and an empty maximum in a range reads No limit.
-
 * **TikTok:** The block symbol Block from comment puts beside a comment's heart is easier to hit. It was about 40 by 24 dp, and a tap now counts anywhere in a 48 dp square around it where the row has blank space. A tap meant for the heart, the comment text or the next comment still goes there, and Easier comment likes keeps working beside it. How far it reaches depends on the row: on a Galaxy S22 it's about 45 by 35 dp, because the comment text sits right above it.
-
 * **TikTok:** Ghost mode also holds back the play report TikTok sends when a story plays (#39). Every story view went out twice: once as a story view, which Ghost mode already blocked, and once as an ordinary play count carrying the story's id, which it didn't, and a second account could still see you in its viewer list. Feed videos still send their play reports as before. This hasn't been checked with two accounts yet, so the diagnostic report now has a "story play stats" line saying whether the report was held back.
-
 * **TikTok:** Hide videos you have already seen has a new row, Count a video as seen after. Set a percent and a video only counts once you've watched that much of it, so five seconds of a ten-minute video no longer hides it at 50%. Zero, the default, keeps the old rule of a few seconds. A video TikTok gives no length for still counts after two seconds, and a short clip never needs its last second.
-
 * **TikTok:** The settings search and the Feature Gate Lab search match text the same way now: case, accents and punctuation don't matter in either, so "pre roll" finds "Pre-roll".
-
 * **TikTok:** Saving, restoring, resetting and undoing settings, and the Calm feed preset, tell you how it went in a banner at the bottom of the settings window instead of toasts that vanish. A restore that left some settings alone says so in the same banner, and a change that needs a restart has a Restart now button.
-
 * **TikTok:** On a phone whose blocked creators, hidden creators, creator exceptions or blocked caption words list grew past the limits added on 2026-09-14, restoring a backup, resetting settings and undoing now work again. Before, all three failed with the generic try-again message. Saving a backup names the list that's too long instead of writing a file no restore would accept.
-
 * **TikTok:** The Feature Gate Lab works from the TikTok build you have installed. It shows that build's own gate list and names it in exports and backups. When TikTok updates, it keeps the overrides whose gates didn't change, turns the rest off and tells you how many. Before, it treated 47.1.3 as 47.0.3 and carried every override across unchecked.
-
 * **TikTok:** The Lab's "first caller" and its SettingsManager observations name the right code again. Reads without a default had stopped being recorded after the first read with one.
-
 * **TikTok:** The diagnostic report has a LIVE BUTTON section that says what decided the LIVE button in the feed's corner each time: the Hide the LIVE button switch, TikTok hiding it because LIVE has a bottom or top tab, or Hushfeed keeping it because that tab was taken off (#28).
-
 * **TikTok:** New patch, Stay on the video in full screen. When a video ends in TikTok's full-screen viewer, you stay on that video instead of being moved to the next one, and the next-video countdown doesn't show. Turn it on in Hushfeed settings > Playback. Swiping still moves on. The viewer has an auto-next of its own, which Auto-advance and Stop video looping never reached.
-
 * **TikTok:** People and apps hidden from the share sheet one per line are hidden from its contact row too. That row only split the list on commas, while the rest of the sheet also split it on line breaks.
-
 * **TikTok:** Share sheet tools looks through TikTok's screens once per layout pass instead of four times. It runs on every layout of the main screen, share sheet open or not.
-
 * **TikTok:** The block symbol that stands in for the thumbs down on comments is drawn in the same grey as the comment's name and time, so it shows on TikTok's dark comment sheet. It used to take its colour from the phone's theme, which TikTok's own dark mode doesn't follow, and came out almost black on black.
-
 * **TikTok:** Hide videos you have already seen keeps a separate record for each TikTok account on the phone. Before, a second account inherited everything the first one had watched, and could have seen that list. Clear seen videos now names the account it forgets for. The record from before this update doesn't say whose it was, so it hides nothing until you add it to an account with the new Add older seen videos to this account row, which shows up while there's anything to add.
-
 * **TikTok:** Saves refuse a download address in any block the internet's registry sets aside for testing, documentation, benchmarking or network equipment, not just private and local ones. TikTok's servers never use those, so a link that points there is not a TikTok file. On a mobile network that only has IPv6, saves from IPv4-only servers keep working.
-
 * **TikTok:** Your own profile shows your newest posts again (#35). TikTok loads a profile's posts in the same kind of list as the feed, so the feed rules reached profile grids too. With Filter location-tagged videos on, recent posts with a place tag were taken off your own grid and only older ones were left. Your own posts now stay wherever TikTok shows them.
-
 * **TikTok:** A profile you open keeps all of its videos. Minimum views, likes and the other count limits, Hide seen videos and the rest of the feed rules used to hide posts there as well, so a small creator's page could look nearly empty. Profiles, their favorites and their reposts now lose only ads, the same as the rest of the profile page.
-
 * **TikTok:** The camera and microphone indicator stays up for as long as TikTok records. Before, the orange diamond only flashed at the start of a story recording, because TikTok records a story's sound in its own native code, which the patch never saw. On Android 11 and newer the mark now also reads what Android itself reports for TikTok's camera and microphone, the same thing the status bar's privacy dots show. On older Android it works as before.
-
 * **TikTok:** On a TikTok version where a patch's hook can't be written the way the patch asks, that patch now stops with a message naming the method, instead of applying and then doing nothing. Morphe's patcher could leave a hook call out without a word when a method has more than 16 registers. It never happened on 47.0.3 or 47.1.3, and now it can't happen silently on a later version either.
-
 * **TikTok:** Save story works again when you press and hold a story. It looked up TikTok's story player by names from TikTok 46.2.3, and neither 47.0.3 nor 47.1.3 has them, so holding a story showed "Open the story again and try once more" and saved nothing. It finds the story by TikTok's own class names now, which don't change between versions.
 
 ## 0.61.0 (2026-09-26)
@@ -415,53 +305,29 @@ Source changes included in the v0.63.0 release.
 A large release. Hushfeed supports TikTok 47.1.3 as well as 47.0.3 now, and it carries every fix made since 0.60.0. Copy comments without username works from the comment menu again, folding a foldable no longer jumps to another video, and sticker saves read TikTok's own sticker data. The settings screens also had a long polish pass.
 
 * **TikTok:** Save media on a sticker's sheet lightens while you hold it, like TikTok's own Share and Save next to it. It used to be the one button there that showed no press.
-
 * **TikTok:** Save media on a comment sticker reads the sticker from TikTok's own sticker data now, which keeps its names from one version to the next. It used to look first for a field and a class that neither 47.0.3 nor 47.1.3 has, and only reached the sticker through its last fallback. It saves the picture the sheet shows, and if a later TikTok renames that data, Hook status says so.
-
 * **TikTok:** Hushfeed supports TikTok 47.1.3 as well as 47.0.3 (#33). Every patch applies to both, and Morphe Manager lists both versions. 47.1.3 renamed 42 of the screen parts Hushfeed finds by name, so each one is looked up by the name the running build gives it. The feed filter reads 47.1.3's rearranged cold-start cache, AMOLED dark theme knows its gray palette, the corner LIVE button check reads its LIVE mode where 47.1.3 moved it, and the four resource optimizers and the language purger accept its reviewed files, from the universal APK and from APKMirror's split bundle. On the S22 running 47.1.3, the feed, comments, inbox, share sheet, captions and the dark theme were checked.
-
 * **TikTok:** The Feature Gate Lab names its export file in UTC like every other Hushfeed export, so they sort together.
-
 * **TikTok:** A like, comment or share count range restored with spaces around its numbers is read as that range instead of being reset to any.
-
 * **TikTok:** A CAPTCHA check whose type TikTok sends as a number is named by its scene now, not by the word scene.
-
 * **TikTok:** Region spoof no longer works out the country, locale and timezone again on every call, and TikTok asks for them constantly. Share sheet tools, the comment tools, search card filtering, Fit the video to the screen and the Feature Gate Lab look up what they need once instead of on every screen update, and the block button's overlay no longer keeps a closed screen in memory.
-
 * **TikTok:** A blocked-creator pattern that could stall the feed is refused when you type it and skipped, with one note, when it comes in with a backup or from an older list. That covers back-references, a repeat inside a repeated group, and patterns stacked with open-ended repeats. The time limit that was meant to catch these never actually ran on a phone.
-
 * **TikTok:** Rarely, the block, Not interested and sound buttons stayed off for a whole video when it started playing at the moment the feed loaded it. That no longer happens.
-
 * **TikTok:** A restored backup that had a number out of range, like an edge seek of 90 seconds where 60 is the most, is no longer undone at the next start as if the restore had been interrupted.
-
 * **TikTok:** A day locked by the daily budget stays locked when TikTok restarts after the phone's timezone moved forward. Before, swiping TikTok away after the change handed the rest of the day back.
-
 * **TikTok:** A settings search that finds nothing now says that switches from patches you didn't tick in Morphe Manager aren't listed. Fill the screen with the video is one of them, since it comes with Fit the video to the screen, which is off by default.
-
 * **TikTok:** Camera and microphone indicator draws a green square for the camera and an orange diamond for the microphone, so telling them apart doesn't depend on seeing green and orange. The text on Hushfeed's banners over a video is easier to read against a bright frame or TikTok's light comment sheet.
-
 * **TikTok:** In settings, the back arrow is announced as a button, and the search box's clear button, the Lab's switch rows and its Technical details heading show when they're pressed or focused. A chosen SIM preset no longer looks like the row that has focus. When a budget change or Pause is refused, the reason stays on screen, under the number you typed or in the settings banner, instead of a toast that was gone before the time in it could be read.
-
 * **TikTok:** Settings text reads more naturally, with contractions throughout, one way of asking you to restart TikTok and one of saying to try again in a moment. Number rows show their range the way they show the value, as in "0 to 86,400 seconds". The Feature Gate Lab says On or off where its filter said Boolean, tells you what to fix in a bad value or bad JSON, uses a real ellipsis while it loads, and its menu has a title and a Cancel.
-
 * **TikTok:** The settings home's status mark is a rounded square now, on the same corner scale as the cards and icon tiles, and the three quick routes no longer sit on the search card's edge. The Feature Gate Lab's icon buttons show where keyboard or d-pad focus is, which the round ripple they had never did.
-
 * **TikTok:** The page that opens when settings can't load now has a proper title, and Retry is drawn as the way forward instead of a second plain row next to Back. Choice dialogs line their marks up under the title and show Cancel in the dialog's own language. What's new offers Got it and Later and has an icon of its own. When Undo or Restart now fails, the message says which one failed, where it used to talk about undoing a clear either way.
-
 * **TikTok:** A What's new row sits at the top of Hushfeed's settings after an update. It opens the changelog for the version you're on, and for any releases you skipped since you last dismissed it. Later keeps the row for another look, and Got it takes it away until the next release.
-
 * **TikTok:** Hide Play Store update offer is a new optional patch. On the S22, Play changed from Update to Open while Morphe Manager kept showing TikTok 47.0.3. Android won't install a lower-code APK over this one, so leave the patch off if you expect to switch back without removing the app.
-
 * **TikTok:** The settings home has pink section icons, quieter group labels and a warmer active card in dark mode. Search now has its own framed field and a separate results card. Section pages keep pink headings and larger row titles.
-
 * **TikTok:** Repost diagnostics writes the request, TikTok's response status and the next repost-list result into a diagnostic report when logging is on. It keeps the video's ID and any repost note out of the report.
-
 * **TikTok:** Taking LIVE off the top feed tabs now keeps the corner LIVE button available, just as taking LIVE off the bottom bar does. Hide the LIVE button still works on its own.
-
 * **TikTok:** On a foldable with the split comment view, folding or unfolding no longer moves you to another video when Hide seen videos is on. The rebuild for the new width let the filter drop the video you were watching before TikTok could put it back.
-
 * **TikTok:** Camera and microphone indicator shows its mark on TikTok's camera screen. Before, the first time the camera opened the mark was drawn on the main screen hidden behind it, so on a phone it rarely showed at all.
-
 * **TikTok:** Copy comments without username works from the comment sheet's own menu again. Since TikTok 46.9.3 that menu builds the clipboard text a different way, and the option was only reaching Copy in Favorites. Stickers and emoji in the copied text come through as before.
 
 ## 0.60.0 (2026-09-25)
@@ -469,9 +335,7 @@ A large release. Hushfeed supports TikTok 47.1.3 as well as 47.0.3 now, and it c
 A small release with three fixes. Comments that TikTok dropped without a word now go out, the caption no longer shows over the video when Caption above comments is on, and Allow Duet and Stitch covers creators who limit duets on their whole account.
 
 * **TikTok:** Comment send fix, a new patch that's on by default, covers a way TikTok drops a comment without a word. TikTok checks a send against the page opened most recently, and when that page has already lost its screen, the check stops the comment and shows nothing, so the text just stays in the box. The check now gets the comment panel's own screen in that case. The diagnostic export names the page that had none, so a report from a phone where comments still don't post says whether this was the reason.
-
 * **TikTok:** With Caption above comments on, the caption over the video goes away, since the whole caption now sits at the top of the comments. It used to show in both places. Hide the caption still hides it on its own.
-
 * **TikTok:** Allow Duet and Stitch now answers the creator's account-wide choice as well as the video's own. TikTok checks both, and on the S22 a video that allowed anyone still had no Duet entry because its creator's account allowed only people they follow back. With the switch on, Duet and Stitch both show on those videos now. Whether TikTok's servers accept the upload is still up to them.
 
 ## 0.59.0 (2026-09-25)
@@ -479,109 +343,57 @@ A small release with three fixes. Comments that TikTok dropped without a word no
 The biggest release so far, with everything built since 0.58.0 and this week's bug reports. The seek bar that TikTok's experiment took away is back (#16), Watch history works with the browser guard on (#16), the tab names above the feed can go (#32), a video can fill the screen (#29), the corner LIVE button survives a filtered bottom bar (#28), split comment view follows the fold (#26), and the Products block in search has a switch (#21).
 
 * **TikTok:** Taking the LIVE tab off the bottom bar no longer takes TikTok's LIVE button off the top of the feed too. TikTok hides that corner button while LIVE has a bottom tab, and it checked its own list of bottom tabs, which still had LIVE after Filter bottom tabs removed it, so LIVE had no way in from the feed (#28). Hide the LIVE button still hides the corner button when you want it gone.
-
 * **TikTok:** Fill the screen with the video, a new switch under Playback beside Fit the video to the screen, crops a video until it covers the whole window, for the phones where TikTok leaves a black strip under a 9:16 video (#29). Turning either of the two switches on turns the other off.
-
 * **TikTok:** Hide the tab names above the feed, a new switch on the Feed tabs page, takes the Following and For You names off the top of the feed. Swiping between the feeds and the search button stay (#32).
-
 * **TikTok:** Show the progress bar now beats the two TikTok experiments that hide the seek bar. One hides it on every video except paid content for whoever the server puts in that group, which left the bar gone from the whole feed but present in the drama player, and it can come and go between restarts (#16). The other hides it on any video the server hasn't marked as draggable. Both ran before Hushfeed's switch was asked.
-
 * **TikTok:** Wait a day to loosen the budget, a new switch on the Screen time page, keeps a change that loosens the daily budget until the day starts over, while one that tightens it applies at once. A higher budget or none, a shorter hold, more times to open the feed anyway, another hour for the day to start and the switch itself going off all count as loosening. The row says what it will change to and at what time. Restoring a backup, resetting and Undo follow the same rule, and Start today over and Pause Hushfeed are refused while the switch is on, since each would take the budget off at once. A restore on a locked day now leaves every budget setting as it is, where before it could hand a locked day a looser budget.
-
 * **TikTok:** More opens the comments, a new switch under Comments, makes tapping more under a video open its comments with the whole caption as the first row, instead of spreading the caption over the video (upstream #156). A tap on the caption text does the same. The row is TikTok's own, the one its comment list shows when an opener asks for it, so the caption keeps its links and its own more and Hide. Caption above comments, the switch beside it, does the same for the comment button. Photo posts keep TikTok's own page for this, which already puts the caption above the comments, and ads keep TikTok's handling. Both switches are part of Comment tools, which now brings Double-tap controls with it to open the comments. On the S22 more on a video opened its comments with the caption on top in place of TikTok's Tako panel, the comment button did the same with the second switch on, a photo post still opened TikTok's post page, and with the switches off everything was TikTok's again.
-
 * **TikTok:** Three new switches under Feed screen > Gestures let a long press on Comment, Share or Favorites play the video at the hold speed, the way it did before TikTok gave those buttons menus of their own (upstream #87). With its switch off a button keeps TikTok's menu, which is the emoji row on Comment, the quick share row on Share and the new collection offer on Favorites. The hold is TikTok's own and shows its speed banner. Letting go doesn't count as a tap, so it doesn't open the comments or save the video. A press TikTok won't hold, because the finger slid off the spot or a second finger landed early on, opens the button's menu as before. The switches need the Long press row on TikTok default and Seek from the edges off, since both take the right side of the screen for themselves, and they grey out otherwise. They're part of the Long-press controls patch. On the S22 a hold on each switched-on button played at 2x with no menu and went back to normal speed on release. A hold on Favorites left the video unsaved, and a tap on Comment still opened the comments. Every menu came back with its switch off, and with edge seeking on.
-
 * **TikTok:** Show poll results before voting, a new switch under Comments, draws a creator's comment poll with its bars and percentages before you pick an answer. The counts already come with the comments whether or not you've voted, and TikTok only waits for your vote or the poll's end to draw them. Tapping an answer still votes, and no answer is marked as yours until you do. It's part of the Comment tools patch. On the S22 a poll the test account hadn't voted on arrived with every answer's count and the total, and with the switch on it drew 72, 26 and 2 percent of 276 votes with no answer marked, where TikTok's own row showed only the answers.
-
 * **TikTok:** Show TikTok's feed buttons, a new switch on the Feed tabs page, puts TikTok's own play and pause button and its previous and next buttons on the feed. TikTok builds that row into every feed page for people who use a screen reader, and shows it only while one is running. With the switch on it shows for everyone, and a change to the switch shows as soon as you're back on the feed. TikTok's own analytics note the row and each press on it, as they do for screen reader users. TikTok's layout lets each button take focus on a tap, which a screen reader never runs into, so the patch also makes each one act on the first tap instead of the second. Previous on the first video of For You reloads the feed, as it does with TalkBack, unless Keep For You on a pull down is on. On the S22 each button acted on the first tap whichever one was tapped before it, and the row stayed hidden with the switch off.
-
 * **TikTok:** Keep a paused video paused, a new switch on the Screen time page, stops TikTok from starting a video you paused when you come back to the app. TikTok plays it again twice as it returns, once as the feed resumes and once as the video's surface is rebuilt, and both plays go through one method, which now turns down a play of that video for three seconds after the return. Your own tap plays it as usual, and so do TikTok's feed buttons and a screen reader's play action. A video you left playing starts again the way it always did, whether you went to the home screen or to another TikTok screen such as your messages. It needs Android 10 or newer, the first version that lets the app read the video before TikTok stops it, and the Block author button patch, which carries the other playback switches too. On the S22 a paused video stayed still after a trip to the home screen, played at a tap, and one left playing picked up again on return. TikTok doesn't draw its play button over the kept video, so it shows as a still frame.
-
 * **TikTok:** Open TikTok on, a new choice on the Feed tabs page, picks the tab TikTok starts on when you open it from its icon: For You, Following, Friends, Inbox or Profile. TikTok default leaves the pick to TikTok. A notification or a link still opens where it points, and a TikTok that Android restores goes back to the page it was on. A tab hidden on the same page isn't opened, so TikTok starts where it would have, and neither is Inbox without a signed-in account, since TikTok sends a start there to its login screen. On the S22 a start from the icon opened on Inbox, Profile, Friends, For You and Following in turn, a hidden Friends or Following tab left TikTok's own pick in place, and a start carrying a notification's tab still went to that tab.
-
 * **TikTok:** Two new switches on the Feed tabs page keep For You where it is. Keep For You on a Home tap stops a tap on Home, or on the For You tab while For You is showing, from reloading the feed, and Keep For You on a pull down does the same for a pull at the top of the feed. Both are off by default, and the other feeds refresh as before. A kept refresh ends the way TikTok ends one it skips, so the Home icon turns back from its refresh arrow and no spinner hangs. TikTok's own reloads, like the one after you block the creator on screen, still go through. Keep For You on a pull down also covers the Previous action TikTok's accessibility tools offer at the top of the feed. On the S22 a Home tap and a pull each kept the video playing with its switch on and reloaded the feed with it off.
-
 * **TikTok:** Confirm feed interactions has three new switches under Feed screen, for a comment's like, a story's like and TikTok's quick repost from the bar under a video. Each is off by default. The first tap arms and a second one within four seconds goes through, the way the Follow and like switches already work, and removing a like stays immediate. A comment's like asks from the heart in the comment list, from a double tap on the comment and from the like on a comment's photo page. A repost from the bar asks whether it comes from the bar's repost button or from the repost guide TikTok shows on the same bar, since both send it at once. On the S22 a comment's heart and a story's heart each armed on the first tap, liked on the second and unliked at once, and with the switch off one tap liked as before. The photo page's like and the quick repost bar didn't turn up for the test account, so those two haven't been seen on a phone yet.
-
 * **TikTok:** The diagnostic export now counts the strips TikTok shows above a caption and the banners under a video, by kind, whatever the logging switch says. A kind is TikTok's own key for it, such as a place or an effect, and never what the strip says. Some phones get strips that promote something else, like a Lemon8 link or a "Find ..." search, and a switch that hides them needs those keys, so an export from such a phone now carries them. With diagnostic logging on, a banner kind that first showed up before logging went on used to stay unnamed until TikTok restarted. It's named the next time it shows up now.
-
 * **TikTok:** AMOLED dark theme paints the right colors on TikTok 47.0.3. TikTok added a color ahead of its dark palette in 47.0.3, which moved every name in it one along, and the patch kept rewriting the 46.x names. So it turned TikTok's pink-red accent, an orange and two see-through overlays black, and it left four of the five dark grays as they were, among them the one fifty of TikTok's layouts use. Each build now has its own palette, read off that build, and on a build nobody has read yet the patch stops with nothing changed instead of guessing. On the S22 the only colors the rebuilt table changed were those five grays, and TikTok ran in Dark as before.
-
 * **TikTok:** Hide mini dramas now takes TikTok's Short Drama block out of search results as well. That's the header with an Explore button, a row of category chips and a strip of dramas that a search for "short drama" opens with. The block isn't one of the results the other search filters read. TikTok streams the Top results in pieces and builds it afterwards as a server-drawn card, so it's now caught where its row is drawn and folded away. On the S22 a search for "short drama" showed the block with the switch off and went straight to the videos with it on. The diagnostic export also names each server-drawn card a search shows, by its template and never by what it says, so a report of another block can say which one it was.
-
 * **TikTok:** Disable telemetry now stops the analytics uploads themselves. With the switch on, TikTok's AppLog SDK still sent its queued packs to the log hosts (session starts and ends, and events that reach it past the entry points the switch covers). Its forward worker posted copies of them to a second path and a backup, and the install SDK checked in once a start with the advertising id, carrier, SIM region and time zone in the query. On the S22 that came to 10 requests and 134 KB over 20 videos, about as much as with the switch off. Three walks since the fix sent none. The pack send answers as if the pack had gone out, so the SDK clears its queue and nothing piles up for later. The forward send stops before its post, and the SDK has already dropped those rows by then. The check-in answers success without leaving the phone. The SDK's priority uploader gets the same treatment. It sent nothing on the S22, but a setting it stored earlier could turn it back on. Device registration and the settings fetch aren't touched. With debug on, the network report also writes the path of each request to a log host into the log, so a leftover line in the report can be traced to the SDK behind it.
-
 * **TikTok:** The comment keyword filter now reaches comments TikTok shows translated. It judged a comment's text when the page loaded, and a translation landed in that same text afterwards, so a blocked word the original never had could still show up: with batch translation on, 2 of 14 shown comments on the S22 held the blocked word. A translation is now judged as it arrives, before TikTok shows it, and again whenever a translated comment is drawn, and a comment whose translation holds a blocked word collapses out of the list. TikTok's own translations count too, and Comment tools does this on its own, without Translate comments. A collapsed comment comes back as soon as the filter is off. Comments shown in their original language are judged as before, and a voice comment's translated transcript is left alone, like its original one.
-
 * **TikTok:** The Bottom tabs to keep row under Feed tabs now says to open the feed once while TikTok hasn't been seen loading a tab yet, and its dialog says the same above the two tabs every install has. The note was written for both tab editors but could never show for this one: Home and Profile are always offered, so the two rows counted as tabs already seen, and the row said All loaded tabs when nothing had loaded. Select every tab waits for a seen tab, as it does for feed tabs.
-
 * **TikTok:** The Long press row under Feed screen > Gestures gains Find the sound on YouTube Music. A long press opens YouTube Music's search for the sound's title and artist, the pair TikTok's own sound page shows, so the track can be saved to a playlist there. TikTok used to offer that and took it away. Nothing is sent anywhere else and no account is involved. Without YouTube Music installed, or for a sound with no title, a short toast says so and nothing opens, and so it does for the video's own original sound, which YouTube Music won't have.
-
 * **TikTok:** New Creator exceptions row under Feed filter, beside the block lists. Name a few accounts by handle or id and their videos stay when only a preference filter would have hidden them: stories, photo posts, location tags, AI labels, verified accounts, playlists, age, length and the view, like, comment, favorite and share ranges. Ads, blocked creators, words, sounds and countries, paid and Shop content, LIVE, mini dramas, Series and seen videos still hide them. The row names any entry a block list also holds, since that creator stays hidden, and refuses a pattern or a display name before it saves. One that arrives in a settings backup is ignored and named on the row. The list rides along in a settings backup with the other rule lists.
-
 * **TikTok:** Hide the Tako bubble now takes the Ask Tako pill off the search results page too, the first tab on every search that the switch had left standing. It isn't one of the served tabs but a view TikTok builds into the strip, so it is hidden by the id name its text keeps once the page is built. The other tabs keep their order, and switching it off brings the pill back after a restart. The served tab list is filtered as well, for a build that ever serves the tab as data, and with diagnostic logging on the export lists the tab keys the strip held.
-
 * **TikTok:** A save of three or more files (a post's original photos, a story's photos, a video with its sound and subtitles) now shows a running count in a row above the save banner, with a Cancel that lets the file under way finish and leaves the rest. A file that fails is skipped instead of ending the save, and the result says how many landed, how many were skipped and whether the rest were cancelled, or stopped for lack of space or time. The row is read out once when it appears, once when Cancel is pressed and the result once at the end, not on every file.
-
 * **TikTok:** Saving a live photo from a comment now keeps its motion. TikTok's own Save photo hands its downloader the still alone, so the clip never landed (upstream #169). Once TikTok has the comment and the tapped photo in hand, Hushfeed fetches the clip and saves it beside the still as an MP4, with a banner of its own. A plain photo comment saves as before. Needs the Downloads patch. Not yet seen on a phone: no live-photo comment turned up on the test phone, so the clip's own landing there is unverified.
-
 * **TikTok:** Remove ads now reaches the cold-start TopView, the full-screen ad TikTok can open with. Its ads never pass through a feed list the filter sees: the feed fetch hands them straight to TikTok's splash service before the list is filtered, which is why an earlier reset of that list at filter time reached nothing. The list is emptied as TikTok reads it, so TikTok's own "nothing to preload" path runs, the one it takes on every start served no ads. The diagnostic export carries a TopViewPreload line saying the route ran, ads or none. The test account is served no TopView, so the empty handoff was checked on a phone and the ad itself gone was not.
-
 * **TikTok:** The speed menu's toast now names the speed you picked. Choosing a custom speed such as 2.5x played at 2.5x but the toast said "Playing at 2x speed", because TikTok labels a custom speed with its nearest built-in and only 0.5, 1.5, 2 and 3 have their own. It reads "Playing at 2.5x speed" now, and TikTok's own speeds are unchanged.
-
 * **TikTok:** New switch under Screen time, Leave when TikTok says time is up. TikTok's own daily screen-time reminder (the full-screen card once the limit under TikTok's Time and well-being settings is spent) sends the app to the background instead of waiting to be dismissed. Coming straight back within a few minutes leaves the reminder on screen, so the limit and the switch itself stay reachable. (upstream #2)
-
 * **TikTok:** Every full patch run on a fixture now checks the rebuilt resource table against TikTok's own, across all twelve of its packages. A resource that no longer resolves, a lost value or style item, a missing file or a reference to nothing fails the run and names the id. That's the kind of failure behind upstream's crash on a layout in TikTok's search package (upstream #84). The report also lists every value the patches changed, which is how the dark theme's wrong palette on 47.0.3 turned up. On all five fixtures, TikTok 46.2.3 to 47.0.3, every patch applies and every one of the 80,632 to 83,292 resources resolves.
-
 * **TikTok:** Every runtime view ID Hushfeed uses is now tied to TikTok 47.0.3 code, including share actions, comment dislike controls and caption text. Each one is also told apart from the other ids the same TikTok class or layout loads, by the view it is set on, cast to or handed to, so a build that moves a name to a neighbouring view fails the test instead of passing it. Every lookup in the code is traced back to that table too, whatever helper, loop or constant carries the name, along with the package it resolves under.
-
 * **TikTok:** In-app browser privacy guard now protects external websites without breaking Activity center, Watch history, shop checkout or CAPTCHA. Its Privacy switch has clearer wording and still starts off.
-
 * **TikTok:** New Pause Hushfeed switch at the top of Hushfeed settings. From the next start TikTok runs as if it weren't patched, which answers "is it Hushfeed?" without turning things off one at a time, and your settings stay put for when you switch it back. Hushfeed also pauses itself after TikTok crashes within a minute of starting three times in a row. If the settings can't be reached at all, an empty file named `hushfeed-safe-mode` in TikTok's folder under Android/data pauses it too.
-
 * **TikTok:** New switch on the Feed filter page, Hide TikTok Shop in search, takes the Products block and single product cards out of search results. No account here is shown that block, so if it still turns up for you, a diagnostic export made right after that search now says what kind of card it was. (#21)
-
 * **TikTok:** Foldable split comment view now follows the fold while TikTok is open. Unfolding past your width setting refreshes the feed so comments can sit beside the video, and folding back refreshes it again. Before, it only took effect if TikTok was started already unfolded. (#26)
-
 * **TikTok:** AMOLED dark theme works on an .apkm again when Morphe Manager merges it. It used to refuse every merged bundle, because rebuilding the desktop CLI's merge made TikTok crash at launch. Manager's merge keeps TikTok's own file paths and loses nothing, so the dark theme now refuses only an APK whose paths clash with the rebuild, which is what the desktop CLI's merge still produces. (#21)
-
 * **TikTok:** Hide comment popup ads now stops the brand animation itself. On 47.0.3 it only turned off TikTok's analytics report about the animation, so the animation still played. TikTok's own celebration when you post a video's first comment still plays. It now tells TikTok's own celebrations from a campaign's by where the surprise comes from rather than by what is written on it: a surprise sent with a comment page stays only when the page was fetched for one of TikTok's own scenes, a surprise sent with a comment you posted stays only when it is the first-comment kind, and the replayed first-comment milestone always stays. Before, a campaign's surprise with no trigger word written on it played, and a celebration with one written on it didn't. Comment pages and posting a comment were checked on a phone, where no surprise came either way. The celebrations and the campaign case were checked against TikTok's code, not with a real campaign or a first comment on a video that had none. Tell us if one still plays for you, or if a celebration stops.
-
 * **TikTok:** AMOLED dark theme now blackens 47.0.3's sheets and panels too, the comment panel and the share sheet among them, along with menus and pop-ups. They had stayed dark gray, because 47.0.3 paints them from a different color than 46.x did.
-
 * **TikTok:** New Swipe-left controls patch. A left swipe on a feed video opens the creator's profile in TikTok, and the new Swipe left row under Feed screen > Gestures can make it do nothing or open the video's comments instead. Only a swipe toward the profile changes. Swiping right still opens TikTok's side panel, a photo post keeps its own swipe between pictures, and where TikTok doesn't page to a profile itself (the Inbox, your own profile) nothing happens. Changes take effect without a restart.
-
 * **TikTok:** Video download quality now takes effect on TikTok 47.0.3. Hushfeed looked for the list of qualities under the name older versions used, found nothing there, and every chosen quality fell back to TikTok's own save. A saved video is also never taken from ByteVC2, TikTok's own format that other players can't open, and at the same size H.264 comes before HEVC. When only ByteVC2 is left, TikTok's own save runs as before, and when the size you picked comes only as ByteVC2, TikTok's own watermark-free file is saved if it says it's closer to that size, rather than a smaller copy.
-
 * **TikTok:** Save the original photos works on TikTok 47.0.3. A photo post's Download never reached the step Hushfeed took the save from, so TikTok's own save ran and no original was fetched. Now "Download image", a photo saved without asking, and the photos picked in TikTok's selection sheet save the originals under your filename template, numbered by their place in the post. A live photo you chose still comes down as TikTok's video. TikTok's picker for posts with several photos goes through the same step and saves only the ones you pick, but it wasn't tried on a phone yet. One photo now says "Saving one original photo".
-
 * **TikTok:** Turning automatic clear display off while it had the controls hidden no longer keeps TikTok's top bar, and its search button, away on the next videos. TikTok brought its other controls back by itself, but Hushfeed still thought they were hidden. The same went for a feed item that comes without a video id after a cleared video, with clear display automatic or remembered.
-
 * **TikTok:** Clear display, TikTok's own or the automatic one, no longer lifts the daily hold. It hides TikTok's tab bar, and Hushfeed took that as you leaving the feed, so once the budget ran out the hold's panel came down and the sound came back. Now the panel stays up. With Remember clear display patched in, TikTok's controls come back as the panel goes up, so the Inbox and Profile tabs the panel points you to are right there, and nothing clears again until the hold is over. Without it, TikTok's own clear display bar stays uncovered under the panel, and its X brings the tabs back. The same mistake hid Keep captions in clear display as soon as the controls cleared. The caption stays now, but never on top of the hold's panel. The Block and Not interested buttons still go away with TikTok's controls.
-
 * **TikTok:** A finished save now offers a way to it. Saving a video at a chosen quality, a story, original photos, a profile picture, a sound or an original sound used to flash a two-second toast with a folder path. The same words sit on the six-second banner now, and its Open button hands the saved file to a viewer. One banner per save: a video or story that carries its sound as well announces the sound with a plain toast beside the banner. Saves made of several photos open on the post's last one. Where there is nothing to open, or no app on the phone opens that kind of file, the toast says so.
-
 * **TikTok:** A bigger caption size no longer splits words in the middle. The caption kept the width TikTok measured for its own smaller text, so at size 28 a word could break across two lines ("conditio" over "ns."). It lays out wider now, up to TikTok's own caption width so it stays clear of the buttons on the right, and longer lines wrap between words. Only a single word wider than that still breaks. At any size the caption's box now fits its text, with no empty band beside it, and the size is applied to the caption itself, so other text TikTok draws the same way, such as a video's description, keeps TikTok's size.
-
 * **TikTok:** The daily hold pauses the video on TikTok 47.0.3 again. The panel went up but the video kept playing behind it, because the pause Hushfeed called by its TikTok name had turned into something else in 47.0.3. The hold now finds TikTok's own pause and resume where TikTok's feed uses them, and Open the feed anyway picks the same video back up.
-
 * **TikTok:** The two pause switches work on TikTok 47.0.3. Silence the feed while comments are open did nothing there at all, sound included, because 47.0.3 draws the comments into the app's own screen rather than a window of their own, and a window was what the switch watched for. It goes by the comment sheet itself now. Under "Tap to start the feed" after coming back to the app, the video kept playing, since 47.0.3's player plays on when something else asks for the sound. Both switches now pause the video with the same TikTok pause the daily hold uses, and it carries on from the same spot when the comments close or you tap. A video that was already paused when the comments opened stays paused, turning the switch off with the comments still open leaves the video quiet until you tap it, and the comments switch's description says it pauses now.
-
 * **TikTok:** New Network request report patch, off by default. It counts the requests TikTok's own API client sends, grouped by domain and by kind (API, log, monitoring, messages, LIVE and the rest), and adds them to the diagnostic export. Video and image downloads and other companies' SDKs use connections of their own and aren't counted, and the report says so. Nothing about the requests changes.
-
 * **TikTok:** Feed filter adds Hide mini dramas, for TikTok's short drama episodes and the cards that promote them. It's off by default. Hide Series already caught drama episodes, since TikTok sells them as Series, but this one leaves other Series alone. (upstream #155)
-
 * **TikTok:** Feed tabs adds Hide the unread badges on the bottom tabs, for the red counts and dots on Inbox, Profile and any other bottom tab. The inbox itself still shows what came in.
-
 * **TikTok:** Playback adds Hide TikTok's Auto scroll button, for readers who want videos to advance on their own but not TikTok's own Auto scroll action in the video panel.
-
 * **TikTok:** Playback adds Speed while you hold the video, so the hold gesture and its pull-down lock run at 1.25x to 3x instead of TikTok's fixed 2x. TikTok's own banner, lock guide and lock toast say the speed you picked.
-
 * **TikTok:** Leaving Hushfeed's settings search with the Back arrow now takes the keyboard down with it. It used to stay up over the next page until Back was pressed once more.
-
 * **TikTok:** The four optional cleanup patches accept APKMirror's 47.0.3 bundle too, the way they accept 46.2.3's. A merged 47.0.3 bundle carries the full APK's files less 92 armeabi-v7a libraries, byte for byte, and 27 of the 64 language packs. Every file they empty is still checked first. (#21)
-
 * **TikTok:** Hushfeed's settings now survive TikTok's own crash recovery. After three crashes in a row at launch, TikTok deletes every settings file it doesn't recognize, and that used to take all of Hushfeed's settings with it, Lab rules and the Calm feed undo included.
 
 ## 0.58.0 (2026-09-21)
@@ -589,15 +401,10 @@ The biggest release so far, with everything built since 0.58.0 and this week's b
 This week's bug reports, two requested switches and Turkish.
 
 * **TikTok:** Hide series no longer empties creator profiles. TikTok 47.0.3 tags every ordinary profile video as episode 0, and Hushfeed took that for a series. Only a real episode number counts now. (#20)
-
 * **TikTok:** Hide the Tako bubble now also removes the Ask Tako button floating over the search page, including the version paired with a Voice button. (#22)
-
 * **TikTok:** The Save media button is back on comment stickers. TikTok renames its button class with every build, so the button had quietly gone missing since 46.7.3. Hushfeed finds the sheet's buttons by their layout now. (#23)
-
 * **TikTok:** Cut the in-app browser off from TikTok now says plainly that it also stops Activity center and Watch history from responding. If Watch history ignores your taps, turn that switch off under Privacy. (#16)
-
 * **TikTok:** Feed screen adds Hide the Report button on videos, for the flag button some regions get above the creator's picture. App adds Hide search rewards, for the points banner under the search box and the coin counter floating over results. Both are off by default. TikTok doesn't show either one in our region, so they were checked against the app's code and not on a phone. Tell us how they behave for you. (#21)
-
 * **TikTok:** Hushfeed's settings now come in Turkish. It's a first pass, and corrections from Turkish speakers are very welcome. (#13)
 
 ## 0.57.0 (2026-09-20)
@@ -605,7 +412,6 @@ This week's bug reports, two requested switches and Turkish.
 Block a creator and move on.
 
 * **TikTok:** The one-tap block button now skips to the next video as soon as TikTok confirms the block. A small Unblock button appears at the top left for two seconds instead of the large bottom banner. It always reverses the original block, even after the video changes.
-
 * **TikTok:** If you've already scrolled or left the feed while a block is being confirmed, Hushfeed won't move you again. Failed requests don't skip a video. Other Undo notices keep their existing recovery time.
 
 ## 0.56.0 (2026-09-20)
@@ -613,7 +419,6 @@ Block a creator and move on.
 Give video controls the space used by suggested searches.
 
 * **TikTok:** Feed screen adds Hide the search bar below videos. It removes the suggested-search strip above the bottom tabs so video details and side controls can use that space. The top search button and suggestions above comments stay unchanged. It's off by default and needs a restart.
-
 * **TikTok:** Includes the independent location badge hiding and location-tagged video filtering from 0.55.0, plus Full screen button hiding and Easier comment likes.
 
 ## 0.55.0 (2026-09-20)
@@ -621,9 +426,7 @@ Give video controls the space used by suggested searches.
 Choose which video overlays you want to see.
 
 * **TikTok:** Feed screen adds Hide the Full screen button and Hide location labels. Each has its own switch inside Hide video overlays. Hiding a location card doesn't filter the video or change location permissions. Full screen hiding leaves playback and automatic rotation alone. Both options are off by default and need a restart.
-
 * **TikTok:** Location hiding covers multi-place badges too. Filter location-tagged videos is a separate option under Feed filter > Ads. It skips videos with place badges, whether or not they're paid ads. Hiding a badge doesn't erase the location markers used by the filter. Both controls are optional.
-
 * **TikTok:** Includes Easier comment likes from 0.54.0. The heart can receive taps in nearby blank space without making comment rows taller. Enable it under Comments.
 
 ## 0.54.0 (2026-09-20)
@@ -637,7 +440,6 @@ Comment hearts are easier to tap.
 Give the comment list more room.
 
 * **TikTok:** Comment tools adds Compact comment header. It removes the comment count, sort and close buttons, plus the suggestion area above them, including its empty space. Comments and the reply box stay available. Use Back or swipe down to close the panel. Headers with list-navigation tabs stay visible. The switch is off by default and needs a restart.
-
 * **TikTok:** Fixed a local release check that could block a new tag even though its source commit was already on GitHub. Update-index changes still require a published, verified bundle.
 
 ## 0.52.0 (2026-09-20)
@@ -645,9 +447,7 @@ Give the comment list more room.
 Comments get their own suggested-search control, and search settings now say where they work.
 
 * **TikTok:** Comment tools adds Hide search suggestions above comments. It removes TikTok's "Search: ..." banner above the comment count without removing comments, their controls or Hushfeed's separate search box. It's off by default and needs a restart.
-
 * **TikTok:** Search controls now distinguish the feed button, Inbox button, LIVE drawer, image-search prompts, main search-page suggestions and searching within loaded comments. Poll hiding also explains that it removes voting cards and ended poll results.
-
 * **TikTok:** Fixed the Hushfeed source metadata that made Morphe report "The remote metadata file is unavailable." Refreshing the source is enough. The release check now rejects timestamps Manager can't read.
 
 ## 0.51.0 (2026-09-20)
@@ -655,11 +455,8 @@ Comments get their own suggested-search control, and search settings now say whe
 Commission posts now use the same location-affiliate signal TikTok checks before showing its disclosure.
 
 * **TikTok:** Remove feed ads catches location videos marked "Creator earns commission" even when TikTok leaves the shopping and standard ad fields empty. It filters the video before display, without matching English text. Ordinary location tags aren't enough to remove a post.
-
 * **TikTok:** Paid partnerships and branded content are included in Remove feed ads. The separate paid-partnership switch remains available, and the related controls now sit together under Ads.
-
 * **TikTok:** When For You is the only remaining top tab, its title and underline are hidden. The feed and Search stay available.
-
 * **TikTok:** App settings can hide the purple rewards shortcut beside Add friends on Profile. This belongs to Hide floating promotions and is off by default.
 
 ## 0.50.0 (2026-09-20)
@@ -669,7 +466,6 @@ Settings failures are recoverable, movable controls stay reachable and the large
 ### Interface and accessibility
 
 * **TikTok:** Large translated settings titles now keep words whole at enlarged text sizes. The title adapts within a limited range while Android's chosen font scale remains unchanged everywhere else.
-
 * **TikTok:** Movable feed controls now stay clear of status bars, navigation insets, display cutouts and TikTok's bottom tab row. They recheck those boundaries whenever the window geometry changes.
 
 ### Performance
@@ -679,13 +475,9 @@ Settings failures are recoverable, movable controls stay reachable and the large
 ### Reliability
 
 * **TikTok:** A failed settings write now keeps the live value aligned with the value that will survive a restart. Concurrent writes can't cross its rollback window, and feed actions show a failure instead of a false success or Undo state.
-
 * **TikTok:** Settings restore now rejects fractional and overflowing backup schema numbers instead of truncating them into a supported version.
-
 * **TikTok:** Session budget resets now invalidate older queued writes, so one test can't quietly restore a spent budget after the next test has cleared it.
-
 * **TikTok:** A first push of a branch now checks its complete resulting tree. A documentation-only tip or stale tracking ref can no longer hide a code path from the local gates, and the script contracts follow the current TikTok 47.0.3 target.
-
 * **TikTok:** Guarded S22 acceptance now checks the focused window on Android's default display and sends every input to that same display. TikTok on another task or display can't authorize input, and the helper still resolves Windows `adb.exe` and evidence paths correctly under WSL.
 
 ## 0.49.0 (2026-09-20)
@@ -695,17 +487,11 @@ Settings feedback is clearer, easier to recover from and more consistent across 
 ### Premium settings polish
 
 * **TikTok:** Invalid number, text, range, creator, folder and Feature Gate values now show an inline explanation inside the editor. The field keeps focus, announces the problem once and clears the message when typing resumes.
-
 * **TikTok:** Text cursors, selection handles, picker frames and list edge effects now use the Hushfeed palette instead of leaking TikTok's theme into the settings screen.
-
 * **TikTok:** Clear seen videos and Start today over now offer Undo in a ten-second settings banner. The action survives page changes and remains at least 48 dp for touch and accessibility input.
-
 * **TikTok:** Restart-gated changes now offer Restart now in the same banner while keeping the pinned restart row for later. Returning a value to what TikTok already runs no longer asks for a restart.
-
 * **TikTok:** Feed and bottom tab pickers now join the persistent restart state correctly instead of showing a restart message and then losing it.
-
 * **TikTok:** Forty-one labels and descriptions now use one naming system across Feed filter, Feed screen, Inbox, Playback, Region, search and the share sheet. German, Spanish, Indonesian and Brazilian Portuguese were updated with them.
-
 * **TikTok:** The three home shortcuts now become full-width rows at Android's first large-text step, so Privacy and Screen time stay intact instead of breaking in the middle of a word. The full settings matrix was rendered again in dark and light themes, large text and mirrored layout.
 
 ## 0.48.0 (2026-09-20)
@@ -715,11 +501,8 @@ Feed filter now has a reversible starting point for a calmer feed.
 ### Calm feed
 
 * **TikTok:** Calm feed turns on six focused filters together: feed ads, Shop posts, LIVE videos, LIVE replays, promotional music and paid partnerships.
-
 * **TikTok:** Applying the preset saves the previous values first. Restore puts that exact setup back, even after TikTok restarts or after one of the six switches is changed by hand.
-
 * **TikTok:** The preset leaves stories, photo posts, AI labels, creator rules, keywords and time limits alone.
-
 * **TikTok:** Its status card shows when the preset is on or has been adjusted. The action is a real 48 dp button, stacks at large text sizes and is translated with the rest of Hushfeed settings.
 
 ## 0.47.0 (2026-09-20)
@@ -729,11 +512,8 @@ The settings home is faster to scan and easier to use with touch or a screen rea
 ### Settings
 
 * **TikTok:** A new status card confirms Hushfeed is active and shows the installed Hushfeed and TikTok versions. Diagnostics opens directly from the card.
-
 * **TikTok:** Feed filter, Privacy and Screen time now have direct buttons beside Search at the top of the settings home.
-
 * **TikTok:** The new actions use real button roles, visible focus and press feedback, and touch targets of at least 48 dp. They stack instead of clipping when text is enlarged.
-
 * **TikTok:** The settings home screenshot has been refreshed from the tested native Android view in both theme and accessibility checks.
 
 ## 0.46.0 (2026-09-20)
@@ -743,17 +523,11 @@ All 91 patches now support TikTok 47.0.3.
 ### TikTok 47.0.3
 
 * **TikTok:** Hushfeed is the first row in Settings and privacy again. TikTok 47.0.3 changed how that menu is assembled, and the patch now moves the existing row instead of creating a duplicate.
-
 * **TikTok:** Downloads now follows the actual comment-image watermark draw when TikTok moves nearby MIME and pending-state strings.
-
 * **TikTok:** Feed filter now handles TikTok's separate golden-cache and offline-cache delivery methods. Hide already seen videos follows the same repaired boundary.
-
 * **TikTok:** Playback speed now finds the player boundary by its behavior after TikTok obfuscated both method names.
-
 * **TikTok:** Empty comment pages and ordinary posts without a survey no longer appear as broken hooks in Diagnostics.
-
 * **TikTok:** Block P2P video relay, Remove LIVE extras, Remove content credential and card scanner assets, Remove creation tools, and Remove unused language packs now use reviewed 47.0.3 file inventories.
-
 * **TikTok:** Feature Gate Lab now treats 47.0.3 as its target. Saved rules from an older target stay disabled until they are reviewed.
 
 ## 0.45.2 (2026-09-19)
@@ -771,7 +545,6 @@ Two fixes for TikTok 46.9.3, one of them a crash (#12).
 ### Fixes
 
 * **TikTok:** On TikTok 46.9.3, Feed filter no longer closes the app when the Following feed loads. That build renamed where the feed keeps its videos, and the filter now finds them under either name.
-
 * **TikTok:** On TikTok 46.9.3, a download with no clean address falls back to the video's own playback address again, the way it does on 46.2.3.
 
 ## 0.45.0 (2026-09-18)
@@ -781,7 +554,6 @@ TikTok 46.2.3 from APKMirror's bundle download, an .apkm file, now patches clean
 ### Fixes
 
 * **TikTok:** The four optional cleanup patches now accept APKMirror's 46.2.3 bundle. They refused it before, because a merged bundle carries fewer files and only 25 of the 64 language packs. Every file they empty is still checked byte for byte first.
-
 * **TikTok:** AMOLED dark theme now refuses an APK merged from a bundle instead of building one that crashes at launch, because rebuilding a merged bundle's resources loses about 1,400 of them. Use the plain APK from APKMirror if you want the dark theme.
 
 ## 0.44.0 (2026-09-18)
@@ -795,7 +567,6 @@ Separate share lists for profiles and LIVEs, and two fixes from a patching repor
 ### Fixes
 
 * **TikTok:** Downloads no longer fails to patch on TikTok builds where the download step's code is larger than usual. A reporter's 46.8.3 lost Downloads to this.
-
 * **TikTok:** When one of the four optional cleanup patches meets a TikTok APK it hasn't checked, its error now says nothing was removed and what to do next: untick it, or patch the full APK from APKMirror. A split bundle (an .apkm file) can cause this.
 
 ## 0.43.1 (2026-09-18)
@@ -821,7 +592,6 @@ Two ad and Tako surfaces that slipped past the feed filter, both reported on 0.4
 ### Feed filter
 
 * **TikTok:** Ads no longer appear while you scroll a creator's videos from their profile. The profile's own video pager was asking a separate ad endpoint and splicing the answer between the creator's videos, so those ads were in none of the lists the filter already cleaned. That request is refused now while Remove feed ads is on.
-
 * **TikTok:** The "Ask" bar that sat under some videos is gone with Hide Tako AI on. It looked like a Tako feature but was one of TikTok's bottom banners, so Hide Tako AI now covers it along with the floating bubble, and its switch says so.
 
 ## 0.41.0 (2026-09-18)
@@ -2118,19 +1888,12 @@ A polish release. No patches were added or removed. Most of it makes the setting
 * **feed:** four upstream patches for the feed toolbar: hide the LIVE button, the search button, the follow plus under the avatar, and the save button. The LIVE one shares the existing Live entrance switch and stops the button before it is built
 
 * **build:** move to Morphe patcher 1.12.0 and patches plugin 1.3.4, which is what Morphe Manager 1.29 ships. Typed patch options, sliders and color pickers are available to patches from here on
-
 * **feed:** a Hide already seen videos patch. Watched video ids go into a local database and are dropped from later feed pages, with a retention setting and a clear button. Nothing leaves the device
-
 * **feed:** switches for the playlist bar, the floating event badge and the cards TikTok inserts between videos, plus the countdown lock on short drama adverts, which now releases when ads are being removed
-
 * **captcha:** a second CAPTCHA patch for TikTok's risk control dialog, answering the existing switch. Off by default, it never touches SMS or two factor verification, and it logs every suppression
-
 * **privacy:** a Ghost mode patch that stops the reports telling other people what you looked at: story views, profile views, the typing indicator. Online status is unchanged
-
 * **privacy:** a Disable telemetry patch that stops ByteDance AppLog, AppsFlyer, explicit Firebase screen reports and crash reporting at their SDK entry points. Off by default, and it silences TikTok's own diagnostics too
-
 * **inbox:** the Archive and TikTok Shop rows are now stopped at their widget injectors, so they never lay out
-
 * **inbox:** three patches that work on TikTok's widgets instead of the finished views: suggested accounts and the stories tray are never built (and suggested accounts is now covered on Activity and New followers too), and the Activity and New followers lists can show in full instead of stopping at View all
 
 ### Bug Fixes
@@ -2138,7 +1901,6 @@ A polish release. No patches were added or removed. Most of it makes the setting
 * **block button:** draw the block symbol instead of setting it as text, so a font without U+2298 cannot leave a tofu box on the button
 
 * **feed:** close the ad delivery gaps upstream found: profile grid videos, the detail page, late insertions, the cache delivery chain, play-lag inserts and reach-bottom cache all run through the filters now
-
 * **feed:** the cached video switch is now "Filter offline fallback videos" and applies to the videos TikTok falls back on when the feed cannot load enough new items
 
 ## 0.12.0 (2026-09-05)
@@ -2162,7 +1924,6 @@ A polish release. No patches were added or removed. Most of it makes the setting
 ### Features
 
 * **interface:** hide the "Search this image" prompt over videos and the top left Live entrance, each with its own switch
-
 * **comments:** replace the two finger hold with a one tap block button drawn beside each comment
 
 ### Bug Fixes
@@ -2174,9 +1935,7 @@ A polish release. No patches were added or removed. Most of it makes the setting
 ### Features
 
 * **feed-filter:** skip videos by sound, with a block-sound button on the player and a name list for re-uploads
-
 * **feed-filter:** switches for paid partnerships, AI generated videos, verified accounts, Series and playlist videos
-
 * **comments:** hide comments by keyword or by account, and block a commenter with a two finger hold
 
 ### Bug Fixes
@@ -2188,21 +1947,15 @@ A polish release. No patches were added or removed. Most of it makes the setting
 ### Features
 
 * **tiktok:** add a one-tap block button to the video player, with an undo banner and a drag-to-move position that is remembered
-
 * **tiktok:** add a switch for each Inbox row and header control, and a Clear all control for suggested accounts
 
 ### Bug Fixes
 
 * **block-button:** hide the button off the video feed, and keep it available on videos longer than thirty seconds
-
 * **block-button:** keep the button on a video opened from a profile or search, hide it over a profile page, and drop it on cards that have no account to block
-
 * **block-button:** treat a block reply with a non-zero status code as a refusal instead of a success
-
 * **inbox:** stop hiding every conversation when only message requests are switched off
-
 * **inbox:** match the suggested accounts section, which uses none of the row title ids
-
 * **inbox:** resolve view ids once instead of on every layout pass
 
 Everything below this line is the release history of icysymmetra/tiktok-patches-for-morphe, which Hushfeed was forked from.
@@ -2212,34 +1965,23 @@ Everything below this line is the release history of icysymmetra/tiktok-patches-
 ### Bug Fixes
 
 * **build:** complete feed model stubs ([053ce6c](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/053ce6cd064c16c1a06e87e10b76896da7c00a83))
-
 * **clear-display:** preserve state across feed transitions ([a433fe0](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/a433fe03b98ecee8814a83f94aaef760222e538f))
 * Merge branch `dev` to `main` ([#95](https://github.com/icysymmetra/tiktok-patches-for-morphe/issues/95)) ([1ba91a3](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/1ba91a3d45ffdd8ee237105b8dd3ad8853a7b7fe))
 * merge dev into main ([3c81835](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/3c8183512dfb9dbe7b7e93979e5a419e428ff605))
 * **playback:** persist explicit speed selections ([0f785fc](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/0f785fc8685c30793bf7ffea028d1223613f52c9))
-
 * **settings:** make custom dialogs fit device screens ([7592339](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/75923397520ff45fde1b5f618c1de2010de422e0))
-
 * **tiktok:** consume download filename mappings ([864fc15](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/864fc1526d51f819daea8e0730716d62a4c6b662))
-
 * **tiktok:** cover direct Turing CAPTCHA dialogs ([27b2639](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/27b263920ffadaf2e27777c703c225f2e4f3ce40))
-
 * **tiktok:** expand startup and runtime hook coverage ([bac0ba8](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/bac0ba8d2697a60d2c66d723fba75e211ca48a49))
-
 * **tiktok:** filter cached feed insertions ([d30a6dd](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/d30a6dd37f9eaa1c1faecdf2b30b047707170860))
-
 * **tiktok:** harden bytecode hook resolution ([95e0a3f](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/95e0a3f8d6c45e97eb44c3066bd201e2d9ab1843))
-
 * **tiktok:** preserve swipe-lock playback speed ([dfbe2a5](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/dfbe2a55aaced183f97a457b494893c31cebf596))
-
 * **tiktok:** prevent settings crash and expand crash reports ([08186e7](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/08186e77ba89d92debfcd319fe8fcc745e2a363b))
 
 ### Features
 
 * **downloads:** support separate media destinations ([f4580c9](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/f4580c94b3b2c0d2d79c2bb0bfa6a544abeaedb3))
-
 * **tiktok:** add repost and cached feed controls ([446ee90](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/446ee90123b118642fe3c50f5da9221d984667c2))
-
 * **tiktok:** expand offline video limits ([35eff0e](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/35eff0e4f84ea69925bbddc71eb04c6d0bf5e66d))
 
 ## [0.7.0-dev.8](https://github.com/icysymmetra/tiktok-patches-for-morphe/compare/v0.7.0-dev.7...v0.7.0-dev.8) (2026-08-22)
@@ -2253,7 +1995,6 @@ Everything below this line is the release history of icysymmetra/tiktok-patches-
 ### Bug Fixes
 
 * **tiktok:** consume download filename mappings ([864fc15](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/864fc1526d51f819daea8e0730716d62a4c6b662))
-
 * **tiktok:** harden bytecode hook resolution ([95e0a3f](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/95e0a3f8d6c45e97eb44c3066bd201e2d9ab1843))
 
 ### Features
@@ -2271,7 +2012,6 @@ Everything below this line is the release history of icysymmetra/tiktok-patches-
 ### Bug Fixes
 
 * **build:** complete feed model stubs ([053ce6c](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/053ce6cd064c16c1a06e87e10b76896da7c00a83))
-
 * **tiktok:** filter cached feed insertions ([d30a6dd](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/d30a6dd37f9eaa1c1faecdf2b30b047707170860))
 
 ## [0.7.0-dev.4](https://github.com/icysymmetra/tiktok-patches-for-morphe/compare/v0.7.0-dev.3...v0.7.0-dev.4) (2026-08-13)
@@ -2285,9 +2025,7 @@ Everything below this line is the release history of icysymmetra/tiktok-patches-
 ### Bug Fixes
 
 * **playback:** persist explicit speed selections ([0f785fc](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/0f785fc8685c30793bf7ffea028d1223613f52c9))
-
 * **settings:** make custom dialogs fit device screens ([7592339](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/75923397520ff45fde1b5f618c1de2010de422e0))
-
 * **tiktok:** expand startup and runtime hook coverage ([bac0ba8](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/bac0ba8d2697a60d2c66d723fba75e211ca48a49))
 
 ## [0.7.0-dev.2](https://github.com/icysymmetra/tiktok-patches-for-morphe/compare/v0.7.0-dev.1...v0.7.0-dev.2) (2026-08-11)
@@ -2325,39 +2063,24 @@ Everything below this line is the release history of icysymmetra/tiktok-patches-
 ### Bug Fixes
 
 * **build:** select current bundle for patch catalog ([69bd1e9](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/69bd1e93194825b7af567e8456de4f29831fd9a8))
-
 * **tiktok:** filter following ads at cached feed reads ([13d74f0](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/13d74f00b1d076aa22b7a4ab8bbe92bfaf2c4b6b))
-
 * **tiktok:** filter late following feed ads ([a232cba](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/a232cbaeb3725f0c1361d20a99e9a6fd31a0be53))
-
 * **tiktok:** hook native video looping boundary ([2721f01](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/2721f010b670842f9776b2afb34486de418f29d9))
-
 * **tiktok:** preserve account verification CAPTCHA flows ([dd35d89](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/dd35d8948b002f0d098ed1f83a3f64cddc5f7904))
-
 * **tiktok:** preserve native download addresses ([61da3c6](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/61da3c6413ed75cdb04f5eb1cb4b7292dfd06089))
-
 * **tiktok:** repair automatic comment translation ([636ef64](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/636ef648c18be2610c6ee48beed7270e37ffce41))
-
 * **tiktok:** reset completed video resume state ([100cab5](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/100cab58fc178f360c2e727308e161e3e3e2f9ad))
-
 * **tiktok:** skip same-language automatic translations ([3415710](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/3415710facfc60db19943599112b9bc47cf82647))
-
 * **tiktok:** use native video loop control ([f508adb](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/f508adbdbf6229e7a993a42616ed00cc0feadcd2))
 
 ### Features
 
 * **tiktok:** add native search and seekbar controls ([c36bfaf](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/c36bfaf51d6e8d30fbef6e5c6ba99bfdeae283e2))
-
 * **tiktok:** add playback completion controls ([9a51c2f](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/9a51c2f614145250177600144abd61eb30cf0841))
-
 * **tiktok:** add quick-action controls ([fe29a24](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/fe29a249e42620d53dc6224c347c74aadc291c08))
-
 * **tiktok:** port core patches to TikTok 46.2.3 ([2c52b6a](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/2c52b6aa1362a3a9ccbcdd8dad2e16ec4b9a06cc))
-
 * **tiktok:** port Feature Gate Lab to TikTok 46.2.3 ([4bdbdee](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/4bdbdeed1649bdc6177ea6a2c62bd2d9300ac8d6))
-
 * **tiktok:** redesign patch settings navigation ([a479bdb](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/a479bdb09a4e01584f9d683cdfda1c65d3ab6dff))
-
 * **tiktok:** separate optional diagnostics from settings entry ([aad18c3](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/aad18c3e4b301366685174b0faa5a23a8a2850de))
 
 ## [0.4.1](https://github.com/icysymmetra/tiktok-patches-for-morphe/compare/v0.4.0...v0.4.1) (2026-07-28)
@@ -2371,19 +2094,12 @@ Everything below this line is the release history of icysymmetra/tiktok-patches-
 ### Features
 
 * **tiktok:** add feature gate lab and UI suppressors ([72bf32a](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/72bf32aa6991257ace0bab91d3a8767617cbd802))
-
 * **tiktok:** add translation language exclusions ([8f60185](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/8f60185434a3cbb13653438a6561e2d7fc45f4dd))
-
 * **tiktok:** enable Feature Gate Lab by default ([a164b70](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/a164b70cf046a738d3b0a817a57b1fedf515ef2e))
-
 * **tiktok:** enable hold-and-slide 2x lock ([a2fd626](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/a2fd626ecb1fb116461b760445128bfdd8980f29))
-
 * **tiktok:** improve feature gate lab search ([ffc19de](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/ffc19dece888a6ef814d20401d0bc4b9ba93858d))
-
 * **tiktok:** port external browser patch from lyyako ([7a517c2](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/7a517c218a35508ac4f284450ff6d6c4d3ea05d8))
-
 * **tiktok:** port publish date patch from lyyako ([1b6c386](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/1b6c386611239c39242bc813fca9614c8de3d3d1))
-
 * **tiktok:** redesign support row ([cc39469](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/cc39469c98eabc0ccdea40fc423e94639c34703f))
 
 ## [0.4.0-dev.1](https://github.com/icysymmetra/tiktok-patches-for-morphe/compare/v0.3.1...v0.4.0-dev.1) (2026-07-26)
@@ -2391,19 +2107,12 @@ Everything below this line is the release history of icysymmetra/tiktok-patches-
 ### Features
 
 * **tiktok:** add feature gate lab and UI suppressors ([72bf32a](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/72bf32aa6991257ace0bab91d3a8767617cbd802))
-
 * **tiktok:** add translation language exclusions ([8f60185](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/8f60185434a3cbb13653438a6561e2d7fc45f4dd))
-
 * **tiktok:** enable Feature Gate Lab by default ([a164b70](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/a164b70cf046a738d3b0a817a57b1fedf515ef2e))
-
 * **tiktok:** enable hold-and-slide 2x lock ([a2fd626](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/a2fd626ecb1fb116461b760445128bfdd8980f29))
-
 * **tiktok:** improve feature gate lab search ([ffc19de](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/ffc19dece888a6ef814d20401d0bc4b9ba93858d))
-
 * **tiktok:** port external browser patch from lyyako ([7a517c2](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/7a517c218a35508ac4f284450ff6d6c4d3ea05d8))
-
 * **tiktok:** port publish date patch from lyyako ([1b6c386](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/1b6c386611239c39242bc813fca9614c8de3d3d1))
-
 * **tiktok:** redesign support row ([cc39469](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/cc39469c98eabc0ccdea40fc423e94639c34703f))
 
 ## [0.3.1](https://github.com/icysymmetra/tiktok-patches-for-morphe/compare/v0.3.0...v0.3.1) (2026-06-17)
@@ -2429,7 +2138,6 @@ Everything below this line is the release history of icysymmetra/tiktok-patches-
 * filter bottom navigation tabs ([e1f01b2](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/e1f01b25e35bb6d284691c273ae4b0b4778a57dc))
 * save comment media downloads ([77b4dab](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/77b4dabcd6f327a7b9f06e5646193a0d7e54a52f))
 * **tiktok:** add custom offline videos limit ([bfcb717](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/bfcb717d9e6fdcfb69ec7d0b30016352ed6d6c90))
-
 * **tiktok:** add focused debug diagnostics ([878d0f4](https://github.com/icysymmetra/tiktok-patches-for-morphe/commit/878d0f44b4b1bc1846ecb888ca3f9536fcf4db11))
 
 ### Performance Improvements
