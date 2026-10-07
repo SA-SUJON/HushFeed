@@ -524,6 +524,13 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting HIDE_DETAIL_COMMENT_BAR = new BooleanSetting("hide_detail_comment_bar", FALSE);
     /** The progress bar, close button and pause/speed pill TikTok draws while Clear display is on (#97). */
     public static final BooleanSetting HIDE_CLEAR_DISPLAY_CONTROLS = new BooleanSetting("hide_clear_display_controls", FALSE);
+    /**
+     * How see-through the controls over the video are drawn, as a percentage: 100 leaves them as
+     * TikTok draws them, lower fades the rail, caption, music row and tabs while they keep taking
+     * taps, and 0 hides the rail and caption the way Clear display does (#84).
+     */
+    public static final IntegerSetting FADE_CONTROLS_OPACITY =
+            new IntegerSetting("fade_controls_opacity", 100).withRange(0, 100);
     public static final BooleanSetting HIDE_SHARE_GUIDE = new BooleanSetting("hide_share_guide", FALSE);
     public static final BooleanSetting HIDE_RAIL_FOLLOW = new BooleanSetting("hide_rail_follow", FALSE);
     public static final BooleanSetting HIDE_RAIL_LIKE = new BooleanSetting("hide_rail_like", FALSE);

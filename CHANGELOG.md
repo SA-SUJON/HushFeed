@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Fade the video controls, a new number under Clear display, dims the buttons, caption and tabs over the video to the level you pick instead of hiding them, which helps against screen burn-in while you can still see where everything is. 100 leaves TikTok as it is, and faded controls still take taps. At 0 the buttons and caption are hidden the way Clear display hides them, and the tabs stay at 10 so you can still find your way around.
+
 * **TikTok:** Lock the feed, a new switch under Screen time, keeps For You, Following and the other feed tabs behind a calm panel, and the feed won't swipe. Inbox, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of a feed you've shut. The Friends tab's feed is covered too, and clearing the controls doesn't lift the panel. Only a link to a single video gets through, not a profile or a search link. With Wait a day to loosen the budget on, turning Lock the feed off waits until the day starts over, the same as a longer budget does. It's off until you turn it on, and Pause Hushfeed turns it off with everything else.
 
 * **TikTok:** New patch, Block popups. Its checklist under Feed screen > Popups lists each popup TikTok has tried to show on your phone, like the follow-your-friends card, and stops the ones you tick the next time they come up. Nothing is blocked until you tick something. CAPTCHA, verification, sign-in, age, ban and legal consent screens never show up in the list and are never blocked.

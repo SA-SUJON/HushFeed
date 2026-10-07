@@ -450,7 +450,9 @@ Exported %1$d comments and %2$d replies,Exported %1$d comments and %2$d replies
 Exported %1$d loaded values,Exported %1$d loaded values
 Exported 1 loaded value,Exported 1 loaded value
 "Extend the heart's touch area into nearby blank space. The icon and row spacing stay the same. Text, Reply and other controls keep their own space.","Extend the heart's touch area into nearby blank space. The icon and row spacing stay the same. Text, Reply and other controls keep their own space."
+"Fade the buttons, caption and tabs over the video to this level instead of hiding them. 100 leaves them as TikTok draws them. Faded controls still take taps. At 0 the buttons and caption are hidden, and the tabs stay at 10.","Fade the buttons, caption and tabs over the video to this level instead of hiding them. 100 leaves them as TikTok draws them. Faded controls still take taps. At 0 the buttons and caption are hidden, and the tabs stay at 10."
 Fade the feed out before the hold,Fade the feed out before the hold
+Fade the video controls,Fade the video controls
 Favorites range,Favorites range
 Feature Gate Lab,Feature Gate Lab
 Feature gate override reset,Feature gate override reset

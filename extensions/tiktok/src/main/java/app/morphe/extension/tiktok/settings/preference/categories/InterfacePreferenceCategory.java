@@ -470,6 +470,12 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     "While Clear display is on, also hide the progress bar, the close button and the pause and speed buttons at the bottom. You can still drag along the bottom edge to move through the video. To leave Clear display, press and hold the video and tap Restore display.",
                     Settings.HIDE_CLEAR_DISPLAY_CONTROLS
             ));
+            addPreference(new NumberInputPreference(
+                    context,
+                    "Fade the video controls",
+                    "Fade the buttons, caption and tabs over the video to this level instead of hiding them. 100 leaves them as TikTok draws them. Faded controls still take taps. At 0 the buttons and caption are hidden, and the tabs stay at 10.",
+                    Settings.FADE_CONTROLS_OPACITY, "%1$s%%"
+            ));
         }
     }
 
