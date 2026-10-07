@@ -755,17 +755,21 @@ public final class FeedItemsFilter {
 
             List<IFilter> activeFilters = getActiveFilters(CONTENT_FILTERS);
             boolean hideLive = Settings.HIDE_LIVE.get();
-            if (activeFilters.isEmpty() && !hideLive) return;
+            boolean mutualsOnly = Settings.FRIENDS_MUTUALS_ONLY.get();
+            if (activeFilters.isEmpty() && !hideLive && !mutualsOnly) return;
 
             if (!(raw instanceof List)) return;
             List items = (List) raw;
             if (items.isEmpty()) return;
 
+            String ownId = mutualsOnly ? SignedInUser.id() : null;
             ArrayList kept = new ArrayList(items.size());
             Map<String, Integer> reasonCounts = BaseSettings.DEBUG.get() ? new HashMap<>() : null;
             String lastReason = null;
             for (Object entry : items) {
-                String reason = friendsFeedReason(entry, activeFilters, hideLive);
+                String reason = mutualsOnly && !FriendsMutuals.fromMutual(entry, ownId)
+                        ? FriendsMutuals.REASON
+                        : friendsFeedReason(entry, activeFilters, hideLive);
                 if (reason == null) {
                     kept.add(entry);
                 } else {

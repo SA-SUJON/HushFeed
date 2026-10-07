@@ -77,6 +77,8 @@ public class FriendsFeedFilterTest {
         }
         saved.put(Settings.REMOVE_ADS, Settings.REMOVE_ADS.get());
         saved.put(Settings.HIDE_LIVE, Settings.HIDE_LIVE.get());
+        saved.put(Settings.FRIENDS_MUTUALS_ONLY, Settings.FRIENDS_MUTUALS_ONLY.get());
+        Settings.FRIENDS_MUTUALS_ONLY.save(false);
     }
 
     @After public void tearDown() {
@@ -159,6 +161,7 @@ public class FriendsFeedFilterTest {
     /** Stands in for FriendsV3RepostModel: a friend's repost of someone's video. */
     public static final class Repost {
         public Aweme repostedAweme;
+        public Object reposter;
         Repost(Aweme aweme) { this.repostedAweme = aweme; }
     }
 
@@ -196,6 +199,81 @@ public class FriendsFeedFilterTest {
         assertEquals(List.of(ordinary, repostedOrdinary), response.friendsV3Feeds);
         FeedItemsFilter.filterFriendsV3Feed(null);
         FeedItemsFilter.filterFriendsV3Feed(new Object());
+    }
+
+    /** Stands in for TikTok's User: its uid and its follow status toward the reader. */
+    public static final class Person {
+        public final String uid;
+        public final int followStatus;
+        Person(String uid, int followStatus) { this.uid = uid; this.followStatus = followStatus; }
+    }
+
+    /** A video with an author. */
+    public static final class Post extends Video {
+        public final Object author;
+        Post(Person author) { super(false); this.author = author; }
+    }
+
+    /** A V3 repost: whoever reposted it, and the video they reposted. */
+    static V3Entry repost(Person reposter, Person author) {
+        V3Entry entry = V3Entry.repostOf(new Post(author));
+        entry.repostItem.reposter = reposter;
+        return entry;
+    }
+
+    /** LiveRoomStruct, read through RoomFeedCellStruct.getNewLiveRoomData(). */
+    public static final class Room {
+        public final Object owner;
+        Room(Person owner) { this.owner = owner; }
+    }
+    public static final class RoomCell {
+        private final Room room;
+        RoomCell(Person owner) { this.room = new Room(owner); }
+        public Room getNewLiveRoomData() { return room; }
+    }
+
+    @Test public void mutualsOnlyKeepsFriendsTheirRepostsAndYourOwnPosts() {
+        Settings.REMOVE_ADS.save(false);
+        Settings.HIDE_LIVE.save(false);
+        Settings.FRIENDS_MUTUALS_ONLY.save(true);
+        app.morphe.extension.tiktok.SignedInUser.idForTests = "me";
+        try {
+            Person friend = new Person("friend", 2);
+            Person followed = new Person("followed", 1);
+            Person stranger = new Person("stranger", 0);
+            Person me = new Person("me", 0);
+
+            V3Entry friendsPost = new V3Entry(new Post(friend));
+            V3Entry friendsRepost = repost(friend, stranger);
+            V3Entry ownPost = new V3Entry(new Post(me));
+            V3Entry ownRepost = repost(me, followed);
+            V3Entry friendsLive = new V3Entry(null);
+            friendsLive.roomStruct = new RoomCell(friend);
+            V3Entry unreadable = new V3Entry(new Video(false));
+            V3Entry strangersLive = new V3Entry(null);
+            strangersLive.roomStruct = new RoomCell(stranger);
+            V3Response response = new V3Response(friendsPost, new V3Entry(new Post(followed)),
+                    friendsRepost, repost(stranger, friend), new V3Entry(new Post(stranger)), ownPost,
+                    ownRepost, friendsLive, strangersLive, unreadable);
+
+            FeedItemsFilter.filterFriendsV3Feed(response);
+
+            assertEquals(List.of(friendsPost, friendsRepost, ownPost, ownRepost, friendsLive, unreadable),
+                    response.friendsV3Feeds);
+
+            Entry older = new Entry(new Post(friend));
+            Response v2 = new Response(older, new Entry(new Post(followed)), new Entry(new Post(stranger)));
+            FeedItemsFilter.filterFriendsFeed(v2);
+            assertEquals(List.of(older), v2.friendFeedData);
+
+            Settings.FRIENDS_MUTUALS_ONLY.save(false);
+            V3Response off = new V3Response(new V3Entry(new Post(stranger)));
+            List<V3Entry> before = off.friendsV3Feeds;
+            FeedItemsFilter.filterFriendsV3Feed(off);
+            assertSame("the switch off leaves the list alone", before, off.friendsV3Feeds);
+        } finally {
+            app.morphe.extension.tiktok.SignedInUser.idForTests = null;
+        }
     }
 
     @Test public void everyEntryCanBeDroppedWhenTheyAllMatch() {

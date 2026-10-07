@@ -236,6 +236,8 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting HIDE_PROMOTIONAL_MUSIC = new BooleanSetting("hide_promotional_music", FALSE);
     public static final BooleanSetting HIDE_LIVE_REPLAYS = new BooleanSetting("hide_live_replays", FALSE);
     public static final BooleanSetting HIDE_UNPERSONALIZED_FOR_YOU = new BooleanSetting("hide_unpersonalized_for_you", FALSE);
+    /** Read on every Friends tab response, so it applies from the next page on. */
+    public static final BooleanSetting FRIENDS_MUTUALS_ONLY = new BooleanSetting("friends_mutuals_only", FALSE);
     public static final BooleanSetting HIDE_SHARE_CHANNELS = new BooleanSetting("hide_share_channels", FALSE);
     public static final BooleanSetting HIDE_SHARE_ACTIONS = new BooleanSetting("hide_share_actions", FALSE);
     public static final BooleanSetting REMOVE_ADS = new BooleanSetting("remove_ads", TRUE, true);

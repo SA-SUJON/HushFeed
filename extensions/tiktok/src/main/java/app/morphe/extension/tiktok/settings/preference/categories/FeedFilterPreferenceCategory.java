@@ -99,6 +99,12 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         ));
         addPreference(new TogglePreference(
                 context,
+                "Show only mutual friends on the Friends tab",
+                "On the Friends tab, hide posts, reposts and LIVEs from accounts that aren't a mutual follow, suggested accounts included. Your own posts stay.",
+                Settings.FRIENDS_MUTUALS_ONLY
+        ));
+        addPreference(new TogglePreference(
+                context,
                 "Hide stories", "Hide stories from the feed.",
                 Settings.HIDE_STORY
         ));
