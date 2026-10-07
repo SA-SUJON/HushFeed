@@ -106,7 +106,7 @@ val networkTrafficGovernorPatch = bytecodePatch(
 @Suppress("unused")
 val runtimeMemoryGovernorPatch = bytecodePatch(
     name = "Drop the animated image cache",
-    description = "Makes TikTok's reviewed Fresco animated-frame cache lookups return no cached frame. This can increase decoding work or change animation playback.",
+    description = "Makes TikTok's reviewed Fresco animated-frame cache lookups return no cached frame, so every frame of an animated sticker or GIF gets decoded again. In a 47.1.4 test the slowest frames in a comment thread full of animated stickers took about twice as long and memory use didn't go down, so leave it off unless you're testing it.",
     default = false,
 ) {
     category("Performance")

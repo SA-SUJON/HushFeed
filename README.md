@@ -204,7 +204,7 @@ The eleven optional patches in the Performance group were measured on a Galaxy S
 | `Disable the long press repost` | Keeps holding Like from opening TikTok's repost action. Switch: Hushfeed settings > Feed screen. |
 | `Double-tap controls` | Lets double taps do nothing or open the current video's comments. Switch: Hushfeed settings > Feed screen. |
 | `Downloads` | Adds watermark-free downloads, comment sticker saving, configurable folders, and filename templates. It ignores the flag TikTok sets when a creator turns downloading off, so those videos save too. Network fetches accept public HTTPS addresses and follow at most five checked redirects. Switch: Hushfeed settings > Downloads. |
-| `Drop the animated image cache` | Makes TikTok's reviewed Fresco animated-frame cache lookups return no cached frame. This can increase decoding work or change animation playback. |
+| `Drop the animated image cache` | Makes TikTok's reviewed Fresco animated-frame cache lookups return no cached frame, so every frame of an animated sticker or GIF gets decoded again. In a 47.1.4 test the slowest frames in a comment thread full of animated stickers took about twice as long and memory use didn't go down, so leave it off unless you're testing it. |
 | `Enable voice comments` | Turns on TikTok's own voice comment recording and publishing entry points for accounts that do not have them. |
 | `Expand activity list` | Show the full Activity and New followers lists instead of collapsing them behind a View all button. Switch: Hushfeed settings > Inbox. |
 | `Feature Gate Lab` | Adds a menu for viewing and overriding supported TikTok feature flags and configuration values. |
