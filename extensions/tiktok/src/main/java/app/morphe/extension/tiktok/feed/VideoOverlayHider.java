@@ -385,8 +385,11 @@ public final class VideoOverlayHider {
             boolean carry = !HushfeedPause.isPaused() && RememberClearDisplayPatch.isCarryingClear();
             boolean tabStrip = !detailPager && !HushfeedPause.isPaused()
                     && (RememberClearDisplayPatch.isClearDisplayNow() || carry);
-            // The comment bar is the detail pager's own; the main feed has the tabs there.
-            boolean detailCommentBar = detailPager && Settings.HIDE_DETAIL_COMMENT_BAR.get();
+            // The comment bar is the detail pager's own; the main feed has the tabs there. TikTok
+            // leaves it up in Clear display on a photo or video opened from search or a profile
+            // (#84), so it goes then too and comes back with the controls.
+            boolean detailCommentBar = detailPager && (Settings.HIDE_DETAIL_COMMENT_BAR.get()
+                    || (!HushfeedPause.isPaused() && (RememberClearDisplayPatch.isClearDisplayNow() || carry)));
             // Asked for here and confirmed after the walk by TikTok's own bar being on screen,
             // which it shows only in Clear display; see gateClearControls.
             boolean clearControls = !HushfeedPause.isPaused() && Settings.HIDE_CLEAR_DISPLAY_CONTROLS.get();

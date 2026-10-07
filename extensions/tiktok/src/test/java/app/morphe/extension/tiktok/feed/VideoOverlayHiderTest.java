@@ -1233,6 +1233,47 @@ public class VideoOverlayHiderTest {
     }
 
     /**
+     * TikTok leaves the Add comment bar up in Clear display on a photo or video opened from
+     * search or a profile (#84). It goes with the other controls, with Hide the comment bar on
+     * opened videos off, and comes back on Restore display.
+     */
+    @Test
+    public void clearDisplayTakesTheCommentBarOffAnOpenedVideo() {
+        resolveCommentBarIds();
+        Settings.HIDE_DETAIL_COMMENT_BAR.save(false);
+        try (var detailController = Robolectric.buildActivity(
+                com.ss.android.ugc.aweme.detail.ui.DetailActivity.class).create().start()) {
+            Activity detail = detailController.get();
+            View strip = new View(detail);
+            FrameLayout root = new FrameLayout(detail);
+            root.addView(pagerColumn(detail, strip));
+            View bar = new View(detail);
+            bar.setId(BAR_ID);
+            root.addView(bar);
+            detail.setContentView(root);
+            detailController.resume();
+
+            VideoOverlayHider.applyTo(detail);
+            assertEquals(View.VISIBLE, bar.getVisibility());
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+            VideoOverlayHider.applyTo(detail);
+            assertEquals("the comment bar stayed in Clear display", View.GONE, bar.getVisibility());
+            assertEquals(View.GONE, strip.getVisibility());
+
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+            VideoOverlayHider.applyTo(detail);
+            assertEquals("Restore display left the comment bar hidden", View.VISIBLE, bar.getVisibility());
+            assertEquals(View.VISIBLE, strip.getVisibility());
+        } finally {
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+            Settings.CLEAR_DISPLAY.save(false);
+        }
+    }
+
+    /**
      * The bar and the strip go together. With the bar missing, a collapsed strip would grow the
      * pager under nothing, or under a bar a build renamed, which then covers the caption. With
      * the strip missing, hiding the bar alone leaves the black strip.
