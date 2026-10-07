@@ -217,7 +217,7 @@ The eleven optional patches in the Performance group were measured on a Galaxy S
 | `Copy comments without username` | Copies only the comment text without including the creator's username. Switch: Hushfeed settings > Comments. |
 | `Custom launcher icon` | Gives TikTok's launcher icon a themed version, so on Android 13 and up it takes your wallpaper's color when themed icons are on. Its options can also swap in a black background or a plain one-color note on Android 8 and up. |
 | `Custom offline videos limit` | Adds a custom entry to TikTok's offline videos menu with a configurable limit from 1 to 1000 videos. Switch: Hushfeed settings > Downloads. |
-| `Device privacy guard` | Blocks TikTok from reading your clipboard. Copying a link you asked for still works. Switch: Hushfeed settings > Privacy. |
+| `Device privacy guard` | Stops TikTok reading a few things about your device. Blocking what you copied is on by default, and copying a link from TikTok still works. Hiding a VPN connection and handing it a blank advertising id are each a switch you turn on. All of them sit under Hushfeed settings > Privacy. |
 | `Diagnostic tools` | Adds diagnostic logging, filtered reports and local TikTok crash capture. The switches are under Diagnostics in Hushfeed settings. Switch: Hushfeed settings > Diagnostics. |
 | `Disable login requirement` | Removes TikTok's mandatory login gate from supported flows. |
 | `Disable screen capture detection` | Prevents TikTok from reacting to screenshots and screen recordings. |

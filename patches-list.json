@@ -1502,7 +1502,7 @@
     },
     {
       "name": "Device privacy guard",
-      "description": "Blocks TikTok from reading your clipboard. Copying a link you asked for still works. Switch: Hushfeed settings > Privacy.",
+      "description": "Stops TikTok reading a few things about your device. Blocking what you copied is on by default, and copying a link from TikTok still works. Hiding a VPN connection and handing it a blank advertising id are each a switch you turn on. All of them sit under Hushfeed settings > Privacy.",
       "category": "Privacy",
       "use": false,
       "dependencies": [

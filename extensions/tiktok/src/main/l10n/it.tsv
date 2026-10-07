@@ -209,6 +209,10 @@ Back up settings	Esegui il backup delle impostazioni
 Backup and restore	Backup e ripristino
 Black	Nero
 Block clipboard reads	Blocca le letture degli appunti
+Hide a VPN connection	Nascondi una connessione VPN
+Keep TikTok from telling you're on a VPN. Only the VPN shows as off to it, and your other connections read as they really are. Leave this off if you need a feature that checks for a VPN.	Impedisce a TikTok di capire che usi una VPN. Solo la VPN gli risulta disattivata, mentre le altre connessioni restano come sono davvero. Lascialo disattivato se ti serve una funzione che controlla la presenza di una VPN.
+Block the advertising id	Blocca l'id pubblicitario
+Hand TikTok a blank advertising id, the same one Android gives after you reset yours, so this device can't be matched across apps by it.	Dà a TikTok un id pubblicitario vuoto, lo stesso che Android fornisce dopo che reimposti il tuo, così questo dispositivo non può essere collegato tra le app tramite esso.
 Block contact list access	Blocca l'accesso alla lista contatti
 Block installed app scanning	Blocca la scansione delle app installate
 Block location	Blocca la posizione

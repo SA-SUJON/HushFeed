@@ -204,6 +204,10 @@ Back up settings	Ayarları yedekle
 Backup and restore	Yedekleme ve geri yükleme
 Black	Siyah
 Block clipboard reads	Pano okumalarını engelle
+Hide a VPN connection	VPN bağlantısını gizle
+Keep TikTok from telling you're on a VPN. Only the VPN shows as off to it, and your other connections read as they really are. Leave this off if you need a feature that checks for a VPN.	TikTok'un bir VPN kullandığınızı anlamasını engeller. Ona yalnızca VPN kapalı görünür, diğer bağlantılarınız gerçekte olduğu gibi kalır. VPN olup olmadığını denetleyen bir özelliğe ihtiyacınız varsa bunu kapalı bırakın.
+Block the advertising id	Reklam kimliğini engelle
+Hand TikTok a blank advertising id, the same one Android gives after you reset yours, so this device can't be matched across apps by it.	TikTok'a boş bir reklam kimliği verir, sıfırladıktan sonra Android'in verdiği kimliğin aynısını, böylece bu cihaz bunun üzerinden uygulamalar arasında eşleştirilemez.
 Block contact list access	Kişi listesine erişimi engelle
 Block installed app scanning	Yüklü uygulama taramasını engelle
 Block location	Konumu engelle

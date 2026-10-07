@@ -156,6 +156,21 @@ public final class PrivacyPreferenceCategory extends ConditionalPreferenceCatego
                     "Stop TikTok reading what you copied. Copying a link from TikTok still works.",
                     Settings.BLOCK_CLIPBOARD_READS
             ));
+            addPreference(new TogglePreference(
+                    context,
+                    "Hide a VPN connection",
+                    "Keep TikTok from telling you're on a VPN. Only the VPN shows as off to it, and "
+                            + "your other connections read as they really are. Leave this off if you "
+                            + "need a feature that checks for a VPN.",
+                    Settings.HIDE_VPN
+            ));
+            addPreference(new TogglePreference(
+                    context,
+                    "Block the advertising id",
+                    "Hand TikTok a blank advertising id, the same one Android gives after you reset "
+                            + "yours, so this device can't be matched across apps by it.",
+                    Settings.BLOCK_ADVERTISING_ID
+            ));
         }
         if (SettingsStatus.resourceGovernorEnabled) {
             addPreference(new TogglePreference(

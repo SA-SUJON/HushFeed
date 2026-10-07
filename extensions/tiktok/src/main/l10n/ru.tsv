@@ -254,6 +254,10 @@ Back up settings	Создать резервную копию настроек
 Backup and restore	Резервное копирование и восстановление
 Black	Чёрный
 Block clipboard reads	Блокировать чтение буфера обмена
+Hide a VPN connection	Скрывать VPN-подключение
+Keep TikTok from telling you're on a VPN. Only the VPN shows as off to it, and your other connections read as they really are. Leave this off if you need a feature that checks for a VPN.	Не даёт TikTok узнать, что вы используете VPN. Ему как выключенный показывается только VPN, а остальные подключения остаются такими, какие есть. Оставьте выключенным, если вам нужна функция, которая проверяет наличие VPN.
+Block the advertising id	Блокировать рекламный идентификатор
+Hand TikTok a blank advertising id, the same one Android gives after you reset yours, so this device can't be matched across apps by it.	Передаёт TikTok пустой рекламный идентификатор, тот же, что Android выдаёт после сброса вашего, чтобы это устройство нельзя было сопоставить между приложениями по нему.
 Block contact list access	Блокировать доступ к списку контактов
 Block installed app scanning	Блокировать сканирование установленных приложений
 Block location	Блокировать местоположение

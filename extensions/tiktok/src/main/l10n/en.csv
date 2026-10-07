@@ -219,6 +219,7 @@ Block new bottom tabs,Block new bottom tabs
 Block new feed tabs,Block new feed tabs
 Block popups,Block popups
 Block suggested video notifications,Block suggested video notifications
+Block the advertising id,Block the advertising id
 "Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts.","Block the creator in one tap. Once TikTok confirms, skip to the next video. A small Unblock button appears at the top left for two seconds. You can also unblock later in TikTok's Privacy > Blocked accounts."
 Block this commenter,Block this commenter
 Block this creator,Block this creator
@@ -529,6 +530,7 @@ Ghost mode,Ghost mode
 Ghost mode diagnostics,Ghost mode diagnostics
 Go to the screen now. Hushfeed records its layout in %1$d seconds.,Go to the screen now. Hushfeed records its layout in %1$d seconds.
 Got it,Got it
+"Hand TikTok a blank advertising id, the same one Android gives after you reset yours, so this device can't be matched across apps by it.","Hand TikTok a blank advertising id, the same one Android gives after you reset yours, so this device can't be matched across apps by it."
 Hand-off,Hand-off
 Handle or id,Handle or id
 Hidden %1$s on this phone,Hidden %1$s on this phone
@@ -553,6 +555,7 @@ Hide TikTok Shop posts from the feed.,Hide TikTok Shop posts from the feed.
 "Hide TikTok's ""Search: ..."" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box.","Hide TikTok's ""Search: ..."" banner above the comment count. This doesn't hide the comments or Hushfeed's comment-search box."
 Hide TikTok's Auto scroll button,Hide TikTok's Auto scroll button
 Hide TikTok's short drama episodes and the cards that promote them.,Hide TikTok's short drama episodes and the cards that promote them.
+Hide a VPN connection,Hide a VPN connection
 Hide activity,Hide activity
 Hide activity status,Hide activity status
 "Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships.","Hide ads, Shop posts, LIVE videos and replays, promotional music, and paid partnerships."
@@ -722,6 +725,7 @@ Inserted cards,Inserted cards
 "Install one, then come back here.","Install one, then come back here."
 Keep For You on a Home tap,Keep For You on a Home tap
 Keep For You on a pull down,Keep For You on a pull down
+"Keep TikTok from telling you're on a VPN. Only the VPN shows as off to it, and your other connections read as they really are. Leave this off if you need a feature that checks for a VPN.","Keep TikTok from telling you're on a VPN. Only the VPN shows as off to it, and your other connections read as they really are. Leave this off if you need a feature that checks for a VPN."
 Keep a local record of what you have watched and hide those videos when the feed sends them again.,Keep a local record of what you have watched and hide those videos when the feed sends them again.
 Keep a paused video paused,Keep a paused video paused
 "Keep a photo story on screen until you tap or swipe, instead of moving on after a few seconds.","Keep a photo story on screen until you tap or swipe, instead of moving on after a few seconds."

@@ -669,6 +669,12 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting BLOCK_INSTALLED_APPS = new BooleanSetting("block_installed_apps", TRUE);
     public static final BooleanSetting BLOCK_LOCATION = new BooleanSetting("block_location", TRUE);
     public static final BooleanSetting BLOCK_CLIPBOARD_READS = new BooleanSetting("block_clipboard_reads", TRUE);
+    // Off by default, unlike the blocks above. Hiding a VPN changes what TikTok reads your
+    // connection as, and a blank advertising id can affect attribution the reader may want kept,
+    // so each is a switch to turn on rather than a default. Both are read at the intercepted call,
+    // so neither needs a restart, and a paused build answers TikTok's real value.
+    public static final BooleanSetting HIDE_VPN = new BooleanSetting("hide_vpn", FALSE);
+    public static final BooleanSetting BLOCK_ADVERTISING_ID = new BooleanSetting("block_advertising_id", FALSE);
     public static final BooleanSetting BLOCK_MOTION_SENSORS = new BooleanSetting("block_motion_sensors", TRUE);
     // On by default for the same reason, and read at each history write, so no restart.
     public static final BooleanSetting STOP_SEARCH_HISTORY = new BooleanSetting("stop_search_history", TRUE);

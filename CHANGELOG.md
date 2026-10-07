@@ -8,6 +8,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** New patch, LIVE controls. A LIVE that shows up in your feed can count down and drop you into the room without a tap. Turn on Stop LIVE previews opening by themselves in Hushfeed settings > Playback and it stays a preview until you tap it. It's off by default.
 
+* **TikTok:** Device privacy guard picks up two more switches under Privacy, both off until you turn them on. Hide a VPN connection keeps TikTok from telling you're on a VPN, and only the VPN reads as off to it, so your other connections stay as they are. Block the advertising id hands TikTok the blank id Android gives after you reset yours, so this device can't be matched across apps by it. Both take effect without a restart, and Pause Hushfeed gives TikTok your real VPN state and id back.
+
 * **TikTok:** New patch, Stop search autoplay. Turn on Stop search results playing on their own in Hushfeed settings > App and the videos in your search results stay on their cover until you open one. The feed plays as usual.
 
 * **TikTok:** Ghost mode has a new Hide online status switch under it in Hushfeed settings > Privacy. With both on, TikTok stops sending the activity report that shows your friends a green dot or Active now while you're in the app. That same report brings back your friends' status, so theirs may stop updating for you while it's on. It's off by default.

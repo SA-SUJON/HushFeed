@@ -205,6 +205,10 @@ Back up settings,Cadangkan pengaturan
 Backup and restore,Cadangkan dan pulihkan
 Black,Hitam
 Block clipboard reads,Blokir pembacaan papan klip
+Hide a VPN connection,Sembunyikan koneksi VPN
+"Keep TikTok from telling you're on a VPN. Only the VPN shows as off to it, and your other connections read as they really are. Leave this off if you need a feature that checks for a VPN.","Mencegah TikTok mengetahui bahwa kamu memakai VPN. Hanya VPN yang terlihat mati baginya, dan koneksi lainnya tetap seperti apa adanya. Biarkan mati jika kamu memerlukan fitur yang memeriksa adanya VPN."
+Block the advertising id,Blokir id iklan
+"Hand TikTok a blank advertising id, the same one Android gives after you reset yours, so this device can't be matched across apps by it.","Memberi TikTok id iklan kosong, sama seperti yang diberikan Android setelah kamu menyetel ulang milikmu, agar perangkat ini tidak bisa dicocokkan antaraplikasi lewat id itu."
 Block contact list access,Blokir akses ke daftar kontak
 Block installed app scanning,Blokir pemindaian aplikasi terpasang
 Block location,Blokir lokasi
