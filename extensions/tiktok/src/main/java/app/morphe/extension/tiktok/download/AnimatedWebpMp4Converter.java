@@ -76,7 +76,7 @@ final class AnimatedWebpMp4Converter {
     private static final String MIME_TYPE = "video/avc";
     private static final int FRAME_RATE = 30;
     private static final int I_FRAME_INTERVAL_SECONDS = 1;
-    private static final long CODEC_TIMEOUT_US = 10_000L;
+    static final long CODEC_TIMEOUT_US = 10_000L;
 
     private AnimatedWebpMp4Converter() {
     }
@@ -266,13 +266,30 @@ final class AnimatedWebpMp4Converter {
             EncoderState state,
             File directory
     ) throws IOException {
+        drainEncoder(encoder, muxer, endOfStream, state, directory, CODEC_TIMEOUT_US);
+    }
+
+    /**
+     * As above, waiting at most {@code timeoutUs} for output that isn't there yet. A caller
+     * draining between frames can pass 0 while the encoder keeps up: it's still working on the
+     * frame just sent, and waiting for it each time cost a slideshow about a minute across
+     * thousands of frames.
+     */
+    static void drainEncoder(
+            MediaCodec encoder,
+            MediaMuxer muxer,
+            boolean endOfStream,
+            EncoderState state,
+            File directory,
+            long timeoutUs
+    ) throws IOException {
         MediaCodec.BufferInfo info = new MediaCodec.BufferInfo();
         while (true) {
             // An encoder that stops emitting after signalEndOfInputStream leaves this loop
             // spinning. One of the three media worker threads was then gone for the life of the
             // process. This is the only place in the loop that can notice the job deadline.
             MediaBudget.check(null);
-            int outputIndex = encoder.dequeueOutputBuffer(info, CODEC_TIMEOUT_US);
+            int outputIndex = encoder.dequeueOutputBuffer(info, endOfStream ? CODEC_TIMEOUT_US : timeoutUs);
             if (outputIndex == MediaCodec.INFO_TRY_AGAIN_LATER) {
                 if (!endOfStream) return;
             } else if (outputIndex == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
@@ -290,6 +307,7 @@ final class AnimatedWebpMp4Converter {
                     outputBuffer.limit(info.offset + info.size);
                     MediaBudget.checkDiskSpace(directory, info.size);
                     muxer.writeSampleData(state.trackIndex, outputBuffer, info);
+                    state.samples++;
                 }
                 encoder.releaseOutputBuffer(outputIndex, false);
                 if ((info.flags & MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) return;
@@ -359,6 +377,8 @@ final class AnimatedWebpMp4Converter {
     static final class EncoderState {
         int trackIndex = -1;
         boolean muxerStarted;
+        /** Encoded frames written to the file, so a caller can tell how far the encoder lags. */
+        long samples;
     }
 
     /** The encoder's input surface behind EGL. {@link SlideshowEncoder} draws its photos through it too. */

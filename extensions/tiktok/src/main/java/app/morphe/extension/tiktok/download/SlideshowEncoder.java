@@ -131,7 +131,11 @@ final class SlideshowEncoder implements Closeable {
         for (int i = 0; i < count; i++) {
             surface.present(SlideshowVideo.presentationTimeNs(frames, fps));
             frames++;
-            AnimatedWebpMp4Converter.drainEncoder(encoder, muxer, false, state, directory);
+            // Wait only when the encoder falls behind, so its output buffers can't all fill
+            // while the next frame waits for an input slot.
+            long behind = frames - state.samples;
+            AnimatedWebpMp4Converter.drainEncoder(encoder, muxer, false, state, directory,
+                    behind > 2 ? AnimatedWebpMp4Converter.CODEC_TIMEOUT_US : 0);
             if (progress != null) progress.frames(frames);
         }
     }
