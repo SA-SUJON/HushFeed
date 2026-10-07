@@ -532,6 +532,13 @@ public class PausePlaybackTest {
         assertFalse("ACTION_MAIN alone, without the launcher's category",
                 PausePlayback.startedFromTheLauncher(new Intent(Intent.ACTION_MAIN)));
         assertFalse(PausePlayback.startedFromTheLauncher(null));
+        assertFalse("a notification sent as the launcher's intent, marked by TikTok's push extra",
+                PausePlayback.startedFromTheLauncher(launcher().putExtra("from_notification", true)));
+        assertFalse("a notification sent as the launcher's intent with a tab to open",
+                PausePlayback.startedFromTheLauncher(launcher().putExtra(
+                        "com.ss.android.ugc.aweme.intent.extra.EXTRA_AWEME_PUSH_TAB", "inbox")));
+        assertFalse("a reopen from Recents after Android closed TikTok",
+                PausePlayback.startedFromTheLauncher(launcher().addFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY)));
     }
 
     @Test public void withTheFirstVideoSwitchOffAStartFromTheLauncherPlays() {

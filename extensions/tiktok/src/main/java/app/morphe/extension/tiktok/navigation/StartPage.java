@@ -172,7 +172,7 @@ public final class StartPage {
      * it and none of the extras TikTok's own push check reads. Some of TikTok's notifications open
      * the app with the launcher's intent and mark it only with those.
      */
-    static boolean isLauncherStart(Intent intent) {
+    public static boolean isLauncherStart(Intent intent) {
         if (intent == null
                 || !Intent.ACTION_MAIN.equals(intent.getAction())
                 || !intent.hasCategory(Intent.CATEGORY_LAUNCHER)

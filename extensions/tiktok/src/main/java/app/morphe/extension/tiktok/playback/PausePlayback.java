@@ -22,6 +22,7 @@ import android.widget.FrameLayout;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.tiktok.blockauthor.FeedVisibility;
+import app.morphe.extension.tiktok.navigation.StartPage;
 import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.wellbeing.SessionBudget;
@@ -381,10 +382,15 @@ public final class PausePlayback {
         }
     }
 
-    /** A tap on TikTok's icon, as the launcher sends it, and nothing that came with a page to open. */
+    /**
+     * A tap on TikTok's icon, as the launcher sends it, and nothing that came with a page to open.
+     * Start page's check, which also turns away the push extras some notifications put on the
+     * launcher's own intent. A reopen from Recents after Android closed TikTok carries that intent
+     * too, and plays: the reader was already watching.
+     */
     static boolean startedFromTheLauncher(Intent intent) {
-        return intent != null && Intent.ACTION_MAIN.equals(intent.getAction())
-                && intent.hasCategory(Intent.CATEGORY_LAUNCHER) && intent.getData() == null;
+        return StartPage.isLauncherStart(intent)
+                && (intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0;
     }
 
     /**

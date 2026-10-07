@@ -76,8 +76,7 @@ public final class ScreenTimePreferenceCategory extends ConditionalPreferenceCat
                 Settings.NO_RESUME_ON_FOREGROUND));
         addPreference(new TogglePreference(context, "Don't start the first video",
                 "When you open TikTok from its icon, the first video in the feed waits for one tap "
-                        + "before it plays. A link, a notification or a shortcut opens as usual. "
-                        + "Takes effect the next time TikTok starts.",
+                        + "before it plays. A link, a notification or a shortcut opens as usual.",
                 Settings.PAUSE_FIRST_VIDEO));
         addPreference(new TogglePreference(context, "Keep a paused video paused",
                 "A video you paused stays paused when you come back to the app instead of "

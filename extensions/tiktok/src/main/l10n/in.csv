@@ -1680,7 +1680,7 @@ TikTok's own name,Nama bawaan TikTok
 "If that name is taken, Android adds a number to the new file.","Jika nama itu sudah dipakai, Android menambahkan angka pada file baru."
 "If that name is taken, Hushfeed adds a number to the new file.","Jika nama itu sudah dipakai, Hushfeed menambahkan angka pada file baru."
 Don't start the first video,Jangan mulai video pertama
-"When you open TikTok from its icon, the first video in the feed waits for one tap before it plays. A link, a notification or a shortcut opens as usual. Takes effect the next time TikTok starts.","Saat kamu membuka TikTok dari ikonnya, video pertama di feed menunggu satu ketukan sebelum diputar. Tautan, notifikasi, atau pintasan tetap terbuka seperti biasa. Berlaku saat TikTok dimulai lagi."
+"When you open TikTok from its icon, the first video in the feed waits for one tap before it plays. A link, a notification or a shortcut opens as usual.","Saat kamu membuka TikTok dari ikonnya, video pertama di feed menunggu satu ketukan sebelum diputar. Tautan, notifikasi, atau pintasan tetap terbuka seperti biasa."
 Network proxy,Proksi jaringan
 Send TikTok through a proxy,Kirim TikTok lewat proksi
 "Sends TikTok's own network stack, which carries the feed, search, comments and the rest of its API, through the proxy below. Videos and LIVE streams load through TikTok's player, which connects on its own, so they stay direct. Other apps aren't affected.","Mengirim tumpukan jaringan TikTok sendiri, yang membawa feed, pencarian, komentar, dan sisa API-nya, lewat proksi di bawah. Video dan siaran LIVE dimuat lewat pemutar TikTok, yang terhubung sendiri, jadi tetap langsung. Aplikasi lain tidak terpengaruh."
