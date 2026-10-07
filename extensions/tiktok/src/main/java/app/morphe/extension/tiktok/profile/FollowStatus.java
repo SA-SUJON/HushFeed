@@ -100,7 +100,7 @@ public final class FollowStatus {
             // The item sets its text after this call returns, so read it once the bind is done.
             text.post(() -> {
                 try {
-                    if (isHandle(text.getText(), username)) place(text, label);
+                    if (isHandle(text.getText(), username)) place(text, label, null);
                 } catch (Throwable error) {
                     Logger.printException(() -> "Follow status: could not label the profile header", error);
                 }
@@ -132,7 +132,7 @@ public final class FollowStatus {
                     if (label == null) return;
                     TextView anchor = findText(root, handle, true);
                     if (anchor == null) anchor = findText(root, nickname, false);
-                    if (anchor != null) place(anchor, label);
+                    if (anchor != null) place(anchor, label, root);
                 } catch (Throwable error) {
                     Logger.printException(() -> "Follow status: could not label a follow list cell", error);
                 }
@@ -221,8 +221,10 @@ public final class FollowStatus {
      * Puts the label right after the anchor's row in the nearest vertical LinearLayout above it,
      * or beside the anchor when the only LinearLayout is a horizontal one. Any other layout gets
      * nothing, since a view added there without its own rules would land on top of something.
+     * The climb never goes past {@code limit}, so a list cell's label stays inside the cell, where its
+     * next bind can find it again.
      */
-    static void place(TextView anchor, @Nullable String label) {
+    static void place(TextView anchor, @Nullable String label, @Nullable View limit) {
         View child = anchor;
         LinearLayout row = null;
         View rowChild = null;
@@ -239,6 +241,7 @@ public final class FollowStatus {
                     rowChild = child;
                 }
             }
+            if (parent == limit) break;
             child = (View) parent;
             parent = parent.getParent();
         }

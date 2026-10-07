@@ -209,6 +209,22 @@ public class FollowStatusTest {
         assertEquals(3, names.getChildCount());
     }
 
+    @Test public void aFollowListCellWithoutALinearLayoutLeavesThePageAlone() {
+        // The page around the list is a vertical column, within the label's climb from the name.
+        LinearLayout page = column();
+        FrameLayout cell = new FrameLayout(activity);
+        page.addView(cell);
+        TextView handle = new TextView(activity);
+        handle.setText("jo.smith");
+        cell.addView(handle);
+
+        FollowStatus.onRelationCell(cell, item(user("5", "jo.smith", "Jo", 1, 0)));
+        idle();
+
+        assertEquals(1, page.getChildCount());
+        assertEquals(0, labels(activity.getWindow().getDecorView()));
+    }
+
     @Test public void theListItemsAccountIsFoundByItsType() {
         User account = user("5", "jo.smith", "Jo", 1, 0);
         assertSame(account, FollowStatus.userOf(item(account)));
