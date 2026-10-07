@@ -1217,6 +1217,7 @@ A change that loosens the budget waits until the day starts over and one that ti
 Changes to %1$s at %2$s	Изменится на %1$s в %2$s
 Turns off at %1$s	Выключится в %1$s
 That loosens the budget. It waits until %1$s.	Это ослабляет лимит. Вступит в силу не раньше %1$s.
+That loosens the lock. It waits until %1$s.	Это ослабляет блокировку. Вступит в силу не раньше %1$s.
 Today can't start over while Wait a day to loosen the budget is on. The day starts over at %1$s.	Сегодняшний день не может начаться заново, пока включено «Ждать день перед тем, как ослабить лимит». День начнётся заново в %1$s.
 Wait a day to loosen the budget is on, so Hushfeed stays on	«Ждать день перед тем, как ослабить лимит» включено, поэтому Hushfeed остаётся включённым
 Today has moved on, so there's nothing to put back	Сегодняшний день уже сменился, поэтому возвращать нечего

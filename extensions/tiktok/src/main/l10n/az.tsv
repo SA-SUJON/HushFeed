@@ -1171,6 +1171,7 @@ A change that loosens the budget waits until the day starts over and one that ti
 Changes to %1$s at %2$s	%2$s vaxtında %1$s olacaq
 Turns off at %1$s	%1$s vaxtında qapalır
 That loosens the budget. It waits until %1$s.	Bu büdcəni yumşaldır. O, %1$s vaxtına qədər gözləyir.
+That loosens the lock. It waits until %1$s.	Bu kilidi yumşaldır. O, %1$s vaxtına qədər gözləyir.
 Today can't start over while Wait a day to loosen the budget is on. The day starts over at %1$s.	Büdcəni yumşaltmaq üçün bir gün gözləyin seçimi açıq olduqda bu gün yenidən başlaya bilməz. Gün %1$s vaxtında yenidən başlayır.
 Wait a day to loosen the budget is on, so Hushfeed stays on	Büdcəni yumşaltmaq üçün bir gün gözləyin seçimi açıqdır, ona görə Hushfeed aktiv qalır
 Today has moved on, so there's nothing to put back	Bu gün irəlilədi, ona görə geri qaytarılacaq heç nə yoxdur

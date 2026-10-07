@@ -1136,6 +1136,7 @@ A change that loosens the budget waits until the day starts over and one that ti
 Changes to %1$s at %2$s	Ändert sich um %2$s auf %1$s
 Turns off at %1$s	Schaltet sich um %1$s aus
 That loosens the budget. It waits until %1$s.	Das lockert das Budget. Es wartet bis %1$s.
+That loosens the lock. It waits until %1$s.	Das lockert die Sperre. Es wartet bis %1$s.
 Today can't start over while Wait a day to loosen the budget is on. The day starts over at %1$s.	Heute kann nicht neu beginnen, solange Lockerungen des Budgets einen Tag warten lassen an ist. Der Tag beginnt um %1$s neu.
 Wait a day to loosen the budget is on, so Hushfeed stays on	Lockerungen des Budgets einen Tag warten lassen ist an, daher bleibt Hushfeed an
 Today has moved on, so there's nothing to put back	Der Tag ist weitergezogen, es gibt nichts zurückzuholen

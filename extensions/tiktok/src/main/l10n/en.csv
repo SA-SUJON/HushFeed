@@ -1325,6 +1325,7 @@ That isn't valid JSON. Check the brackets and quotes.,That isn't valid JSON. Che
 That list has too many entries. Keep it to %1$s or fewer.,That list has too many entries. Keep it to %1$s or fewer.
 That list is too large. Keep it to %1$s KB or less.,That list is too large. Keep it to %1$s KB or less.
 That loosens the budget. It waits until %1$s.,That loosens the budget. It waits until %1$s.
+That loosens the lock. It waits until %1$s.,That loosens the lock. It waits until %1$s.
 That preset isn't recognized. Choose another.,That preset isn't recognized. Choose another.
 That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.,That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.
 That settings backup holds a value Hushfeed can't read. Nothing was altered.,That settings backup holds a value Hushfeed can't read. Nothing was altered.

@@ -56,7 +56,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildAz() {
-        Map<String, String> table = new HashMap<>(3226);
+        Map<String, String> table = new HashMap<>(3228);
         fillAz0(table);
         fillAz1(table);
         fillAz2(table);
@@ -2806,6 +2806,8 @@ public final class L10nTranslations {
                 "Həmin siyahı çox böyükdür. Onu %1$s KB və ya daha az saxlayın.");
         table.put("That loosens the budget. It waits until %1$s.",
                 "Bu büdcəni yumşaldır. O, %1$s vaxtına qədər gözləyir.");
+        table.put("That loosens the lock. It waits until %1$s.",
+                "Bu kilidi yumşaldır. O, %1$s vaxtına qədər gözləyir.");
         table.put("That preset isn't recognized. Choose another.",
                 "Həmin hazır ayar tanınmır. Başqasını seçin.");
         table.put("That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.",
@@ -2912,11 +2914,11 @@ public final class L10nTranslations {
                 "Profil şəkli saxlanıla bilmədi. Yenidən cəhd edin.");
         table.put("The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.",
                 "Yarımçıq qalmış ayar dəyişikliyinin qeydi oxuna bilmədi, ona görə kənara qoyuldu. Ayarlarınızı yoxlayın.");
-        table.put("The report couldn't be saved. Try again.",
-                "Hesabat saxlanıla bilmədi. Yenidən cəhd edin.");
     }
 
     private static void fillAz23(Map<String, String> table) {
+        table.put("The report couldn't be saved. Try again.",
+                "Hesabat saxlanıla bilmədi. Yenidən cəhd edin.");
         table.put("The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.",
                 "Gələnlərin yuxarısındakı hekayə avatarları sətri yox olur. Hekayələr yenə də lentdən və profillərdən oynanır.");
         table.put("The saved-video choice couldn't open. Try again.",
@@ -3035,11 +3037,11 @@ public final class L10nTranslations {
                 "TikTok defoltu (yaradıcının profilini açın)");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok rəyi qəbul etmədi. Sonra yenidən cəhd edin.");
-        table.put("TikTok didn't block %1$s. Try again in a moment.",
-                "TikTok %1$s istifadəçisini bloklamadı. Bir azdan yenidən cəhd edin.");
     }
 
     private static void fillAz24(Map<String, String> table) {
+        table.put("TikTok didn't block %1$s. Try again in a moment.",
+                "TikTok %1$s istifadəçisini bloklamadı. Bir azdan yenidən cəhd edin.");
         table.put("TikTok didn't unblock %1$s. Try again in a moment.",
                 "TikTok %1$s istifadəçisini blokdan çıxarmadı. Bir azdan yenidən cəhd edin.");
         table.put("TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.",
@@ -3158,11 +3160,11 @@ public final class L10nTranslations {
                 "Növ");
         table.put("Unavailable",
                 "Əlçatan deyil");
-        table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
-                "Bu TikTok buildlərində əlçatan deyil. Bütün doğrulama tapşırıqları görünən qalır.");
     }
 
     private static void fillAz25(Map<String, String> table) {
+        table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
+                "Bu TikTok buildlərində əlçatan deyil. Bütün doğrulama tapşırıqları görünən qalır.");
         table.put("Unblock",
                 "Blokdan çıxarın");
         table.put("Unblock this commenter",
@@ -3281,11 +3283,11 @@ public final class L10nTranslations {
                 "Video %2$s yerinə %1$s altyazı ilə saxlanıldı");
         table.put("Videos can't be saved to the folder in that file, so your video folder was kept",
                 "Videolar həmin fayldakı qovluğa saxlanıla bilmir, ona görə video qovluğunuz saxlanıldı");
-        table.put("Views range",
-                "Baxış aralığı");
     }
 
     private static void fillAz26(Map<String, String> table) {
+        table.put("Views range",
+                "Baxış aralığı");
         table.put("Visual search",
                 "Vizual axtarış");
         table.put("Wait a day to loosen the budget",
@@ -3395,7 +3397,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(3226);
+        Map<String, String> table = new HashMap<>(3228);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -6145,6 +6147,8 @@ public final class L10nTranslations {
                 "Diese Liste ist zu groß. Begrenze sie auf höchstens %1$s KB.");
         table.put("That loosens the budget. It waits until %1$s.",
                 "Das lockert das Budget. Es wartet bis %1$s.");
+        table.put("That loosens the lock. It waits until %1$s.",
+                "Das lockert die Sperre. Es wartet bis %1$s.");
         table.put("That preset isn't recognized. Choose another.",
                 "Ungültige SIM-Vorlage.");
         table.put("That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.",
@@ -6251,11 +6255,11 @@ public final class L10nTranslations {
                 "Das Profilbild konnte nicht gespeichert werden.");
         table.put("The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.",
                 "Die Aufzeichnung einer unterbrochenen Einstellungsänderung ließ sich nicht lesen und wurde beiseitegelegt. Prüfe deine Einstellungen.");
-        table.put("The report couldn't be saved. Try again.",
-                "Der Bericht konnte nicht gespeichert werden. Versuch es noch einmal.");
     }
 
     private static void fillDe23(Map<String, String> table) {
+        table.put("The report couldn't be saved. Try again.",
+                "Der Bericht konnte nicht gespeichert werden. Versuch es noch einmal.");
         table.put("The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.",
                 "Die Reihe der Story-Avatare oben im Posteingang verschwindet. Stories laufen weiterhin im Feed und auf Profilen.");
         table.put("The saved-video choice couldn't open. Try again.",
@@ -6374,11 +6378,11 @@ public final class L10nTranslations {
                 "TikTok-Standard (Profil des Creators öffnen)");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok hat die Rückmeldung nicht angenommen. Versuche es später noch einmal.");
-        table.put("TikTok didn't block %1$s. Try again in a moment.",
-                "TikTok hat %1$s nicht blockiert. Versuch es gleich noch einmal.");
     }
 
     private static void fillDe24(Map<String, String> table) {
+        table.put("TikTok didn't block %1$s. Try again in a moment.",
+                "TikTok hat %1$s nicht blockiert. Versuch es gleich noch einmal.");
         table.put("TikTok didn't unblock %1$s. Try again in a moment.",
                 "TikTok hat die Blockierung von %1$s nicht aufgehoben. Versuch es gleich noch einmal.");
         table.put("TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.",
@@ -6497,11 +6501,11 @@ public final class L10nTranslations {
                 "Typ");
         table.put("Unavailable",
                 "Nicht verfügbar");
-        table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
-                "In diesen TikTok-Versionen nicht verfügbar. Alle Verifizierungsabfragen bleiben sichtbar.");
     }
 
     private static void fillDe25(Map<String, String> table) {
+        table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
+                "In diesen TikTok-Versionen nicht verfügbar. Alle Verifizierungsabfragen bleiben sichtbar.");
         table.put("Unblock",
                 "Entblocken");
         table.put("Unblock this commenter",
@@ -6620,11 +6624,11 @@ public final class L10nTranslations {
                 "Video mit %1$s Untertiteln in %2$s gespeichert");
         table.put("Videos can't be saved to the folder in that file, so your video folder was kept",
                 "Im Ordner aus dieser Datei lassen sich keine Videos speichern, deshalb wurde dein Videoordner beibehalten");
-        table.put("Views range",
-                "Spanne der Aufrufe");
     }
 
     private static void fillDe26(Map<String, String> table) {
+        table.put("Views range",
+                "Spanne der Aufrufe");
         table.put("Visual search",
                 "Visuelle Suche");
         table.put("Wait a day to loosen the budget",
@@ -6734,7 +6738,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(3226);
+        Map<String, String> table = new HashMap<>(3228);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -9484,6 +9488,8 @@ public final class L10nTranslations {
                 "Esa lista es demasiado grande. Limítala a %1$s KB o menos.");
         table.put("That loosens the budget. It waits until %1$s.",
                 "Eso afloja el presupuesto. Espera hasta las %1$s.");
+        table.put("That loosens the lock. It waits until %1$s.",
+                "Eso afloja el bloqueo. Espera hasta las %1$s.");
         table.put("That preset isn't recognized. Choose another.",
                 "Ajuste preestablecido de SIM no válido.");
         table.put("That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.",
@@ -9590,11 +9596,11 @@ public final class L10nTranslations {
                 "No se pudo guardar la foto de perfil.");
         table.put("The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.",
                 "No se pudo leer el registro de un cambio de ajustes interrumpido, así que se apartó. Revisa tus ajustes.");
-        table.put("The report couldn't be saved. Try again.",
-                "No se pudo guardar el informe. Inténtalo otra vez.");
     }
 
     private static void fillEs23(Map<String, String> table) {
+        table.put("The report couldn't be saved. Try again.",
+                "No se pudo guardar el informe. Inténtalo otra vez.");
         table.put("The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.",
                 "La fila de fotos de historias de la parte de arriba de la bandeja de entrada desaparece. Las historias se siguen viendo en el feed y en los perfiles.");
         table.put("The saved-video choice couldn't open. Try again.",
@@ -9713,11 +9719,11 @@ public final class L10nTranslations {
                 "Predeterminado de TikTok (abrir el perfil del creador)");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok no aceptó el comentario. Inténtalo más tarde.");
-        table.put("TikTok didn't block %1$s. Try again in a moment.",
-                "TikTok no bloqueó a %1$s. Inténtalo de nuevo en un momento.");
     }
 
     private static void fillEs24(Map<String, String> table) {
+        table.put("TikTok didn't block %1$s. Try again in a moment.",
+                "TikTok no bloqueó a %1$s. Inténtalo de nuevo en un momento.");
         table.put("TikTok didn't unblock %1$s. Try again in a moment.",
                 "TikTok no desbloqueó a %1$s. Inténtalo de nuevo en un momento.");
         table.put("TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.",
@@ -9836,11 +9842,11 @@ public final class L10nTranslations {
                 "Tipo");
         table.put("Unavailable",
                 "No disponible");
-        table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
-                "No disponible en estas versiones de TikTok. Todas las verificaciones siguen visibles.");
     }
 
     private static void fillEs25(Map<String, String> table) {
+        table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
+                "No disponible en estas versiones de TikTok. Todas las verificaciones siguen visibles.");
         table.put("Unblock",
                 "Desbloquear");
         table.put("Unblock this commenter",
@@ -9959,11 +9965,11 @@ public final class L10nTranslations {
                 "Vídeo guardado con %1$s subtítulos en %2$s");
         table.put("Videos can't be saved to the folder in that file, so your video folder was kept",
                 "Los vídeos no se pueden guardar en la carpeta de ese archivo, así que se mantuvo tu carpeta de vídeos");
-        table.put("Views range",
-                "Rango de visualizaciones");
     }
 
     private static void fillEs26(Map<String, String> table) {
+        table.put("Views range",
+                "Rango de visualizaciones");
         table.put("Visual search",
                 "Búsqueda visual");
         table.put("Wait a day to loosen the budget",
@@ -10073,7 +10079,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(3226);
+        Map<String, String> table = new HashMap<>(3228);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -12823,6 +12829,8 @@ public final class L10nTranslations {
                 "Daftar itu terlalu besar. Batasi ukurannya hingga %1$s KB atau kurang.");
         table.put("That loosens the budget. It waits until %1$s.",
                 "Itu melonggarkan anggaran. Menunggu sampai pukul %1$s.");
+        table.put("That loosens the lock. It waits until %1$s.",
+                "Itu melonggarkan kunci. Menunggu sampai pukul %1$s.");
         table.put("That preset isn't recognized. Choose another.",
                 "Pratata SIM tidak sah.");
         table.put("That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.",
@@ -12929,11 +12937,11 @@ public final class L10nTranslations {
                 "Foto profilnya tidak bisa disimpan.");
         table.put("The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.",
                 "Catatan perubahan pengaturan yang terputus tidak bisa dibaca, jadi disisihkan. Periksa pengaturan kamu.");
-        table.put("The report couldn't be saved. Try again.",
-                "Laporan tidak bisa disimpan. Coba lagi.");
     }
 
     private static void fillIn23(Map<String, String> table) {
+        table.put("The report couldn't be saved. Try again.",
+                "Laporan tidak bisa disimpan. Coba lagi.");
         table.put("The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.",
                 "Baris foto profil Story di bagian atas Kotak Masuk hilang. Story tetap bisa diputar dari feed dan dari profil.");
         table.put("The saved-video choice couldn't open. Try again.",
@@ -13052,11 +13060,11 @@ public final class L10nTranslations {
                 "Bawaan TikTok (buka profil kreator)");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok tidak menerima masukannya. Coba lagi nanti.");
-        table.put("TikTok didn't block %1$s. Try again in a moment.",
-                "TikTok tidak memblokir %1$s. Coba lagi sebentar lagi.");
     }
 
     private static void fillIn24(Map<String, String> table) {
+        table.put("TikTok didn't block %1$s. Try again in a moment.",
+                "TikTok tidak memblokir %1$s. Coba lagi sebentar lagi.");
         table.put("TikTok didn't unblock %1$s. Try again in a moment.",
                 "TikTok tidak membuka blokir %1$s. Coba lagi sebentar lagi.");
         table.put("TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.",
@@ -13175,11 +13183,11 @@ public final class L10nTranslations {
                 "Tipe");
         table.put("Unavailable",
                 "Tidak tersedia");
-        table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
-                "Tidak tersedia pada versi TikTok ini. Semua verifikasi tetap terlihat.");
     }
 
     private static void fillIn25(Map<String, String> table) {
+        table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
+                "Tidak tersedia pada versi TikTok ini. Semua verifikasi tetap terlihat.");
         table.put("Unblock",
                 "Buka blokir");
         table.put("Unblock this commenter",
@@ -13298,11 +13306,11 @@ public final class L10nTranslations {
                 "Video disimpan dengan %1$s subtitel di %2$s");
         table.put("Videos can't be saved to the folder in that file, so your video folder was kept",
                 "Video tidak bisa disimpan ke folder di file itu, jadi folder videomu tetap dipakai");
-        table.put("Views range",
-                "Rentang tayangan");
     }
 
     private static void fillIn26(Map<String, String> table) {
+        table.put("Views range",
+                "Rentang tayangan");
         table.put("Visual search",
                 "Pencarian visual");
         table.put("Wait a day to loosen the budget",
@@ -13412,7 +13420,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIt() {
-        Map<String, String> table = new HashMap<>(3226);
+        Map<String, String> table = new HashMap<>(3228);
         fillIt0(table);
         fillIt1(table);
         fillIt2(table);
@@ -16162,6 +16170,8 @@ public final class L10nTranslations {
                 "Questa lista è troppo grande. Mantienila a %1$s KB o meno.");
         table.put("That loosens the budget. It waits until %1$s.",
                 "Questo allenta il budget. Aspetta fino alle %1$s.");
+        table.put("That loosens the lock. It waits until %1$s.",
+                "Questo allenta il blocco. Aspetta fino alle %1$s.");
         table.put("That preset isn't recognized. Choose another.",
                 "Questo preset non è riconosciuto. Scegline un altro.");
         table.put("That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.",
@@ -16268,11 +16278,11 @@ public final class L10nTranslations {
                 "Non è stato possibile salvare la foto del profilo. Riprova.");
         table.put("The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.",
                 "Non è stato possibile leggere il registro di una modifica delle impostazioni interrotta, perciò è stato accantonato. Controlla le tue impostazioni.");
-        table.put("The report couldn't be saved. Try again.",
-                "Non è stato possibile salvare il rapporto. Riprova.");
     }
 
     private static void fillIt23(Map<String, String> table) {
+        table.put("The report couldn't be saved. Try again.",
+                "Non è stato possibile salvare il rapporto. Riprova.");
         table.put("The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.",
                 "La riga degli avatar delle storie in cima alla Posta in arrivo scompare. Le storie continuano a essere riprodotte dal feed e dai profili.");
         table.put("The saved-video choice couldn't open. Try again.",
@@ -16391,11 +16401,11 @@ public final class L10nTranslations {
                 "Predefinito di TikTok (apre il profilo del creator)");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok non ha accettato il feedback. Riprova più tardi.");
-        table.put("TikTok didn't block %1$s. Try again in a moment.",
-                "TikTok non ha bloccato %1$s. Riprova tra poco.");
     }
 
     private static void fillIt24(Map<String, String> table) {
+        table.put("TikTok didn't block %1$s. Try again in a moment.",
+                "TikTok non ha bloccato %1$s. Riprova tra poco.");
         table.put("TikTok didn't unblock %1$s. Try again in a moment.",
                 "TikTok non ha sbloccato %1$s. Riprova tra poco.");
         table.put("TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.",
@@ -16514,11 +16524,11 @@ public final class L10nTranslations {
                 "Tipo");
         table.put("Unavailable",
                 "Non disponibile");
-        table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
-                "Non disponibile in queste versioni di TikTok. Tutte le verifiche restano visibili.");
     }
 
     private static void fillIt25(Map<String, String> table) {
+        table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
+                "Non disponibile in queste versioni di TikTok. Tutte le verifiche restano visibili.");
         table.put("Unblock",
                 "Sblocca");
         table.put("Unblock this commenter",
@@ -16637,11 +16647,11 @@ public final class L10nTranslations {
                 "Video salvato con %1$s sottotitoli in %2$s");
         table.put("Videos can't be saved to the folder in that file, so your video folder was kept",
                 "I video non possono essere salvati nella cartella indicata in quel file, quindi è stata mantenuta la tua cartella video");
-        table.put("Views range",
-                "Intervallo delle visualizzazioni");
     }
 
     private static void fillIt26(Map<String, String> table) {
+        table.put("Views range",
+                "Intervallo delle visualizzazioni");
         table.put("Visual search",
                 "Ricerca visiva");
         table.put("Wait a day to loosen the budget",
@@ -16751,7 +16761,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(3226);
+        Map<String, String> table = new HashMap<>(3228);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -19501,6 +19511,8 @@ public final class L10nTranslations {
                 "Essa lista é grande demais. Limite-a a %1$s KB ou menos.");
         table.put("That loosens the budget. It waits until %1$s.",
                 "Isso afrouxa o limite. Espera até as %1$s.");
+        table.put("That loosens the lock. It waits until %1$s.",
+                "Isso afrouxa o bloqueio. Espera até as %1$s.");
         table.put("That preset isn't recognized. Choose another.",
                 "Predefinição de SIM inválida.");
         table.put("That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.",
@@ -19607,11 +19619,11 @@ public final class L10nTranslations {
                 "Não foi possível salvar a foto de perfil.");
         table.put("The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.",
                 "O registro de uma alteração de configurações interrompida não pôde ser lido, então foi posto de lado. Confira suas configurações.");
-        table.put("The report couldn't be saved. Try again.",
-                "Não foi possível salvar o relatório. Tente de novo.");
     }
 
     private static void fillPt_rBR23(Map<String, String> table) {
+        table.put("The report couldn't be saved. Try again.",
+                "Não foi possível salvar o relatório. Tente de novo.");
         table.put("The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.",
                 "A linha de fotos de stories no topo da caixa de entrada some. Os stories continuam abrindo no feed e nos perfis.");
         table.put("The saved-video choice couldn't open. Try again.",
@@ -19730,11 +19742,11 @@ public final class L10nTranslations {
                 "Padrão do TikTok (abrir o perfil do criador)");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "O TikTok não aceitou o feedback. Tente mais tarde.");
-        table.put("TikTok didn't block %1$s. Try again in a moment.",
-                "O TikTok não bloqueou %1$s. Tente de novo daqui a pouco.");
     }
 
     private static void fillPt_rBR24(Map<String, String> table) {
+        table.put("TikTok didn't block %1$s. Try again in a moment.",
+                "O TikTok não bloqueou %1$s. Tente de novo daqui a pouco.");
         table.put("TikTok didn't unblock %1$s. Try again in a moment.",
                 "O TikTok não desbloqueou %1$s. Tente de novo daqui a pouco.");
         table.put("TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.",
@@ -19853,11 +19865,11 @@ public final class L10nTranslations {
                 "Tipo");
         table.put("Unavailable",
                 "Indisponível");
-        table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
-                "Indisponível nestas versões do TikTok. Todas as verificações continuam visíveis.");
     }
 
     private static void fillPt_rBR25(Map<String, String> table) {
+        table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
+                "Indisponível nestas versões do TikTok. Todas as verificações continuam visíveis.");
         table.put("Unblock",
                 "Desbloquear");
         table.put("Unblock this commenter",
@@ -19976,11 +19988,11 @@ public final class L10nTranslations {
                 "Vídeo salvo com %1$s legendas em %2$s");
         table.put("Videos can't be saved to the folder in that file, so your video folder was kept",
                 "Vídeos não podem ser salvos na pasta desse arquivo, então sua pasta de vídeos foi mantida");
-        table.put("Views range",
-                "Faixa de visualizações");
     }
 
     private static void fillPt_rBR26(Map<String, String> table) {
+        table.put("Views range",
+                "Faixa de visualizações");
         table.put("Visual search",
                 "Pesquisa visual");
         table.put("Wait a day to loosen the budget",
@@ -20090,7 +20102,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildRu() {
-        Map<String, String> table = new HashMap<>(3508);
+        Map<String, String> table = new HashMap<>(3510);
         fillRu0(table);
         fillRu1(table);
         fillRu2(table);
@@ -23101,6 +23113,8 @@ public final class L10nTranslations {
                 "Этот список слишком большой. Ограничьте его %1$s КБ или меньше.");
         table.put("That loosens the budget. It waits until %1$s.",
                 "Это ослабляет лимит. Вступит в силу не раньше %1$s.");
+        table.put("That loosens the lock. It waits until %1$s.",
+                "Это ослабляет блокировку. Вступит в силу не раньше %1$s.");
         table.put("That preset isn't recognized. Choose another.",
                 "Эта предустановка не распознана. Выберите другую.");
         table.put("That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.",
@@ -23195,11 +23209,11 @@ public final class L10nTranslations {
                 "Оригинальные фото недоступны. Видео не было сохранено.");
         table.put("The override changes no fields. Edit the field values, or reset the override.",
                 "Это переопределение не меняет ни одного поля. Измените значения полей или сбросьте переопределение.");
-        table.put("The override couldn't be applied: %1$s. Edit the field values, or reset the override.",
-                "Не удалось применить переопределение: %1$s. Измените значения полей или сбросьте переопределение.");
     }
 
     private static void fillRu25(Map<String, String> table) {
+        table.put("The override couldn't be applied: %1$s. Edit the field values, or reset the override.",
+                "Не удалось применить переопределение: %1$s. Измените значения полей или сбросьте переопределение.");
         table.put("The override doesn't say what list to return. Edit the field values, or reset the override.",
                 "Переопределение не указывает, какой список возвращать. Измените значения полей или сбросьте переопределение.");
         table.put("The partial file couldn't be removed. Delete it from the folder you chose.",
@@ -23318,11 +23332,11 @@ public final class L10nTranslations {
                 "У звука этого видео нет названия для поиска");
         table.put("Thumbs down blocks the commenter",
                 "Палец вниз блокирует автора комментария");
-        table.put("TikTok closed during these saves",
-                "TikTok закрылся во время этих сохранений");
     }
 
     private static void fillRu26(Map<String, String> table) {
+        table.put("TikTok closed during these saves",
+                "TikTok закрылся во время этих сохранений");
         table.put("TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are.",
                 "TikTok закрылся три раза в течение минуты после запуска, поэтому Hushfeed поставил себя на паузу. Ваши настройки остаются как есть.");
         table.put("TikTok default",
@@ -23441,11 +23455,11 @@ public final class L10nTranslations {
                 "Повторите попытку или вернитесь в TikTok.");
         table.put("Turn Hushfeed back on",
                 "Снова включить Hushfeed");
-        table.put("Turn on %1$s first.",
-                "Сначала включите %1$s.");
     }
 
     private static void fillRu27(Map<String, String> table) {
+        table.put("Turn on %1$s first.",
+                "Сначала включите %1$s.");
         table.put("Turn on Keep a streak going first",
                 "Сначала включите «Поддерживать серию»");
         table.put("Turn on overrides",
@@ -23564,11 +23578,11 @@ public final class L10nTranslations {
                 "Возвращаемое значение");
         table.put("Value: %1$s to %2$s",
                 "Значение: от %1$s до %2$s");
-        table.put("Verified accounts",
-                "Верифицированные аккаунты");
     }
 
     private static void fillRu28(Map<String, String> table) {
+        table.put("Verified accounts",
+                "Верифицированные аккаунты");
         table.put("Version %1$s",
                 "Версия %1$s");
         table.put("Version %1$s for TikTok %2$s",
@@ -23687,11 +23701,11 @@ public final class L10nTranslations {
                 "Ваши фильтры скрыли всё, что прислал TikTok, %1$d раз подряд. В основном это было %2$s.");
         table.put("Your operator's name, like T-Mobile.",
                 "Название вашего оператора, например T-Mobile.");
-        table.put("Your operator's numeric code, like 310260.",
-                "Числовой код вашего оператора, например 310260.");
     }
 
     private static void fillRu29(Map<String, String> table) {
+        table.put("Your operator's numeric code, like 310260.",
+                "Числовой код вашего оператора, например 310260.");
         table.put("Your previous feed setup couldn't be restored. Nothing was changed.",
                 "Не удалось восстановить вашу предыдущую настройку ленты. Ничего не изменено.");
         table.put("Your previous feed setup is back.",
@@ -23723,7 +23737,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildTr() {
-        Map<String, String> table = new HashMap<>(3226);
+        Map<String, String> table = new HashMap<>(3228);
         fillTr0(table);
         fillTr1(table);
         fillTr2(table);
@@ -26473,6 +26487,8 @@ public final class L10nTranslations {
                 "Bu liste çok büyük. %1$s KB veya daha küçük olsun.");
         table.put("That loosens the budget. It waits until %1$s.",
                 "Bu bütçeyi gevşetir. %1$s saatine kadar bekler.");
+        table.put("That loosens the lock. It waits until %1$s.",
+                "Bu kilidi gevşetir. %1$s saatine kadar bekler.");
         table.put("That preset isn't recognized. Choose another.",
                 "Bu hazır ayar tanınmıyor. Başka birini seç.");
         table.put("That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.",
@@ -26579,11 +26595,11 @@ public final class L10nTranslations {
                 "Profil fotoğrafı kaydedilemedi. Yeniden dene.");
         table.put("The record of an interrupted settings change couldn't be read, so it was set aside. Check your settings.",
                 "Yarıda kalan bir ayar değişikliğinin kaydı okunamadığı için bir kenara ayrıldı. Ayarlarını kontrol et.");
-        table.put("The report couldn't be saved. Try again.",
-                "Rapor kaydedilemedi. Yeniden dene.");
     }
 
     private static void fillTr23(Map<String, String> table) {
+        table.put("The report couldn't be saved. Try again.",
+                "Rapor kaydedilemedi. Yeniden dene.");
         table.put("The row of story avatars across the top of the Inbox goes. Stories still play from the feed and from profiles.",
                 "Gelen Kutusu'nun üst kısmındaki hikaye avatarları satırı kalkar. Hikayeler akıştan ve profillerden oynatılmaya devam eder.");
         table.put("The saved-video choice couldn't open. Try again.",
@@ -26702,11 +26718,11 @@ public final class L10nTranslations {
                 "TikTok varsayılanı (içerik üreticisinin profilini aç)");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok geri bildirimi kabul etmedi. Daha sonra yeniden dene.");
-        table.put("TikTok didn't block %1$s. Try again in a moment.",
-                "TikTok %1$s hesabını engellemedi. Birazdan yeniden dene.");
     }
 
     private static void fillTr24(Map<String, String> table) {
+        table.put("TikTok didn't block %1$s. Try again in a moment.",
+                "TikTok %1$s hesabını engellemedi. Birazdan yeniden dene.");
         table.put("TikTok didn't unblock %1$s. Try again in a moment.",
                 "TikTok %1$s hesabının engelini kaldırmadı. Birazdan yeniden dene.");
         table.put("TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.",
@@ -26825,11 +26841,11 @@ public final class L10nTranslations {
                 "Tür");
         table.put("Unavailable",
                 "Kullanılamıyor");
-        table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
-                "Bu TikTok sürümlerinde kullanılamaz. Tüm doğrulamalar görünür kalır.");
     }
 
     private static void fillTr25(Map<String, String> table) {
+        table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
+                "Bu TikTok sürümlerinde kullanılamaz. Tüm doğrulamalar görünür kalır.");
         table.put("Unblock",
                 "Engeli kaldır");
         table.put("Unblock this commenter",
@@ -26948,11 +26964,11 @@ public final class L10nTranslations {
                 "Video, %1$s altyazıyla %2$s konumuna kaydedildi");
         table.put("Videos can't be saved to the folder in that file, so your video folder was kept",
                 "Videolar o dosyadaki klasöre kaydedilemiyor, bu yüzden video klasörün korundu");
-        table.put("Views range",
-                "Görüntülenme aralığı");
     }
 
     private static void fillTr26(Map<String, String> table) {
+        table.put("Views range",
+                "Görüntülenme aralığı");
         table.put("Visual search",
                 "Görsel arama");
         table.put("Wait a day to loosen the budget",
