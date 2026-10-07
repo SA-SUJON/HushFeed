@@ -34,6 +34,30 @@ private const val VIDEO_ITEM_PARAMS_DESCRIPTOR =
 private const val FINISH_LAST_VIDEO =
     "Lapp/morphe/extension/tiktok/wellbeing/FinishLastVideo;"
 
+/**
+ * TikTok's player as the session hold sees it: the video a PlayerController actually has on
+ * screen, and that player's own pause and resume. Block author's hold and switches and the app
+ * lock all stop the video through it, so it is its own patch that each depends on and that
+ * runs once however many of them are picked.
+ */
+internal val sessionPlaybackBridgePatch = bytecodePatch {
+    dependsOn(sharedExtensionPatch)
+
+    execute {
+        // A bind is not "this video is on screen": the feed binds the items either side of
+        // the current one before the user reaches them, so a bind tracker would arm the next
+        // creator. The player names the video that is actually playing, which is what selects
+        // among the bound items. p1 is that id; p0 also lets the session hold pause the
+        // owning player without retaining a global player instance.
+        PlayerProgressAidFingerprint.method.capturePlayingAweme()
+
+        // The hold's pause and resume, and the video it checks it is pausing. Their names
+        // change with every build, so they are read off TikTok's own pauseVideo and the For You
+        // feed's space-key toggle and written into the hold's three bridge methods.
+        installNativePlayback(resolveNativePlayback())
+    }
+}
+
 @Suppress("unused")
 val blockAuthorPatch = bytecodePatch(
     name = "Block author button",
@@ -49,7 +73,7 @@ val blockAuthorPatch = bytecodePatch(
     default = false,
 ) {
     category("Interaction")
-    dependsOn(settingsPatch, sharedExtensionPatch)
+    dependsOn(settingsPatch, sharedExtensionPatch, sessionPlaybackBridgePatch)
 
     compatibleWith(*AppCompatibilities.tiktok())
 
@@ -98,12 +122,8 @@ val blockAuthorPatch = bytecodePatch(
                 "$EXTENSION_CLASS_DESCRIPTOR->setCurrentVideoParams(Ljava/lang/Object;)V",
         )
 
-        // A bind is not "this video is on screen": the feed binds the items either side of
-        // the current one before the user reaches them, so the tracker above would arm the
-        // next creator. The player names the video that is actually playing, which is what
-        // selects among the bound items. p1 is that id; p0 also lets the session hold
-        // pause the owning player without retaining a global player instance.
-        PlayerProgressAidFingerprint.method.capturePlayingAweme()
+        // The video actually playing, and the player's own pause and resume, come from
+        // sessionPlaybackBridgePatch, which the app lock brings in as well.
 
         // A replacement native activity can take focus from the hold itself. Observe its
         // actual grant and loss so release can distinguish that from an external audio owner.
@@ -113,11 +133,6 @@ val blockAuthorPatch = bytecodePatch(
         nativeFocus.request.captureNativeFocusRequest()
         nativeFocus.abandon.captureNativeFocusAbandon()
         nativeFocus.change.captureNativeFocusChange()
-
-        // The hold's pause and resume, and the video it checks it is pausing. Their names
-        // change with every build, so they are read off TikTok's own pauseVideo and the For You
-        // feed's space-key toggle and written into the hold's three bridge methods.
-        installNativePlayback(resolveNativePlayback())
 
         // Assert the block endpoint still looks the way the extension expects. The
         // extension calls it by reflection, so without this the patch would install a
