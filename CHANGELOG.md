@@ -10,7 +10,6 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** LIVE controls has a second switch, Show exact LIVE viewer counts, under Hushfeed settings > Playback. A LIVE room's viewer count at the top right shows the real number, like 1,234, instead of TikTok's rounded 1.2K. It's off by default.
 
-* **TikTok:** New patch, Keep pulled sounds. When a sound gets pulled for copyright or in your region, TikTok mutes every video that uses it. Turn on Play sounds TikTok pulled in Hushfeed settings > Playback and those videos play with their audio again, in the feed and in search. TikTok still shows the sound as unavailable. It's off by default.
 
 * **TikTok:** New patch, LIVE controls. A LIVE that shows up in your feed can count down and drop you into the room without a tap. Turn on Stop LIVE previews opening by themselves in Hushfeed settings > Playback and it stays a preview until you tap it. It's off by default.
 
