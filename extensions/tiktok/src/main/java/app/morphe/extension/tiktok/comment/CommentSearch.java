@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -85,6 +86,8 @@ public final class CommentSearch {
     private static final class LoadedComments {
         final LinkedHashMap<String, Object> byId = new LinkedHashMap<>();
         boolean truncated;
+        /** Bumped whenever a comment is added or a rebind brings a newer model for one. */
+        int changes;
     }
 
     /**
@@ -553,20 +556,24 @@ public final class CommentSearch {
             }
         }
 
-        /** How many loaded comments the count beside the buttons was last worked out from. */
-        private int countedFrom = -1;
+        /** The loaded set's change count the number beside the buttons was last worked out from. */
+        private int countedChanges = -1;
+        private long countedAt;
 
         /** What the buttons would write: every comment and reply the sheet has loaded. */
-        void updateExportCount(java.util.Collection<Object> loaded) {
+        void updateExportCount(LoadedComments loaded) {
             if (exports == null) return;
             View view = exports.findViewWithTag(EXPORT_COUNT_TAG);
             if (!(view instanceof TextView)) return;
             // Every row bind lands here, and counting reads each loaded comment through
-            // reflection. The set only grows, so its size says whether there's anything new.
-            int size = loaded == null ? 0 : loaded.size();
-            if (size == countedFrom) return;
-            countedFrom = size;
-            int total = loaded == null ? 0 : CommentExport.count(loaded);
+            // reflection, so it runs when the set changed. A model can also grow its reply
+            // previews in place, which no change count sees, so it runs once a second anyway.
+            int changes = loaded == null ? 0 : loaded.changes;
+            long now = SystemClock.uptimeMillis();
+            if (changes == countedChanges && now - countedAt < 1000L) return;
+            countedChanges = changes;
+            countedAt = now;
+            int total = loaded == null ? 0 : CommentExport.count(loaded.byId.values());
             Context context = view.getContext();
             SettingsUi.setTextIfChanged((TextView) view, L10n.quantity(context, total,
                     "1 comment or reply loaded", "%1$d comments and replies loaded"));
@@ -657,7 +664,7 @@ public final class CommentSearch {
         if (field != null) {
             field.updateResult(filtering ? wanted : "", countLoadedMatches(listView, wanted));
             LoadedComments loaded = LOADED_COMMENTS.get(listView);
-            field.updateExportCount(loaded == null ? null : loaded.byId.values());
+            field.updateExportCount(loaded);
         }
     }
 
@@ -671,7 +678,7 @@ public final class CommentSearch {
             LOADED_COMMENTS.put(listView, loaded);
         }
         if (loaded.byId.containsKey(id) || loaded.byId.size() < MAX_LOADED_COMMENTS) {
-            loaded.byId.put(id, comment);
+            if (loaded.byId.put(id, comment) != comment) loaded.changes++;
         } else {
             loaded.truncated = true;
         }
