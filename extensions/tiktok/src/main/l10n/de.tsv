@@ -1775,3 +1775,7 @@ Saving the frame	Standbild wird gespeichert
 Frame saved to %1$s	Standbild gespeichert unter %1$s
 The frame couldn't be saved. Try again.	Das Standbild konnte nicht gespeichert werden. Versuch es noch einmal.
 Video frame	Video-Standbild
+Hide the two-step verification suggestion	Vorschlag zur Bestätigung in zwei Schritten ausblenden
+Stop the sheet suggesting you turn on two-step verification. Sign-in checks and codes still show.	Stoppt das Fenster, das vorschlägt, die Bestätigung in zwei Schritten einzuschalten. Anmeldeprüfungen und Codes erscheinen weiterhin.
+Hide the LIVE bubble	LIVE-Blase ausblenden
+Stop the bubble TikTok floats at the top of the feed to point you to a LIVE.	Stoppt die Blase, die TikTok oben im Feed einblendet, um dich zu einem LIVE zu führen.

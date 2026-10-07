@@ -1,19 +1,24 @@
 package app.morphe.patches.tiktok.misc.popups
 
 import app.morphe.Fixtures
+import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.takes
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ThreeRegisterInstruction
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethodImplementation
+import com.android.tools.smali.dexlib2.iface.reference.MethodReference
+import com.android.tools.smali.dexlib2.iface.reference.StringReference
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertThrows
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -129,6 +134,70 @@ class BlockPopupsAnchorsTest {
             for (call in calls) {
                 assertTrue("answer register v${call.resultRegister}", call.resultRegister in 0..255)
             }
+        }
+    }
+
+    @Test
+    fun `an early return asks the switch first and otherwise runs the method as it was`() {
+        val m = method(
+            """
+                const/4 v1, 0x1
+                return-void
+            """,
+        )
+        m.returnEarlyWhen("hideLiveBubble", "return-void")
+        val code = m.implementation!!.instructions.toList()
+        assertEquals(
+            listOf(
+                Opcode.INVOKE_STATIC, Opcode.MOVE_RESULT, Opcode.IF_EQZ, Opcode.RETURN_VOID,
+                Opcode.CONST_4, Opcode.RETURN_VOID,
+            ),
+            code.map { it.opcode },
+        )
+        assertEquals(
+            "Lapp/morphe/extension/tiktok/popups/PopupSwitches;->hideLiveBubble()Z",
+            ((code[0] as ReferenceInstruction).reference as MethodReference).toString(),
+        )
+        assertEquals(0, (code[1] as OneRegisterInstruction).registerA)
+    }
+
+    @Test
+    fun `a method with no local register for the answer is refused`() {
+        val m = MutableMethod(
+            ImmutableMethod(
+                "Lx/Owner;", "check", emptyList(), "V", AccessFlags.PUBLIC.value, null, null,
+                ImmutableMethodImplementation(1, emptyList(), null, null),
+            ),
+        ).apply { addInstructionsWithLabels(0, "return-void") }
+        assertThrows(PatchException::class.java) { m.returnEarlyWhen("hideLiveBubble", "return-void") }
+    }
+
+    @Test
+    fun `the intro sheet and the LIVE bubble check are one method each, with room for the answer, on every declared build`() {
+        Fixtures.forEachDeclared { apk ->
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            val classes = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
+                .toList()
+            for (fingerprint in listOf(IntroPopSheetFingerprint, LiveBubbleCheckFingerprint)) {
+                val taken = classes.flatMap { classDef -> classDef.methods.filter { fingerprint.takes(it, classDef) } }
+                assertEquals("${apk.name}: ${fingerprint.javaClass.simpleName} took ${taken.map { it.name }}", 1, taken.size)
+                val found = taken.single()
+                val ins = found.parameterTypes.sumOf { type -> if (type.toString() == "J" || type.toString() == "D") 2 else 1 } +
+                    if (AccessFlags.STATIC.isSet(found.accessFlags)) 0 else 1
+                assertTrue("${apk.name}: ${found.name} has no local register", found.implementation!!.registerCount > ins)
+            }
+            // The skipped sheet hands the popup layer null, which it has to take as a failed show.
+            val executor = classes.single { it.type == "Lcom/bytedance/poplayer/core/PopupTaskExecutor;" }
+            val strings = executor.methods.flatMap { method ->
+                method.implementation?.instructions?.mapNotNull {
+                    ((it as? ReferenceInstruction)?.reference as? StringReference)?.string
+                }.orEmpty()
+            }
+            assertTrue(
+                "${apk.name}: the popup layer no longer handles a null show",
+                strings.any { it.contains("showPopup_returns_null") },
+            )
         }
     }
 }

@@ -817,6 +817,8 @@ public class Settings extends BaseSettings {
     // Popup labels (TikTok's own popup layer): the labels ticked in the checklist, and the ones
     // TikTok has tried to show on this phone, which the checklist offers.
     public static final StringSetting POPUP_LABEL_PICKS = new StringSetting("popup_label_picks", "");
+    public static final BooleanSetting HIDE_2SV_SUGGESTION = new BooleanSetting("hide_2sv_suggestion", FALSE);
+    public static final BooleanSetting HIDE_LIVE_BUBBLE = new BooleanSetting("hide_live_bubble", FALSE);
     public static final StringSetting POPUP_LABEL_CATALOG = new StringSetting("popup_label_catalog", "");
     // "Follows you" under the @username on a profile, and a mark on the follow list accounts that don't follow back.
     public static final BooleanSetting SHOW_FOLLOW_STATUS = new BooleanSetting("show_follow_status", TRUE);

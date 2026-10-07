@@ -1937,3 +1937,7 @@ Saving the frame	Кадр сохраняется
 Frame saved to %1$s	Кадр сохранён в %1$s
 The frame couldn't be saved. Try again.	Не удалось сохранить кадр. Повторите попытку.
 Video frame	Кадр из видео
+Hide the two-step verification suggestion	Скрыть предложение двухэтапной проверки
+Stop the sheet suggesting you turn on two-step verification. Sign-in checks and codes still show.	Отключает панель, предлагающую включить двухэтапную проверку. Проверки входа и коды по-прежнему показываются.
+Hide the LIVE bubble	Скрыть пузырь LIVE
+Stop the bubble TikTok floats at the top of the feed to point you to a LIVE.	Отключает пузырь, который TikTok показывает вверху ленты, чтобы позвать вас в LIVE.

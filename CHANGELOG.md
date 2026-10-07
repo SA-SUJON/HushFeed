@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Block popups has two new switches under Feed screen > Popups, both off by default. Hide the two-step verification suggestion stops the sheet that suggests turning it on, and Hide the LIVE bubble stops the bubble TikTok floats at the top of the feed to point you to a LIVE. Neither one ever reached the checklist, so ticking couldn't stop them before.
+
 * **TikTok:** Two new patches, Turn off haptics and Turn off screen transitions. The first stops the short vibrations TikTok plays on its own taps and gestures, and your keyboard and your phone's own haptics stay. The second opens and closes TikTok's screens without their slide, while swipes inside a screen still follow your finger. Neither is in the default selection, and each switch starts on once you pick its patch, under Hushfeed settings > App > Appearance.
 
 * **TikTok:** Long press has a new choice, Save the frame on screen as a photo. The press saves the picture the video is showing as a JPEG in the Photo destination folder, DCIM/TikTok unless you've changed it. It's read from the video itself, at the video's own size, so the caption and the buttons drawn over it aren't in it. Pause first to pick an exact frame. The file takes the video's name plus where the frame came from, like `_frame_1m05s`.
