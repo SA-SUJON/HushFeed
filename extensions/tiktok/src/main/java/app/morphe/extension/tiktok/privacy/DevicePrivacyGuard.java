@@ -21,7 +21,8 @@ import java.util.Enumeration;
 
 /**
  * The reads TikTok makes about this device, answered without handing it the real value while the
- * matching switch is on: what you copied, whether you're on a VPN, and the advertising id.
+ * matching switch is on: what you copied, whether you're on a VPN, and the advertising id with
+ * its limit ad tracking flag.
  *
  * <p>One method per intercepted signature, each returning what the call site expects. A single
  * helper returning {@link ClipData} for all three clipboard reads handed a ClipData back where
@@ -109,17 +110,54 @@ public final class DevicePrivacyGuard {
     // --- Advertising id ---
 
     /**
+     * Whether the advertising id switch is on, read at the call. It answers off until the
+     * extension has a context, since TikTok's ad SDKs read the id early in startup, and off while
+     * Hushfeed is paused.
+     */
+    private static boolean blocksAdvertisingId(String what) {
+        if (!(Utils.getContext() != null && Settings.BLOCK_ADVERTISING_ID.get())) return false;
+        Logger.printInfo(() -> "Device privacy guard: " + what);
+        return true;
+    }
+
+    /**
      * The advertising id lookup, answered with the blank id Android gives once the user has deleted
      * it while the switch is on. The call site hands its {@code AdvertisingIdClient.Info} in as an
      * Object, since the extension does not compile against Play Services; the real id is read back
      * off it by reflection only when the switch is off.
      */
     public static String interceptAdvertisingId(Object info) {
-        if (Utils.getContext() != null && Settings.BLOCK_ADVERTISING_ID.get()) {
-            Logger.printInfo(() -> "Device privacy guard: answered the advertising id as blank");
-            return BLANK_ADVERTISING_ID;
-        }
+        if (blocksAdvertisingId("answered the advertising id as blank")) return BLANK_ADVERTISING_ID;
         return realAdvertisingId(info);
+    }
+
+    /**
+     * An id read without Info.getId: off the reply of Google's advertising id service, which two
+     * SDKs inside TikTok ask directly, or off Info's id field. The blank id while the switch is on,
+     * the id the read produced otherwise.
+     */
+    public static String interceptAdvertisingIdRead(String id) {
+        if (blocksAdvertisingId("answered a direct advertising id read as blank")) return BLANK_ADVERTISING_ID;
+        return id;
+    }
+
+    /**
+     * Whether ad tracking is limited, as the service's reply carries it: an int, nonzero for
+     * limited. 1 while the switch is on, which is what Android answers once the user has deleted
+     * the id or opted out of ads personalization.
+     */
+    public static int interceptLimitAdTrackingReply(int limited) {
+        if (blocksAdvertisingId("answered a direct limit ad tracking read as limited")) return 1;
+        return limited;
+    }
+
+    /**
+     * The same flag read off Info's field, where R8 inlined isLimitAdTrackingEnabled: limited
+     * while the switch is on, the real answer otherwise.
+     */
+    public static boolean interceptLimitAdTracking(boolean limited) {
+        if (blocksAdvertisingId("answered limit ad tracking as limited")) return true;
+        return limited;
     }
 
     private static String realAdvertisingId(Object info) {

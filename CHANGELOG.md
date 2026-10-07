@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Block the advertising id in Device privacy guard now covers every place TikTok reads it. Two ad SDKs inside the app ask Google's ad service for the id on their own instead of going through Play Services, and they still got the real one. With the switch on they get the blank id too, and every check of whether you've opted out of ads personalization says you have, which is what Android tells apps once you delete your advertising id. Pause Hushfeed still hands TikTok the real answers.
+
 * **TikTok:** New patch, Picture-in-picture. Turn on Keep watching in a small window in Hushfeed settings > Playback, and when you leave TikTok while a video plays it keeps going over your other apps. The window has a play and pause button and takes the video's own shape. It works in the feed and on videos you open from a profile, search or a sound, and needs Android 8 or later. It's off by default.
 
 * **TikTok:** New patch, Always upload in HD. Turn it on in Hushfeed settings > App, under Posting, and every video you post goes through TikTok's own HD upload, just as if you'd switched HD on yourself on the post page. A clip TikTok doesn't count as high quality posts the way it always did. While it's on, turning HD off on the post page won't stick. It's off by default.

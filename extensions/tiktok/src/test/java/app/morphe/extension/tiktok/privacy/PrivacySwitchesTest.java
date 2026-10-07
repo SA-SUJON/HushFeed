@@ -253,6 +253,53 @@ public class PrivacySwitchesTest {
                 DevicePrivacyGuard.interceptAdvertisingId(null));
     }
 
+    private static final String REAL_AD_ID = "a1b2c3d4-0000-1111-2222-aabbccddeeff";
+    private static final String BLANK_AD_ID = "00000000-0000-0000-0000-000000000000";
+
+    /**
+     * The reads that skip Info.getId: two SDKs ask Google's service for the id (a String) and the
+     * limit flag (an int, nonzero for limited) themselves, and TikTok reads Info's limit field
+     * where isLimitAdTrackingEnabled was inlined. On, they answer as Android does once the id is
+     * deleted: blank and limited.
+     */
+    @Test public void directAdvertisingIdReadsAreBlankAndLimitedOnlyWhileTheSwitchIsOn() {
+        Settings.BLOCK_ADVERTISING_ID.save(true);
+        assertEquals(BLANK_AD_ID, DevicePrivacyGuard.interceptAdvertisingIdRead(REAL_AD_ID));
+        assertEquals("a missing id still reads as the blank one", BLANK_AD_ID,
+                DevicePrivacyGuard.interceptAdvertisingIdRead(null));
+        assertEquals("the service's reply reads as limited", 1, DevicePrivacyGuard.interceptLimitAdTrackingReply(0));
+        assertTrue("Info's flag reads as limited", DevicePrivacyGuard.interceptLimitAdTracking(false));
+        assertTrue(DevicePrivacyGuard.interceptLimitAdTracking(true));
+
+        Settings.BLOCK_ADVERTISING_ID.save(false);
+        assertEquals("off, the id the read produced comes through", REAL_AD_ID,
+                DevicePrivacyGuard.interceptAdvertisingIdRead(REAL_AD_ID));
+        assertNull(DevicePrivacyGuard.interceptAdvertisingIdRead(null));
+        assertEquals(0, DevicePrivacyGuard.interceptLimitAdTrackingReply(0));
+        assertEquals("a limited reply stays as the service sent it", 5,
+                DevicePrivacyGuard.interceptLimitAdTrackingReply(5));
+        assertFalse(DevicePrivacyGuard.interceptLimitAdTracking(false));
+        assertTrue(DevicePrivacyGuard.interceptLimitAdTracking(true));
+    }
+
+    @Test public void pauseHandsTheRealAdvertisingIdAndLimitFlagBack() {
+        Settings.BLOCK_ADVERTISING_ID.save(true);
+        PausedProcess.set(true);
+        try {
+            assertEquals(REAL_AD_ID, DevicePrivacyGuard.interceptAdvertisingId(new FakeAdInfo()));
+            assertEquals(REAL_AD_ID, DevicePrivacyGuard.interceptAdvertisingIdRead(REAL_AD_ID));
+            assertEquals(0, DevicePrivacyGuard.interceptLimitAdTrackingReply(0));
+            assertFalse(DevicePrivacyGuard.interceptLimitAdTracking(false));
+            assertEquals("the saved choice is kept for after the pause",
+                    Boolean.TRUE, Settings.BLOCK_ADVERTISING_ID.savedValue());
+        } finally {
+            PausedProcess.set(false);
+        }
+        assertEquals("the next read after the pause is blank again", BLANK_AD_ID,
+                DevicePrivacyGuard.interceptAdvertisingIdRead(REAL_AD_ID));
+        assertTrue(DevicePrivacyGuard.interceptLimitAdTracking(false));
+    }
+
     /** TikTok checks its connection early in startup, before Hushfeed has a context to read settings with. */
     @Test public void beforeTheExtensionHasAContextTheRealVpnStateAndIdComeThrough() {
         NetworkCapabilities capabilities = org.robolectric.shadows.ShadowNetworkCapabilities.newInstance();
@@ -262,8 +309,10 @@ public class PrivacySwitchesTest {
         Utils.setContext(null);
         try {
             assertTrue(DevicePrivacyGuard.interceptHasTransport(capabilities, NetworkCapabilities.TRANSPORT_VPN));
-            assertEquals("a1b2c3d4-0000-1111-2222-aabbccddeeff",
-                    DevicePrivacyGuard.interceptAdvertisingId(new FakeAdInfo()));
+            assertEquals(REAL_AD_ID, DevicePrivacyGuard.interceptAdvertisingId(new FakeAdInfo()));
+            assertEquals(REAL_AD_ID, DevicePrivacyGuard.interceptAdvertisingIdRead(REAL_AD_ID));
+            assertEquals(0, DevicePrivacyGuard.interceptLimitAdTrackingReply(0));
+            assertFalse(DevicePrivacyGuard.interceptLimitAdTracking(false));
         } finally {
             Utils.setContext(context);
         }

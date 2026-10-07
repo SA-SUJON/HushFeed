@@ -6,6 +6,8 @@ import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
+import com.android.tools.smali.dexlib2.iface.reference.StringReference
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -70,6 +72,97 @@ class DevicePrivacyGuardAnchorsTest {
             assertTrue("$version: no NetworkInterface.getNetworkInterfaces call site", getInterfaces > 0)
             assertTrue("$version: a read is in an invoke form the replacement can't match: $wrongForm",
                 wrongForm.isEmpty())
+        }
+    }
+
+    /**
+     * The advertising id reads that never call Info.getId, found by the same shape functions the
+     * patch hooks with. On every declared build two SDKs (AppsFlyer and one R8 renamed) each ask
+     * Google's service for the id (code 1, then readString) and the limit flag (code 2, then
+     * readInt) in a method of their own, and Info's fields are read where the patch answers them:
+     * the limit flag 14 times (13 inlined isLimitAdTrackingEnabled reads and toString) and the id
+     * twice (getId's body and toString). A build that adds a reader the shape misses, or moves a
+     * read out of the shape, fails here rather than handing TikTok the real id or flag.
+     */
+    @Test
+    fun `each declared build reads the advertising id and its limit flag where the guard answers them`() {
+        Fixtures.forEachDeclared { apk ->
+            val version = Fixtures.versionOf(apk)
+            val serviceReads = mutableListOf<AdIdReadSite>()
+            val fieldReads = mutableListOf<AdIdReadSite>()
+            val readers = mutableListOf<String>()
+            val tokenAndTransact = mutableListOf<String>()
+            val problems = mutableListOf<String>()
+            var infoShape: Boolean? = null
+
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            container.dexEntryNames.forEach { entry ->
+                container.getEntry(entry)!!.dexFile.classes.forEach { classDef ->
+                    if (classDef.type.startsWith("Lapp/morphe/extension/")) return@forEach
+                    if (classDef.type == adIdInfo) infoShape = isAdvertisingInfoShape(classDef)
+                    classDef.methods.forEach { method ->
+                        val body = method.implementation ?: return@forEach
+                        val instructions = body.instructions.toList()
+                        val where = "${classDef.type}->${method.name}"
+                        val writesToken = instructions.any {
+                            ((it as? ReferenceInstruction)?.reference as? StringReference)?.string == AD_ID_SERVICE_TOKEN
+                        }
+                        val transacts = instructions.any {
+                            reference(it)?.let { call -> call.definingClass == "Landroid/os/IBinder;" && call.name == "transact" } == true
+                        }
+                        if (writesToken && transacts) tokenAndTransact += where
+
+                        val raw = rawAdvertisingIdReads(method)
+                        if (raw.isNotEmpty()) readers += where
+                        serviceReads += raw
+                        raw.forEach { site ->
+                            val (moveResult, read) = when (site.read) {
+                                AdIdRead.ID -> Opcode.MOVE_RESULT_OBJECT to "readString"
+                                AdIdRead.LIMIT_REPLY -> Opcode.MOVE_RESULT to "readInt"
+                                AdIdRead.LIMIT_FIELD -> null to ""
+                            }
+                            val call = reference(instructions[site.index - 1])
+                            if (instructions[site.index].opcode != moveResult ||
+                                call?.definingClass != "Landroid/os/Parcel;" || call?.name != read
+                            ) {
+                                problems += "$where: ${site.read} at ${site.index} is not a $read result"
+                            }
+                        }
+
+                        val fields = advertisingInfoFieldReads(method)
+                        fieldReads += fields
+                        fields.forEach { site ->
+                            val iget = when (site.read) {
+                                AdIdRead.LIMIT_FIELD -> Opcode.IGET_BOOLEAN
+                                AdIdRead.ID -> Opcode.IGET_OBJECT
+                                AdIdRead.LIMIT_REPLY -> null
+                            }
+                            if (instructions[site.index].opcode != iget) {
+                                problems += "$where: ${site.read} at ${site.index} is ${instructions[site.index].opcode}"
+                            }
+                        }
+
+                        // The answer moves back with move-result vAA, so the register fits eight bits.
+                        (raw + fields).forEach { site ->
+                            if (site.register !in 0 until minOf(body.registerCount, 256)) {
+                                problems += "$where: v${site.register} can't take the answer back"
+                            }
+                        }
+                    }
+                }
+            }
+
+            assertEquals("$version: AdvertisingIdClient\$Info holds one String and one boolean field", true, infoShape)
+            assertEquals("$version: every method that writes the service token and calls transact is a reader the shape reads",
+                tokenAndTransact.sorted(), readers.sorted())
+            assertEquals("$version: direct service readers $readers", 4, readers.size)
+            assertEquals("$version: AppsFlyer's two readers", 2, readers.count { it.startsWith("Lcom/appsflyer/") })
+            assertEquals("$version: id reads off the service reply", 2, serviceReads.count { it.read == AdIdRead.ID })
+            assertEquals("$version: limit flag reads off the service reply", 2,
+                serviceReads.count { it.read == AdIdRead.LIMIT_REPLY })
+            assertEquals("$version: Info limit flag reads", 14, fieldReads.count { it.read == AdIdRead.LIMIT_FIELD })
+            assertEquals("$version: Info id reads", 2, fieldReads.count { it.read == AdIdRead.ID })
+            assertTrue("$version: $problems", problems.isEmpty())
         }
     }
 
