@@ -19,6 +19,7 @@ private const val VIEW = "Landroid/view/View;"
 private const val VIBRATOR = "Landroid/os/Vibrator;"
 private const val EFFECT = "Landroid/os/VibrationEffect;"
 private const val AUDIO_ATTRIBUTES = "Landroid/media/AudioAttributes;"
+private const val LONG_CLICK = "Landroid/view/View\$OnLongClickListener;"
 
 /*
  * TikTok 47.1.4 names View or Vibrator itself in every one of these calls, never a subclass:
@@ -38,6 +39,15 @@ internal val VIBRATIONS = mapOf(
     "$VIBRATOR->vibrate($EFFECT$AUDIO_ATTRIBUTES)V" to "$HAPTICS->vibrate($VIBRATOR$EFFECT$AUDIO_ATTRIBUTES)V",
 )
 
+/*
+ * Android plays the long press buzz itself once a long click listener answers true, so the
+ * listener is wrapped where TikTok sets it. 423 of the 428 calls on 47.1.4 name View itself; the
+ * other five name an obfuscated class and stay as they are.
+ */
+internal val LONG_CLICKS = mapOf(
+    "$VIEW->setOnLongClickListener($LONG_CLICK)V" to "$HAPTICS->setOnLongClickListener($VIEW$LONG_CLICK)V",
+)
+
 /**
  * Holds back the vibrations TikTok plays on its own taps and gestures. See the extension's
  * Haptics for when.
@@ -48,8 +58,8 @@ internal val VIBRATIONS = mapOf(
 @Suppress("unused")
 val turnOffHapticsPatch = bytecodePatch(
     name = "Turn off haptics",
-    description = "Stops the short vibrations TikTok plays on its own taps and gestures. Your keyboard " +
-        "and your phone's own haptics stay. Its switch starts on once you pick the patch. " +
+    description = "Stops the short vibrations TikTok plays on its own taps and gestures, the long press buzz included. " +
+        "Your keyboard and your phone's own haptics stay. Its switch starts on once you pick the patch. " +
         "Switch: Hushfeed settings > App.",
     default = false,
 ) {
@@ -62,13 +72,16 @@ val turnOffHapticsPatch = bytecodePatch(
             0,
             "invoke-static {}, Lapp/morphe/extension/tiktok/settings/SettingsStatus;->enableTurnOffHaptics()V",
         )
-        val replacements = VIEW_HAPTICS + VIBRATIONS
+        val replacements = VIEW_HAPTICS + VIBRATIONS + LONG_CLICKS
         val sites = invokeSitesOf(replacements.keys)
         if (sites.none { it.target in VIEW_HAPTICS }) {
             throw PatchException("Turn off haptics: found no View haptic call outside the extension.")
         }
         if (sites.none { it.target in VIBRATIONS }) {
             throw PatchException("Turn off haptics: found no vibrator call outside the extension.")
+        }
+        if (sites.none { it.target in LONG_CLICKS }) {
+            throw PatchException("Turn off haptics: found no long click listener outside the extension.")
         }
         replaceSites(sites, replacements)
     }

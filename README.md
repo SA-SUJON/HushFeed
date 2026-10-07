@@ -195,7 +195,7 @@ The manager signs every patched build with its own key, and Android only install
 
 Playback quality chooses among the video streams TikTok offers. It doesn't cap the video's frame rate. Keep the screen's refresh rate changes the display request, not the video frames.
 
-The eleven optional patches in the Performance group were measured on a Galaxy S22 running TikTok 47.0.3, each added to the recommended set plus Hide Play Store update offer, after a cold start and eight videos. None of them, alone or all together, moved TikTok's total memory use beyond the spread between runs of the same build, which was about 150 MB around a median of 1,040 MB. With all of them on, loaded code fell by about 13 MB and the APK got about 85 MB smaller. The five that remove files say in their rows how much storage they save. Most of TikTok's memory is its own code and libraries, and no patch shrinks those.
+Eleven of the optional patches in the Performance group were measured on a Galaxy S22 running TikTok 47.0.3, each added to the recommended set plus Hide Play Store update offer, after a cold start and eight videos. None of them, alone or all together, moved TikTok's total memory use beyond the spread between runs of the same build, which was about 150 MB around a median of 1,040 MB. With all of them on, loaded code fell by about 13 MB and the APK got about 85 MB smaller. The five that remove files say in their rows how much storage they save. Most of TikTok's memory is its own code and libraries, and no patch shrinks those. Turn off screen transitions came later and wasn't part of that run.
 
 | Patch | Description |
 |---|---|
@@ -323,7 +323,7 @@ The eleven optional patches in the Performance group were measured on a Galaxy S
 | `Subtitle tools` | Saves subtitle files beside downloaded videos and adds caption size, background, and clear-display options. Switch: Hushfeed settings > Feed screen. |
 | `Swipe-left controls` | Lets a left swipe on a feed video do nothing or open its comments instead of opening the creator's profile. Switch: Hushfeed settings > Feed screen. |
 | `Translate comments` | Adds comment translation controls using TikTok's translation system, with selectable language exclusions. Switch: Hushfeed settings > Comments. |
-| `Turn off haptics` | Stops the short vibrations TikTok plays on its own taps and gestures. Your keyboard and your phone's own haptics stay. Its switch starts on once you pick the patch. Switch: Hushfeed settings > App. |
+| `Turn off haptics` | Stops the short vibrations TikTok plays on its own taps and gestures, the long press buzz included. Your keyboard and your phone's own haptics stay. Its switch starts on once you pick the patch. Switch: Hushfeed settings > App. |
 | `Turn off screen transitions` | Opens and closes TikTok's screens without their slide. Swipes inside a screen still follow your finger. Its switch starts on once you pick the patch. Switch: Hushfeed settings > App. |
 | `Use non-personalized search` | Uses TikTok's non-personalized search mode instead of its saved account choice. Switch: Hushfeed settings > App. |
 | `Use system font` | Draws TikTok's text in your device's font instead of TikTok Sans. The icons, the gift animations and the @ and # glyphs keep their own fonts. A second switch draws every emoji with your device's emoji font instead of filling in the newest ones with Google's. Both are off by default. Restart after changing. Switches: Hushfeed settings > App. |
