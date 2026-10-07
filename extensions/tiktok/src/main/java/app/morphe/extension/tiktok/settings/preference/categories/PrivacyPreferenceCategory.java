@@ -12,6 +12,7 @@ import app.morphe.extension.tiktok.privacy.BenchmarkRuns;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
 import app.morphe.extension.tiktok.settings.L10n;
+import app.morphe.extension.tiktok.settings.preference.ChoicePreference;
 import app.morphe.extension.tiktok.settings.preference.GhostModePreference;
 import app.morphe.extension.tiktok.settings.preference.HookStatusPreference;
 import app.morphe.extension.tiktok.settings.preference.InputTextPreference;
@@ -32,7 +33,7 @@ public final class PrivacyPreferenceCategory extends ConditionalPreferenceCatego
 
     /** Whether this page has anything on it. The row into it asks the same question. */
     public static boolean isAvailable() {
-        return hasTracking() || hasDeviceAccess() || hasLinks();
+        return SettingsStatus.appLockEnabled || hasTracking() || hasDeviceAccess() || hasLinks();
     }
 
     private static boolean hasTracking() {
@@ -62,6 +63,21 @@ public final class PrivacyPreferenceCategory extends ConditionalPreferenceCatego
 
     @Override
     public void addPreferences(Context context) {
+        if (SettingsStatus.appLockEnabled) {
+            addPreference(new SectionHeadingPreference(context, "App lock"));
+            addPreference(new TogglePreference(
+                    context,
+                    "Lock TikTok",
+                    "Ask for the unlock your phone uses, like a fingerprint or a PIN, when TikTok "
+                            + "starts and when you come back to it. A link you open from another app "
+                            + "still goes to its video once you unlock. While this is on, TikTok's "
+                            + "preview in recent apps stays blank. Needs a screen lock on the phone.",
+                    Settings.APP_LOCK
+            ));
+            addPreference(new ChoicePreference(context, "Lock again after", Settings.APP_LOCK_TIMEOUT,
+                    new String[]{"Right away", "After 1 minute", "After 5 minutes", "After 15 minutes"},
+                    new String[]{"0", "1", "5", "15"}));
+        }
         if (hasTracking()) {
             addPreference(new SectionHeadingPreference(context, "Tracking"));
         }

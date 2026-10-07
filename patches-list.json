@@ -323,6 +323,67 @@
       "options": []
     },
     {
+      "name": "App lock",
+      "description": "Puts TikTok behind your phone's own unlock, so a fingerprint or the screen lock PIN opens it. It asks when TikTok starts and when you come back after a time you pick, before anything shows. A link you open from another app still goes to its video once you unlock, and TikTok's preview in recent apps stays blank while the lock is on. On a phone with no screen lock, TikTok opens as before and says why. Switch: Hushfeed settings > Privacy.",
+      "category": "Privacy",
+      "use": false,
+      "dependencies": [
+        "BytecodePatch",
+        "Settings"
+      ],
+      "compatiblePackages": {
+        "com.zhiliaoapp.musically": [
+          "47.0.3",
+          "47.1.3",
+          "47.1.4"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "TikTok",
+          "packageName": "com.zhiliaoapp.musically",
+          "description": null,
+          "appIconColor": 16657493,
+          "signatures": [
+            "9041803e91bcb814b4b4399fb5c85a91640b755e5e8ba76813814bf4cf2ab5ba"
+          ],
+          "targets": [
+            {
+              "version": "47.0.3",
+              "experimental": false,
+              "versionCodes": {
+                "ARM64_V8A": 2024700030,
+                "ARMEABI_V7A": 2024700030,
+                "X86": 2024700030,
+                "X86_64": 2024700030
+              }
+            },
+            {
+              "version": "47.1.3",
+              "experimental": false,
+              "versionCodes": {
+                "ARM64_V8A": 2024701030,
+                "ARMEABI_V7A": 2024701030,
+                "X86": 2024701030,
+                "X86_64": 2024701030
+              }
+            },
+            {
+              "version": "47.1.4",
+              "experimental": false,
+              "versionCodes": {
+                "ARM64_V8A": 2024701040,
+                "ARMEABI_V7A": 2024701040,
+                "X86": 2024701040,
+                "X86_64": 2024701040
+              }
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Automatic video advance",
       "description": "Keeps TikTok's automatic advance enabled while preserving its pause, dialog and gesture checks, and shows TikTok's own Auto scroll action in the video panel for accounts outside its rollout, with a switch that hides that action instead. Switch: Hushfeed settings > Playback.",
       "category": "Playback",

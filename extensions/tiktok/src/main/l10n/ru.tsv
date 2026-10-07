@@ -1711,3 +1711,16 @@ Prefer H.264 video	Предпочитать видео H.264
 Play the H.264 version of videos TikTok also offers in HEVC or ByteVC2. It's easier on phones that stutter or run hot playing those. Videos without an H.264 version still play.	Воспроизводить версию H.264 у видео, которые TikTok также даёт в HEVC или ByteVC2. Так легче телефонам, которые на них подтормаживают или греются. Видео без версии H.264 по-прежнему воспроизводятся.
 Show engagement rate	Показывать уровень вовлечённости
 Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.	Показывать лайки, комментарии, репосты и сохранения в процентах от просмотров рядом с именем автора и после числа просмотров в сетке профиля.
+App lock	Блокировка приложения
+Lock TikTok	Блокировать TikTok
+Ask for the unlock your phone uses, like a fingerprint or a PIN, when TikTok starts and when you come back to it. A link you open from another app still goes to its video once you unlock. While this is on, TikTok's preview in recent apps stays blank. Needs a screen lock on the phone.	Запрашивать разблокировку телефона, например отпечаток пальца или PIN-код, при запуске TikTok и при возврате в него. Ссылка, открытая из другого приложения, после разблокировки всё равно ведёт к своему видео. Пока это включено, превью TikTok в недавних приложениях остаётся пустым. Нужна блокировка экрана на телефоне.
+Lock again after	Снова блокировать через
+Right away	Сразу
+After 1 minute	Через 1 минуту
+After 5 minutes	Через 5 минут
+After 15 minutes	Через 15 минут
+Unlock TikTok	Разблокировать TikTok
+Use screen lock	Использовать блокировку экрана
+TikTok is locked	TikTok заблокирован
+Unlock	Разблокировать
+TikTok isn't locked because this phone has no screen lock	TikTok не заблокирован, потому что на этом телефоне нет блокировки экрана

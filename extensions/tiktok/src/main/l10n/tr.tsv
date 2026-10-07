@@ -1573,3 +1573,16 @@ Prefer H.264 video	H.264 videoyu tercih et
 Play the H.264 version of videos TikTok also offers in HEVC or ByteVC2. It's easier on phones that stutter or run hot playing those. Videos without an H.264 version still play.	TikTok'un HEVC veya ByteVC2 olarak da sunduğu videoların H.264 sürümünü oynat. Bunları oynatırken takılan veya ısınan telefonlar için daha hafiftir. H.264 sürümü olmayan videolar yine oynatılır.
 Show engagement rate	Etkileşim oranını göster
 Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.	Beğenileri, yorumları, paylaşımları ve kaydetmeleri görüntülenmelerin yüzdesi olarak içerik üreticisinin adının yanında ve profil ızgarasında görüntülenme sayısının ardından göster.
+App lock	Uygulama kilidi
+Lock TikTok	TikTok'u kilitle
+Ask for the unlock your phone uses, like a fingerprint or a PIN, when TikTok starts and when you come back to it. A link you open from another app still goes to its video once you unlock. While this is on, TikTok's preview in recent apps stays blank. Needs a screen lock on the phone.	TikTok açılırken ve ona geri döndüğünde telefonunun kullandığı kilidi, örneğin parmak izini veya PIN'i iste. Başka bir uygulamadan açtığın bağlantı, kilidi açtıktan sonra yine videosuna gider. Bu açıkken TikTok'un son uygulamalardaki önizlemesi boş kalır. Telefonda ekran kilidi gerekir.
+Lock again after	Tekrar kilitleme süresi
+Right away	Hemen
+After 1 minute	1 dakika sonra
+After 5 minutes	5 dakika sonra
+After 15 minutes	15 dakika sonra
+Unlock TikTok	TikTok'un kilidini aç
+Use screen lock	Ekran kilidini kullan
+TikTok is locked	TikTok kilitli
+Unlock	Kilidi aç
+TikTok isn't locked because this phone has no screen lock	Bu telefonda ekran kilidi olmadığı için TikTok kilitli değil

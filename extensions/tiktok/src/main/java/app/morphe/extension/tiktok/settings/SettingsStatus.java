@@ -128,6 +128,7 @@ public class SettingsStatus {
     public static boolean browserPrivacyGuardEnabled = false;
     public static boolean cameraMicIndicatorEnabled = false;
     public static boolean storeIdentityEnabled = false;
+    public static boolean appLockEnabled = false;
 
     public static void enableContactListBlocker() {
         contactListBlockerEnabled = true;
@@ -163,6 +164,10 @@ public class SettingsStatus {
 
     public static void enableStoreIdentity() {
         storeIdentityEnabled = true;
+    }
+
+    public static void enableAppLock() {
+        appLockEnabled = true;
     }
 
     public static void enableFeedFilter() {

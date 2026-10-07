@@ -13,14 +13,14 @@
 
 Hushfeed is a [Morphe](https://github.com/MorpheApp/morphe-manager) patch bundle for people who want TikTok to behave differently. It can cut feed clutter, guard risky taps, improve downloads and expose controls TikTok leaves buried or unavailable. Every selected patch is configured from one native settings screen inside the app.
 
-**[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse the 115 source patches](#patches)
+**[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse the 116 source patches](#patches)
 
 > [!IMPORTANT]
 > Hushfeed targets the global TikTok package, `com.zhiliaoapp.musically`, versions [47.0.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-0-3-release/tiktok-47-0-3-3-android-apk-download/), [47.1.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-1-3-release/tiktok-47-1-3-android-apk-download/) and [47.1.4](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-1-4-release/tiktok-47-1-4-2-android-apk-download/). Use one of those exact APKs when patching. See [Supported target](#supported-target) for the verified build details.
 
 Hushfeed v0.68.0 contains 106 patches for TikTok 47.0.3, 47.1.3 and 47.1.4. New in this one: original photos save as full-size JPEGs, hiding the status bar takes TikTok's black strip with it, a switch clears the controls left on Clear display, and Back up, Restore and the Lab's file actions stop waiting on a stuck file app when you ask. It needs Morphe Manager 1.34.0 or newer.
 
-The main branch contains 115 patches, nine more than v0.68.0.
+The main branch contains 116 patches, ten more than v0.68.0.
 
 ## Pick what changes
 
@@ -29,7 +29,7 @@ The main branch contains 115 patches, nine more than v0.68.0.
 - **Playback:** Choose speed and quality, stop loops, resume a video after scrolling or move to the next one automatically. Keep a video playing after you leave the app or turn the screen off.
 - **Downloads:** Save watermark-free video, original photos, separate audio and SRT subtitles with filenames and folders you control. The save button also works on videos whose creator turned downloading off. A save of several files shows a running count with a Cancel, and the result says what landed.
 - **Comments and inbox:** Filter comment text or accounts, translate comments and decide which Inbox rows appear. A creator's poll in the comments can show how the vote stands before you pick. Tapping more under a video can open its comments with the whole caption on top. Compact comment header removes the count, sort and close row and the suggestion area above it. Close comments with Back or a downward swipe. It's optional and needs a restart.
-- **Privacy and diagnostics:** Turn off supported telemetry, hide view and typing reports, back up settings and export a useful diagnostic report.
+- **Privacy and diagnostics:** Turn off supported telemetry, hide view and typing reports, back up settings and export a useful diagnostic report. TikTok can also sit behind your phone's fingerprint or PIN.
 
 Compact comment header keeps headers that switch between different lists, so those tabs remain reachable.
 
@@ -184,6 +184,7 @@ The eleven optional patches in the Performance group were measured on a Galaxy S
 | `Allow screenshots and Circle to Search` | Removes secure window flags and disables the Circle to Search block. Off by default. Restart after changing. Switch: Hushfeed settings > App. |
 | `Always show publish date` | Always shows the publish date in video author information. Switch: Hushfeed settings > Feed screen. |
 | `AMOLED dark theme` | Replaces TikTok's dark background palette with black or a chosen color. The light theme keeps its colors. It rewrites TikTok's resources, so patching with it on is slower when the manager's memory limit is low. Give the manager 768 MB or more. At 640 MB it still finishes, just more slowly. |
+| `App lock` | Puts TikTok behind your phone's own unlock, so a fingerprint or the screen lock PIN opens it. It asks when TikTok starts and when you come back after a time you pick, before anything shows. A link you open from another app still goes to its video once you unlock, and TikTok's preview in recent apps stays blank while the lock is on. On a phone with no screen lock, TikTok opens as before and says why. Switch: Hushfeed settings > Privacy. |
 | `Automatic video advance` | Keeps TikTok's automatic advance enabled while preserving its pause, dialog and gesture checks, and shows TikTok's own Auto scroll action in the video panel for accounts outside its rollout, with a switch that hides that action instead. Switch: Hushfeed settings > Playback. |
 | `Block author button` | Adds one-tap controls for blocking the creator, hiding them locally and blocking the current sound. A confirmed account block skips to the next video and shows a small Unblock button at the top left for two seconds. Every control starts off and has its own switch, so nothing shows on videos until you turn one on, and any one can show without the others. Long press any visible control to move it. Hushfeed keeps it clear of system bars, cutouts and TikTok's bottom tabs when the window changes. A local action shows Undo only after its setting was saved. All controls hide while comments are open. Switch: Hushfeed settings > Feed screen. |
 | `Block contact list access` | Answers TikTok's reads of your phone contacts with an empty list. Find Friends and People you may know lose access to your contact list. Switch: Hushfeed settings > Privacy. |
@@ -616,7 +617,7 @@ APKMirror also offers some TikTok releases as bundles, using an `.apkm` file. Mo
 
 ### Why those versions and not a newer one
 
-Patches use named components where TikTok retains them and code patterns where names are stripped. Both can change between builds. On main, 47.0.3, 47.1.3 and 47.1.4 are the declared targets. 47.0.3 stays declared alongside the two 47.1 builds. All 115 patches apply to all three reviewed APKs, and the retained 46.2.3, 46.7.3, 46.8.3 and 46.9.3 builds remain regression fixtures rather than advertised targets. Another build can fail loudly when an anchor moves or, worse, accept the wrong shape.
+Patches use named components where TikTok retains them and code patterns where names are stripped. Both can change between builds. On main, 47.0.3, 47.1.3 and 47.1.4 are the declared targets. 47.0.3 stays declared alongside the two 47.1 builds. All 116 patches apply to all three reviewed APKs, and the retained 46.2.3, 46.7.3, 46.8.3 and 46.9.3 builds remain regression fixtures rather than advertised targets. Another build can fail loudly when an anchor moves or, worse, accept the wrong shape.
 
 Only the global package is declared in the compatibility metadata.
 

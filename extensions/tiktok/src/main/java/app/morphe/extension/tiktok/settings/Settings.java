@@ -633,6 +633,11 @@ public class Settings extends BaseSettings {
     // On once the patch is picked, which is the opt-in. A restart, because TikTok works its
     // signature hash out once and keeps it.
     public static final BooleanSetting STORE_IDENTITY = new BooleanSetting("store_identity", TRUE, true);
+    // App lock. Off until the reader turns it on, and read as each screen starts, so no restart.
+    // The delay is whole minutes TikTok may spend in the background before it asks again.
+    public static final BooleanSetting APP_LOCK = new BooleanSetting("app_lock", FALSE);
+    public static final StringSetting APP_LOCK_TIMEOUT =
+            new StringSetting("app_lock_timeout", "0", false, Setting.parent(APP_LOCK));
     // Feed toolbar controls. The LIVE button shares HIDE_LIVE_ENTRANCE with the overlay hider.
     public static final BooleanSetting HIDE_FEED_FOLLOW_BUTTON =
             new BooleanSetting("hide_feed_follow_button", FALSE, true);

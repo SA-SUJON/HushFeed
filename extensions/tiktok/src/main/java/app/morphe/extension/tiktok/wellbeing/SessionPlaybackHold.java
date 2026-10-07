@@ -35,6 +35,8 @@ public final class SessionPlaybackHold {
     // The pause switches' own pause (comments open, or the feed waiting for a tap after a
     // return), kept apart from the panel's so neither hands back a video the other paused.
     private static volatile boolean switchWanted;
+    // The app lock's own wish for the same pause, so it and the switches each hand it back alone.
+    private static volatile boolean lockWanted;
     private static final AtomicBoolean switchQueued = new AtomicBoolean();
     // Main thread only, like held.
     private static Target switchHeld;
@@ -200,7 +202,7 @@ public final class SessionPlaybackHold {
             }
             // TikTok starts the video again by itself, on a return above all, so while a pause
             // switch wants it stopped each report of it playing pauses it again.
-            if (switchWanted && switchQueued.compareAndSet(false, true)) {
+            if ((switchWanted || lockWanted) && switchQueued.compareAndSet(false, true)) {
                 MAIN.post(() -> {
                     switchQueued.set(false);
                     pauseForSwitchIfPlaying();
@@ -276,6 +278,30 @@ public final class SessionPlaybackHold {
      */
     public static void releaseForSwitch(boolean resume) {
         switchWanted = false;
+        // The app lock still covers the screen, so the video stays stopped until it lifts.
+        if (lockWanted) return;
+        handBackSwitchPause(resume);
+    }
+
+    /**
+     * The app lock covers TikTok: the video on screen stops the way the switches stop it, and
+     * stays stopped on each report of it playing until {@link #releaseForLock}. Kept apart from
+     * the switches' own wish so neither one letting go starts a video the other still holds.
+     * Main thread.
+     */
+    public static void pauseForLock() {
+        lockWanted = true;
+        pauseForSwitchIfPlaying();
+    }
+
+    /** The lock lifted. With {@code resume} the video it stopped plays on. Main thread. */
+    public static void releaseForLock(boolean resume) {
+        lockWanted = false;
+        if (switchWanted) return;
+        handBackSwitchPause(resume);
+    }
+
+    private static void handBackSwitchPause(boolean resume) {
         Target owner = switchHeld;
         Object manager = switchManager.get();
         switchHeld = null;
@@ -292,7 +318,7 @@ public final class SessionPlaybackHold {
     }
 
     private static void pauseForSwitchIfPlaying() {
-        if (!switchWanted || SessionBudget.isLocked()) return;
+        if (!(switchWanted || lockWanted) || SessionBudget.isLocked()) return;
         Target target = current;
         if (target == null) return;
         Object controller = target.controller.get();
