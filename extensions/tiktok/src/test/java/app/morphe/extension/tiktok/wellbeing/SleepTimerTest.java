@@ -107,6 +107,22 @@ public class SleepTimerTest {
         assertEquals("a minute late still closes", 1, closes);
     }
 
+    @Test public void itLooksEveryHalfMinuteSoASleepPartWayCanOnlyDelayItThatMuch() {
+        SleepTimer.start(60);
+        long wait = shadowOf(Looper.getMainLooper()).getNextScheduledTaskTime().toMillis() - SystemClock.uptimeMillis();
+        assertTrue("waits " + wait + " ms before its first look", wait > 0 && wait <= SleepTimer.STEP_MS);
+
+        // Thirty awake minutes and five asleep: the end-time clock ran on while the looper's
+        // stood still, so the look that follows reads five minutes more than the looper waited.
+        long started = SystemClock.elapsedRealtime();
+        SleepTimer.check(started + 35 * MINUTE);
+        assertTrue(SleepTimer.isRunning());
+        wait = shadowOf(Looper.getMainLooper()).getNextScheduledTaskTime().toMillis() - SystemClock.uptimeMillis();
+        assertTrue("waits " + wait + " ms after a sleep", wait > 0 && wait <= SleepTimer.STEP_MS);
+        SleepTimer.check(started + 60 * MINUTE + SleepTimer.STEP_MS);
+        assertEquals("half a minute past its end still closes", 1, closes);
+    }
+
     @Test public void anEarlyWakeWaitsOutTheRest() {
         long started = SystemClock.elapsedRealtime();
         SleepTimer.start(15);

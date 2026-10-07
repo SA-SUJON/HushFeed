@@ -29,16 +29,20 @@ import java.util.List;
  * closes the way a swipe away from Recents closes it, background play included.
  *
  * <p>Kept in memory only, since TikTok closing any other way leaves nothing to close. The wait
- * runs on the main looper, whose clock stands still while the phone sleeps. That happens only
- * when nothing plays (a playing video keeps the phone awake), so a timer that comes due well past
- * its end found the phone asleep, and it ends without closing rather than closing TikTok on
- * someone who picked the phone up the next morning.
+ * runs on the main looper, whose clock stands still while the phone sleeps, so it looks at the
+ * end time every half minute rather than waiting out the whole length at once: a sleep part way
+ * through then delays the close by half a minute at most. The phone sleeps only when nothing
+ * plays (a playing video keeps it awake), so a timer that comes due well past its end found the
+ * phone asleep, and it ends without closing rather than closing TikTok on someone who picked the
+ * phone up the next morning.
  */
 public final class SleepTimer {
     /** The lengths the picker offers. */
     static final int[] MINUTES = {15, 30, 45, 60, 90};
     /** Further past its end than this, the phone slept through the timer. */
     static final long LATE_MS = 2 * 60_000L;
+    /** The longest the looper waits between looks at the end time. Well under {@link #LATE_MS}. */
+    static final long STEP_MS = 30_000L;
     /** How long TikTok gets to close its screens before its process ends. */
     static final long CLOSE_GRACE_MS = 1_000L;
 
@@ -92,7 +96,7 @@ public final class SleepTimer {
         long length = minutes * 60_000L;
         endsAt = SystemClock.elapsedRealtime() + length;
         MAIN.removeCallbacks(CHECK);
-        MAIN.postDelayed(CHECK, length);
+        MAIN.postDelayed(CHECK, Math.min(length, STEP_MS));
         Logger.printInfo(() -> "Sleep timer set for " + minutes + " minutes");
         Context context = Utils.getContext();
         if (context != null) Utils.showToastShort(L10n.f("TikTok closes at %1$s", endTime(context)));
@@ -107,13 +111,13 @@ public final class SleepTimer {
         return endsAt != 0;
     }
 
-    /** The timer came due, or the looper woke early: closes, waits on, or lets a stale one go. */
+    /** A look at the end time: closes, waits on, or lets a stale one go. */
     static void check(long now) {
         long end = endsAt;
         if (end == 0) return;
         if (now < end) {
             MAIN.removeCallbacks(CHECK);
-            MAIN.postDelayed(CHECK, end - now);
+            MAIN.postDelayed(CHECK, Math.min(end - now, STEP_MS));
             return;
         }
         endsAt = 0;
