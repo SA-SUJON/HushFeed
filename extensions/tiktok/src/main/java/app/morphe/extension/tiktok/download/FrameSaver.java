@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -98,7 +99,8 @@ public final class FrameSaver {
             Utils.showToastLong(L10n.t("Allow storage for TikTok in Android settings to save frames"));
             return;
         }
-        int[] size = frameSize(aweme, video);
+        int[] size = frameSize(aweme, video,
+                video instanceof SurfaceView ? surfaceBuffer((SurfaceView) video) : null);
         if (size == null) {
             couldNotRead();
             return;
@@ -123,12 +125,28 @@ public final class FrameSaver {
      * neither has a size.
      */
     static int[] frameSize(Object aweme, View video) {
+        return frameSize(aweme, video, null);
+    }
+
+    /**
+     * The same, given the size of the surface the frame sits in when that's known. A player that
+     * hands decoded frames straight to a SurfaceView leaves its buffer the video's own shape, and
+     * the post's size reads it best. One that draws through a renderer of its own leaves the buffer
+     * the view's shape with the video already fitted in, and reading that at the post's shape would
+     * stretch it, so a buffer of another shape is read at its own size.
+     */
+    static int[] frameSize(Object aweme, View video, int[] buffer) {
         Object model = aweme == null ? null : Reflect.property(aweme, "getVideo", "video");
         long width = dimension(model, "getWidth", "width");
         long height = dimension(model, "getHeight", "height");
         if (width <= 0 || height <= 0) {
             width = video.getWidth();
             height = video.getHeight();
+        }
+        if (buffer != null && buffer[0] > 0 && buffer[1] > 0
+                && (width <= 0 || height <= 0 || !sameShape(width, height, buffer[0], buffer[1]))) {
+            width = buffer[0];
+            height = buffer[1];
         }
         if (width <= 0 || height <= 0) return null;
         double scale = Math.min(1d, Math.min(
@@ -139,6 +157,26 @@ public final class FrameSaver {
             height = Math.max(1L, (long) (height * scale));
         }
         return new int[]{(int) width, (int) height};
+    }
+
+    /** Width to height within 2 percent of each other, the slack of an odd row or column. */
+    static boolean sameShape(long width, long height, long otherWidth, long otherHeight) {
+        double one = (double) width / height;
+        double other = (double) otherWidth / otherHeight;
+        return Math.abs(one - other) <= 0.02 * Math.max(one, other);
+    }
+
+    /** The size of the SurfaceView's current buffer, or null before it has one. */
+    static int[] surfaceBuffer(SurfaceView view) {
+        try {
+            Rect frame = view.getHolder().getSurfaceFrame();
+            if (frame != null && frame.width() > 0 && frame.height() > 0) {
+                return new int[]{frame.width(), frame.height()};
+            }
+        } catch (RuntimeException unreadable) {
+            Logger.printInfo(() -> "Could not read the video surface's size: " + unreadable);
+        }
+        return null;
     }
 
     private static long dimension(Object model, String getter, String field) {
@@ -209,7 +247,9 @@ public final class FrameSaver {
                 }
                 MediaFileWriter.Saved landed = MediaFileWriter.publishForResult(app, temp, name, "image/jpeg", path, false);
                 SaveNotice.saved(L10n.f("Frame saved to %1$s", path), landed);
-            } catch (IOException | RuntimeException exception) {
+            } catch (IOException | RuntimeException | OutOfMemoryError exception) {
+                // A 4K frame's JPEG needs room of its own on top of the frame, and this runs on a
+                // worker thread, where an error nobody catches takes TikTok down with it.
                 Logger.printException(() -> "Frame save failed", exception);
                 Utils.showToastLong(L10n.t("The frame couldn't be saved. Try again."));
             } finally {

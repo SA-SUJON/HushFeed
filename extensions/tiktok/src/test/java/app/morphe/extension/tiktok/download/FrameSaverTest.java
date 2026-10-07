@@ -299,6 +299,25 @@ public class FrameSaverTest {
         assertNull("nothing has a size", FrameSaver.frameSize(null, new View(activity)));
     }
 
+    @Test public void aSurfaceOfAnotherShapeIsReadAtItsOwnSoNothingStretches() {
+        View drawn = new View(activity);
+        drawn.layout(0, 0, 400, 700);
+        assertArrayEquals("a buffer the video's shape keeps the post's size",
+                new int[]{1080, 1920}, FrameSaver.frameSize(new Post("1", 1080, 1920), drawn, new int[]{720, 1280}));
+        assertArrayEquals("an odd row is still the same shape",
+                new int[]{1080, 1920}, FrameSaver.frameSize(new Post("1", 1080, 1920), drawn, new int[]{720, 1281}));
+        assertArrayEquals("a screen-shaped buffer is read as it is",
+                new int[]{1080, 2340}, FrameSaver.frameSize(new Post("1", 1080, 1920), drawn, new int[]{1080, 2340}));
+        assertArrayEquals("no post size: the buffer, not the view",
+                new int[]{1080, 2340}, FrameSaver.frameSize(null, drawn, new int[]{1080, 2340}));
+        assertArrayEquals("only a buffer",
+                new int[]{1080, 2340}, FrameSaver.frameSize(null, new View(activity), new int[]{1080, 2340}));
+        assertArrayEquals("an empty buffer changes nothing",
+                new int[]{1080, 1920}, FrameSaver.frameSize(new Post("1", 1080, 1920), drawn, new int[]{0, 0}));
+        int[] eightK = FrameSaver.frameSize(null, drawn, new int[]{4320, 9360});
+        assertTrue("the limits still hold", (long) eightK[0] * eightK[1] <= FrameSaver.MAX_PIXELS);
+    }
+
     @Test public void aFrameIsNamedAfterItsVideoAndWhereInItItWas() {
         assertEquals("0m00s", DownloadFilenameFormatter.frameTime(0));
         assertEquals("1m05s", DownloadFilenameFormatter.frameTime(65_400));
