@@ -8,6 +8,7 @@ package app.morphe.extension.tiktok.settings.preference.categories;
 
 import android.content.Context;
 import android.preference.PreferenceScreen;
+import android.text.format.Formatter;
 
 import app.morphe.extension.tiktok.offline.CustomOfflineVideosLimitPatch;
 import app.morphe.extension.tiktok.settings.L10n;
@@ -199,7 +200,12 @@ public class DownloadsPreferenceCategory extends ConditionalPreferenceCategory {
                     L10n.f(context, "Choose %1$d to %2$d videos. Values outside this range use the nearest valid limit. Restart TikTok to apply this.",
                             CustomOfflineVideosLimitPatch.MIN_LIMIT, CustomOfflineVideosLimitPatch.MAX_LIMIT),
                     Settings.CUSTOM_OFFLINE_VIDEO_LIMIT
-            ));
+            ) {
+                @Override protected String extraSummaryLine() {
+                    return L10n.f(getContext(), "About %1$s of storage at this limit", Formatter.formatShortFileSize(
+                            getContext(), CustomOfflineVideosLimitPatch.storageBytes(Settings.CUSTOM_OFFLINE_VIDEO_LIMIT.get())));
+                }
+            });
         }
     }
 }

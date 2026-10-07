@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Custom offline videos limit now goes up to 10,000 videos (it stopped at 1,000), and the limit's row says about how much storage that many videos take. How many TikTok actually sends is still up to its servers.
+
 * **TikTok:** Feed filter > Advanced has a new switch, Keep offline videos out of the feed, off by default. TikTok slips the videos it saved for offline viewing back into For You when it can't load enough new ones, and with the switch on they're all taken out, the whole offline fallback list included. Your offline list stays as it is, and Filter TikTok's offline videos greys out while the new switch is on.
 
 * **TikTok:** Long press has a new choice, Set a sleep timer that closes TikTok. The press opens a picker of 15, 30, 45, 60 or 90 minutes, and a toast says when TikTok will close. When the time runs out the video stops and TikTok closes the way a swipe away from Recents closes it, background play included. Pressing again while a timer runs offers to turn it off. If the phone slept through the end with nothing playing, TikTok stays open rather than closing on you the next morning.

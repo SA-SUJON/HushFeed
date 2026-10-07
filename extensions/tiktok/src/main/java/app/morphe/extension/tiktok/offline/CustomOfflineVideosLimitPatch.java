@@ -13,7 +13,8 @@ import app.morphe.extension.tiktok.settings.Settings;
 @SuppressWarnings("unused")
 public final class CustomOfflineVideosLimitPatch {
     public static final int MIN_LIMIT = 1;
-    public static final int MAX_LIMIT = 1000;
+    /** TikTok-Q's ceiling. TikTok's own choices stop at a few hundred; the server decides how many it sends. */
+    public static final int MAX_LIMIT = 10_000;
     private static final int STORAGE_MB_PER_VIDEO = 2;
     private static final double WATCH_MINUTES_PER_VIDEO = 0.6;
 
@@ -76,6 +77,11 @@ public final class CustomOfflineVideosLimitPatch {
         }
 
         return getCustomOfflineVideoLimit() * STORAGE_MB_PER_VIDEO;
+    }
+
+    /** About how much room the offline list takes at {@code limit} videos, by TikTok's own reckoning. */
+    public static long storageBytes(int limit) {
+        return clamp(limit) * STORAGE_MB_PER_VIDEO * 1024L * 1024L;
     }
 
     private static int clamp(int value) {

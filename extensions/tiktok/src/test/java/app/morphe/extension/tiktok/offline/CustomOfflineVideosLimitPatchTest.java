@@ -48,10 +48,13 @@ public class CustomOfflineVideosLimitPatchTest {
         Settings.CUSTOM_OFFLINE_VIDEO_LIMIT.save(1);
         assertEquals(1, CustomOfflineVideosLimitPatch.getCustomOfflineVideoLimit());
 
-        Settings.CUSTOM_OFFLINE_VIDEO_LIMIT.save(1000);
-        assertEquals(1000, CustomOfflineVideosLimitPatch.getCustomOfflineVideoLimit());
+        Settings.CUSTOM_OFFLINE_VIDEO_LIMIT.save(5000);
+        assertEquals("past TikTok's old 1,000", 5000, CustomOfflineVideosLimitPatch.getCustomOfflineVideoLimit());
 
-        Settings.CUSTOM_OFFLINE_VIDEO_LIMIT.save(1001);
+        Settings.CUSTOM_OFFLINE_VIDEO_LIMIT.save(10_000);
+        assertEquals(10_000, CustomOfflineVideosLimitPatch.getCustomOfflineVideoLimit());
+
+        Settings.CUSTOM_OFFLINE_VIDEO_LIMIT.save(10_001);
         assertEquals(CustomOfflineVideosLimitPatch.MAX_LIMIT,
                 CustomOfflineVideosLimitPatch.getCustomOfflineVideoLimit());
 
@@ -70,9 +73,13 @@ public class CustomOfflineVideosLimitPatchTest {
         assertSame("a limit TikTok already offers should leave the list alone",
                 STOCK, CustomOfflineVideosLimitPatch.getOfflineVideoOptions(STOCK));
 
-        // The clamp applies here too: 5000 is offered as 1000, not as 5000.
         Settings.CUSTOM_OFFLINE_VIDEO_LIMIT.save(5000);
-        assertEquals(Arrays.asList(10, 20, 50, 1000),
+        assertEquals(Arrays.asList(10, 20, 50, 5000),
+                CustomOfflineVideosLimitPatch.getOfflineVideoOptions(STOCK));
+
+        // The clamp applies here too: 20,000 is offered as 10,000.
+        Settings.CUSTOM_OFFLINE_VIDEO_LIMIT.save(20_000);
+        assertEquals(Arrays.asList(10, 20, 50, 10_000),
                 CustomOfflineVideosLimitPatch.getOfflineVideoOptions(STOCK));
     }
 
@@ -102,5 +109,16 @@ public class CustomOfflineVideosLimitPatchTest {
 
         Settings.CUSTOM_OFFLINE_VIDEO_LIMIT.save(2);
         assertEquals(2, CustomOfflineVideosLimitPatch.getCustomOfflineVideoMinutesOrOriginal(18));
+    }
+
+    @Test
+    public void theStorageEstimateIsTheSizeTikTokIsToldInBytes() {
+        assertEquals(2L * 1024 * 1024, CustomOfflineVideosLimitPatch.storageBytes(1));
+        assertEquals(10_000L * 2 * 1024 * 1024, CustomOfflineVideosLimitPatch.storageBytes(10_000));
+        assertEquals("clamped like the limit", CustomOfflineVideosLimitPatch.storageBytes(10_000),
+                CustomOfflineVideosLimitPatch.storageBytes(50_000));
+        Settings.CUSTOM_OFFLINE_VIDEO_LIMIT.save(5000);
+        assertEquals(CustomOfflineVideosLimitPatch.getCustomOfflineVideoSizeMbOrOriginal(60) * 1024L * 1024L,
+                CustomOfflineVideosLimitPatch.storageBytes(5000));
     }
 }
