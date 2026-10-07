@@ -46,6 +46,7 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                 || SettingsStatus.nonPersonalizedSearchEnabled
                 || SettingsStatus.liveSearchEnabled
                 || SettingsStatus.hideSearchSuggestionsEnabled
+                || SettingsStatus.searchAutoplayEnabled
                 || SettingsStatus.keepFavoritesTabEnabled
                 || SettingsStatus.promotionalBannersEnabled
                 || SettingsStatus.profileShortcutsEnabled
@@ -84,7 +85,7 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
             ));
         }
         boolean hasSearch = SettingsStatus.nonPersonalizedSearchEnabled || SettingsStatus.liveSearchEnabled
-                || SettingsStatus.hideSearchSuggestionsEnabled;
+                || SettingsStatus.hideSearchSuggestionsEnabled || SettingsStatus.searchAutoplayEnabled;
         if (hasSearch) {
             addPreference(new SectionHeadingPreference(context, "Search"));
         }
@@ -116,6 +117,14 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     "Hide search rewards",
                     "Hide the points banner under the search box and the coin counter floating over search results, which TikTok shows in some regions. Searching works as before.",
                     Settings.HIDE_SEARCH_REWARDS
+            ));
+        }
+        if (SettingsStatus.searchAutoplayEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Stop search results playing on their own",
+                    "Videos in search results show their cover and play when you open them. The feed and the videos you open play as usual.",
+                    Settings.STOP_SEARCH_AUTOPLAY
             ));
         }
         if (SettingsStatus.keepFavoritesTabEnabled || SettingsStatus.promotionalBannersEnabled

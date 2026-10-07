@@ -1777,3 +1777,5 @@ Edge strip width	Ширина боковых полос
 How wide each edge strip is, as a percent of the screen width.	Ширина каждой боковой полосы в процентах от ширины экрана.
 Brightness	Яркость
 Volume	Громкость
+Stop search results playing on their own	Не воспроизводить результаты поиска сами по себе
+Videos in search results show their cover and play when you open them. The feed and the videos you open play as usual.	Видео в результатах поиска показывают обложку и запускаются, когда вы их открываете. Лента и открытые вами видео воспроизводятся как обычно.

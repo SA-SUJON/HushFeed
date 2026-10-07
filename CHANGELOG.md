@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** New patch, Stop search autoplay. Turn on Stop search results playing on their own in Hushfeed settings > App and the videos in your search results stay on their cover until you open one. The feed plays as usual.
+
 * **TikTok:** Look like the store app can now name a different store as TikTok's installer. Pick Play Store (still the default), Galaxy Store, AppGallery or Amazon Appstore under the switch in Hushfeed settings > App, then restart TikTok.
 
 * **TikTok:** Swipe for brightness and volume, a new switch under Feed screen > Gestures, lets you drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume, with a small level shown on screen. It works on the feed and on a video opened from a profile. A drag that starts anywhere else still scrolls the feed, and a tap does what it always did. Edge strip width sets how wide the edges are, from 5 to 30 percent of the screen. It's off until you turn it on, and the brightness goes back to your phone's setting when you leave the video.

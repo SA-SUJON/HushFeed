@@ -1636,3 +1636,5 @@ Edge strip width	Ancho de las franjas laterales
 How wide each edge strip is, as a percent of the screen width.	Ancho de cada franja lateral, como porcentaje del ancho de la pantalla.
 Brightness	Brillo
 Volume	Volumen
+Stop search results playing on their own	Que los resultados de búsqueda no se reproduzcan solos
+Videos in search results show their cover and play when you open them. The feed and the videos you open play as usual.	Los videos de los resultados de búsqueda muestran su portada y se reproducen cuando los abres. El feed y los videos que abres se reproducen como siempre.

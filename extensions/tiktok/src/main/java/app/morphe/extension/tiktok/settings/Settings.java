@@ -695,6 +695,7 @@ public class Settings extends BaseSettings {
     // Read each time TikTok builds a video's caption strips, so no restart.
     public static final BooleanSetting HIDE_CREATION_TAGS = new BooleanSetting("hide_creation_tags", FALSE);
     public static final BooleanSetting HIDE_SEARCH_SUGGESTIONS = new BooleanSetting("hide_search_suggestions", FALSE);
+    public static final BooleanSetting STOP_SEARCH_AUTOPLAY = new BooleanSetting("stop_search_autoplay", FALSE);
     public static final StringSetting CUSTOM_SHARE_DOMAIN = new StringSetting("custom_share_domain", "");
     public static final BooleanSetting HIDE_LIVE_ENTRANCE = new BooleanSetting("hide_live_entrance", FALSE);
     // Comment tools.

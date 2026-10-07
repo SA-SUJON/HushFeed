@@ -60,6 +60,7 @@ public class SettingsStatus {
     public static boolean disableLongPressRepostEnabled = false;
     public static boolean nonPersonalizedSearchEnabled = false;
     public static boolean hideSearchSuggestionsEnabled = false;
+    public static boolean searchAutoplayEnabled = false;
     public static boolean liveSearchEnabled = false;
     public static boolean seekbarThumbnailEnabled = false;
     public static boolean stopVideoLoopingEnabled = false;
@@ -244,6 +245,10 @@ public class SettingsStatus {
 
     public static void enableHideSearchSuggestions() {
         hideSearchSuggestionsEnabled = true;
+    }
+
+    public static void enableSearchAutoplay() {
+        searchAutoplayEnabled = true;
     }
 
     public static void enableLiveSearch() {
