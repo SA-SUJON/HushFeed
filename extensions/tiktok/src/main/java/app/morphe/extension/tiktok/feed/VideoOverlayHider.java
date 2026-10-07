@@ -414,7 +414,9 @@ public final class VideoOverlayHider {
                 wanted[ACTION_BAR_TARGET] = actionBar;
                 wanted[SURVEY_TARGET] = surveys;
                 wanted[TAB_STRIP_TARGET] = tabStrip;
-                wanted[BOTTOM_TABS_TARGET] = tabStrip;
+                // Only over the Home feed. A live state that outlasts the feed (Inbox opened from
+                // a notification) must not take the tabs off another page.
+                wanted[BOTTOM_TABS_TARGET] = tabStrip && FeedVisibility.isOnFeed(activity);
                 wanted[FOLLOWING_STORY_TARGET] = tabStrip && !FeedVisibility.isStoryVisible(activity);
                 wanted[DETAIL_COMMENT_BAR_TARGET] = detailCommentBar;
                 wanted[DETAIL_COMMENT_STRIP_TARGET] = detailCommentBar;
