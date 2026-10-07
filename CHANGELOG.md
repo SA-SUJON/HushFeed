@@ -12,7 +12,7 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Region spoof has a new switch, Match region fields in requests, in Hushfeed settings > Region. Every request TikTok sends carries the region its servers last saved on your phone and your network's country code, and neither one followed the preset before. With the switch on, both do. The other region fields in a request already follow Match locale and timezone to country. It's off by default.
 
-* **TikTok:** LIVE controls has a second switch, Show exact LIVE viewer counts, under Hushfeed settings > Playback. A LIVE room's viewer count at the top right shows the real number, like 1,234, instead of TikTok's rounded 1.2K. It's off by default.
+* **TikTok:** LIVE controls has a second switch, Show exact LIVE viewer counts, under Hushfeed settings > Playback. A LIVE room's viewer count at the top right shows the real number, like 1,234, instead of TikTok's rounded 1.2K, and so does the count in a programmed LIVE, collapsed, expanded or in landscape. It's off by default.
 
 
 * **TikTok:** New patch, LIVE controls. A LIVE that shows up in your feed can count down and drop you into the room without a tap. Turn on Stop LIVE previews opening by themselves in Hushfeed settings > Playback and it stays a preview until you tap it. It's off by default.
