@@ -911,6 +911,7 @@ None of these gates takes a true or false value.,None of these gates takes a tru
 None recorded,None recorded
 Normal,Normal
 "Not a handle or id, so ignored: %1$s","Not a handle or id, so ignored: %1$s"
+"Not a token for Hushfeed's downloader, kept as typed: %1$s","Not a token for Hushfeed's downloader, kept as typed: %1$s"
 "Not a token here, kept as typed: %1$s","Not a token here, kept as typed: %1$s"
 Not blocked,Not blocked
 Not interested in this video,Not interested in this video

@@ -157,10 +157,33 @@ public class DownloadNamePreviewTest {
         assertEquals("creator_name_{vidoe_id}_2.jpg", DownloadFilenameFormatter.formatOriginalPhotoName(post, 2, "jpg"));
     }
 
-    @Test public void bracesThatArentAWordAreLeftAlone() {
-        assertEquals(Arrays.asList("{album}"),
-                DownloadNamePreview.unknownTokens("{ } {1} {creator}{album}{album}", DownloadNamePreview.TOKENS));
-        assertFalse(DownloadNamePreview.video("{creator} {1}", NOW).contains("Not a token"));
+    @Test public void aMistypedTokenIsNamedWhateverItsShape() {
+        assertEquals(Arrays.asList("{1}", "{video-id}", "{video id}", "{date2}", "{album}"),
+                DownloadNamePreview.unknownTokens("{ } {1} {video-id} {video id}{date2} {creator}{album}{album}",
+                        DownloadNamePreview.TOKENS));
+        assertFalse("braces around spaces aren't a try at a token",
+                DownloadNamePreview.video("{creator} { }", NOW).contains("Not a token"));
+        String preview = DownloadNamePreview.video("{creator}_{video-id}", NOW);
+        assertEquals("{video-id}", line(preview, "Not a token here, kept as typed: "));
+        assertEquals("DCIM/Clips/creator_name_{video-id}.mp4", line(preview, "Hushfeed's downloader: "));
+    }
+
+    @Test public void tokensOnlyTikToksDownloaderFillsAreNamedForHushfeeds() throws Exception {
+        String preview = DownloadNamePreview.video("{original}_{media_id}_{vidoe}", NOW);
+
+        assertEquals("{vidoe}", line(preview, "Not a token here, kept as typed: "));
+        assertEquals("{original}, {media_id}", line(preview, "Not a token for Hushfeed's downloader, kept as typed: "));
+        Settings.DOWNLOAD_VIDEO_FILENAME_TEMPLATE.save("{original}_{media_id}_{vidoe}");
+        assertEquals("what Hushfeed's downloader really saves", "{original}_{media_id}_{vidoe}.mp4",
+                DownloadFilenameFormatter.formatSelectedVideoName(post));
+        assertTrue("and TikTok's fills {original}",
+                tiktokSave("{original}_{media_id}_{vidoe}").contains(DownloadNamePreview.TIKTOK_NAME + "_"));
+
+        SettingsStatus.advancedDownloadsEnabled = false;
+        assertFalse("without Hushfeed's downloader there's nothing to say about it",
+                DownloadNamePreview.video("{original}", NOW).contains("Not a token"));
+        assertFalse("the comment media saver fills both",
+                DownloadNamePreview.commentMedia("{original}_{media_id}", NOW).contains("Not a token"));
     }
 
     @Test public void onlyTheDownloadersInTheBundleGetALine() {

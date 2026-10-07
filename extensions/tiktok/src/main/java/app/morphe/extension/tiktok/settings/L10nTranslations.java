@@ -56,7 +56,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildAz() {
-        Map<String, String> table = new HashMap<>(3422);
+        Map<String, String> table = new HashMap<>(3424);
         fillAz0(table);
         fillAz1(table);
         fillAz2(table);
@@ -1959,6 +1959,8 @@ public final class L10nTranslations {
                 "Normal");
         table.put("Not a handle or id, so ignored: %1$s",
                 "İstifadəçi adı və ya ID deyil, ona görə nəzərə alınmadı: %1$s");
+        table.put("Not a token for Hushfeed's downloader, kept as typed: %1$s",
+                "Hushfeed yükləyicisi üçün token deyil, yazıldığı kimi saxlanılır: %1$s");
         table.put("Not a token here, kept as typed: %1$s",
                 "Burada token deyil, yazıldığı kimi saxlanılır: %1$s");
         table.put("Not blocked",
@@ -2053,11 +2055,11 @@ public final class L10nTranslations {
                 "TikTok-u burada açın");
         table.put("Open a share sheet once, then return here to choose its actions.",
                 "Paylaşma vərəqini bir dəfə açın, sonra əməliyyatlarını seçmək üçün bura qayıdın.");
-        table.put("Open comments",
-                "Şərhləri açın");
     }
 
     private static void fillAz16(Map<String, String> table) {
+        table.put("Open comments",
+                "Şərhləri açın");
         table.put("Open external links directly",
                 "Xarici keçidləri birbaşa açın");
         table.put("Open messages",
@@ -2176,11 +2178,11 @@ public final class L10nTranslations {
                 "Oxutma");
         table.put("Player",
                 "Pleyer");
-        table.put("Playlist posts",
-                "Pleylist paylaşımları");
     }
 
     private static void fillAz17(Map<String, String> table) {
+        table.put("Playlist posts",
+                "Pleylist paylaşımları");
         table.put("Popular",
                 "Populyar");
         table.put("Popups",
@@ -2299,11 +2301,11 @@ public final class L10nTranslations {
                 "%1$s silin");
         table.put("Remove all overrides",
                 "Bütün əvəzləmələri silin");
-        table.put("Remove feed ads",
-                "Lent reklamlarını silin");
     }
 
     private static void fillAz18(Map<String, String> table) {
+        table.put("Remove feed ads",
+                "Lent reklamlarını silin");
         table.put("Remove feed ads, creator commission posts, paid partnerships, and branded content.",
                 "Lent reklamlarını, yaradıcı komissiyalı paylaşımları, ödənişli tərəfdaşlıqları və brendli məzmunu silin.");
         table.put("Remove story rings",
@@ -2422,11 +2424,11 @@ public final class L10nTranslations {
                 "Uzun basmaqla profil şəklini saxlayın");
         table.put("Save a story on a long press",
                 "Uzun basmaqla hekayəni saxlayın");
-        table.put("Save again",
-                "Yenidən saxla");
     }
 
     private static void fillAz19(Map<String, String> table) {
+        table.put("Save again",
+                "Yenidən saxla");
         table.put("Save as video",
                 "Video kimi saxla");
         table.put("Save build details",
@@ -2545,11 +2547,11 @@ public final class L10nTranslations {
                 "Ada, təsvirə və ya kateqoriyaya görə axtarın.");
         table.put("Search countries or operators",
                 "Ölkələri və ya operatorları axtarın");
-        table.put("Search hidden creators",
-                "Gizlədilən yaradıcıları axtarın");
     }
 
     private static void fillAz20(Map<String, String> table) {
+        table.put("Search hidden creators",
+                "Gizlədilən yaradıcıları axtarın");
         table.put("Search settings",
                 "Ayarlarda axtarın");
         table.put("Search share actions",
@@ -2668,11 +2670,11 @@ public final class L10nTranslations {
                 "Xətaları ekranda göstərin");
         table.put("Show follow status",
                 "İzləmə vəziyyətini göstər");
-        table.put("Show gates",
-                "Qapıları göstərin");
     }
 
     private static void fillAz21(Map<String, String> table) {
+        table.put("Show gates",
+                "Qapıları göstərin");
         table.put("Show last report",
                 "Son hesabatı göstərin");
         table.put("Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.",
@@ -2791,11 +2793,11 @@ public final class L10nTranslations {
                 "Tam ekranda videoda qalın");
         table.put("Staying on a video",
                 "Videoda qalmaq");
-        table.put("Sticker",
-                "Stiker");
     }
 
     private static void fillAz22(Map<String, String> table) {
+        table.put("Sticker",
+                "Stiker");
         table.put("Sticker destination",
                 "Stiker təyinatı");
         table.put("Sticker saved to %1$s",
@@ -2914,11 +2916,11 @@ public final class L10nTranslations {
                 "Yenidən paylaşmaq üçün yenidən toxunun");
         table.put("Tap the feed Follow button twice within %1$d seconds.",
                 "Lentdəki İzlə düyməsinə %1$d saniyə ərzində iki dəfə toxunun.");
-        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
-                "Bəyənmə ürəyinə %1$d saniyə ərzində iki dəfə toxunun. Bəyənməni geri götürmək dərhal olur.");
     }
 
     private static void fillAz23(Map<String, String> table) {
+        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
+                "Bəyənmə ürəyinə %1$d saniyə ərzində iki dəfə toxunun. Bəyənməni geri götürmək dərhal olur.");
         table.put("Tap to start the feed",
                 "Lenti başlatmaq üçün toxunun");
         table.put("Tap, then go to the screen with what you want hidden. After %1$d seconds Hushfeed records how that screen is built, without any of its text, for the diagnostic report.",
@@ -3037,11 +3039,11 @@ public final class L10nTranslations {
                 "Seçdiyiniz endirmə tətbiqi quraşdırılmayıb. Endirmələr altında Keçidləri başqa tətbiqə göndərin seçimini yoxlayın.");
         table.put("The export wasn't saved. Export again when the file app is ready.",
                 "İxrac saxlanılmadı. Fayl tətbiqi hazır olanda yenidən ixrac edin.");
-        table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
-                "Lent fasilədən əvvəlki son dəqiqənin dörddə üçündə qaralır ki, ona düşməyəsiniz, çatasınız. Vaxt büdcəsi və çatmaq üçün fasilə lazımdır.");
     }
 
     private static void fillAz24(Map<String, String> table) {
+        table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
+                "Lent fasilədən əvvəlki son dəqiqənin dörddə üçündə qaralır ki, ona düşməyəsiniz, çatasınız. Vaxt büdcəsi və çatmaq üçün fasilə lazımdır.");
         table.put("The feed doesn't end. This is a fine time to leave it.",
                 "Lent bitmir. İndi onu tərk etmək üçün yaxşı vaxtdır.");
         table.put("The feed is locked",
@@ -3160,11 +3162,11 @@ public final class L10nTranslations {
                 "Bu fayl Feature Gate Lab-dan yüklənmiş dəyərlərin ixracı deyil.");
         table.put("This gate type isn't supported.",
                 "Bu qapı növü dəstəklənmir.");
-        table.put("This is the video's own sound, so YouTube Music won't have it",
-                "Bu videonun öz səsidir, ona görə YouTube Music-də olmayacaq");
     }
 
     private static void fillAz25(Map<String, String> table) {
+        table.put("This is the video's own sound, so YouTube Music won't have it",
+                "Bu videonun öz səsidir, ona görə YouTube Music-də olmayacaq");
         table.put("This key isn't in Hushfeed's list, so its type can't be checked. Reset the override.",
                 "Bu açar Hushfeed siyahısında yoxdur, ona görə növü yoxlanıla bilmir. Əvəzləməni sıfırlayın.");
         table.put("This key touches account safety. Forcing it can change login, region, payment or security checks.",
@@ -3283,11 +3285,11 @@ public final class L10nTranslations {
                 "Bu gün əvvəlki vəziyyətinə qayıtdı");
         table.put("Today started over. Tap again to put the counts back.",
                 "Bu gün yenidən başladı. Sayları geri qaytarmaq üçün yenidən toxunun.");
-        table.put("Today starts again",
-                "Bu gün yenidən başlayır");
     }
 
     private static void fillAz26(Map<String, String> table) {
+        table.put("Today starts again",
+                "Bu gün yenidən başlayır");
         table.put("Today's budget is locked. The day starts over at %1$s.",
                 "Bugünkü büdcə kilidlənib. Gün %1$s vaxtında yenidən başlayır.");
         table.put("Today's budget is locked. The feed opens again at %1$s. Messages, profiles and search still work.",
@@ -3406,11 +3408,11 @@ public final class L10nTranslations {
                 "Defolt oxutma sürətindən istifadə edin");
         table.put("Use non-personalized search",
                 "Fərdiləşdirilməmiş axtarışdan istifadə edin");
-        table.put("Use screen lock",
-                "Ekran kilidindən istifadə edin");
     }
 
     private static void fillAz27(Map<String, String> table) {
+        table.put("Use screen lock",
+                "Ekran kilidindən istifadə edin");
         table.put("Use system font",
                 "Sistem şriftindən istifadə edin");
         table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search.",
@@ -3529,11 +3531,11 @@ public final class L10nTranslations {
                 "Diaqnostik qeydiyyat açıq olduqda mesaj Hushfeed-in hansı hissəsinin uğursuz olduğunu bildirir. Qapalı olduqda uğursuzluqlar yalnız hesabatda qalır.");
         table.put("Who to message",
                 "Kimə mesaj yazılsın");
-        table.put("Window width needed to enable the layout. Restart TikTok to apply this.",
-                "Düzülüşü aktiv etmək üçün lazım olan pəncərə eni. Tətbiq etmək üçün TikTok-u yenidən başladın.");
     }
 
     private static void fillAz28(Map<String, String> table) {
+        table.put("Window width needed to enable the layout. Restart TikTok to apply this.",
+                "Düzülüşü aktiv etmək üçün lazım olan pəncərə eni. Tətbiq etmək üçün TikTok-u yenidən başladın.");
         table.put("Word rules only, not every feed filter:",
                 "Yalnız söz qaydaları, lentdəki bütün filtrlər deyil:");
         table.put("Words, countries and languages",
@@ -3599,7 +3601,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(3422);
+        Map<String, String> table = new HashMap<>(3424);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -5502,6 +5504,8 @@ public final class L10nTranslations {
                 "Normal");
         table.put("Not a handle or id, so ignored: %1$s",
                 "Kein Konto-Name und keine ID, daher ignoriert: %1$s");
+        table.put("Not a token for Hushfeed's downloader, kept as typed: %1$s",
+                "Für Hushfeeds Downloader kein Platzhalter, bleibt wie eingegeben: %1$s");
         table.put("Not a token here, kept as typed: %1$s",
                 "Hier kein Platzhalter, bleibt wie eingegeben: %1$s");
         table.put("Not blocked",
@@ -5596,11 +5600,11 @@ public final class L10nTranslations {
                 "TikTok öffnen mit");
         table.put("Open a share sheet once, then return here to choose its actions.",
                 "Öffne einmal ein Share-Menü und kehre dann zurück, um seine Aktionen auszuwählen.");
-        table.put("Open comments",
-                "Kommentare öffnen");
     }
 
     private static void fillDe16(Map<String, String> table) {
+        table.put("Open comments",
+                "Kommentare öffnen");
         table.put("Open external links directly",
                 "Externe Links direkt öffnen");
         table.put("Open messages",
@@ -5719,11 +5723,11 @@ public final class L10nTranslations {
                 "Wiedergabe");
         table.put("Player",
                 "Wiedergabe");
-        table.put("Playlist posts",
-                "Playlist-Beiträge");
     }
 
     private static void fillDe17(Map<String, String> table) {
+        table.put("Playlist posts",
+                "Playlist-Beiträge");
         table.put("Popular",
                 "Beliebt");
         table.put("Popups",
@@ -5842,11 +5846,11 @@ public final class L10nTranslations {
                 "%1$s entfernen");
         table.put("Remove all overrides",
                 "Alle Überschreibungen entfernen");
-        table.put("Remove feed ads",
-                "Werbung im Feed entfernen");
     }
 
     private static void fillDe18(Map<String, String> table) {
+        table.put("Remove feed ads",
+                "Werbung im Feed entfernen");
         table.put("Remove feed ads, creator commission posts, paid partnerships, and branded content.",
                 "Feed-Werbung, Posts mit Creator-Provision, bezahlte Partnerschaften und Markeninhalte entfernen.");
         table.put("Remove story rings",
@@ -5965,11 +5969,11 @@ public final class L10nTranslations {
                 "Profilbild per langem Druck speichern");
         table.put("Save a story on a long press",
                 "Story per langem Druck speichern");
-        table.put("Save again",
-                "Erneut speichern");
     }
 
     private static void fillDe19(Map<String, String> table) {
+        table.put("Save again",
+                "Erneut speichern");
         table.put("Save as video",
                 "Als Video speichern");
         table.put("Save build details",
@@ -6088,11 +6092,11 @@ public final class L10nTranslations {
                 "Nach Name, Beschreibung oder Kategorie suchen.");
         table.put("Search countries or operators",
                 "Nach Ländern oder Anbietern suchen");
-        table.put("Search hidden creators",
-                "Ausgeblendete Creator durchsuchen");
     }
 
     private static void fillDe20(Map<String, String> table) {
+        table.put("Search hidden creators",
+                "Ausgeblendete Creator durchsuchen");
         table.put("Search settings",
                 "Einstellungen durchsuchen");
         table.put("Search share actions",
@@ -6211,11 +6215,11 @@ public final class L10nTranslations {
                 "Fehler auf dem Bildschirm anzeigen");
         table.put("Show follow status",
                 "Folgestatus anzeigen");
-        table.put("Show gates",
-                "Schalter anzeigen");
     }
 
     private static void fillDe21(Map<String, String> table) {
+        table.put("Show gates",
+                "Schalter anzeigen");
         table.put("Show last report",
                 "Letzten Bericht anzeigen");
         table.put("Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.",
@@ -6334,11 +6338,11 @@ public final class L10nTranslations {
                 "Im Vollbild beim Video bleiben");
         table.put("Staying on a video",
                 "Beim Video bleiben");
-        table.put("Sticker",
-                "Sticker");
     }
 
     private static void fillDe22(Map<String, String> table) {
+        table.put("Sticker",
+                "Sticker");
         table.put("Sticker destination",
                 "Speicherort für Sticker");
         table.put("Sticker saved to %1$s",
@@ -6457,11 +6461,11 @@ public final class L10nTranslations {
                 "Noch einmal tippen zum Reposten");
         table.put("Tap the feed Follow button twice within %1$d seconds.",
                 "Tippe die Folgen-Schaltfläche im Feed innerhalb von %1$d Sekunden zweimal an.");
-        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
-                "Tippe das Like-Herz innerhalb von %1$d Sekunden zweimal an. Das Entfernen eines Likes bleibt sofort.");
     }
 
     private static void fillDe23(Map<String, String> table) {
+        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
+                "Tippe das Like-Herz innerhalb von %1$d Sekunden zweimal an. Das Entfernen eines Likes bleibt sofort.");
         table.put("Tap to start the feed",
                 "Zum Starten des Feeds tippen");
         table.put("Tap, then go to the screen with what you want hidden. After %1$d seconds Hushfeed records how that screen is built, without any of its text, for the diagnostic report.",
@@ -6580,11 +6584,11 @@ public final class L10nTranslations {
                 "Die gewaehlte Downloader-App ist nicht installiert. Pruefe Links an andere App senden unter Downloads.");
         table.put("The export wasn't saved. Export again when the file app is ready.",
                 "Der Export wurde nicht gespeichert. Exportiere erneut, wenn die Datei-App bereit ist.");
-        table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
-                "Der Feed dunkelt in den letzten drei Viertelminuten vor der Sperre ab, damit man dort ankommt statt darauf zu landen. Braucht ein Zeitbudget und eine Sperre.");
     }
 
     private static void fillDe24(Map<String, String> table) {
+        table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
+                "Der Feed dunkelt in den letzten drei Viertelminuten vor der Sperre ab, damit man dort ankommt statt darauf zu landen. Braucht ein Zeitbudget und eine Sperre.");
         table.put("The feed doesn't end. This is a fine time to leave it.",
                 "Der Feed hört nicht auf. Jetzt ist ein guter Zeitpunkt zu gehen.");
         table.put("The feed is locked",
@@ -6703,11 +6707,11 @@ public final class L10nTranslations {
                 "Diese Datei ist kein Export geladener Werte aus dem Feature Gate Lab.");
         table.put("This gate type isn't supported.",
                 "Dieser Gate-Typ wird nicht unterstützt.");
-        table.put("This is the video's own sound, so YouTube Music won't have it",
-                "Das ist der eigene Sound des Videos, YouTube Music hat ihn also nicht");
     }
 
     private static void fillDe25(Map<String, String> table) {
+        table.put("This is the video's own sound, so YouTube Music won't have it",
+                "Das ist der eigene Sound des Videos, YouTube Music hat ihn also nicht");
         table.put("This key isn't in Hushfeed's list, so its type can't be checked. Reset the override.",
                 "Dieser Schlüssel steht nicht in der Liste von Hushfeed, deshalb lässt sich sein Typ nicht prüfen. Setze die Überschreibung zurück.");
         table.put("This key touches account safety. Forcing it can change login, region, payment or security checks.",
@@ -6826,11 +6830,11 @@ public final class L10nTranslations {
                 "Der heutige Tag ist wieder wie zuvor");
         table.put("Today started over. Tap again to put the counts back.",
                 "Heute wurde neu gestartet. Zum Zurücksetzen der Zähler erneut tippen.");
-        table.put("Today starts again",
-                "Heute beginnt neu");
     }
 
     private static void fillDe26(Map<String, String> table) {
+        table.put("Today starts again",
+                "Heute beginnt neu");
         table.put("Today's budget is locked. The day starts over at %1$s.",
                 "Das heutige Budget ist gesperrt. Der Tag beginnt um %1$s von vorn.");
         table.put("Today's budget is locked. The feed opens again at %1$s. Messages, profiles and search still work.",
@@ -6949,11 +6953,11 @@ public final class L10nTranslations {
                 "Standardgeschwindigkeit verwenden");
         table.put("Use non-personalized search",
                 "Nicht personalisierte Suche verwenden");
-        table.put("Use screen lock",
-                "Displaysperre verwenden");
     }
 
     private static void fillDe27(Map<String, String> table) {
+        table.put("Use screen lock",
+                "Displaysperre verwenden");
         table.put("Use system font",
                 "Systemschrift verwenden");
         table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search.",
@@ -7072,11 +7076,11 @@ public final class L10nTranslations {
                 "Solange die Diagnoseprotokollierung läuft, nennt eine Meldung den Teil von Hushfeed, der fehlgeschlagen ist. Aus behält Fehler nur im Bericht.");
         table.put("Who to message",
                 "Wem schreiben");
-        table.put("Window width needed to enable the layout. Restart TikTok to apply this.",
-                "Fensterbreite, ab der das Layout gilt. TikTok neu starten, damit das gilt.");
     }
 
     private static void fillDe28(Map<String, String> table) {
+        table.put("Window width needed to enable the layout. Restart TikTok to apply this.",
+                "Fensterbreite, ab der das Layout gilt. TikTok neu starten, damit das gilt.");
         table.put("Word rules only, not every feed filter:",
                 "Nur Wortregeln, nicht jeder Feed-Filter:");
         table.put("Words, countries and languages",
@@ -7142,7 +7146,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(3422);
+        Map<String, String> table = new HashMap<>(3424);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -9045,6 +9049,8 @@ public final class L10nTranslations {
                 "Normal");
         table.put("Not a handle or id, so ignored: %1$s",
                 "No es un nombre de cuenta ni un id, así que se ignora: %1$s");
+        table.put("Not a token for Hushfeed's downloader, kept as typed: %1$s",
+                "No es un token para el descargador de Hushfeed, se guarda tal cual: %1$s");
         table.put("Not a token here, kept as typed: %1$s",
                 "Aquí no es un token, se guarda tal cual: %1$s");
         table.put("Not blocked",
@@ -9139,11 +9145,11 @@ public final class L10nTranslations {
                 "Abrir TikTok en");
         table.put("Open a share sheet once, then return here to choose its actions.",
                 "Abre una vez el panel de compartir y vuelve aquí para elegir sus acciones.");
-        table.put("Open comments",
-                "Abrir los comentarios");
     }
 
     private static void fillEs16(Map<String, String> table) {
+        table.put("Open comments",
+                "Abrir los comentarios");
         table.put("Open external links directly",
                 "Abrir los enlaces externos directamente");
         table.put("Open messages",
@@ -9262,11 +9268,11 @@ public final class L10nTranslations {
                 "Reproducción");
         table.put("Player",
                 "Reproductor");
-        table.put("Playlist posts",
-                "Publicaciones de listas de reproducción");
     }
 
     private static void fillEs17(Map<String, String> table) {
+        table.put("Playlist posts",
+                "Publicaciones de listas de reproducción");
         table.put("Popular",
                 "Popular");
         table.put("Popups",
@@ -9385,11 +9391,11 @@ public final class L10nTranslations {
                 "Quitar %1$s");
         table.put("Remove all overrides",
                 "Quitar todas las sustituciones");
-        table.put("Remove feed ads",
-                "Quitar los anuncios del feed");
     }
 
     private static void fillEs18(Map<String, String> table) {
+        table.put("Remove feed ads",
+                "Quitar los anuncios del feed");
         table.put("Remove feed ads, creator commission posts, paid partnerships, and branded content.",
                 "Quita los anuncios del feed, las publicaciones con comisión para creadores, las colaboraciones pagadas y el contenido de marca.");
         table.put("Remove story rings",
@@ -9508,11 +9514,11 @@ public final class L10nTranslations {
                 "Guardar una foto de perfil con una pulsación larga");
         table.put("Save a story on a long press",
                 "Guardar una historia con una pulsación larga");
-        table.put("Save again",
-                "Guardar de nuevo");
     }
 
     private static void fillEs19(Map<String, String> table) {
+        table.put("Save again",
+                "Guardar de nuevo");
         table.put("Save as video",
                 "Guardar como vídeo");
         table.put("Save build details",
@@ -9631,11 +9637,11 @@ public final class L10nTranslations {
                 "Busca por nombre, descripción o categoría.");
         table.put("Search countries or operators",
                 "Buscar países u operadores");
-        table.put("Search hidden creators",
-                "Buscar creadores ocultos");
     }
 
     private static void fillEs20(Map<String, String> table) {
+        table.put("Search hidden creators",
+                "Buscar creadores ocultos");
         table.put("Search settings",
                 "Buscar en los ajustes");
         table.put("Search share actions",
@@ -9754,11 +9760,11 @@ public final class L10nTranslations {
                 "Mostrar fallos en pantalla");
         table.put("Show follow status",
                 "Mostrar el estado de seguimiento");
-        table.put("Show gates",
-                "Mostrar interruptores");
     }
 
     private static void fillEs21(Map<String, String> table) {
+        table.put("Show gates",
+                "Mostrar interruptores");
         table.put("Show last report",
                 "Ver el último informe");
         table.put("Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.",
@@ -9877,11 +9883,11 @@ public final class L10nTranslations {
                 "Quedarse en el vídeo a pantalla completa");
         table.put("Staying on a video",
                 "Quedarse en un vídeo");
-        table.put("Sticker",
-                "Sticker");
     }
 
     private static void fillEs22(Map<String, String> table) {
+        table.put("Sticker",
+                "Sticker");
         table.put("Sticker destination",
                 "Destino de los stickers");
         table.put("Sticker saved to %1$s",
@@ -10000,11 +10006,11 @@ public final class L10nTranslations {
                 "Toca otra vez para hacer repost");
         table.put("Tap the feed Follow button twice within %1$d seconds.",
                 "Toca el botón Seguir del feed dos veces en menos de %1$d segundos.");
-        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
-                "Toca el corazón de me gusta dos veces en menos de %1$d segundos. Quitar un me gusta sigue siendo inmediato.");
     }
 
     private static void fillEs23(Map<String, String> table) {
+        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
+                "Toca el corazón de me gusta dos veces en menos de %1$d segundos. Quitar un me gusta sigue siendo inmediato.");
         table.put("Tap to start the feed",
                 "Toca para poner el feed en marcha");
         table.put("Tap, then go to the screen with what you want hidden. After %1$d seconds Hushfeed records how that screen is built, without any of its text, for the diagnostic report.",
@@ -10123,11 +10129,11 @@ public final class L10nTranslations {
                 "La aplicacion de descarga que elegiste no esta instalada. Revisa Enviar enlaces a otra aplicacion en Descargas.");
         table.put("The export wasn't saved. Export again when the file app is ready.",
                 "La exportación no se guardó. Vuelve a exportar cuando la app de archivos esté lista.");
-        table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
-                "El feed se oscurece en los últimos tres cuartos de minuto antes de la pausa, para que llegues a ella en lugar de caer. Necesita un presupuesto de tiempo y una pausa.");
     }
 
     private static void fillEs24(Map<String, String> table) {
+        table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
+                "El feed se oscurece en los últimos tres cuartos de minuto antes de la pausa, para que llegues a ella en lugar de caer. Necesita un presupuesto de tiempo y una pausa.");
         table.put("The feed doesn't end. This is a fine time to leave it.",
                 "El feed no se acaba. Este es un buen momento para dejarlo.");
         table.put("The feed is locked",
@@ -10246,11 +10252,11 @@ public final class L10nTranslations {
                 "Este archivo no es una exportación de valores cargados del Feature Gate Lab.");
         table.put("This gate type isn't supported.",
                 "Este tipo de gate no es compatible.");
-        table.put("This is the video's own sound, so YouTube Music won't have it",
-                "Este es el sonido propio del video, así que YouTube Music no lo tendrá");
     }
 
     private static void fillEs25(Map<String, String> table) {
+        table.put("This is the video's own sound, so YouTube Music won't have it",
+                "Este es el sonido propio del video, así que YouTube Music no lo tendrá");
         table.put("This key isn't in Hushfeed's list, so its type can't be checked. Reset the override.",
                 "Esta clave no está en la lista de Hushfeed, así que no se puede comprobar su tipo. Restablece la anulación.");
         table.put("This key touches account safety. Forcing it can change login, region, payment or security checks.",
@@ -10369,11 +10375,11 @@ public final class L10nTranslations {
                 "Hoy está como estaba");
         table.put("Today started over. Tap again to put the counts back.",
                 "Hoy ha empezado de nuevo. Toca otra vez para recuperar las cuentas.");
-        table.put("Today starts again",
-                "Hoy empieza otra vez");
     }
 
     private static void fillEs26(Map<String, String> table) {
+        table.put("Today starts again",
+                "Hoy empieza otra vez");
         table.put("Today's budget is locked. The day starts over at %1$s.",
                 "El presupuesto de hoy está bloqueado. El día empieza de nuevo a las %1$s.");
         table.put("Today's budget is locked. The feed opens again at %1$s. Messages, profiles and search still work.",
@@ -10492,11 +10498,11 @@ public final class L10nTranslations {
                 "Usar una velocidad de reproducción predeterminada");
         table.put("Use non-personalized search",
                 "Usar la búsqueda sin personalizar");
-        table.put("Use screen lock",
-                "Usar bloqueo de pantalla");
     }
 
     private static void fillEs27(Map<String, String> table) {
+        table.put("Use screen lock",
+                "Usar bloqueo de pantalla");
         table.put("Use system font",
                 "Usar la fuente del sistema");
         table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search.",
@@ -10615,11 +10621,11 @@ public final class L10nTranslations {
                 "Mientras el registro de diagnóstico está activado, un mensaje indica la parte de Hushfeed que falló. Desactivado, los fallos solo quedan en el informe.");
         table.put("Who to message",
                 "A quién escribir");
-        table.put("Window width needed to enable the layout. Restart TikTok to apply this.",
-                "Anchura de ventana necesaria para activar el diseño. Reinicia TikTok para que se aplique.");
     }
 
     private static void fillEs28(Map<String, String> table) {
+        table.put("Window width needed to enable the layout. Restart TikTok to apply this.",
+                "Anchura de ventana necesaria para activar el diseño. Reinicia TikTok para que se aplique.");
         table.put("Word rules only, not every feed filter:",
                 "Solo reglas de palabras, no todos los filtros del feed:");
         table.put("Words, countries and languages",
@@ -10685,7 +10691,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(3422);
+        Map<String, String> table = new HashMap<>(3424);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -12588,6 +12594,8 @@ public final class L10nTranslations {
                 "Normal");
         table.put("Not a handle or id, so ignored: %1$s",
                 "Bukan nama akun atau id, jadi diabaikan: %1$s");
+        table.put("Not a token for Hushfeed's downloader, kept as typed: %1$s",
+                "Bukan token untuk pengunduh Hushfeed, disimpan apa adanya: %1$s");
         table.put("Not a token here, kept as typed: %1$s",
                 "Bukan token di sini, disimpan apa adanya: %1$s");
         table.put("Not blocked",
@@ -12682,11 +12690,11 @@ public final class L10nTranslations {
                 "Buka TikTok di");
         table.put("Open a share sheet once, then return here to choose its actions.",
                 "Buka lembar berbagi sekali, lalu kembali ke sini untuk memilih tindakannya.");
-        table.put("Open comments",
-                "Buka komentar");
     }
 
     private static void fillIn16(Map<String, String> table) {
+        table.put("Open comments",
+                "Buka komentar");
         table.put("Open external links directly",
                 "Buka tautan luar secara langsung");
         table.put("Open messages",
@@ -12805,11 +12813,11 @@ public final class L10nTranslations {
                 "Pemutaran");
         table.put("Player",
                 "Pemutar");
-        table.put("Playlist posts",
-                "Kiriman playlist");
     }
 
     private static void fillIn17(Map<String, String> table) {
+        table.put("Playlist posts",
+                "Kiriman playlist");
         table.put("Popular",
                 "Populer");
         table.put("Popups",
@@ -12928,11 +12936,11 @@ public final class L10nTranslations {
                 "Hapus %1$s");
         table.put("Remove all overrides",
                 "Hapus semua penggantian");
-        table.put("Remove feed ads",
-                "Hapus iklan di feed");
     }
 
     private static void fillIn18(Map<String, String> table) {
+        table.put("Remove feed ads",
+                "Hapus iklan di feed");
         table.put("Remove feed ads, creator commission posts, paid partnerships, and branded content.",
                 "Hapus iklan di feed, postingan komisi kreator, kemitraan berbayar, dan konten bermerek.");
         table.put("Remove story rings",
@@ -13051,11 +13059,11 @@ public final class L10nTranslations {
                 "Simpan foto profil dengan tekan lama");
         table.put("Save a story on a long press",
                 "Simpan Story dengan tekan lama");
-        table.put("Save again",
-                "Simpan lagi");
     }
 
     private static void fillIn19(Map<String, String> table) {
+        table.put("Save again",
+                "Simpan lagi");
         table.put("Save as video",
                 "Simpan sebagai video");
         table.put("Save build details",
@@ -13174,11 +13182,11 @@ public final class L10nTranslations {
                 "Cari berdasarkan nama, deskripsi, atau kategori.");
         table.put("Search countries or operators",
                 "Cari negara atau operator");
-        table.put("Search hidden creators",
-                "Cari kreator tersembunyi");
     }
 
     private static void fillIn20(Map<String, String> table) {
+        table.put("Search hidden creators",
+                "Cari kreator tersembunyi");
         table.put("Search settings",
                 "Cari setelan");
         table.put("Search share actions",
@@ -13297,11 +13305,11 @@ public final class L10nTranslations {
                 "Tampilkan kegagalan di layar");
         table.put("Show follow status",
                 "Tampilkan status mengikuti");
-        table.put("Show gates",
-                "Tampilkan gate");
     }
 
     private static void fillIn21(Map<String, String> table) {
+        table.put("Show gates",
+                "Tampilkan gate");
         table.put("Show last report",
                 "Tampilkan laporan terakhir");
         table.put("Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.",
@@ -13420,11 +13428,11 @@ public final class L10nTranslations {
                 "Tetap di video saat layar penuh");
         table.put("Staying on a video",
                 "Tetap di video");
-        table.put("Sticker",
-                "Stiker");
     }
 
     private static void fillIn22(Map<String, String> table) {
+        table.put("Sticker",
+                "Stiker");
         table.put("Sticker destination",
                 "Lokasi simpan stiker");
         table.put("Sticker saved to %1$s",
@@ -13543,11 +13551,11 @@ public final class L10nTranslations {
                 "Ketuk lagi untuk me-repost");
         table.put("Tap the feed Follow button twice within %1$d seconds.",
                 "Ketuk tombol Ikuti di feed dua kali dalam %1$d detik.");
-        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
-                "Ketuk ikon hati dua kali dalam %1$d detik. Membatalkan suka tetap langsung berlaku.");
     }
 
     private static void fillIn23(Map<String, String> table) {
+        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
+                "Ketuk ikon hati dua kali dalam %1$d detik. Membatalkan suka tetap langsung berlaku.");
         table.put("Tap to start the feed",
                 "Ketuk untuk memulai feed");
         table.put("Tap, then go to the screen with what you want hidden. After %1$d seconds Hushfeed records how that screen is built, without any of its text, for the diagnostic report.",
@@ -13666,11 +13674,11 @@ public final class L10nTranslations {
                 "Aplikasi pengunduh yang kamu pilih tidak terpasang. Periksa Kirim tautan ke aplikasi lain di Unduhan.");
         table.put("The export wasn't saved. Export again when the file app is ready.",
                 "Ekspor tidak tersimpan. Ekspor lagi saat aplikasi file sudah siap.");
-        table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
-                "Feed meredup selama tiga perempat menit terakhir sebelum jeda, agar kamu tiba di sana, bukan mendarat. Butuh anggaran waktu dan jeda.");
     }
 
     private static void fillIn24(Map<String, String> table) {
+        table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
+                "Feed meredup selama tiga perempat menit terakhir sebelum jeda, agar kamu tiba di sana, bukan mendarat. Butuh anggaran waktu dan jeda.");
         table.put("The feed doesn't end. This is a fine time to leave it.",
                 "Feed tidak ada habisnya. Ini saat yang baik untuk berhenti.");
         table.put("The feed is locked",
@@ -13789,11 +13797,11 @@ public final class L10nTranslations {
                 "Berkas ini bukan ekspor nilai yang dimuat dari Feature Gate Lab.");
         table.put("This gate type isn't supported.",
                 "Tipe gate ini tidak didukung.");
-        table.put("This is the video's own sound, so YouTube Music won't have it",
-                "Ini suara asli video itu sendiri, jadi YouTube Music tidak akan memilikinya");
     }
 
     private static void fillIn25(Map<String, String> table) {
+        table.put("This is the video's own sound, so YouTube Music won't have it",
+                "Ini suara asli video itu sendiri, jadi YouTube Music tidak akan memilikinya");
         table.put("This key isn't in Hushfeed's list, so its type can't be checked. Reset the override.",
                 "Kunci ini tidak ada di daftar Hushfeed, jadi jenisnya tidak bisa diperiksa. Setel ulang penggantian.");
         table.put("This key touches account safety. Forcing it can change login, region, payment or security checks.",
@@ -13912,11 +13920,11 @@ public final class L10nTranslations {
                 "Hari ini kembali seperti semula");
         table.put("Today started over. Tap again to put the counts back.",
                 "Hari ini dimulai ulang. Ketuk lagi untuk mengembalikan hitungannya.");
-        table.put("Today starts again",
-                "Hari ini dimulai lagi");
     }
 
     private static void fillIn26(Map<String, String> table) {
+        table.put("Today starts again",
+                "Hari ini dimulai lagi");
         table.put("Today's budget is locked. The day starts over at %1$s.",
                 "Anggaran hari ini terkunci. Hari dimulai ulang pada %1$s.");
         table.put("Today's budget is locked. The feed opens again at %1$s. Messages, profiles and search still work.",
@@ -14035,11 +14043,11 @@ public final class L10nTranslations {
                 "Pakai kecepatan pemutaran bawaan");
         table.put("Use non-personalized search",
                 "Pakai pencarian nonpersonal");
-        table.put("Use screen lock",
-                "Gunakan kunci layar");
     }
 
     private static void fillIn27(Map<String, String> table) {
+        table.put("Use screen lock",
+                "Gunakan kunci layar");
         table.put("Use system font",
                 "Gunakan font sistem");
         table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search.",
@@ -14158,11 +14166,11 @@ public final class L10nTranslations {
                 "Selama pencatatan diagnostik aktif, sebuah pesan menyebutkan bagian Hushfeed yang gagal. Jika nonaktif, kegagalan hanya tercatat di laporan.");
         table.put("Who to message",
                 "Kirim ke siapa");
-        table.put("Window width needed to enable the layout. Restart TikTok to apply this.",
-                "Lebar jendela yang dibutuhkan agar tata letaknya aktif. Mulai ulang TikTok agar berlaku.");
     }
 
     private static void fillIn28(Map<String, String> table) {
+        table.put("Window width needed to enable the layout. Restart TikTok to apply this.",
+                "Lebar jendela yang dibutuhkan agar tata letaknya aktif. Mulai ulang TikTok agar berlaku.");
         table.put("Word rules only, not every feed filter:",
                 "Hanya aturan kata, bukan semua filter feed:");
         table.put("Words, countries and languages",
@@ -14228,7 +14236,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIt() {
-        Map<String, String> table = new HashMap<>(3422);
+        Map<String, String> table = new HashMap<>(3424);
         fillIt0(table);
         fillIt1(table);
         fillIt2(table);
@@ -16131,6 +16139,8 @@ public final class L10nTranslations {
                 "Normale");
         table.put("Not a handle or id, so ignored: %1$s",
                 "Non è un nome utente né un ID, quindi è stato ignorato: %1$s");
+        table.put("Not a token for Hushfeed's downloader, kept as typed: %1$s",
+                "Non è un token per il downloader di Hushfeed, resta come scritto: %1$s");
         table.put("Not a token here, kept as typed: %1$s",
                 "Qui non è un token, resta come scritto: %1$s");
         table.put("Not blocked",
@@ -16225,11 +16235,11 @@ public final class L10nTranslations {
                 "Apri TikTok con");
         table.put("Open a share sheet once, then return here to choose its actions.",
                 "Apri una volta un menu di condivisione, poi torna qui per scegliere le sue azioni.");
-        table.put("Open comments",
-                "Apri i commenti");
     }
 
     private static void fillIt16(Map<String, String> table) {
+        table.put("Open comments",
+                "Apri i commenti");
         table.put("Open external links directly",
                 "Apri direttamente i link esterni");
         table.put("Open messages",
@@ -16348,11 +16358,11 @@ public final class L10nTranslations {
                 "Riproduzione");
         table.put("Player",
                 "Lettore");
-        table.put("Playlist posts",
-                "Post playlist");
     }
 
     private static void fillIt17(Map<String, String> table) {
+        table.put("Playlist posts",
+                "Post playlist");
         table.put("Popular",
                 "Popolare");
         table.put("Popups",
@@ -16471,11 +16481,11 @@ public final class L10nTranslations {
                 "Rimuovi %1$s");
         table.put("Remove all overrides",
                 "Rimuovi tutte le sovrascritture");
-        table.put("Remove feed ads",
-                "Rimuovi gli annunci dal feed");
     }
 
     private static void fillIt18(Map<String, String> table) {
+        table.put("Remove feed ads",
+                "Rimuovi gli annunci dal feed");
         table.put("Remove feed ads, creator commission posts, paid partnerships, and branded content.",
                 "Rimuove gli annunci dal feed, i post con commissione per il creator, le collaborazioni a pagamento e i contenuti brandizzati.");
         table.put("Remove story rings",
@@ -16594,11 +16604,11 @@ public final class L10nTranslations {
                 "Salva la foto del profilo con una pressione prolungata");
         table.put("Save a story on a long press",
                 "Salva una storia con una pressione prolungata");
-        table.put("Save again",
-                "Salva di nuovo");
     }
 
     private static void fillIt19(Map<String, String> table) {
+        table.put("Save again",
+                "Salva di nuovo");
         table.put("Save as video",
                 "Salva come video");
         table.put("Save build details",
@@ -16717,11 +16727,11 @@ public final class L10nTranslations {
                 "Cerca per nome, descrizione o categoria.");
         table.put("Search countries or operators",
                 "Cerca paesi o operatori");
-        table.put("Search hidden creators",
-                "Cerca tra i creator nascosti");
     }
 
     private static void fillIt20(Map<String, String> table) {
+        table.put("Search hidden creators",
+                "Cerca tra i creator nascosti");
         table.put("Search settings",
                 "Cerca nelle impostazioni");
         table.put("Search share actions",
@@ -16840,11 +16850,11 @@ public final class L10nTranslations {
                 "Mostra gli errori sullo schermo");
         table.put("Show follow status",
                 "Mostra lo stato di follow");
-        table.put("Show gates",
-                "Mostra i gate");
     }
 
     private static void fillIt21(Map<String, String> table) {
+        table.put("Show gates",
+                "Mostra i gate");
         table.put("Show last report",
                 "Mostra l'ultimo rapporto");
         table.put("Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.",
@@ -16963,11 +16973,11 @@ public final class L10nTranslations {
                 "Resta sul video a schermo intero");
         table.put("Staying on a video",
                 "Restare su un video");
-        table.put("Sticker",
-                "Sticker");
     }
 
     private static void fillIt22(Map<String, String> table) {
+        table.put("Sticker",
+                "Sticker");
         table.put("Sticker destination",
                 "Destinazione sticker");
         table.put("Sticker saved to %1$s",
@@ -17086,11 +17096,11 @@ public final class L10nTranslations {
                 "Tocca di nuovo per ripubblicare");
         table.put("Tap the feed Follow button twice within %1$d seconds.",
                 "Tocca due volte il pulsante Segui nel feed entro %1$d secondi.");
-        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
-                "Tocca due volte il cuore del Mi piace entro %1$d secondi. La rimozione di un Mi piace resta immediata.");
     }
 
     private static void fillIt23(Map<String, String> table) {
+        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
+                "Tocca due volte il cuore del Mi piace entro %1$d secondi. La rimozione di un Mi piace resta immediata.");
         table.put("Tap to start the feed",
                 "Tocca per avviare il feed");
         table.put("Tap, then go to the screen with what you want hidden. After %1$d seconds Hushfeed records how that screen is built, without any of its text, for the diagnostic report.",
@@ -17209,11 +17219,11 @@ public final class L10nTranslations {
                 "L'app di download scelta non è installata. Controlla \"Invia i link a un'altra app\" in Download.");
         table.put("The export wasn't saved. Export again when the file app is ready.",
                 "L'esportazione non è stata salvata. Esporta di nuovo quando l'app dei file è pronta.");
-        table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
-                "Il feed si scurisce gradualmente negli ultimi quarantacinque secondi prima del blocco, così ci arrivi invece di caderci dentro. Richiede un budget di tempo e un blocco a cui arrivare.");
     }
 
     private static void fillIt24(Map<String, String> table) {
+        table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
+                "Il feed si scurisce gradualmente negli ultimi quarantacinque secondi prima del blocco, così ci arrivi invece di caderci dentro. Richiede un budget di tempo e un blocco a cui arrivare.");
         table.put("The feed doesn't end. This is a fine time to leave it.",
                 "Il feed non finisce mai. Questo è un buon momento per uscirne.");
         table.put("The feed is locked",
@@ -17332,11 +17342,11 @@ public final class L10nTranslations {
                 "Questo file non è un'esportazione di valori caricati dal Feature Gate Lab.");
         table.put("This gate type isn't supported.",
                 "Questo tipo di gate non è supportato.");
-        table.put("This is the video's own sound, so YouTube Music won't have it",
-                "Questo è l'audio originale del video, quindi YouTube Music non lo avrà");
     }
 
     private static void fillIt25(Map<String, String> table) {
+        table.put("This is the video's own sound, so YouTube Music won't have it",
+                "Questo è l'audio originale del video, quindi YouTube Music non lo avrà");
         table.put("This key isn't in Hushfeed's list, so its type can't be checked. Reset the override.",
                 "Questa chiave non è nella lista di Hushfeed, quindi non è possibile controllarne il tipo. Reimposta la sovrascrizione.");
         table.put("This key touches account safety. Forcing it can change login, region, payment or security checks.",
@@ -17455,11 +17465,11 @@ public final class L10nTranslations {
                 "La giornata è tornata com'era");
         table.put("Today started over. Tap again to put the counts back.",
                 "La giornata è ricominciata. Tocca di nuovo per ripristinare i conteggi.");
-        table.put("Today starts again",
-                "La giornata ricomincia");
     }
 
     private static void fillIt26(Map<String, String> table) {
+        table.put("Today starts again",
+                "La giornata ricomincia");
         table.put("Today's budget is locked. The day starts over at %1$s.",
                 "Il budget di oggi è bloccato. La giornata ricomincia alle %1$s.");
         table.put("Today's budget is locked. The feed opens again at %1$s. Messages, profiles and search still work.",
@@ -17578,11 +17588,11 @@ public final class L10nTranslations {
                 "Usa una velocità di riproduzione predefinita");
         table.put("Use non-personalized search",
                 "Usa la ricerca non personalizzata");
-        table.put("Use screen lock",
-                "Usa il blocco schermo");
     }
 
     private static void fillIt27(Map<String, String> table) {
+        table.put("Use screen lock",
+                "Usa il blocco schermo");
         table.put("Use system font",
                 "Usa il carattere di sistema");
         table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search.",
@@ -17701,11 +17711,11 @@ public final class L10nTranslations {
                 "Quando la registrazione diagnostica è attiva, un messaggio indica quale parte di Hushfeed ha avuto un problema. Se disattivata, gli errori restano solo nel rapporto.");
         table.put("Who to message",
                 "A chi scrivere");
-        table.put("Window width needed to enable the layout. Restart TikTok to apply this.",
-                "Larghezza della finestra necessaria per attivare il layout. Riavvia TikTok per applicare la modifica.");
     }
 
     private static void fillIt28(Map<String, String> table) {
+        table.put("Window width needed to enable the layout. Restart TikTok to apply this.",
+                "Larghezza della finestra necessaria per attivare il layout. Riavvia TikTok per applicare la modifica.");
         table.put("Word rules only, not every feed filter:",
                 "Solo regole di parole, non tutti i filtri del feed:");
         table.put("Words, countries and languages",
@@ -17771,7 +17781,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(3422);
+        Map<String, String> table = new HashMap<>(3424);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -19674,6 +19684,8 @@ public final class L10nTranslations {
                 "Normal");
         table.put("Not a handle or id, so ignored: %1$s",
                 "Não é um nome de conta nem um id, então foi ignorado: %1$s");
+        table.put("Not a token for Hushfeed's downloader, kept as typed: %1$s",
+                "Não é um token para o baixador do Hushfeed, fica como foi digitado: %1$s");
         table.put("Not a token here, kept as typed: %1$s",
                 "Aqui não é um token, fica como foi digitado: %1$s");
         table.put("Not blocked",
@@ -19768,11 +19780,11 @@ public final class L10nTranslations {
                 "Abrir o TikTok em");
         table.put("Open a share sheet once, then return here to choose its actions.",
                 "Abra uma vez a folha de compartilhamento e volte aqui para escolher as ações dela.");
-        table.put("Open comments",
-                "Abrir os comentários");
     }
 
     private static void fillPt_rBR16(Map<String, String> table) {
+        table.put("Open comments",
+                "Abrir os comentários");
         table.put("Open external links directly",
                 "Abrir os links externos direto");
         table.put("Open messages",
@@ -19891,11 +19903,11 @@ public final class L10nTranslations {
                 "Reprodução");
         table.put("Player",
                 "Reprodutor");
-        table.put("Playlist posts",
-                "Publicações de playlists");
     }
 
     private static void fillPt_rBR17(Map<String, String> table) {
+        table.put("Playlist posts",
+                "Publicações de playlists");
         table.put("Popular",
                 "Populares");
         table.put("Popups",
@@ -20014,11 +20026,11 @@ public final class L10nTranslations {
                 "Remover %1$s");
         table.put("Remove all overrides",
                 "Remover todas as substituições");
-        table.put("Remove feed ads",
-                "Remover os anúncios do feed");
     }
 
     private static void fillPt_rBR18(Map<String, String> table) {
+        table.put("Remove feed ads",
+                "Remover os anúncios do feed");
         table.put("Remove feed ads, creator commission posts, paid partnerships, and branded content.",
                 "Remover anúncios do feed, posts com comissão do criador, parcerias pagas e conteúdo de marca.");
         table.put("Remove story rings",
@@ -20137,11 +20149,11 @@ public final class L10nTranslations {
                 "Salvar uma foto de perfil com um toque longo");
         table.put("Save a story on a long press",
                 "Salvar um story com um toque longo");
-        table.put("Save again",
-                "Salvar novamente");
     }
 
     private static void fillPt_rBR19(Map<String, String> table) {
+        table.put("Save again",
+                "Salvar novamente");
         table.put("Save as video",
                 "Salvar como vídeo");
         table.put("Save build details",
@@ -20260,11 +20272,11 @@ public final class L10nTranslations {
                 "Busque por nome, descrição ou categoria.");
         table.put("Search countries or operators",
                 "Buscar países ou operadoras");
-        table.put("Search hidden creators",
-                "Buscar criadores escondidos");
     }
 
     private static void fillPt_rBR20(Map<String, String> table) {
+        table.put("Search hidden creators",
+                "Buscar criadores escondidos");
         table.put("Search settings",
                 "Buscar nas configurações");
         table.put("Search share actions",
@@ -20383,11 +20395,11 @@ public final class L10nTranslations {
                 "Mostrar falhas na tela");
         table.put("Show follow status",
                 "Mostrar status de seguimento");
-        table.put("Show gates",
-                "Mostrar gates");
     }
 
     private static void fillPt_rBR21(Map<String, String> table) {
+        table.put("Show gates",
+                "Mostrar gates");
         table.put("Show last report",
                 "Mostrar último relatório");
         table.put("Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.",
@@ -20506,11 +20518,11 @@ public final class L10nTranslations {
                 "Ficar no vídeo em tela cheia");
         table.put("Staying on a video",
                 "Ficar em um vídeo");
-        table.put("Sticker",
-                "Sticker");
     }
 
     private static void fillPt_rBR22(Map<String, String> table) {
+        table.put("Sticker",
+                "Sticker");
         table.put("Sticker destination",
                 "Destino dos stickers");
         table.put("Sticker saved to %1$s",
@@ -20629,11 +20641,11 @@ public final class L10nTranslations {
                 "Toque de novo para repostar");
         table.put("Tap the feed Follow button twice within %1$d seconds.",
                 "Toque no botão Seguir do feed duas vezes dentro de %1$d segundos.");
-        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
-                "Toque no coração de curtir duas vezes dentro de %1$d segundos. Tirar uma curtida continua sendo imediato.");
     }
 
     private static void fillPt_rBR23(Map<String, String> table) {
+        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
+                "Toque no coração de curtir duas vezes dentro de %1$d segundos. Tirar uma curtida continua sendo imediato.");
         table.put("Tap to start the feed",
                 "Toque para iniciar o feed");
         table.put("Tap, then go to the screen with what you want hidden. After %1$d seconds Hushfeed records how that screen is built, without any of its text, for the diagnostic report.",
@@ -20752,11 +20764,11 @@ public final class L10nTranslations {
                 "O aplicativo de download que voce escolheu nao esta instalado. Verifique Enviar links para outro aplicativo em Downloads.");
         table.put("The export wasn't saved. Export again when the file app is ready.",
                 "A exportação não foi salva. Exporte de novo quando o app de arquivos estiver pronto.");
-        table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
-                "O feed escurece nos últimos três quartos de minuto antes da pausa, para que você chegue a ela em vez de cair nela. Precisa de um orçamento de tempo e uma pausa.");
     }
 
     private static void fillPt_rBR24(Map<String, String> table) {
+        table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
+                "O feed escurece nos últimos três quartos de minuto antes da pausa, para que você chegue a ela em vez de cair nela. Precisa de um orçamento de tempo e uma pausa.");
         table.put("The feed doesn't end. This is a fine time to leave it.",
                 "O feed não acaba. Esta é uma boa hora para largá-lo.");
         table.put("The feed is locked",
@@ -20875,11 +20887,11 @@ public final class L10nTranslations {
                 "Este arquivo não é uma exportação de valores carregados do Feature Gate Lab.");
         table.put("This gate type isn't supported.",
                 "Este tipo de gate não é compatível.");
-        table.put("This is the video's own sound, so YouTube Music won't have it",
-                "Este é o som do próprio vídeo, então o YouTube Music não vai tê-lo");
     }
 
     private static void fillPt_rBR25(Map<String, String> table) {
+        table.put("This is the video's own sound, so YouTube Music won't have it",
+                "Este é o som do próprio vídeo, então o YouTube Music não vai tê-lo");
         table.put("This key isn't in Hushfeed's list, so its type can't be checked. Reset the override.",
                 "Esta chave não está na lista do Hushfeed, então o tipo dela não pode ser verificado. Redefina a substituição.");
         table.put("This key touches account safety. Forcing it can change login, region, payment or security checks.",
@@ -20998,11 +21010,11 @@ public final class L10nTranslations {
                 "Hoje está como estava");
         table.put("Today started over. Tap again to put the counts back.",
                 "Hoje recomeçou. Toque de novo para trazer as contagens de volta.");
-        table.put("Today starts again",
-                "Hoje começa de novo");
     }
 
     private static void fillPt_rBR26(Map<String, String> table) {
+        table.put("Today starts again",
+                "Hoje começa de novo");
         table.put("Today's budget is locked. The day starts over at %1$s.",
                 "O limite de hoje está travado. O dia recomeça às %1$s.");
         table.put("Today's budget is locked. The feed opens again at %1$s. Messages, profiles and search still work.",
@@ -21121,11 +21133,11 @@ public final class L10nTranslations {
                 "Usar uma velocidade de reprodução padrão");
         table.put("Use non-personalized search",
                 "Usar a busca sem personalização");
-        table.put("Use screen lock",
-                "Usar bloqueio de tela");
     }
 
     private static void fillPt_rBR27(Map<String, String> table) {
+        table.put("Use screen lock",
+                "Usar bloqueio de tela");
         table.put("Use system font",
                 "Usar a fonte do sistema");
         table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search.",
@@ -21244,11 +21256,11 @@ public final class L10nTranslations {
                 "Enquanto o registro de diagnóstico estiver ligado, uma mensagem indica a parte do Hushfeed que falhou. Desligado, as falhas ficam só no relatório.");
         table.put("Who to message",
                 "Para quem mandar");
-        table.put("Window width needed to enable the layout. Restart TikTok to apply this.",
-                "Largura de janela necessária para ligar o layout. Reinicie o TikTok para aplicar.");
     }
 
     private static void fillPt_rBR28(Map<String, String> table) {
+        table.put("Window width needed to enable the layout. Restart TikTok to apply this.",
+                "Largura de janela necessária para ligar o layout. Reinicie o TikTok para aplicar.");
         table.put("Word rules only, not every feed filter:",
                 "Só regras de palavras, não todos os filtros do feed:");
         table.put("Words, countries and languages",
@@ -21314,7 +21326,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildRu() {
-        Map<String, String> table = new HashMap<>(3704);
+        Map<String, String> table = new HashMap<>(3706);
         fillRu0(table);
         fillRu1(table);
         fillRu2(table);
@@ -23426,6 +23438,8 @@ public final class L10nTranslations {
                 "Обычная");
         table.put("Not a handle or id, so ignored: %1$s",
                 "Не имя аккаунта и не id, поэтому проигнорировано: %1$s");
+        table.put("Not a token for Hushfeed's downloader, kept as typed: %1$s",
+                "Для загрузчика Hushfeed это не подстановка, сохраняется как есть: %1$s");
         table.put("Not a token here, kept as typed: %1$s",
                 "Здесь это не подстановка, сохраняется как есть: %1$s");
         table.put("Not blocked",
@@ -23436,11 +23450,11 @@ public final class L10nTranslations {
                 "Ещё не прочитано");
         table.put("Not requested in this process yet",
                 "Ещё не запрошено в этом процессе");
-        table.put("Not saved yet",
-                "Ещё не сохранено");
     }
 
     private static void fillRu17(Map<String, String> table) {
+        table.put("Not saved yet",
+                "Ещё не сохранено");
         table.put("Not seen",
                 "Не просмотрено");
         table.put("Not seen yet",
@@ -23559,11 +23573,11 @@ public final class L10nTranslations {
                 "Необязательно. Собственный сетевой стек TikTok не умеет входить в прокси, поэтому это используют только обычные Java-соединения. Оставьте поле пустым для прокси без пароля.");
         table.put("Original language",
                 "Язык оригинала");
-        table.put("Original photos",
-                "Оригинальные фото");
     }
 
     private static void fillRu18(Map<String, String> table) {
+        table.put("Original photos",
+                "Оригинальные фото");
         table.put("Original sound",
                 "Оригинальный звук");
         table.put("Other",
@@ -23682,11 +23696,11 @@ public final class L10nTranslations {
                 "Предпросмотр на выдуманной публикации:");
         table.put("Privacy",
                 "Конфиденциальность");
-        table.put("Privacy and system",
-                "Конфиденциальность и система");
     }
 
     private static void fillRu19(Map<String, String> table) {
+        table.put("Privacy and system",
+                "Конфиденциальность и система");
         table.put("Problem detected.",
                 "Обнаружена проблема.");
         table.put("Problem detected. Story views may still be reported. Check Ghost mode diagnostics. The warning stays until TikTok restarts.",
@@ -23805,11 +23819,11 @@ public final class L10nTranslations {
                 "Сбросить");
         table.put("Reset %1$d gates of %2$d. Restart TikTok to apply this.",
                 "Сброшено %1$d переключателей из %2$d. Перезапустите TikTok, чтобы это применить.");
-        table.put("Reset %1$d gates of %2$d. Restart TikTok to apply this.|few",
-                "Сброшено %1$d переключателя из %2$d. Перезапустите TikTok, чтобы это применить.");
     }
 
     private static void fillRu20(Map<String, String> table) {
+        table.put("Reset %1$d gates of %2$d. Restart TikTok to apply this.|few",
+                "Сброшено %1$d переключателя из %2$d. Перезапустите TikTok, чтобы это применить.");
         table.put("Reset %1$d gates of %2$d. Restart TikTok to apply this.|many",
                 "Сброшено %1$d переключателей из %2$d. Перезапустите TikTok, чтобы это применить.");
         table.put("Reset %1$d gates of %2$d. Restart TikTok to apply this.|one",
@@ -23928,11 +23942,11 @@ public final class L10nTranslations {
                 "Сохранить значения полей");
         table.put("Save full report",
                 "Сохранить полный отчёт");
-        table.put("Save media",
-                "Сохранение медиафайлов");
     }
 
     private static void fillRu21(Map<String, String> table) {
+        table.put("Save media",
+                "Сохранение медиафайлов");
         table.put("Save photo posts as a video",
                 "Сохранять фотопубликации как видео");
         table.put("Save photos",
@@ -24051,11 +24065,11 @@ public final class L10nTranslations {
                 "Поиск по настройкам");
         table.put("Search share actions",
                 "Поиск по действиям «Поделиться»");
-        table.put("Search these comments",
-                "Поиск по этим комментариям");
     }
 
     private static void fillRu22(Map<String, String> table) {
+        table.put("Search these comments",
+                "Поиск по этим комментариям");
         table.put("Search translated titles and descriptions, then open the original setting.",
                 "Искать по переведённым заголовкам и описаниям, а затем открывать нужную настройку.");
         table.put("Search within comments",
@@ -24174,11 +24188,11 @@ public final class L10nTranslations {
                 "Показать последний отчёт");
         table.put("Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.",
                 "Показывать лайки, комментарии, репосты и сохранения в процентах от просмотров рядом с именем автора и после числа просмотров в сетке профиля.");
-        table.put("Show only LIVEs from creators with this many followers.",
-                "Показывать только трансляции авторов с таким количеством подписчиков.");
     }
 
     private static void fillRu23(Map<String, String> table) {
+        table.put("Show only LIVEs from creators with this many followers.",
+                "Показывать только трансляции авторов с таким количеством подписчиков.");
         table.put("Show only LIVEs with this many people watching.",
                 "Показывать только трансляции с таким количеством зрителей.");
         table.put("Show only mutual friends on the Friends tab",
@@ -24297,11 +24311,11 @@ public final class L10nTranslations {
                 "Оставаться на видео в полноэкранном режиме");
         table.put("Staying on a video",
                 "Пребывание на видео");
-        table.put("Sticker",
-                "Стикер");
     }
 
     private static void fillRu24(Map<String, String> table) {
+        table.put("Sticker",
+                "Стикер");
         table.put("Sticker destination",
                 "Папка для стикеров");
         table.put("Sticker saved to %1$s",
@@ -24420,11 +24434,11 @@ public final class L10nTranslations {
                 "Нажмите ещё раз, чтобы сделать репост");
         table.put("Tap the feed Follow button twice within %1$d seconds.",
                 "Дважды нажмите кнопку «Подписаться» в ленте в течение %1$d секунд.");
-        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
-                "Дважды нажмите на сердечко лайка в течение %1$d секунд. Снятие лайка остаётся мгновенным.");
     }
 
     private static void fillRu25(Map<String, String> table) {
+        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
+                "Дважды нажмите на сердечко лайка в течение %1$d секунд. Снятие лайка остаётся мгновенным.");
         table.put("Tap to start the feed",
                 "Нажмите, чтобы запустить ленту");
         table.put("Tap, then go to the screen with what you want hidden. After %1$d seconds Hushfeed records how that screen is built, without any of its text, for the diagnostic report.",
@@ -24543,11 +24557,11 @@ public final class L10nTranslations {
                 "Резервное копирование не началось, и не удалось удалить его неполный файл. Удалите его из выбранной папки.");
         table.put("The backup wasn't saved. Back up again when the file app is ready.",
                 "Резервная копия не сохранена. Создайте её снова, когда приложение для файлов будет готово.");
-        table.put("The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.",
-                "Каталог указывает для этого ключа значение %1$s, а для этого переопределения значение %2$s. Сбросьте переопределение и создайте новое.");
     }
 
     private static void fillRu26(Map<String, String> table) {
+        table.put("The catalog says this key is %1$s and this override is %2$s. Reset the override and make a new one.",
+                "Каталог указывает для этого ключа значение %1$s, а для этого переопределения значение %2$s. Сбросьте переопределение и создайте новое.");
         table.put("The comment button also opens a video's comments with its caption at the top. The caption over the video goes away while this is on.",
                 "Кнопка комментариев тоже открывает комментарии видео с подписью сверху. Подпись поверх видео исчезает, пока это включено.");
         table.put("The diagnostic report couldn't be saved yet. Try again in a moment.",
@@ -24666,11 +24680,11 @@ public final class L10nTranslations {
                 "Эти заметки на английском языке.");
         table.put("This catalog entry is no longer available. Refresh the Lab and try again.",
                 "Эта запись каталога больше не доступна. Обновите Lab и повторите попытку.");
-        table.put("This change couldn't be saved. Try again.",
-                "Не удалось сохранить это изменение. Повторите попытку.");
     }
 
     private static void fillRu27(Map<String, String> table) {
+        table.put("This change couldn't be saved. Try again.",
+                "Не удалось сохранить это изменение. Повторите попытку.");
         table.put("This configuration has no fields that can be copied and changed safely on this build.",
                 "В этой конфигурации нет полей, которые можно безопасно скопировать и изменить в этой сборке.");
         table.put("This file has more loaded values than the Lab takes at once.",
@@ -24789,11 +24803,11 @@ public final class L10nTranslations {
                 "Размер TikTok");
         table.put("TikTok's suggested reply cells and their intro banner stop showing in a chat. Messages you type or receive are untouched.",
                 "Предложенные ответы TikTok и баннер, который их представляет, больше не показываются в чате. Сообщения, которые вы пишете или получаете, не затрагиваются.");
-        table.put("Timed logging stopped",
-                "Запись по таймеру остановлена");
     }
 
     private static void fillRu28(Map<String, String> table) {
+        table.put("Timed logging stopped",
+                "Запись по таймеру остановлена");
         table.put("Times you can open the feed anyway",
                 "Сколько раз можно всё равно открыть ленту");
         table.put("Today can't start over while Wait a day to loosen the budget is on. The day starts over at %1$s.",
@@ -24912,11 +24926,11 @@ public final class L10nTranslations {
                 "Отмена не завершилась. Некоторые настройки могут остаться изменёнными.");
         table.put("Undo didn't finish. Some settings may still be changed. Try Undo again.",
                 "Отмена не завершилась. Некоторые настройки могут остаться изменёнными. Повторите отмену ещё раз.");
-        table.put("Undo forgetting saved videos",
-                "Отменить забывание сохранённых видео");
     }
 
     private static void fillRu29(Map<String, String> table) {
+        table.put("Undo forgetting saved videos",
+                "Отменить забывание сохранённых видео");
         table.put("Undo last Lab change",
                 "Отменить последнее изменение Lab");
         table.put("Undo last restore or reset",
@@ -25035,11 +25049,11 @@ public final class L10nTranslations {
                 "Ждём, пока приложение для файлов отпустит последний файл. Если этого не произойдёт, перезапустите TikTok.");
         table.put("Waiting to record. Go to the screen you want recorded.",
                 "Ожидание записи. Перейдите к экрану, который нужно записать.");
-        table.put("Waiting to save %1$s files",
-                "%1$s файлов ожидают сохранения");
     }
 
     private static void fillRu30(Map<String, String> table) {
+        table.put("Waiting to save %1$s files",
+                "%1$s файлов ожидают сохранения");
         table.put("Waiting to save %1$s files|few",
                 "%1$s файла ожидают сохранения");
         table.put("Waiting to save %1$s files|many",
@@ -25147,7 +25161,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildTr() {
-        Map<String, String> table = new HashMap<>(3422);
+        Map<String, String> table = new HashMap<>(3424);
         fillTr0(table);
         fillTr1(table);
         fillTr2(table);
@@ -27050,6 +27064,8 @@ public final class L10nTranslations {
                 "Normal");
         table.put("Not a handle or id, so ignored: %1$s",
                 "Hesap adı veya kimlik değil, bu yüzden yok sayıldı: %1$s");
+        table.put("Not a token for Hushfeed's downloader, kept as typed: %1$s",
+                "Hushfeed indiricisi için bir belirteç değil, yazıldığı gibi kalır: %1$s");
         table.put("Not a token here, kept as typed: %1$s",
                 "Burada bir belirteç değil, yazıldığı gibi kalır: %1$s");
         table.put("Not blocked",
@@ -27144,11 +27160,11 @@ public final class L10nTranslations {
                 "TikTok'u şu sayfada aç");
         table.put("Open a share sheet once, then return here to choose its actions.",
                 "Bir paylaşım menüsünü bir kez aç, sonra eylemlerini seçmek için buraya dön.");
-        table.put("Open comments",
-                "Yorumları aç");
     }
 
     private static void fillTr16(Map<String, String> table) {
+        table.put("Open comments",
+                "Yorumları aç");
         table.put("Open external links directly",
                 "Harici bağlantıları doğrudan aç");
         table.put("Open messages",
@@ -27267,11 +27283,11 @@ public final class L10nTranslations {
                 "Oynatma");
         table.put("Player",
                 "Oynatıcı");
-        table.put("Playlist posts",
-                "Oynatma listesi gönderileri");
     }
 
     private static void fillTr17(Map<String, String> table) {
+        table.put("Playlist posts",
+                "Oynatma listesi gönderileri");
         table.put("Popular",
                 "Popüler");
         table.put("Popups",
@@ -27390,11 +27406,11 @@ public final class L10nTranslations {
                 "Kaldır: %1$s");
         table.put("Remove all overrides",
                 "Tüm geçersiz kılmaları kaldır");
-        table.put("Remove feed ads",
-                "Akış reklamlarını kaldır");
     }
 
     private static void fillTr18(Map<String, String> table) {
+        table.put("Remove feed ads",
+                "Akış reklamlarını kaldır");
         table.put("Remove feed ads, creator commission posts, paid partnerships, and branded content.",
                 "Akış reklamlarını, içerik üreticisi komisyon gönderilerini, ücretli ortaklıkları ve markalı içerikleri kaldır.");
         table.put("Remove story rings",
@@ -27513,11 +27529,11 @@ public final class L10nTranslations {
                 "Uzun basınca profil fotoğrafını kaydet");
         table.put("Save a story on a long press",
                 "Uzun basınca hikayeyi kaydet");
-        table.put("Save again",
-                "Yeniden kaydet");
     }
 
     private static void fillTr19(Map<String, String> table) {
+        table.put("Save again",
+                "Yeniden kaydet");
         table.put("Save as video",
                 "Video olarak kaydet");
         table.put("Save build details",
@@ -27636,11 +27652,11 @@ public final class L10nTranslations {
                 "Ada, açıklamaya veya kategoriye göre ara.");
         table.put("Search countries or operators",
                 "Ülke veya operatör ara");
-        table.put("Search hidden creators",
-                "Gizlenen içerik üreticilerinde ara");
     }
 
     private static void fillTr20(Map<String, String> table) {
+        table.put("Search hidden creators",
+                "Gizlenen içerik üreticilerinde ara");
         table.put("Search settings",
                 "Ayarlarda ara");
         table.put("Search share actions",
@@ -27759,11 +27775,11 @@ public final class L10nTranslations {
                 "Hataları ekranda göster");
         table.put("Show follow status",
                 "Takip durumunu göster");
-        table.put("Show gates",
-                "Özellik kapılarını göster");
     }
 
     private static void fillTr21(Map<String, String> table) {
+        table.put("Show gates",
+                "Özellik kapılarını göster");
         table.put("Show last report",
                 "Son raporu göster");
         table.put("Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.",
@@ -27882,11 +27898,11 @@ public final class L10nTranslations {
                 "Tam ekranda videoda kal");
         table.put("Staying on a video",
                 "Videoda kalmak");
-        table.put("Sticker",
-                "Çıkartma");
     }
 
     private static void fillTr22(Map<String, String> table) {
+        table.put("Sticker",
+                "Çıkartma");
         table.put("Sticker destination",
                 "Çıkartma kayıt konumu");
         table.put("Sticker saved to %1$s",
@@ -28005,11 +28021,11 @@ public final class L10nTranslations {
                 "Yeniden yayınlamak için yeniden dokun");
         table.put("Tap the feed Follow button twice within %1$d seconds.",
                 "Akıştaki Takip et düğmesine %1$d saniye içinde iki kez dokun.");
-        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
-                "Beğeni kalbine %1$d saniye içinde iki kez dokun. Beğeniyi kaldırmak yine anında olur.");
     }
 
     private static void fillTr23(Map<String, String> table) {
+        table.put("Tap the like heart twice within %1$d seconds. Removing a like stays immediate.",
+                "Beğeni kalbine %1$d saniye içinde iki kez dokun. Beğeniyi kaldırmak yine anında olur.");
         table.put("Tap to start the feed",
                 "Akışı başlatmak için dokun");
         table.put("Tap, then go to the screen with what you want hidden. After %1$d seconds Hushfeed records how that screen is built, without any of its text, for the diagnostic report.",
@@ -28128,11 +28144,11 @@ public final class L10nTranslations {
                 "Seçtiğin indirme uygulaması yüklü değil. İndirmeler altındaki Bağlantıları başka bir uygulamaya gönder ayarını kontrol et.");
         table.put("The export wasn't saved. Export again when the file app is ready.",
                 "Dışa aktarım kaydedilmedi. Dosya uygulaması hazır olduğunda yeniden dışa aktar.");
-        table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
-                "Akış, bekletmeden önceki son kırk beş saniye boyunca kararır, böylece bekletmeye birden çarpmak yerine yavaşça varırsın. Bir süre bütçesi ve varılacak bir bekletme gerekir.");
     }
 
     private static void fillTr24(Map<String, String> table) {
+        table.put("The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.",
+                "Akış, bekletmeden önceki son kırk beş saniye boyunca kararır, böylece bekletmeye birden çarpmak yerine yavaşça varırsın. Bir süre bütçesi ve varılacak bir bekletme gerekir.");
         table.put("The feed doesn't end. This is a fine time to leave it.",
                 "Akışın sonu yok. Şimdi bırakmak için iyi bir an.");
         table.put("The feed is locked",
@@ -28251,11 +28267,11 @@ public final class L10nTranslations {
                 "Bu dosya Feature Gate Lab'den alınmış bir yüklenen değerler dışa aktarımı değil.");
         table.put("This gate type isn't supported.",
                 "Bu özellik kapısı türü desteklenmiyor.");
-        table.put("This is the video's own sound, so YouTube Music won't have it",
-                "Bu videonun kendi sesi, bu yüzden YouTube Music'te bulunmaz");
     }
 
     private static void fillTr25(Map<String, String> table) {
+        table.put("This is the video's own sound, so YouTube Music won't have it",
+                "Bu videonun kendi sesi, bu yüzden YouTube Music'te bulunmaz");
         table.put("This key isn't in Hushfeed's list, so its type can't be checked. Reset the override.",
                 "Bu anahtar Hushfeed listesinde yok, bu yüzden türü denetlenemiyor. Geçersiz kılmayı sıfırla.");
         table.put("This key touches account safety. Forcing it can change login, region, payment or security checks.",
@@ -28374,11 +28390,11 @@ public final class L10nTranslations {
                 "Bugün eski haline döndü");
         table.put("Today started over. Tap again to put the counts back.",
                 "Bugün baştan başladı. Sayıları geri koymak için yeniden dokun.");
-        table.put("Today starts again",
-                "Bugün yeniden başlıyor");
     }
 
     private static void fillTr26(Map<String, String> table) {
+        table.put("Today starts again",
+                "Bugün yeniden başlıyor");
         table.put("Today's budget is locked. The day starts over at %1$s.",
                 "Bugünün bütçesi kilitli. Gün %1$s saatinde baştan başlar.");
         table.put("Today's budget is locked. The feed opens again at %1$s. Messages, profiles and search still work.",
@@ -28497,11 +28513,11 @@ public final class L10nTranslations {
                 "Varsayılan bir oynatma hızı kullan");
         table.put("Use non-personalized search",
                 "Kişiselleştirilmemiş aramayı kullan");
-        table.put("Use screen lock",
-                "Ekran kilidini kullan");
     }
 
     private static void fillTr27(Map<String, String> table) {
+        table.put("Use screen lock",
+                "Ekran kilidini kullan");
         table.put("Use system font",
                 "Sistem yazı tipini kullan");
         table.put("Use the preset for the region TikTok reports for your account and its shop too. May affect search.",
@@ -28620,11 +28636,11 @@ public final class L10nTranslations {
                 "Tanılama günlüğü açıkken bir mesaj, Hushfeed'in hata veren bölümünün adını söyler. Kapalıyken hatalar yalnızca raporda kalır.");
         table.put("Who to message",
                 "Kime yazılsın");
-        table.put("Window width needed to enable the layout. Restart TikTok to apply this.",
-                "Düzeni etkinleştirmek için gereken pencere genişliği. Bunu uygulamak için TikTok'u yeniden başlat.");
     }
 
     private static void fillTr28(Map<String, String> table) {
+        table.put("Window width needed to enable the layout. Restart TikTok to apply this.",
+                "Düzeni etkinleştirmek için gereken pencere genişliği. Bunu uygulamak için TikTok'u yeniden başlat.");
         table.put("Word rules only, not every feed filter:",
                 "Yalnızca kelime kuralları, akıştaki her filtre değil:");
         table.put("Words, countries and languages",

@@ -36,13 +36,18 @@ public final class DownloadNamePreview {
     /** TikTok's own name for a save, which the preview can't know, so it stands in for it. */
     static final String TIKTOK_NAME = "tiktok_name";
 
-    private static final Pattern TOKEN = Pattern.compile("\\{[A-Za-z_]+\\}");
+    /** Anything in braces, so a typo like {video-id}, {video id} or {date2} is named too. */
+    private static final Pattern TOKEN = Pattern.compile("\\{[^{}]+\\}");
     /**
-     * Every token a downloader fills. One with nothing to fill it with still goes ("unknown" for
-     * a sticker's creator), so only a word outside this set is kept as typed. Set.of is API 30.
+     * Every token TikTok's downloader and the comment media saver fill. One with nothing to fill
+     * it with still goes ("unknown" for a sticker's creator), so only a word outside this set is
+     * kept as typed there. Set.of is API 30.
      */
     static final Set<String> TOKENS = new HashSet<>(Arrays.asList(
             "{creator}", "{date}", "{video_id}", "{media_id}", "{index}", "{original}"));
+    /** The ones Hushfeed's downloader fills. It has no TikTok name or media id, so it keeps those two as typed. */
+    static final Set<String> SOURCE_TOKENS = new HashSet<>(Arrays.asList(
+            "{creator}", "{date}", "{video_id}", "{index}"));
 
     private DownloadNamePreview() {
     }
@@ -76,12 +81,13 @@ public final class DownloadNamePreview {
                 lines.add(L10n.f("Sound: %1$s", AudioDownloads.audioPath(path) + "/" + stem + ".m4a"));
             }
             if (details) lines.add(L10n.f("Details: %1$s", path + "/" + stem + ".txt"));
+            // The made-up post has English captions only, which every language choice falls back to.
             if (subtitles) lines.add(L10n.f("Subtitles: %1$s", path + "/" + stem + ".en.srt"));
         }
         if (SettingsStatus.downloadEnabled) {
             lines.add(L10n.f("TikTok's downloader: %1$s", tiktokRoute(template, root, "mp4", now, 1)));
         }
-        return finish(lines, template);
+        return finish(lines, template, SettingsStatus.advancedDownloadsEnabled);
     }
 
     static String photo(String template, long now) {
@@ -96,7 +102,7 @@ public final class DownloadNamePreview {
         if (SettingsStatus.downloadEnabled) {
             lines.add(L10n.f("TikTok's downloader: %1$s", tiktokRoute(template, root, "jpg", now, 1)));
         }
-        return finish(lines, template);
+        return finish(lines, template, SettingsStatus.advancedDownloadsEnabled);
     }
 
     static String commentMedia(String template, long now) {
@@ -106,16 +112,22 @@ public final class DownloadNamePreview {
                 + DownloadFilenameFormatter.formatCommentMediaName(template, "png", MEDIA_ID, now)));
         lines.add(L10n.f("Live photo clips: %1$s", DownloadsPatch.getPhotoDownloadPath() + "/"
                 + DownloadFilenameFormatter.formatCommentMediaName(template, "mp4", MEDIA_ID + "-live", now)));
-        return finish(lines, template);
+        return finish(lines, template, false);
     }
 
-    /** Any {word} the route doesn't fill, which a save keeps exactly as typed. */
+    /**
+     * Anything in braces the route doesn't fill, which a save keeps exactly as typed. Braces
+     * around nothing but spaces aren't a try at a token.
+     */
     static List<String> unknownTokens(String template, Set<String> known) {
         Set<String> unknown = new LinkedHashSet<>();
         if (template == null) return new ArrayList<>(unknown);
         Matcher matcher = TOKEN.matcher(template);
         while (matcher.find()) {
-            if (!known.contains(matcher.group())) unknown.add(matcher.group());
+            String token = matcher.group();
+            if (!known.contains(token) && !token.substring(1, token.length() - 1).trim().isEmpty()) {
+                unknown.add(token);
+            }
         }
         return new ArrayList<>(unknown);
     }
@@ -139,10 +151,22 @@ public final class DownloadNamePreview {
         return dot > 0 ? name.substring(0, dot) : name;
     }
 
-    private static String finish(List<String> lines, String template) {
+    /**
+     * @param hushfeeds whether Hushfeed's downloader has a line, which keeps two more tokens as
+     *                  typed than the other routes do.
+     */
+    private static String finish(List<String> lines, String template, boolean hushfeeds) {
         List<String> unknown = unknownTokens(template, TOKENS);
         if (!unknown.isEmpty()) {
             lines.add(L10n.f("Not a token here, kept as typed: %1$s", String.join(", ", unknown)));
+        }
+        if (hushfeeds) {
+            List<String> onlyTikToks = unknownTokens(template, SOURCE_TOKENS);
+            onlyTikToks.removeAll(unknown);
+            if (!onlyTikToks.isEmpty()) {
+                lines.add(L10n.f("Not a token for Hushfeed's downloader, kept as typed: %1$s",
+                        String.join(", ", onlyTikToks)));
+            }
         }
         // On Android 10 and later the media store picks the number, below that the writer does.
         lines.add(L10n.t(Build.VERSION.SDK_INT >= 29
