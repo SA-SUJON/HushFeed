@@ -5,6 +5,7 @@
 package app.morphe.extension.tiktok.interaction;
 
 import android.media.AudioAttributes;
+import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
@@ -74,11 +75,15 @@ public final class Haptics {
      * <p>Android plays the long press buzz itself: once a long click listener answers true, the
      * view asks for LONG_PRESS straight away, in framework code no patch reaches. The listener is
      * wrapped instead, and while the switch is on the wrapper turns that view's haptics off for
-     * the moment after it answers, then back on with the next message. A view whose haptics were
-     * already off is left as it was. A null listener stays null, so clearing one still clears it.
+     * the moment after it answers, then back on at the front of the queue. A view whose haptics
+     * were already off is left as it was. A null listener stays null, so clearing one still clears
+     * it. Some of TikTok's views take the listener into a setter of their own and hand it on to
+     * another view's, and both setters come through here, so one that's already wrapped is passed
+     * on as it is.
      */
     public static void setOnLongClickListener(View view, View.OnLongClickListener listener) {
-        view.setOnLongClickListener(listener == null ? null : new QuietLongClick(listener));
+        view.setOnLongClickListener(listener == null || listener instanceof QuietLongClick
+                ? listener : new QuietLongClick(listener));
     }
 
     static final class QuietLongClick implements View.OnLongClickListener {
@@ -92,10 +97,22 @@ public final class Haptics {
             boolean handled = listener.onLongClick(view);
             if (handled && view.isHapticFeedbackEnabled() && holdsBack("long press")) {
                 view.setHapticFeedbackEnabled(false);
-                view.post(() -> view.setHapticFeedbackEnabled(true));
+                restoreFirst(view);
             }
             return handled;
         }
+    }
+
+    /**
+     * Turns the view's haptics back on ahead of anything TikTok queued from its own listener.
+     * Android plays its buzz before this runs, straight after the listener answers, and a view
+     * TikTok turned off from a message of its own stays off, since that message now runs after.
+     * Not attached yet, the view has no handler and its own queue runs the restore on attach.
+     */
+    private static void restoreFirst(View view) {
+        Runnable restore = () -> view.setHapticFeedbackEnabled(true);
+        Handler handler = view.getHandler();
+        if (handler == null || !handler.postAtFrontOfQueue(restore)) view.post(restore);
     }
 
     /** True when the switch holds back the haptic TikTok asked for. Never throws. */

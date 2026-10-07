@@ -6,6 +6,7 @@ package app.morphe.extension.tiktok.interaction;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -147,17 +148,59 @@ public class HapticsTest {
         assertEquals(25L, shadowOf(vibrator).getMilliseconds());
     }
 
+    /**
+     * A view that notes whether its haptics were on when Android asked it for the long press buzz.
+     * Robolectric's ShadowView answers performHapticFeedback(int) itself, records the constant and
+     * ignores the view's setting, so what it records can't show a buzz was skipped. What this
+     * shows is the setting Android's own check reads at that moment, on the call API 28's
+     * performLongClickInternal makes right after the listener answers.
+     */
+    private static final class WitnessView extends View {
+        int longPressAsks;
+        boolean enabledWhenAsked;
+
+        WitnessView(Context context) {
+            super(context);
+        }
+
+        @Override public boolean performHapticFeedback(int feedbackConstant) {
+            if (feedbackConstant == HapticFeedbackConstants.LONG_PRESS) {
+                longPressAsks++;
+                enabledWhenAsked = isHapticFeedbackEnabled();
+            }
+            return super.performHapticFeedback(feedbackConstant);
+        }
+    }
+
+    /** A view that keeps the long click listener it was handed. */
+    private static final class RecordingView extends View {
+        View.OnLongClickListener listener;
+
+        RecordingView(Context context) {
+            super(context);
+        }
+
+        @Override public void setOnLongClickListener(View.OnLongClickListener listener) {
+            this.listener = listener;
+            super.setOnLongClickListener(listener);
+        }
+    }
+
     /** A view in a real window, so a post reaches the main looper. */
     private interface WithView {
-        void run(View target);
+        void run(WitnessView target);
     }
 
     private static void inAWindow(WithView body) {
         try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
-            View target = new View(controller.get());
+            WitnessView target = new WitnessView(controller.get());
             controller.get().setContentView(target);
             body.run(target);
         }
+    }
+
+    private static void idle() {
+        shadowOf(Looper.getMainLooper()).idle();
     }
 
     @Test public void aLongPressIsQuietAndTheViewsHapticsComeBackAfter() {
@@ -169,10 +212,37 @@ public class HapticsTest {
             });
             assertTrue(target.performLongClick());
             assertEquals("TikTok's own listener still runs", 1, presses[0]);
+            assertEquals("Android asked for its long press buzz", 1, target.longPressAsks);
+            assertFalse("the view's haptics were on when Android asked", target.enabledWhenAsked);
             assertFalse("off for the buzz Android asks for right after", target.isHapticFeedbackEnabled());
-            shadowOf(Looper.getMainLooper()).idle();
+            idle();
             assertTrue("back on with the next message", target.isHapticFeedbackEnabled());
         });
+    }
+
+    @Test public void hapticsTikTokTurnsOffFromItsOwnListenerStayOff() {
+        inAWindow(target -> {
+            Haptics.setOnLongClickListener(target, v -> {
+                v.post(() -> v.setHapticFeedbackEnabled(false));
+                return true;
+            });
+            assertTrue(target.performLongClick());
+            idle();
+            assertFalse("the restore ran after TikTok's message and turned them back on",
+                    target.isHapticFeedbackEnabled());
+        });
+    }
+
+    @Test public void aListenerAlreadyWrappedIsHandedOnAsItIs() {
+        // A TikTok view that takes the listener into a setter of its own and hands it to
+        // another view's, where both setters are patched.
+        Context context = RuntimeEnvironment.getApplication();
+        RecordingView first = new RecordingView(context);
+        RecordingView second = new RecordingView(context);
+        Haptics.setOnLongClickListener(first, v -> true);
+        assertTrue(first.listener instanceof Haptics.QuietLongClick);
+        Haptics.setOnLongClickListener(second, first.listener);
+        assertSame("wrapped a second time", first.listener, second.listener);
     }
 
     @Test public void aLongPressNobodyHandledLeavesTheView() {
@@ -188,6 +258,8 @@ public class HapticsTest {
         inAWindow(target -> {
             Haptics.setOnLongClickListener(target, v -> true);
             assertTrue(target.performLongClick());
+            assertEquals(1, target.longPressAsks);
+            assertTrue("the buzz was asked for with haptics on", target.enabledWhenAsked);
             assertTrue(target.isHapticFeedbackEnabled());
         });
         Settings.TURN_OFF_HAPTICS.save(true);
@@ -204,7 +276,7 @@ public class HapticsTest {
             target.setHapticFeedbackEnabled(false);
             Haptics.setOnLongClickListener(target, v -> true);
             assertTrue(target.performLongClick());
-            shadowOf(Looper.getMainLooper()).idle();
+            idle();
             assertFalse(target.isHapticFeedbackEnabled());
         });
     }
