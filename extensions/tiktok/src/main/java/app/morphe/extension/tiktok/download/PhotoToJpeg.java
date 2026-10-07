@@ -120,11 +120,10 @@ final class PhotoToJpeg {
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         try {
             retriever.setDataSource(file.getPath());
-            long width = parseDimension(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_IMAGE_WIDTH));
-            long height = parseDimension(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_IMAGE_HEIGHT));
-            if (width <= 0 || height <= 0 || width * height > MAX_PIXELS) return null;
-            // An image sequence would lose every frame but the first, as with the decoder.
-            if (parseDimension(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_IMAGE_COUNT)) > 1) {
+            if (!oneStillImage(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_IMAGE_WIDTH),
+                    retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_IMAGE_HEIGHT),
+                    retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_IMAGE_COUNT),
+                    retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_HAS_VIDEO))) {
                 return null;
             }
             MediaMetadataRetriever.BitmapParams params = new MediaMetadataRetriever.BitmapParams();
@@ -140,6 +139,16 @@ final class PhotoToJpeg {
                 Logger.printInfo(() -> "Could not release the photo media extractor: " + error);
             }
         }
+    }
+
+    /** Whether the retriever's metadata describe one still image within the size limit. */
+    static boolean oneStillImage(String width, String height, String imageCount, String hasVideo) {
+        long wide = parseDimension(width);
+        long tall = parseDimension(height);
+        if (wide <= 0 || tall <= 0 || wide * tall > MAX_PIXELS) return false;
+        // An image sequence would lose every frame but the first, as with the decoder. An
+        // animated HEIF keeps its frames in a video track, not as extra images, so it says so there.
+        return parseDimension(imageCount) <= 1 && !"yes".equals(hasVideo);
     }
 
     private static long parseDimension(String value) {

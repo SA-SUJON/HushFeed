@@ -2,7 +2,9 @@ package app.morphe.extension.tiktok.download;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -146,6 +148,16 @@ public class PhotoToJpegTest {
     @Test
     public void theRealExtractorTurnsDownAFileItCantRead() throws IOException {
         assertEquals(null, PhotoToJpeg.readPrimaryImage(noise("extractor.tmp")));
+    }
+
+    @Test public void onlyOneStillImageGoesThroughTheExtractor() {
+        assertTrue(PhotoToJpeg.oneStillImage("1080", "1440", "1", null));
+        assertTrue(PhotoToJpeg.oneStillImage("1080", "1440", null, "no"));
+        // An animated HEIF: one image item, its frames in a video track.
+        assertFalse(PhotoToJpeg.oneStillImage("1080", "1440", "1", "yes"));
+        assertFalse(PhotoToJpeg.oneStillImage("1080", "1440", "3", null));
+        assertFalse(PhotoToJpeg.oneStillImage("10000", "10000", "1", null));
+        assertFalse(PhotoToJpeg.oneStillImage(null, "1440", "1", null));
     }
 
     @Test
