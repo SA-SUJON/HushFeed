@@ -262,6 +262,8 @@ public class CreatorExceptionsTest {
                         item -> item.promotionalMusic = true),
                 new Case("LiveReplayFilter", () -> Settings.HIDE_LIVE_REPLAYS.save(true),
                         item -> item.liveReplay = true),
+                new Case("OfflineVideoFilter", () -> Settings.HIDE_OFFLINE_VIDEOS.save(true),
+                        item -> item.cacheSourceType = FeedItemsFilter.CACHE_SOURCE_OFFLINE_MODE),
                 new Case("CaptionLanguageFilter", () -> Settings.CAPTION_LANGUAGES.save("en"),
                         item -> item.captionLanguage = "es"));
     }
@@ -278,7 +280,7 @@ public class CreatorExceptionsTest {
                 Settings.FILTER_LOCATION_VIDEOS, Settings.HIDE_AI_GENERATED, Settings.HIDE_VERIFIED,
                 Settings.HIDE_SERIES, Settings.HIDE_MINI_DRAMAS, Settings.HIDE_PLAYLIST_VIDEOS,
                 Settings.HIDE_INSERTED_CARDS, Settings.HIDE_SEEN_VIDEOS, Settings.HIDE_PROMOTIONAL_MUSIC,
-                Settings.HIDE_LIVE_REPLAYS, Settings.HIDE_UNPERSONALIZED_FOR_YOU,
+                Settings.HIDE_LIVE_REPLAYS, Settings.HIDE_UNPERSONALIZED_FOR_YOU, Settings.HIDE_OFFLINE_VIDEOS,
         };
     }
 

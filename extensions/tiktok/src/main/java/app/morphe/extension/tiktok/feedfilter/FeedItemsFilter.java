@@ -55,6 +55,7 @@ public final class FeedItemsFilter {
         new ContentMarkerFilters.PlaylistFilter(),
         new CardFilters.InsertedCardFilter(),
         new SeenVideoFilter(),
+        new OfflineVideoFilter(),
         new AdvancedFeedRules.KeywordFilter(),
         new AdvancedFeedRules.CreatorFilter(),
         new AdvancedFeedRules.PromotionalMusicFilter(),
@@ -88,7 +89,7 @@ public final class FeedItemsFilter {
     private static final int CACHE_SOURCE_COLD_CACHE = 0;
     private static final int CACHE_SOURCE_FEED_UNCONSUMED = 1;
     private static final int CACHE_SOURCE_GOLDEN_HOUSE = 2;
-    private static final int CACHE_SOURCE_OFFLINE_MODE = 3;
+    static final int CACHE_SOURCE_OFFLINE_MODE = 3;
     private static final int CACHE_SOURCE_MERGE_CACHE = 4;
 
     private static final int MAX_NULL_ITEMS_LOGS = 3;
@@ -919,8 +920,7 @@ public final class FeedItemsFilter {
                 if (kept != null) kept.add(container);
                 continue;
             }
-            if (cacheSourceType == CACHE_SOURCE_OFFLINE_MODE &&
-                    !Settings.FILTER_OFFLINE_FALLBACK_VIDEOS.get()) {
+            if (cacheSourceType == CACHE_SOURCE_OFFLINE_MODE && keepsOfflineVideos()) {
                 if (kept != null) kept.add(container);
                 continue;
             }
@@ -960,9 +960,28 @@ public final class FeedItemsFilter {
 
     public static FeedItemList filterOfflineFeedList(FeedItemList feedItemList) {
         if (feedItemList == null || feedItemList.items == null) return null;
+        if (Settings.HIDE_OFFLINE_VIDEOS.get()) {
+            // Every item here is an offline copy, whatever cache source it carries yet.
+            int dropped = feedItemList.items.size();
+            FeedFilterCounters.sawList(OFFLINE_FALLBACK_SOURCE, dropped);
+            FeedFilterCounters.removed(OFFLINE_FALLBACK_SOURCE, dropped, OFFLINE_REASON);
+            feedItemList.items = new ArrayList<>();
+            return null;
+        }
         if (!Settings.FILTER_OFFLINE_FALLBACK_VIDEOS.get()) return feedItemList;
-        filterCachedFeedItems("FeedItemList:offline-fallback", feedItemList);
+        filterCachedFeedItems(OFFLINE_FALLBACK_SOURCE, feedItemList);
         return feedItemList.items.isEmpty() ? null : feedItemList;
+    }
+
+    static final String OFFLINE_FALLBACK_SOURCE = "FeedItemList:offline-fallback";
+    static final String OFFLINE_REASON = "OfflineVideoFilter";
+
+    /**
+     * Whether an offline video skips the filters: the reader didn't ask for them to reach
+     * offline videos, and didn't ask for offline videos to go altogether.
+     */
+    private static boolean keepsOfflineVideos() {
+        return !Settings.FILTER_OFFLINE_FALLBACK_VIDEOS.get() && !Settings.HIDE_OFFLINE_VIDEOS.get();
     }
 
     /**
@@ -1012,8 +1031,7 @@ public final class FeedItemsFilter {
         if (item == null) return null;
 
         int cacheSourceType = AwemeBizExtKt.getCacheSourceType(item);
-        if (cacheSourceType == CACHE_SOURCE_OFFLINE_MODE &&
-                !Settings.FILTER_OFFLINE_FALLBACK_VIDEOS.get()) {
+        if (cacheSourceType == CACHE_SOURCE_OFFLINE_MODE && keepsOfflineVideos()) {
             return null;
         }
 

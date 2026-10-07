@@ -61,7 +61,8 @@ val feedFilterPatch = bytecodePatch(
         "creator posts TikTok runs as ads, TikTok " +
         "Shop items, livestreams, LIVE replays, stories, photo posts, paid partnerships, " +
         "AI-generated videos, location-tagged videos, verified accounts, series, mini dramas, playlists, " +
-        "the playlist bar, the floating event badge and inserted cards. Videos can also be " +
+        "the playlist bar, the floating event badge, inserted cards and the offline videos TikTok " +
+        "slips back into For You. Videos can also be " +
         "filtered by your own caption words, creator handles or patterns, sound names, length, " +
         "the country they were posted from, the language of their original caption and their " +
         "view, like, comment, favorite and share counts. For You can also drop the fill-in " +
@@ -71,7 +72,7 @@ val feedFilterPatch = bytecodePatch(
         "chosen accounts through the filters on the kind of post, its labels, age, length and " +
         "counts, and through the fill-in rule. Ads, blocked creators, words, sounds, countries " +
         "and caption languages, paid and " +
-        "Shop content, LIVE and seen videos still apply to them. " +
+        "Shop content, LIVE, seen videos and offline videos still apply to them. " +
         "Sponsored cards are dropped from the profile video viewer, the search grids " +
         "and the Friends tab as well as the feed, and so are the mid-roll ads TikTok splices " +
         "into a video pager after the list has loaded and the ads a creator's video pager asks " +

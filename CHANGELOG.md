@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Feed filter > Advanced has a new switch, Keep offline videos out of the feed, off by default. TikTok slips the videos it saved for offline viewing back into For You when it can't load enough new ones, and with the switch on they're all taken out, the whole offline fallback list included. Your offline list stays as it is, and Filter TikTok's offline videos greys out while the new switch is on.
+
 * **TikTok:** Long press has a new choice, Set a sleep timer that closes TikTok. The press opens a picker of 15, 30, 45, 60 or 90 minutes, and a toast says when TikTok will close. When the time runs out the video stops and TikTok closes the way a swipe away from Recents closes it, background play included. Pressing again while a timer runs offers to turn it off. If the phone slept through the end with nothing playing, TikTok stays open rather than closing on you the next morning.
 
 * **TikTok:** New patch, Stop recording watch history, with a Privacy switch that stays off until you turn it on. It holds back the view report TikTok sends for each video you watch, which is how videos get into Activity center > Watch history. Your views stop adding to view counts and For You has less to learn from, and TikTok still sees likes, follows, searches and its own usage logs. Videos already in Watch history stay.

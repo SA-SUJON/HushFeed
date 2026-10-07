@@ -1863,3 +1863,5 @@ Close TikTok after	Закрыть TikTok через
 Turn off the timer (TikTok closes at %1$s)	Выключить таймер (TikTok закроется в %1$s)
 TikTok closes at %1$s	TikTok закроется в %1$s
 Sleep timer off	Таймер сна выключен
+Keep offline videos out of the feed	Не показывать офлайн-видео в ленте
+TikTok slips the videos it saved for offline viewing back into For You when it can't load enough new ones. This takes them all out. Your offline list stays as it is.	Когда TikTok не может загрузить достаточно новых видео, он подмешивает в «Рекомендации» видео, сохранённые для офлайн-просмотра. Эта настройка убирает их все. Ваш офлайн-список остаётся как есть.

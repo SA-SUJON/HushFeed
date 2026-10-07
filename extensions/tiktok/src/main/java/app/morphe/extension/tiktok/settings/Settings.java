@@ -283,10 +283,13 @@ public class Settings extends BaseSettings {
     public static final StringSetting MIN_MAX_COMMENTS = new StringSetting("min_max_comments", "0-" + Long.MAX_VALUE, true);
     public static final StringSetting MIN_MAX_FAVOURITES = new StringSetting("min_max_favourites", "0-" + Long.MAX_VALUE, true);
     public static final StringSetting MIN_MAX_SHARES = new StringSetting("min_max_shares", "0-" + Long.MAX_VALUE, true);
+    public static final BooleanSetting HIDE_OFFLINE_VIDEOS = new BooleanSetting("hide_offline_videos", FALSE);
+    /** Moot while the switch above takes every offline video out. */
     public static final BooleanSetting FILTER_OFFLINE_FALLBACK_VIDEOS = new BooleanSetting(
             "filter_cached_offline_videos",
             TRUE,
-            true
+            true,
+            Setting.parentNot(HIDE_OFFLINE_VIDEOS)
     );
     public static final BooleanSetting FEED_NAVIGATION = new BooleanSetting("feed_navigation", FALSE, true);
     public static final StringSetting FEED_NAVIGATION_TABS = new StringSetting(

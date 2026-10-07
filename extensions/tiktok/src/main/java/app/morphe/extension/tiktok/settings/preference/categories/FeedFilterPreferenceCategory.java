@@ -340,6 +340,13 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         addPreference(new SectionHeadingPreference(context, "Advanced"));
         addPreference(new TogglePreference(
                 context,
+                "Keep offline videos out of the feed",
+                "TikTok slips the videos it saved for offline viewing back into For You when it can't load "
+                        + "enough new ones. This takes them all out. Your offline list stays as it is.",
+                Settings.HIDE_OFFLINE_VIDEOS
+        ));
+        addPreference(new TogglePreference(
+                context,
                 "Filter TikTok's offline videos",
                 "Also apply these filters to downloaded videos TikTok uses when the feed can't load enough new items.",
                 Settings.FILTER_OFFLINE_FALLBACK_VIDEOS

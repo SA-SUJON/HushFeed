@@ -1722,3 +1722,5 @@ Close TikTok after	TikTok'u şu süre sonra kapat
 Turn off the timer (TikTok closes at %1$s)	Zamanlayıcıyı kapat (TikTok'un kapanacağı saat: %1$s)
 TikTok closes at %1$s	TikTok'un kapanacağı saat: %1$s
 Sleep timer off	Uyku zamanlayıcısı kapalı
+Keep offline videos out of the feed	Çevrimdışı videoları akışın dışında tut
+TikTok slips the videos it saved for offline viewing back into For You when it can't load enough new ones. This takes them all out. Your offline list stays as it is.	TikTok yeterince yeni video yükleyemediğinde çevrimdışı izlemek için kaydettiği videoları Sana Özel'e geri katar. Bu, hepsini çıkarır. Çevrimdışı listen olduğu gibi kalır.
