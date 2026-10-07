@@ -263,13 +263,22 @@ public final class PausePlayback {
      * second registration would quieten the feed twice for one return.
      */
     public static void install(Activity activity) {
+        install(activity, null);
+    }
+
+    /**
+     * {@link #install(Activity)} with onCreate's saved state. Android hands one back when it
+     * builds TikTok's screen again after closing it in the background, as a reopen from Recents
+     * does, and the intent it comes with is still the launcher's from the first start.
+     */
+    public static void install(Activity activity, Bundle state) {
         try {
             if (installed || activity == null) return;
             Application application = activity.getApplication();
             if (application == null) return;
             installed = true;
             feedClass = activity.getClass();
-            firstStartPending = startedFromTheLauncher(activity.getIntent());
+            firstStartPending = state == null && startedFromTheLauncher(activity.getIntent());
             // Called from onCreate, ahead of this activity's own start, which adds it again.
             STARTED.add(activity);
             // The activity that shows the feed. These callbacks come for every activity in the
@@ -386,7 +395,9 @@ public final class PausePlayback {
      * A tap on TikTok's icon, as the launcher sends it, and nothing that came with a page to open.
      * Start page's check, which also turns away the push extras some notifications put on the
      * launcher's own intent. A reopen from Recents after Android closed TikTok carries that intent
-     * too, and plays: the reader was already watching.
+     * too, and plays: the reader was already watching. It's marked as launched from history only
+     * once TikTok's screen itself is gone, so the saved state {@link #install(Activity, Bundle)}
+     * gets covers the rest.
      */
     static boolean startedFromTheLauncher(Intent intent) {
         return StartPage.isLauncherStart(intent)

@@ -11,6 +11,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
@@ -539,6 +540,23 @@ public class PausePlaybackTest {
                         "com.ss.android.ugc.aweme.intent.extra.EXTRA_AWEME_PUSH_TAB", "inbox")));
         assertFalse("a reopen from Recents after Android closed TikTok",
                 PausePlayback.startedFromTheLauncher(launcher().addFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY)));
+    }
+
+    /**
+     * Android closed TikTok in the background and builds its screen again for a reopen from
+     * Recents: the intent is the launcher's from the first start, without the history flag, and
+     * the saved state is what says the reader was already watching.
+     */
+    @Test public void aScreenBuiltAgainFromSavedStateIsNotHeld() {
+        Settings.PAUSE_FIRST_VIDEO.save(true);
+        try (var feedOwner = Robolectric.buildActivity(HostActivity.class, launcher()).create(new Bundle())) {
+            Utils.setActivity(feedOwner.get());
+            PausePlayback.install(feedOwner.get(), new Bundle());
+            feedOwner.start().resume().visible();
+
+            assertFalse("a rebuilt screen was held as a start", PausePlayback.quietenedForTests());
+            assertNull(PausePlayback.catcherForTests());
+        }
     }
 
     @Test public void withTheFirstVideoSwitchOffAStartFromTheLauncherPlays() {

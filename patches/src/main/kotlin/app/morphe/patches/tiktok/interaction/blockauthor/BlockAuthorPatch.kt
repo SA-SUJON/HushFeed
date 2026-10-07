@@ -84,13 +84,15 @@ val blockAuthorPatch = bytecodePatch(
                 "Lapp/morphe/extension/tiktok/settings/SettingsStatus;->enableBlockAuthor()V",
         )
 
-        // The activity, so the pause switches can follow the app going away and coming back.
-        // p0 is the activity, and /range because a parameter register is usually above v15.
+        // The activity, so the pause switches can follow the app going away and coming back, and
+        // its saved state, which tells a screen Android built again from a first start. p0 is the
+        // activity and p1 onCreate's Bundle, and /range because a parameter register is usually
+        // above v15.
         MainActivityOnCreateFingerprint.method.addInstruction(
             0,
-            "invoke-static/range { p0 .. p0 }, " +
+            "invoke-static/range { p0 .. p1 }, " +
                 "Lapp/morphe/extension/tiktok/playback/PausePlayback;->" +
-                "install(Landroid/app/Activity;)V",
+                "install(Landroid/app/Activity;Landroid/os/Bundle;)V",
         )
 
         // TikTok's daily screen-time reminder coming up over the feed, for the switch that
