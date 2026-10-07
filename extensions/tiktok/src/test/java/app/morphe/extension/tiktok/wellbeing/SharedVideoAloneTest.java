@@ -133,6 +133,50 @@ public class SharedVideoAloneTest {
         }
     }
 
+    @Test public void onlyThePagerTheSharedVideoCameUpInIsHeld() {
+        // Another top tab, or the Friends tab, is a pager of its own. One that opens on a LIVE
+        // or a photo post plays no new video, so nothing would have ended the hold there.
+        Settings.SHARED_VIDEO_ALONE.save(true);
+        try (var main = Robolectric.buildActivity(MainActivity.class).setup().visible()) {
+            ReflectionHelpers.setStaticField(Utils.class, "resumedRef", new WeakReference<>(main.get()));
+            standOnTheFeed(main.get());
+            View forYou = pagerIn(main.get());
+            View following = pagerIn(main.get());
+            following.setVisibility(View.GONE);
+            layOut(main.get());
+            FeedLock.onNewIntent(link("https://www.tiktok.com/@a/video/1"));
+            report("linked");
+
+            // A tap on Following, which opens on something that isn't a video.
+            forYou.setVisibility(View.GONE);
+            following.setVisibility(View.VISIBLE);
+            assertTrue(FeedLock.linkVideoAlone());
+            assertFalse("another tab's feed couldn't swipe", FinishLastVideo.holdsSwipe(following));
+            // Back on For You, the shared video still plays alone.
+            forYou.setVisibility(View.VISIBLE);
+            assertTrue("the shared video's own feed swiped on", FinishLastVideo.holdsSwipe(forYou));
+        } finally {
+            ReflectionHelpers.setStaticField(Utils.class, "resumedRef", new WeakReference<Activity>(null));
+        }
+    }
+
+    @Test public void withNoPagerOnScreenWhenItCameUpTheFirstOneTouchedIsHeld() {
+        Settings.SHARED_VIDEO_ALONE.save(true);
+        try (var main = Robolectric.buildActivity(MainActivity.class).setup().visible()) {
+            ReflectionHelpers.setStaticField(Utils.class, "resumedRef", new WeakReference<>(main.get()));
+            standOnTheFeed(main.get());
+            FeedLock.onNewIntent(link("https://www.tiktok.com/@a/video/1"));
+            report("linked");
+            View forYou = pagerIn(main.get());
+            View other = pagerIn(main.get());
+            assertTrue(FinishLastVideo.holdsSwipe(forYou));
+            assertTrue("the held pager changed", FinishLastVideo.holdsSwipe(forYou));
+            assertFalse(FinishLastVideo.holdsSwipe(other));
+        } finally {
+            ReflectionHelpers.setStaticField(Utils.class, "resumedRef", new WeakReference<Activity>(null));
+        }
+    }
+
     @Test public void aWarmLinkWaitsForItsOwnVideo() {
         Settings.SHARED_VIDEO_ALONE.save(true);
         try (var main = Robolectric.buildActivity(MainActivity.class).setup().visible()) {
@@ -281,6 +325,15 @@ public class SharedVideoAloneTest {
     private static void seedHomeTab(View homeTab) {
         ReflectionHelpers.setStaticField(FeedVisibility.class, "homeTabReference",
                 new WeakReference<>(homeTab));
+    }
+
+    /** A layout pass, so the pagers have the size being on screen is judged by. */
+    private static void layOut(Activity activity) {
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+        View root = activity.getWindow().getDecorView();
+        root.measure(View.MeasureSpec.makeMeasureSpec(400, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(800, View.MeasureSpec.EXACTLY));
+        root.layout(0, 0, 400, 800);
     }
 
     private static View pagerIn(Activity activity) {

@@ -262,6 +262,17 @@ public final class AutoAdvance {
             // The settings page's canonical value is ready when its posted update runs.
             // Returning to the same value or changing another row preserves this session.
             refreshLimit();
+            // A shared video opened alone has no feed after it, so nothing moves on from it, and
+            // that takes in TikTok's own auto scroll too: started from the panel action, or by
+            // search on its own, it isn't Hushfeed's, and the pager's touch guard doesn't stop
+            // a move the app makes itself. Ownership is released, so the next look once another
+            // video plays starts it again. The switch and Pause Hushfeed are in linkVideoAlone.
+            if (FeedLock.linkVideoAlone()) {
+                Object now = state.read();
+                if (now instanceof Enum<?> && !named(now, "AUTO_SCROLL_STATE_STOP")) stop.run();
+                owned = false;
+                return;
+            }
             if (!Settings.AUTO_ADVANCE.get()) {
                 if (owned) { stop.run(); owned = false; }
                 return;
@@ -275,12 +286,6 @@ public final class AutoAdvance {
             // is released rather than only stopped, so the next call after the hold ends starts
             // it again from the video that is actually on screen.
             if (SessionBudget.isLocked()) {
-                if (owned) { stop.run(); owned = false; }
-                return;
-            }
-            // A shared video opened alone has no feed after it, so nothing moves on from it.
-            // Released the same way, so the next look once another video plays starts it again.
-            if (FeedLock.linkVideoAlone()) {
                 if (owned) { stop.run(); owned = false; }
                 return;
             }

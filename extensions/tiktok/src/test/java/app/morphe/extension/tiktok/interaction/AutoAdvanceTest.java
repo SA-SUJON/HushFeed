@@ -300,6 +300,52 @@ public class AutoAdvanceTest {
         }
     }
 
+    @Test public void tikToksOwnScrollStopsOnASharedVideoPlayingAloneToo() {
+        // Started from the panel action, or by search on its own: not Hushfeed's, and the
+        // pager's touch guard doesn't stop a move the app makes itself.
+        SettingsStatus.blockAuthorEnabled = true;
+        SettingsStatus.feedNavigationEnabled = true;
+        Settings.SHARED_VIDEO_ALONE.save(true);
+        try {
+            FeedView feed = new FeedView();
+            var control = new AutoAdvance.Control(feed.indicator);
+            var state = new AtomicReference<>(State.AUTO_SCROLL_STATE_START);
+            var stops = new AtomicInteger();
+            Runnable start = () -> fail("it started a scroll that was already running");
+            Runnable stop = () -> { stops.incrementAndGet(); state.set(State.AUTO_SCROLL_STATE_STOP); };
+            control.update(state::get, start, stop);
+            assertFalse(control.owned);
+            assertEquals("TikTok's own scroll was stopped with no shared video", 0, stops.get());
+
+            FeedLock.onNewIntent(new android.content.Intent(android.content.Intent.ACTION_VIEW,
+                    android.net.Uri.parse("https://www.tiktok.com/@a/video/1")));
+            playing("linked");
+            assertTrue(FeedLock.linkVideoAlone());
+            control.update(state::get, start, stop);
+            assertEquals("TikTok's own scroll moved on from a shared video", 1, stops.get());
+            control.update(state::get, start, stop);
+            assertEquals("a stopped scroll was stopped again", 1, stops.get());
+
+            // With Hushfeed's own Auto-advance off, TikTok's still doesn't move on from it.
+            Settings.AUTO_ADVANCE.save(false);
+            state.set(State.AUTO_SCROLL_STATE_PAUSE);
+            control.update(state::get, start, stop);
+            assertEquals(2, stops.get());
+
+            app.morphe.extension.shared.settings.PausedProcess.set(true);
+            state.set(State.AUTO_SCROLL_STATE_START);
+            control.update(state::get, start, stop);
+            assertEquals("paused, Hushfeed still stopped TikTok's scroll", 2, stops.get());
+        } finally {
+            app.morphe.extension.shared.settings.PausedProcess.set(false);
+            Settings.SHARED_VIDEO_ALONE.resetToDefault();
+            SettingsStatus.blockAuthorEnabled = false;
+            SettingsStatus.feedNavigationEnabled = false;
+            org.robolectric.util.ReflectionHelpers.callStaticMethod(FeedLock.class, "resetForTests");
+            org.robolectric.util.ReflectionHelpers.setStaticField(SessionPlaybackHold.class, "current", null);
+        }
+    }
+
     /** The player reporting the video it plays, the way it reaches the hold and the feed lock. */
     private static void playing(String awemeId) {
         SessionPlaybackHold.onPlayerProgress(new Object(), awemeId);

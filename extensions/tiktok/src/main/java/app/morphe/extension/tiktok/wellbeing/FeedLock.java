@@ -6,8 +6,11 @@ package app.morphe.extension.tiktok.wellbeing;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.SystemClock;
+import android.view.View;
+import android.view.ViewGroup;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
@@ -15,6 +18,7 @@ import app.morphe.extension.tiktok.blockauthor.FeedVisibility;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
 
+import java.lang.ref.WeakReference;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
@@ -41,7 +45,9 @@ import java.util.regex.Pattern;
  * the one playing ({@link #linkVideoAlone}), so there is no next video to fall into. Another
  * video coming up by any route ends it, and so does TikTok coming back after {@link
  * #AWAY_ENDS_ALONE_MS} or more away, when the reader is back for TikTok itself and the link's
- * video may still be sitting at the top of For You.
+ * video may still be sitting at the top of For You. Only the pager the video came up in is held:
+ * the other top tabs and the bottom Friends tab each have a pager of their own, and one of them
+ * where nothing new starts playing, like a LIVE or a photo post, would otherwise not swipe at all.
  */
 public final class FeedLock {
     /** How long a link entry waits for its video to come up before it is forgotten. */
@@ -60,6 +66,11 @@ public final class FeedLock {
     private static volatile boolean linkAlone;
     /** When TikTok last left the screen, or zero while it is on screen. */
     private static volatile long leftAt;
+    /** The main feed's pager that video came up in, the one whose swipe is held. */
+    private static volatile WeakReference<View> alonePager = new WeakReference<>(null);
+
+    private static final String MAIN_ACTIVITY = "com.ss.android.ugc.aweme.main.MainActivity";
+    private static final String PAGER = "com.ss.android.ugc.aweme.common.widget.VerticalViewPager";
 
     private static volatile Clock clock = SystemClock::elapsedRealtime;
 
@@ -120,6 +131,7 @@ public final class FeedLock {
         if (!isOn() && !alone) return;
         baseline = SessionPlaybackHold.currentAwemeId();
         permitted = null;
+        alonePager = new WeakReference<>(null);
         linkAlone = alone;
         // The link is what brought TikTok back, so the time it was away says nothing about it.
         leftAt = 0;
@@ -206,6 +218,8 @@ public final class FeedLock {
             } else if (!awemeId.equals(baseline)) {
                 permitted = awemeId;
                 linkPending = false;
+                alonePager = new WeakReference<>(null);
+                if (linkAlone) Utils.runOnMainThread(FeedLock::pinAlonePager);
                 // The panel may be up over the video the link is replacing.
                 Utils.runOnMainThread(SessionLockOverlay::sync);
                 return;
@@ -241,6 +255,45 @@ public final class FeedLock {
         return isOn() && activity != null && FeedVisibility.onFeedTab(activity);
     }
 
+    /**
+     * The link's video has just come up, so the pager on screen in the main activity is the one
+     * it plays in, and the one {@link #holdsAloneSwipe} holds.
+     */
+    static void pinAlonePager() {
+        if (!linkVideoAlone()) return;
+        Activity activity = Utils.getVisibleActivity();
+        if (activity == null || !MAIN_ACTIVITY.equals(activity.getClass().getName())) return;
+        View pager = onScreenPager(activity.findViewById(android.R.id.content));
+        if (pager != null) alonePager = new WeakReference<>(pager);
+    }
+
+    /**
+     * Whether a main feed pager holds its swipe for the shared video playing alone: the one it
+     * came up in. With none found then, the first one touched while it plays, which is the one
+     * it's on unless a tab was changed first.
+     */
+    static boolean holdsAloneSwipe(View pager) {
+        View pinned = alonePager.get();
+        if (pinned == null) {
+            alonePager = new WeakReference<>(pager);
+            return true;
+        }
+        return pinned == pager;
+    }
+
+    private static View onScreenPager(View view) {
+        if (view == null || !view.isShown() || !view.getGlobalVisibleRect(new Rect())) return null;
+        if (PAGER.equals(view.getClass().getName())) return view;
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+            for (int i = 0; i < group.getChildCount(); i++) {
+                View found = onScreenPager(group.getChildAt(i));
+                if (found != null) return found;
+            }
+        }
+        return null;
+    }
+
     static void resetForTests() {
         linkPending = false;
         linkAt = 0;
@@ -248,6 +301,7 @@ public final class FeedLock {
         permitted = null;
         linkAlone = false;
         leftAt = 0;
+        alonePager = new WeakReference<>(null);
         clock = SystemClock::elapsedRealtime;
     }
 
