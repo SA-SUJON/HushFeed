@@ -1928,3 +1928,12 @@ Turn off haptics	Отключить тактильную отдачу
 Stop the short vibrations TikTok plays on its own taps and gestures. Your keyboard and your phone's own haptics stay as they are.	Отключает короткие вибрации, которые TikTok воспроизводит при собственных нажатиях и жестах. Клавиатура и собственная тактильная отдача телефона остаются как есть.
 Turn off screen transitions	Отключить анимацию переходов
 Open and close TikTok's screens without their slide. Swipes inside a screen still follow your finger.	Экраны TikTok открываются и закрываются без анимации сдвига. Свайпы внутри экрана по-прежнему следуют за пальцем.
+Save the frame on screen as a photo	Сохранять кадр с экрана как фото
+There's no video on screen to save a frame from	На экране нет видео, из которого можно сохранить кадр
+Saving a frame from this video needs Android 7 or newer	Чтобы сохранить кадр из этого видео, нужен Android 7 или новее
+Allow storage for TikTok in Android settings to save frames	Разрешите TikTok доступ к хранилищу в настройках Android, чтобы сохранять кадры
+The frame couldn't be read. Try again.	Не удалось прочитать кадр. Повторите попытку.
+Saving the frame	Кадр сохраняется
+Frame saved to %1$s	Кадр сохранён в %1$s
+The frame couldn't be saved. Try again.	Не удалось сохранить кадр. Повторите попытку.
+Video frame	Кадр из видео

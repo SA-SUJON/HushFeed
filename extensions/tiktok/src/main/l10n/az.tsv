@@ -1763,3 +1763,12 @@ Turn off haptics	Haptik titrəməni söndürün
 Stop the short vibrations TikTok plays on its own taps and gestures. Your keyboard and your phone's own haptics stay as they are.	TikTok-un öz toxunuşlarında və jestlərində çaldığı qısa titrəmələri dayandırın. Klaviaturanız və telefonunuzun öz haptikası olduğu kimi qalır.
 Turn off screen transitions	Ekran keçidlərini söndürün
 Open and close TikTok's screens without their slide. Swipes inside a screen still follow your finger.	TikTok ekranlarını sürüşmə animasiyası olmadan açın və bağlayın. Ekran daxilində sürüşdürmələr yenə barmağınızı izləyir.
+Save the frame on screen as a photo	Ekrandakı kadrı foto kimi saxlayın
+There's no video on screen to save a frame from	Ekranda kadrı saxlanıla biləcək video yoxdur
+Saving a frame from this video needs Android 7 or newer	Bu videodan kadr saxlamaq üçün Android 7 və ya daha yenisi lazımdır
+Allow storage for TikTok in Android settings to save frames	Kadrları saxlamaq üçün Android ayarlarında TikTok üçün yaddaşa icazə verin
+The frame couldn't be read. Try again.	Kadr oxuna bilmədi. Yenidən cəhd edin.
+Saving the frame	Kadr saxlanılır
+Frame saved to %1$s	Kadr %1$s yerinə saxlanıldı
+The frame couldn't be saved. Try again.	Kadr saxlanıla bilmədi. Yenidən cəhd edin.
+Video frame	Video kadrı

@@ -206,9 +206,10 @@ public final class PictureInPicture {
 
     /**
      * The video on screen: the largest TextureView or SurfaceView showing, which is what TikTok's
-     * player draws into. Neighbouring cells sit off screen and show nothing.
+     * player draws into. Neighbouring cells sit off screen and show nothing. The frame a Long press
+     * saves is read from the same view.
      */
-    static View videoView(View root) {
+    public static View videoView(View root) {
         List<View> found = new ArrayList<>();
         collect(root, found);
         View best = null;

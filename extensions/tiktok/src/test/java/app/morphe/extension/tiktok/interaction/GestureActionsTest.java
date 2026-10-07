@@ -189,7 +189,7 @@ public class GestureActionsTest {
         }
     }
 
-    @Test public void longPressPatchHasEightReachableChoices() throws Exception {
+    @Test public void longPressPatchHasNineReachableChoices() throws Exception {
         try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
             var activity = controller.get();
             Utils.setContext(activity);
@@ -199,7 +199,8 @@ public class GestureActionsTest {
             ChoicePreference choice = (ChoicePreference) screen.findPreference("long_press_action");
             assertNotNull(choice);
             assertArrayEquals(new String[]{"default", "nothing", "comments", "original_sound",
-                    "copy_link", "copy_sound_link", "youtube_music", "sleep_timer"}, choice.getEntryValues());
+                    "copy_link", "copy_sound_link", "youtube_music", "sleep_timer", "save_frame"},
+                    choice.getEntryValues());
             assertEquals("every value needs a label to pick it by",
                     choice.getEntryValues().length, choice.getEntries().length);
             // The edge seek rides on the same patch, so its two controls come with it.
@@ -250,6 +251,32 @@ public class GestureActionsTest {
             Settings.DOUBLE_TAP_ACTION.resetToDefault();
             Settings.CUSTOM_SHARE_DOMAIN.resetToDefault();
             BaseSettings.SANITIZE_SHARING_LINKS.resetToDefault();
+        }
+    }
+
+    /**
+     * Save the frame is Hushfeed's press, so TikTok's hold doesn't start under it, and it goes to
+     * the frame saver, which says so when the screen holds no video to read.
+     */
+    @Test public void longPressSaveFrameTakesThePressAndSaysWhenThereIsNoVideo() {
+        try (var controller = Robolectric.buildActivity(android.app.Activity.class).setup().visible()) {
+            var activity = controller.get();
+            Utils.setContext(activity);
+            Utils.setActivity(activity);
+            activity.setContentView(new FrameLayout(activity));
+            Settings.EDGE_SEEK.save(false);
+            Settings.LONG_PRESS_ACTION.save("save_frame");
+            assertTrue(GestureActions.takesLongPress("save_frame"));
+            assertFalse("TikTok's own edge speedup stays off under it", GestureActions.allowNativeEdgeSpeedup(0));
+
+            ShadowToast.reset();
+            assertTrue(GestureActions.onLongPress(middleOf(activity)));
+            org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle();
+            assertEquals(L10n.t("There's no video on screen to save a frame from"),
+                    ShadowToast.getTextOfLatestToast());
+        } finally {
+            Settings.LONG_PRESS_ACTION.resetToDefault();
+            Settings.EDGE_SEEK.resetToDefault();
         }
     }
 

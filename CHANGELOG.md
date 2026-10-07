@@ -6,6 +6,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Two new patches, Turn off haptics and Turn off screen transitions. The first stops the short vibrations TikTok plays on its own taps and gestures, and your keyboard and your phone's own haptics stay. The second opens and closes TikTok's screens without their slide, while swipes inside a screen still follow your finger. Neither is in the default selection, and each switch starts on once you pick its patch, under Hushfeed settings > App > Appearance.
 
+* **TikTok:** Long press has a new choice, Save the frame on screen as a photo. The press saves the picture the video is showing as a JPEG in the Photo destination folder, DCIM/TikTok unless you've changed it. It's read from the video itself, at the video's own size, so the caption and the buttons drawn over it aren't in it. Pause first to pick an exact frame. The file takes the video's name plus where the frame came from, like `_frame_1m05s`.
+
 * **TikTok:** Custom offline videos limit now goes up to 10,000 videos (it stopped at 1,000), and the limit's row says about how much storage that many videos take. How many TikTok actually sends is still up to its servers.
 
 * **TikTok:** Feed filter > Advanced has a new switch, Keep offline videos out of the feed, off by default. TikTok slips the videos it saved for offline viewing back into For You when it can't load enough new ones, and with the switch on they're all taken out, the whole offline fallback list included. Your offline list stays as it is, and Filter TikTok's offline videos greys out while the new switch is on.

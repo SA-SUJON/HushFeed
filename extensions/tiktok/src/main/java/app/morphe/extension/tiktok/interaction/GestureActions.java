@@ -22,6 +22,7 @@ import app.morphe.extension.tiktok.blockauthor.CurrentVideoAuthor;
 import app.morphe.extension.tiktok.blockauthor.Reflect;
 import app.morphe.extension.tiktok.download.OriginalSoundDownloads;
 import app.morphe.extension.tiktok.download.ExternalDownloader;
+import app.morphe.extension.tiktok.download.FrameSaver;
 import app.morphe.extension.tiktok.share.ShareUrlSanitizer;
 import app.morphe.extension.tiktok.feedfilter.SoundIdentity;
 import app.morphe.extension.tiktok.settings.Settings;
@@ -101,7 +102,7 @@ public final class GestureActions {
         return "nothing".equals(action) || "comments".equals(action)
                 || "original_sound".equals(action) || "copy_link".equals(action)
                 || "copy_sound_link".equals(action) || "youtube_music".equals(action)
-                || "sleep_timer".equals(action);
+                || "sleep_timer".equals(action) || "save_frame".equals(action);
     }
 
     /**
@@ -206,6 +207,14 @@ public final class GestureActions {
         if ("sleep_timer".equals(action)) {
             // Posted, so the picker opens after the press is done with the touch.
             Utils.runOnMainThread(() -> SleepTimer.choose(Utils.getVisibleActivity()));
+            return true;
+        }
+        if ("save_frame".equals(action)) {
+            // Read on the press itself, so the frame saved is the one under the finger. The
+            // position only names the file, and only when the ticks are this video's.
+            Object aweme = onScreenAweme();
+            String videoId = Reflect.string(aweme, "getAid", "aid");
+            FrameSaver.save(Utils.getVisibleActivity(), aweme, FeedSeek.positionOf(videoId));
             return true;
         }
         if (!"comments".equals(action)) return false;

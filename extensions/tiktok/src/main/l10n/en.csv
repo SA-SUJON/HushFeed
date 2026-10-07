@@ -172,6 +172,7 @@ All events,All events
 All loaded tabs,All loaded tabs
 Allow Duet and Stitch anyway,Allow Duet and Stitch anyway
 Allow screenshots and Circle to Search,Allow screenshots and Circle to Search
+Allow storage for TikTok in Android settings to save frames,Allow storage for TikTok in Android settings to save frames
 Allow storage for TikTok in Android settings to save profile pictures,Allow storage for TikTok in Android settings to save profile pictures
 Allow storage for TikTok in Android settings to save sounds,Allow storage for TikTok in Android settings to save sounds
 Allow storage for TikTok in Android settings to save stories,Allow storage for TikTok in Android settings to save stories
@@ -545,6 +546,7 @@ Forget what has been counted today and end any hold. The budgets themselves are 
 Forgetting saved videos,Forgetting saved videos
 Forgotten. Tap to put them back.,Forgotten. Tap to put them back.
 Found %1$s in your chats.,Found %1$s in your chats.
+Frame saved to %1$s,Frame saved to %1$s
 Friends,Friends
 "From the next start TikTok runs as if it weren't patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are.","From the next start TikTok runs as if it weren't patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are."
 Full comment sort options,Full comment sort options
@@ -1182,6 +1184,7 @@ Save report,Save report
 Save seen history to a file,Save seen history to a file
 Save subtitles beside videos,Save subtitles beside videos
 "Save the caption, creator, link and publication date in a TXT file. On Android 10 and later, the pair uses Download or Documents under the same folder name. Applies to saves handled here.","Save the caption, creator, link and publication date in a TXT file. On Android 10 and later, the pair uses Download or Documents under the same folder name. Applies to saves handled here."
+Save the frame on screen as a photo,Save the frame on screen as a photo
 Save the latest available TikTok crash report for diagnostic export.,Save the latest available TikTok crash report for diagnostic export.
 Save the original sound,Save the original sound
 Save the sound as well,Save the sound as well
@@ -1212,9 +1215,11 @@ Saving,Saving
 Saving %1$s of %2$s,Saving %1$s of %2$s
 Saving %1$s of %2$s: %3$s,Saving %1$s of %2$s: %3$s
 Saving %1$s original photos,Saving %1$s original photos
+Saving a frame from this video needs Android 7 or newer,Saving a frame from this video needs Android 7 or newer
 Saving one original photo,Saving one original photo
 Saving seen history,Saving seen history
 Saving settings backup,Saving settings backup
+Saving the frame,Saving the frame
 Saving the live photo's clip,Saving the live photo's clip
 Saving the profile picture,Saving the profile picture
 Saving the sound,Saving the sound
@@ -1488,6 +1493,8 @@ The feed stops when this video ends.,The feed stops when this video ends.
 "The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.","The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away."
 "The file app still has the last file. Try again once it lets go, or restart TikTok.","The file app still has the last file. Try again once it lets go, or restart TikTok."
 The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.,The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.
+The frame couldn't be read. Try again.,The frame couldn't be read. Try again.
+The frame couldn't be saved. Try again.,The frame couldn't be saved. Try again.
 "The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night.","The hour both budgets reset, on a 24 hour clock. Four in the morning by default, because someone still scrolling at one is having last night."
 The last one is still waiting to start,The last one is still waiting to start
 The last report is still being saved,The last report is still being saved
@@ -1531,6 +1538,7 @@ There is no diagnostic data to clear,There is no diagnostic data to clear
 There is no diagnostic data to put back,There is no diagnostic data to put back
 There was nothing to put back,There was nothing to put back
 There were no saved videos to forget,There were no saved videos to forget
+There's no video on screen to save a frame from,There's no video on screen to save a frame from
 These loaded values are for a different TikTok version.,These loaded values are for a different TikTok version.
 These notes are in English.,These notes are in English.
 This catalog entry is no longer available. Refresh the Lab and try again.,This catalog entry is no longer available. Refresh the Lab and try again.
@@ -1690,6 +1698,7 @@ Video and details saved to %1$s,Video and details saved to %1$s
 Video destination,Video destination
 Video download quality,Video download quality
 Video filename,Video filename
+Video frame,Video frame
 Video info,Video info
 Video of photos,Video of photos
 Video playback quality,Video playback quality

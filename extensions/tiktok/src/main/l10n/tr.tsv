@@ -1763,3 +1763,12 @@ Turn off haptics	Dokunsal titreşimi kapat
 Stop the short vibrations TikTok plays on its own taps and gestures. Your keyboard and your phone's own haptics stay as they are.	TikTok'un kendi dokunuşlarında ve hareketlerinde çaldığı kısa titreşimleri durdurur. Klavyen ve telefonunun kendi dokunsal titreşimleri olduğu gibi kalır.
 Turn off screen transitions	Ekran geçişlerini kapat
 Open and close TikTok's screens without their slide. Swipes inside a screen still follow your finger.	TikTok ekranlarını kaydırma animasyonu olmadan açar ve kapatır. Bir ekranın içindeki kaydırmalar parmağını izlemeye devam eder.
+Save the frame on screen as a photo	Ekrandaki kareyi fotoğraf olarak kaydet
+There's no video on screen to save a frame from	Ekranda kare kaydedilecek bir video yok
+Saving a frame from this video needs Android 7 or newer	Bu videodan kare kaydetmek için Android 7 veya üstü gerekir
+Allow storage for TikTok in Android settings to save frames	Kareleri kaydetmek için Android ayarlarında TikTok'a depolama izni ver
+The frame couldn't be read. Try again.	Kare okunamadı. Yeniden dene.
+Saving the frame	Kare kaydediliyor
+Frame saved to %1$s	Kare şuraya kaydedildi: %1$s
+The frame couldn't be saved. Try again.	Kare kaydedilemedi. Yeniden dene.
+Video frame	Video karesi

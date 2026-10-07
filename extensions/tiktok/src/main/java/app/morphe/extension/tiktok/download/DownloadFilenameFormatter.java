@@ -270,6 +270,30 @@ public final class DownloadFilenameFormatter {
         return base + "_profile.jpg";
     }
 
+    /**
+     * A frame takes its video's own name and where in the video it was, so frames from one post
+     * sort together and beside the video itself: {@code <video name>_frame_1m05s.jpg}. A frame
+     * with no post to name it after (a LIVE, an ad) is named for when it was saved.
+     *
+     * @param positionMs where the video was, or a negative number when that isn't known
+     */
+    static String formatFrameName(Object aweme, long positionMs) {
+        String at = positionMs >= 0 ? "_" + frameTime(positionMs) : "";
+        if (aweme == null) {
+            return "frame_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US).format(new Date()) + at + ".jpg";
+        }
+        String video = stripExtension(formatSourceName(aweme, 1, "jpg", false));
+        String suffix = "frame" + at;
+        // Cut from the video's name, never from the suffix: the time is what tells frames apart.
+        return boundTemplatedName(sanitizeBaseName(video + "_" + suffix), MAX_BASENAME_LENGTH, suffix) + ".jpg";
+    }
+
+    /** A position as minutes and two-digit seconds, 65,400 ms as 1m05s. */
+    static String frameTime(long positionMs) {
+        long seconds = Math.max(0, positionMs) / 1000;
+        return (seconds / 60) + "m" + String.format(Locale.US, "%02d", seconds % 60) + "s";
+    }
+
     private static String formatSourceName(Object aweme, int index, String extension, boolean photo) {
         Object author = invoke(aweme, "getAuthor");
         String creator = firstNonBlank(invokeString(author, "getUniqueId"), invokeString(author, "getNickname"), "unknown");
