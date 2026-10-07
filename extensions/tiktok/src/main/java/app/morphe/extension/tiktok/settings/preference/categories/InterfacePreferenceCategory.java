@@ -243,6 +243,18 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     "Always show the publish date in video author information. Restart TikTok to apply this.",
                     Settings.ALWAYS_SHOW_PUBLISH_DATE
             ));
+            addPreference(new TogglePreference(
+                    context,
+                    "Show the time to the second",
+                    "Show when a video was posted down to the second, with your time zone, in place of TikTok's short date by the creator's name.",
+                    Settings.PUBLISH_DATE_EXACT_TIME
+            ));
+            addPreference(new TogglePreference(
+                    context,
+                    "Show dates on profile grids",
+                    "Show the day each video was posted under its view count on profile grids.",
+                    Settings.PUBLISH_DATE_ON_GRID
+            ));
         }
         if (SettingsStatus.authorRegionEnabled) {
             addPreference(new TogglePreference(

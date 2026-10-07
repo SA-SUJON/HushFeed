@@ -1308,6 +1308,7 @@ Show TikTok's own progress bar on videos where it's normally hidden.,Show TikTok
 Show a progress bar while a video saves.,Show a progress bar while a video saves.
 Show a video preview thumbnail while dragging the progress bar.,Show a video preview thumbnail while dragging the progress bar.
 "Show counts as full numbers, like 1,234,567 instead of 1.2M.","Show counts as full numbers, like 1,234,567 instead of 1.2M."
+Show dates on profile grids,Show dates on profile grids
 Show download progress,Show download progress
 Show engagement rate,Show engagement rate
 Show exact LIVE viewer counts,Show exact LIVE viewer counts
@@ -1332,6 +1333,7 @@ Show the block button on videos,Show the block button on videos
 Show the block sound button,Show the block sound button
 Show the country a video was posted from next to the creator's name.,Show the country a video was posted from next to the creator's name.
 Show the current spoken caption while the other controls are hidden.,Show the current spoken caption while the other controls are hidden.
+Show the day each video was posted under its view count on profile grids.,Show the day each video was posted under its view count on profile grids.
 Show the handle instead of the name,Show the handle instead of the name
 Show the hide button on videos,Show the hide button on videos
 Show the mute button on videos,Show the mute button on videos
@@ -1339,9 +1341,11 @@ Show the progress bar,Show the progress bar
 Show the progress bar thumbnail,Show the progress bar thumbnail
 "Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments.","Show the search entry inside TikTok's LIVE drawer, where available. This doesn't add a search box to video comments."
 Show the switch,Show the switch
+Show the time to the second,Show the time to the second
 Show the whole Activity and New followers lists instead of stopping at a View all button.,Show the whole Activity and New followers lists instead of stopping at a View all button.
 "Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off.","Show the whole video instead of cropping it to the window. Nothing changes on a tall phone, where it already fits. On a folding phone opened up, a squarer screen or a split view the sides or the ends stop being cut off."
 Show what is left of the budget,Show what is left of the budget
+"Show when a video was posted down to the second, with your time zone, in place of TikTok's short date by the creator's name.","Show when a video was posted down to the second, with your time zone, in place of TikTok's short date by the creator's name."
 Show when the camera or microphone is in use,Show when the camera or microphone is in use
 Show where a video was posted,Show where a video was posted
 Showing %1$s again,Showing %1$s again

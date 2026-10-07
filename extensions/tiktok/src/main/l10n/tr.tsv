@@ -1798,3 +1798,7 @@ Allow storage for TikTok in Android settings to save covers	Kapakları kaydetmek
 The cover couldn't be saved. Try again.	Kapak kaydedilemedi. Yeniden dene.
 Cover saved to %1$s	Kapak şuraya kaydedildi: %1$s
 Saving the cover	Kapak kaydediliyor
+Show the time to the second	Saati saniyesine kadar göster
+Show when a video was posted down to the second, with your time zone, in place of TikTok's short date by the creator's name.	Bir videonun ne zaman paylaşıldığını, içerik üreticisinin adının yanındaki TikTok'un kısa tarihi yerine saniyesine kadar ve saat diliminle göster.
+Show dates on profile grids	Profil ızgarasında tarihleri göster
+Show the day each video was posted under its view count on profile grids.	Profil ızgarasında her videonun paylaşıldığı günü görüntülenme sayısının altında göster.

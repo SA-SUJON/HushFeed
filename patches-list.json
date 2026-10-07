@@ -263,7 +263,7 @@
     },
     {
       "name": "Always show publish date",
-      "description": "Always shows the publish date in video author information. Switch: Hushfeed settings > Feed screen.",
+      "description": "Always shows the publish date in video author information, and can show it to the second or on profile grids. Switch: Hushfeed settings > Feed screen.",
       "category": "Feed",
       "use": true,
       "dependencies": [

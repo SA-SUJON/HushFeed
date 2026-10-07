@@ -19,8 +19,8 @@ import app.morphe.extension.tiktok.settings.SettingsStatus;
  * Show engagement rate: likes, comments, shares and saves together, as a share of the views,
  * worked out from the counts TikTok already sent with each video. Nothing is fetched.
  *
- * <p>The profile grid asks here after it formats a cell's view count, and the rate goes after
- * it ("12.3K · 4.2%"). The video on screen gets it on the creator's row, through
+ * <p>The profile grid asks here, through {@link ProfileGridCount}, after it formats a cell's view
+ * count, and the rate goes after it ("12.3K · 4.2%"). The video on screen gets it on the creator's row, through
  * {@link AuthorRegion}. A video with no views, or no counts at all, shows nothing, since any
  * number there would be made up.
  */
@@ -39,7 +39,7 @@ public final class EngagementRate {
     }
 
     /**
-     * Called by the profile grid's bind right after TikTok formats a cell's view count. Returns
+     * Called through {@link ProfileGridCount} right after TikTok formats a cell's view count. Returns
      * the text the cell shows: TikTok's own count, with the rate after it while the switch is on.
      */
     public static String gridCount(String count, Object item) {

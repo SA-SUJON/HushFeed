@@ -24,10 +24,10 @@ import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
-private const val EXTENSION = "Lapp/morphe/extension/tiktok/feed/EngagementRate;"
+private const val EXTENSION = "Lapp/morphe/extension/tiktok/feed/ProfileGridCount;"
 private const val AWEME = "Lcom/ss/android/ugc/aweme/feed/model/Aweme;"
 private const val STATISTICS = "Lcom/ss/android/ugc/aweme/feed/model/AwemeStatistics;"
-private const val WHAT = "Show engagement rate"
+private const val WHAT = "Profile grid count"
 
 /**
  * The bind of the profile grid's adapter, which a profile's Videos, Liked and other tabs list
@@ -124,24 +124,15 @@ internal fun Method.gridCountSite(): GridCountSite {
     return GridCountSite(insertAt, textRegister, itemRegister)
 }
 
-@Suppress("unused")
-val showEngagementRatePatch = bytecodePatch(
-    name = "Show engagement rate",
-    description = "Shows a video's engagement rate, its likes, comments, shares and saves as a share of its views, " +
-        "next to the creator's name and after the view count on profile grids. Switch: Hushfeed settings > Feed screen.",
-    default = false,
-) {
-    category("Feed")
-    // The author row install and the player's current video come with the row patch.
-    dependsOn(settingsPatch, sharedExtensionPatch, authorRowPatch)
-    compatibleWith(*AppCompatibilities.tiktok())
+/**
+ * Hands each profile grid cell's view count text and its Aweme to the extension. Show engagement
+ * rate and Always show publish date share it, so a build with both installs the hook once and
+ * each adds its part to the text: the rate after the count, the date on a line of its own.
+ */
+internal val profileGridCountPatch = bytecodePatch {
+    dependsOn(sharedExtensionPatch)
 
     execute {
-        SettingsStatusLoadFingerprint.method.addInstruction(
-            0,
-            "invoke-static {}, Lapp/morphe/extension/tiktok/settings/SettingsStatus;->enableEngagementRate()V",
-        )
-
         ProfileGridBindFingerprint.method.apply {
             if (AccessFlags.STATIC.isSet(accessFlags)) {
                 throw PatchException("$WHAT: the profile grid bind is static.")
@@ -150,10 +141,31 @@ val showEngagementRatePatch = bytecodePatch(
             addInstructions(
                 site.insertAt,
                 """
-                    invoke-static { v${site.textRegister}, v${site.itemRegister} }, $EXTENSION->gridCount(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/String;
+                    invoke-static { v${site.textRegister}, v${site.itemRegister} }, $EXTENSION->text(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/String;
                     move-result-object v${site.textRegister}
                 """,
             )
         }
+    }
+}
+
+@Suppress("unused")
+val showEngagementRatePatch = bytecodePatch(
+    name = "Show engagement rate",
+    description = "Shows a video's engagement rate, its likes, comments, shares and saves as a share of its views, " +
+        "next to the creator's name and after the view count on profile grids. Switch: Hushfeed settings > Feed screen.",
+    default = false,
+) {
+    category("Feed")
+    // The author row install and the player's current video come with the row patch, the grid
+    // cell's count with the grid patch.
+    dependsOn(settingsPatch, sharedExtensionPatch, authorRowPatch, profileGridCountPatch)
+    compatibleWith(*AppCompatibilities.tiktok())
+
+    execute {
+        SettingsStatusLoadFingerprint.method.addInstruction(
+            0,
+            "invoke-static {}, Lapp/morphe/extension/tiktok/settings/SettingsStatus;->enableEngagementRate()V",
+        )
     }
 }
