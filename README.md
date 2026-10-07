@@ -13,14 +13,14 @@
 
 Hushfeed is a [Morphe](https://github.com/MorpheApp/morphe-manager) patch bundle for people who want TikTok to behave differently. It can cut feed clutter, guard risky taps, improve downloads and expose controls TikTok leaves buried or unavailable. Every selected patch is configured from one native settings screen inside the app.
 
-**[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse the 124 source patches](#patches)
+**[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse the 125 source patches](#patches)
 
 > [!IMPORTANT]
 > Hushfeed targets the global TikTok package, `com.zhiliaoapp.musically`, versions [47.0.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-0-3-release/tiktok-47-0-3-3-android-apk-download/), [47.1.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-1-3-release/tiktok-47-1-3-android-apk-download/) and [47.1.4](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-1-4-release/tiktok-47-1-4-2-android-apk-download/). Use one of those exact APKs when patching. See [Supported target](#supported-target) for the verified build details.
 
 Hushfeed v0.68.0 contains 106 patches for TikTok 47.0.3, 47.1.3 and 47.1.4. New in this one: original photos save as full-size JPEGs, hiding the status bar takes TikTok's black strip with it, a switch clears the controls left on Clear display, and Back up, Restore and the Lab's file actions stop waiting on a stuck file app when you ask. It needs Morphe Manager 1.34.0 or newer.
 
-The main branch contains 124 patches, eighteen more than v0.68.0.
+The main branch contains 125 patches, nineteen more than v0.68.0.
 
 ## Pick what changes
 
@@ -136,6 +136,12 @@ That's TikTok. On TikTok 47.1.4 its own dark mode paints Profile and Inbox black
 ### Can I select every patch at once?
 
 Yes. Every release is patched with all of them selected before it ships, so no two refuse to go in together. The one thing to watch is memory: with AMOLED dark theme selected, raise the manager's limit as step 4 of [Install](#install) says. Hide Play Store update offer, Change app name and Custom launcher icon also decode resources, so raise the limit if one of them runs out of memory. Mixing Hushfeed with another TikTok bundle is a different question, and [Moving from Kveld](#moving-from-kveld) covers the overlap we know about.
+
+### A second TikTok beside the store app
+
+Morphe's own patch bundle has Clone app, which gives the patched TikTok a new package name so Android installs it next to the one from the store. Keep its Update permissions and Update providers options on, or Android refuses the install. Clone app alone isn't enough for TikTok, though. The copy reports its new name when it registers your phone, TikTok's servers don't give it a device ID, and logging in fails. Select Run beside the store app from Hushfeed as well and the copy registers under TikTok's own name. Change app name helps tell the two icons apart. Each app keeps its own data and its own login.
+
+Facebook sign-in checks the app's signing key, so it won't work in the copy, and Google sign-in hasn't been tried there yet. Log in to the copy with your email or phone number and a code.
 
 ### Unfollowing a lot of accounts at once
 
@@ -292,6 +298,7 @@ The eleven optional patches in the Performance group were measured on a Galaxy S
 | `Repost diagnostics` | With diagnostic logging on, records a repost request, TikTok's answer, and the next repost-list read without recording the video's ID or note. |
 | `Resource and battery governor` | Stops TikTok listening to the motion sensors it polls for device fingerprinting: the accelerometer, gyroscope, magnetometer, rotation, gravity and linear acceleration sensors. A second switch, off by default, keeps TikTok's phone benchmark from starting in a background process of its own. Switch: Hushfeed settings > Privacy. |
 | `Resume videos after scrolling` | Continues supported videos from where playback stopped when returning after a scroll. Switch: Hushfeed settings > Playback. |
+| `Run beside the store app` | Lets a TikTok copy renamed with Morphe's Clone app patch sign in while the store app stays installed. Select it together with Clone app. When the copy registers your phone with TikTok it gives TikTok's own package name, because TikTok's servers don't hand out a device ID for a name they don't know and signing in fails without one. A build that keeps TikTok's package name is left alone. Google and Facebook sign-in can't work in a renamed copy, so log in with your email or phone number. |
 | `Sanitize sharing links` | Removes tracking parameters from TikTok links before they are shared, and can put a host of your choosing in place of tiktok.com. Switch: Hushfeed settings > Privacy. |
 | `Settings` | Adds the Hushfeed settings screen to TikTok and keeps its entry first in Settings and privacy. |
 | `Share sheet tools` | Hides chosen people, share options or the whole Send to row of the share sheet, and a profile's or a LIVE's share sheet can hide a different set from a video's. Apps you pick can be added to the Share via row. Switch: Hushfeed settings > Share sheet. |
