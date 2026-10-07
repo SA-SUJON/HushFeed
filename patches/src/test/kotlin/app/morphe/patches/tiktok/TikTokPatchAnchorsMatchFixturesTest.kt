@@ -14,7 +14,15 @@ import app.morphe.patches.tiktok.feedfilter.goldenRunsTheColdStart
 import app.morphe.patches.tiktok.feedfilter.isCommentTopBarCanShow
 import app.morphe.patches.tiktok.feedfilter.isTakoSearchEntranceInflater
 import app.morphe.patches.tiktok.feedfilter.takoSearchEntranceVariants
+import app.morphe.patches.tiktok.interaction.copyids.BASE_SHARE_PACKAGE
+import app.morphe.patches.tiktok.interaction.copyids.BioBindFingerprint
+import app.morphe.patches.tiktok.interaction.copyids.SHARE_PANEL_MARKER
+import app.morphe.patches.tiktok.interaction.copyids.SIGNATURE_COMPONENT
+import app.morphe.patches.tiktok.interaction.copyids.bioTextField
+import app.morphe.patches.tiktok.interaction.copyids.sharePackageField
 import app.morphe.patches.tiktok.interaction.downloads.drawsCommentImageWatermark
+import app.morphe.patches.tiktok.interaction.sharesheet.ShareSnapshotFingerprint
+import app.morphe.patches.tiktok.interaction.sharesheet.resolveSharePanel
 import app.morphe.patches.tiktok.interaction.searchsuggestions.isSearchRewardsAccessor
 import app.morphe.patches.tiktok.interaction.speed.playerManagerSpeedBoundary
 import app.morphe.patches.tiktok.misc.settings.isSettingsComposeRowsMethod
@@ -766,6 +774,65 @@ class TikTokPatchAnchorsMatchFixturesTest {
             for ((type, names) in getters) {
                 val declared = classes.getValue(type).methods.filter { it.parameterTypes.isEmpty() }.map { it.name }.toSet()
                 assertEquals("$type: follow status getters", emptyList<String>(), names.filter { it !in declared })
+            }
+        }
+    }
+
+    /**
+     * Copy bio and IDs hooks the bio item's bind, the share model's constructor and the share
+     * sheet's action panel. The bio hook reads the item's one TuxTextView field, and the model hook
+     * the builder's one BaseSharePackage field. The extension then reads `user` off a profile's
+     * package and `aweme` off a video's, so those fields and the getters it calls are held too.
+     */
+    @Test
+    fun `copy bio and IDs hooks and the share package members they read resolve on every declared build`() {
+        val pkg = "Lcom/ss/android/ugc/aweme/share/improve/pkg/"
+        val user = "Lcom/ss/android/ugc/aweme/profile/model/User;"
+        val aweme = "Lcom/ss/android/ugc/aweme/feed/model/Aweme;"
+        Fixtures.forEachDeclared { apk ->
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            val classes = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
+                .associateBy { it.type }
+
+            val bio = classes.getValue(SIGNATURE_COMPONENT)
+            val bioBinds = bio.methods.filter { BioBindFingerprint.takes(it, bio) }
+            assertEquals("the bio bind", 1, bioBinds.size)
+            assertTrue("the bio bind has two free registers", bioBinds.single().implementation!!.registerCount - 3 >= 2)
+            assertTrue("the bio item's one text view", bio.bioTextField() != null)
+
+            val snapshots = classes.values.flatMap { classDef ->
+                classDef.methods.filter {
+                    it.name == "<init>" && it.parameterTypes.size == 1 && ShareSnapshotFingerprint.takes(it, classDef)
+                }
+            }
+            assertEquals("the share model constructor", 1, snapshots.size)
+            assertTrue("the share model has a free register", snapshots.single().implementation!!.registerCount - 2 >= 1)
+            val builder = classes.getValue(snapshots.single().parameterTypes.single().toString())
+            assertTrue("the share model builder's one package", builder.sharePackageField() != null)
+
+            val panel = resolveSharePanel(classes.values.filter { classDef ->
+                classDef.methods.any { method ->
+                    method.name == "onAttachedToWindow" && method.implementation?.instructions?.any {
+                        ((it as? ReferenceInstruction)?.reference as? StringReference)?.string == SHARE_PANEL_MARKER
+                    } == true
+                }
+            })
+            assertEquals("the action panel", "onAttachedToWindow", panel.name)
+
+            assertEquals("a share package's kind", 1, classes.getValue(BASE_SHARE_PACKAGE).fields.count {
+                it.name == "itemType" && it.type == "Ljava/lang/String;"
+            })
+            assertEquals("a profile's share package holds its account", 1, classes.getValue("${pkg}UserSharePackage;").fields.count {
+                it.name == "user" && it.type == user
+            })
+            assertEquals("a video's share package holds its video", 1, classes.getValue("${pkg}AwemeSharePackage;").fields.count {
+                it.name == "aweme" && it.type == aweme
+            })
+            for ((type, getter) in listOf(user to "getUniqueId", user to "getUid", aweme to "getAid")) {
+                assertTrue("$type->$getter()", classes.getValue(type).methods.any {
+                    it.name == getter && it.parameterTypes.isEmpty() && it.returnType == "Ljava/lang/String;"
+                })
             }
         }
     }

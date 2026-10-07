@@ -1560,3 +1560,12 @@ Show follow status	Mostrar el estado de seguimiento
 Under the @username on a profile, say whether it follows you or doesn't follow you back. Follower and following lists mark the accounts you follow that don't follow you back.	Bajo el @usuario de un perfil, indicar si te sigue o no te sigue de vuelta. Las listas de seguidores y seguidos marcan las cuentas que sigues que no te siguen de vuelta.
 Follows you	Te sigue
 Doesn't follow you back	No te sigue de vuelta
+Copy bio and IDs	Copiar biografía e ID
+Long-press a bio to copy it. A profile's share sheet gets buttons that copy its username and user ID, and a video's share sheet one that copies the video ID.	Mantén pulsada una biografía para copiarla. El menú de compartir de un perfil recibe botones que copian su nombre de usuario y su ID de usuario, y el de un video uno que copia el ID del video.
+Bio copied	Biografía copiada
+Username copied	Nombre de usuario copiado
+User ID copied	ID de usuario copiado
+Video ID copied	ID del video copiado
+Copy username	Copiar nombre de usuario
+Copy user ID	Copiar ID de usuario
+Copy video ID	Copiar ID del video

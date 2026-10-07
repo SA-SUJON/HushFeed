@@ -1555,3 +1555,12 @@ Show follow status,Tampilkan status mengikuti
 "Under the @username on a profile, say whether it follows you or doesn't follow you back. Follower and following lists mark the accounts you follow that don't follow you back.","Di bawah @nama pengguna pada profil, tampilkan apakah akun itu mengikuti Anda atau tidak mengikuti balik. Daftar pengikut dan yang diikuti menandai akun yang Anda ikuti tetapi tidak mengikuti balik."
 Follows you,Mengikuti Anda
 Doesn't follow you back,Tidak mengikuti balik
+Copy bio and IDs,Salin bio dan ID
+"Long-press a bio to copy it. A profile's share sheet gets buttons that copy its username and user ID, and a video's share sheet one that copies the video ID.","Tekan lama bio untuk menyalinnya. Lembar bagikan profil mendapat tombol untuk menyalin nama pengguna dan ID penggunanya, dan lembar bagikan video mendapat tombol untuk menyalin ID video."
+Bio copied,Bio disalin
+Username copied,Nama pengguna disalin
+User ID copied,ID pengguna disalin
+Video ID copied,ID video disalin
+Copy username,Salin nama pengguna
+Copy user ID,Salin ID pengguna
+Copy video ID,Salin ID video

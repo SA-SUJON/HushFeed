@@ -1560,3 +1560,12 @@ Show follow status	İzləmə vəziyyətini göstər
 Under the @username on a profile, say whether it follows you or doesn't follow you back. Follower and following lists mark the accounts you follow that don't follow you back.	Profildə @istifadəçi adının altında onun sizi izləyib-izləmədiyini göstərin. İzləyici və izlənilən siyahıları sizi geri izləməyən, sizin izlədiyiniz hesabları qeyd edir.
 Follows you	Sizi izləyir
 Doesn't follow you back	Sizi geri izləmir
+Copy bio and IDs	Bio və ID-ləri kopyala
+Long-press a bio to copy it. A profile's share sheet gets buttons that copy its username and user ID, and a video's share sheet one that copies the video ID.	Bionu kopyalamaq üçün ona uzun basın. Profilin paylaşma panelinə istifadəçi adını və istifadəçi ID-sini kopyalayan düymələr, videonun paylaşma panelinə isə video ID-sini kopyalayan düymə əlavə olunur.
+Bio copied	Bio kopyalandı
+Username copied	İstifadəçi adı kopyalandı
+User ID copied	İstifadəçi ID-si kopyalandı
+Video ID copied	Video ID-si kopyalandı
+Copy username	İstifadəçi adını kopyala
+Copy user ID	İstifadəçi ID-sini kopyala
+Copy video ID	Video ID-sini kopyala

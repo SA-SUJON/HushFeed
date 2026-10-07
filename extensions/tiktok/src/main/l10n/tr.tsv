@@ -1560,3 +1560,12 @@ Show follow status	Takip durumunu göster
 Under the @username on a profile, say whether it follows you or doesn't follow you back. Follower and following lists mark the accounts you follow that don't follow you back.	Bir profilde @kullanıcı adının altında seni takip edip etmediğini ya da geri takip etmediğini göster. Takipçi ve takip edilen listeleri, takip ettiğin ama seni geri takip etmeyen hesapları işaretler.
 Follows you	Seni takip ediyor
 Doesn't follow you back	Seni geri takip etmiyor
+Copy bio and IDs	Biyografiyi ve kimlikleri kopyala
+Long-press a bio to copy it. A profile's share sheet gets buttons that copy its username and user ID, and a video's share sheet one that copies the video ID.	Bir biyografiyi kopyalamak için üzerine uzun bas. Bir profilin paylaşım sayfasına kullanıcı adını ve kullanıcı kimliğini kopyalayan düğmeler, bir videonunkine de video kimliğini kopyalayan bir düğme eklenir.
+Bio copied	Biyografi kopyalandı
+Username copied	Kullanıcı adı kopyalandı
+User ID copied	Kullanıcı kimliği kopyalandı
+Video ID copied	Video kimliği kopyalandı
+Copy username	Kullanıcı adını kopyala
+Copy user ID	Kullanıcı kimliğini kopyala
+Copy video ID	Video kimliğini kopyala

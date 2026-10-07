@@ -48,6 +48,7 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                 || SettingsStatus.promotionalBannersEnabled
                 || SettingsStatus.profileShortcutsEnabled
                 || SettingsStatus.followStatusEnabled
+                || SettingsStatus.copyIdsEnabled
                 || SettingsStatus.refreshRateEnabled
                 || SettingsStatus.launcherShortcutsEnabled
                 || SettingsStatus.screenCaptureEnabled
@@ -116,7 +117,8 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
             ));
         }
         if (SettingsStatus.keepFavoritesTabEnabled || SettingsStatus.promotionalBannersEnabled
-                || SettingsStatus.profileShortcutsEnabled || SettingsStatus.followStatusEnabled) {
+                || SettingsStatus.profileShortcutsEnabled || SettingsStatus.followStatusEnabled
+                || SettingsStatus.copyIdsEnabled) {
             addPreference(new SectionHeadingPreference(context, "Profile"));
         }
         if (SettingsStatus.keepFavoritesTabEnabled) {
@@ -135,6 +137,15 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                             + "you back. Follower and following lists mark the accounts you follow "
                             + "that don't follow you back.",
                     Settings.SHOW_FOLLOW_STATUS
+            ));
+        }
+        if (SettingsStatus.copyIdsEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Copy bio and IDs",
+                    "Long-press a bio to copy it. A profile's share sheet gets buttons that copy its "
+                            + "username and user ID, and a video's share sheet one that copies the video ID.",
+                    Settings.COPY_IDS
             ));
         }
         if (SettingsStatus.promotionalBannersEnabled) {

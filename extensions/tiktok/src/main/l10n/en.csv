@@ -197,6 +197,7 @@ Avatar and follow button,Avatar and follow button
 Back,Back
 Back up settings,Back up settings
 Backup and restore,Backup and restore
+Bio copied,Bio copied
 Black,Black
 Block clipboard reads,Block clipboard reads
 Block contact list access,Block contact list access
@@ -305,6 +306,7 @@ Confirm before liking a story,Confirm before liking a story
 Continue supported videos from where you stopped when you scroll back to them.,Continue supported videos from where you stopped when you scroll back to them.
 Controls,Controls
 Copy a quick report or save the full report as a file.,Copy a quick report or save the full report as a file.
+Copy bio and IDs,Copy bio and IDs
 Copy build details,Copy build details
 Copy comments without username,Copy comments without username
 Copy only the comment text when using TikTok's copy comment action.,Copy only the comment text when using TikTok's copy comment action.
@@ -313,6 +315,9 @@ Copy quick report,Copy quick report
 Copy report,Copy report
 Copy the sound link,Copy the sound link
 Copy the video link,Copy the video link
+Copy user ID,Copy user ID
+Copy username,Copy username
+Copy video ID,Copy video ID
 Couldn't add the older seen videos. Try again.,Couldn't add the older seen videos. Try again.
 Couldn't change the Lab settings. Try again.,Couldn't change the Lab settings. Try again.
 Couldn't clear seen videos. Try again.,Couldn't clear seen videos. Try again.
@@ -756,6 +761,7 @@ Log diagnostics,Log diagnostics
 "Logging, hook status and reports","Logging, hook status and reports"
 Long press,Long press
 Long-press Home for Hushfeed settings,Long-press Home for Hushfeed settings
+"Long-press a bio to copy it. A profile's share sheet gets buttons that copy its username and user ID, and a video's share sheet one that copies the video ID.","Long-press a bio to copy it. A profile's share sheet gets buttons that copy its username and user ID, and a video's share sheet one that copies the video ID."
 Long-press menu on every post,Long-press menu on every post
 Look like the store app to TikTok's checks,Look like the store app to TikTok's checks
 Looking for apps,Looking for apps
@@ -1482,6 +1488,8 @@ Use the preset for the region TikTok reports for your account and its shop too. 
 "Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.","Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone."
 Use value,Use value
 Use your own offline videos limit,Use your own offline videos limit
+User ID copied,User ID copied
+Username copied,Username copied
 Using TikTok's value,Using TikTok's value
 Value,Value
 Value to return,Value to return
@@ -1491,6 +1499,7 @@ Version %1$s,Version %1$s
 Version %1$s for TikTok %2$s,Version %1$s for TikTok %2$s
 Video,Video
 Video (MP4),Video (MP4)
+Video ID copied,Video ID copied
 Video and details saved to %1$s,Video and details saved to %1$s
 Video destination,Video destination
 Video download quality,Video download quality

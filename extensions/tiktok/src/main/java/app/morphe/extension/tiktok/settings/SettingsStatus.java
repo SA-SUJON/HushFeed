@@ -111,6 +111,7 @@ public class SettingsStatus {
     public static boolean lengthLimitsEnabled = false;
     public static boolean keepFavoritesTabEnabled = false;
     public static boolean followStatusEnabled = false;
+    public static boolean copyIdsEnabled = false;
     public static boolean hideFeedLiveButtonEnabled = false;
     public static boolean hideFeedSearchButtonEnabled = false;
     public static boolean showSeekbarEnabled = false;
@@ -382,6 +383,10 @@ public class SettingsStatus {
 
     public static void enableFollowStatus() {
         followStatusEnabled = true;
+    }
+
+    public static void enableCopyIds() {
+        copyIdsEnabled = true;
     }
 
     public static void enableHideFeedLiveButton() {

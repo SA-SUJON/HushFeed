@@ -1698,3 +1698,12 @@ Show follow status	Показывать статус подписки
 Under the @username on a profile, say whether it follows you or doesn't follow you back. Follower and following lists mark the accounts you follow that don't follow you back.	Под @именем пользователя в профиле показывать, подписан ли он на вас или не подписан в ответ. В списках подписчиков и подписок отмечаются аккаунты, на которые вы подписаны, но которые не подписаны на вас.
 Follows you	Подписан на вас
 Doesn't follow you back	Не подписан в ответ
+Copy bio and IDs	Копировать био и ID
+Long-press a bio to copy it. A profile's share sheet gets buttons that copy its username and user ID, and a video's share sheet one that copies the video ID.	Нажмите и удерживайте био, чтобы скопировать его. В меню «Поделиться» профиля появляются кнопки для копирования имени пользователя и ID пользователя, а в меню видео кнопка для копирования ID видео.
+Bio copied	Био скопировано
+Username copied	Имя пользователя скопировано
+User ID copied	ID пользователя скопирован
+Video ID copied	ID видео скопирован
+Copy username	Копировать имя пользователя
+Copy user ID	Копировать ID пользователя
+Copy video ID	Копировать ID видео
