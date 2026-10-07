@@ -364,11 +364,13 @@ public class InputCheckTest {
 
     /** The preview line under the field, found by its heading. */
     private static String previewIn(android.view.View view) {
-        if (view instanceof android.widget.TextView text && !(view instanceof android.widget.EditText)
-                && text.getText().toString().startsWith("Preview with a made-up post:")) {
+        if (view instanceof android.widget.TextView && !(view instanceof android.widget.EditText)
+                && ((android.widget.TextView) view).getText().toString().startsWith("Preview with a made-up post:")) {
+            android.widget.TextView text = (android.widget.TextView) view;
             return text.getVisibility() == android.view.View.VISIBLE ? text.getText().toString() : null;
         }
-        if (view instanceof android.view.ViewGroup group) {
+        if (view instanceof android.view.ViewGroup) {
+            android.view.ViewGroup group = (android.view.ViewGroup) view;
             for (int index = 0; index < group.getChildCount(); index++) {
                 String found = previewIn(group.getChildAt(index));
                 if (found != null) return found;

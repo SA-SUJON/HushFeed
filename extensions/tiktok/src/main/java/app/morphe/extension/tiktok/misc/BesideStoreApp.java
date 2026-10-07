@@ -53,9 +53,10 @@ public final class BesideStoreApp {
     /** What goes into the header for {@code key}: the store package for a renamed copy's own name. */
     @Nullable
     static Object reported(@Nullable String key, @Nullable Object value) {
-        if (!PACKAGE_KEY.equals(key) || !(value instanceof String running) || !renamed(running)) return value;
+        if (!PACKAGE_KEY.equals(key) || !(value instanceof String) || !renamed((String) value)) return value;
         if (!logged) {
             logged = true;
+            String running = (String) value;
             Logger.printInfo(() -> "Beside the store app: registering " + running + " as " + STORE_PACKAGE);
         }
         return STORE_PACKAGE;
