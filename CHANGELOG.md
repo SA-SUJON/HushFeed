@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Automatic video advance has a new switch under Playback, Auto-advance in search results, off by default. It answers yes to TikTok's own search auto scroll flag, which search results read instead of the For You one, so videos opened from search can move on at the end too. Restart TikTok after turning it on.
+
 * **TikTok:** Block popups has two new switches under Feed screen > Popups, both off by default. Hide the two-step verification suggestion stops the sheet that suggests turning it on, and Hide the LIVE bubble stops the bubble TikTok floats at the top of the feed to point you to a LIVE. Neither one ever reached the checklist, so ticking couldn't stop them before.
 
 * **TikTok:** Two new patches, Turn off haptics and Turn off screen transitions. The first stops the short vibrations TikTok plays on its own taps and gestures, and your keyboard and your phone's own haptics stay. The second opens and closes TikTok's screens without their slide, while swipes inside a screen still follow your finger. Neither is in the default selection, and each switch starts on once you pick its patch, under Hushfeed settings > App > Appearance.

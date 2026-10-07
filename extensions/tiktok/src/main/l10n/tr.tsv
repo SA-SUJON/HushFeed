@@ -1776,3 +1776,5 @@ Hide the two-step verification suggestion	İki adımlı doğrulama önerisini gi
 Stop the sheet suggesting you turn on two-step verification. Sign-in checks and codes still show.	İki adımlı doğrulamayı açmanı öneren paneli durdurur. Giriş kontrolleri ve kodlar görünmeye devam eder.
 Hide the LIVE bubble	LIVE balonunu gizle
 Stop the bubble TikTok floats at the top of the feed to point you to a LIVE.	TikTok'un seni bir LIVE'a yönlendirmek için akışın üstünde gösterdiği balonu durdurur.
+Auto-advance in search results	Arama sonuçlarında otomatik geçiş
+Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.	Aramadan açılan videolar için TikTok'un kendi otomatik kaydırmasını da açar. Uygulamak için TikTok'u yeniden başlat.

@@ -59,6 +59,21 @@ public final class AutoAdvance {
     }
 
     /**
+     * TikTok's search_auto_scroll flag, read where search decides whether its results feed gets
+     * auto scroll and which state that starts in. The feed runs the same component as For You, so
+     * once the flag lets it exist the hooks below start and stop it like any other. With either
+     * switch off, or Hushfeed paused, the server's answer goes through unchanged.
+     */
+    public static int searchFlag(int nativeValue) {
+        try {
+            return Settings.AUTO_ADVANCE.get() && Settings.AUTO_ADVANCE_SEARCH.get() ? 1 : nativeValue;
+        } catch (Throwable error) {
+            Logger.printException(() -> "Could not read the search auto-advance switch", error);
+            return nativeValue;
+        }
+    }
+
+    /**
      * Answers the load strategy the host records beside its auto scroll component. TikTok
      * registers that component lazily, so nothing builds it until somebody opens the video panel
      * and asks for Auto scroll by hand. On a cold start with this setting already on, none of the

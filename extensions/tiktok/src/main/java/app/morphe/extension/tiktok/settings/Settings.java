@@ -441,6 +441,12 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting AUTO_ADVANCE_HIDE_PANEL_ACTION = new BooleanSetting(
             "auto_advance_hide_panel_action", FALSE, false, Setting.parent(AUTO_ADVANCE));
     /**
+     * Answers yes to TikTok's search_auto_scroll flag. Search results get auto scroll from that
+     * flag rather than the For You one, and their feed runs the same component Auto-advance starts.
+     */
+    public static final BooleanSetting AUTO_ADVANCE_SEARCH = new BooleanSetting(
+            "auto_advance_search", FALSE, true, Setting.parent(AUTO_ADVANCE));
+    /**
      * Quietens the feed while a comment sheet is open, and gives the sound back when it closes.
      * Off by default.
      */

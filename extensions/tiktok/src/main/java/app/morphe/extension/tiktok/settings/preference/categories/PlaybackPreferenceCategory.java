@@ -63,6 +63,10 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                     "Takes TikTok's own Auto scroll action out of the video panel. "
                             + "Auto-advance keeps working.",
                     Settings.AUTO_ADVANCE_HIDE_PANEL_ACTION));
+            addPreference(new TogglePreference(context, "Auto-advance in search results",
+                    "Also turns on TikTok's own auto scroll for videos opened from search. "
+                            + "Restart TikTok to apply this.",
+                    Settings.AUTO_ADVANCE_SEARCH));
         }
         // None of these is auto-advance, and under its heading they read as parts of it: each keeps
         // you on the video you're on, paused behind the comments, held or stopped at its end, or
