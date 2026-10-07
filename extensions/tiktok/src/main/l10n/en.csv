@@ -392,6 +392,7 @@ Discard edits,Discard edits
 Dismissed %1$s suggested accounts,Dismissed %1$s suggested accounts
 Dismissed one suggested account,Dismissed one suggested account
 Do nothing,Do nothing
+Doesn't follow you back,Doesn't follow you back
 Don't save new searches,Don't save new searches
 Don't start the feed on returning,Don't start the feed on returning
 Done,Done
@@ -464,6 +465,7 @@ Fit the video to the screen,Fit the video to the screen
 Focus,Focus
 Follow probe,Follow probe
 Following,Following
+Follows you,Follows you
 For You,For You
 For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.,For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.
 For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.,For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.
@@ -1140,6 +1142,7 @@ Show a video preview thumbnail while dragging the progress bar.,Show a video pre
 Show download progress,Show download progress
 Show exact counts,Show exact counts
 Show failures on screen,Show failures on screen
+Show follow status,Show follow status
 Show gates,Show gates
 Show last report,Show last report
 Show only LIVEs from creators with this many followers.,Show only LIVEs from creators with this many followers.
@@ -1451,6 +1454,7 @@ Unavailable on these TikTok builds. All verification challenges stay visible.,Un
 Unblock,Unblock
 Unblock this commenter,Unblock this commenter
 Unblocked %1$s,Unblocked %1$s
+"Under the @username on a profile, say whether it follows you or doesn't follow you back. Follower and following lists mark the accounts you follow that don't follow you back.","Under the @username on a profile, say whether it follows you or doesn't follow you back. Follower and following lists mark the accounts you follow that don't follow you back."
 Undo,Undo
 Undo clearing seen videos,Undo clearing seen videos
 Undo didn't finish. Some settings may still be changed.,Undo didn't finish. Some settings may still be changed.

@@ -14,6 +14,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** New patch, Play SDR instead of HDR. Turn it on under Playback and videos that also come in HDR play their standard version, so the screen doesn't jump to full brightness when one starts. A video TikTok only offers in HDR still plays. With Playback quality on too, it picks among the standard versions.
 
+* **TikTok:** New patch, Show follow status. Open a profile that follows you and "Follows you" shows under its @username. If you follow it and it doesn't follow you back, it says that instead. Your follower and following lists mark the accounts you follow that don't follow you back. It uses the follow status TikTok already sends, so nothing extra is fetched. Switch: Hushfeed settings > App > Show follow status.
+
 * **TikTok:** Feed filter has a new Show only mutual friends on the Friends tab switch. With it on, the Friends tab drops posts, reposts and LIVEs from accounts you follow that don't follow you back, and from strangers and suggested accounts. A friend's repost stays even when the video is someone else's, and your own posts and reposts always stay.
 
 * **TikTok:** Hide AI-generated videos catches a lot more now. Besides TikTok's visible AI label, it reads the AI marks TikTok keeps on a post without always showing them: the creator's AI disclosure, TikTok's own moderation verdict, AI sources in the content credentials (C2PA), posts made with TikTok's AI effects like AI Alive, AI remix and AI portrait, and tags like #ai or #aigenerated. The filter report counts each one under AiSignals by the mark that caught it. Feed filter also covers the newer version of the Friends tab feed, so its rules apply there too.

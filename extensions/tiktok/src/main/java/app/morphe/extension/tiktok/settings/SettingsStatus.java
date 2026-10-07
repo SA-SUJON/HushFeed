@@ -110,6 +110,7 @@ public class SettingsStatus {
     public static boolean avatarRingsEnabled = false;
     public static boolean lengthLimitsEnabled = false;
     public static boolean keepFavoritesTabEnabled = false;
+    public static boolean followStatusEnabled = false;
     public static boolean hideFeedLiveButtonEnabled = false;
     public static boolean hideFeedSearchButtonEnabled = false;
     public static boolean showSeekbarEnabled = false;
@@ -377,6 +378,10 @@ public class SettingsStatus {
     public static void enableKeepFavoritesTab() {
         keepFavoritesTabEnabled = true;
         app.morphe.extension.tiktok.favorites.FavoritesTab.installed();
+    }
+
+    public static void enableFollowStatus() {
+        followStatusEnabled = true;
     }
 
     public static void enableHideFeedLiveButton() {

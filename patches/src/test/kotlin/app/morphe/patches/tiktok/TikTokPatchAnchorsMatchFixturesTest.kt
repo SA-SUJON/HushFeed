@@ -25,6 +25,15 @@ import app.morphe.takes
 import app.morphe.patches.tiktok.interaction.exactcounts.COUNT_FORMATTERS
 import app.morphe.patches.tiktok.interaction.exactcounts.CountFormatterFingerprint
 import app.morphe.patches.tiktok.interaction.exactcounts.isCountFormatter
+import app.morphe.patches.tiktok.profile.BASE_UI_COMPONENT
+import app.morphe.patches.tiktok.profile.HEADER_TEXT_ITEM
+import app.morphe.patches.tiktok.profile.PROFILE_COMMON_INFO
+import app.morphe.patches.tiktok.profile.ProfileHeaderTextBindFingerprint
+import app.morphe.patches.tiktok.profile.RELATION_USER_CELL
+import app.morphe.patches.tiktok.profile.REUSED_SLOT_ASSEM
+import app.morphe.patches.tiktok.profile.RelationCellBindFingerprint
+import app.morphe.patches.tiktok.profile.commonInfoGetter
+import app.morphe.patches.tiktok.profile.itemViewField
 import app.morphe.patches.tiktok.misc.commenttools.isCommentSearchHeaderFactory
 import app.morphe.patches.tiktok.misc.commenttools.resolveCommentSearchSuggestions
 import app.morphe.patches.tiktok.misc.commenttools.compactCommentHeaderComponents
@@ -52,6 +61,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.NarrowLiteralInstructio
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.iface.reference.StringReference
+import com.android.tools.smali.dexlib2.iface.reference.TypeReference
 import java.io.File
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -704,6 +714,59 @@ class TikTokPatchAnchorsMatchFixturesTest {
             assertTrue("roomStruct", entry.containsKey("roomStruct"))
             assertEquals("Lcom/ss/android/ugc/aweme/feed/model/Aweme;", fieldsOf("FriendsV3RepostModel")["repostedAweme"])
             assertEquals("Ljava/util/List;", fieldsOf("FriendsV3FeedResponse")["friendsV3Feeds"])
+        }
+    }
+
+    /**
+     * Show follow status hooks the profile header's text item bind and the follow list cell bind.
+     * The header hook reads the item's view and its profile's common info through the one
+     * BaseUIComponent field and getter of those types, and the cell hook asks ReusedUISlotAssem for
+     * the cell's content view. The extension then reads the relation and profile by name.
+     */
+    @Test
+    fun `follow status hooks and the relation members they read resolve on every declared build`() {
+        val data = "Lcom/ss/android/ugc/profile/platform/base/data/"
+        val user = "Lcom/ss/android/ugc/aweme/profile/model/User;"
+        val getters = mapOf(
+            PROFILE_COMMON_INFO to listOf("getUserProfileInfo", "getUserRelationInfo"),
+            "${data}UserRelationInfo;" to listOf("getFollowStatus", "getFollowerStatus"),
+            "${data}UserProfileInfo;" to listOf("getUsername", "getUid"),
+            user to listOf("getUniqueId", "getNickname", "getUid", "getFollowStatus", "getFollowerStatus"),
+        )
+        Fixtures.forEachDeclared { apk ->
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            val classes = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
+                .associateBy { it.type }
+
+            val header = classes.getValue(HEADER_TEXT_ITEM)
+            assertEquals("the header text item's base", BASE_UI_COMPONENT, header.superclass)
+            val headerBinds = header.methods.filter { ProfileHeaderTextBindFingerprint.takes(it, header) }
+            assertEquals("the header text bind", 1, headerBinds.size)
+            assertTrue("the header text bind has two free registers", headerBinds.single().implementation!!.registerCount >= 3)
+            val base = classes.getValue(BASE_UI_COMPONENT)
+            assertTrue("BaseUIComponent's one common info getter", base.commonInfoGetter() != null)
+            assertTrue("BaseUIComponent's one view field", base.itemViewField() != null)
+
+            val cell = classes.getValue(RELATION_USER_CELL)
+            assertEquals("the follow list cell's base", REUSED_SLOT_ASSEM, cell.superclass)
+            val cellBinds = cell.methods.filter { RelationCellBindFingerprint.takes(it, cell) }
+            assertEquals("the follow list cell bind", 1, cellBinds.size)
+            val itemType = ((cellBinds.single().implementation!!.instructions.first() as ReferenceInstruction)
+                .reference as TypeReference).type
+            assertEquals("the cell's item holds one User", 1, classes.getValue(itemType).fields.count { it.type == user })
+            assertTrue(
+                "ReusedUISlotAssem.getContentView",
+                classes.getValue(REUSED_SLOT_ASSEM).methods.any {
+                    it.name == "getContentView" && it.parameterTypes.isEmpty() && it.returnType == "Landroid/view/View;" &&
+                        AccessFlags.PUBLIC.isSet(it.accessFlags)
+                },
+            )
+
+            for ((type, names) in getters) {
+                val declared = classes.getValue(type).methods.filter { it.parameterTypes.isEmpty() }.map { it.name }.toSet()
+                assertEquals("$type: follow status getters", emptyList<String>(), names.filter { it !in declared })
+            }
         }
     }
 

@@ -270,6 +270,7 @@ The eleven optional patches in the Performance group were measured on a Galaxy S
 | `Share sheet tools` | Hides chosen people, share options or the whole Send to row of the share sheet, and a profile's or a LIVE's share sheet can hide a different set from a video's. Apps you pick can be added to the Share via row. Switch: Hushfeed settings > Share sheet. |
 | `Show author region` | Show the country a video was posted from next to the creator's name on the feed. Switch: Hushfeed settings > Feed screen. |
 | `Show exact counts` | Shows counts as full numbers, like 1,234,567 instead of 1.2M. Switch: Hushfeed settings > Feed screen. |
+| `Show follow status` | Says under a profile's @username whether it follows you, or that it doesn't follow you back when you follow it. Follower and following lists mark the accounts you follow that don't follow you back. It reads the follow status TikTok already sends. Switch: Hushfeed settings > App. |
 | `Show LIVE search` | Shows TikTok's search entry in the LIVE drawer where supported. |
 | `Show the progress bar` | Shows TikTok's native video seekbar where it would normally be hidden, including when one of TikTok's experiments takes it off every video but paid content. Switch: Hushfeed settings > Playback. |
 | `Show the progress bar thumbnail` | Shows TikTok's video preview thumbnail while dragging the seekbar. |

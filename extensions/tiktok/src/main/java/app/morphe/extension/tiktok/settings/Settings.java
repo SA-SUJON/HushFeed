@@ -700,6 +700,8 @@ public class Settings extends BaseSettings {
     public static final StringSetting HIDDEN_PROFILE_SHORTCUTS = new StringSetting("hidden_profile_shortcuts", "");
     public static final StringSetting PROFILE_SHORTCUT_PICKS = new StringSetting("profile_shortcut_picks", "");
     public static final StringSetting PROFILE_SHORTCUT_CATALOG = new StringSetting("profile_shortcut_catalog", "");
+    // "Follows you" under the @username on a profile, and a mark on the follow list accounts that don't follow back.
+    public static final BooleanSetting SHOW_FOLLOW_STATUS = new BooleanSetting("show_follow_status", TRUE);
     // Package names of the apps added to the Share via row, comma separated, in the order picked.
     public static final StringSetting SHARE_ADDED_APPS = new StringSetting("share_added_apps", "");
     public static final BooleanSetting DISABLE_LONG_PRESS_QUICK_SHARE =
