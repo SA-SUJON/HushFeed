@@ -306,6 +306,7 @@ The eleven optional patches in the Performance group were measured on a Galaxy S
 | --- | --- |
 | The `Search: ...` suggestion above a video's comments | Comments > **Hide search suggestions above comments**. Restart TikTok after changing it. |
 | A box for finding text or usernames in loaded comments | Comments > **Search within comments**. This adds Hushfeed's own filter, not TikTok search. |
+| Save the loaded comments and replies to a file | Comments > **Export comments**, then Export CSV or Export JSON under the search box. It needs **Search within comments**, and it saves the replies you've opened. |
 | Recommended searches shown before typing on TikTok's search page | App > **Hide suggestions on the search page**. Search history stays. |
 | New searches being added to your search history | Privacy > **Don't save new searches** (needs the Stop saving search history patch). Saved searches stay until you delete them on TikTok's search page, and TikTok may still keep its own record on its servers. |
 | The magnifying glass at the top of the feed | Feed screen > **Hide the search button on the feed**. |

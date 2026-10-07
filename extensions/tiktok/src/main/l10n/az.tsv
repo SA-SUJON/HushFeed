@@ -1600,3 +1600,12 @@ The video couldn't be made from these photos. Try again.	Bu fotolardan video haz
 Video of photos	Fotolardan video
 # context: search words for the Log diagnostics switch. Never shown, only matched when someone searches settings. Give the words people type for debug logging in this language, separated by spaces.
 debug debugging logs logging	sazlama xəta axtarışı jurnallar loglar
+Export comments	Şərhləri ixrac et
+Adds Export CSV and Export JSON under the search box, so it needs Search within comments. They save the comments and replies this video has loaded to a file you pick. Open the reply threads you want first, since TikTok only loads them when you do.	Axtarış qutusunun altına CSV ixracı və JSON ixracı əlavə edir, ona görə Şərhlər daxilində axtarın lazımdır. Bu video üçün yüklənmiş şərhləri və cavabları seçdiyiniz fayla saxlayır. Əvvəlcə istədiyiniz cavab zəncirlərini açın, çünki TikTok onları yalnız açdıqda yükləyir.
+Export CSV	CSV ixracı
+Export JSON	JSON ixracı
+1 comment or reply loaded	1 şərh və ya cavab yüklənib
+%1$d comments and replies loaded	%1$d şərh və cavab yüklənib
+No comments are loaded to export yet.	İxrac üçün hələ şərh yüklənməyib.
+Exported %1$d comments and %2$d replies	%1$d şərh və %2$d cavab ixrac edildi
+Comment export failed	Şərh ixracı alınmadı

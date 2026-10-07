@@ -675,6 +675,8 @@ public class Settings extends BaseSettings {
     public static final StringSetting COMMENT_BLOCKED_USERS = new StringSetting("comment_blocked_users", "");
     public static final BooleanSetting BLOCK_FROM_COMMENT = new BooleanSetting("block_from_comment", TRUE);
     public static final BooleanSetting COMMENT_SEARCH = new BooleanSetting("comment_search", FALSE);
+    /** Adds Export CSV and Export JSON under the comment search box. */
+    public static final BooleanSetting COMMENT_EXPORT = new BooleanSetting("comment_export", FALSE);
     public static final BooleanSetting COMMENT_LINKS = new BooleanSetting("comment_links", TRUE);
     public static final BooleanSetting HIDE_COMMENT_MEDIA = new BooleanSetting("hide_comment_media", FALSE);
     public static final BooleanSetting HIDE_COMMENT_POLLS = new BooleanSetting("hide_comment_polls", FALSE);

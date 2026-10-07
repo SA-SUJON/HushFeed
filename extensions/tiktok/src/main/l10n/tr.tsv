@@ -1600,3 +1600,12 @@ The video couldn't be made from these photos. Try again.	Bu fotoğraflardan vide
 Video of photos	Fotoğraflardan video
 # context: search words for the Log diagnostics switch. Never shown, only matched when someone searches settings. Give the words people type for debug logging in this language, separated by spaces.
 debug debugging logs logging	hata ayıklama günlükler loglar
+Export comments	Yorumları dışa aktar
+Adds Export CSV and Export JSON under the search box, so it needs Search within comments. They save the comments and replies this video has loaded to a file you pick. Open the reply threads you want first, since TikTok only loads them when you do.	Arama kutusunun altına CSV dışa aktar ve JSON dışa aktar düğmelerini ekler, bu yüzden Yorumların içinde ara gerekir. Bu videonun yüklediği yorumları ve yanıtları seçtiğiniz bir dosyaya kaydeder. Önce istediğiniz yanıt dizilerini açın, çünkü TikTok onları yalnızca siz açınca yükler.
+Export CSV	CSV dışa aktar
+Export JSON	JSON dışa aktar
+1 comment or reply loaded	1 yorum veya yanıt yüklendi
+%1$d comments and replies loaded	%1$d yorum ve yanıt yüklendi
+No comments are loaded to export yet.	Dışa aktarılacak yüklenmiş yorum henüz yok.
+Exported %1$d comments and %2$d replies	%1$d yorum ve %2$d yanıt dışa aktarıldı
+Comment export failed	Yorumlar dışa aktarılamadı

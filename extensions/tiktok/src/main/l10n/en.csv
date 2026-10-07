@@ -1,6 +1,7 @@
 source,target
 %1$d already matched,%1$d already matched
 %1$d areas were checked and everything they need is here.,%1$d areas were checked and everything they need is here.
+%1$d comments and replies loaded,%1$d comments and replies loaded
 %1$d fields overridden,%1$d fields overridden
 %1$d fields will be overridden when requested,%1$d fields will be overridden when requested
 %1$d gates selected,%1$d gates selected
@@ -87,6 +88,7 @@ source,target
 %1$s: might not have finished,%1$s: might not have finished
 %1$s: one of %3$s files didn't finish,%1$s: one of %3$s files didn't finish
 %1$s: one of %3$s files might not have finished,%1$s: one of %3$s files might not have finished
+1 comment or reply loaded,1 comment or reply loaded
 1 field overridden,1 field overridden
 1 field will be overridden when requested,1 field will be overridden when requested
 1 gate selected,1 gate selected
@@ -137,6 +139,7 @@ Added %1$s,Added %1$s
 Added %1$s older seen videos to this account,Added %1$s older seen videos to this account
 Added one older seen video to this account,Added one older seen video to this account
 Added to this account.,Added to this account.
+"Adds Export CSV and Export JSON under the search box, so it needs Search within comments. They save the comments and replies this video has loaded to a file you pick. Open the reply threads you want first, since TikTok only loads them when you do.","Adds Export CSV and Export JSON under the search box, so it needs Search within comments. They save the comments and replies this video has loaded to a file you pick. Open the reply threads you want first, since TikTok only loads them when you do."
 Ads,Ads
 Advanced,Advanced
 Advanced JSON value,Advanced JSON value
@@ -291,6 +294,7 @@ Comma separated usernames or display names whose comments are hidden.,Comma sepa
 "Comma separated words to match against a sound's name, like saxophone. Case doesn't matter.","Comma separated words to match against a sound's name, like saxophone. Case doesn't matter."
 "Comma separated words, like music, chat. A LIVE is hidden when its category, topic tags or game name contains one. Case doesn't matter.","Comma separated words, like music, chat. A LIVE is hidden when its category, topic tags or game name contains one. Case doesn't matter."
 "Comma separated. A comment is hidden if its text contains any of them. Case doesn't matter. Two phrases in quotes can be joined: ""a"" & ""b"" needs both, ""a"" !& ""b"" needs the first without the second.","Comma separated. A comment is hidden if its text contains any of them. Case doesn't matter. Two phrases in quotes can be joined: ""a"" & ""b"" needs both, ""a"" !& ""b"" needs the first without the second."
+Comment export failed,Comment export failed
 Comment media filename,Comment media filename
 Comment sort and dislike styles,Comment sort and dislike styles
 "Comment with live photos, the camera or audio","Comment with live photos, the camera or audio"
@@ -436,8 +440,12 @@ Entry %1$d isn't an object.,Entry %1$d isn't an object.
 Errors,Errors
 Expand activity list,Expand activity list
 Explore or Community,Explore or Community
+Export CSV,Export CSV
+Export JSON,Export JSON
+Export comments,Export comments
 Export diagnostic report,Export diagnostic report
 Export loaded values,Export loaded values
+Exported %1$d comments and %2$d replies,Exported %1$d comments and %2$d replies
 Exported %1$d loaded values,Exported %1$d loaded values
 Exported 1 loaded value,Exported 1 loaded value
 "Extend the heart's touch area into nearby blank space. The icon and row spacing stay the same. Text, Reply and other controls keep their own space.","Extend the heart's touch area into nearby blank space. The icon and row spacing stay the same. Text, Reply and other controls keep their own space."
@@ -815,6 +823,7 @@ No app on this phone opens that file,No app on this phone opens that file
 No apps match this search,No apps match this search
 "No chat with @%1$s turned up on this account. Open your chat with them once, then try again.","No chat with @%1$s turned up on this account. Open your chat with them once, then try again."
 No cleared videos fit the current history limits.,No cleared videos fit the current history limits.
+No comments are loaded to export yet.,No comments are loaded to export yet.
 No creator to block on this video,No creator to block on this video
 No creator to hide on this video,No creator to hide on this video
 "No creators are hidden yet. Hide one from a video, or add a handle above.","No creators are hidden yet. Hide one from a video, or add a handle above."

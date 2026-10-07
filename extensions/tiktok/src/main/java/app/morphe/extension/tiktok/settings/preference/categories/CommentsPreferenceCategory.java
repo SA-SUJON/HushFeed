@@ -85,6 +85,14 @@ public class CommentsPreferenceCategory extends ConditionalPreferenceCategory {
             ));
             addPreference(new TogglePreference(
                     context,
+                    "Export comments",
+                    "Adds Export CSV and Export JSON under the search box, so it needs Search within comments. "
+                            + "They save the comments and replies this video has loaded to a file you pick. "
+                            + "Open the reply threads you want first, since TikTok only loads them when you do.",
+                    Settings.COMMENT_EXPORT
+            ));
+            addPreference(new TogglePreference(
+                    context,
                     "Links in comments open",
                     "A web address someone left in a comment can be tapped instead of copied "
                             + "out by hand. Tapping anywhere else in the comment still does what "

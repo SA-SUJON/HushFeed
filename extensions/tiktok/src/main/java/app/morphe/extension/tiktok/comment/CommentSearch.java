@@ -97,6 +97,8 @@ public final class CommentSearch {
 
     static final String FIELD_TAG = "comment_search_field";
     static final String STATUS_TAG = "comment_search_status";
+    static final String EXPORT_TAG = "comment_export_row";
+    static final String EXPORT_COUNT_TAG = "comment_export_count";
 
     private static final View.OnAttachStateChangeListener ROW_ATTACH_LISTENER =
             new View.OnAttachStateChangeListener() {
@@ -129,6 +131,11 @@ public final class CommentSearch {
                 trackBoundRowAttachments();
                 ViewGroup listView = shown.get();
                 if (listView != null && listView.isAttachedToWindow()) {
+                    // Rebuilt, so the export buttons follow their own switch.
+                    for (WeakReference<SearchField> reference : new ArrayList<>(DECORATED.values())) {
+                        SearchField field = reference.get();
+                        if (field != null && field.listView == listView) field.remove(false);
+                    }
                     addSearchField(listView);
                     narrowShownRows();
                 }
@@ -320,6 +327,57 @@ public final class CommentSearch {
         return states;
     }
 
+    /** The count of what has loaded and the two Export buttons, under the box and its status line. */
+    private static LinearLayout exportRow(Context context, boolean dark, ViewGroup listView,
+            int padding, int sideMargin) {
+        LinearLayout row = new LinearLayout(context);
+        row.setTag(EXPORT_TAG);
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        row.setGravity(Gravity.CENTER_VERTICAL);
+        LinearLayout.LayoutParams rowParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        rowParams.setMargins(sideMargin, 0, sideMargin, SettingsUi.dp(context, 8));
+        row.setLayoutParams(rowParams);
+
+        TextView count = new TextView(context);
+        count.setTag(EXPORT_COUNT_TAG);
+        count.setTextSize(TypedValue.COMPLEX_UNIT_SP, SettingsUi.TEXT_BODY_SMALL);
+        count.setTextColor(SettingsUi.textSecondaryOn(dark));
+        count.setPadding(padding, 0, padding, 0);
+        row.addView(count, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+        row.addView(exportButton(context, dark, "Export CSV", listView, CommentExport.Format.CSV, padding));
+        row.addView(exportButton(context, dark, "Export JSON", listView, CommentExport.Format.JSON, padding));
+        return row;
+    }
+
+    private static TextView exportButton(Context context, boolean dark, String label, ViewGroup listView,
+            CommentExport.Format format, int padding) {
+        TextView button = new TextView(context);
+        button.setText(L10n.t(context, label));
+        button.setTextSize(TypedValue.COMPLEX_UNIT_SP, SettingsUi.TEXT_BODY_SMALL);
+        button.setTextColor(SettingsUi.accentOn(dark));
+        button.setGravity(Gravity.CENTER);
+        button.setPadding(padding, padding, padding, padding);
+        button.setMinimumHeight(SettingsUi.dp(context, 48));
+        button.setMinimumWidth(SettingsUi.dp(context, 48));
+        button.setClickable(true);
+        button.setFocusable(true);
+        button.setOnClickListener(view -> {
+            LoadedComments loaded = LOADED_COMMENTS.get(listView);
+            android.app.Activity activity = activityOf(view.getContext());
+            CommentExport.begin(activity, format, loaded == null ? null : loaded.byId.values());
+        });
+        return button;
+    }
+
+    private static android.app.Activity activityOf(Context context) {
+        while (context instanceof android.content.ContextWrapper) {
+            if (context instanceof android.app.Activity) return (android.app.Activity) context;
+            context = ((android.content.ContextWrapper) context).getBaseContext();
+        }
+        return null;
+    }
+
     /** Builds the box and puts it in {@code column}, directly above whatever holds the list. */
     private static void insertBox(LinearLayout column, View anchor, ViewGroup listView) {
         WeakReference<SearchField> existing = DECORATED.get(column);
@@ -366,6 +424,8 @@ public final class CommentSearch {
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         statusParams.setMargins(sideMargin, 0, sideMargin, SettingsUi.dp(context, 8));
         status.setLayoutParams(statusParams);
+        LinearLayout exports = CommentExport.enabled()
+                ? exportRow(context, dark, listView, padding, sideMargin) : null;
         box.setText(query);
         box.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -389,10 +449,11 @@ public final class CommentSearch {
         int insertionIndex = column.indexOfChild(anchor);
         column.addView(box, insertionIndex);
         column.addView(status, insertionIndex + 1);
+        if (exports != null) column.addView(exports, insertionIndex + 2);
         // Only once it is really in. Marking the column first would blacklist it for good if
         // anything above threw, and the sheet would never get a box again.
         SearchField field = new SearchField(column, listView, box, status,
-                new SettingsUi.ClearGlyphDrawable(context, SettingsUi.textSecondaryOn(dark)));
+                new SettingsUi.ClearGlyphDrawable(context, SettingsUi.textSecondaryOn(dark)), exports);
         field.wireClearControl();
         DECORATED.put(column, new WeakReference<>(field));
 
@@ -407,9 +468,12 @@ public final class CommentSearch {
         private final EditText box;
         private final TextView status;
         private final Drawable clearIcon;
+        /** The export buttons, or null while their switch is off. */
+        private final LinearLayout exports;
 
         SearchField(LinearLayout column, ViewGroup listView, EditText box, TextView status,
-                Drawable clearIcon) {
+                Drawable clearIcon, LinearLayout exports) {
+            this.exports = exports;
             this.column = column;
             this.listView = listView;
             this.box = box;
@@ -479,11 +543,24 @@ public final class CommentSearch {
                 column.post(() -> {
                     column.removeView(box);
                     column.removeView(status);
+                    if (exports != null) column.removeView(exports);
                 });
             } else {
                 column.removeView(box);
                 column.removeView(status);
+                if (exports != null) column.removeView(exports);
             }
+        }
+
+        /** What the buttons would write: every comment and reply the sheet has loaded. */
+        void updateExportCount(java.util.Collection<Object> loaded) {
+            if (exports == null) return;
+            View view = exports.findViewWithTag(EXPORT_COUNT_TAG);
+            if (!(view instanceof TextView)) return;
+            int total = loaded == null ? 0 : CommentExport.count(loaded);
+            Context context = view.getContext();
+            SettingsUi.setTextIfChanged((TextView) view, L10n.quantity(context, total,
+                    "1 comment or reply loaded", "%1$d comments and replies loaded"));
         }
 
         void updateResult(String wanted, Matches matches) {
@@ -570,6 +647,8 @@ public final class CommentSearch {
         SearchField field = searchFieldFor(listView);
         if (field != null) {
             field.updateResult(filtering ? wanted : "", countLoadedMatches(listView, wanted));
+            LoadedComments loaded = LOADED_COMMENTS.get(listView);
+            field.updateExportCount(loaded == null ? null : loaded.byId.values());
         }
     }
 

@@ -1594,3 +1594,12 @@ Saved the photos as a video in %1$s,Foto disimpan sebagai video di %1$s
 The video couldn't be made from these photos. Try again.,Video tidak dapat dibuat dari foto ini. Coba lagi.
 Video of photos,Video dari foto
 debug debugging logs logging,debug debugging log catatan
+Export comments,Ekspor komentar
+"Adds Export CSV and Export JSON under the search box, so it needs Search within comments. They save the comments and replies this video has loaded to a file you pick. Open the reply threads you want first, since TikTok only loads them when you do.","Menambahkan Ekspor CSV dan Ekspor JSON di bawah kotak pencarian, jadi perlu Cari dalam komentar. Tombol ini menyimpan komentar dan balasan yang sudah dimuat di video ini ke berkas yang Anda pilih. Buka dulu utas balasan yang Anda inginkan, karena TikTok baru memuatnya saat Anda membukanya."
+Export CSV,Ekspor CSV
+Export JSON,Ekspor JSON
+1 comment or reply loaded,1 komentar atau balasan dimuat
+%1$d comments and replies loaded,%1$d komentar dan balasan dimuat
+No comments are loaded to export yet.,Belum ada komentar yang dimuat untuk diekspor.
+Exported %1$d comments and %2$d replies,%1$d komentar dan %2$d balasan diekspor
+Comment export failed,Ekspor komentar gagal

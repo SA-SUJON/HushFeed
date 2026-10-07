@@ -1603,3 +1603,12 @@ The video couldn't be made from these photos. Try again.	Aus diesen Fotos ließ 
 Video of photos	Video aus Fotos
 # context: search words for the Log diagnostics switch. Never shown, only matched when someone searches settings. Give the words people type for debug logging in this language, separated by spaces.
 debug debugging logs logging	Fehlersuche Debugging Protokolle Logs
+Export comments	Kommentare exportieren
+Adds Export CSV and Export JSON under the search box, so it needs Search within comments. They save the comments and replies this video has loaded to a file you pick. Open the reply threads you want first, since TikTok only loads them when you do.	Fügt unter dem Suchfeld CSV exportieren und JSON exportieren hinzu und braucht deshalb In Kommentaren suchen. Damit werden die Kommentare und Antworten, die dieses Video geladen hat, in eine Datei Ihrer Wahl gespeichert. Öffnen Sie zuerst die Antwortverläufe, die Sie brauchen, denn TikTok lädt sie erst dann.
+Export CSV	CSV exportieren
+Export JSON	JSON exportieren
+1 comment or reply loaded	1 Kommentar oder Antwort geladen
+%1$d comments and replies loaded	%1$d Kommentare und Antworten geladen
+No comments are loaded to export yet.	Es sind noch keine Kommentare zum Exportieren geladen.
+Exported %1$d comments and %2$d replies	%1$d Kommentare und %2$d Antworten exportiert
+Comment export failed	Kommentarexport fehlgeschlagen

@@ -292,7 +292,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
             FeedMute.refresh();
             BlockAuthorOverlay.refresh();
         }
-        if (!applySettingToPreference && setting == Settings.COMMENT_SEARCH) {
+        if (!applySettingToPreference && (setting == Settings.COMMENT_SEARCH || setting == Settings.COMMENT_EXPORT)) {
             CommentSearch.onSettingChanged();
         }
         if (!applySettingToPreference && setting == Settings.KEEP_CAPTIONS_CLEAR_DISPLAY) {
