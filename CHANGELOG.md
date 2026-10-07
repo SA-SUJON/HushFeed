@@ -59,6 +59,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Searching Hushfeed's settings puts a setting whose name matches above one that only mentions those words in its description, so "original photos" now lists Download original photos first and Photo filename after it. Searching "debug", "debugging", "logs" or "logging" finds Log diagnostics, and each translation has its own words for it too.
 
+* **TikTok:** A photo TikTok only sends as HEIF now has a second way to become a JPEG. Samsung's image decoder turns TikTok's HEIF down, so Hushfeed reads it the way the phone's media scanner does instead, and keeps the file TikTok sent only when neither one can read it.
+
 * **Docs:** The FAQ explains the pure black Profile and Inbox some people see without AMOLED dark theme. It comes from TikTok 47.1.4's own dark mode, and a build without that patch shows the same colors with Hushfeed paused (#69).
 
 ## 0.68.0 (2026-10-06)

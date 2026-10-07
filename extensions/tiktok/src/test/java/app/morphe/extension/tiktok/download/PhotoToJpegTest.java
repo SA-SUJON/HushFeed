@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -38,6 +39,11 @@ import org.robolectric.annotation.GraphicsMode;
 public class PhotoToJpegTest {
     @Rule public final TemporaryFolder folder = new TemporaryFolder();
     private final Context context = RuntimeEnvironment.getApplication();
+
+    @After
+    public void restoreTheExtractor() {
+        PhotoToJpeg.primaryImageReader = PhotoToJpeg::readPrimaryImage;
+    }
 
     @Test
     public void aHeifPhotoIsSavedAgainAsAJpegOfTheSameSize() throws IOException {
@@ -93,6 +99,55 @@ public class PhotoToJpegTest {
         assertNoConversionFilesLeft();
     }
 
+    /** Samsung's decoder said "invalid input" to a HEIF its media extractor read (S22). */
+    @Test
+    public void aHeifTheDecoderRefusesIsReadThroughTheMediaExtractor() throws IOException {
+        File photo = noise("refused.tmp");
+        java.util.List<File> asked = new java.util.ArrayList<>();
+        PhotoToJpeg.primaryImageReader = file -> {
+            asked.add(file);
+            Bitmap image = Bitmap.createBitmap(48, 32, Bitmap.Config.ARGB_8888);
+            image.eraseColor(0xFF3366CC);
+            return image;
+        };
+        assertEquals("jpg", PhotoToJpeg.convert(context, photo, "heif"));
+        assertEquals(List.of(photo), asked);
+        byte[] saved = Files.readAllBytes(photo.toPath());
+        assertEquals("JPEG start of image", 0xFF, saved[0] & 0xFF);
+        assertEquals("JPEG start of image", 0xD8, saved[1] & 0xFF);
+        Bitmap decoded = BitmapFactory.decodeByteArray(saved, 0, saved.length);
+        assertNotNull("the JPEG reads back", decoded);
+        assertEquals(48, decoded.getWidth());
+        assertEquals(32, decoded.getHeight());
+        assertNoConversionFilesLeft();
+    }
+
+    @Test
+    public void aHeifNeitherPathReadsKeepsWhatTikTokSent() throws IOException {
+        File photo = noise("unreadable.tmp");
+        byte[] sent = Files.readAllBytes(photo.toPath());
+        PhotoToJpeg.primaryImageReader = file -> null;
+        assertEquals("heic", PhotoToJpeg.convert(context, photo, "heic"));
+        assertArrayEquals(sent, Files.readAllBytes(photo.toPath()));
+        assertNoConversionFilesLeft();
+    }
+
+    @Test
+    public void aWebpTheDecoderRefusesNeverReachesTheExtractor() throws IOException {
+        File photo = noise("refused-webp.tmp");
+        PhotoToJpeg.primaryImageReader = file -> {
+            throw new AssertionError("a WebP went to the HEIF extractor");
+        };
+        assertEquals("webp", PhotoToJpeg.convert(context, photo, "webp"));
+        assertNoConversionFilesLeft();
+    }
+
+    /** The real extractor on a file it can't read answers null rather than throwing. */
+    @Test
+    public void theRealExtractorTurnsDownAFileItCantRead() throws IOException {
+        assertEquals(null, PhotoToJpeg.readPrimaryImage(noise("extractor.tmp")));
+    }
+
     @Test
     public void aSeeThroughPhotoStaysHeifBecauseJpegWouldBlackenIt() throws IOException {
         File photo = png(8, 8, 0x00000000);
@@ -109,6 +164,14 @@ public class PhotoToJpegTest {
         byte[] before = Files.readAllBytes(photo.toPath());
         assertEquals("heif", PhotoToJpeg.convert(context, photo, "heif"));
         assertArrayEquals(before, Files.readAllBytes(photo.toPath()));
+    }
+
+    private File noise(String name) throws IOException {
+        File photo = folder.newFile(name);
+        byte[] bytes = new byte[512];
+        new Random(105).nextBytes(bytes);
+        Files.write(photo.toPath(), bytes);
+        return photo;
     }
 
     private File png(int width, int height, int color) throws IOException {
