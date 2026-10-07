@@ -64,6 +64,7 @@ public class SavedVideoArchiveTest {
     private java.util.concurrent.CountDownLatch reachedEnd, releaseCopy;
     private String oldPath, oldTemplate, oldQuality, oldExternal;
     private boolean refuseAudio;
+    private String refusePath;
 
     @Before public void setup() throws Exception {
         oldProgress = Settings.DOWNLOAD_PROGRESS.get(); Settings.DOWNLOAD_PROGRESS.save(false);
@@ -93,6 +94,7 @@ public class SavedVideoArchiveTest {
                 requests.incrementAndGet();
                 return new FakeHttpsConnection(url) {
                     @Override public int getResponseCode() {
+                        if (url.getPath().equals(refusePath)) return HTTP_NOT_FOUND;
                         return refuseAudio && url.getPath().startsWith("/audio") ? 429 : HTTP_OK;
                     }
                     @Override public String getHeaderField(String name) {
@@ -578,6 +580,43 @@ public class SavedVideoArchiveTest {
         } finally {
             Settings.REMOVE_DOWNLOAD_WATERMARK.save(before);
         }
+    }
+
+    /** The clean file refused: the stamped copy is saved instead, only with the switch on, and the save says so. */
+    @Test public void aCleanVideoThatCantBeFetchedFallsBackToTheStampedCopyWhenAsked() throws Exception {
+        boolean watermark = Settings.REMOVE_DOWNLOAD_WATERMARK.get();
+        refusePath = "/clean.mp4";
+        try {
+            Settings.REMOVE_DOWNLOAD_WATERMARK.save(true);
+            Settings.DOWNLOAD_DETAILS.save(false);
+            assertEquals(List.of("https://8.8.8.8/stamped.mp4"),
+                    VideoDownloads.stampedFallbackUrls(new BothAddresses(), List.of("https://8.8.8.8/clean.mp4")));
+            assertTrue("a save of the stamped copy has nothing to fall back to",
+                    VideoDownloads.stampedFallbackUrls(new BothAddresses(), List.of("https://8.8.8.8/stamped.mp4")).isEmpty());
+
+            assertTrue(VideoDownloads.start(new StampedPost("125"), owner.get()));
+            awaitJobs();
+            assertFalse("the switch is off, so nothing is saved", new File(root, "alice/125.mp4").exists());
+
+            Settings.DOWNLOAD_WATERMARK_FALLBACK.save(true);
+            ShadowToast.reset();
+            assertTrue(VideoDownloads.start(new StampedPost("126"), owner.get()));
+            awaitJobs();
+            assertArrayEquals(VIDEO, Files.readAllBytes(new File(root, "alice/126.mp4").toPath()));
+            assertEquals("126.mp4", SavedVideoArchive.find(owner.get(), "126").name);
+            assertEquals("The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to "
+                    + FOLDER + "/alice", ShadowToast.getTextOfLatestToast());
+        } finally {
+            refusePath = null;
+            Settings.REMOVE_DOWNLOAD_WATERMARK.save(watermark);
+            Settings.DOWNLOAD_WATERMARK_FALLBACK.resetToDefault();
+        }
+    }
+
+    /** A video with TikTok's stamped address beside the clean one. */
+    public static final class StampedPost extends DownloadDetailsTest.Post {
+        StampedPost(String id) { super("alice", id); }
+        public BothAddresses getVideo() { return new BothAddresses(); }
     }
 
     public static final class BothAddresses {

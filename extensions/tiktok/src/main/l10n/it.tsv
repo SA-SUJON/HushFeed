@@ -1802,3 +1802,6 @@ Show the time to the second	Mostra l'ora al secondo
 Show when a video was posted down to the second, with your time zone, in place of TikTok's short date by the creator's name.	Mostra quando è stato pubblicato un video, al secondo e con il tuo fuso orario, al posto della data breve di TikTok accanto al nome del creator.
 Show dates on profile grids	Mostra le date nella griglia del profilo
 Show the day each video was posted under its view count on profile grids.	Mostra il giorno in cui è stato pubblicato ogni video sotto il numero di visualizzazioni nella griglia del profilo.
+Fall back to the watermarked copy	Ripiega sulla copia con filigrana
+When the video without the watermark can't be fetched, save TikTok's own watermarked copy instead and say so. It's the size TikTok's own save uses, so it may be smaller than the quality you picked.	Se il video senza filigrana non si riesce a scaricare, salva invece la copia con filigrana di TikTok e avvisa. Ha la dimensione usata dal salvataggio di TikTok, quindi può essere più piccola della qualità che hai scelto.
+The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s	Non è stato possibile scaricare il video senza filigrana, quindi la copia con filigrana di TikTok è stata salvata in %1$s

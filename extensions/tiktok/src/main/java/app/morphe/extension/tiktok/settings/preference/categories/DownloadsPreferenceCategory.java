@@ -112,6 +112,9 @@ public class DownloadsPreferenceCategory extends ConditionalPreferenceCategory {
             addPreference(new ChoicePreference(context, "Video download quality", Settings.DOWNLOAD_VIDEO_QUALITY,
                     new String[]{"Automatic", "Highest", "Lowest", "1080p", "720p", "540p", "480p", "360p"},
                     new String[]{"auto", "highest", "lowest", "1080", "720", "540", "480", "360"}));
+            addPreference(new TogglePreference(context, "Fall back to the watermarked copy",
+                    "When the video without the watermark can't be fetched, save TikTok's own watermarked copy instead and say so. It's the size TikTok's own save uses, so it may be smaller than the quality you picked.",
+                    Settings.DOWNLOAD_WATERMARK_FALLBACK));
             addPreference(new TogglePreference(context, "Save videos without sound",
                     "Leave the sound out of the saved video. Save the sound as well still writes "
                             + "the .m4a beside it if you want both.", Settings.DOWNLOAD_WITHOUT_SOUND));

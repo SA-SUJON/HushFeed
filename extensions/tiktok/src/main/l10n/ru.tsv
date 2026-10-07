@@ -1967,3 +1967,6 @@ Show the time to the second	Показывать время до секунды
 Show when a video was posted down to the second, with your time zone, in place of TikTok's short date by the creator's name.	Показывать, когда опубликовано видео, с точностью до секунды и с вашим часовым поясом вместо короткой даты TikTok рядом с именем автора.
 Show dates on profile grids	Показывать даты в сетке профиля
 Show the day each video was posted under its view count on profile grids.	Показывать день публикации каждого видео под числом просмотров в сетке профиля.
+Fall back to the watermarked copy	Сохранять копию с водяным знаком, если иначе нельзя
+When the video without the watermark can't be fetched, save TikTok's own watermarked copy instead and say so. It's the size TikTok's own save uses, so it may be smaller than the quality you picked.	Если видео без водяного знака не удаётся загрузить, сохраняется собственная копия TikTok с водяным знаком, и об этом сообщается. У неё размер, который использует сохранение TikTok, поэтому она может быть меньше выбранного качества.
+The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s	Не удалось загрузить видео без водяного знака, поэтому копия TikTok с водяным знаком сохранена в %1$s
