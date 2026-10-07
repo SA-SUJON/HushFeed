@@ -110,7 +110,8 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
         addPreference(new TogglePreference(
                 context,
                 "Hide AI-generated videos",
-                "Hide videos carrying TikTok's AI-generated label.",
+                "Hide videos with TikTok's AI-generated label, AI content credentials, a TikTok AI effect "
+                        + "such as AI Alive, or a tag like #ai or #aigenerated.",
                 Settings.HIDE_AI_GENERATED
         ));
         addPreference(new TogglePreference(

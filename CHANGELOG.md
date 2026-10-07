@@ -14,6 +14,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** New patch, Play SDR instead of HDR. Turn it on under Playback and videos that also come in HDR play their standard version, so the screen doesn't jump to full brightness when one starts. A video TikTok only offers in HDR still plays. With Playback quality on too, it picks among the standard versions.
 
+* **TikTok:** Hide AI-generated videos catches a lot more now. Besides TikTok's visible AI label, it reads the AI marks TikTok keeps on a post without always showing them: the creator's AI disclosure, TikTok's own moderation verdict, AI sources in the content credentials (C2PA), posts made with TikTok's AI effects like AI Alive, AI remix and AI portrait, and tags like #ai or #aigenerated. The filter report counts each one under AiSignals by the mark that caught it. Feed filter also covers the newer version of the Friends tab feed, so its rules apply there too.
+
 * **TikTok:** Show where a video was posted now works on videos where TikTok hides the post time, which is most of For You unless Always show publish date is on. It also shows on videos you open from search, a creator's profile or a shared link, and it switches to the right country as soon as an opened video starts instead of keeping the one from the feed. A long name gets shortened a little so the country isn't cut off along with it.
 
 * **TikTok:** In Feature Gate Lab, turning overrides on from a gate's own page now unlocks its Forced result switch right away. Before, it stayed greyed out until you left the page and came back.

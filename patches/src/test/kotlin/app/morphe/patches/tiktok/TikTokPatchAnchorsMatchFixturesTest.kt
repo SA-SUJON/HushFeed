@@ -1,7 +1,9 @@
 package app.morphe.patches.tiktok
 
 import app.morphe.Fixtures
+import app.morphe.takes
 import app.morphe.patches.tiktok.feedfilter.COMMENT_TOP_BAR_BRIDGE_BASE
+import app.morphe.patches.tiktok.feedfilter.FriendsV3FeedHandleResponseFingerprint
 import app.morphe.patches.tiktok.feedfilter.TAKO_COMMENT_TOP_BAR_BRIDGE
 import app.morphe.patches.tiktok.feedfilter.TAKO_COMMENT_TOP_BAR_SERVICE
 import app.morphe.patches.tiktok.feedfilter.coldStartCall
@@ -535,6 +537,68 @@ class TikTokPatchAnchorsMatchFixturesTest {
     }
 
     /**
+     * ContentMarkerFilters.aiSignal reads each AI marker by name, getter first and field second.
+     * Every one it relies on has to be there on every declared build, in the shape it reads:
+     * a no-argument getter or a field of that name.
+     */
+    @Test
+    fun `every AI filter signal resolves on every declared build`() {
+        val model = "Lcom/ss/android/ugc/aweme/feed/model/"
+        val wanted = mapOf(
+            "${model}Aweme;" to listOf(
+                "getAigcInfo", "getModerationAigcInfo", "getC2paInfo", "getAiAliveInfo", "aiRemixInfo",
+                "aiPortraitInfo", "aiTheaterInfo", "aiChatEditorInfo", "getAnchors", "getTextExtra",
+                "getDesc", "getAid",
+            ),
+            "Lcom/ss/android/ugc/aweme/feed/AIGCInfo;" to listOf("getAIGCLabelType", "createByAI"),
+            "${model}ModerationAigcInfo;" to listOf(
+                "moderationAigcLabelType", "moderationUserLabelStatus", "creatorGuidanceStatus",
+                "moderationCreatorSegment",
+            ),
+            "${model}C2PAInfo;" to listOf("aigcSrc", "firstAigcSrc", "lastAigcSrc"),
+            "${model}AIAliveInfo;" to listOf("getModelKey", "getModelPrompt", "getText"),
+            "${model}AIRemixInfo;" to listOf("getTaskId", "getPromptId"),
+            "${model}AIPortraitInfo;" to listOf("getTaskId", "getPromptId"),
+            "${model}AITheaterInfo;" to listOf("getTaskId", "getPromptId"),
+            "${model}AiChatEditorInfo;" to listOf("getTaskId"),
+            "${model}AnchorCommonStruct;" to listOf("getComponentKey"),
+            "Lcom/ss/android/ugc/aweme/model/TextExtraStruct;" to listOf("getHashTagName"),
+        )
+        val aiAnchorKeys = setOf(
+            "anchor_aigc_avatar", "anchor_ai_portrait", "anchor_ai_remix", "anchor_ai_style",
+            "anchor_ai_group_shot",
+        )
+        Fixtures.forEachDeclared { apk ->
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            val classes = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
+                .filter { it.type in wanted }
+                .associateBy { it.type }
+            for ((type, members) in wanted) {
+                val classDef = classes[type] ?: throw AssertionError("$type is missing")
+                val getters = classDef.methods.filter { it.parameterTypes.isEmpty() }.map { it.name }.toSet()
+                val fields = classDef.fields.map { it.name }.toSet()
+                assertEquals(
+                    "$type: AI signal members",
+                    emptyList<String>(),
+                    members.filter { it !in getters && it !in fields },
+                )
+            }
+            val aweme = classes.getValue("${model}Aweme;")
+            for (name in listOf("aiRemixInfo", "aiPortraitInfo", "aiTheaterInfo", "aiChatEditorInfo")) {
+                assertTrue("Aweme.$name is a struct field", aweme.fields.any { it.name == name && it.type.startsWith(model) })
+            }
+            val loaded = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
+                .flatMap { it.methods.asSequence() }
+                .flatMap { it.stringConstants().asSequence() }
+                .filter { it in aiAnchorKeys }
+                .toSet()
+            assertEquals("AI effect anchor keys", aiAnchorKeys, loaded)
+        }
+    }
+
+    /**
      * Remove avatar rings: the story status getter, the feed avatar's bind and the one author
      * live check it calls, and the User.isLive reads in AvatarLiveDataAdapter, on every declared
      * build. The bind and the check are R8 names that move each build.
@@ -602,6 +666,44 @@ class TikTokPatchAnchorsMatchFixturesTest {
                 }
             }
             assertEquals("${apk.name}: bio limit comparisons", 3, bioSites)
+        }
+    }
+
+    /**
+     * The Friends V3 feed is filtered as FriendsV3FeedNetworkSource starts handling a response:
+     * one public final instance method on every declared build, which walks the response's
+     * friendsV3Feeds list. Its entries keep the aweme, roomStruct and repostItem fields the
+     * filter reads, and a repost keeps its video in repostedAweme.
+     */
+    @Test
+    fun `Friends V3 response handler and entry fields resolve on every declared build`() {
+        val repo = "Lcom/ss/android/ugc/aweme/friendstab/repo/"
+        Fixtures.forEachDeclared { apk ->
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            val classes = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
+                .filter { it.type.startsWith(repo) }
+                .toList()
+            val taken = classes.flatMap { classDef ->
+                classDef.methods.filter { FriendsV3FeedHandleResponseFingerprint.takes(it, classDef) }
+            }
+            assertEquals("the Friends V3 response handler", 1, taken.size)
+            val handler = taken.single()
+            assertEquals("${repo}FriendsV3FeedNetworkSource;", handler.definingClass)
+            assertTrue("the handler is an instance method", handler.accessFlags and AccessFlags.STATIC.value == 0)
+            assertTrue(
+                "the handler walks friendsV3Feeds",
+                handler.implementation!!.instructions.any {
+                    ((it as? ReferenceInstruction)?.reference as? FieldReference)?.name == "friendsV3Feeds"
+                },
+            )
+            fun fieldsOf(name: String) = classes.single { it.type == "$repo$name;" }.fields.associate { it.name to it.type }
+            val entry = fieldsOf("FriendsV3FeedModel")
+            assertEquals("Lcom/ss/android/ugc/aweme/feed/model/Aweme;", entry["aweme"])
+            assertEquals("${repo}FriendsV3RepostModel;", entry["repostItem"])
+            assertTrue("roomStruct", entry.containsKey("roomStruct"))
+            assertEquals("Lcom/ss/android/ugc/aweme/feed/model/Aweme;", fieldsOf("FriendsV3RepostModel")["repostedAweme"])
+            assertEquals("Ljava/util/List;", fieldsOf("FriendsV3FeedResponse")["friendsV3Feeds"])
         }
     }
 

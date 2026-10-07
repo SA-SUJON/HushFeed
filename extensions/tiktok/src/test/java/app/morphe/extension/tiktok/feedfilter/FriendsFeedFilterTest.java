@@ -156,6 +156,48 @@ public class FriendsFeedFilterTest {
         assertEquals(1, odd.friendFeedData.size());
     }
 
+    /** Stands in for FriendsV3RepostModel: a friend's repost of someone's video. */
+    public static final class Repost {
+        public Aweme repostedAweme;
+        Repost(Aweme aweme) { this.repostedAweme = aweme; }
+    }
+
+    /** Stands in for FriendsV3FeedModel: the older wrapper's fields plus a repost. */
+    public static final class V3Entry {
+        public Aweme aweme;
+        public Object roomStruct;
+        public Repost repostItem;
+        V3Entry(Aweme aweme) { this.aweme = aweme; }
+        static V3Entry repostOf(Aweme aweme) {
+            V3Entry entry = new V3Entry(null);
+            entry.repostItem = new Repost(aweme);
+            return entry;
+        }
+    }
+
+    /** Stands in for FriendsV3FeedResponse. */
+    public static final class V3Response {
+        public List<V3Entry> friendsV3Feeds;
+        V3Response(V3Entry... entries) { friendsV3Feeds = new ArrayList<>(List.of(entries)); }
+    }
+
+    @Test public void theV3FeedDropsAnAdvertWhetherPostedOrReposted() {
+        Settings.REMOVE_ADS.save(true);
+        Settings.HIDE_LIVE.save(true);
+        V3Entry ordinary = new V3Entry(new Video(false));
+        V3Entry repostedOrdinary = V3Entry.repostOf(new Video(false));
+        V3Entry live = new V3Entry(null);
+        live.roomStruct = new Object();
+        V3Response response = new V3Response(ordinary, new V3Entry(new Video(true)), repostedOrdinary,
+                V3Entry.repostOf(new Video(true)), live);
+
+        FeedItemsFilter.filterFriendsV3Feed(response);
+
+        assertEquals(List.of(ordinary, repostedOrdinary), response.friendsV3Feeds);
+        FeedItemsFilter.filterFriendsV3Feed(null);
+        FeedItemsFilter.filterFriendsV3Feed(new Object());
+    }
+
     @Test public void everyEntryCanBeDroppedWhenTheyAllMatch() {
         Settings.REMOVE_ADS.save(true);
         Settings.HIDE_LIVE.save(false);
