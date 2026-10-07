@@ -1725,3 +1725,37 @@ Sleep timer off	Uyku zamanlayıcısı kapalı
 Keep offline videos out of the feed	Çevrimdışı videoları akışın dışında tut
 TikTok slips the videos it saved for offline viewing back into For You when it can't load enough new ones. This takes them all out. Your offline list stays as it is.	TikTok yeterince yeni video yükleyemediğinde çevrimdışı izlemek için kaydettiği videoları Sana Özel'e geri katar. Bu, hepsini çıkarır. Çevrimdışı listen olduğu gibi kalır.
 About %1$s of storage at this limit	Bu sınırda yaklaşık %1$s depolama alanı
+Save seen history to a file	Görülen videoları bir dosyaya kaydet
+Restore seen history from a file	Görülen videoları bir dosyadan geri yükle
+Save the videos @%1$s has seen, and when, to a JSON file. Anyone who opens the file can see that viewing history.	@%1$s hesabının gördüğü videoları ve ne zaman görüldüklerini bir JSON dosyasına kaydet. Dosyayı açan herkes bu izleme geçmişini görebilir.
+Save this account's seen videos, and when they were watched, to a JSON file. Anyone who opens the file can see that viewing history.	Bu hesabın gördüğü videoları ve ne zaman görüldüklerini bir JSON dosyasına kaydet. Dosyayı açan herkes bu izleme geçmişini görebilir.
+Add a seen-history file saved by Hushfeed to the videos @%1$s has seen. A video in both keeps the newer date.	Hushfeed'in kaydettiği bir geçmiş dosyasını @%1$s hesabının gördüğü videolara ekle. İkisinde de olan bir video daha yeni tarihi korur.
+Add a seen-history file saved by Hushfeed to this account's seen videos. A video in both keeps the newer date.	Hushfeed'in kaydettiği bir geçmiş dosyasını bu hesabın gördüğü videolara ekle. İkisinde de olan bir video daha yeni tarihi korur.
+Sign in to TikTok before saving or restoring seen history.	Görülen videoları kaydetmeden veya geri yüklemeden önce TikTok'a giriş yapın.
+Saving seen history	Görülen videolar kaydediliyor
+Reading the seen-history file	Geçmiş dosyası okunuyor
+Restoring seen history	Görülen videolar geri yükleniyor
+Saved 1 seen video to the file	Dosyaya 1 görülen video kaydedildi
+Saved %1$s seen videos to the file	Dosyaya %1$s görülen video kaydedildi
+Couldn't save the seen-history file. Try again.	Geçmiş dosyası kaydedilemedi. Tekrar deneyin.
+Couldn't start the export. Try again in a moment.	Dışa aktarma başlatılamadı. Biraz sonra tekrar deneyin.
+Added 1 seen video	1 görülen video eklendi
+Added %1$s seen videos	%1$s görülen video eklendi
+Added 1 seen video.	1 görülen video eklendi.
+Added %1$s seen videos.	%1$s görülen video eklendi.
+%1$s video was already recorded.	%1$s video zaten kayıtlıydı.
+%1$s videos were already recorded.	%1$s video zaten kayıtlıydı.
+%1$s video was older than Forget seen videos after allows.	%1$s video, Görülen videoları şu süreden sonra unut ayarının izin verdiğinden eskiydi.
+%1$s videos were older than Forget seen videos after allows.	%1$s video, Görülen videoları şu süreden sonra unut ayarının izin verdiğinden eskiydi.
+%1$s video had a date later than this phone's clock.	%1$s videonun tarihi bu telefonun saatinden ileriydi.
+%1$s videos had dates later than this phone's clock.	%1$s videonun tarihi bu telefonun saatinden ileriydi.
+%1$s video didn't fit in the newest %2$s.	%1$s video en yeni %2$s video içine sığmadı.
+%1$s videos didn't fit in the newest %2$s.	%1$s video en yeni %2$s video içine sığmadı.
+%1$s older seen video was dropped to keep the newest %2$s.	En yeni %2$s video korunsun diye %1$s eski görülen video silindi.
+%1$s older seen videos were dropped to keep the newest %2$s.	En yeni %2$s video korunsun diye %1$s eski görülen video silindi.
+Couldn't restore seen history. Your saved history is unchanged.	Görülen videolar geri yüklenemedi. Kayıtlı geçmişiniz değişmedi.
+That file is larger than %1$s MB. Choose a seen-history file saved by Hushfeed.	Bu dosya %1$s MB'tan büyük. Hushfeed'in kaydettiği bir geçmiş dosyası seçin.
+That file lists more than %1$s videos. Nothing was restored.	Bu dosyada %1$s videodan fazlası var. Hiçbir şey geri yüklenmedi.
+That isn't a seen-history file saved by Hushfeed. For TikTok's own data export, use Import watch history.	Bu, Hushfeed'in kaydettiği bir geçmiş dosyası değil. TikTok'un kendi veri dışa aktarımı için İzleme geçmişini içe aktar'ı kullanın.
+That file was saved by a newer Hushfeed. Update Hushfeed, then try again.	Bu dosya Hushfeed'in daha yeni bir sürümüyle kaydedilmiş. Hushfeed'i güncelleyip tekrar deneyin.
+That seen-history file is damaged or was edited. Nothing was restored.	Bu geçmiş dosyası bozuk ya da düzenlenmiş. Hiçbir şey geri yüklenmedi.

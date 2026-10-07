@@ -48,6 +48,8 @@ source,target
 %1$s minutes,%1$s minutes
 %1$s more saves waiting,%1$s more saves waiting
 %1$s needs fixing. %2$s,%1$s needs fixing. %2$s
+%1$s older seen video was dropped to keep the newest %2$s.,%1$s older seen video was dropped to keep the newest %2$s.
+%1$s older seen videos were dropped to keep the newest %2$s.,%1$s older seen videos were dropped to keep the newest %2$s.
 %1$s point,%1$s point
 %1$s points,%1$s points
 %1$s s,%1$s s
@@ -57,8 +59,16 @@ source,target
 %1$s times,%1$s times
 %1$s to %2$s,%1$s to %2$s
 %1$s video,%1$s video
+%1$s video didn't fit in the newest %2$s.,%1$s video didn't fit in the newest %2$s.
+%1$s video had a date later than this phone's clock.,%1$s video had a date later than this phone's clock.
+%1$s video was already recorded.,%1$s video was already recorded.
+%1$s video was older than Forget seen videos after allows.,%1$s video was older than Forget seen videos after allows.
 %1$s videos,%1$s videos
+%1$s videos didn't fit in the newest %2$s.,%1$s videos didn't fit in the newest %2$s.
+%1$s videos had dates later than this phone's clock.,%1$s videos had dates later than this phone's clock.
 %1$s videos left,%1$s videos left
+%1$s videos were already recorded.,%1$s videos were already recorded.
+%1$s videos were older than Forget seen videos after allows.,%1$s videos were older than Forget seen videos after allows.
 %1$s videos were recorded before each account kept its own list. They hide nothing until you add them here.,%1$s videos were recorded before each account kept its own list. They hide nothing until you add them here.
 %1$s view per comment,%1$s view per comment
 %1$s view per like,%1$s view per like
@@ -135,12 +145,18 @@ Add a button beside the block control to send feedback about the current video.,
 Add a button that hides the current creator on this phone without blocking them.,Add a button that hides the current creator on this phone without blocking them.
 Add a creator,Add a creator
 Add a search box that filters comments already loaded on this video by text or username. It doesn't search all of TikTok or remove TikTok's suggested-search banner.,Add a search box that filters comments already loaded on this video by text or username. It doesn't search all of TikTok or remove TikTok's suggested-search banner.
+Add a seen-history file saved by Hushfeed to the videos @%1$s has seen. A video in both keeps the newer date.,Add a seen-history file saved by Hushfeed to the videos @%1$s has seen. A video in both keeps the newer date.
+Add a seen-history file saved by Hushfeed to this account's seen videos. A video in both keeps the newer date.,Add a seen-history file saved by Hushfeed to this account's seen videos. A video in both keeps the newer date.
 Add a separate button that skips videos using the current sound.,Add a separate button that skips videos using the current sound.
 Add apps to Share via,Add apps to Share via
 Add hidden creator,Add hidden creator
 Add older seen videos to this account,Add older seen videos to this account
 Added %1$s,Added %1$s
 Added %1$s older seen videos to this account,Added %1$s older seen videos to this account
+Added %1$s seen videos,Added %1$s seen videos
+Added %1$s seen videos.,Added %1$s seen videos.
+Added 1 seen video,Added 1 seen video
+Added 1 seen video.,Added 1 seen video.
 Added one older seen video to this account,Added one older seen video to this account
 Added to this account.,Added to this account.
 "Adds Export CSV and Export JSON under the search box, so it needs Search within comments. They save the comments and replies this video has loaded to a file you pick. Open the reply threads you want first, since TikTok only loads them when you do.","Adds Export CSV and Export JSON under the search box, so it needs Search within comments. They save the comments and replies this video has loaded to a file you pick. Open the reply threads you want first, since TikTok only loads them when you do."
@@ -363,13 +379,16 @@ Couldn't record the screen's layout. Start again from Diagnostics.,Couldn't reco
 Couldn't reset the settings. Try again.,Couldn't reset the settings. Try again.
 Couldn't reset this override. Try again.,Couldn't reset this override. Try again.
 Couldn't restart TikTok. Close it and open it again.,Couldn't restart TikTok. Close it and open it again.
+Couldn't restore seen history. Your saved history is unchanged.,Couldn't restore seen history. Your saved history is unchanged.
 Couldn't restore the settings. Try again.,Couldn't restore the settings. Try again.
 Couldn't save the change. Try again.,Couldn't save the change. Try again.
+Couldn't save the seen-history file. Try again.,Couldn't save the seen-history file. Try again.
 Couldn't save the settings backup. Try again.,Couldn't save the settings backup. Try again.
 Couldn't save these choices. Try again.,Couldn't save these choices. Try again.
 Couldn't save this override. Try again.,Couldn't save this override. Try again.
 Couldn't send the feedback. Try again in a moment.,Couldn't send the feedback. Try again in a moment.
 Couldn't start the Lab change. Try again in a moment.,Couldn't start the Lab change. Try again in a moment.
+Couldn't start the export. Try again in a moment.,Couldn't start the export. Try again in a moment.
 Couldn't start the import. Try again in a moment.,Couldn't start the import. Try again in a moment.
 Couldn't start the report export. Try again in a moment.,Couldn't start the report export. Try again in a moment.
 Couldn't start the settings change. Try again in a moment.,Couldn't start the settings change. Try again in a moment.
@@ -1068,6 +1087,7 @@ Quality,Quality
 "Quality, speed and auto-advance","Quality, speed and auto-advance"
 Quick setup,Quick setup
 Reading,Reading
+Reading the seen-history file,Reading the seen-history file
 Reading watch history,Reading watch history
 Record a screen's layout,Record a screen's layout
 Recorded gate reads (%1$d),Recorded gate reads (%1$d)
@@ -1116,8 +1136,10 @@ Restart now,Restart now
 Restart pending,Restart pending
 Restore failed. Some settings may still be changed.,Restore failed. Some settings may still be changed.
 Restore failed. Some settings may still be changed. Use Undo to put them back.,Restore failed. Some settings may still be changed. Use Undo to put them back.
+Restore seen history from a file,Restore seen history from a file
 Restore settings,Restore settings
 Restore setup,Restore setup
+Restoring seen history,Restoring seen history
 Restoring setup,Restoring setup
 Restoring your settings,Restoring your settings
 Resume videos after scrolling,Resume videos after scrolling
@@ -1156,11 +1178,14 @@ Save photo posts as a video,Save photo posts as a video
 Save photos,Save photos
 Save photos or a video?,Save photos or a video?
 Save report,Save report
+Save seen history to a file,Save seen history to a file
 Save subtitles beside videos,Save subtitles beside videos
 "Save the caption, creator, link and publication date in a TXT file. On Android 10 and later, the pair uses Download or Documents under the same folder name. Applies to saves handled here.","Save the caption, creator, link and publication date in a TXT file. On Android 10 and later, the pair uses Download or Documents under the same folder name. Applies to saves handled here."
 Save the latest available TikTok crash report for diagnostic export.,Save the latest available TikTok crash report for diagnostic export.
 Save the original sound,Save the original sound
 Save the sound as well,Save the sound as well
+"Save the videos @%1$s has seen, and when, to a JSON file. Anyone who opens the file can see that viewing history.","Save the videos @%1$s has seen, and when, to a JSON file. Anyone who opens the file can see that viewing history."
+"Save this account's seen videos, and when they were watched, to a JSON file. Anyone who opens the file can see that viewing history.","Save this account's seen videos, and when they were watched, to a JSON file. Anyone who opens the file can see that viewing history."
 Save videos without sound,Save videos without sound
 "Save, restore, reset and undo your settings","Save, restore, reset and undo your settings"
 Saved,Saved
@@ -1173,6 +1198,8 @@ Saved %1$s of %2$s photos before the story failed,Saved %1$s of %2$s photos befo
 "Saved %1$s of %2$s, the rest ran out of time","Saved %1$s of %2$s, the rest ran out of time"
 Saved %1$s of %2$s. The server asked us to wait. Try again later.,Saved %1$s of %2$s. The server asked us to wait. Try again later.
 Saved %1$s original photos,Saved %1$s original photos
+Saved %1$s seen videos to the file,Saved %1$s seen videos to the file
+Saved 1 seen video to the file,Saved 1 seen video to the file
 Saved one original photo,Saved one original photo
 Saved the photos as a video in %1$s,Saved the photos as a video in %1$s
 "Saved the photos as a video in %1$s. The sound couldn't be added, so it's silent.","Saved the photos as a video in %1$s. The sound couldn't be added, so it's silent."
@@ -1185,6 +1212,7 @@ Saving %1$s of %2$s,Saving %1$s of %2$s
 Saving %1$s of %2$s: %3$s,Saving %1$s of %2$s: %3$s
 Saving %1$s original photos,Saving %1$s original photos
 Saving one original photo,Saving one original photo
+Saving seen history,Saving seen history
 Saving settings backup,Saving settings backup
 Saving the live photo's clip,Saving the live photo's clip
 Saving the profile picture,Saving the profile picture
@@ -1295,6 +1323,7 @@ Show when the camera or microphone is in use,Show when the camera or microphone 
 Show where a video was posted,Show where a video was posted
 Showing %1$s again,Showing %1$s again
 Sign in to TikTok before importing watch history.,Sign in to TikTok before importing watch history.
+Sign in to TikTok before saving or restoring seen history.,Sign in to TikTok before saving or restoring seen history.
 Silence the feed while comments are open,Silence the feed while comments are open
 Skip content warnings,Skip content warnings
 "Skipped entries are invalid, expired, already recorded, or older than the newest %1$s videos.","Skipped entries are invalid, expired, already recorded, or older than the newest %1$s videos."
@@ -1398,16 +1427,20 @@ That creator is already in the list,That creator is already in the list
 "That creator pattern is too long to use, so it was skipped: %1$s","That creator pattern is too long to use, so it was skipped: %1$s"
 "That creator pattern is too long, so it wasn't added: %1$s","That creator pattern is too long, so it wasn't added: %1$s"
 That file has more than %1$s watch-history entries.,That file has more than %1$s watch-history entries.
+That file is larger than %1$s MB. Choose a seen-history file saved by Hushfeed.,That file is larger than %1$s MB. Choose a seen-history file saved by Hushfeed.
 That file is larger than %1$s MB. Choose a smaller watch-history export.,That file is larger than %1$s MB. Choose a smaller watch-history export.
 That file is too large to be a settings backup. Nothing was altered.,That file is too large to be a settings backup. Nothing was altered.
 "That file isn't a loaded-values export, or it's larger than the Lab accepts","That file isn't a loaded-values export, or it's larger than the Lab accepts"
 "That file isn't readable text, so it may have been damaged in transit. Nothing was altered.","That file isn't readable text, so it may have been damaged in transit. Nothing was altered."
+That file lists more than %1$s videos. Nothing was restored.,That file lists more than %1$s videos. Nothing was restored.
+"That file was saved by a newer Hushfeed. Update Hushfeed, then try again.","That file was saved by a newer Hushfeed. Update Hushfeed, then try again."
 "That folder name has a character Android doesn't allow. Use letters, numbers, spaces or dashes.","That folder name has a character Android doesn't allow. Use letters, numbers, spaces or dashes."
 That is %1$d minutes today,That is %1$d minutes today
 That is %1$d videos today,That is %1$d videos today
 That is one minute today,That is one minute today
 That is one video today,That is one video today
 That isn't a Hushfeed settings backup. Nothing was altered.,That isn't a Hushfeed settings backup. Nothing was altered.
+"That isn't a seen-history file saved by Hushfeed. For TikTok's own data export, use Import watch history.","That isn't a seen-history file saved by Hushfeed. For TikTok's own data export, use Import watch history."
 "That isn't an app name. Try something like com.example.downloader, or leave the box empty to keep saving in TikTok.","That isn't an app name. Try something like com.example.downloader, or leave the box empty to keep saving in TikTok."
 That isn't valid JSON. Check the brackets and quotes.,That isn't valid JSON. Check the brackets and quotes.
 That list has too many entries. Keep it to %1$s or fewer.,That list has too many entries. Keep it to %1$s or fewer.
@@ -1415,6 +1448,7 @@ That list is too large. Keep it to %1$s KB or less.,That list is too large. Keep
 That loosens the budget. It waits until %1$s.,That loosens the budget. It waits until %1$s.
 That loosens the lock. It waits until %1$s.,That loosens the lock. It waits until %1$s.
 That preset isn't recognized. Choose another.,That preset isn't recognized. Choose another.
+That seen-history file is damaged or was edited. Nothing was restored.,That seen-history file is damaged or was edited. Nothing was restored.
 That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.,That settings backup contains a feed rule list larger than Hushfeed accepts. Nothing was altered.
 That settings backup holds a value Hushfeed can't read. Nothing was altered.,That settings backup holds a value Hushfeed can't read. Nothing was altered.
 That settings backup holds more Feature Gate Lab rules than the Lab takes. Nothing was altered.,That settings backup holds more Feature Gate Lab rules than the Lab takes. Nothing was altered.

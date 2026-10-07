@@ -1725,3 +1725,37 @@ Sleep timer off	Timer spento
 Keep offline videos out of the feed	Tieni i video offline fuori dal feed
 TikTok slips the videos it saved for offline viewing back into For You when it can't load enough new ones. This takes them all out. Your offline list stays as it is.	TikTok rimette in Per te i video che ha salvato per la visione offline quando non riesce a caricarne abbastanza di nuovi. Questo li toglie tutti. La tua lista offline resta com'è.
 About %1$s of storage at this limit	Circa %1$s di spazio con questo limite
+Save seen history to a file	Salva i video visti in un file
+Restore seen history from a file	Ripristina i video visti da un file
+Save the videos @%1$s has seen, and when, to a JSON file. Anyone who opens the file can see that viewing history.	Salva in un file JSON i video visti da @%1$s e quando sono stati guardati. Chi apre il file può vedere questa cronologia di visualizzazione.
+Save this account's seen videos, and when they were watched, to a JSON file. Anyone who opens the file can see that viewing history.	Salva in un file JSON i video visti di questo account e quando sono stati guardati. Chi apre il file può vedere questa cronologia di visualizzazione.
+Add a seen-history file saved by Hushfeed to the videos @%1$s has seen. A video in both keeps the newer date.	Aggiungi un file di cronologia salvato da Hushfeed ai video visti da @%1$s. Se un video è in entrambi, resta la data più recente.
+Add a seen-history file saved by Hushfeed to this account's seen videos. A video in both keeps the newer date.	Aggiungi un file di cronologia salvato da Hushfeed ai video visti di questo account. Se un video è in entrambi, resta la data più recente.
+Sign in to TikTok before saving or restoring seen history.	Accedi a TikTok prima di salvare o ripristinare i video visti.
+Saving seen history	Salvataggio dei video visti
+Reading the seen-history file	Lettura del file di cronologia
+Restoring seen history	Ripristino dei video visti
+Saved 1 seen video to the file	1 video visto salvato nel file
+Saved %1$s seen videos to the file	%1$s video visti salvati nel file
+Couldn't save the seen-history file. Try again.	Impossibile salvare il file di cronologia. Riprova.
+Couldn't start the export. Try again in a moment.	Impossibile avviare l'esportazione. Riprova tra un momento.
+Added 1 seen video	Aggiunto 1 video visto
+Added %1$s seen videos	Aggiunti %1$s video visti
+Added 1 seen video.	Aggiunto 1 video visto.
+Added %1$s seen videos.	Aggiunti %1$s video visti.
+%1$s video was already recorded.	%1$s video era già registrato.
+%1$s videos were already recorded.	%1$s video erano già registrati.
+%1$s video was older than Forget seen videos after allows.	%1$s video era più vecchio di quanto consente Dimentica i video visti dopo.
+%1$s videos were older than Forget seen videos after allows.	%1$s video erano più vecchi di quanto consente Dimentica i video visti dopo.
+%1$s video had a date later than this phone's clock.	%1$s video aveva una data successiva all'ora di questo telefono.
+%1$s videos had dates later than this phone's clock.	%1$s video avevano date successive all'ora di questo telefono.
+%1$s video didn't fit in the newest %2$s.	%1$s video non rientrava nei %2$s più recenti.
+%1$s videos didn't fit in the newest %2$s.	%1$s video non rientravano nei %2$s più recenti.
+%1$s older seen video was dropped to keep the newest %2$s.	%1$s video visto più vecchio è stato rimosso per tenere i %2$s più recenti.
+%1$s older seen videos were dropped to keep the newest %2$s.	%1$s video visti più vecchi sono stati rimossi per tenere i %2$s più recenti.
+Couldn't restore seen history. Your saved history is unchanged.	Impossibile ripristinare i video visti. La cronologia salvata non è cambiata.
+That file is larger than %1$s MB. Choose a seen-history file saved by Hushfeed.	Il file supera %1$s MB. Scegli un file di cronologia salvato da Hushfeed.
+That file lists more than %1$s videos. Nothing was restored.	Il file contiene più di %1$s video. Non è stato ripristinato nulla.
+That isn't a seen-history file saved by Hushfeed. For TikTok's own data export, use Import watch history.	Questo non è un file di cronologia salvato da Hushfeed. Per l'esportazione dei dati di TikTok usa Importa cronologia di visualizzazione.
+That file was saved by a newer Hushfeed. Update Hushfeed, then try again.	Il file è stato salvato da una versione più recente di Hushfeed. Aggiorna Hushfeed e riprova.
+That seen-history file is damaged or was edited. Nothing was restored.	Il file di cronologia è danneggiato o è stato modificato. Non è stato ripristinato nulla.

@@ -1719,3 +1719,37 @@ Sleep timer off,Pengatur waktu tidur mati
 Keep offline videos out of the feed,Jauhkan video offline dari feed
 TikTok slips the videos it saved for offline viewing back into For You when it can't load enough new ones. This takes them all out. Your offline list stays as it is.,TikTok menyelipkan video yang disimpannya untuk ditonton offline kembali ke For You saat tidak bisa memuat cukup video baru. Ini mengeluarkan semuanya. Daftar offline-mu tetap seperti semula.
 About %1$s of storage at this limit,Sekitar %1$s penyimpanan pada batas ini
+Save seen history to a file,Simpan riwayat video yang dilihat ke file
+Restore seen history from a file,Pulihkan riwayat video yang dilihat dari file
+"Save the videos @%1$s has seen, and when, to a JSON file. Anyone who opens the file can see that viewing history.",Simpan video yang telah dilihat @%1$s beserta waktunya ke file JSON. Siapa pun yang membuka file ini dapat melihat riwayat tontonan tersebut.
+"Save this account's seen videos, and when they were watched, to a JSON file. Anyone who opens the file can see that viewing history.",Simpan video yang telah dilihat akun ini beserta waktunya ke file JSON. Siapa pun yang membuka file ini dapat melihat riwayat tontonan tersebut.
+Add a seen-history file saved by Hushfeed to the videos @%1$s has seen. A video in both keeps the newer date.,Tambahkan file riwayat yang disimpan Hushfeed ke video yang telah dilihat @%1$s. Video yang ada di keduanya memakai tanggal yang lebih baru.
+Add a seen-history file saved by Hushfeed to this account's seen videos. A video in both keeps the newer date.,Tambahkan file riwayat yang disimpan Hushfeed ke video yang telah dilihat akun ini. Video yang ada di keduanya memakai tanggal yang lebih baru.
+Sign in to TikTok before saving or restoring seen history.,Masuk ke TikTok sebelum menyimpan atau memulihkan riwayat video yang dilihat.
+Saving seen history,Menyimpan riwayat video yang dilihat
+Reading the seen-history file,Membaca file riwayat
+Restoring seen history,Memulihkan riwayat video yang dilihat
+Saved 1 seen video to the file,1 video yang dilihat disimpan ke file
+Saved %1$s seen videos to the file,%1$s video yang dilihat disimpan ke file
+Couldn't save the seen-history file. Try again.,Tidak dapat menyimpan file riwayat. Coba lagi.
+Couldn't start the export. Try again in a moment.,Tidak dapat memulai ekspor. Coba lagi sebentar lagi.
+Added 1 seen video,1 video yang dilihat ditambahkan
+Added %1$s seen videos,%1$s video yang dilihat ditambahkan
+Added 1 seen video.,1 video yang dilihat ditambahkan.
+Added %1$s seen videos.,%1$s video yang dilihat ditambahkan.
+%1$s video was already recorded.,%1$s video sudah tercatat.
+%1$s videos were already recorded.,%1$s video sudah tercatat.
+%1$s video was older than Forget seen videos after allows.,%1$s video lebih lama dari batas Lupakan video yang sudah ditonton setelah.
+%1$s videos were older than Forget seen videos after allows.,%1$s video lebih lama dari batas Lupakan video yang sudah ditonton setelah.
+%1$s video had a date later than this phone's clock.,%1$s video bertanggal lebih lambat dari jam ponsel ini.
+%1$s videos had dates later than this phone's clock.,%1$s video bertanggal lebih lambat dari jam ponsel ini.
+%1$s video didn't fit in the newest %2$s.,%1$s video tidak muat di %2$s video terbaru.
+%1$s videos didn't fit in the newest %2$s.,%1$s video tidak muat di %2$s video terbaru.
+%1$s older seen video was dropped to keep the newest %2$s.,%1$s video lama yang dilihat dihapus agar %2$s video terbaru tetap tersimpan.
+%1$s older seen videos were dropped to keep the newest %2$s.,%1$s video lama yang dilihat dihapus agar %2$s video terbaru tetap tersimpan.
+Couldn't restore seen history. Your saved history is unchanged.,Tidak dapat memulihkan riwayat video yang dilihat. Riwayat yang tersimpan tidak berubah.
+That file is larger than %1$s MB. Choose a seen-history file saved by Hushfeed.,File itu lebih besar dari %1$s MB. Pilih file riwayat yang disimpan Hushfeed.
+That file lists more than %1$s videos. Nothing was restored.,File itu berisi lebih dari %1$s video. Tidak ada yang dipulihkan.
+"That isn't a seen-history file saved by Hushfeed. For TikTok's own data export, use Import watch history.","Itu bukan file riwayat yang disimpan Hushfeed. Untuk ekspor data TikTok sendiri, gunakan Impor riwayat tontonan."
+"That file was saved by a newer Hushfeed. Update Hushfeed, then try again.","File itu disimpan oleh Hushfeed versi lebih baru. Perbarui Hushfeed, lalu coba lagi."
+That seen-history file is damaged or was edited. Nothing was restored.,File riwayat itu rusak atau telah diedit. Tidak ada yang dipulihkan.

@@ -1725,3 +1725,37 @@ Sleep timer off	Yuxu taymeri söndürüldü
 Keep offline videos out of the feed	Oflayn videoları lentdən kənarda saxlayın
 TikTok slips the videos it saved for offline viewing back into For You when it can't load enough new ones. This takes them all out. Your offline list stays as it is.	TikTok kifayət qədər yeni video yükləyə bilməyəndə oflayn baxış üçün saxladığı videoları For You-ya geri qatır. Bu, hamısını çıxarır. Oflayn siyahınız olduğu kimi qalır.
 About %1$s of storage at this limit	Bu limitdə təxminən %1$s yaddaş
+Save seen history to a file	İzlənmiş videoları fayla saxla
+Restore seen history from a file	İzlənmiş videoları fayldan bərpa et
+Save the videos @%1$s has seen, and when, to a JSON file. Anyone who opens the file can see that viewing history.	@%1$s hesabının izlədiyi videoları və nə vaxt izlənildiklərini JSON faylına saxlayın. Faylı açan hər kəs bu izləmə tarixçəsini görə bilər.
+Save this account's seen videos, and when they were watched, to a JSON file. Anyone who opens the file can see that viewing history.	Bu hesabın izlədiyi videoları və nə vaxt izlənildiklərini JSON faylına saxlayın. Faylı açan hər kəs bu izləmə tarixçəsini görə bilər.
+Add a seen-history file saved by Hushfeed to the videos @%1$s has seen. A video in both keeps the newer date.	Hushfeed-in saxladığı tarixçə faylını @%1$s hesabının izlədiyi videolara əlavə edin. Hər ikisində olan video daha yeni tarixi saxlayır.
+Add a seen-history file saved by Hushfeed to this account's seen videos. A video in both keeps the newer date.	Hushfeed-in saxladığı tarixçə faylını bu hesabın izlədiyi videolara əlavə edin. Hər ikisində olan video daha yeni tarixi saxlayır.
+Sign in to TikTok before saving or restoring seen history.	İzlənmiş videoları saxlamazdan və ya bərpa etməzdən əvvəl TikTok-a daxil olun.
+Saving seen history	İzlənmiş videolar saxlanılır
+Reading the seen-history file	Tarixçə faylı oxunur
+Restoring seen history	İzlənmiş videolar bərpa olunur
+Saved 1 seen video to the file	Fayla 1 izlənmiş video saxlanıldı
+Saved %1$s seen videos to the file	Fayla %1$s izlənmiş video saxlanıldı
+Couldn't save the seen-history file. Try again.	Tarixçə faylı saxlanıla bilmədi. Yenidən cəhd edin.
+Couldn't start the export. Try again in a moment.	İxrac başladıla bilmədi. Bir az sonra yenidən cəhd edin.
+Added 1 seen video	1 izlənmiş video əlavə edildi
+Added %1$s seen videos	%1$s izlənmiş video əlavə edildi
+Added 1 seen video.	1 izlənmiş video əlavə edildi.
+Added %1$s seen videos.	%1$s izlənmiş video əlavə edildi.
+%1$s video was already recorded.	%1$s video artıq qeydə alınmışdı.
+%1$s videos were already recorded.	%1$s video artıq qeydə alınmışdı.
+%1$s video was older than Forget seen videos after allows.	%1$s video İzlənmiş videoları bu müddətdən sonra unudun ayarının icazə verdiyindən köhnə idi.
+%1$s videos were older than Forget seen videos after allows.	%1$s video İzlənmiş videoları bu müddətdən sonra unudun ayarının icazə verdiyindən köhnə idi.
+%1$s video had a date later than this phone's clock.	%1$s videonun tarixi bu telefonun saatından sonra idi.
+%1$s videos had dates later than this phone's clock.	%1$s videonun tarixi bu telefonun saatından sonra idi.
+%1$s video didn't fit in the newest %2$s.	%1$s video ən yeni %2$s videoya sığmadı.
+%1$s videos didn't fit in the newest %2$s.	%1$s video ən yeni %2$s videoya sığmadı.
+%1$s older seen video was dropped to keep the newest %2$s.	Ən yeni %2$s video qalsın deyə %1$s köhnə izlənmiş video silindi.
+%1$s older seen videos were dropped to keep the newest %2$s.	Ən yeni %2$s video qalsın deyə %1$s köhnə izlənmiş video silindi.
+Couldn't restore seen history. Your saved history is unchanged.	İzlənmiş videolar bərpa edilə bilmədi. Saxlanmış tarixçəniz dəyişmədi.
+That file is larger than %1$s MB. Choose a seen-history file saved by Hushfeed.	Bu fayl %1$s MB-dan böyükdür. Hushfeed-in saxladığı tarixçə faylını seçin.
+That file lists more than %1$s videos. Nothing was restored.	Bu faylda %1$s videodan çox var. Heç nə bərpa edilmədi.
+That isn't a seen-history file saved by Hushfeed. For TikTok's own data export, use Import watch history.	Bu, Hushfeed-in saxladığı tarixçə faylı deyil. TikTok-un öz məlumat ixracı üçün İzləmə tarixçəsini idxal et funksiyasından istifadə edin.
+That file was saved by a newer Hushfeed. Update Hushfeed, then try again.	Bu fayl Hushfeed-in daha yeni versiyası ilə saxlanılıb. Hushfeed-i yeniləyin, sonra yenidən cəhd edin.
+That seen-history file is damaged or was edited. Nothing was restored.	Bu tarixçə faylı zədələnib və ya redaktə olunub. Heç nə bərpa edilmədi.

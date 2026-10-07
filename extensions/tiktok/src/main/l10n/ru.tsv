@@ -1866,3 +1866,61 @@ Sleep timer off	Таймер сна выключен
 Keep offline videos out of the feed	Не показывать офлайн-видео в ленте
 TikTok slips the videos it saved for offline viewing back into For You when it can't load enough new ones. This takes them all out. Your offline list stays as it is.	Когда TikTok не может загрузить достаточно новых видео, он подмешивает в «Рекомендации» видео, сохранённые для офлайн-просмотра. Эта настройка убирает их все. Ваш офлайн-список остаётся как есть.
 About %1$s of storage at this limit	Около %1$s памяти при этом лимите
+Save seen history to a file	Сохранить просмотренные видео в файл
+Restore seen history from a file	Восстановить просмотренные видео из файла
+Save the videos @%1$s has seen, and when, to a JSON file. Anyone who opens the file can see that viewing history.	Сохранить в JSON-файл видео, просмотренные аккаунтом @%1$s, и время просмотра. Любой, кто откроет файл, увидит эту историю просмотров.
+Save this account's seen videos, and when they were watched, to a JSON file. Anyone who opens the file can see that viewing history.	Сохранить в JSON-файл видео, просмотренные в этом аккаунте, и время просмотра. Любой, кто откроет файл, увидит эту историю просмотров.
+Add a seen-history file saved by Hushfeed to the videos @%1$s has seen. A video in both keeps the newer date.	Добавить файл истории, сохранённый Hushfeed, к видео, просмотренным аккаунтом @%1$s. Если видео есть в обоих, остаётся более поздняя дата.
+Add a seen-history file saved by Hushfeed to this account's seen videos. A video in both keeps the newer date.	Добавить файл истории, сохранённый Hushfeed, к просмотренным видео этого аккаунта. Если видео есть в обоих, остаётся более поздняя дата.
+Sign in to TikTok before saving or restoring seen history.	Войдите в TikTok, прежде чем сохранять или восстанавливать просмотренные видео.
+Saving seen history	Сохранение просмотренных видео
+Reading the seen-history file	Чтение файла истории
+Restoring seen history	Восстановление просмотренных видео
+Saved 1 seen video to the file	В файл сохранено 1 просмотренное видео
+Saved %1$s seen videos to the file	В файл сохранено %1$s просмотренных видео
+Couldn't save the seen-history file. Try again.	Не удалось сохранить файл истории. Попробуйте ещё раз.
+Couldn't start the export. Try again in a moment.	Не удалось начать экспорт. Попробуйте ещё раз через минуту.
+Added 1 seen video	Добавлено 1 просмотренное видео
+Added %1$s seen videos	Добавлено %1$s просмотренных видео
+Added 1 seen video.	Добавлено 1 просмотренное видео.
+Added %1$s seen videos.	Добавлено %1$s просмотренных видео.
+%1$s video was already recorded.	%1$s видео уже было записано.
+%1$s videos were already recorded.	%1$s видео уже было записано.
+%1$s video was older than Forget seen videos after allows.	%1$s видео было старше срока из настройки «Забывать просмотренные видео через».
+%1$s videos were older than Forget seen videos after allows.	%1$s видео было старше срока из настройки «Забывать просмотренные видео через».
+%1$s video had a date later than this phone's clock.	%1$s видео было датировано позже, чем показывают часы этого телефона.
+%1$s videos had dates later than this phone's clock.	%1$s видео было датировано позже, чем показывают часы этого телефона.
+%1$s video didn't fit in the newest %2$s.	%1$s видео не поместилось в %2$s последних.
+%1$s videos didn't fit in the newest %2$s.	%1$s видео не поместилось в %2$s последних.
+%1$s older seen video was dropped to keep the newest %2$s.	%1$s более старое просмотренное видео удалено, чтобы оставить %2$s последних.
+%1$s older seen videos were dropped to keep the newest %2$s.	%1$s более старых просмотренных видео удалено, чтобы оставить %2$s последних.
+Couldn't restore seen history. Your saved history is unchanged.	Не удалось восстановить просмотренные видео. Сохранённая история не изменилась.
+That file is larger than %1$s MB. Choose a seen-history file saved by Hushfeed.	Файл больше %1$s МБ. Выберите файл истории, сохранённый Hushfeed.
+That file lists more than %1$s videos. Nothing was restored.	В файле больше %1$s видео. Ничего не восстановлено.
+That isn't a seen-history file saved by Hushfeed. For TikTok's own data export, use Import watch history.	Это не файл истории, сохранённый Hushfeed. Для собственного экспорта данных TikTok используйте «Импортировать историю просмотров».
+That file was saved by a newer Hushfeed. Update Hushfeed, then try again.	Файл сохранён более новой версией Hushfeed. Обновите Hushfeed и попробуйте ещё раз.
+That seen-history file is damaged or was edited. Nothing was restored.	Файл истории повреждён или был изменён. Ничего не восстановлено.
+Saved %1$s seen videos to the file|one	В файл сохранено %1$s просмотренное видео
+Saved %1$s seen videos to the file|few	В файл сохранено %1$s просмотренных видео
+Saved %1$s seen videos to the file|many	В файл сохранено %1$s просмотренных видео
+Added %1$s seen videos|one	Добавлено %1$s просмотренное видео
+Added %1$s seen videos|few	Добавлено %1$s просмотренных видео
+Added %1$s seen videos|many	Добавлено %1$s просмотренных видео
+Added %1$s seen videos.|one	Добавлено %1$s просмотренное видео.
+Added %1$s seen videos.|few	Добавлено %1$s просмотренных видео.
+Added %1$s seen videos.|many	Добавлено %1$s просмотренных видео.
+%1$s videos were already recorded.|one	%1$s видео уже было записано.
+%1$s videos were already recorded.|few	%1$s видео уже были записаны.
+%1$s videos were already recorded.|many	%1$s видео уже было записано.
+%1$s videos were older than Forget seen videos after allows.|one	%1$s видео было старше срока из настройки «Забывать просмотренные видео через».
+%1$s videos were older than Forget seen videos after allows.|few	%1$s видео были старше срока из настройки «Забывать просмотренные видео через».
+%1$s videos were older than Forget seen videos after allows.|many	%1$s видео было старше срока из настройки «Забывать просмотренные видео через».
+%1$s videos had dates later than this phone's clock.|one	%1$s видео было датировано позже, чем показывают часы этого телефона.
+%1$s videos had dates later than this phone's clock.|few	%1$s видео были датированы позже, чем показывают часы этого телефона.
+%1$s videos had dates later than this phone's clock.|many	%1$s видео было датировано позже, чем показывают часы этого телефона.
+%1$s videos didn't fit in the newest %2$s.|one	%1$s видео не поместилось в %2$s последних.
+%1$s videos didn't fit in the newest %2$s.|few	%1$s видео не поместились в %2$s последних.
+%1$s videos didn't fit in the newest %2$s.|many	%1$s видео не поместилось в %2$s последних.
+%1$s older seen videos were dropped to keep the newest %2$s.|one	%1$s более старое просмотренное видео удалено, чтобы оставить %2$s последних.
+%1$s older seen videos were dropped to keep the newest %2$s.|few	%1$s более старых просмотренных видео удалены, чтобы оставить %2$s последних.
+%1$s older seen videos were dropped to keep the newest %2$s.|many	%1$s более старых просмотренных видео удалено, чтобы оставить %2$s последних.
