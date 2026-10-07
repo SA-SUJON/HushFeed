@@ -8,6 +8,7 @@ import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.diagnostics.HookStatus;
 import app.morphe.extension.tiktok.blockauthor.Reflect;
 import app.morphe.extension.tiktok.settings.Settings;
+import app.morphe.extension.tiktok.settings.SettingsStatus;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +61,10 @@ public final class H264Playback {
      * with another codec. Anything else goes back as it came.
      */
     static List<?> keepH264(List<?> original) {
-        if (original == null || original.size() < 2 || !Settings.PREFER_H264.get()) return original;
+        // A switch saved on by a build that had the patch, or a restored backup, keeps its
+        // value after a repatch without it, and no row is left to turn it off.
+        if (original == null || original.size() < 2 || !SettingsStatus.h264PlaybackEnabled
+                || !Settings.PREFER_H264.get()) return original;
         List<Object> h264 = new ArrayList<>(original.size());
         for (Object gear : original) {
             if (isH264(gear)) h264.add(gear);

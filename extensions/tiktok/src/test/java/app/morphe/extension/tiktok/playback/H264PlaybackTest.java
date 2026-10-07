@@ -64,6 +64,10 @@ public class H264PlaybackTest {
         @Override public String toString() { return gearName + "/" + codecType + "/" + hdrType; }
     }
 
+    @org.junit.Before public void patched() {
+        SettingsStatus.h264PlaybackEnabled = true;
+    }
+
     @After public void tearDown() {
         Settings.PREFER_H264.save(false);
         Settings.PLAY_SDR.save(false);
@@ -92,6 +96,17 @@ public class H264PlaybackTest {
         assertEquals(List.of(h264720, h264540), H264Playback.filterPlayerUrlModelGears(gears));
         assertEquals(List.of(h264720, h264540), H264Playback.filterPlayerVideoGears(gears));
         assertEquals("the hooked list is never changed in place", 4, gears.size());
+    }
+
+    /** A switch saved on by an earlier build keeps its value after a repatch without the patch. */
+    @Test public void aSavedSwitchDoesNothingWithoutItsPatch() {
+        Settings.PREFER_H264.save(true);
+        SettingsStatus.h264PlaybackEnabled = false;
+        List<Gear> gears = List.of(new Gear("1080p", 900, 1), new Gear("720p", 600, 0));
+        assertSame(gears, H264Playback.filterPlayerUrlModelGears(gears));
+        assertSame(gears, H264Playback.filterPlayerVideoGears(gears));
+        Settings.PLAY_SDR.save(true);
+        assertSame(gears, SdrPlayback.filterPlayerUrlModelGears(gears));
     }
 
     @Test public void aVideoWithoutAnH264VersionPlaysAsBefore() {
