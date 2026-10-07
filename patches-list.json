@@ -1790,7 +1790,7 @@
     },
     {
       "name": "Drop the animated image cache",
-      "description": "Makes TikTok's reviewed Fresco animated-frame cache lookups return no cached frame, so every frame of an animated sticker or GIF gets decoded again. In a 47.1.4 test the slowest frames in a comment thread full of animated stickers took about twice as long and memory use didn't go down, so leave it off unless you're testing it.",
+      "description": "Has TikTok keep only the frame on screen for each animated sticker or GIF instead of caching every frame, and stops it decoding frames ahead of time. Each next frame is built from the one before it, so animations still play smoothly while using less memory.",
       "category": "Performance",
       "use": false,
       "dependencies": [],

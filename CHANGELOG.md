@@ -10,7 +10,7 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Remove LIVE extras now says in its description that it can take away the red and blue battle score bar and the co-host guests' names in LIVE. It's off unless you pick it, so leave it unticked if you watch battles.
 
-* **TikTok:** Drop the animated image cache now says what it costs. In a 47.1.4 test the slowest frames in a comment thread full of animated stickers took about twice as long with it on, and memory use didn't go down. It's off unless you pick it, so leave it unticked if stickers or GIFs stutter.
+* **TikTok:** Drop the animated image cache works differently now (#100). The old version threw away cached frames, so animated stickers and GIFs stuttered and memory use didn't go down. Now TikTok keeps only the frame on screen for each animation and stops decoding frames ahead of time, and each next frame is drawn from the one before it.
 
 * **TikTok:** Hide the Clear display controls moved to Feed screen > Clear display, right under Automatic clear display, instead of the end of Around the video.
 
