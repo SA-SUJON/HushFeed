@@ -24,12 +24,16 @@ import app.morphe.extension.shared.settings.BaseSettings;
  * <p>The capture is saved as when it started by both clocks, plus the phone's boot count, in
  * {@link BaseSettings#DEBUG_CAPTURE}, which backups leave out. It ends when either clock says
  * its time is up, so moving the phone's clock back can't stretch it, and a restarted phone ends
- * it, since the elapsed clock starts again from zero. A restarted TikTok reads the same record
- * and keeps the same end.
+ * it, since the elapsed clock starts again from zero. Before 7.0, which has no boot count, the
+ * restart shows as the boot moment the two clocks give moving. A restarted TikTok reads the
+ * same record and keeps the same end.
  */
 public final class DebugCapture {
     /** How long one capture logs. A saved record asking for longer is treated as over. */
     public static final long DURATION_MS = 15 * 60_000L;
+
+    /** How far the boot moment may drift by network time corrections before 7.0 reads it as a new boot. */
+    private static final long BOOT_DRIFT_MS = 30_000L;
 
     interface Clock {
         long wall();
@@ -145,10 +149,15 @@ public final class DebugCapture {
             long duration = Long.parseLong(parts[4]);
             if (duration <= 0 || duration > DURATION_MS) return 0;
             // The elapsed clock starts again at every boot, so a capture can't be measured
-            // across one. Before 7.0 a boot shows as the elapsed clock going backwards.
+            // across one.
             if (startBoot >= 0 && boot >= 0 && startBoot != boot) return 0;
             long sinceStart = elapsed - startElapsed;
             if (sinceStart < 0) return 0;
+            // Before 7.0 there's no boot count. The moment the elapsed clock started (wall minus
+            // elapsed) stays put within one boot and jumps by at least the old uptime at the
+            // next. A clock change moves it too and ends the capture early, the safe way.
+            if ((startBoot < 0 || boot < 0)
+                    && Math.abs((wall - elapsed) - (startWall - startElapsed)) > BOOT_DRIFT_MS) return 0;
             long left = duration - sinceStart;
             // The wall clock can only bring the end closer. Set back, it would stretch the
             // capture, so a negative reading leaves the elapsed clock to decide.

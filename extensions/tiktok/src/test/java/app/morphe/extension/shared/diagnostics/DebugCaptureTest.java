@@ -162,6 +162,19 @@ public class DebugCaptureTest {
                 DebugCapture.remaining(record, 1_000_100L, 4_000L, -1));
         assertEquals("a boot count Android doesn't give leaves the clocks to decide",
                 DebugCapture.DURATION_MS - 100L, DebugCapture.remaining(record, 1_000_100L, 5_000_100L, -1));
+        assertEquals("a network time nudge before 7.0 isn't a restart",
+                DebugCapture.DURATION_MS - 2_100L, DebugCapture.remaining(record, 1_002_100L, 5_000_100L, -1));
+    }
+
+    @Test public void beforeSevenARestartEndsItEvenWhenTheNewBootHasRunLonger() {
+        long minute = 60_000L;
+        // Started a minute after boot, the phone restarted two minutes later, and TikTok opened
+        // three minutes into the new boot: the elapsed clock reads past where it started.
+        String record = DebugCapture.record(1_000_000L, minute, -1, DebugCapture.DURATION_MS);
+
+        assertEquals(0, DebugCapture.remaining(record, 1_000_000L + 5 * minute, 3 * minute, -1));
+        assertEquals("the same boot keeps running", DebugCapture.DURATION_MS - 2 * minute,
+                DebugCapture.remaining(record, 1_000_000L + 2 * minute, 3 * minute, -1));
     }
 
     @Test public void aRecordAskingForLongerOrUnreadableIsOver() {
