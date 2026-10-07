@@ -47,6 +47,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                 || SettingsStatus.avatarRingsEnabled
                 || SettingsStatus.alwaysShowPublishDateEnabled
                 || SettingsStatus.authorRegionEnabled
+                || SettingsStatus.engagementRateEnabled
                 || SettingsStatus.hideFeedLiveButtonEnabled
                 || SettingsStatus.hideFeedSearchButtonEnabled
                 || SettingsStatus.feedFilterEnabled
@@ -210,6 +211,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
     private void addVideoInfo(Context context) {
         boolean any = SettingsStatus.alwaysShowPublishDateEnabled
                 || SettingsStatus.authorRegionEnabled
+                || SettingsStatus.engagementRateEnabled
                 || SettingsStatus.feedTextSizeEnabled
                 || SettingsStatus.videoOverlaysEnabled;
         if (!any) return;
@@ -252,6 +254,14 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     "Show the handle instead of the name",
                     "Show @username beside a video instead of the display name the creator chose.",
                     Settings.SHOW_AUTHOR_HANDLE
+            ));
+        }
+        if (SettingsStatus.engagementRateEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Show engagement rate",
+                    "Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.",
+                    Settings.SHOW_ENGAGEMENT_RATE
             ));
         }
         if (SettingsStatus.videoOverlaysEnabled) {

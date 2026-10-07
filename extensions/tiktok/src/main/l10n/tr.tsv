@@ -1571,3 +1571,5 @@ Copy user ID	Kullanıcı kimliğini kopyala
 Copy video ID	Video kimliğini kopyala
 Prefer H.264 video	H.264 videoyu tercih et
 Play the H.264 version of videos TikTok also offers in HEVC or ByteVC2. It's easier on phones that stutter or run hot playing those. Videos without an H.264 version still play.	TikTok'un HEVC veya ByteVC2 olarak da sunduğu videoların H.264 sürümünü oynat. Bunları oynatırken takılan veya ısınan telefonlar için daha hafiftir. H.264 sürümü olmayan videolar yine oynatılır.
+Show engagement rate	Etkileşim oranını göster
+Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.	Beğenileri, yorumları, paylaşımları ve kaydetmeleri görüntülenmelerin yüzdesi olarak içerik üreticisinin adının yanında ve profil ızgarasında görüntülenme sayısının ardından göster.

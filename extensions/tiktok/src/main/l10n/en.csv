@@ -1148,11 +1148,13 @@ Show a progress bar while a video saves.,Show a progress bar while a video saves
 Show a video preview thumbnail while dragging the progress bar.,Show a video preview thumbnail while dragging the progress bar.
 "Show counts as full numbers, like 1,234,567 instead of 1.2M.","Show counts as full numbers, like 1,234,567 instead of 1.2M."
 Show download progress,Show download progress
+Show engagement rate,Show engagement rate
 Show exact counts,Show exact counts
 Show failures on screen,Show failures on screen
 Show follow status,Show follow status
 Show gates,Show gates
 Show last report,Show last report
+"Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.","Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids."
 Show only LIVEs from creators with this many followers.,Show only LIVEs from creators with this many followers.
 Show only LIVEs with this many people watching.,Show only LIVEs with this many people watching.
 Show only mutual friends on the Friends tab,Show only mutual friends on the Friends tab

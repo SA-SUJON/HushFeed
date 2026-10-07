@@ -1709,3 +1709,5 @@ Copy user ID	Копировать ID пользователя
 Copy video ID	Копировать ID видео
 Prefer H.264 video	Предпочитать видео H.264
 Play the H.264 version of videos TikTok also offers in HEVC or ByteVC2. It's easier on phones that stutter or run hot playing those. Videos without an H.264 version still play.	Воспроизводить версию H.264 у видео, которые TikTok также даёт в HEVC или ByteVC2. Так легче телефонам, которые на них подтормаживают или греются. Видео без версии H.264 по-прежнему воспроизводятся.
+Show engagement rate	Показывать уровень вовлечённости
+Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.	Показывать лайки, комментарии, репосты и сохранения в процентах от просмотров рядом с именем автора и после числа просмотров в сетке профиля.

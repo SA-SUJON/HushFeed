@@ -34,6 +34,8 @@ import app.morphe.patches.tiktok.interaction.exactcounts.COUNT_FORMATTERS
 import app.morphe.patches.tiktok.interaction.exactcounts.CompactCountFormatterFingerprint
 import app.morphe.patches.tiktok.interaction.exactcounts.CountFormatterFingerprint
 import app.morphe.patches.tiktok.interaction.exactcounts.isCountFormatter
+import app.morphe.patches.tiktok.interaction.engagement.ProfileGridBindFingerprint
+import app.morphe.patches.tiktok.interaction.engagement.gridCountSite
 import app.morphe.patches.tiktok.profile.BASE_UI_COMPONENT
 import app.morphe.patches.tiktok.profile.HEADER_TEXT_ITEM
 import app.morphe.patches.tiktok.profile.PROFILE_COMMON_INFO
@@ -67,9 +69,9 @@ import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.iface.Method
-import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.value.StringEncodedValue
 import com.android.tools.smali.dexlib2.iface.instruction.NarrowLiteralInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
@@ -533,6 +535,36 @@ class TikTokPatchAnchorsMatchFixturesTest {
             assertTrue("${apk.name}: a formatter without the hook's register",
                 (formatters + compact).all { it.isCountFormatter() })
             assertTrue("${apk.name}: a formatter in both sets", formatters.none { it in compact })
+        }
+    }
+
+    /**
+     * Show engagement rate hooks the profile grid adapter's bind right after the cell's view count
+     * is formatted, and hands the extension the text and the cell's Aweme. One bind per declared
+     * build, the item in the register its statistics were asked of, and the text the one the
+     * cell's next setText writes (v1 and v12 on all three builds).
+     */
+    @Test
+    fun `profile grid view count site for engagement rate resolves on every declared build`() {
+        Fixtures.forEachDeclared { apk ->
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            val classes = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }.toList()
+            val binds = classes.flatMap { cls -> cls.methods.filter { ProfileGridBindFingerprint.takes(it, cls) } }
+            assertEquals("profile grid binds", 1, binds.size)
+            val bind = binds.single()
+            val site = runCatching { bind.gridCountSite() }.getOrElse { throw AssertionError(it.message, it) }
+            assertEquals("text and item registers", 1 to 12, site.textRegister to site.itemRegister)
+            val instructions = bind.implementation!!.instructions.toList()
+            val result = instructions[site.insertAt - 1]
+            assertEquals(Opcode.MOVE_RESULT_OBJECT, result.opcode)
+            assertEquals(site.textRegister, (result as OneRegisterInstruction).registerA)
+            val setText = (site.insertAt until instructions.size).first {
+                val reference = (instructions[it] as? ReferenceInstruction)?.reference as? MethodReference
+                reference?.name == "setText" && reference.parameterTypes.map(CharSequence::toString) == listOf("Ljava/lang/CharSequence;")
+            }
+            assertEquals("the cell's text is the formatted count", site.textRegister,
+                (instructions[setText] as FiveRegisterInstruction).registerD)
         }
     }
 

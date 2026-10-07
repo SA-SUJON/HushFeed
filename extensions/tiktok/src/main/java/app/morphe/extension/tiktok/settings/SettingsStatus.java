@@ -109,6 +109,7 @@ public class SettingsStatus {
     public static boolean hideFeedFollowButtonEnabled = false;
     public static boolean hideFeedSaveButtonEnabled = false;
     public static boolean exactCountsEnabled = false;
+    public static boolean engagementRateEnabled = false;
     public static boolean avatarRingsEnabled = false;
     public static boolean lengthLimitsEnabled = false;
     public static boolean keepFavoritesTabEnabled = false;
@@ -368,6 +369,10 @@ public class SettingsStatus {
 
     public static void enableExactCounts() {
         exactCountsEnabled = true;
+    }
+
+    public static void enableEngagementRate() {
+        engagementRateEnabled = true;
     }
 
     public static void enableAvatarRings() {

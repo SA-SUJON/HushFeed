@@ -6,6 +6,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** New patch, Prefer H.264 playback. Turn on Prefer H.264 video under Playback and a video TikTok also offers in H.264 plays that version instead of HEVC or ByteVC2, which can help a phone that stutters or runs hot. A video without one plays as before. With Play SDR instead of HDR or Playback quality on too, they pick among the H.264 versions.
 
+* **TikTok:** New patch, Show engagement rate. Its switch under Feed screen > Video info works out a video's likes, comments, shares and saves as a percentage of its views, from the counts TikTok already sent with it, so nothing extra is downloaded. The rate shows after the creator's name on the video you're watching and after the view count on profile grids, like 12.3K · 4.2%. A video without a view count shows nothing.
+
 * **TikTok:** New Show exact counts switch in Feed screen > Right column. It shows likes, comments, shares and other counts as the full number, like 1,234,567 instead of 1.2M, using your phone's digit grouping.
 
 * **TikTok:** New patch, Custom launcher icon. It gives TikTok's icon a themed layer, so with themed icons on in Android 13 and up the note takes your wallpaper's color. Its Icon style option also swaps in a black background, or a plain white-on-black or black-on-white note, on Android 8 and up.
