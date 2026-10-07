@@ -123,6 +123,10 @@ final class PhotoToJpeg {
             long width = parseDimension(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_IMAGE_WIDTH));
             long height = parseDimension(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_IMAGE_HEIGHT));
             if (width <= 0 || height <= 0 || width * height > MAX_PIXELS) return null;
+            // An image sequence would lose every frame but the first, as with the decoder.
+            if (parseDimension(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_IMAGE_COUNT)) > 1) {
+                return null;
+            }
             MediaMetadataRetriever.BitmapParams params = new MediaMetadataRetriever.BitmapParams();
             params.setPreferredConfig(Bitmap.Config.ARGB_8888);
             return retriever.getPrimaryImage(params);
