@@ -388,11 +388,15 @@ public final class VideoOverlayHider {
             boolean carry = !HushfeedPause.isPaused() && RememberClearDisplayPatch.isCarryingClear();
             boolean tabStrip = !detailPager && !HushfeedPause.isPaused()
                     && (RememberClearDisplayPatch.isClearDisplayNow() || carry);
-            // The comment bar is the detail pager's own; the main feed has the tabs there. TikTok
+            // The comment bar is the opened post's own; the main feed has the tabs there. TikTok
             // leaves it up in Clear display on a photo or video opened from search or a profile
-            // (#84), so it goes then too and comes back with the controls.
-            boolean detailCommentBar = detailPager && (Settings.HIDE_DETAIL_COMMENT_BAR.get()
-                    || (!HushfeedPause.isPaused() && (RememberClearDisplayPatch.isClearDisplayNow() || carry)));
+            // (#84), so it goes then too and comes back with the controls. A video opens in the
+            // detail pager, but on 47.1.4 a photo from search opens in the main activity
+            // (DetailSafRootFragment) with the same bar, so Clear display doesn't ask which
+            // window it's in: only an opened post has the bar, and the strip under it is left
+            // alone wherever the bar isn't found (see the pairing after the walk).
+            boolean detailCommentBar = (detailPager && Settings.HIDE_DETAIL_COMMENT_BAR.get())
+                    || (!HushfeedPause.isPaused() && (RememberClearDisplayPatch.isClearDisplayNow() || carry));
             // Asked for here and confirmed after the walk by TikTok's own bar being on screen,
             // which it shows only in Clear display; see gateClearControls.
             boolean clearControls = !HushfeedPause.isPaused() && Settings.HIDE_CLEAR_DISPLAY_CONTROLS.get();

@@ -1274,6 +1274,52 @@ public class VideoOverlayHiderTest {
     }
 
     /**
+     * On 47.1.4 a photo opened from search plays in the main activity (DetailSafRootFragment),
+     * not the detail pager, with the same comment bar. Clear display takes it off there too, and
+     * the main feed's own strip, which has no bar over it, is left alone (#84).
+     */
+    @Test
+    public void clearDisplayTakesTheCommentBarOffAPhotoOpenedInTheMainActivity() {
+        resolveCommentBarIds();
+        Settings.HIDE_DETAIL_COMMENT_BAR.save(false);
+        try (var mainController = Robolectric.buildActivity(
+                com.ss.android.ugc.aweme.main.MainActivity.class).create().start()) {
+            Activity main = mainController.get();
+            View strip = new View(main);
+            FrameLayout root = new FrameLayout(main);
+            root.addView(pagerColumn(main, strip));
+            View bar = new View(main);
+            bar.setId(BAR_ID);
+            root.addView(bar);
+            main.setContentView(root);
+            mainController.resume();
+
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+            VideoOverlayHider.applyTo(main);
+            assertEquals("the photo's comment bar stayed in Clear display", View.GONE, bar.getVisibility());
+            assertEquals(View.GONE, strip.getVisibility());
+
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+            VideoOverlayHider.applyTo(main);
+            assertEquals(View.VISIBLE, bar.getVisibility());
+            assertEquals(View.VISIBLE, strip.getVisibility());
+
+            // The feed itself: the strip with no bar over it stays in Clear display.
+            root.removeView(bar);
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+            VideoOverlayHider.applyTo(main);
+            assertEquals("the feed's strip went without a comment bar", View.VISIBLE, strip.getVisibility());
+        } finally {
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+            Settings.CLEAR_DISPLAY.save(false);
+        }
+    }
+
+    /**
      * The bar and the strip go together. With the bar missing, a collapsed strip would grow the
      * pager under nothing, or under a bar a build renamed, which then covers the caption. With
      * the strip missing, hiding the bar alone leaves the black strip.
