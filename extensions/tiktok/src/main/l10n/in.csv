@@ -1605,3 +1605,6 @@ Exported %1$d comments and %2$d replies,%1$d komentar dan %2$d balasan diekspor
 Comment export failed,Ekspor komentar gagal
 Some of these notes are in English.,Sebagian catatan ini dalam bahasa Inggris.
 "More than %1$d comments were loaded, so the rest aren't in the file.","Lebih dari %1$d komentar dimuat, jadi sisanya tidak ada di berkas."
+Lock the feed,Kunci feed
+"For You, Following and the other feed tabs stay behind a calm panel and won't swipe. Messages, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of the feed.","For You, Mengikuti, dan tab feed lainnya tetap di balik panel yang tenang dan tidak bisa digeser. Pesan, profil, dan pencarian berfungsi seperti biasa, tautan ke satu video tetap membuka video itu, dan aplikasi terbuka di Kotak Masuk, bukan di feed."
+The feed is locked,Feed terkunci

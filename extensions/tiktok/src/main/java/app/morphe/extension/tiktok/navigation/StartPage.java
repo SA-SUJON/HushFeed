@@ -12,6 +12,7 @@ import android.os.SystemClock;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.diagnostics.HookStatus;
 import app.morphe.extension.tiktok.settings.Settings;
+import app.morphe.extension.tiktok.wellbeing.FeedLock;
 
 /**
  * Picks the tab TikTok opens on when it starts from its icon.
@@ -84,9 +85,21 @@ public final class StartPage {
             HookStatus.bound(FAMILY, "cold start");
             startTopTab = null;
             if (savedState != null) return tag;
+            Intent intent = activity == null ? null : activity.getIntent();
+            // A link to one video: the feed lock lets that video through. It never reaches the
+            // start tab below, since a link keeps the tab it asked for.
+            if (intent != null && intent.getData() != null) FeedLock.noteLinkEntry();
             String choice = Settings.START_PAGE.get();
-            if (TIKTOK.equals(choice)) return tag;
-            if (!isLauncherStart(activity == null ? null : activity.getIntent())) return tag;
+            // With the feed lock on, a start that would land on a feed lands on Inbox, or on
+            // Profile for a phone with no Inbox to open, so the app doesn't open on a blank feed.
+            boolean locked = FeedLock.isOn() && !INBOX.equals(choice) && !PROFILE.equals(choice)
+                    && (!TIKTOK.equals(choice) || HOME_TAG.equals(tag));
+            if (TIKTOK.equals(choice) && !locked) return tag;
+            if (!isLauncherStart(intent)) return tag;
+            if (locked) {
+                choice = tagFor(INBOX) != null ? INBOX : PROFILE;
+                HookStatus.bound(FAMILY, "feed lock start");
+            }
             String target = tagFor(choice);
             if (target == null) return tag;
             String top = topTagFor(choice);

@@ -1752,3 +1752,6 @@ Comment export failed	Не удалось экспортировать комм�
 %1$d comments and replies loaded|many	Загружено %1$d комментариев и ответов
 Some of these notes are in English.	Часть этих заметок на английском языке.
 More than %1$d comments were loaded, so the rest aren't in the file.	Загружено больше %1$d комментариев, остальные в файл не попали.
+Lock the feed	Заблокировать ленту
+For You, Following and the other feed tabs stay behind a calm panel and won't swipe. Messages, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of the feed.	«Для вас», «Подписки» и другие вкладки ленты остаются за спокойной панелью и не листаются. Сообщения, профили и поиск работают как обычно, ссылка на одно видео по-прежнему открывает это видео, а приложение запускается во входящих, а не в ленте.
+The feed is locked	Лента заблокирована

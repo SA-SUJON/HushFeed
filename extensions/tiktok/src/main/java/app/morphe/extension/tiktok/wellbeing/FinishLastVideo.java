@@ -122,11 +122,15 @@ public final class FinishLastVideo {
      * from both, which is the answer TikTok's own disable-scroll switch gives there.
      */
     public static boolean holdsSwipe(View pager) {
-        // Every touch of every feed pager reaches this, so the idle case is one volatile read.
-        if (finishing == null || pager == null || !pending()) return false;
+        // Every touch of every feed pager reaches this, so the idle case is a couple of reads.
+        if (pager == null) return false;
+        boolean waiting = finishing != null && pending();
+        boolean locked = !waiting && FeedLock.isOn();
+        if (!waiting && !locked) return false;
         Activity activity = activityOf(pager.getContext());
-        return activity != null && MAIN_ACTIVITY.equals(activity.getClass().getName())
-                && FeedVisibility.isOnFeed(activity);
+        if (activity == null || !MAIN_ACTIVITY.equals(activity.getClass().getName())) return false;
+        // The feed lock turns the same swipe down, on the recommendation feed only.
+        return waiting ? FeedVisibility.isOnFeed(activity) : FeedLock.holdsSwipe(activity);
     }
 
     private static Activity activityOf(Context context) {

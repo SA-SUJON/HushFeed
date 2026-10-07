@@ -486,6 +486,7 @@ Follow probe,Follow probe
 Following,Following
 Follows you,Follows you
 For You,For You
+"For You, Following and the other feed tabs stay behind a calm panel and won't swipe. Messages, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of the feed.","For You, Following and the other feed tabs stay behind a calm panel and won't swipe. Messages, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of the feed."
 For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.,For com.deniscerri.ytdl only. Ask YTDLnis for audio or video when the save button hands it a link.
 For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.,For com.deniscerri.ytdl only. Hide its download card and start the handoff in the background.
 Forced %1$d gates of %2$d. The rest don't take a true or false value. Restart TikTok to apply this.,Forced %1$d gates of %2$d. The rest don't take a true or false value. Restart TikTok to apply this.
@@ -772,6 +773,7 @@ Loading the gate list and TikTok's current values…,Loading the gate list and T
 Location-tagged videos,Location-tagged videos
 Lock TikTok,Lock TikTok
 Lock again after,Lock again after
+Lock the feed,Lock the feed
 Lock the hold speed with a pull down,Lock the hold speed with a pull down
 Lock today's budget,Lock today's budget
 Log diagnostics,Log diagnostics
@@ -1352,6 +1354,7 @@ The downloader app you chose isn't installed. Check Send links to another app un
 The export wasn't saved. Export again when the file app is ready.,The export wasn't saved. Export again when the file app is ready.
 "The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at.","The feed dims over the last three quarters of a minute before the hold, so you arrive at it rather than land on it. Needs a time budget and a hold to arrive at."
 The feed doesn't end. This is a fine time to leave it.,The feed doesn't end. This is a fine time to leave it.
+The feed is locked,The feed is locked
 The feed is open again,The feed is open again
 The feed stops when this video ends.,The feed stops when this video ends.
 "The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away.","The feed waits for one tap before it starts playing again when you come back to the app. Messages, profiles and search are still one tap away."

@@ -64,6 +64,11 @@ public final class ScreenTimePreferenceCategory extends ConditionalPreferenceCat
         // never shows yesterday's budget with today's change still listed as waiting.
         BudgetChanges.applyDue(SessionBudget.now());
         addPreference(new SectionHeadingPreference(context, "Focus"));
+        addPreference(new TogglePreference(context, "Lock the feed",
+                "For You, Following and the other feed tabs stay behind a calm panel and won't "
+                        + "swipe. Messages, profiles and search work as usual, a link to one video "
+                        + "still opens that video, and the app opens on Inbox instead of the feed.",
+                Settings.FEED_LOCK));
         addPreference(new TogglePreference(context, "Don't start the feed on returning",
                 "The feed waits for one tap before it starts playing again when you "
                         + "come back to the app. Messages, profiles and search are still "

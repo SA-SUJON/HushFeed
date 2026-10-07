@@ -68,6 +68,7 @@ public final class SessionLockOverlay {
 
     private static final java.util.WeakHashMap<View, Curtained> previousAccessibilityImportance =
             new java.util.WeakHashMap<>();
+    private static WeakReference<TextView> titleReference = new WeakReference<>(null);
     private static WeakReference<TextView> remainingReference = new WeakReference<>(null);
     private static WeakReference<TextView> releaseReference = new WeakReference<>(null);
     private static WeakReference<TextView> hintReference = new WeakReference<>(null);
@@ -147,7 +148,12 @@ public final class SessionLockOverlay {
         // player's progress never syncs an ended one.
         if (!SessionBudget.isLocked()) {
             Utils.runOnMainThread(() -> {
-                if (!SessionBudget.isLocked() && overlayReference.get() != null) sync();
+                // The feed lock has no countdown to bring a panel down or up, so a return to
+                // the app is where it follows the switch.
+                if (!SessionBudget.isLocked()
+                        && (overlayReference.get() != null || FeedLock.isOn())) {
+                    sync();
+                }
             });
         }
     }
@@ -168,14 +174,15 @@ public final class SessionLockOverlay {
     /** Puts the overlay where it belongs for the moment, attaching or removing as needed. */
     public static void sync() {
         try {
-            if (!SessionBudget.isLocked()) {
+            boolean budgetHold = SessionBudget.isLocked();
+            if (!budgetHold && !FeedLock.covers()) {
                 detach();
                 return;
             }
             // The last video is playing out and the feed's swipe is off meanwhile. The panel and
             // its pause follow the video's end, which calls this again; the countdown's own tick
             // catches a wait that ran out at its limit instead.
-            if (FinishLastVideo.pending()) {
+            if (budgetHold && FinishLastVideo.pending()) {
                 detach();
                 return;
             }
@@ -186,7 +193,11 @@ public final class SessionLockOverlay {
                 requestQuiet();
                 return;
             }
-            if (!FeedVisibility.isOnFeed(activity)) {
+            // The feed lock alone is stricter about what counts as the feed: a video opened from
+            // a message or a search is a page of the same activity, and it is not covered.
+            boolean onFeed = budgetHold ? FeedVisibility.isOnFeed(activity)
+                    : FeedLock.coversFeedOn(activity);
+            if (!onFeed) {
                 // Messages, profiles and search still work, which the panel says in as many
                 // words, so the hold has no business silencing anything played there.
                 releaseQuiet();
@@ -262,13 +273,20 @@ public final class SessionLockOverlay {
      * outlive the day: it is left attached while the reader is on messages or a profile.
      */
     private static void applyLockedState() {
+        boolean budgetHold = SessionBudget.isLocked();
+        // The title, the countdown and the way out belong to the budget's hold. The feed lock
+        // alone is a calm panel with the title and the way to messages.
+        SettingsUi.setTextIfChanged(titleReference.get(), budgetHold
+                ? SessionBudgetNotice.spentMessage() : L10n.t("The feed is locked"));
+        TextView countdown = remainingReference.get();
+        if (countdown != null) countdown.setVisibility(budgetHold ? View.VISIBLE : View.GONE);
         boolean locked = SessionBudget.lockedToday();
         TextView release = releaseReference.get();
         if (release != null) {
             int left = SessionBudget.passesLeftToday();
             // Spent is the same as locked as far as this control goes: there is no way through
             // today. The hint below still says what does work, so the panel is not a dead end.
-            release.setVisibility(locked || left == 0 ? View.GONE : View.VISIBLE);
+            release.setVisibility(!budgetHold || locked || left == 0 ? View.GONE : View.VISIBLE);
             String label = releaseLabel(left);
             // Both only when they moved: a content description is announced the same way the
             // text is, so writing it back unchanged is the same interruption.
@@ -281,7 +299,7 @@ public final class SessionLockOverlay {
         if (hint == null) return;
         // One literal, because the translation gate reads the literal handed to L10n and a
         // string built from two of them is two entries it cannot find.
-        SettingsUi.setTextIfChanged(hint, locked
+        SettingsUi.setTextIfChanged(hint, budgetHold && locked
                 ? L10n.f("Today's budget is locked. The feed opens again at %1$s. Messages, profiles and search still work.", resetTimeLabel())
                 : L10n.t("Messages, profiles and search still work."));
     }
@@ -354,7 +372,8 @@ public final class SessionLockOverlay {
         // for anything that changes anywhere under it.
 
         TextView title = new TextView(activity);
-        String titleText = SessionBudgetNotice.spentMessage();
+        String titleText = SessionBudget.isLocked()
+                ? SessionBudgetNotice.spentMessage() : L10n.t("The feed is locked");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             panel.setAccessibilityPaneTitle(titleText);
         }
@@ -363,6 +382,7 @@ public final class SessionLockOverlay {
         title.setTextSize(TypedValue.COMPLEX_UNIT_SP, SettingsUi.TEXT_HEADLINE);
         title.setGravity(Gravity.CENTER);
         panel.addView(title);
+        titleReference = new WeakReference<>(title);
 
         TextView remaining = new TextView(activity);
         remaining.setText(remainingLabel());
@@ -621,6 +641,7 @@ public final class SessionLockOverlay {
         SessionPlaybackHold.release(mayResume);
         View overlay = overlayReference.get();
         overlayReference = new WeakReference<>(null);
+        titleReference = new WeakReference<>(null);
         remainingReference = new WeakReference<>(null);
         releaseReference = new WeakReference<>(null);
         hintReference = new WeakReference<>(null);

@@ -474,6 +474,12 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting SESSION_BUDGET_FINISH_VIDEO = new BooleanSetting(
             "session_budget_finish_video", FALSE);
     /**
+     * Keeps the feed (For You, Following and the other feed tabs) behind a calm panel with its
+     * swipe turned off, and leaves Inbox, profiles and search alone. Off by default. Paused,
+     * every setting answers its unpatched value, so this is off then like the rest. See FeedLock.
+     */
+    public static final BooleanSetting FEED_LOCK = new BooleanSetting("feed_lock", FALSE);
+    /**
      * A small label on the feed saying what is left of today's budget. Off by default, and it
      * has nothing to report unless {@link #SESSION_BUDGET_VIDEOS} or {@link #SESSION_BUDGET_MINUTES}
      * is set. No restart: it is drawn from the same callback that measures the budget.

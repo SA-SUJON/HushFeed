@@ -1611,3 +1611,6 @@ Exported %1$d comments and %2$d replies	%1$d şərh və %2$d cavab ixrac edildi
 Comment export failed	Şərh ixracı alınmadı
 Some of these notes are in English.	Bu qeydlərin bir hissəsi ingilis dilindədir.
 More than %1$d comments were loaded, so the rest aren't in the file.	%1$d-dən çox şərh yüklənmişdi, ona görə qalanları faylda yoxdur.
+Lock the feed	Lenti kilidlə
+For You, Following and the other feed tabs stay behind a calm panel and won't swipe. Messages, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of the feed.	Sizin üçün, İzlədiklərim və digər lent tabları sakit bir panelin arxasında qalır və sürüşdürülmür. Mesajlar, profillər və axtarış həmişəki kimi işləyir, bir videoya keçid yenə də həmin videonu açır, tətbiq isə lentin əvəzinə Gələnlər qutusunda açılır.
+The feed is locked	Lent kilidlidir

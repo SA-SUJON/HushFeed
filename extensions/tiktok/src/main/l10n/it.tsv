@@ -1611,3 +1611,6 @@ Exported %1$d comments and %2$d replies	Esportati %1$d commenti e %2$d risposte
 Comment export failed	Esportazione dei commenti non riuscita
 Some of these notes are in English.	Alcune di queste note sono in inglese.
 More than %1$d comments were loaded, so the rest aren't in the file.	Erano caricati più di %1$d commenti, quindi il resto non è nel file.
+Lock the feed	Blocca il feed
+For You, Following and the other feed tabs stay behind a calm panel and won't swipe. Messages, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of the feed.	Per te, Seguiti e le altre schede del feed restano dietro un pannello tranquillo e non si scorrono. Messaggi, profili e ricerca funzionano come sempre, un link a un video apre comunque quel video, e l'app si apre sulla posta in arrivo invece che sul feed.
+The feed is locked	Il feed è bloccato

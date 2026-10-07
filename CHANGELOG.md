@@ -4,6 +4,7 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Lock the feed, a new switch under Screen time, keeps For You, Following and the other feed tabs behind a calm panel, and the feed won't swipe. Inbox, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of a feed you've shut. It's off until you turn it on, and Pause Hushfeed turns it off with everything else.
 * **TikTok:** Export comments, a new switch under Comments, adds Export CSV and Export JSON under the comment search box. Each one saves the comments and replies the video has loaded to a file you pick, with the author, text, time, likes, reply count, pinned, creator liked, picture count and language for every row, and a count beside the buttons that matches the rows in the file. Open the reply threads you want first, since TikTok only loads a thread's replies when you do. If your file app stalls, the app offers Stop waiting. It's off until you turn it on, and it needs Search within comments.
 
 * **TikTok:** Remove feed ads now also keeps the "Find fresh ideas on Lemon8" card out of For You. It's an install promo TikTok slots between videos, so no ad flag marks it. Hushfeed stops TikTok asking for it and drops it from the feed if one arrives anyway, and it shows up in the feed filter report under Ads.

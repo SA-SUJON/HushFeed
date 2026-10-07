@@ -1611,3 +1611,6 @@ Exported %1$d comments and %2$d replies	%1$d yorum ve %2$d yanıt dışa aktarı
 Comment export failed	Yorumlar dışa aktarılamadı
 Some of these notes are in English.	Bu notların bir kısmı İngilizcedir.
 More than %1$d comments were loaded, so the rest aren't in the file.	%1$d yorumdan fazlası yüklenmişti, kalanlar dosyada yok.
+Lock the feed	Akışı kilitle
+For You, Following and the other feed tabs stay behind a calm panel and won't swipe. Messages, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of the feed.	Sana Özel, Takip Edilenler ve diğer akış sekmeleri sakin bir panelin arkasında kalır ve kaydırılmaz. Mesajlar, profiller ve arama her zamanki gibi çalışır, tek bir videoya giden bağlantı yine o videoyu açar ve uygulama akış yerine Gelen Kutusu'nda açılır.
+The feed is locked	Akış kilitli

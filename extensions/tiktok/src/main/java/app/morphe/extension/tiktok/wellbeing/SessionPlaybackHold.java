@@ -182,6 +182,7 @@ public final class SessionPlaybackHold {
                 || !awemeId.equals(previous.awemeId)) {
             current = new Target(controller, awemeId);
         }
+        FeedLock.onVideo(awemeId);
         if (!SessionBudget.isLocked()) {
             Target waiting = waitingForFocus;
             if (waiting != null && waiting == current) {
@@ -206,6 +207,14 @@ public final class SessionPlaybackHold {
                 MAIN.post(() -> {
                     switchQueued.set(false);
                     pauseForSwitchIfPlaying();
+                });
+            }
+            // The feed lock puts the same panel up with no budget behind it, so each report is
+            // where it finds out the feed is on screen, as the hold does just below.
+            if (FeedLock.covers() && syncQueued.compareAndSet(false, true)) {
+                MAIN.post(() -> {
+                    syncQueued.set(false);
+                    SessionLockOverlay.sync();
                 });
             }
             return;
