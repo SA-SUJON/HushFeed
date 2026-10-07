@@ -44,6 +44,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                 || SettingsStatus.hideFeedFollowButtonEnabled
                 || SettingsStatus.hideFeedSaveButtonEnabled
                 || SettingsStatus.exactCountsEnabled
+                || SettingsStatus.avatarRingsEnabled
                 || SettingsStatus.alwaysShowPublishDateEnabled
                 || SettingsStatus.authorRegionEnabled
                 || SettingsStatus.hideFeedLiveButtonEnabled
@@ -87,7 +88,8 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
         boolean any = SettingsStatus.videoOverlaysEnabled
                 || SettingsStatus.hideFeedFollowButtonEnabled
                 || SettingsStatus.hideFeedSaveButtonEnabled
-                || SettingsStatus.exactCountsEnabled;
+                || SettingsStatus.exactCountsEnabled
+                || SettingsStatus.avatarRingsEnabled;
         if (!any) return;
         addPreference(new SectionHeadingPreference(context, "Right column"));
         if (SettingsStatus.videoOverlaysEnabled) {
@@ -141,6 +143,20 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     "Show exact counts",
                     "Show counts as full numbers, like 1,234,567 instead of 1.2M.",
                     Settings.SHOW_EXACT_COUNTS
+            ));
+        }
+        if (SettingsStatus.avatarRingsEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Remove story rings",
+                    "Take the story ring off profile pictures on the feed, in comments and on profiles. Tapping a picture opens the profile instead of the story.",
+                    Settings.HIDE_STORY_RINGS
+            ));
+            addPreference(new TogglePreference(
+                    context,
+                    "Remove the LIVE ring",
+                    "Take the pulsing LIVE ring off profile pictures on the feed and in comments. Tapping the picture of a creator who's live opens their profile instead of the LIVE.",
+                    Settings.HIDE_LIVE_RING
             ));
         }
     }

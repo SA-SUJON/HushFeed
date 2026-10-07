@@ -1547,3 +1547,7 @@ Show exact counts	Mostrar cifras exactas
 Show counts as full numbers, like 1,234,567 instead of 1.2M.	Muestra las cifras completas, como 1.234.567 en lugar de 1.2M.
 Play SDR instead of HDR	Reproducir SDR en lugar de HDR
 Play the standard version of videos that also come in HDR, so the screen doesn't jump to full brightness when one starts. Videos TikTok only offers in HDR still play.	Reproducir la versión normal de los vídeos que también vienen en HDR, para que la pantalla no salte al brillo máximo cuando empieza uno. Los vídeos que TikTok solo ofrece en HDR se siguen reproduciendo.
+Remove story rings	Quitar los anillos de historias
+Take the story ring off profile pictures on the feed, in comments and on profiles. Tapping a picture opens the profile instead of the story.	Quitar el anillo de historia de las fotos de perfil en el feed, en los comentarios y en los perfiles. Al tocar una foto se abre el perfil en vez de la historia.
+Remove the LIVE ring	Quitar el anillo de LIVE
+Take the pulsing LIVE ring off profile pictures on the feed and in comments. Tapping the picture of a creator who's live opens their profile instead of the LIVE.	Quitar el anillo pulsante de LIVE de las fotos de perfil en el feed y en los comentarios. Al tocar la foto de alguien que está en directo se abre su perfil en vez del LIVE.

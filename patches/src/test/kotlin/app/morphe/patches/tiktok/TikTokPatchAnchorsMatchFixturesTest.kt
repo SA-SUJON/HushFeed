@@ -528,6 +528,40 @@ class TikTokPatchAnchorsMatchFixturesTest {
         }
     }
 
+    /**
+     * Remove avatar rings: the story status getter, the feed avatar's bind and the one author
+     * live check it calls, and the User.isLive reads in AvatarLiveDataAdapter, on every declared
+     * build. The bind and the check are R8 names that move each build.
+     */
+    @Test
+    fun `avatar ring hooks resolve on every declared build`() {
+        for (apk in Fixtures.declaredVersions().map(Fixtures::apkOf)) {
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            val classes = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }.associateBy { it.type }
+            fun taken(fingerprint: app.morphe.patcher.Fingerprint) = classes.values.flatMap { classDef ->
+                classDef.methods.filter { fingerprint.takes(it, classDef) }
+            }
+            assertEquals("${apk.name}: story status getter", listOf("$AVATAR_USER->getStoryStatus()I"),
+                taken(UserStoryStatusFingerprint).map { it.anchorSignature() })
+            val bind = taken(FeedAvatarWrapBindFingerprint)
+            assertEquals("${apk.name}: feed avatar bind", 1, bind.size)
+            val check = bind.single().authorLiveCheck()
+            val checkMethod = classes.getValue(check.definingClass).methods.single { method ->
+                method.name == check.name && method.returnType == "Z" &&
+                    method.parameterTypes.map { it.toString() } == check.parameterTypes.map { it.toString() }
+            }
+            assertTrue("${apk.name}: ${check.definingClass}->${check.name} is static",
+                AccessFlags.STATIC.isSet(checkMethod.accessFlags))
+            assertTrue("${apk.name}: the author live check returns",
+                checkMethod.implementation!!.instructions.any { it.opcode == Opcode.RETURN })
+            val adapterReads = classes.getValue(AVATAR_LIVE_DATA_ADAPTER).methods.sumOf { method ->
+                method.implementation?.instructions?.toList()?.isLiveResults()?.size ?: 0
+            }
+            assertTrue("${apk.name}: AvatarLiveDataAdapter reads User.isLive", adapterReads > 0)
+        }
+    }
+
     @Test
     fun `main feed items getter exists once on every fixture`() {
         val apks = fixtures()

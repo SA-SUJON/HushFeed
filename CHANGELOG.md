@@ -6,6 +6,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** New Show exact counts switch in Feed screen > Right column. It shows likes, comments, shares and other counts as the full number, like 1,234,567 instead of 1.2M, using your phone's digit grouping.
 
+* **TikTok:** New patch, Remove avatar rings. Two switches under Feed screen > Right column take the story ring and the pulsing LIVE ring off profile pictures on the feed and in comments, and the story ring off profiles too. With them on, tapping the picture opens the creator's profile instead of their story or their LIVE.
+
 * **TikTok:** New patch, Play SDR instead of HDR. Turn it on under Playback and videos that also come in HDR play their standard version, so the screen doesn't jump to full brightness when one starts. A video TikTok only offers in HDR still plays. With Playback quality on too, it picks among the standard versions.
 
 * **TikTok:** Show where a video was posted now works on videos where TikTok hides the post time, which is most of For You unless Always show publish date is on. It also shows on videos you open from search, a creator's profile or a shared link, and it switches to the right country as soon as an opened video starts instead of keeping the one from the feed. A long name gets shortened a little so the country isn't cut off along with it.
