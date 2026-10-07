@@ -163,6 +163,7 @@ Also change the region TikTok reports internally. Keeps your interface language.
 "Also on a block list, so still hidden: %1$s","Also on a block list, so still hidden: %1$s"
 Always show publish date,Always show publish date
 Always show the publish date in video author information. Restart TikTok to apply this.,Always show the publish date in video author information. Restart TikTok to apply this.
+Amazon Appstore,Amazon Appstore
 "An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here.","An app's package name, like com.dv.adm. The save button sends the video's link there instead of saving it here. Leave it empty to save here."
 "An exception names one creator, so a pattern can't be one: %1$s","An exception names one creator, so a pattern can't be one: %1$s"
 "An exception takes a handle or id, not a display name: %1$s","An exception takes a handle or id, not a display name: %1$s"
@@ -179,6 +180,7 @@ Answer TikTok's reads of your contacts with an empty list. Find Friends and Peop
 App,App
 App AB,App AB
 App lock,App lock
+AppGallery,AppGallery
 Appearance,Appearance
 Applies to both video and photo downloads.,Applies to both video and photo downloads.
 Apply,Apply
@@ -514,6 +516,7 @@ Full comment sort options,Full comment sort options
 Full license,Full license
 Full report saved to %1$s,Full report saved to %1$s
 GIF,GIF
+Galaxy Store,Galaxy Store
 Gate data unavailable,Gate data unavailable
 Gate details,Gate details
 Generated defaults,Generated defaults
@@ -959,6 +962,7 @@ Pick the buttons to take off the column. The rest stay where they are.,Pick the 
 "Pick the popups to stop. The list holds the ones TikTok has tried to show on this phone, so a popup appears here after its first showing. CAPTCHA, verification, sign-in, age, ban and legal consent screens are never listed or blocked.","Pick the popups to stop. The list holds the ones TikTok has tried to show on this phone, so a popup appears here after its first showing. CAPTCHA, verification, sign-in, age, ban and legal consent screens are never listed or blocked."
 "Pick the shortcuts to remove from the row under a profile's bio, such as TikTok Studio or Your orders. Restart TikTok to apply this.","Pick the shortcuts to remove from the row under a profile's bio, such as TikTok Studio or Your orders. Restart TikTok to apply this."
 Play SDR instead of HDR,Play SDR instead of HDR
+Play Store,Play Store
 "Play feed videos without sound and leave the phone's volume alone. Music from another app keeps playing while it's on. DMs, stories and LIVE keep their sound.","Play feed videos without sound and leave the phone's volume alone. Music from another app keeps playing while it's on. DMs, stories and LIVE keep their sound."
 Play the H.264 version of videos TikTok also offers in HEVC or ByteVC2. It's easier on phones that stutter or run hot playing those. Videos without an H.264 version still play.,Play the H.264 version of videos TikTok also offers in HEVC or ByteVC2. It's easier on phones that stutter or run hot playing those. Videos without an H.264 version still play.
 "Play the standard version of videos that also come in HDR, so the screen doesn't jump to full brightness when one starts. Videos TikTok only offers in HDR still play.","Play the standard version of videos that also come in HDR, so the screen doesn't jump to full brightness when one starts. Videos TikTok only offers in HDR still play."
@@ -1282,6 +1286,7 @@ Stopped waiting for the file app. Nothing was changed.,Stopped waiting for the f
 Stopped waiting for the file app. Nothing was exported.,Stopped waiting for the file app. Nothing was exported.
 Stopped waiting for the file app. Nothing was imported.,Stopped waiting for the file app. Nothing was imported.
 Stopping after this file,Stopping after this file
+Store TikTok reads as its installer,Store TikTok reads as its installer
 Stories,Stories
 Story,Story
 Story saved to %1$s,Story saved to %1$s

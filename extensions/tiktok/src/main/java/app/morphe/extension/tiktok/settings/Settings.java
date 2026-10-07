@@ -653,6 +653,9 @@ public class Settings extends BaseSettings {
     // On once the patch is picked, which is the opt-in. A restart, because TikTok works its
     // signature hash out once and keeps it.
     public static final BooleanSetting STORE_IDENTITY = new BooleanSetting("store_identity", TRUE, true);
+    // The store those installer reads name, by package. A restart for the same reason (#112).
+    public static final StringSetting STORE_IDENTITY_INSTALLER =
+            new StringSetting("store_identity_installer", "com.android.vending", true);
     // App lock. Off until the reader turns it on, and read as each screen starts, so no restart.
     // The delay is whole minutes TikTok may spend in the background before it asks again.
     public static final BooleanSetting APP_LOCK = new BooleanSetting("app_lock", FALSE);

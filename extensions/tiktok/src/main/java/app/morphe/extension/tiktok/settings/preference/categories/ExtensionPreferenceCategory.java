@@ -9,8 +9,10 @@ package app.morphe.extension.tiktok.settings.preference.categories;
 import android.content.Context;
 import android.preference.PreferenceScreen;
 
+import app.morphe.extension.tiktok.privacy.StoreIdentity;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
+import app.morphe.extension.tiktok.settings.preference.ChoicePreference;
 import app.morphe.extension.tiktok.settings.preference.InputTextPreference;
 import app.morphe.extension.tiktok.settings.preference.ProfileShortcutChecklistPreference;
 import app.morphe.extension.tiktok.settings.preference.SectionHeadingPreference;
@@ -223,6 +225,10 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                             + "TikTok can also check from native code this doesn't reach, so it may not help.",
                     Settings.STORE_IDENTITY
             ));
+            addPreference(new ChoicePreference(context, "Store TikTok reads as its installer",
+                    Settings.STORE_IDENTITY_INSTALLER,
+                    new String[]{"Play Store", "Galaxy Store", "AppGallery", "Amazon Appstore"},
+                    StoreIdentity.installers()));
         }
     }
 }
