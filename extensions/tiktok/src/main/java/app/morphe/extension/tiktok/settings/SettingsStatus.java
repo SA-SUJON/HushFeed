@@ -104,6 +104,7 @@ public class SettingsStatus {
     public static boolean disableTelemetryEnabled = false;
     public static boolean hideFeedFollowButtonEnabled = false;
     public static boolean hideFeedSaveButtonEnabled = false;
+    public static boolean exactCountsEnabled = false;
     public static boolean keepFavoritesTabEnabled = false;
     public static boolean hideFeedLiveButtonEnabled = false;
     public static boolean hideFeedSearchButtonEnabled = false;
@@ -355,6 +356,10 @@ public class SettingsStatus {
 
     public static void enableHideFeedSaveButton() {
         hideFeedSaveButtonEnabled = true;
+    }
+
+    public static void enableExactCounts() {
+        exactCountsEnabled = true;
     }
 
     public static void enableKeepFavoritesTab() {

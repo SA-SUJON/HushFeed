@@ -20,6 +20,9 @@ import app.morphe.patches.tiktok.misc.optimizer.backendBuilderCall
 import app.morphe.patches.tiktok.misc.optimizer.cachingStrategyRead
 import app.morphe.patches.tiktok.misc.optimizer.framePreparerGateIndex
 import app.morphe.takes
+import app.morphe.patches.tiktok.interaction.exactcounts.COUNT_FORMATTERS
+import app.morphe.patches.tiktok.interaction.exactcounts.CountFormatterFingerprint
+import app.morphe.patches.tiktok.interaction.exactcounts.isCountFormatter
 import app.morphe.patches.tiktok.misc.commenttools.isCommentSearchHeaderFactory
 import app.morphe.patches.tiktok.misc.commenttools.resolveCommentSearchSuggestions
 import app.morphe.patches.tiktok.misc.commenttools.compactCommentHeaderComponents
@@ -472,6 +475,24 @@ class TikTokPatchAnchorsMatchFixturesTest {
                 it.name == call.name && it.parameterTypes.map(CharSequence::toString) == call.parameterTypes.map(CharSequence::toString) && it.returnType == call.returnType
             }
             assertTrue("${apk.name}: frame preparer gate", builder.framePreparerGateIndex() != null)
+        }
+    }
+
+    /**
+     * Show exact counts hooks every count formatter. Each declared build has the main one and up
+     * to three copies, all static, a long in and a string out, with a spare register for the hook.
+     */
+    @Test
+    fun `count formatters for exact counts stay within the reviewed number on every declared build`() {
+        for (apk in Fixtures.declared()) {
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            val formatters = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
+                .flatMap { cls -> cls.methods.filter { CountFormatterFingerprint.takes(it, cls) }.asSequence() }
+                .toList()
+            assertTrue("${apk.name}: ${formatters.size} count formatters", formatters.size in COUNT_FORMATTERS)
+            assertTrue("${apk.name}: a formatter without the hook's register",
+                formatters.all { it.isCountFormatter() })
         }
     }
 

@@ -43,6 +43,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                 || SettingsStatus.feedTextSizeEnabled
                 || SettingsStatus.hideFeedFollowButtonEnabled
                 || SettingsStatus.hideFeedSaveButtonEnabled
+                || SettingsStatus.exactCountsEnabled
                 || SettingsStatus.alwaysShowPublishDateEnabled
                 || SettingsStatus.authorRegionEnabled
                 || SettingsStatus.hideFeedLiveButtonEnabled
@@ -85,7 +86,8 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
     private void addRightColumn(Context context) {
         boolean any = SettingsStatus.videoOverlaysEnabled
                 || SettingsStatus.hideFeedFollowButtonEnabled
-                || SettingsStatus.hideFeedSaveButtonEnabled;
+                || SettingsStatus.hideFeedSaveButtonEnabled
+                || SettingsStatus.exactCountsEnabled;
         if (!any) return;
         addPreference(new SectionHeadingPreference(context, "Right column"));
         if (SettingsStatus.videoOverlaysEnabled) {
@@ -131,6 +133,14 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     "Hide the save button on the feed",
                     "Hide the save button in the right column. Ticking Save in the list above hides it too.",
                     Settings.HIDE_FEED_SAVE_BUTTON
+            ));
+        }
+        if (SettingsStatus.exactCountsEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Show exact counts",
+                    "Show counts as full numbers, like 1,234,567 instead of 1.2M.",
+                    Settings.SHOW_EXACT_COUNTS
             ));
         }
     }
