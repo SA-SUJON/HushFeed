@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Screen time has a new switch, Open shared videos alone, off by default. A link to one video, like one a friend sends you in another app, opens just that video, and the feed won't swipe past it, so there's no next video to fall into. It swipes again once another video plays, like after a refresh or a tap on Following, or when you come back to TikTok after 10 minutes or more away. Auto-advance doesn't move on from it either. The row needs the Block author button and Feed tab navigation patches, and Pause Hushfeed turns it off.
+
 * **TikTok:** Automatic video advance has a new switch under Playback, Auto-advance in search results, off by default. It answers yes to TikTok's own search auto scroll flag, which search results read instead of the For You one, so videos opened from search can move on at the end too. Restart TikTok after turning it on.
 
 * **TikTok:** Block popups' checklist now also lists the sheets and floating cards TikTok's server sends as campaigns, under the campaign's own name, so ticking one stops it before it's built. They never reached the checklist before. A new switch under Feed screen > Popups, Hide the LIVE bubble, off by default, stops the bubble TikTok floats at the top of the feed to point you to a LIVE.

@@ -18,6 +18,7 @@ import app.morphe.extension.tiktok.blockauthor.BlockAuthorOverlay;
 import app.morphe.extension.tiktok.blockauthor.Reflect;
 import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.tiktok.settings.Settings;
+import app.morphe.extension.tiktok.wellbeing.FeedLock;
 import app.morphe.extension.tiktok.wellbeing.SessionBudget;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -129,8 +130,9 @@ public final class AutoAdvance {
         // Before the completion is recorded, not after. Reaching the hold check further down
         // through update() stood down one video late: the video that finished behind the panel
         // still spent a place in this session's limit, and could put its "stopped after N
-        // videos" toast on top of the hold.
-        if (SessionBudget.isLocked()) {
+        // videos" toast on top of the hold. A shared video playing alone stands it down the
+        // same way, before its end moves the feed on.
+        if (SessionBudget.isLocked() || FeedLock.linkVideoAlone()) {
             update(component);
             return;
         }
@@ -218,6 +220,12 @@ public final class AutoAdvance {
             // is released rather than only stopped, so the next call after the hold ends starts
             // it again from the video that is actually on screen.
             if (SessionBudget.isLocked()) {
+                if (owned) { stop.run(); owned = false; }
+                return;
+            }
+            // A shared video opened alone has no feed after it, so nothing moves on from it.
+            // Released the same way, so the next look once another video plays starts it again.
+            if (FeedLock.linkVideoAlone()) {
                 if (owned) { stop.run(); owned = false; }
                 return;
             }

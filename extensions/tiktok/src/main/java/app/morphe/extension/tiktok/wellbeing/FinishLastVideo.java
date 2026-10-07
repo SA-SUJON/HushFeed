@@ -126,9 +126,14 @@ public final class FinishLastVideo {
         if (pager == null) return false;
         boolean waiting = finishing != null && pending();
         boolean locked = !waiting && FeedLock.isOn();
-        if (!waiting && !locked) return false;
+        // A shared video opened alone, while it is the one playing. Its id already says which
+        // video the pager has on screen, so no tab check: the link opens it at the top of For
+        // You, and anything that moves the reader elsewhere plays another video and ends it.
+        boolean alone = !waiting && !locked && FeedLock.linkVideoAlone();
+        if (!waiting && !locked && !alone) return false;
         Activity activity = activityOf(pager.getContext());
         if (activity == null || !MAIN_ACTIVITY.equals(activity.getClass().getName())) return false;
+        if (alone) return true;
         // The feed lock turns the same swipe down, on the recommendation feed only.
         return waiting ? FeedVisibility.isOnFeed(activity) : FeedLock.holdsSwipe(activity);
     }

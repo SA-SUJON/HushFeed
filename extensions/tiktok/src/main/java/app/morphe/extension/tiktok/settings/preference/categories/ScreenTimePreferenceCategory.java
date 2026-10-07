@@ -24,6 +24,7 @@ import app.morphe.extension.tiktok.settings.preference.SettingsUi;
 import app.morphe.extension.tiktok.settings.preference.StartTodayOverPreference;
 import app.morphe.extension.tiktok.settings.preference.TogglePreference;
 import app.morphe.extension.tiktok.wellbeing.BudgetChanges;
+import app.morphe.extension.tiktok.wellbeing.FeedLock;
 import app.morphe.extension.tiktok.wellbeing.FinishLastVideo;
 import app.morphe.extension.tiktok.wellbeing.SessionBudget;
 import app.morphe.extension.tiktok.wellbeing.SessionLockOverlay;
@@ -69,6 +70,18 @@ public final class ScreenTimePreferenceCategory extends ConditionalPreferenceCat
                         + "swipe. Messages, profiles and search work as usual, a link to one video "
                         + "still opens that video, and the app opens on Inbox instead of the feed.",
                 Settings.FEED_LOCK));
+        // The link's arrival, cold and warm, is read by Feed tab navigation's hooks, so without
+        // that patch there is nothing for the switch to act on.
+        if (SettingsStatus.feedNavigationEnabled) {
+            // The time away is formatted in from the constant that applies it.
+            addPreference(new TogglePreference(context, "Open shared videos alone",
+                    L10n.f(context, "A link to one video opens just that video, and the feed won't "
+                            + "swipe past it. It swipes again once another video plays, like after a "
+                            + "refresh or a tap on Following, or when you come back to TikTok after "
+                            + "%1$d minutes or more away. Auto-advance doesn't move on from it either.",
+                            FeedLock.AWAY_ENDS_ALONE_MS / 60_000L),
+                    Settings.SHARED_VIDEO_ALONE));
+        }
         addPreference(new TogglePreference(context, "Don't start the feed on returning",
                 "The feed waits for one tap before it starts playing again when you "
                         + "come back to the app. Messages, profiles and search are still "

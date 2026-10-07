@@ -547,6 +547,12 @@ public class Settings extends BaseSettings {
      */
     public static final BooleanSetting FEED_LOCK = new BooleanSetting("feed_lock", FALSE);
     /**
+     * A link to one video plays that video alone: the feed's swipe is turned down while it is the
+     * one playing, and Auto-advance doesn't move on from it. Off by default, and off while
+     * paused like the rest. See FeedLock#linkVideoAlone.
+     */
+    public static final BooleanSetting SHARED_VIDEO_ALONE = new BooleanSetting("shared_video_alone", FALSE);
+    /**
      * A small label on the feed saying what is left of today's budget. Off by default, and it
      * has nothing to report unless {@link #SESSION_BUDGET_VIDEOS} or {@link #SESSION_BUDGET_MINUTES}
      * is set. No restart: it is drawn from the same callback that measures the budget.

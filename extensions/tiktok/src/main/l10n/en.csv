@@ -122,6 +122,7 @@ A forced value applies to this copy of TikTok whichever account is signed in. It
 "A good place to stop, if you want one.","A good place to stop, if you want one."
 "A green square in the top corner while TikTok has the camera open, and an orange diamond while it records sound. They go when the access ends.","A green square in the top corner while TikTok has the camera open, and an orange diamond while it records sound. They go when the access ends."
 "A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new.","A host to put in place of tiktok.com when you share or copy a link, like vxtiktok.com. Leave it empty to share TikTok's own links. Only TikTok links are changed, and only the host: nothing is sent anywhere new."
+"A link to one video opens just that video, and the feed won't swipe past it. It swipes again once another video plays, like after a refresh or a tap on Following, or when you come back to TikTok after %1$d minutes or more away. Auto-advance doesn't move on from it either.","A link to one video opens just that video, and the feed won't swipe past it. It swipes again once another video plays, like after a refresh or a tap on Following, or when you come back to TikTok after %1$d minutes or more away. Auto-advance doesn't move on from it either."
 A long press on Comment plays the video at the hold speed instead of opening the emoji row. It needs Long press on TikTok default and Seek from the edges off.,A long press on Comment plays the video at the hold speed instead of opening the emoji row. It needs Long press on TikTok default and Seek from the edges off.
 A long press on Favorites plays the video at the hold speed instead of offering a new collection. It needs Long press on TikTok default and Seek from the edges off.,A long press on Favorites plays the video at the hold speed instead of offering a new collection. It needs Long press on TikTok default and Seek from the edges off.
 A long press on Share plays the video at the hold speed instead of opening the quick share row. It needs Long press on TikTok default and Seek from the edges off.,A long press on Share plays the video at the hold speed instead of opening the quick share row. It needs Long press on TikTok default and Seek from the edges off.
@@ -992,6 +993,7 @@ Open comments,Open comments
 Open external links directly,Open external links directly
 Open messages,Open messages
 Open profile and story website links in your system browser instead of TikTok's in-app browser.,Open profile and story website links in your system browser instead of TikTok's in-app browser.
+Open shared videos alone,Open shared videos alone
 Open the feed anyway,Open the feed anyway
 "Open the feed anyway, %1$d left today","Open the feed anyway, %1$d left today"
 "Open the feed anyway, the last time today","Open the feed anyway, the last time today"

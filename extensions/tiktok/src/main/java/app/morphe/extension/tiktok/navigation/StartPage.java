@@ -86,8 +86,9 @@ public final class StartPage {
             startTopTab = null;
             if (savedState != null) return tag;
             Intent intent = activity == null ? null : activity.getIntent();
-            // A link to one video: the feed lock lets that video through. It never reaches the
-            // start tab below, since a link keeps the tab it asked for.
+            // A link to one video: the feed lock lets that video through, and Open shared videos
+            // alone plays it by itself. It never reaches the start tab below, since a link keeps
+            // the tab it asked for.
             if (FeedLock.isVideoLink(intent)) FeedLock.noteLinkEntry();
             String choice = Settings.START_PAGE.get();
             boolean locking = FeedLock.isOn();

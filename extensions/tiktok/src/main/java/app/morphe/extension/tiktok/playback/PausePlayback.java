@@ -350,10 +350,13 @@ public final class PausePlayback {
         wasAway = true;
         letGo();
         app.morphe.extension.tiktok.wellbeing.SessionLockOverlay.onBackground();
+        // How long the app stays away decides whether a shared video still plays alone.
+        app.morphe.extension.tiktok.wellbeing.FeedLock.onAppLeft();
     }
 
     static void onForeground(Activity activity) {
         app.morphe.extension.tiktok.wellbeing.SessionLockOverlay.onForeground();
+        app.morphe.extension.tiktok.wellbeing.FeedLock.onAppBack();
         try {
             // The sheet the reader left open is the sheet they are looking at again, but only
             // if this is the screen it belongs to. These callbacks are registered for every

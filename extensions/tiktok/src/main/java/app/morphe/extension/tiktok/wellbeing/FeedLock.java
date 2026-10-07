@@ -35,10 +35,19 @@ import java.util.regex.Pattern;
  * So a link entry lets the first video that comes up stay uncovered, and the next video, by any
  * route, ends the exception. A video opened from a message, a profile or search is not on the
  * recommendation feed at all, so the panel never covers it.
+ *
+ * <p>The same link entry serves Open shared videos alone, a switch of its own that needs no
+ * lock: the video a link opened plays by itself, with the feed's swipe turned down while it is
+ * the one playing ({@link #linkVideoAlone}), so there is no next video to fall into. Another
+ * video coming up by any route ends it, and so does TikTok coming back after {@link
+ * #AWAY_ENDS_ALONE_MS} or more away, when the reader is back for TikTok itself and the link's
+ * video may still be sitting at the top of For You.
  */
 public final class FeedLock {
     /** How long a link entry waits for its video to come up before it is forgotten. */
     static final long LINK_WINDOW_MS = 20_000L;
+    /** How long TikTok is away before a return gives a shared video's feed its swipe back. */
+    public static final long AWAY_ENDS_ALONE_MS = 10 * 60_000L;
 
     /** Set on a link entry and cleared when its video binds or the window passes. */
     private static volatile boolean linkPending;
@@ -47,6 +56,10 @@ public final class FeedLock {
     private static volatile String baseline;
     /** The one video a link opened, uncovered while it is the one on screen. */
     private static volatile String permitted;
+    /** Whether that video plays alone: the switch was on at the link entry, and nothing ended it. */
+    private static volatile boolean linkAlone;
+    /** When TikTok last left the screen, or zero while it is on screen. */
+    private static volatile long leftAt;
 
     private static volatile Clock clock = SystemClock::elapsedRealtime;
 
@@ -91,13 +104,57 @@ public final class FeedLock {
         return video != null && video.equals(SessionPlaybackHold.currentAwemeId());
     }
 
+    /**
+     * Whether Open shared videos alone is on. Paused, it answers off. It needs the hooks its row
+     * stands on too: the pager's touch methods and the player's progress come with the block
+     * author patch, and the link's arrival, cold and warm, with Feed tab navigation.
+     */
+    public static boolean aloneIsOn() {
+        return SettingsStatus.blockAuthorEnabled && SettingsStatus.feedNavigationEnabled
+                && Settings.SHARED_VIDEO_ALONE.get();
+    }
+
     /** A link started or reached the main activity. The next new video is the link's. */
     public static void noteLinkEntry() {
-        if (!isOn()) return;
+        boolean alone = aloneIsOn();
+        if (!isOn() && !alone) return;
         baseline = SessionPlaybackHold.currentAwemeId();
         permitted = null;
+        linkAlone = alone;
+        // The link is what brought TikTok back, so the time it was away says nothing about it.
+        leftAt = 0;
         linkAt = clock.now();
         linkPending = true;
+    }
+
+    /**
+     * Whether the video a link opened is the one playing and plays alone, so nothing moves the
+     * feed past it: the pager's swipe and Auto-advance both ask. Read on every touch of the
+     * feed's pager, so the idle case is one volatile read.
+     */
+    public static boolean linkVideoAlone() {
+        if (!linkAlone || !aloneIsOn()) return false;
+        String video = permitted;
+        return video != null && video.equals(SessionPlaybackHold.currentAwemeId());
+    }
+
+    /** The last of TikTok's screens stopped: the app left the screen. */
+    public static void onAppLeft() {
+        long now = clock.now();
+        leftAt = now == 0 ? 1 : now;
+    }
+
+    /**
+     * One of TikTok's screens came to the front. Back after a long time away, the reader is
+     * here for TikTok rather than the video they were sent, which may still be the one at the
+     * top of For You, so the feed swipes again. A short time away (the phone locked, a reply
+     * written in another app) keeps the video alone.
+     */
+    public static void onAppBack() {
+        long left = leftAt;
+        if (left == 0) return;
+        leftAt = 0;
+        if (clock.now() - left >= AWAY_ENDS_ALONE_MS) linkAlone = false;
     }
 
     /** Called with the intent TikTok's main activity is handed while it is already running. */
@@ -145,6 +202,7 @@ public final class FeedLock {
         if (linkPending) {
             if (clock.now() - linkAt > LINK_WINDOW_MS) {
                 linkPending = false;
+                linkAlone = false;
             } else if (!awemeId.equals(baseline)) {
                 permitted = awemeId;
                 linkPending = false;
@@ -156,6 +214,9 @@ public final class FeedLock {
         String video = permitted;
         if (video != null && !video.equals(awemeId)) {
             permitted = null;
+            // Another video by any route (a refresh, Following, a profile, search) is the reader
+            // moving on, so a shared video's feed swipes again.
+            linkAlone = false;
             Utils.runOnMainThread(SessionLockOverlay::sync);
         }
     }
@@ -185,6 +246,8 @@ public final class FeedLock {
         linkAt = 0;
         baseline = null;
         permitted = null;
+        linkAlone = false;
+        leftAt = 0;
         clock = SystemClock::elapsedRealtime;
     }
 
