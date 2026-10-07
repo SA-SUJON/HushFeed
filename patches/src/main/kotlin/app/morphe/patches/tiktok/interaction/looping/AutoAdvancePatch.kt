@@ -330,6 +330,11 @@ val autoAdvancePatch = bytecodePatch(
                 .singleOrPatchException("Auto advance: component $name()")
                 .addInstruction(0, "invoke-static/range {p0 .. p0}, $EXTENSION->$name(Ljava/lang/Object;)V")
         }
+        // The page coming back runs the same search restore as onResume and onViewCreated, so
+        // the extension reads the state there too, before the host's own code does.
+        component.methods.filter { it.name == "onPageResume" && it.parameterTypes == listOf("I") }
+            .singleOrPatchException("Auto advance: component onPageResume(int)")
+            .addInstruction(0, "invoke-static/range {p0 .. p0}, $EXTENSION->onPageResume(Ljava/lang/Object;)V")
         completed.addInstruction(0,
             "invoke-static/range {p0 .. p1}, $EXTENSION->beforeCompletion(Ljava/lang/Object;Ljava/lang/String;)V")
         val available = Availability.method
@@ -389,7 +394,10 @@ val autoAdvancePatch = bytecodePatch(
         }
 
         // Search results' own flag, answered through the child switch. Their feed builds the
-        // same component, so the hooks above start it there once the flag lets it exist.
+        // same component, so the hooks above start it there once the flag lets it exist. The
+        // starting state read has to be answered too: left alone it says STOP, and the host's
+        // resume then turns a running search scroll off every time. What it restores on its own
+        // is claimed by the extension's resume hooks above, so the limit and holds still apply.
         SearchGate.method.answerSearchFlag()
         SearchStartState.method.answerSearchFlag()
 

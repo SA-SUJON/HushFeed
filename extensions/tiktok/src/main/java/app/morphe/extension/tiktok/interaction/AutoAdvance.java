@@ -67,11 +67,15 @@ public final class AutoAdvance {
      */
     public static int searchFlag(int nativeValue) {
         try {
-            return Settings.AUTO_ADVANCE.get() && Settings.AUTO_ADVANCE_SEARCH.get() ? 1 : nativeValue;
+            return searchForced() ? 1 : nativeValue;
         } catch (Throwable error) {
             Logger.printException(() -> "Could not read the search auto-advance switch", error);
             return nativeValue;
         }
+    }
+
+    private static boolean searchForced() {
+        return Settings.AUTO_ADVANCE.get() && Settings.AUTO_ADVANCE_SEARCH.get();
     }
 
     /**
@@ -113,6 +117,40 @@ public final class AutoAdvance {
     public static void onResume(Object component) {
         WeakReference<Object> owner = new WeakReference<>(component);
         MAIN.post(() -> update(owner.get()));
+        watchRestore(component);
+    }
+
+    /** The component's page coming back, where the host runs the same search restore. */
+    public static void onPageResume(Object component) {
+        watchRestore(component);
+    }
+
+    /**
+     * On a search page the host hands every new or resumed component the state search last
+     * remembered, and a START there starts the component on its own. The flag answer above is
+     * what lets it remember at all, so a scroll Hushfeed started and left running on one page
+     * starts again by itself on the next one. Nothing of Hushfeed's started that one, so it was
+     * never owned, and the limit, the hold and the shared video check all passed it by. Leaving
+     * that read at the server's answer isn't the way out: it then says STOP on every resume and
+     * the host turns a running search scroll off each time. So the state is read here, before
+     * the host's restore runs, and a component that went from STOP to running in that one step
+     * is claimed as Hushfeed's.
+     */
+    private static void watchRestore(Object component) {
+        Control control = CONTROLS.get(component);
+        if (control == null) return;
+        try {
+            if (!control.armRestore(searchForced(), readState(component))) return;
+        } catch (RuntimeException error) {
+            Logger.printException(() -> "Could not watch the search auto scroll restore", error);
+            return;
+        }
+        WeakReference<Object> owner = new WeakReference<>(component);
+        MAIN.post(() -> {
+            Object live = owner.get();
+            Control current = CONTROLS.get(live);
+            if (current != null && current.adoptRestore(readState(live))) update(live);
+        });
     }
 
     public static void beforeCompletion(Object component, String completedId) {
@@ -171,8 +209,25 @@ public final class AutoAdvance {
         int completedCount;
         private String lastCompletedId;
         private boolean limitNoticeShown;
+        private boolean restoreArmed;
         private int sessionLimit = Settings.AUTO_ADVANCE_LIMIT.get();
         Control(View view) { this.view = new WeakReference<>(view); }
+
+        /** Read just before the host's search restore: armed only when that could start it. */
+        boolean armRestore(boolean searchForced, Object stateBefore) {
+            restoreArmed = searchForced && !owned && named(stateBefore, "AUTO_SCROLL_STATE_STOP");
+            return restoreArmed;
+        }
+
+        /** Claims a scroll the host started on its own since armRestore; true when it did. */
+        boolean adoptRestore(Object stateAfter) {
+            boolean armed = restoreArmed;
+            restoreArmed = false;
+            if (!armed || owned || !(stateAfter instanceof Enum<?>)
+                    || named(stateAfter, "AUTO_SCROLL_STATE_STOP")) return false;
+            owned = true;
+            return true;
+        }
 
         private void refreshLimit() {
             int next = Settings.AUTO_ADVANCE_LIMIT.get();

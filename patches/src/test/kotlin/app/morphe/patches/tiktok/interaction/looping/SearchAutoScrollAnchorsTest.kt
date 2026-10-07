@@ -34,9 +34,26 @@ class SearchAutoScrollAnchorsTest {
         }
     }
 
+    /**
+     * The host restores search's remembered state from onViewCreated, onResume and
+     * onPageResume, and the extension reads the state at each one before that runs.
+     */
+    @Test
+    fun `the component has the page resume the restore watch hooks`() {
+        Fixtures.forEachDeclared { apk ->
+            val version = Fixtures.versionOf(apk)
+            val component = classesOf(apk).single { it.type == COMPONENT }
+            val pageResumes = component.methods.filter {
+                it.name == "onPageResume" && it.parameterTypes.map(CharSequence::toString) == listOf("I")
+            }
+            assertEquals("$version: onPageResume(int)", 1, pageResumes.size)
+        }
+    }
+
     private companion object {
         const val KEY = "search_auto_scroll"
         const val SERVICE = "Lcom/ss/android/ugc/aweme/search/common/communicate/AbsSearchService;"
+        const val COMPONENT = "Lcom/ss/android/ugc/feed/platform/panel/autoscroll/AutoScrollComponent;"
 
         fun Method.loadsExactKey() = implementation?.instructions?.any {
             (it.opcode == Opcode.CONST_STRING || it.opcode == Opcode.CONST_STRING_JUMBO) &&
