@@ -1711,3 +1711,8 @@ Sample caption to test,Keterangan contoh untuk dicoba
 Sample category to test,Kategori contoh untuk dicoba
 Keep videos out of Watch history,Jauhkan video dari Riwayat tontonan
 "Stops the view report TikTok sends for each video you watch, which is how videos get into Activity center > Watch history. Your views stop adding to view counts and For You has less to learn from. Videos already there stay, and TikTok still sees likes, follows, searches and its usage logs.","Menghentikan laporan tontonan yang dikirim TikTok untuk setiap video yang kamu tonton, yaitu cara video masuk ke Pusat aktivitas > Riwayat tontonan. Tontonanmu tidak lagi menambah jumlah tayangan dan For You punya lebih sedikit bahan untuk belajar. Video yang sudah ada tetap di sana, dan TikTok masih melihat suka, ikuti, pencarian, dan log penggunaannya."
+Set a sleep timer that closes TikTok,Atur pengatur waktu tidur yang menutup TikTok
+Close TikTok after,Tutup TikTok setelah
+Turn off the timer (TikTok closes at %1$s),Matikan pengatur waktu (TikTok tutup pukul %1$s)
+TikTok closes at %1$s,TikTok tutup pukul %1$s
+Sleep timer off,Pengatur waktu tidur mati

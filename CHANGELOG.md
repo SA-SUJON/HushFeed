@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Long press has a new choice, Set a sleep timer that closes TikTok. The press opens a picker of 15, 30, 45, 60 or 90 minutes, and a toast says when TikTok will close. When the time runs out the video stops and TikTok closes the way a swipe away from Recents closes it, background play included. Pressing again while a timer runs offers to turn it off. If the phone slept through the end with nothing playing, TikTok stays open rather than closing on you the next morning.
+
 * **TikTok:** New patch, Stop recording watch history, with a Privacy switch that stays off until you turn it on. It holds back the view report TikTok sends for each video you watch, which is how videos get into Activity center > Watch history. Your views stop adding to view counts and For You has less to learn from, and TikTok still sees likes, follows, searches and its own usage logs. Videos already in Watch history stay.
 
 * **TikTok:** The Blocked caption words and Hidden LIVE categories editors in Hushfeed settings > Feed filter have a sample box now. Type a caption or a category under your rules and the editor says which rule matches it, that nothing matches, or what's wrong with a rule, before you save anything. It runs the same matching the feed uses, and it only covers these word rules, not every filter. Nothing is saved, counted or sent while you try it.

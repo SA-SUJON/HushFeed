@@ -26,6 +26,7 @@ import app.morphe.extension.tiktok.share.ShareUrlSanitizer;
 import app.morphe.extension.tiktok.feedfilter.SoundIdentity;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.L10n;
+import app.morphe.extension.tiktok.wellbeing.SleepTimer;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.Locale;
@@ -99,7 +100,8 @@ public final class GestureActions {
     public static boolean takesLongPress(String action) {
         return "nothing".equals(action) || "comments".equals(action)
                 || "original_sound".equals(action) || "copy_link".equals(action)
-                || "copy_sound_link".equals(action) || "youtube_music".equals(action);
+                || "copy_sound_link".equals(action) || "youtube_music".equals(action)
+                || "sleep_timer".equals(action);
     }
 
     /**
@@ -199,6 +201,11 @@ public final class GestureActions {
             Context context = Utils.getActivity();
             YouTubeMusicSearch.open(onScreenAweme(),
                     context != null ? context : Utils.getContext());
+            return true;
+        }
+        if ("sleep_timer".equals(action)) {
+            // Posted, so the picker opens after the press is done with the touch.
+            Utils.runOnMainThread(() -> SleepTimer.choose(Utils.getVisibleActivity()));
             return true;
         }
         if (!"comments".equals(action)) return false;

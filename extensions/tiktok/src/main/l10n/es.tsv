@@ -1717,3 +1717,8 @@ Sample caption to test	Descripción de ejemplo para probar
 Sample category to test	Categoría de ejemplo para probar
 Keep videos out of Watch history	Dejar los videos fuera del historial de visualización
 Stops the view report TikTok sends for each video you watch, which is how videos get into Activity center > Watch history. Your views stop adding to view counts and For You has less to learn from. Videos already there stay, and TikTok still sees likes, follows, searches and its usage logs.	Detiene el aviso de reproducción que TikTok envía por cada video que ves, que es como los videos llegan a Centro de actividad > Historial de visualización. Tus vistas dejan de sumar a los contadores y Para ti tiene menos de qué aprender. Los videos que ya están se quedan, y TikTok sigue viendo los me gusta, los seguimientos, las búsquedas y sus registros de uso.
+Set a sleep timer that closes TikTok	Poner un temporizador que cierra TikTok
+Close TikTok after	Cerrar TikTok después de
+Turn off the timer (TikTok closes at %1$s)	Apagar el temporizador (TikTok se cierra a las %1$s)
+TikTok closes at %1$s	TikTok se cierra a las %1$s
+Sleep timer off	Temporizador apagado

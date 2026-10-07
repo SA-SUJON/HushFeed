@@ -512,9 +512,10 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             addPreference(new ChoicePreference(context, "Long press", Settings.LONG_PRESS_ACTION,
                     new String[]{"TikTok default (hold to speed up, quick share)", "Do nothing",
                             "Open comments", "Save the original sound", "Copy the video link",
-                            "Copy the sound link", "Find the sound on YouTube Music"},
+                            "Copy the sound link", "Find the sound on YouTube Music",
+                            "Set a sleep timer that closes TikTok"},
                     new String[]{"default", "nothing", "comments", "original_sound", "copy_link",
-                            "copy_sound_link", "youtube_music"}));
+                            "copy_sound_link", "youtube_music", "sleep_timer"}));
             addPreference(new TogglePreference(context, "Seek from the edges",
                     "Press and hold the left or right third of the screen to jump back or forward. "
                             + "The middle third keeps the Long press action.", Settings.EDGE_SEEK));

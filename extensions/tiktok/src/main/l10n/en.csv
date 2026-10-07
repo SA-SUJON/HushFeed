@@ -291,6 +291,7 @@ Clearing seen videos,Clearing seen videos
 Clearing suggested accounts,Clearing suggested accounts
 "Clearing, %1$d so far","Clearing, %1$d so far"
 Close,Close
+Close TikTok after,Close TikTok after
 "Comma separated account handles or user ids. Their videos stay when only a filter on the kind of post, its labels, age, length or counts would hide them. Ads, blocked creators, words, sounds, countries and caption languages, and seen videos still apply.","Comma separated account handles or user ids. Their videos stay when only a filter on the kind of post, its labels, age, length or counts would hide them. Ads, blocked creators, words, sounds, countries and caption languages, and seen videos still apply."
 "Comma separated account handles or user ids. Videos from these accounts are always hidden. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name.","Comma separated account handles or user ids. Videos from these accounts are always hidden. An entry between slashes, like /^news_/, is a pattern matched against the handle and the display name."
 "Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.","Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries."
@@ -1230,6 +1231,7 @@ Sends today's message right away. The daily one then waits for tomorrow.,Sends t
 Sent to %1$d/%2$d chats. The rest still need a message.,Sent to %1$d/%2$d chats. The rest still need a message.
 Sent to %1$d/%2$d chats. They won't get another message today.,Sent to %1$d/%2$d chats. They won't get another message today.
 Series posts,Series posts
+Set a sleep timer that closes TikTok,Set a sleep timer that closes TikTok
 Settings,Settings
 Settings are back to their defaults. Restart TikTok to apply all changes.,Settings are back to their defaults. Restart TikTok to apply all changes.
 Settings backup saved,Settings backup saved
@@ -1295,6 +1297,7 @@ Silence the feed while comments are open,Silence the feed while comments are ope
 Skip content warnings,Skip content warnings
 "Skipped entries are invalid, expired, already recorded, or older than the newest %1$s videos.","Skipped entries are invalid, expired, already recorded, or older than the newest %1$s videos."
 Skipping videos with %1$s,Skipping videos with %1$s
+Sleep timer off,Sleep timer off
 Some Calm feed settings changed. Restore still puts back your earlier setup.,Some Calm feed settings changed. Restore still puts back your earlier setup.
 Some of these notes are in English.,Some of these notes are in English.
 Something is missing from %1$s. Tap for the whole report.,Something is missing from %1$s. Tap for the whole report.
@@ -1524,6 +1527,7 @@ This video's sound has no title to look for,This video's sound has no title to l
 Thumbs down blocks the commenter,Thumbs down blocks the commenter
 TikTok closed during these saves,TikTok closed during these saves
 "TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are.","TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are."
+TikTok closes at %1$s,TikTok closes at %1$s
 TikTok default,TikTok default
 "TikTok default (hold to speed up, quick share)","TikTok default (hold to speed up, quick share)"
 TikTok default (open the creator's profile),TikTok default (open the creator's profile)
@@ -1580,6 +1584,7 @@ Try a different word or clear the search.,Try a different word or clear the sear
 Try a different word or clear the search. Switches from patches you didn't tick in Morphe Manager aren't listed.,Try a different word or clear the search. Switches from patches you didn't tick in Morphe Manager aren't listed.
 "Try again, or go back to TikTok.","Try again, or go back to TikTok."
 Turn Hushfeed back on,Turn Hushfeed back on
+Turn off the timer (TikTok closes at %1$s),Turn off the timer (TikTok closes at %1$s)
 Turn on %1$s first.,Turn on %1$s first.
 Turn on Keep a streak going first,Turn on Keep a streak going first
 Turn on overrides,Turn on overrides

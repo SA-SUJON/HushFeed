@@ -1720,3 +1720,8 @@ Sample caption to test	Beispielbeschreibung zum Testen
 Sample category to test	Beispielkategorie zum Testen
 Keep videos out of Watch history	Videos aus dem Wiedergabeverlauf heraushalten
 Stops the view report TikTok sends for each video you watch, which is how videos get into Activity center > Watch history. Your views stop adding to view counts and For You has less to learn from. Videos already there stay, and TikTok still sees likes, follows, searches and its usage logs.	Stoppt die Aufrufmeldung, die TikTok für jedes angesehene Video sendet. So landen Videos in Aktivitätscenter > Wiedergabeverlauf. Deine Aufrufe zählen nicht mehr zu den Aufrufzahlen, und For You hat weniger, woraus es lernen kann. Videos, die schon dort sind, bleiben, und TikTok sieht weiterhin Likes, Follows, Suchen und seine Nutzungsprotokolle.
+Set a sleep timer that closes TikTok	Einschlaf-Timer stellen, der TikTok schließt
+Close TikTok after	TikTok schließen nach
+Turn off the timer (TikTok closes at %1$s)	Timer ausschalten (TikTok schließt um %1$s)
+TikTok closes at %1$s	TikTok schließt um %1$s
+Sleep timer off	Einschlaf-Timer aus

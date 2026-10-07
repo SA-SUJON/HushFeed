@@ -189,7 +189,7 @@ public class GestureActionsTest {
         }
     }
 
-    @Test public void longPressPatchHasSevenReachableChoices() throws Exception {
+    @Test public void longPressPatchHasEightReachableChoices() throws Exception {
         try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
             var activity = controller.get();
             Utils.setContext(activity);
@@ -199,7 +199,7 @@ public class GestureActionsTest {
             ChoicePreference choice = (ChoicePreference) screen.findPreference("long_press_action");
             assertNotNull(choice);
             assertArrayEquals(new String[]{"default", "nothing", "comments", "original_sound",
-                    "copy_link", "copy_sound_link", "youtube_music"}, choice.getEntryValues());
+                    "copy_link", "copy_sound_link", "youtube_music", "sleep_timer"}, choice.getEntryValues());
             assertEquals("every value needs a label to pick it by",
                     choice.getEntryValues().length, choice.getEntries().length);
             // The edge seek rides on the same patch, so its two controls come with it.
