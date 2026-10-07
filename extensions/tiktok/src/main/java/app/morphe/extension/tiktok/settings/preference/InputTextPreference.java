@@ -12,7 +12,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.settings.StringSetting;
 import app.morphe.extension.shared.Utils;
 
@@ -56,6 +59,22 @@ public class InputTextPreference extends EditTextPreference {
 
     @Nullable
     private Note note;
+
+    /**
+     * Shows what the typed value turns into, under the field, while it's typed. Worked out from
+     * the text alone, so looking never saves or starts anything. Null hides the line.
+     */
+    public interface Preview {
+        @Nullable
+        String text(String typed);
+    }
+
+    @Nullable
+    private Preview preview;
+
+    /** The editor is the same view every time the dialog opens, so its one watcher is kept. */
+    @Nullable
+    private TextWatcher previewWatcher;
 
     /** The description, kept so the summary can be rebuilt when the value changes. */
     private final String baseSummary;
@@ -136,6 +155,11 @@ public class InputTextPreference extends EditTextPreference {
      */
     public InputTextPreference withCheck(Check check) {
         this.check = check;
+        return this;
+    }
+
+    public InputTextPreference withPreview(Preview preview) {
+        this.preview = preview;
         return this;
     }
 
@@ -234,7 +258,51 @@ public class InputTextPreference extends EditTextPreference {
                 ViewGroup.LayoutParams.WRAP_CONTENT
         ));
 
+        if (previewWatcher != null) editText.removeTextChangedListener(previewWatcher);
+        previewWatcher = null;
+        if (preview != null) {
+            TextView shown = SettingsUi.text(
+                    context,
+                    "",
+                    SettingsUi.TEXT_BODY_SMALL,
+                    SettingsUi.textSecondary(),
+                    android.graphics.Typeface.NORMAL
+            );
+            LinearLayout.LayoutParams previewParams = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+            previewParams.setMargins(0, SettingsUi.dp(context, 10), 0, 0);
+            dialogView.addView(shown, previewParams);
+            previewWatcher = new TextWatcher() {
+                @Override public void beforeTextChanged(CharSequence text, int start, int count, int after) {
+                }
+
+                @Override public void onTextChanged(CharSequence text, int start, int before, int count) {
+                }
+
+                @Override public void afterTextChanged(Editable text) {
+                    showPreview(shown, String.valueOf(text));
+                }
+            };
+            editText.addTextChangedListener(previewWatcher);
+            showPreview(shown, String.valueOf(editText.getText()));
+        }
+
         return dialogView;
+    }
+
+    private void showPreview(TextView shown, String typed) {
+        String text;
+        try {
+            text = preview == null ? null : preview.text(typed);
+        } catch (RuntimeException failure) {
+            // A preview that can't be worked out is left out; the field still saves.
+            Logger.printException(() -> "Could not preview the typed value", failure);
+            text = null;
+        }
+        shown.setText(text == null ? "" : text);
+        shown.setVisibility(text == null || text.isEmpty() ? View.GONE : View.VISIBLE);
     }
 
     @Override

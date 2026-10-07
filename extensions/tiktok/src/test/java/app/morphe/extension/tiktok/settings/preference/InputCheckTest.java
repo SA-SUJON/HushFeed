@@ -362,6 +362,49 @@ public class InputCheckTest {
         });
     }
 
+    /** The preview line under the field, found by its heading. */
+    private static String previewIn(android.view.View view) {
+        if (view instanceof android.widget.TextView text && !(view instanceof android.widget.EditText)
+                && text.getText().toString().startsWith("Preview with a made-up post:")) {
+            return text.getVisibility() == android.view.View.VISIBLE ? text.getText().toString() : null;
+        }
+        if (view instanceof android.view.ViewGroup group) {
+            for (int index = 0; index < group.getChildCount(); index++) {
+                String found = previewIn(group.getChildAt(index));
+                if (found != null) return found;
+            }
+        }
+        return null;
+    }
+
+    @Test public void theFilenameEditorPreviewsWhatTheTypedTemplateSavesAs() throws Exception {
+        onScreen("DOWNLOADS", Settings.DOWNLOAD_VIDEO_FILENAME_TEMPLATE.key, field -> {
+            String saved = Settings.DOWNLOAD_VIDEO_FILENAME_TEMPLATE.get();
+            openDialog(field);
+            android.app.AlertDialog dialog = (android.app.AlertDialog) field.getDialog();
+            android.view.View root = dialog.getWindow().getDecorView();
+
+            field.getEditText().setText("{creator}_{vidoe_id}");
+            String shown = previewIn(root);
+            assertNotNull("no preview under the field", shown);
+            assertTrue(shown, shown.contains("/creator_name_{vidoe_id}.mp4"));
+            assertTrue(shown, shown.contains("Not a token here, kept as typed: {vidoe_id}"));
+
+            field.getEditText().setText("{video_id}");
+            shown = previewIn(root);
+            assertTrue("the preview follows the typing: " + shown, shown.contains("/7312345678901234567.mp4"));
+            assertFalse(shown, shown.contains("Not a token"));
+            assertEquals("looking saves nothing", saved, Settings.DOWNLOAD_VIDEO_FILENAME_TEMPLATE.get());
+            dialog.dismiss();
+
+            // Opened again, the editor has one watcher, not one per opening.
+            openDialog(field);
+            field.getEditText().setText("{creator}");
+            assertTrue(previewIn(field.getDialog().getWindow().getDecorView()).contains("/creator_name.mp4"));
+            field.getDialog().dismiss();
+        });
+    }
+
     @Test public void aCreatorPatternThatWillNotCompileIsRefusedInTheDialog() throws Exception {
         onScreen("FEED_FILTER", "blocked_creators", field -> {
             assertFalse("an unclosed group should not save",

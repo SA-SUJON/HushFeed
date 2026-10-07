@@ -403,6 +403,7 @@ Delivery unconfirmed: %1$d/%2$d chats. Remaining chats still need a message.,Del
 Delivery unconfirmed: %1$d/%2$d chats. Those chats won't be retried today.,Delivery unconfirmed: %1$d/%2$d chats. Those chats won't be retried today.
 Description text size,Description text size
 Destination updated,Destination updated
+Details: %1$s,Details: %1$s
 Device access,Device access
 "Device language, then original","Device language, then original"
 Diagnostic data cleared. Tap again to put it back.,Diagnostic data cleared. Tap again to put it back.
@@ -710,6 +711,9 @@ Hushfeed is active,Hushfeed is active
 Hushfeed is paused,Hushfeed is paused
 Hushfeed is paused. Ghost mode isn't active.,Hushfeed is paused. Ghost mode isn't active.
 Hushfeed turns back on when TikTok restarts.,Hushfeed turns back on when TikTok restarts.
+Hushfeed's downloader: %1$s,Hushfeed's downloader: %1$s
+"If that name is taken, Android adds a number to the new file.","If that name is taken, Android adds a number to the new file."
+"If that name is taken, Hushfeed adds a number to the new file.","If that name is taken, Hushfeed adds a number to the new file."
 "Ignore the creator's choice so the Duet and Stitch entries appear. Everything else the app checks still applies, and whether the upload is accepted is the server's decision.","Ignore the creator's choice so the Duet and Stitch entries appear. Everything else the app checks still applies, and whether the upload is accepted is the server's decision."
 Import finished,Import finished
 Import loaded values,Import loaded values
@@ -792,6 +796,7 @@ Links,Links
 Links in comments open,Links in comments open
 Live photo clip,Live photo clip
 Live photo clip saved to %1$s,Live photo clip saved to %1$s
+Live photo clips: %1$s,Live photo clips: %1$s
 Loaded current values. Loading all known gates…,Loaded current values. Loading all known gates…
 Loaded values are still being read. Try again in a moment.,Loaded values are still being read. Try again in a moment.
 Loaded-value file export failed,Loaded-value file export failed
@@ -895,6 +900,7 @@ None of these gates takes a true or false value.,None of these gates takes a tru
 None recorded,None recorded
 Normal,Normal
 "Not a handle or id, so ignored: %1$s","Not a handle or id, so ignored: %1$s"
+"Not a token here, kept as typed: %1$s","Not a token here, kept as typed: %1$s"
 Not blocked,Not blocked
 Not interested in this video,Not interested in this video
 Not read yet,Not read yet
@@ -1014,6 +1020,7 @@ Press and hold a profile picture to save the full size original to your photo de
 Press and hold the Home tab to open these settings. A tap on Home works as before.,Press and hold the Home tab to open these settings. A tap on Home works as before.
 Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.,Press and hold the left or right third of the screen to jump back or forward. The middle third keeps the Long press action.
 Preview shortened. Save report keeps the full report.,Preview shortened. Save report keeps the full report.
+Preview with a made-up post:,Preview with a made-up post:
 Privacy,Privacy
 Privacy and system,Privacy and system
 Problem detected.,Problem detected.
@@ -1270,6 +1277,7 @@ Sound,Sound
 Sound link copied,Sound link copied
 Sound on,Sound on
 Sound saved to %1$s,Sound saved to %1$s
+Sound: %1$s,Sound: %1$s
 Source,Source
 Speed,Speed
 Speed menu choices,Speed menu choices
@@ -1290,6 +1298,7 @@ Sticker,Sticker
 Sticker destination,Sticker destination
 Sticker saved to %1$s,Sticker saved to %1$s
 "Stickers can't be saved to the folder in that file, so your sticker folder was kept","Stickers can't be saved to the folder in that file, so your sticker folder was kept"
+Stickers: %1$s,Stickers: %1$s
 Still here. Nothing is waiting.,Still here. Nothing is waiting.
 Still reading the record. Tap again in a moment.,Still reading the record. Tap again in a moment.
 Still saving the last one,Still saving the last one
@@ -1329,6 +1338,7 @@ Streak,Streak
 Structured value observed,Structured value observed
 Subtitle language,Subtitle language
 Subtitles,Subtitles
+Subtitles: %1$s,Subtitles: %1$s
 Swipe for brightness and volume,Swipe for brightness and volume
 Swipe left,Swipe left
 System,System
@@ -1503,9 +1513,11 @@ TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.,TikTok refuse
 TikTok runs as if it weren't patched. Your settings stay as they are.,TikTok runs as if it weren't patched. Your settings stay as they are.
 "TikTok sometimes tests how fast your phone is in a background process of its own, which can hold a lot of memory. This keeps that process from starting. One that's already running stops when TikTok restarts.","TikTok sometimes tests how fast your phone is in a background process of its own, which can hold a lot of memory. This keeps that process from starting. One that's already running stops when TikTok restarts."
 TikTok's background play and auto-scroll,TikTok's background play and auto-scroll
+TikTok's downloader: %1$s,TikTok's downloader: %1$s
 TikTok's hold to speed up,TikTok's hold to speed up
 TikTok's messages didn't start in time. It tries again at %1$s.,TikTok's messages didn't start in time. It tries again at %1$s.
 "TikTok's own daily screen-time reminder sends the app to the background instead of waiting to be dismissed. Coming straight back leaves the reminder on screen, so the limit stays reachable. Needs a daily limit set under TikTok's Settings and privacy, under Time and well-being.","TikTok's own daily screen-time reminder sends the app to the background instead of waiting to be dismissed. Coming straight back leaves the reminder on screen, so the limit stays reachable. Needs a daily limit set under TikTok's Settings and privacy, under Time and well-being."
+TikTok's own name,TikTok's own name
 TikTok's own value,TikTok's own value
 TikTok's play and pause button and its previous and next buttons appear on the feed. TikTok otherwise shows them only to people who use a screen reader. TikTok's analytics note the row and each press on it.,TikTok's play and pause button and its previous and next buttons appear on the feed. TikTok otherwise shows them only to people who use a screen reader. TikTok's analytics note the row and each press on it.
 TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.,TikTok's server can put an account into an experiment that empties the Favorites tab on your profile. Keep the tab and its saved videos.

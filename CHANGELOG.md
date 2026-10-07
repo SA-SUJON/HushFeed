@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** The Video, Photo and Comment media filename editors in Hushfeed settings > Downloads now preview the template as you type it. You see the folder and file name a made-up post would get from Hushfeed's downloader and from TikTok's own, plus the sound, details and subtitle files you have on, and any {word} that isn't a token is named so a typo doesn't go unnoticed until the next save.
+
 * **TikTok:** Diagnostics has a new row, Log diagnostics for 15 minutes. Tap it before you reproduce a bug and everything is logged for a quarter hour, then logging stops by itself. The row shows when it ends and a second tap stops it early. Restarting TikTok keeps the same end, setting the phone's clock back can't stretch it, and a phone restart ends it. It never moves the Log diagnostics switch, so logging you left on stays on, and backups leave it out. The Log diagnostics switch now says plainly that it stays on until you turn it off.
 
 * **TikTok:** Block the advertising id in Device privacy guard now covers every place TikTok reads it. Two ad SDKs inside the app ask Google's ad service for the id on their own instead of going through Play Services, and they still got the real one. With the switch on they get the blank id too, and every check of whether you've opted out of ads personalization says you have, which is what Android tells apps once you delete your advertising id. Pause Hushfeed still hands TikTok the real answers.

@@ -21,6 +21,7 @@ import app.morphe.extension.tiktok.settings.preference.NumberInputPreference;
 import app.morphe.extension.tiktok.settings.preference.SectionHeadingPreference;
 import app.morphe.extension.tiktok.settings.preference.TogglePreference;
 import app.morphe.extension.tiktok.download.DownloadDestination;
+import app.morphe.extension.tiktok.download.DownloadNamePreview;
 import app.morphe.extension.tiktok.download.ExternalDownloader;
 import app.morphe.extension.tiktok.download.SavedVideoArchive;
 
@@ -80,7 +81,7 @@ public class DownloadsPreferenceCategory extends ConditionalPreferenceCategory {
                     "Video filename",
                     "Tokens: {creator}, {date}, {video_id}. Start with {creator}/ to give each creator a folder. The file extension is kept automatically.",
                     Settings.DOWNLOAD_VIDEO_FILENAME_TEMPLATE
-            ).withNameKeyboard());
+            ).withNameKeyboard().withPreview(DownloadNamePreview::video));
             addPreference(new InputTextPreference(
                     context,
                     "Photo filename",
@@ -89,14 +90,14 @@ public class DownloadsPreferenceCategory extends ConditionalPreferenceCategory {
                             + "TikTok's own button is numbered by the folder instead. The file "
                             + "extension is kept automatically.",
                     Settings.DOWNLOAD_PHOTO_FILENAME_TEMPLATE
-            ).withNameKeyboard());
+            ).withNameKeyboard().withPreview(DownloadNamePreview::photo));
             if (SettingsStatus.downloadEnabled) {
                 addPreference(new InputTextPreference(
                         context,
                         "Comment media filename",
                         "Tokens: {date}, {media_id}. Works for image and video stickers.",
                         Settings.DOWNLOAD_COMMENT_MEDIA_FILENAME_TEMPLATE
-                ).withNameKeyboard());
+                ).withNameKeyboard().withPreview(DownloadNamePreview::commentMedia));
                 addPreference(new TogglePreference(
                         context,
                         "Remove watermark",
