@@ -166,13 +166,17 @@ internal fun launcherPicture(raw: String?): LauncherPicture? {
 
 /**
  * The width and height in a whole, well-formed PNG, or null. Every chunk has to fit the file and
- * match its checksum, the header has to come first, and the file needs image data and an end
- * chunk, so a cut-short download is caught here and not by the launcher.
+ * match its checksum, the header has to come first with a bit depth, color type and method the
+ * PNG spec allows, a palette image needs its palette before the image data, and the file needs
+ * image data and an end chunk, so a cut-short or malformed file is caught here and not by the
+ * launcher.
  */
 internal fun pngSize(bytes: ByteArray): Pair<Int, Int>? {
     if (bytes.size < PNG_SIGNATURE.size || !bytes.copyOfRange(0, PNG_SIGNATURE.size).contentEquals(PNG_SIGNATURE)) return null
     var offset = PNG_SIGNATURE.size
     var size: Pair<Int, Int>? = null
+    var paletted = false
+    var palette = false
     var images = 0
     while (offset + 12 <= bytes.size) {
         val length = bytes.bigEndianInt(offset)
@@ -181,18 +185,32 @@ internal fun pngSize(bytes: ByteArray): Pair<Int, Int>? {
         val crc = CRC32().apply { update(bytes, offset + 4, 4 + length) }.value
         if (crc != (bytes.bigEndianInt(offset + 8 + length).toLong() and 0xffffffffL)) return null
         if (size == null) {
-            if (type != "IHDR" || length != 13) return null
+            if (type != "IHDR" || length != 13 || !pngHeaderValid(bytes, offset + 8)) return null
             size = bytes.bigEndianInt(offset + 8) to bytes.bigEndianInt(offset + 12)
+            paletted = bytes[offset + 17].toInt() == 3
         } else {
             when (type) {
                 "IHDR" -> return null
-                "IDAT" -> images++
+                "PLTE" -> palette = true
+                "IDAT" -> if (paletted && !palette) return null else images++
                 "IEND" -> return size.takeIf { images > 0 && it.first > 0 && it.second > 0 }
             }
         }
         offset += 12 + length
     }
     return null
+}
+
+/** Whether the IHDR body at [at] names a bit depth and color type pair, compression, filter and interlace method the PNG spec allows. */
+private fun pngHeaderValid(bytes: ByteArray, at: Int): Boolean {
+    val depth = bytes[at + 8].toInt()
+    val depths = when (bytes[at + 9].toInt()) {
+        0 -> setOf(1, 2, 4, 8, 16)
+        3 -> setOf(1, 2, 4, 8)
+        2, 4, 6 -> setOf(8, 16)
+        else -> return false
+    }
+    return depth in depths && bytes[at + 10].toInt() == 0 && bytes[at + 11].toInt() == 0 && bytes[at + 12].toInt() in 0..1
 }
 
 private fun ByteArray.bigEndianInt(at: Int): Int =

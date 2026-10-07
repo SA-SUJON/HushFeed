@@ -243,6 +243,32 @@ class CustomLauncherIconTest {
     }
 
     @Test
+    fun `a PNG header the spec doesn't allow is refused`() {
+        fun header(depth: Int, color: Int, compression: Int = 0, filter: Int = 0, interlace: Int = 0) =
+            chunk("IHDR", ByteBuffer.allocate(13).putInt(16).putInt(16)
+                .put(byteArrayOf(depth.toByte(), color.toByte(), compression.toByte(), filter.toByte(), interlace.toByte())).array())
+        val palette = chunk("PLTE", byteArrayOf(0, 0, 0, -1, -1, -1))
+        val data = chunk("IDAT", byteArrayOf(0x78, 0x9c.toByte(), 3, 0, 0, 0, 0, 1))
+        val end = chunk("IEND", ByteArray(0))
+
+        for ((depth, color) in listOf(1 to 0, 16 to 0, 8 to 2, 16 to 6, 8 to 4)) {
+            assertEquals("depth $depth color $color", 16 to 16, pngSize(SIGNATURE + header(depth, color) + data + end))
+        }
+        assertEquals("interlaced", 16 to 16, pngSize(SIGNATURE + header(8, 6, interlace = 1) + data + end))
+        assertEquals("palette first", 16 to 16, pngSize(SIGNATURE + header(8, 3) + palette + data + end))
+
+        assertNull("16-bit palette", pngSize(SIGNATURE + header(16, 3) + palette + data + end))
+        assertNull("4-bit color", pngSize(SIGNATURE + header(4, 2) + data + end))
+        assertNull("3-bit gray", pngSize(SIGNATURE + header(3, 0) + data + end))
+        assertNull("color type 5", pngSize(SIGNATURE + header(8, 5) + data + end))
+        assertNull("compression", pngSize(SIGNATURE + header(8, 6, compression = 1) + data + end))
+        assertNull("filter", pngSize(SIGNATURE + header(8, 6, filter = 1) + data + end))
+        assertNull("interlace", pngSize(SIGNATURE + header(8, 6, interlace = 2) + data + end))
+        assertNull("no palette", pngSize(SIGNATURE + header(8, 3) + data + end))
+        assertNull("palette after the data", pngSize(SIGNATURE + header(8, 3) + data + palette + end))
+    }
+
+    @Test
     fun `a missing, damaged, oblong, small or large picture stops patching with a reason`() {
         fun refusal(path: String): String = assertThrows(PatchException::class.java) { launcherPicture(path) }.message!!
         fun file(name: String, bytes: ByteArray) = folder.newFile(name).apply { writeBytes(bytes) }.path
