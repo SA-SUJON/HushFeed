@@ -375,6 +375,11 @@ public class Settings extends BaseSettings {
      * Read each time a preview would start its countdown, so no restart.
      */
     public static final BooleanSetting STOP_LIVE_AUTO_ENTER = new BooleanSetting("stop_live_auto_enter", FALSE);
+    /**
+     * Plays the audio TikTok mutes on a post whose sound was pulled; the Keep pulled sounds
+     * patch. Read as each video starts, so no restart.
+     */
+    public static final BooleanSetting KEEP_PULLED_SOUNDS = new BooleanSetting("keep_pulled_sounds", FALSE);
     public static final BooleanSetting RESUME_VIDEO_AFTER_SCROLL = new BooleanSetting(
             "resume_video_after_scroll",
             TRUE,

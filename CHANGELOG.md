@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** New patch, Keep pulled sounds. When a sound gets pulled for copyright or in your region, TikTok mutes every video that uses it. Turn on Play sounds TikTok pulled in Hushfeed settings > Playback and those videos play with their audio again, in the feed and in search. TikTok still shows the sound as unavailable. It's off by default.
+
 * **TikTok:** New patch, LIVE controls. A LIVE that shows up in your feed can count down and drop you into the room without a tap. Turn on Stop LIVE previews opening by themselves in Hushfeed settings > Playback and it stays a preview until you tap it. It's off by default.
 
 * **TikTok:** New patch, Stop search autoplay. Turn on Stop search results playing on their own in Hushfeed settings > App and the videos in your search results stay on their cover until you open one. The feed plays as usual.

@@ -33,7 +33,7 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                 || SettingsStatus.autoAdvanceEnabled || SettingsStatus.videoFitEnabled
                 || SettingsStatus.fullScreenHoldEnabled || SettingsStatus.storyControlsEnabled
                 || SettingsStatus.liveControlsEnabled
-                || SettingsStatus.feedMuteEnabled
+                || SettingsStatus.feedMuteEnabled || SettingsStatus.keepPulledSoundsEnabled
                 || SettingsStatus.backgroundPlayEnabled
                 || SettingsStatus.showSeekbarEnabled || SettingsStatus.seekbarThumbnailEnabled
                 || SettingsStatus.stopVideoLoopingEnabled || SettingsStatus.resumeVideoAfterScrollEnabled
@@ -120,7 +120,7 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
         // leave. The bar rows were on App and the frame rows under Quality, which they aren't.
         if (SettingsStatus.showSeekbarEnabled || SettingsStatus.seekbarThumbnailEnabled
                 || SettingsStatus.videoFitEnabled || SettingsStatus.feedMuteEnabled
-                || SettingsStatus.backgroundPlayEnabled) {
+                || SettingsStatus.keepPulledSoundsEnabled || SettingsStatus.backgroundPlayEnabled) {
             addPreference(new SectionHeadingPreference(context, "Player"));
         }
         if (SettingsStatus.showSeekbarEnabled) {
@@ -175,6 +175,13 @@ public final class PlaybackPreferenceCategory extends ConditionalPreferenceCateg
                             + "from another app keeps playing while it's on. DMs, stories and LIVE "
                             + "keep their sound.",
                     Settings.FEED_MUTED));
+        }
+        if (SettingsStatus.keepPulledSoundsEnabled) {
+            addPreference(new TogglePreference(context, "Play sounds TikTok pulled",
+                    "Play the audio on videos TikTok silenced because their sound was pulled for "
+                            + "copyright or in your region. TikTok still says the sound isn't "
+                            + "available.",
+                    Settings.KEEP_PULLED_SOUNDS));
         }
         if (SettingsStatus.backgroundPlayEnabled) {
             addPreference(new TogglePreference(context, "Keep playing in the background",
