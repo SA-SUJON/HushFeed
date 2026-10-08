@@ -22,12 +22,12 @@ import org.robolectric.util.ReflectionHelpers.ClassParameter;
 public class UnverifiedNoticesTest {
     @Before public void setUp() {
         Utils.setContext(RuntimeEnvironment.getApplication());
-        SettingsStatus.sensitiveWarningsEnabled = true;
+        SettingsStatus.unverifiedNoticesEnabled = true;
     }
 
     @After public void tearDown() {
         setPaused(false);
-        SettingsStatus.sensitiveWarningsEnabled = false;
+        SettingsStatus.unverifiedNoticesEnabled = false;
         Settings.HIDE_UNVERIFIED_NOTICES.save(Settings.HIDE_UNVERIFIED_NOTICES.defaultValue);
         Settings.HIDE_SENSITIVE_WARNINGS.save(Settings.HIDE_SENSITIVE_WARNINGS.defaultValue);
     }
@@ -55,7 +55,7 @@ public class UnverifiedNoticesTest {
 
     @Test public void aSavedSwitchDoesNothingWithoutItsPatch() {
         Settings.HIDE_UNVERIFIED_NOTICES.save(true);
-        SettingsStatus.sensitiveWarningsEnabled = false;
+        SettingsStatus.unverifiedNoticesEnabled = false;
         assertFalse(SensitiveWarnings.hideUnverifiedNotices());
     }
 

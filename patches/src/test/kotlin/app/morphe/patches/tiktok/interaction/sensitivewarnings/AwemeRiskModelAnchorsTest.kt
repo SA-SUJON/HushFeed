@@ -13,6 +13,11 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
+import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.Instruction
+import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.RegisterRangeInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import org.junit.Assert.assertEquals
@@ -27,6 +32,56 @@ private const val AWEME = "Lcom/ss/android/ugc/aweme/feed/model/Aweme;"
  * routines that copy a video, and the guard lands in front of the read.
  */
 class AwemeRiskModelAnchorsTest {
+    /**
+     * The getter answering null is only safe where TikTok's code expects none. In every method that
+     * calls it, the first call's result is tested for null before anything else touches it, or is
+     * handed straight to setAwemeRiskModel by a copy. Later calls in the same method (TikTok reads
+     * it again after the test, `get() != null && get().isWarn()`) ride on that first test.
+     */
+    @Test
+    fun `every method that calls the getter tests its first answer for null`() {
+        Fixtures.forEachDeclared { apk ->
+            val version = Fixtures.versionOf(apk)
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            val unchecked = mutableListOf<String>()
+            var callers = 0
+            for (entry in container.dexEntryNames) {
+                for (classDef in container.getEntry(entry)!!.dexFile.classes) {
+                    for (method in classDef.methods) {
+                        val body = method.implementation?.instructions?.toList() ?: continue
+                        val first = body.indices.firstOrNull { at ->
+                            body[at].getReference<MethodReference>()?.let { it.definingClass == AWEME && it.name == "getAwemeRiskModel" } == true
+                        } ?: continue
+                        callers++
+                        val result = (body.getOrNull(first + 1) as? OneRegisterInstruction)
+                            ?.takeIf { body[first + 1].opcode == Opcode.MOVE_RESULT_OBJECT }?.registerA
+                        // The first instruction after the call that reads the result, a check-cast aside.
+                        val use = result?.let { register ->
+                            body.drop(first + 2).take(40).firstOrNull { reads(it, register) && it.opcode != Opcode.CHECK_CAST }
+                        }
+                        val tested = use != null && (use.opcode == Opcode.IF_EQZ || use.opcode == Opcode.IF_NEZ)
+                        val copied = use?.getReference<MethodReference>()?.name == "setAwemeRiskModel"
+                        if (!tested && !copied) unchecked += "${classDef.type}->${method.name}: ${use?.opcode}"
+                    }
+                }
+            }
+            assertTrue("$version: too few callers to mean anything ($callers)", callers >= 10)
+            assertEquals("$version: callers that use the risk model without a null test", emptyList<String>(), unchecked)
+        }
+    }
+
+    private fun reads(instruction: Instruction, register: Int): Boolean = when (instruction) {
+        is FiveRegisterInstruction -> listOf(
+            instruction.registerC, instruction.registerD, instruction.registerE, instruction.registerF, instruction.registerG,
+        ).take(instruction.registerCount).contains(register)
+        is RegisterRangeInstruction ->
+            register in instruction.startRegister until instruction.startRegister + instruction.registerCount
+        is TwoRegisterInstruction -> instruction.registerB == register ||
+            (instruction.registerA == register && instruction.opcode.name.startsWith("iput"))
+        is OneRegisterInstruction -> instruction.registerA == register && !instruction.opcode.setsRegister()
+        else -> false
+    }
+
     @Test
     fun `each declared build reads the risk model only through its getter`() {
         Fixtures.forEachDeclared { apk ->

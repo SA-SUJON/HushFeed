@@ -88,6 +88,8 @@ public class SettingsStatus {
     public static boolean blockAuthorEnabled = false;
     public static boolean authorRegionEnabled = false;
     public static boolean sensitiveWarningsEnabled = false;
+    /** Skip content warnings found Aweme's risk model getter, so the unverified notices switch works. */
+    public static boolean unverifiedNoticesEnabled = false;
     public static boolean notInterestedEnabled = false;
 
     public static void enableNotInterested() {
@@ -358,6 +360,10 @@ public class SettingsStatus {
 
     public static void enableSensitiveWarnings() {
         sensitiveWarningsEnabled = true;
+    }
+
+    public static void enableUnverifiedNotices() {
+        unverifiedNoticesEnabled = true;
     }
 
     public static void enableAuthorRegion() {

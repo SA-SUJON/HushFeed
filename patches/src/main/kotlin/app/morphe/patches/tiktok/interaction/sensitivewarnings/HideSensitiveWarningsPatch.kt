@@ -16,6 +16,7 @@ import app.morphe.patches.tiktok.misc.extension.sharedExtensionPatch
 import app.morphe.patches.tiktok.misc.settings.SettingsStatusLoadFingerprint
 import app.morphe.patches.tiktok.interaction.blockauthor.registerOfParameter
 import app.morphe.patches.tiktok.misc.settings.settingsPatch
+import app.morphe.patches.tiktok.misc.theme.declaredVersions
 import app.morphe.patches.tiktok.shared.guardAtEntry
 
 private const val EXTENSION_CLASS_DESCRIPTOR =
@@ -70,7 +71,20 @@ val hideSensitiveWarningsPatch = bytecodePatch(
                     "$VIDEO_ITEM_PARAMS_DESCRIPTOR parameter to clear.",
             )
 
-        val riskModel = AwemeRiskModelFingerprint.method
+        // The unverified notices switch matters less than the warnings themselves: on a declared
+        // build AwemeRiskModelAnchorsTest holds the getter, elsewhere a miss leaves that switch out.
+        val riskModel = AwemeRiskModelFingerprint.methodOrNull
+        if (riskModel == null && packageMetadata.versionName in declaredVersions()) {
+            throw PatchException("Skip content warnings: Aweme's getAwemeRiskModel() wasn't found.")
+        }
+        if (riskModel != null) {
+            SettingsStatusLoadFingerprint.method.addInstruction(
+                0,
+                "invoke-static {}, Lapp/morphe/extension/tiktok/settings/SettingsStatus;->enableUnverifiedNotices()V",
+            )
+        } else {
+            println("[Skip content warnings] Left out the unverified notices switch on ${packageMetadata.versionName}: no getAwemeRiskModel().")
+        }
 
         // /range: a parameter register on a method this size sits well above v15.
         method.addInstruction(
@@ -80,7 +94,7 @@ val hideSensitiveWarningsPatch = bytecodePatch(
         )
 
         // No risk model is what most videos have, and every reader checks for one.
-        riskModel.guardAtEntry(
+        riskModel?.guardAtEntry(
             "Skip content warnings",
             "invoke-static {}, $EXTENSION_CLASS_DESCRIPTOR->hideUnverifiedNotices()Z",
             """

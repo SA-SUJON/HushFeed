@@ -63,7 +63,7 @@ public final class SensitiveWarnings {
      * the switch answers off.
      */
     public static boolean hideUnverifiedNotices() {
-        return SettingsStatus.sensitiveWarningsEnabled && Settings.HIDE_UNVERIFIED_NOTICES.get();
+        return SettingsStatus.unverifiedNoticesEnabled && Settings.HIDE_UNVERIFIED_NOTICES.get();
     }
 
     /**
