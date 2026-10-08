@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Feed filter has a new switch under Advanced, Show how many were filtered, off by default. It puts a small label under TikTok's top tabs that counts what the feed filter has taken out since TikTok started, ads and the rest alike. It only shows on the feed once something's been taken out, and taps go through it to the video.
+
 * **TikTok:** Feed filter has a new switch under Words, countries and languages, Match text stickers too, off by default. With it on, Blocked caption words also reads the text stickers on a video, the words a creator types over it in TikTok's editor, and hides the video when one matches, the same way a caption match does. Text that's part of the picture itself isn't there to read. If your filters ever hide everything TikTok just sent, the notice names these as Text sticker words.
 
 * **TikTok:** Advanced downloads has a new switch under Video, Fall back to the watermarked copy, off by default. When the video without the watermark can't be fetched, Hushfeed saves TikTok's own watermarked copy instead of nothing and says so when it's done. That copy is the size TikTok's own save uses, so it can be smaller than the quality you picked. A cancel, or running out of space or time, still stops the save as before.

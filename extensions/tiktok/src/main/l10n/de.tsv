@@ -1813,3 +1813,7 @@ Put a ✓ before the view count on profile grids for videos Hushfeed saved here.
 Match text stickers too	Auch Textsticker prüfen
 Also hide videos whose text stickers match a blocked caption word. Text stickers are the words a creator types over the video in TikTok's editor. Text that's part of the picture itself can't be read.	Blendet auch Videos aus, deren Textsticker ein gesperrtes Wort aus den Beschreibungen enthalten. Textsticker sind die Wörter, die jemand im TikTok-Editor über das Video schreibt. Text, der zum Bild selbst gehört, kann nicht gelesen werden.
 Text sticker words	Wörter in Textstickern
+Show how many were filtered	Anzahl der herausgefilterten Beiträge zeigen
+A small label under TikTok's top tabs counts what the feed filter has taken out since TikTok started. It shows only on the feed, and a tap on it reaches the video under it.	Ein kleines Etikett unter TikToks oberen Tabs zählt, was der Feed-Filter seit dem Start von TikTok entfernt hat. Es erscheint nur im Feed, und ein Tippen darauf erreicht das Video darunter.
+1 filtered out	1 herausgefiltert
+%1$d filtered out	%1$d herausgefiltert

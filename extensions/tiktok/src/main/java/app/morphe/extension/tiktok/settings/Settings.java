@@ -316,6 +316,7 @@ public class Settings extends BaseSettings {
             true,
             Setting.parentNot(HIDE_OFFLINE_VIDEOS)
     );
+    public static final BooleanSetting FILTERED_COUNT_PILL = new BooleanSetting("feed_filter_count_pill", FALSE);
     public static final BooleanSetting FEED_NAVIGATION = new BooleanSetting("feed_navigation", FALSE, true);
     public static final StringSetting FEED_NAVIGATION_TABS = new StringSetting(
             "feed_navigation_tabs",

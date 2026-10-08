@@ -337,4 +337,18 @@ public class FeedFilterCountersTest {
         String report = LogBufferManager.buildExportText();
         assertFalse(report, report.contains("[FEED FILTER]"));
     }
+
+    @Test public void theRunningCountAddsEveryRouteAndOutlivesADiagnosticClear() {
+        FeedFilterCounters.resetSessionForTests();
+        FeedFilterCounters.removed("FeedItemList", 3, "AdsFilter");
+        FeedFilterCounters.removed("SearchAds", 2, "searchAd");
+        FeedFilterCounters.removed("FeedItemList", 0, "AdsFilter");
+        assertEquals(5, FeedFilterCounters.sessionRemoved());
+        FeedFilterCounters.snapshotAndClear();
+        FeedFilterCounters.clear();
+        assertEquals("a diagnostic clear keeps the reader's count", 5, FeedFilterCounters.sessionRemoved());
+        FeedFilterCounters.removed("FeedItemList", 1, "KeywordFilter");
+        assertEquals(6, FeedFilterCounters.sessionRemoved());
+        FeedFilterCounters.resetSessionForTests();
+    }
 }

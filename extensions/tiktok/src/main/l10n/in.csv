@@ -1804,3 +1804,7 @@ Mark saved videos on profile grids,Tandai video tersimpan di kisi profil
 Match text stickers too,Cocokkan stiker teks juga
 Also hide videos whose text stickers match a blocked caption word. Text stickers are the words a creator types over the video in TikTok's editor. Text that's part of the picture itself can't be read.,Sembunyikan juga video yang stiker teksnya cocok dengan kata yang diblokir di keterangan. Stiker teks adalah kata-kata yang diketik kreator di atas video di editor TikTok. Teks yang menjadi bagian dari gambarnya sendiri tidak bisa dibaca.
 Text sticker words,Kata di stiker teks
+Show how many were filtered,Tampilkan jumlah yang disaring
+"A small label under TikTok's top tabs counts what the feed filter has taken out since TikTok started. It shows only on the feed, and a tap on it reaches the video under it.","Label kecil di bawah tab atas TikTok menghitung apa saja yang sudah disaring filter feed sejak TikTok dibuka. Label ini hanya muncul di feed, dan ketukan di atasnya tetap sampai ke video di bawahnya."
+1 filtered out,1 disaring
+%1$d filtered out,%1$d disaring

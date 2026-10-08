@@ -15,6 +15,7 @@ import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patcher.util.smali.ExternalLabel
 import app.morphe.patches.shared.compat.AppCompatibilities
+import app.morphe.patches.tiktok.misc.extension.MainActivityOnCreateFingerprint
 import app.morphe.patches.tiktok.misc.extension.sharedExtensionPatch
 import app.morphe.patches.tiktok.misc.settings.SettingsStatusLoadFingerprint
 import app.morphe.patches.tiktok.misc.settings.settingsPatch
@@ -53,6 +54,7 @@ private const val CARD_FILTERS_CLASS_DESCRIPTOR = "Lapp/morphe/extension/tiktok/
 private const val SEARCH_LYNX_CARDS_CLASS_DESCRIPTOR = "Lapp/morphe/extension/tiktok/feedfilter/SearchLynxCards;"
 private const val LIVE_FEED_FILTER_CLASS_DESCRIPTOR = "Lapp/morphe/extension/tiktok/feedfilter/LiveFeedFilter;"
 private const val FEED_ITEM_LIST_DESCRIPTOR = "Lcom/ss/android/ugc/aweme/feed/model/FeedItemList;"
+private const val FILTERED_COUNT_PILL_CLASS_DESCRIPTOR = "Lapp/morphe/extension/tiktok/feedfilter/FilteredCountPill;"
 
 @Suppress("unused")
 val feedFilterPatch = bytecodePatch(
@@ -95,6 +97,13 @@ val feedFilterPatch = bytecodePatch(
         SettingsStatusLoadFingerprint.method.addInstruction(
             0,
             "invoke-static {}, Lapp/morphe/extension/tiktok/settings/SettingsStatus;->enableFeedFilter()V",
+        )
+
+        // Show how many were filtered: the label follows the main activity from its creation and
+        // goes up as it resumes, so the switch alone decides whether anything is drawn.
+        MainActivityOnCreateFingerprint.method.addInstruction(
+            0,
+            "invoke-static/range { p0 .. p0 }, $FILTERED_COUNT_PILL_CLASS_DESCRIPTOR->install(Landroid/app/Activity;)V",
         )
 
         MainFeedResponseFingerprint.method.let { method ->

@@ -197,9 +197,16 @@ public final class FeedFilterCounters {
         tally.addAndGet(add);
     }
 
+    /**
+     * Everything every route has taken out since the process started. A diagnostic clear leaves
+     * it alone, since it's the reader's running count rather than a report line.
+     */
+    private static final AtomicLong SESSION_REMOVED = new AtomicLong();
+
     /** What this route took out of the list it was just handed. */
     public static void removed(String source, int count, String reason) {
         if (count <= 0) return;
+        SESSION_REMOVED.addAndGet(count);
         Counter counter = counter(source);
         if (counter == null) return;
         counter.removed.addAndGet(count);
@@ -351,5 +358,15 @@ public final class FeedFilterCounters {
             COUNTERS.clear();
             SEEN.clear();
         }
+    }
+
+    /** What every route has taken out since TikTok started, through any diagnostic clear. */
+    public static long sessionRemoved() {
+        return SESSION_REMOVED.get();
+    }
+
+    /** Starts the running count from zero, for a test that needs a known start. */
+    public static void resetSessionForTests() {
+        SESSION_REMOVED.set(0);
     }
 }

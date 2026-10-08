@@ -4,6 +4,7 @@ source,target
 %1$d comments and replies loaded,%1$d comments and replies loaded
 %1$d fields overridden,%1$d fields overridden
 %1$d fields will be overridden when requested,%1$d fields will be overridden when requested
+%1$d filtered out,%1$d filtered out
 %1$d gates selected,%1$d gates selected
 %1$d minutes left,%1$d minutes left
 %1$d overrides were turned off because the Lab couldn't confirm their gates are unchanged in TikTok %2$s. Review them before turning them back on.,%1$d overrides were turned off because the Lab couldn't confirm their gates are unchanged in TikTok %2$s. Review them before turning them back on.
@@ -101,6 +102,7 @@ source,target
 1 comment or reply loaded,1 comment or reply loaded
 1 field overridden,1 field overridden
 1 field will be overridden when requested,1 field will be overridden when requested
+1 filtered out,1 filtered out
 1 gate selected,1 gate selected
 1 min left,1 min left
 1 override was turned off because the Lab couldn't confirm its gate is unchanged in TikTok %2$s. Review it before turning it back on.,1 override was turned off because the Lab couldn't confirm its gate is unchanged in TikTok %2$s. Review it before turning it back on.
@@ -130,6 +132,7 @@ A message is already on its way,A message is already on its way
 A port is a whole number from 1 to 65535,A port is a whole number from 1 to 65535
 "A screen's layout is recorded. Export the diagnostic report to send it, or tap to record another.","A screen's layout is recorded. Export the diagnostic report to send it, or tap to record another."
 "A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.","A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out."
+"A small label under TikTok's top tabs counts what the feed filter has taken out since TikTok started. It shows only on the feed, and a tap on it reaches the video under it.","A small label under TikTok's top tabs counts what the feed filter has taken out since TikTok started. It shows only on the feed, and a tap on it reaches the video under it."
 A tap on Home or on the For You tab while For You is showing no longer reloads it. The video you're on stays.,A tap on Home or on the For You tab while For You is showing no longer reloads it. The video you're on stays.
 A video you paused stays paused when you come back to the app instead of starting again. One you left playing starts as usual. It works on Android 10 and newer.,A video you paused stays paused when you come back to the app instead of starting again. One you left playing starts as usual. It works on Android 10 and newer.
 A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.,A web address someone left in a comment can be tapped instead of copied out by hand. Tapping anywhere else in the comment still does what it did.
@@ -1321,6 +1324,7 @@ Show exact counts,Show exact counts
 Show failures on screen,Show failures on screen
 Show follow status,Show follow status
 Show gates,Show gates
+Show how many were filtered,Show how many were filtered
 Show last report,Show last report
 "Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids.","Show likes, comments, shares and saves as a percentage of views, next to the creator's name and after the view count on profile grids."
 Show only LIVEs from creators with this many followers.,Show only LIVEs from creators with this many followers.

@@ -357,5 +357,11 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
                 "Also apply these filters to downloaded videos TikTok uses when the feed can't load enough new items.",
                 Settings.FILTER_OFFLINE_FALLBACK_VIDEOS
         ));
+        addPreference(new TogglePreference(
+                context,
+                "Show how many were filtered",
+                "A small label under TikTok's top tabs counts what the feed filter has taken out since TikTok started. It shows only on the feed, and a tap on it reaches the video under it.",
+                Settings.FILTERED_COUNT_PILL
+        ));
     }
 }

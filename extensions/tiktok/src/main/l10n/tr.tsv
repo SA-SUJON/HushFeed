@@ -1810,3 +1810,7 @@ Put a ✓ before the view count on profile grids for videos Hushfeed saved here.
 Match text stickers too	Metin çıkartmalarını da kontrol et
 Also hide videos whose text stickers match a blocked caption word. Text stickers are the words a creator types over the video in TikTok's editor. Text that's part of the picture itself can't be read.	Metin çıkartmaları engellenen bir açıklama kelimesiyle eşleşen videoları da gizler. Metin çıkartmaları, birinin TikTok düzenleyicisinde videonun üzerine yazdığı kelimelerdir. Görüntünün kendisine ait metin okunamaz.
 Text sticker words	Metin çıkartması kelimeleri
+Show how many were filtered	Kaç tanesinin filtrelendiğini göster
+A small label under TikTok's top tabs counts what the feed filter has taken out since TikTok started. It shows only on the feed, and a tap on it reaches the video under it.	TikTok'un üst sekmelerinin altındaki küçük bir etiket, TikTok açıldığından beri akış filtresinin çıkardıklarını sayar. Yalnızca akışta görünür ve üzerine dokunmak alttaki videoya ulaşır.
+1 filtered out	1 filtrelendi
+%1$d filtered out	%1$d filtrelendi
