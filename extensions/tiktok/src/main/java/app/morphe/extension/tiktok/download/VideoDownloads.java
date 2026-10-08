@@ -222,9 +222,9 @@ final class VideoDownloads {
                                 // Muted, but the sound is wanted beside it as an .m4a. That is a
                                 // second file, so losing it is not a reason to lose the video as well.
                                 try {
-                                    File separate = temp(app, temporary);
-                                    RemoteMedia.fetch(audioUrls, separate, RemoteMedia.Kind.VIDEO);
-                                    sound[0] = separate;
+                                    File soundFile = temp(app, temporary);
+                                    RemoteMedia.fetch(audioUrls, soundFile, RemoteMedia.Kind.VIDEO);
+                                    sound[0] = soundFile;
                                 } catch (IOException | RuntimeException exception) {
                                     Logger.printException(() -> "Could not fetch the sound to save beside a muted video", exception);
                                 }
