@@ -138,6 +138,13 @@ public final class VideoOverlayHider {
      */
     private static final String[] MUSIC_COVER_IDS = {"videomusiccoverblock"};
     /**
+     * The full-width search bar under the caption ("Search · ..."). On 47.1.4 it sits in its own
+     * container beside the cell's interaction area, outside both the column and the anchor's
+     * frame, so neither the fade nor Clear display reached it (S22, 2026-10-08). The music disc
+     * is laid out above it, which is how its name is found on each build.
+     */
+    private static final String[] SEARCH_BAR_IDS = {"47.0.3:lim", "47.1.3:ll8", "47.1.4:ll8"};
+    /**
      * The blank TikTok keeps above the video on tall screens, as tall as the status bar, so the
      * bar never covers the picture. With the bar hidden it's only a black strip (#97).
      */
@@ -248,6 +255,7 @@ public final class VideoOverlayHider {
     private static final int BOTTOM_TABS_TARGET = CLEAR_PHOTO_EXIT_TARGET + 1;
     private static final int ANCHOR_TARGET = BOTTOM_TABS_TARGET + 1;
     private static final int MUSIC_COVER_TARGET = ANCHOR_TARGET + 1;
+    private static final int SEARCH_BAR_TARGET = MUSIC_COVER_TARGET + 1;
     private static final String[][] TRAVERSAL_TARGET_IDS = traversalTargetIds();
     private static final int LOGICAL_TARGET_COUNT = TRAVERSAL_TARGET_IDS.length;
     private static final int TRAVERSAL_TARGET_COUNT = candidateCount(TRAVERSAL_TARGET_IDS);
@@ -484,6 +492,7 @@ public final class VideoOverlayHider {
                 wanted[ANCHOR_TARGET] = anchor;
                 // Only ever faded, never hidden by a switch of its own.
                 wanted[MUSIC_COVER_TARGET] = false;
+                wanted[SEARCH_BAR_TARGET] = anchor;
                 wanted[STATUS_BAR_SPACER_TARGET] = statusBar;
                 for (int i = 0; i < RAIL_BUTTON_IDS.length; i++) {
                     wanted[RAIL_TARGET_START + i] = rail[i] || carry;
@@ -684,7 +693,7 @@ public final class VideoOverlayHider {
     }
 
     private static String[][] traversalTargetIds() {
-        String[][] targets = new String[MUSIC_COVER_TARGET + 1][];
+        String[][] targets = new String[SEARCH_BAR_TARGET + 1][];
         targets[CAPTION_TARGET] = CAPTION_IDS;
         targets[MUSIC_TARGET] = MUSIC_IDS;
         targets[ACTION_BAR_TARGET] = ACTION_BAR_IDS;
@@ -708,6 +717,7 @@ public final class VideoOverlayHider {
         targets[BOTTOM_TABS_TARGET] = BOTTOM_TABS_IDS;
         targets[ANCHOR_TARGET] = ANCHOR_IDS;
         targets[MUSIC_COVER_TARGET] = MUSIC_COVER_IDS;
+        targets[SEARCH_BAR_TARGET] = SEARCH_BAR_IDS;
         return targets;
     }
 
@@ -820,11 +830,12 @@ public final class VideoOverlayHider {
                     // The progress bar only goes see-through, so a drag along the bottom edge
                     // still seeks while it's out of sight (#84).
                     if (target == CLEAR_SEEK_BAR_TARGET) setTransparent(view, wanted);
-                    else if (target == ANCHOR_TARGET || target == MUSIC_COVER_TARGET) {
-                        // 47.1.x keeps the caption frame and the music disc beside the column, so
-                        // they fade here; on 47.0.3 the column holds the caption frame, and a
-                        // second fade inside it would square the opacity. Invisible rather than
-                        // gone, so the caption doesn't move.
+                    else if (target == ANCHOR_TARGET || target == MUSIC_COVER_TARGET
+                            || target == SEARCH_BAR_TARGET) {
+                        // 47.1.x keeps the caption frame, the music disc and the search bar
+                        // beside the column, so they fade here; on 47.0.3 the column holds the
+                        // caption frame, and a second fade inside it would square the opacity.
+                        // Invisible rather than gone, so the caption doesn't move.
                         boolean gone = wanted || fadeLevel == 0;
                         setFaded(view, gone || insideFaded(view) ? 100 : fadeLevel);
                         setHidden(view, gone, View.INVISIBLE);

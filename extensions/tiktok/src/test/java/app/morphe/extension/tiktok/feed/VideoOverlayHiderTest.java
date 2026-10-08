@@ -1838,6 +1838,67 @@ public class VideoOverlayHiderTest {
         }
     }
 
+    /**
+     * 47.1.4's full-width search bar under the caption sits in a container of its own, so it
+     * stayed at full opacity under a faded caption and stayed tappable in Clear display (S22,
+     * 2026-10-08). It fades with the controls, and Clear display or 0 take it out of reach
+     * without moving the caption above it.
+     */
+    @Test
+    public void theSearchBarUnderTheCaptionFadesAndLeavesWithClearDisplay() {
+        int barId = 0x7f0a0d15;
+        resolveFadeIds();
+        VideoOverlayHider.resolveForTests("47.1.4:ll8", barId);
+        boolean overlays = app.morphe.extension.tiktok.settings.SettingsStatus.videoOverlaysEnabled;
+        app.morphe.extension.tiktok.settings.SettingsStatus.videoOverlaysEnabled = true;
+        try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
+            Activity activity = controller.get();
+            Utils.setContext(activity);
+            FrameLayout cell = new FrameLayout(activity);
+            cell.setId(FADE_CELL_ID);
+            View bar = new View(activity);
+            bar.setId(barId);
+            bar.setClickable(true);
+            cell.addView(bar);
+            FrameLayout root = new FrameLayout(activity);
+            root.addView(cell);
+            activity.setContentView(root);
+
+            Settings.FADE_CONTROLS_OPACITY.save(50);
+            VideoOverlayHider.applyTo(activity);
+            assertEquals(0.5f, bar.getAlpha(), 0f);
+            assertEquals("a faded bar still takes taps", View.VISIBLE, bar.getVisibility());
+
+            Settings.FADE_CONTROLS_OPACITY.save(0);
+            VideoOverlayHider.applyTo(activity);
+            assertEquals("0 takes it away without moving the caption", View.INVISIBLE, bar.getVisibility());
+
+            Settings.FADE_CONTROLS_OPACITY.save(100);
+            VideoOverlayHider.applyTo(activity);
+            assertEquals(View.VISIBLE, bar.getVisibility());
+            assertEquals(1f, bar.getAlpha(), 0f);
+
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+            VideoOverlayHider.applyTo(activity);
+            assertEquals("Clear display leaves no bar to tap by accident", View.INVISIBLE, bar.getVisibility());
+
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+            VideoOverlayHider.applyTo(activity);
+            assertEquals(View.VISIBLE, bar.getVisibility());
+        } finally {
+            app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
+                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+            Settings.CLEAR_DISPLAY.save(false);
+            Settings.FADE_CONTROLS_OPACITY.save(100);
+            app.morphe.extension.tiktok.settings.SettingsStatus.videoOverlaysEnabled = overlays;
+            clearFadeIds();
+            VideoOverlayHider.resolveForTests("47.1.4:ll8", 0);
+        }
+    }
+
+
     @Test
     public void theFadeFollowsRecycledViewsAndTikToksOwnAlphaWrites() {
         resolveFadeIds();

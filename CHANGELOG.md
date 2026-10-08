@@ -103,7 +103,7 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Hide inbox items now reaches inside a chat too. Under Inbox > In a chat there are three new switches, all off until you turn them on: Hide call buttons takes the voice and video call buttons off the top of a chat, Hide sticker suggestions drops the sticker banner, and Hide suggested replies stops TikTok's reply suggestions and the banner that introduces them. The chat details button and everything you send are left as they were.
 
-* **TikTok:** Fade the video controls, a new number under Clear display, dims the buttons, caption, music disc and tabs over the video to the level you pick instead of hiding them, which helps against screen burn-in while you can still see where everything is. 100 leaves TikTok as it is, and faded controls still take taps. At 0 the buttons and caption are hidden the way Clear display hides them, and the tabs stay at 10 so you can still find your way around.
+* **TikTok:** Fade the video controls, a new number under Clear display, dims the buttons, caption, music disc, search bar and tabs over the video to the level you pick instead of hiding them, which helps against screen burn-in while you can still see where everything is. 100 leaves TikTok as it is, and faded controls still take taps. At 0 the buttons and caption are hidden the way Clear display hides them, and the tabs stay at 10 so you can still find your way around.
 
 * **TikTok:** Lock the feed, a new switch under Screen time, keeps For You, Following and the other feed tabs behind a calm panel, and the feed won't swipe. Inbox, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of a feed you've shut. The Friends tab's feed is covered too, and clearing the controls doesn't lift the panel. Only a link to a single video gets through, not a profile or a search link. With Wait a day to loosen the budget on, turning Lock the feed off waits until the day starts over, the same as a longer budget does. It's off until you turn it on, and Pause Hushfeed turns it off with everything else.
 
@@ -155,7 +155,7 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** With Automatic clear display on and no delay, the next video stays cleared while you swipe to it, instead of showing its buttons, caption, progress bar and tabs for a moment (#84). Tapping Restore display still brings everything back.
 
-* **TikTok:** In Clear display, the search, place or product link under the caption can't be tapped by accident anymore. TikTok only faded it out, so a tap near the bottom of a video could open a search you couldn't see (#84).
+* **TikTok:** In Clear display, the search, place or product link under the caption can't be tapped by accident anymore, and neither can the wide search bar newer TikTok versions put at the bottom. TikTok only faded it out, so a tap near the bottom of a video could open a search you couldn't see (#84).
 
 * **TikTok:** Clear display now also takes the Add comment bar off photos and videos you open from search or a profile, and Restore display brings it back (#84). Before, it stayed at the bottom unless Hide the comment bar on opened videos was on.
 
