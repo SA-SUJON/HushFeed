@@ -2003,3 +2003,11 @@ Turn off double tap to react	Отключить двойное касание д
 A double tap on a message no longer adds a heart to it. A single tap and a long press work as before.	Двойное касание сообщения больше не ставит на него сердечко. Одиночное касание и долгое нажатие работают как раньше.
 Turn off swipe to reply	Отключить свайп для ответа
 Swiping a message sideways no longer starts a reply to it. Taps and long presses work as before.	Свайп по сообщению в сторону больше не начинает ответ на него. Касания и долгие нажатия работают как раньше.
+Hide the bottom tab names	Скрыть названия нижних вкладок
+The words under the bottom tab icons go away. The icons stay, and each tab opens what it always did.	Слова под значками нижних вкладок исчезают. Значки остаются, и каждая вкладка открывает то же, что и раньше.
+Home tab name	Название вкладки «Главная»
+Friends tab name	Название вкладки «Друзья»
+Inbox tab name	Название вкладки «Входящие»
+Profile tab name	Название вкладки «Профиль»
+Shop tab name	Название вкладки «Магазин»
+A name of your own under this tab's icon. Leave it empty to keep TikTok's.	Ваше собственное название под значком этой вкладки. Оставьте пустым, чтобы сохранить название TikTok.

@@ -1829,3 +1829,11 @@ Turn off double tap to react,Matikan ketuk dua kali untuk bereaksi
 A double tap on a message no longer adds a heart to it. A single tap and a long press work as before.,Ketuk dua kali pada pesan tidak lagi menambahkan hati ke pesan itu. Ketuk sekali dan tekan lama tetap berfungsi seperti biasa.
 Turn off swipe to reply,Matikan geser untuk membalas
 Swiping a message sideways no longer starts a reply to it. Taps and long presses work as before.,Menggeser pesan ke samping tidak lagi memulai balasan. Ketukan dan tekan lama tetap berfungsi seperti biasa.
+Hide the bottom tab names,Sembunyikan nama tab bawah
+"The words under the bottom tab icons go away. The icons stay, and each tab opens what it always did.","Tulisan di bawah ikon tab bawah hilang. Ikonnya tetap ada, dan setiap tab membuka hal yang sama seperti biasa."
+Home tab name,Nama tab Beranda
+Friends tab name,Nama tab Teman
+Inbox tab name,Nama tab Kotak masuk
+Profile tab name,Nama tab Profil
+Shop tab name,Nama tab Toko
+A name of your own under this tab's icon. Leave it empty to keep TikTok's.,Nama pilihan Anda sendiri di bawah ikon tab ini. Biarkan kosong untuk memakai nama dari TikTok.

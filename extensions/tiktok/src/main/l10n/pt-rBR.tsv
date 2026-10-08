@@ -1835,3 +1835,11 @@ Turn off double tap to react	Desativar toque duplo para reagir
 A double tap on a message no longer adds a heart to it. A single tap and a long press work as before.	Um toque duplo numa mensagem não adiciona mais um coração a ela. O toque simples e o toque longo funcionam como antes.
 Turn off swipe to reply	Desativar deslizar para responder
 Swiping a message sideways no longer starts a reply to it. Taps and long presses work as before.	Deslizar uma mensagem para o lado não inicia mais uma resposta a ela. Toques e toques longos funcionam como antes.
+Hide the bottom tab names	Ocultar os nomes das abas inferiores
+The words under the bottom tab icons go away. The icons stay, and each tab opens what it always did.	As palavras sob os ícones das abas inferiores somem. Os ícones ficam, e cada aba abre o mesmo de sempre.
+Home tab name	Nome da aba Início
+Friends tab name	Nome da aba Amigos
+Inbox tab name	Nome da aba Caixa de entrada
+Profile tab name	Nome da aba Perfil
+Shop tab name	Nome da aba Loja
+A name of your own under this tab's icon. Leave it empty to keep TikTok's.	Um nome seu sob o ícone desta aba. Deixe vazio para manter o do TikTok.

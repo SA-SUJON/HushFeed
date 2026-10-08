@@ -357,6 +357,13 @@ public class Settings extends BaseSettings {
     );
     /** The red count on Inbox and the dot on Profile, the pull that reopens the app. */
     public static final BooleanSetting HIDE_TAB_BADGES = new BooleanSetting("hide_tab_badges", FALSE, true);
+    /** The names under the bottom tab icons, and a name of the user's own for each; empty keeps TikTok's. Read before each frame. */
+    public static final BooleanSetting HIDE_BOTTOM_TAB_LABELS = new BooleanSetting("hide_bottom_tab_labels", FALSE);
+    public static final StringSetting BOTTOM_TAB_NAME_HOME = new StringSetting("bottom_tab_name_home", "");
+    public static final StringSetting BOTTOM_TAB_NAME_FRIENDS = new StringSetting("bottom_tab_name_friends", "");
+    public static final StringSetting BOTTOM_TAB_NAME_INBOX = new StringSetting("bottom_tab_name_inbox", "");
+    public static final StringSetting BOTTOM_TAB_NAME_PROFILE = new StringSetting("bottom_tab_name_profile", "");
+    public static final StringSetting BOTTOM_TAB_NAME_SHOP = new StringSetting("bottom_tab_name_shop", "");
     public static final BooleanSetting KEEP_FOR_YOU_ON_TAB_TAP = new BooleanSetting("keep_for_you_on_tab_tap", FALSE);
     public static final BooleanSetting KEEP_FOR_YOU_ON_PULL_DOWN = new BooleanSetting("keep_for_you_on_pull_down", FALSE);
     /** A long press on the Home tab opens Hushfeed's settings (#45). TikTok gives that press nothing of its own. */

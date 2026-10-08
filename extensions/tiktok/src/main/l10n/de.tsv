@@ -1838,3 +1838,11 @@ Turn off double tap to react	Doppeltippen zum Reagieren ausschalten
 A double tap on a message no longer adds a heart to it. A single tap and a long press work as before.	Doppeltippen auf eine Nachricht fügt ihr kein Herz mehr hinzu. Einfaches Tippen und langes Drücken funktionieren wie bisher.
 Turn off swipe to reply	Wischen zum Antworten ausschalten
 Swiping a message sideways no longer starts a reply to it. Taps and long presses work as before.	Seitliches Wischen über eine Nachricht startet keine Antwort mehr darauf. Tippen und langes Drücken funktionieren wie bisher.
+Hide the bottom tab names	Namen der unteren Tabs ausblenden
+The words under the bottom tab icons go away. The icons stay, and each tab opens what it always did.	Die Wörter unter den Symbolen der unteren Tabs verschwinden. Die Symbole bleiben, und jeder Tab öffnet, was er immer geöffnet hat.
+Home tab name	Name des Start-Tabs
+Friends tab name	Name des Freunde-Tabs
+Inbox tab name	Name des Posteingang-Tabs
+Profile tab name	Name des Profil-Tabs
+Shop tab name	Name des Shop-Tabs
+A name of your own under this tab's icon. Leave it empty to keep TikTok's.	Ein eigener Name unter dem Symbol dieses Tabs. Leer lassen, um den von TikTok zu behalten.

@@ -1835,3 +1835,11 @@ Turn off double tap to react	Tepki için çift dokunmayı kapat
 A double tap on a message no longer adds a heart to it. A single tap and a long press work as before.	Bir mesaja çift dokunmak artık ona kalp eklemiyor. Tek dokunma ve uzun basma eskisi gibi çalışır.
 Turn off swipe to reply	Yanıtlamak için kaydırmayı kapat
 Swiping a message sideways no longer starts a reply to it. Taps and long presses work as before.	Bir mesajı yana kaydırmak artık ona yanıt başlatmıyor. Dokunmalar ve uzun basmalar eskisi gibi çalışır.
+Hide the bottom tab names	Alt sekme adlarını gizle
+The words under the bottom tab icons go away. The icons stay, and each tab opens what it always did.	Alt sekme simgelerinin altındaki yazılar kaybolur. Simgeler kalır ve her sekme her zamanki yeri açar.
+Home tab name	Ana sayfa sekmesinin adı
+Friends tab name	Arkadaşlar sekmesinin adı
+Inbox tab name	Gelen kutusu sekmesinin adı
+Profile tab name	Profil sekmesinin adı
+Shop tab name	Mağaza sekmesinin adı
+A name of your own under this tab's icon. Leave it empty to keep TikTok's.	Bu sekmenin simgesinin altında kendi adınız. TikTok'un adını korumak için boş bırakın.

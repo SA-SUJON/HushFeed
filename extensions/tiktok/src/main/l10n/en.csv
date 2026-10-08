@@ -130,6 +130,7 @@ A long press on Comment plays the video at the hold speed instead of opening the
 A long press on Favorites plays the video at the hold speed instead of offering a new collection. It needs Long press on TikTok default and Seek from the edges off.,A long press on Favorites plays the video at the hold speed instead of offering a new collection. It needs Long press on TikTok default and Seek from the edges off.
 A long press on Share plays the video at the hold speed instead of opening the quick share row. It needs Long press on TikTok default and Seek from the edges off.,A long press on Share plays the video at the hold speed instead of opening the quick share row. It needs Long press on TikTok default and Seek from the edges off.
 A message is already on its way,A message is already on its way
+A name of your own under this tab's icon. Leave it empty to keep TikTok's.,A name of your own under this tab's icon. Leave it empty to keep TikTok's.
 A port is a whole number from 1 to 65535,A port is a whole number from 1 to 65535
 "A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched.","A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched."
 "A screen's layout is recorded. Export the diagnostic report to send it, or tap to record another.","A screen's layout is recorded. Export the diagnostic report to send it, or tap to record another."
@@ -568,6 +569,7 @@ Forgotten. Tap to put them back.,Forgotten. Tap to put them back.
 Found %1$s in your chats.,Found %1$s in your chats.
 Frame saved to %1$s,Frame saved to %1$s
 Friends,Friends
+Friends tab name,Friends tab name
 "From the next start TikTok runs as if it weren't patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are.","From the next start TikTok runs as if it weren't patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are."
 Full comment sort options,Full comment sort options
 Full license,Full license
@@ -686,6 +688,7 @@ Hide the Tako bubble,Hide the Tako bubble
 Hide the Tako chat,Hide the Tako chat
 Hide the actions row of the share sheet.,Hide the actions row of the share sheet.
 Hide the add people icon,Hide the add people icon
+Hide the bottom tab names,Hide the bottom tab names
 Hide the caption,Hide the caption
 Hide the comment bar on opened videos,Hide the comment bar on opened videos
 Hide the description under the creator's name on the feed.,Hide the description under the creator's name on the feed.
@@ -755,6 +758,7 @@ Hold speed on Favorites,Hold speed on Favorites
 Hold speed on Share,Hold speed on Share
 Hold the feed after the budget,Hold the feed after the budget
 Home,Home
+Home tab name,Home tab name
 Hook status,Hook status
 How far each edge press moves the video.,How far each edge press moves the video.
 How long each photo stays on screen in a video made from a photo post.,How long each photo stays on screen in a video made from a photo post.
@@ -779,6 +783,7 @@ Importing new history ended Undo for the earlier clear. You can clear the import
 Importing watch history,Importing watch history
 In a chat,In a chat
 Inbox,Inbox
+Inbox tab name,Inbox tab name
 Include diagnostic events,Include diagnostic events
 Included diagnostics,Included diagnostics
 Includes all diagnostic events.,Includes all diagnostic events.
@@ -1103,6 +1108,7 @@ Profile banner and new profile layout,Profile banner and new profile layout
 Profile picture,Profile picture
 Profile picture saved to %1$s,Profile picture saved to %1$s
 Profile share actions,Profile share actions
+Profile tab name,Profile tab name
 Promotional music,Promotional music
 Proof,Proof
 Protect external pages in TikTok's browser,Protect external pages in TikTok's browser
@@ -1322,6 +1328,7 @@ Shares range,Shares range
 Shop,Shop
 Shop order updates and coupon messages no longer take up rows in the Inbox. Your orders are unchanged.,Shop order updates and coupon messages no longer take up rows in the Inbox. Your orders are unchanged.
 Shop posts,Shop posts
+Shop tab name,Shop tab name
 Show,Show
 Show @username beside a video instead of the display name the creator chose.,Show @username beside a video instead of the display name the creator chose.
 Show See translation,Show See translation
@@ -1583,6 +1590,7 @@ The video couldn't be made from these photos. Try again.,The video couldn't be m
 "The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s. Try again later for the clean copy.","The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s. Try again later for the clean copy."
 "The video you're watching keeps playing to its end after you leave TikTok or turn the screen off, with TikTok's own media notification to pause it. TikTok's background play switch stays on while this is on. Restart TikTok to apply this.","The video you're watching keeps playing to its end after you leave TikTok or turn the screen off, with TikTok's own media notification to pause it. TikTok's background play switch stays on while this is on. Restart TikTok to apply this."
 "The voice and video call buttons leave the top of a chat. Calls still ring, and the chat details button stays.","The voice and video call buttons leave the top of a chat. Calls still ring, and the chat details button stays."
+"The words under the bottom tab icons go away. The icons stay, and each tab opens what it always did.","The words under the bottom tab icons go away. The icons stay, and each tab opens what it always did."
 "Their usernames, separated by commas or new lines. Each person must already have a chat with you.","Their usernames, separated by commas or new lines. Each person must already have a chat with you."
 There is no Lab change to undo.,There is no Lab change to undo.
 There is no diagnostic data to clear,There is no diagnostic data to clear

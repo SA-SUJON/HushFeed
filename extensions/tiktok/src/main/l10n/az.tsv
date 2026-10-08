@@ -1835,3 +1835,11 @@ Turn off double tap to react	Reaksiya üçün iki dəfə toxunmanı söndür
 A double tap on a message no longer adds a heart to it. A single tap and a long press work as before.	Mesaja iki dəfə toxunmaq artıq ona ürək əlavə etmir. Bir dəfə toxunma və uzun basma əvvəlki kimi işləyir.
 Turn off swipe to reply	Cavab üçün sürüşdürməni söndür
 Swiping a message sideways no longer starts a reply to it. Taps and long presses work as before.	Mesajı yana sürüşdürmək artıq ona cavab başlatmır. Toxunmalar və uzun basmalar əvvəlki kimi işləyir.
+Hide the bottom tab names	Alt panel adlarını gizlət
+The words under the bottom tab icons go away. The icons stay, and each tab opens what it always did.	Alt paneldəki ikonların altındakı sözlər yox olur. İkonlar qalır və hər bölmə əvvəlki kimi açılır.
+Home tab name	Əsas bölmənin adı
+Friends tab name	Dostlar bölməsinin adı
+Inbox tab name	Gələnlər bölməsinin adı
+Profile tab name	Profil bölməsinin adı
+Shop tab name	Mağaza bölməsinin adı
+A name of your own under this tab's icon. Leave it empty to keep TikTok's.	Bu bölmənin ikonunun altında öz adınız. TikTok-un adını saxlamaq üçün boş qoyun.
