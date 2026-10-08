@@ -424,6 +424,8 @@ public class Settings extends BaseSettings {
             true,
             Setting.parent(CUSTOM_OFFLINE_VIDEOS)
     ).withRange(CustomOfflineVideosLimitPatch.MIN_LIMIT, CustomOfflineVideosLimitPatch.MAX_LIMIT);
+    /** Offline videos stay until you clear them, instead of expiring after TikTok's lifetime (#123). */
+    public static final BooleanSetting KEEP_OFFLINE_VIDEOS = new BooleanSetting("keep_offline_videos", FALSE, true);
     public static final BooleanSetting SHOW_SEEKBAR = new BooleanSetting("show_seekbar", TRUE);
     public static final BooleanSetting SHOW_SEEKBAR_THUMBNAIL = new BooleanSetting(
             "show_seekbar_thumbnail",
