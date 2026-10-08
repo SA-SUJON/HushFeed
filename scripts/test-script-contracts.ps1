@@ -456,7 +456,8 @@ exit /b 19
         Resolve-Java -Explicit $emptyJdk
     } "*$emptyJdk*" 'An explicit directory without bin/java fell through to the PATH Java.'
 
-    $pathJava = Resolve-Java
+    # Resolve-Java answers a bare `java` when the one on PATH is new enough; take its file.
+    $pathJava = (Get-Command -Name (Resolve-Java) -CommandType Application | Select-Object -First 1).Source
     $jdkRoot = Split-Path -Parent (Split-Path -Parent $pathJava)
     $resolvedJava = Resolve-Java -Explicit $jdkRoot
     Assert-True ([System.IO.Path]::GetFullPath($resolvedJava).Equals(
