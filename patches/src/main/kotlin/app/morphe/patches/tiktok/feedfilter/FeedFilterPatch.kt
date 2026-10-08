@@ -67,7 +67,8 @@ val feedFilterPatch = bytecodePatch(
         "slips back into For You. Videos can also be " +
         "filtered by your own caption words, creator handles or patterns, sound names, length, " +
         "the country they were posted from, the language of their original caption and their " +
-        "view, like, comment, favorite and share counts. For You can also drop the fill-in " +
+        "view, like, comment, favorite and share counts. Caption words can also match the " +
+        "text stickers typed over a video. For You can also drop the fill-in " +
         "videos TikTok sends without picking them for you, and a batch that's all fill-in " +
         "stays so the feed never runs dry. The Friends tab can show only mutual friends. " +
         "A short list of creator exceptions lets " +
@@ -81,7 +82,8 @@ val feedFilterPatch = bytecodePatch(
         "for on its own. The share prompt that appears after a like can be hidden too, and so " +
         "can TikTok Shop's Products block and product cards in search results. The LIVE feed " +
         "you swipe through has its own rules: gaming, shopping, sponsored and verified LIVEs, " +
-        "categories, and viewer and follower ranges. " +
+        "categories, and viewer and follower ranges. A small label on the Home feed can count " +
+        "what the filter has taken out. " +
         "Switch: Hushfeed settings > Feed filter.",
     default = true,
 ) {
