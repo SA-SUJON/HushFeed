@@ -440,7 +440,7 @@ public final class FeedItemsFilter {
             logKeptItem(MID_AD_SOURCE, ad, verbose);
             return false;
         }
-        FeedFilterCounters.removed(MID_AD_SOURCE, 1, MID_AD_REASON);
+        FeedFilterCounters.removedItems(MID_AD_SOURCE, 1, MID_AD_REASON);
         logItem(ad, MID_AD_REASON, verbose);
         return true;
     }
@@ -491,7 +491,7 @@ public final class FeedItemsFilter {
                 }
                 return preloads;
             }
-            FeedFilterCounters.removed(TOP_VIEW_SOURCE, count, TOP_VIEW_REASON);
+            FeedFilterCounters.removedItems(TOP_VIEW_SOURCE, count, TOP_VIEW_REASON);
             for (Object ad : preloads) {
                 if (ad instanceof Aweme) logItem((Aweme) ad, TOP_VIEW_REASON, verbose);
             }
@@ -551,7 +551,7 @@ public final class FeedItemsFilter {
             }
             return ads;
         }
-        FeedFilterCounters.removed(PROFILE_AD_SOURCE, ads.size(), PROFILE_AD_REASON);
+        FeedFilterCounters.removedItems(PROFILE_AD_SOURCE, ads.size(), PROFILE_AD_REASON);
         for (Object item : ads) {
             if (item instanceof Aweme) logItem((Aweme) item, PROFILE_AD_REASON, verbose);
         }
@@ -629,8 +629,8 @@ public final class FeedItemsFilter {
         // Counted only once the page has actually been rewritten. The all-ads refusal above and
         // a failed write both leave the grid alone, and a counter that said otherwise would
         // point an ad report at a route that removed nothing.
-        FeedFilterCounters.removed(SEARCH_SOURCE, adsRemoved, "searchAd");
-        FeedFilterCounters.removed(SEARCH_SOURCE, shopRemoved, "searchShop");
+        FeedFilterCounters.removedItems(SEARCH_SOURCE, adsRemoved, "searchAd");
+        FeedFilterCounters.removedItems(SEARCH_SOURCE, shopRemoved, "searchShop");
 
         // printInfo is not gated on the debug switch, unlike printDebug, so every search page
         // used to append to the bounded diagnostic buffer and push out the events around a crash.
@@ -791,7 +791,7 @@ public final class FeedItemsFilter {
             Field field = Reflect.field(response.getClass(), listField);
             if (field == null) return;
             field.set(response, kept);
-            if (count) FeedFilterCounters.removed(source, items.size() - kept.size(), lastReason);
+            if (count) FeedFilterCounters.removedItems(source, items.size() - kept.size(), lastReason);
 
             final int before = items.size();
             final int after = kept.size();
@@ -874,7 +874,7 @@ public final class FeedItemsFilter {
         }
 
         own.report();
-        FeedFilterCounters.removed(source, removed, lastReason);
+        FeedFilterCounters.removedItems(source, removed, lastReason);
         FeedFilterCounters.unreadable(source, notVideos);
         if (kept == null) return items;
         if (verbose && shouldLogBatch()) {
@@ -942,7 +942,7 @@ public final class FeedItemsFilter {
             logItem(item, reason, BaseSettings.DEBUG.get());
         }
 
-        FeedFilterCounters.removed(FINAL_INSERT_SOURCE + source, removed, lastReason);
+        FeedFilterCounters.removedItems(FINAL_INSERT_SOURCE + source, removed, lastReason);
         if (kept == null) return items;
         if (BaseSettings.DEBUG.get()) {
             int removedCount = removed;
@@ -965,7 +965,7 @@ public final class FeedItemsFilter {
             // Every item here is an offline copy, whatever cache source it carries yet.
             int dropped = feedItemList.items.size();
             FeedFilterCounters.sawList(OFFLINE_FALLBACK_SOURCE, dropped);
-            FeedFilterCounters.removed(OFFLINE_FALLBACK_SOURCE, dropped, OFFLINE_REASON);
+            FeedFilterCounters.removedItems(OFFLINE_FALLBACK_SOURCE, dropped, OFFLINE_REASON);
             feedItemList.items = new ArrayList<>();
             return null;
         }
@@ -1233,7 +1233,7 @@ public final class FeedItemsFilter {
         }
         if (countDistribution) {
             Integer dropped = reasonCounts.get(UNPERSONALIZED_REASON);
-            FeedFilterCounters.removed(FOR_YOU_DISTRIBUTION_SOURCE, dropped == null ? 0 : dropped, UNPERSONALIZED_REASON);
+            FeedFilterCounters.removedItems(FOR_YOU_DISTRIBUTION_SOURCE, dropped == null ? 0 : dropped, UNPERSONALIZED_REASON);
         }
         // Never restore ads, blocked creators/words, seen videos, or other hard rejects.
         if (rangeKept.isEmpty() && qualityFallback != null) rangeKept.add(qualityFallback);
@@ -1290,7 +1290,7 @@ public final class FeedItemsFilter {
             recordProbeScan(listId, removed, System.nanoTime() - startNs);
         }
 
-        FeedFilterCounters.removed(source, removed,
+        FeedFilterCounters.removedItems(source, removed,
             reasonCounts.isEmpty() ? null : reasonCounts.keySet().iterator().next());
         FeedFilterFeedback.onBatchResult(source, initialSize, resultList.size(), reasonCounts,
                 System.currentTimeMillis());

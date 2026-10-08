@@ -66,7 +66,7 @@ public class FilteredCountPillTest {
 
     @Test
     public void theLabelCountsWhatTheFilterTookOutOnlyWithTheSwitchOn() {
-        FeedFilterCounters.removed("FeedItemList", 3, "AdsFilter");
+        FeedFilterCounters.removedItems("FeedItemList", 3, "AdsFilter");
         controller.start().resume().visible();
         assertNull("the switch is off", FilteredCountPill.pillForTests());
 
@@ -78,7 +78,7 @@ public class FilteredCountPillTest {
         assertEquals("3 filtered out", pill.getText().toString());
         assertFalse("a tap goes through to the video", pill.isClickable());
 
-        FeedFilterCounters.removed("SearchAds", 1, "searchAd");
+        FeedFilterCounters.removedItems("SearchAds", 1, "searchAd");
         layout();
         assertEquals("4 filtered out", pill.getText().toString());
 
@@ -98,7 +98,7 @@ public class FilteredCountPillTest {
         assertNotNull(pill);
         assertEquals(View.GONE, pill.getVisibility());
 
-        FeedFilterCounters.removed("FeedItemList", 1, "AdsFilter");
+        FeedFilterCounters.removedItems("FeedItemList", 1, "AdsFilter");
         layout();
         assertEquals(View.VISIBLE, pill.getVisibility());
         assertEquals("1 filtered out", pill.getText().toString());
@@ -108,7 +108,7 @@ public class FilteredCountPillTest {
     public void withoutTheFeedFilterInTheBundleNothingIsDrawn() {
         SettingsStatus.feedFilterEnabled = false;
         Settings.FILTERED_COUNT_PILL.save(true);
-        FeedFilterCounters.removed("FeedItemList", 2, "AdsFilter");
+        FeedFilterCounters.removedItems("FeedItemList", 2, "AdsFilter");
         controller.start().resume().visible();
         assertNull(FilteredCountPill.pillForTests());
     }
@@ -116,7 +116,7 @@ public class FilteredCountPillTest {
     @Test
     public void closingTheActivityTakesTheLabelWithIt() {
         Settings.FILTERED_COUNT_PILL.save(true);
-        FeedFilterCounters.removed("FeedItemList", 2, "AdsFilter");
+        FeedFilterCounters.removedItems("FeedItemList", 2, "AdsFilter");
         controller.start().resume().visible();
         TextView pill = FilteredCountPill.pillForTests();
         assertNotNull(pill);

@@ -338,17 +338,28 @@ public class FeedFilterCountersTest {
         assertFalse(report, report.contains("[FEED FILTER]"));
     }
 
-    @Test public void theRunningCountAddsEveryRouteAndOutlivesADiagnosticClear() {
+    @Test public void theRunningCountAddsEveryPostRouteAndOutlivesADiagnosticClear() {
         FeedFilterCounters.resetSessionForTests();
-        FeedFilterCounters.removed("FeedItemList", 3, "AdsFilter");
-        FeedFilterCounters.removed("SearchAds", 2, "searchAd");
-        FeedFilterCounters.removed("FeedItemList", 0, "AdsFilter");
+        FeedFilterCounters.removedItems("FeedItemList", 3, "AdsFilter");
+        FeedFilterCounters.removedItems("SearchAds", 2, "searchAd");
+        FeedFilterCounters.removedItems("FeedItemList", 0, "AdsFilter");
         assertEquals(5, FeedFilterCounters.sessionRemoved());
         FeedFilterCounters.snapshotAndClear();
         FeedFilterCounters.clear();
         assertEquals("a diagnostic clear keeps the reader's count", 5, FeedFilterCounters.sessionRemoved());
-        FeedFilterCounters.removed("FeedItemList", 1, "KeywordFilter");
+        FeedFilterCounters.removedItems("FeedItemList", 1, "KeywordFilter");
         assertEquals(6, FeedFilterCounters.sessionRemoved());
+        FeedFilterCounters.resetSessionForTests();
+    }
+
+    @Test public void tagsBannersAndCachedRetriesStayOutOfTheRunningCount() {
+        FeedFilterCounters.resetSessionForTests();
+        // Every render of a caption strip reports its hidden tags again.
+        FeedFilterCounters.removed(LocationBadgeFilter.STRIP_SOURCE, 1, "place");
+        FeedFilterCounters.removed(LocationBadgeFilter.STRIP_SOURCE, 1, "place");
+        assertEquals(0, FeedFilterCounters.sessionRemoved());
+        assertFalse("a cached ad is still refused", FeedItemsFilter.shouldKeepPlayLagCache(video(true)));
+        assertEquals("a cached retry isn't a new removal", 0, FeedFilterCounters.sessionRemoved());
         FeedFilterCounters.resetSessionForTests();
     }
 }

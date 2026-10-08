@@ -198,15 +198,25 @@ public final class FeedFilterCounters {
     }
 
     /**
-     * Everything every route has taken out since the process started. A diagnostic clear leaves
-     * it alone, since it's the reader's running count rather than a report line.
+     * The posts the routes counted through {@link #removedItems} have taken out since the process
+     * started. A diagnostic clear leaves it alone, since it's the reader's running count rather
+     * than a report line.
      */
     private static final AtomicLong SESSION_REMOVED = new AtomicLong();
+
+    /**
+     * What a route that takes whole posts out of what TikTok shows removed: videos, ads, search
+     * results. These alone make the running count. A tag or banner inside a post isn't one, and
+     * neither is a video TikTok offers again from its cache after a list already lost it.
+     */
+    public static void removedItems(String source, int count, String reason) {
+        if (count > 0) SESSION_REMOVED.addAndGet(count);
+        removed(source, count, reason);
+    }
 
     /** What this route took out of the list it was just handed. */
     public static void removed(String source, int count, String reason) {
         if (count <= 0) return;
-        SESSION_REMOVED.addAndGet(count);
         Counter counter = counter(source);
         if (counter == null) return;
         counter.removed.addAndGet(count);
