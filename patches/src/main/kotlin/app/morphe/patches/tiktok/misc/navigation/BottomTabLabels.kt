@@ -9,6 +9,7 @@ import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.util.addInstruction
 import app.morphe.util.addInstructionsAtControlFlowLabel
 import app.morphe.util.getReference
+import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
@@ -67,6 +68,11 @@ internal fun bottomTabLabelSites(icon: ClassDef, classBy: (String) -> ClassDef?)
     if (code.instructions.count { it.opcode == Opcode.RETURN_VOID } != 1 || code.registerCount !in 3..16) {
         fail("the tab icon constructor doesn't end in one return with a free local and its arguments in reach.")
     }
+    // The hook reads the view (p0) and its data (p1) at the return, so nothing before may reuse them.
+    val view = code.registerCount - 2
+    if (code.instructions.any { it.writes(view) || it.writes(view + 1) }) {
+        fail("the tab icon constructor reuses its view or data register before it returns.")
+    }
 
     val data = classBy(dataType) ?: fail("no icon data class $dataType.")
     val comparesHome = data.methods.any { method ->
@@ -86,6 +92,10 @@ internal fun bottomTabLabelSites(icon: ClassDef, classBy: (String) -> ClassDef?)
         .singleOrNull()
         ?.takeIf { it.definingClass == base.type && it.type == STRING }
         ?: fail("${base.type} doesn't keep its tag in one field.")
+    // The icon view reads the tag off its data, a class of its own, so the field has to be public.
+    val tagPublic = base.fields.singleOrNull { it.name == tag.name && it.type == tag.type }
+        ?.let { AccessFlags.PUBLIC.isSet(it.accessFlags) } == true
+    if (!tagPublic) fail("${base.type}'s tag field isn't public, so the icon view can't read it.")
 
     val logicType = icon.only("setIconTabLogic").parameterTypes.singleOrNull()?.toString()
         ?: fail("${icon.type}->setIconTabLogic takes no single tab logic.")

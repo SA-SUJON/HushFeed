@@ -146,7 +146,7 @@ internal fun com.android.tools.smali.dexlib2.iface.Method.liveTopTabModeRead(): 
 }
 
 /** Whether the instruction writes [register], as itself or as the high half of a wide pair. */
-private fun com.android.tools.smali.dexlib2.iface.instruction.Instruction.writes(register: Int): Boolean {
+internal fun com.android.tools.smali.dexlib2.iface.instruction.Instruction.writes(register: Int): Boolean {
     val target = (this as? OneRegisterInstruction)?.registerA ?: return false
     return (opcode.setsRegister() && target == register) || (opcode.setsWideRegister() && target + 1 == register)
 }
@@ -275,6 +275,10 @@ val feedTabNavigationPatch = bytecodePatch(
             icon.methods.mutableCopyOf(sites.constructor).reportBottomTab(sites.tag)
             mutableClassDefBy(sites.labelSetter.definingClass).methods.mutableCopyOf(sites.labelSetter)
                 .reportBottomTabLabel(sites)
+            SettingsStatusLoadFingerprint.method.addInstruction(
+                0,
+                "invoke-static {}, Lapp/morphe/extension/tiktok/settings/SettingsStatus;->enableBottomTabLabels()V",
+            )
         }
 
         // A Home tap or a For You tab tap asks the For You fragment's refresh with its trigger. A

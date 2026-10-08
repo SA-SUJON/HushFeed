@@ -5,6 +5,7 @@
 package app.morphe.patches.tiktok.misc.navigation
 
 import app.morphe.Fixtures
+import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.util.getReference
@@ -148,6 +149,22 @@ class BottomTabLabelsAnchorsTest {
                 bottomTabLabelSites(icon) { if (it == logic.type) broken else app[it] }
             }
             assertTrue(failure.message, failure.message!!.contains("sets the name view $count times"))
+        }
+    }
+
+    @Test
+    fun `an icon constructor that reuses its view or data register leaves the names out`() {
+        val apk = Fixtures.declared().firstOrNull { it.isFile } ?: return
+        val app = load(apk)
+        val icon = app.values.single { classDef -> classDef.methods.any { it.name == "setCountDotVisibility" } }
+        val constructor = bottomTabLabelSites(icon) { app[it] }.constructor
+        for (register in listOf("p0", "p1")) {
+            val broken = icon.withMethods(icon.methods.map { method ->
+                if (method != constructor) return@map method
+                MutableMethod(method).apply { addInstructionsWithLabels(0, "const/4 $register, 0x0") }
+            })
+            val failure = assertThrows(PatchException::class.java) { bottomTabLabelSites(broken) { app[it] } }
+            assertTrue(failure.message, failure.message!!.contains("reuses its view or data register"))
         }
     }
 

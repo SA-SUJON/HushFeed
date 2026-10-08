@@ -59,6 +59,8 @@ public class SettingsStatus {
     public static boolean popupLabelsEnabled = false;
     /** Block popups found the wind-down triggers' checks on this build and hooked them. */
     public static boolean windDownScreensEnabled = false;
+    /** Feed tab navigation found the bottom tab icons' names on this build and hooked them. */
+    public static boolean bottomTabLabelsEnabled = false;
     public static boolean longPressSpeedLockEnabled = false;
     public static boolean disableLongPressQuickShareEnabled = false;
     public static boolean disableLongPressRepostEnabled = false;
@@ -245,6 +247,10 @@ public class SettingsStatus {
 
     public static void enableWindDownScreens() {
         windDownScreensEnabled = true;
+    }
+
+    public static void enableBottomTabLabels() {
+        bottomTabLabelsEnabled = true;
     }
 
     public static void enableLongPressSpeedLock() {

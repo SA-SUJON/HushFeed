@@ -111,18 +111,21 @@ public class FeedNavigationPreferenceCategory extends ConditionalPreferenceCateg
                         + "The inbox itself still shows what came in.",
                 Settings.HIDE_TAB_BADGES
         ));
-        addPreference(new TogglePreference(
-                context,
-                "Hide the bottom tab names",
-                "The words under the bottom tab icons go away. The icons stay, and each tab "
-                        + "opens what it always did.",
-                Settings.HIDE_BOTTOM_TAB_LABELS
-        ));
-        addTabName(context, "Home tab name", Settings.BOTTOM_TAB_NAME_HOME);
-        addTabName(context, "Friends tab name", Settings.BOTTOM_TAB_NAME_FRIENDS);
-        addTabName(context, "Inbox tab name", Settings.BOTTOM_TAB_NAME_INBOX);
-        addTabName(context, "Profile tab name", Settings.BOTTOM_TAB_NAME_PROFILE);
-        addTabName(context, "Shop tab name", Settings.BOTTOM_TAB_NAME_SHOP);
+        // Left out with their hooks on a build where the tab icons' names weren't found.
+        if (SettingsStatus.bottomTabLabelsEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Hide the bottom tab names",
+                    "The words under the bottom tab icons go away. The icons stay, and each tab "
+                            + "opens what it always did.",
+                    Settings.HIDE_BOTTOM_TAB_LABELS
+            ));
+            addTabName(context, "Home tab name", Settings.BOTTOM_TAB_NAME_HOME);
+            addTabName(context, "Friends tab name", Settings.BOTTOM_TAB_NAME_FRIENDS);
+            addTabName(context, "Inbox tab name", Settings.BOTTOM_TAB_NAME_INBOX);
+            addTabName(context, "Profile tab name", Settings.BOTTOM_TAB_NAME_PROFILE);
+            addTabName(context, "Shop tab name", Settings.BOTTOM_TAB_NAME_SHOP);
+        }
         addPreference(new TogglePreference(
                 context,
                 "Hide the Tako bubble",
