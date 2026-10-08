@@ -1832,3 +1832,6 @@ Liked videos	Gelikte Videos
 Public	Öffentlich
 Private	Privat
 Copy	Kopieren
+Copy the full link for short links	Bei Kurzlinks den vollständigen Link kopieren
+When Copy link gives you a short vt.tiktok.com or vm.tiktok.com link, Hushfeed opens it once in the background to read the full video link and puts that on your clipboard instead. TikTok sees that open, the same as when anyone taps the link. A link you send to another app goes out as it was.	Wenn Link kopieren einen kurzen vt.tiktok.com- oder vm.tiktok.com-Link liefert, öffnet Hushfeed ihn einmal im Hintergrund, liest den vollständigen Videolink aus und legt stattdessen diesen in die Zwischenablage. TikTok sieht diesen Aufruf, genau wie wenn jemand auf den Link tippt. Ein Link, den du an eine andere App sendest, geht unverändert raus.
+Full link copied	Vollständiger Link kopiert

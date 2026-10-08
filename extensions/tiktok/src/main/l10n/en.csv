@@ -366,6 +366,7 @@ Copy only the comment text when using TikTok's copy comment action.,Copy only th
 Copy or save patch-time choices and build identity.,Copy or save patch-time choices and build identity.
 Copy quick report,Copy quick report
 Copy report,Copy report
+Copy the full link for short links,Copy the full link for short links
 Copy the sound link,Copy the sound link
 Copy the video link,Copy the video link
 Copy user ID,Copy user ID
@@ -569,6 +570,7 @@ Friends,Friends
 "From the next start TikTok runs as if it weren't patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are.","From the next start TikTok runs as if it weren't patched, so you can tell whether a problem comes from Hushfeed. Your settings stay as they are."
 Full comment sort options,Full comment sort options
 Full license,Full license
+Full link copied,Full link copied
 Full report saved to %1$s,Full report saved to %1$s
 GIF,GIF
 Galaxy Store,Galaxy Store
@@ -1779,6 +1781,7 @@ Watching and sharing,Watching and sharing
 What TikTok gets,What TikTok gets
 What gets sent each day.,What gets sent each day.
 What's new,What's new
+"When Copy link gives you a short vt.tiktok.com or vm.tiktok.com link, Hushfeed opens it once in the background to read the full video link and puts that on your clipboard instead. TikTok sees that open, the same as when anyone taps the link. A link you send to another app goes out as it was.","When Copy link gives you a short vt.tiktok.com or vm.tiktok.com link, Hushfeed opens it once in the background to read the full video link and puts that on your clipboard instead. TikTok sees that open, the same as when anyone taps the link. A link you send to another app goes out as it was."
 "When TikTok requests this key, return the selected value below","When TikTok requests this key, return the selected value below"
 "When a video ends in full screen, stay on it instead of moving to the next one. Swiping still moves on.","When a video ends in full screen, stay on it instead of moving to the next one. Swiping still moves on."
 "When the budget runs out, the video on screen plays to its end before the hold covers the feed, and the feed won't swipe to another video meanwhile. A time budget the fade already dimmed goes straight to the hold. Needs a hold to wait for. It waits %1$d minutes at most.","When the budget runs out, the video on screen plays to its end before the hold covers the feed, and the feed won't swipe to another video meanwhile. A time budget the fade already dimmed goes straight to the hold. Needs a hold to wait for. It waits %1$d minutes at most."

@@ -38,7 +38,7 @@ class ExtensionHostsTest {
         val openers = sources().filter { (_, source) -> NETWORK.containsMatchIn(split(source).second) }
             .map { it.first }.toSortedSet()
         assertEquals(
-            "The README says the extension goes online by itself only to download what you save. " +
+            "The README says the extension goes online by itself only through the media transport. " +
                 "These files open connections",
             TRANSPORT.toSortedSet(),
             openers,

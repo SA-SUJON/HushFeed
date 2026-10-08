@@ -233,6 +233,15 @@ public final class PrivacyPreferenceCategory extends ConditionalPreferenceCatego
                             + "links are changed, and only the host: nothing is sent anywhere new.",
                     Settings.CUSTOM_SHARE_DOMAIN
             ).withNameKeyboard());
+            addPreference(new TogglePreference(
+                    context,
+                    "Copy the full link for short links",
+                    "When Copy link gives you a short vt.tiktok.com or vm.tiktok.com link, Hushfeed "
+                            + "opens it once in the background to read the full video link and puts "
+                            + "that on your clipboard instead. TikTok sees that open, the same as when "
+                            + "anyone taps the link. A link you send to another app goes out as it was.",
+                    Settings.EXPAND_SHORT_SHARE_LINKS
+            ));
         }
         if (SettingsStatus.externalBrowserEnabled) {
             addPreference(new TogglePreference(

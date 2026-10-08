@@ -1829,3 +1829,6 @@ Liked videos	Bəyənilən videolar
 Public	Hamıya açıq
 Private	Gizli
 Copy	Kopyala
+Copy the full link for short links	Qısa linklər üçün tam linki kopyalayın
+When Copy link gives you a short vt.tiktok.com or vm.tiktok.com link, Hushfeed opens it once in the background to read the full video link and puts that on your clipboard instead. TikTok sees that open, the same as when anyone taps the link. A link you send to another app goes out as it was.	Linki kopyala sizə qısa vt.tiktok.com və ya vm.tiktok.com linki verəndə, Hushfeed tam video linkini oxumaq üçün onu arxa planda bir dəfə açır və bufera onu qoyur. TikTok bu açılışı görür, kimsə linkə toxunanda olduğu kimi. Başqa tətbiqə göndərdiyiniz link olduğu kimi gedir.
+Full link copied	Tam link kopyalandı

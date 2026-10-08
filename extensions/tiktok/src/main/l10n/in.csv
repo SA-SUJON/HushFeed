@@ -1823,3 +1823,6 @@ Liked videos,Video yang disukai
 Public,Publik
 Private,Privat
 Copy,Salin
+Copy the full link for short links,Salin tautan lengkap untuk tautan pendek
+"When Copy link gives you a short vt.tiktok.com or vm.tiktok.com link, Hushfeed opens it once in the background to read the full video link and puts that on your clipboard instead. TikTok sees that open, the same as when anyone taps the link. A link you send to another app goes out as it was.","Saat Salin tautan memberi tautan pendek vt.tiktok.com atau vm.tiktok.com, Hushfeed membukanya sekali di latar belakang untuk membaca tautan video lengkapnya, lalu menaruh tautan itu di papan klip. TikTok melihat pembukaan itu, sama seperti saat siapa pun mengetuk tautannya. Tautan yang kamu kirim ke aplikasi lain tetap seperti aslinya."
+Full link copied,Tautan lengkap disalin
