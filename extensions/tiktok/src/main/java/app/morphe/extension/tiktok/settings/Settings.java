@@ -894,6 +894,8 @@ public class Settings extends BaseSettings {
     public static final StringSetting HIDDEN_PROFILE_SHORTCUTS = new StringSetting("hidden_profile_shortcuts", "");
     public static final StringSetting PROFILE_SHORTCUT_PICKS = new StringSetting("profile_shortcut_picks", "");
     public static final StringSetting PROFILE_SHORTCUT_CATALOG = new StringSetting("profile_shortcut_catalog", "");
+    /** The Thoughts bubble above a profile picture (#122). Read when a profile's picture is built. */
+    public static final BooleanSetting HIDE_PROFILE_THOUGHTS = new BooleanSetting("hide_profile_thoughts", FALSE, true);
     // Popup labels (TikTok's own popup layer): the labels ticked in the checklist, and the ones
     // TikTok has tried to show on this phone, which the checklist offers.
     public static final StringSetting POPUP_LABEL_PICKS = new StringSetting("popup_label_picks", "");

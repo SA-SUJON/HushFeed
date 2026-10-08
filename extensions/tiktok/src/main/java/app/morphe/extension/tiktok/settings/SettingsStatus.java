@@ -528,6 +528,13 @@ public class SettingsStatus {
         groupChatBannerEnabled = true;
     }
 
+    /** Hide profile shortcuts found the profile picture's Thoughts bubble on this build and hooked it. */
+    public static boolean profileThoughtsEnabled = false;
+
+    public static void enableProfileThoughts() {
+        profileThoughtsEnabled = true;
+    }
+
     static {
         // The patcher fills load() with selected registrations. Runtime hooks can run before settings opens.
         // Keep this after field initializers so their default values cannot overwrite those registrations.

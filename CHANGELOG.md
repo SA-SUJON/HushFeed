@@ -8,6 +8,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Custom offline videos limit has a new switch in Hushfeed settings > Downloads, Keep offline videos until you delete them. It's off until you turn it on (#123). TikTok throws out the videos it saved for offline viewing after a set time, sometimes only two days, and a list saved in one go disappears in one go, watched or not. With the switch on they stay until you delete them in TikTok's Offline videos settings, which is also how you get a fresh set. TikTok can still clear ones you've already watched when your phone runs low on space, and picking a lower limit still trims the list. Keep an eye on the storage line under the offline videos limit. The switch takes effect the next time TikTok starts.
 
+* **TikTok:** Hide profile shortcuts has a new switch under App, Hide Thoughts on profiles, off until you turn it on (#122). It hides the Thoughts bubble TikTok puts above a profile picture, and on your own profile the prompt to share one. Restart TikTok after you change it.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** A TikTok video link you open now shows its video even when a feed filter would hide it, like Hide videos you have already seen for one you watched before (#117). TikTok loads a linked video as a feed page of its own, so filtering it out left TikTok's error screen there. Only that one video gets past the filters, and only for a minute after the link. Links to photo posts and the mobile site's older `m.tiktok.com/v/<id>.html` links count as one post too, here and for `Lock the feed`.
