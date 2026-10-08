@@ -25,6 +25,7 @@ import app.morphe.extension.shared.Logger;
 import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
+import app.morphe.extension.tiktok.settings.preference.SettingsUi;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -270,7 +271,7 @@ public final class EdgeSwipeLevels {
             if (side == Side.BRIGHTNESS) {
                 float level = levelAfter(startLevel, startY, event.getY(), windowHeight(), MIN_BRIGHTNESS);
                 setBrightness(activity.getWindow(), level);
-                show(activity, "Brightness", level);
+                show(activity, L10n.t(activity, "Brightness"), level);
             } else {
                 float level = levelAfter(startLevel, startY, event.getY(), windowHeight(), 0f);
                 AudioManager audio = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
@@ -278,7 +279,7 @@ public final class EdgeSwipeLevels {
                     audio.setStreamVolume(AudioManager.STREAM_MUSIC,
                             volumeStep(level, audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC)), 0);
                 }
-                show(activity, "Volume", level);
+                show(activity, L10n.t(activity, "Volume"), level);
             }
         }
     }
@@ -307,7 +308,10 @@ public final class EdgeSwipeLevels {
         DIMMED.put(window, Boolean.TRUE);
     }
 
-    /** The one level label per window, drawn over the content and taken away shortly after. */
+    /**
+     * The one level label per window, drawn over the content and taken away shortly after.
+     * {@code label} arrives already translated.
+     */
     private static void show(Activity activity, String label, float level) {
         try {
             ViewGroup decor = (ViewGroup) activity.getWindow().getDecorView();
@@ -322,7 +326,7 @@ public final class EdgeSwipeLevels {
                 view.setPadding(pad * 2, pad, pad * 2, pad);
                 GradientDrawable background = new GradientDrawable();
                 background.setColor(0xCC000000);
-                background.setCornerRadius(24 * density);
+                background.setCornerRadius(SettingsUi.dp(activity, SettingsUi.RADIUS_OVERLAY));
                 view.setBackground(background);
                 view.setClickable(false);
                 view.setFocusable(false);
@@ -332,7 +336,7 @@ public final class EdgeSwipeLevels {
                 params.topMargin = Math.round(96 * density);
                 decor.addView(view, params);
             }
-            view.setText(L10n.t(activity, label) + " " + Math.round(level * 100) + "%");
+            view.setText(label + " " + Math.round(level * 100) + "%");
             view.setVisibility(View.VISIBLE);
             TextView shown = view;
             Runnable earlier = HIDERS.get(shown);
