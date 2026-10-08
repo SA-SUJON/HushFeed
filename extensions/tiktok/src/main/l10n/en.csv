@@ -885,7 +885,7 @@ Make TikTok yours.,Make TikTok yours.
 Making a video of the photos,Making a video of the photos
 Manage topics,Manage topics
 Manager,Manager
-Mark saved videos on profile grids,Mark saved videos on profile grids
+Mark saved videos,Mark saved videos
 Marked as not interested,Marked as not interested
 Match locale and timezone to country,Match locale and timezone to country
 Match region fields in requests,Match region fields in requests
@@ -1115,7 +1115,7 @@ Proxy user name,Proxy user name
 Public,Public
 Pulling down at the top of For You no longer reloads it.,Pulling down at the top of For You no longer reloads it.
 Put %1$s in %2$s first.,Put %1$s in %2$s first.
-"Put a ✓ before the view count on profile grids for videos Hushfeed saved here. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.","Put a ✓ before the view count on profile grids for videos Hushfeed saved here. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos."
+"Put a ✓ before the view count on profile grids, and before the time on a feed video's creator row, for videos Hushfeed saved here. The feed's mark shows wherever Always show publish date shows the time. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.","Put a ✓ before the view count on profile grids, and before the time on a feed video's creator row, for videos Hushfeed saved here. The feed's mark shows wherever Always show publish date shows the time. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos."
 Put back the settings saved before the last restore or reset.,Put back the settings saved before the last restore or reset.
 Put every setting back to its default straight away. Your current settings are kept for Undo.,Put every setting back to its default straight away. Your current settings are kept for Undo.
 Putting seen videos back,Putting seen videos back

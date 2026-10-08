@@ -17,6 +17,7 @@ import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.PausedProcess;
 import app.morphe.extension.tiktok.SettingsContextRule;
 import app.morphe.extension.tiktok.feed.ProfileGridCount;
+import app.morphe.extension.tiktok.publishdate.AlwaysShowPublishDatePatch;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
 
@@ -109,6 +110,16 @@ public class SavedVideoMarkTest {
         assertEquals("an item that isn't a video got the mark", "12.3K",
                 SavedVideoMark.gridText("12.3K", "7"));
         assertEquals("12.3K", SavedVideoMark.gridText("12.3K", new Cell(null)));
+    }
+
+    @Test public void aFeedVideosCreatorRowCarriesTheMarkBeforeItsTime() throws Exception {
+        SavedVideoArchive.remember(context, "7", saved("seven"), SavedVideoArchive.generation());
+        readIds();
+        String mark = SavedVideoMark.MARK + " ";
+        assertEquals(mark + "2d ago", AlwaysShowPublishDatePatch.postTime("2d ago", new Cell("7")));
+        assertEquals("2d ago", AlwaysShowPublishDatePatch.postTime("2d ago", new Cell("8")));
+        Settings.MARK_SAVED_VIDEOS.save(false);
+        assertEquals("2d ago", AlwaysShowPublishDatePatch.postTime("2d ago", new Cell("7")));
     }
 
     @Test public void theMarkNeedsBothSwitchesAndAdvancedDownloadsAndStopsWhilePaused() throws Exception {

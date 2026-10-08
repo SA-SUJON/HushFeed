@@ -20,6 +20,7 @@ import java.util.TimeZone;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.tiktok.download.SavedVideoMark;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
 
@@ -54,9 +55,14 @@ public final class AlwaysShowPublishDatePatch {
 
     /**
      * Called where the creator's row has its post time text ready ("2d ago", "10-7"). Returns
-     * that text, or the full date and time to the second with the time zone while the switch is on.
+     * that text, or the full date and time to the second with the time zone while the switch is on,
+     * with Mark saved videos' check before it for a video saved here.
      */
     public static String postTime(String original, Object item) {
+        return SavedVideoMark.rowText(exactOrOriginal(original, item), item);
+    }
+
+    private static String exactOrOriginal(String original, Object item) {
         if (!Settings.PUBLISH_DATE_EXACT_TIME.get()) {
             return original;
         }

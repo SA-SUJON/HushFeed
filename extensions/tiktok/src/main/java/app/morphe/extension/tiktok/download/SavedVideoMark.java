@@ -12,7 +12,7 @@ import app.morphe.extension.tiktok.settings.SettingsStatus;
 
 /**
  * The check mark a profile grid cell puts before its view count when its video is one Hushfeed
- * saved here ("✓ 12.3K").
+ * saved here ("✓ 12.3K"), and a feed video's creator row before its time ("✓ 2d ago").
  *
  * <p>Saved means in {@link SavedVideoArchive}'s record, which Check for already-saved videos
  * keeps. That record only takes saves made while the check is on, so the mark needs the check
@@ -59,13 +59,25 @@ public final class SavedVideoMark {
      * while the switch is on and the cell's video is in the record.
      */
     public static String gridText(String text, Object item) {
+        return marked(text, item);
+    }
+
+    /**
+     * What a feed video's creator row shows for its time: {@code text}, with the mark before it
+     * the same way. The row binds as the feed scrolls, so this answers from memory too.
+     */
+    public static String rowText(String text, Object item) {
+        return marked(text, item);
+    }
+
+    private static String marked(String text, Object item) {
         if (text == null || !(item instanceof Aweme)) return text;
         try {
             if (!enabled()) return text;
             String id = ((Aweme) item).getAid();
             return SavedVideoArchive.isSaved(id) ? MARK + GAP + text : text;
         } catch (Throwable ex) {
-            Logger.printException(() -> "Could not mark a saved video on the grid", ex);
+            Logger.printException(() -> "Could not mark a saved video", ex);
             return text;
         }
     }

@@ -1906,8 +1906,8 @@ public final class L10nTranslations {
                 "Mövzuları idarə edin");
         table.put("Manager",
                 "Menecer");
-        table.put("Mark saved videos on profile grids",
-                "Saxlanılmış videoları profil şəbəkəsində işarələyin");
+        table.put("Mark saved videos",
+                "Saxlanılmış videoları işarələyin");
         table.put("Marked as not interested",
                 "Maraqlı deyil kimi qeyd edilib");
         table.put("Match locale and timezone to country",
@@ -2378,8 +2378,8 @@ public final class L10nTranslations {
                 "Sənin üçün lentinin yuxarısında aşağı çəkmək artıq onu yenidən yükləmir.");
         table.put("Put %1$s in %2$s first.",
                 "Əvvəlcə %1$s dəyərini %2$s sahəsinə yazın.");
-        table.put("Put a ✓ before the view count on profile grids for videos Hushfeed saved here. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
-                "Hushfeed-in burada saxladığı videolar üçün profil şəbəkəsində baxış sayının önünə ✓ qoyun. Bu, Artıq saxlanılmış videoları yoxlayın açarının apardığı qeydi oxuyur, ona görə yalnız o açar açıq olanda işləyir. Foto paylaşımları işarələnmir, sonradan sildiyiniz video isə Saxlanılmış videoları unudun istifadə edənə qədər işarəsini saxlayır.");
+        table.put("Put a ✓ before the view count on profile grids, and before the time on a feed video's creator row, for videos Hushfeed saved here. The feed's mark shows wherever Always show publish date shows the time. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
+                "Hushfeed-in burada saxladığı videolar üçün profil şəbəkəsində baxış sayının önünə, lentdəki videonun müəllif sətrində isə vaxtın önünə ✓ qoyun. Lentdəki işarə Paylaşım tarixini həmişə göstərin vaxtı göstərdiyi yerdə görünür. Bu, Artıq saxlanılmış videoları yoxlayın açarının apardığı qeydi oxuyur, ona görə yalnız o açar açıq olanda işləyir. Foto paylaşımları işarələnmir, sonradan sildiyiniz video isə Saxlanılmış videoları unudun istifadə edənə qədər işarəsini saxlayır.");
         table.put("Put back the settings saved before the last restore or reset.",
                 "Son bərpa və ya sıfırlamadan əvvəl saxlanılmış ayarları geri qaytarın.");
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
@@ -5689,8 +5689,8 @@ public final class L10nTranslations {
                 "Themen verwalten");
         table.put("Manager",
                 "Manager");
-        table.put("Mark saved videos on profile grids",
-                "Gespeicherte Videos im Profilraster markieren");
+        table.put("Mark saved videos",
+                "Gespeicherte Videos markieren");
         table.put("Marked as not interested",
                 "Als „Kein Interesse“ markiert");
         table.put("Match locale and timezone to country",
@@ -6161,8 +6161,8 @@ public final class L10nTranslations {
                 "Herunterziehen ganz oben in „Für dich“ lädt den Feed nicht mehr neu.");
         table.put("Put %1$s in %2$s first.",
                 "Trag zuerst %1$s in %2$s ein.");
-        table.put("Put a ✓ before the view count on profile grids for videos Hushfeed saved here. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
-                "Setzt im Profilraster ein ✓ vor die Aufrufzahl von Videos, die Hushfeed hier gespeichert hat. Es liest die Liste, die Bereits gespeicherte Videos prüfen führt, und wirkt deshalb nur, solange dieser Schalter an ist. Fotobeiträge werden nicht markiert, und ein Video, das du inzwischen gelöscht hast, bleibt markiert, bis du Gespeicherte Videos vergessen nutzt.");
+        table.put("Put a ✓ before the view count on profile grids, and before the time on a feed video's creator row, for videos Hushfeed saved here. The feed's mark shows wherever Always show publish date shows the time. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
+                "Setzt bei Videos, die Hushfeed hier gespeichert hat, ein ✓ vor die Aufrufzahl im Profilraster und vor die Zeit in der Erstellerzeile eines Feed-Videos. Im Feed erscheint die Markierung überall dort, wo Veröffentlichungsdatum immer anzeigen die Zeit zeigt. Es liest die Liste, die Bereits gespeicherte Videos prüfen führt, und wirkt deshalb nur, solange dieser Schalter an ist. Fotobeiträge werden nicht markiert, und ein Video, das du inzwischen gelöscht hast, bleibt markiert, bis du Gespeicherte Videos vergessen nutzt.");
         table.put("Put back the settings saved before the last restore or reset.",
                 "Die Einstellungen zurückholen, die vor der letzten Wiederherstellung oder Zurücksetzung gespeichert wurden.");
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
@@ -9472,8 +9472,8 @@ public final class L10nTranslations {
                 "Gestionar temas");
         table.put("Manager",
                 "Gestor");
-        table.put("Mark saved videos on profile grids",
-                "Marcar los vídeos guardados en la cuadrícula del perfil");
+        table.put("Mark saved videos",
+                "Marcar los vídeos guardados");
         table.put("Marked as not interested",
                 "Marcado como no me interesa");
         table.put("Match locale and timezone to country",
@@ -9944,8 +9944,8 @@ public final class L10nTranslations {
                 "Deslizar hacia abajo al principio de Para ti ya no lo recarga.");
         table.put("Put %1$s in %2$s first.",
                 "Escribe antes %1$s en %2$s.");
-        table.put("Put a ✓ before the view count on profile grids for videos Hushfeed saved here. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
-                "Pone un ✓ antes del número de visualizaciones en la cuadrícula del perfil en los vídeos que Hushfeed guardó aquí. Lee el registro que lleva Comprobar videos ya guardados, así que solo funciona mientras ese interruptor está activado. Las publicaciones de fotos no se marcan, y un vídeo que hayas borrado después conserva su marca hasta que uses Olvidar los vídeos guardados.");
+        table.put("Put a ✓ before the view count on profile grids, and before the time on a feed video's creator row, for videos Hushfeed saved here. The feed's mark shows wherever Always show publish date shows the time. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
+                "Pone un ✓ antes del número de visualizaciones en la cuadrícula del perfil, y antes de la hora en la fila del creador de un vídeo del feed, en los vídeos que Hushfeed guardó aquí. En el feed, la marca aparece donde Mostrar siempre la fecha de publicación muestra la hora. Lee el registro que lleva Comprobar videos ya guardados, así que solo funciona mientras ese interruptor está activado. Las publicaciones de fotos no se marcan, y un vídeo que hayas borrado después conserva su marca hasta que uses Olvidar los vídeos guardados.");
         table.put("Put back the settings saved before the last restore or reset.",
                 "Recuperar los ajustes guardados antes de la última restauración o reinicio.");
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
@@ -13255,8 +13255,8 @@ public final class L10nTranslations {
                 "Kelola topik");
         table.put("Manager",
                 "Manajer");
-        table.put("Mark saved videos on profile grids",
-                "Tandai video tersimpan di kisi profil");
+        table.put("Mark saved videos",
+                "Tandai video tersimpan");
         table.put("Marked as not interested",
                 "Ditandai tidak tertarik");
         table.put("Match locale and timezone to country",
@@ -13727,8 +13727,8 @@ public final class L10nTranslations {
                 "Menarik ke bawah di bagian atas Untuk Kamu tidak lagi memuat ulang feed.");
         table.put("Put %1$s in %2$s first.",
                 "Isi %2$s dengan %1$s dulu.");
-        table.put("Put a ✓ before the view count on profile grids for videos Hushfeed saved here. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
-                "Tambahkan ✓ sebelum jumlah tayangan di kisi profil untuk video yang disimpan Hushfeed di sini. Ini membaca catatan yang disimpan oleh Periksa video yang sudah disimpan, jadi hanya berfungsi saat sakelar itu aktif. Postingan foto tidak ditandai, dan video yang sudah kamu hapus tetap bertanda sampai kamu memakai Lupakan video tersimpan.");
+        table.put("Put a ✓ before the view count on profile grids, and before the time on a feed video's creator row, for videos Hushfeed saved here. The feed's mark shows wherever Always show publish date shows the time. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
+                "Tambahkan ✓ sebelum jumlah tayangan di kisi profil, dan sebelum waktu di baris kreator video feed, untuk video yang disimpan Hushfeed di sini. Tanda di feed muncul di mana pun Selalu tampilkan tanggal unggah menampilkan waktunya. Ini membaca catatan yang disimpan oleh Periksa video yang sudah disimpan, jadi hanya berfungsi saat sakelar itu aktif. Postingan foto tidak ditandai, dan video yang sudah kamu hapus tetap bertanda sampai kamu memakai Lupakan video tersimpan.");
         table.put("Put back the settings saved before the last restore or reset.",
                 "Kembalikan pengaturan yang tersimpan sebelum pemulihan atau penyetelan ulang terakhir.");
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
@@ -17038,8 +17038,8 @@ public final class L10nTranslations {
                 "Gestisci argomenti");
         table.put("Manager",
                 "Manager");
-        table.put("Mark saved videos on profile grids",
-                "Segna i video salvati nella griglia del profilo");
+        table.put("Mark saved videos",
+                "Segna i video salvati");
         table.put("Marked as not interested",
                 "Contrassegnato come “non mi interessa”");
         table.put("Match locale and timezone to country",
@@ -17510,8 +17510,8 @@ public final class L10nTranslations {
                 "Tirare verso il basso in cima a Per te non ricarica più il feed.");
         table.put("Put %1$s in %2$s first.",
                 "Inserisci prima %1$s in %2$s.");
-        table.put("Put a ✓ before the view count on profile grids for videos Hushfeed saved here. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
-                "Mette una ✓ prima del numero di visualizzazioni nella griglia del profilo per i video che Hushfeed ha salvato qui. Legge l'elenco tenuto da Controlla i video già salvati, quindi funziona solo mentre quell'interruttore è attivo. I post di foto non vengono segnati, e un video che hai eliminato nel frattempo resta segnato finché non usi Dimentica i video salvati.");
+        table.put("Put a ✓ before the view count on profile grids, and before the time on a feed video's creator row, for videos Hushfeed saved here. The feed's mark shows wherever Always show publish date shows the time. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
+                "Mette una ✓ prima del numero di visualizzazioni nella griglia del profilo, e prima dell'ora nella riga del creator di un video del feed, per i video che Hushfeed ha salvato qui. Nel feed il segno compare dove Mostra sempre la data di pubblicazione mostra l'ora. Legge l'elenco tenuto da Controlla i video già salvati, quindi funziona solo mentre quell'interruttore è attivo. I post di foto non vengono segnati, e un video che hai eliminato nel frattempo resta segnato finché non usi Dimentica i video salvati.");
         table.put("Put back the settings saved before the last restore or reset.",
                 "Riporta le impostazioni salvate prima dell'ultimo ripristino o reset.");
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
@@ -20821,8 +20821,8 @@ public final class L10nTranslations {
                 "Gerenciar tópicos");
         table.put("Manager",
                 "Gerenciador");
-        table.put("Mark saved videos on profile grids",
-                "Marcar vídeos salvos na grade do perfil");
+        table.put("Mark saved videos",
+                "Marcar vídeos salvos");
         table.put("Marked as not interested",
                 "Marcado como não tenho interesse");
         table.put("Match locale and timezone to country",
@@ -21293,8 +21293,8 @@ public final class L10nTranslations {
                 "Puxar para baixo no topo de Para você não recarrega mais o feed.");
         table.put("Put %1$s in %2$s first.",
                 "Coloque %1$s em %2$s primeiro.");
-        table.put("Put a ✓ before the view count on profile grids for videos Hushfeed saved here. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
-                "Coloca um ✓ antes do número de visualizações na grade do perfil nos vídeos que o Hushfeed salvou aqui. Ele lê o registro que Verificar vídeos já salvos mantém, então só funciona enquanto essa opção estiver ligada. Posts de fotos não são marcados, e um vídeo que você apagou depois continua marcado até você usar Esquecer os vídeos salvos.");
+        table.put("Put a ✓ before the view count on profile grids, and before the time on a feed video's creator row, for videos Hushfeed saved here. The feed's mark shows wherever Always show publish date shows the time. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
+                "Coloca um ✓ antes do número de visualizações na grade do perfil, e antes da hora na linha do criador de um vídeo do feed, nos vídeos que o Hushfeed salvou aqui. No feed, a marca aparece onde Sempre mostrar a data de publicação mostra a hora. Ele lê o registro que Verificar vídeos já salvos mantém, então só funciona enquanto essa opção estiver ligada. Posts de fotos não são marcados, e um vídeo que você apagou depois continua marcado até você usar Esquecer os vídeos salvos.");
         table.put("Put back the settings saved before the last restore or reset.",
                 "Trazer de volta as configurações salvas antes da última restauração ou redefinição.");
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
@@ -24859,8 +24859,8 @@ public final class L10nTranslations {
                 "Управление темами");
         table.put("Manager",
                 "Менеджер");
-        table.put("Mark saved videos on profile grids",
-                "Отмечать сохранённые видео в сетке профиля");
+        table.put("Mark saved videos",
+                "Отмечать сохранённые видео");
         table.put("Marked as not interested",
                 "Отмечено как «не интересно»");
         table.put("Match locale and timezone to country",
@@ -25331,8 +25331,8 @@ public final class L10nTranslations {
                 "Потягивание вниз наверху «Рекомендаций» больше не обновляет ленту.");
         table.put("Put %1$s in %2$s first.",
                 "Сначала укажите %1$s в %2$s.");
-        table.put("Put a ✓ before the view count on profile grids for videos Hushfeed saved here. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
-                "Ставит ✓ перед числом просмотров в сетке профиля у видео, которые Hushfeed сохранил здесь. Берёт данные из записи, которую ведёт «Проверять уже сохранённые видео», поэтому работает, только пока этот переключатель включён. Фотопосты не отмечаются, а удалённое вами видео остаётся отмеченным, пока вы не нажмёте «Забыть сохранённые видео».");
+        table.put("Put a ✓ before the view count on profile grids, and before the time on a feed video's creator row, for videos Hushfeed saved here. The feed's mark shows wherever Always show publish date shows the time. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
+                "Ставит ✓ перед числом просмотров в сетке профиля и перед временем в строке автора видео в ленте у видео, которые Hushfeed сохранил здесь. В ленте отметка видна там, где «Всегда показывать дату публикации» показывает время. Берёт данные из записи, которую ведёт «Проверять уже сохранённые видео», поэтому работает, только пока этот переключатель включён. Фотопосты не отмечаются, а удалённое вами видео остаётся отмеченным, пока вы не нажмёте «Забыть сохранённые видео».");
         table.put("Put back the settings saved before the last restore or reset.",
                 "Вернуть настройки, сохранённые перед последним восстановлением или сбросом.");
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
@@ -28729,8 +28729,8 @@ public final class L10nTranslations {
                 "Konuları yönet");
         table.put("Manager",
                 "Manager");
-        table.put("Mark saved videos on profile grids",
-                "Kaydedilen videoları profil ızgarasında işaretle");
+        table.put("Mark saved videos",
+                "Kaydedilen videoları işaretle");
         table.put("Marked as not interested",
                 "İlgilenmiyorum olarak işaretlendi");
         table.put("Match locale and timezone to country",
@@ -29201,8 +29201,8 @@ public final class L10nTranslations {
                 "Senin İçin'in en üstünde aşağı çekmek artık akışı yenilemez.");
         table.put("Put %1$s in %2$s first.",
                 "Önce %2$s alanına %1$s yaz.");
-        table.put("Put a ✓ before the view count on profile grids for videos Hushfeed saved here. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
-                "Hushfeed'in burada kaydettiği videoların profil ızgarasındaki görüntülenme sayısının önüne ✓ koyar. Önceden kaydedilen videoları kontrol et seçeneğinin tuttuğu kaydı okur, bu yüzden yalnızca o anahtar açıkken çalışır. Fotoğraf gönderileri işaretlenmez, sonradan sildiğin bir video ise Kaydedilen videoları unut seçeneğini kullanana kadar işaretli kalır.");
+        table.put("Put a ✓ before the view count on profile grids, and before the time on a feed video's creator row, for videos Hushfeed saved here. The feed's mark shows wherever Always show publish date shows the time. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.",
+                "Hushfeed'in burada kaydettiği videolarda profil ızgarasındaki görüntülenme sayısının önüne ve akıştaki bir videonun içerik üreticisi satırındaki zamanın önüne ✓ koyar. Akıştaki işaret, Yayın tarihini her zaman göster seçeneğinin zamanı gösterdiği her yerde görünür. Önceden kaydedilen videoları kontrol et seçeneğinin tuttuğu kaydı okur, bu yüzden yalnızca o anahtar açıkken çalışır. Fotoğraf gönderileri işaretlenmez, sonradan sildiğin bir video ise Kaydedilen videoları unut seçeneğini kullanana kadar işaretli kalır.");
         table.put("Put back the settings saved before the last restore or reset.",
                 "Son geri yükleme veya sıfırlamadan önce kaydedilen ayarları geri koy.");
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
