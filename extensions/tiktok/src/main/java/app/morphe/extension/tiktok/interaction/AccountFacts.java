@@ -142,7 +142,12 @@ public final class AccountFacts {
         if (code == null) return L10n.t(NOT_SENT);
         String upper = code.toUpperCase(Locale.ROOT);
         String name = new Locale("", upper).getDisplayCountry(locale);
-        return name.isEmpty() || name.equalsIgnoreCase(upper) ? upper : name + " (" + upper + ")";
+        // A code with no country behind it (ZZ, or a user-assigned one) gets the same generic
+        // "Unknown Region" the platform gives ZZ, in the phone's language. That says nothing
+        // about the account, so the code is shown as it came.
+        String generic = new Locale("", "ZZ").getDisplayCountry(locale);
+        return name.isEmpty() || name.equalsIgnoreCase(upper) || name.equals(generic)
+                ? upper : name + " (" + upper + ")";
     }
 
     /** A language tag with its name in the phone's language: "German (de)". */
