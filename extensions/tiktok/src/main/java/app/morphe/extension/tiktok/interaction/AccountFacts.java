@@ -30,7 +30,8 @@ import app.morphe.extension.tiktok.settings.preference.SettingsUi;
  * are filled from the profile response (create_time, region, account_region, language,
  * unique_id_modify_time, nick_name_modify_ts, secret and has_open_favorite, the last being what
  * the profile's own tab pager reads to show the liked videos tab) and read by their real names.
- * A date or name the server didn't send says so rather than guessing.
+ * A date or name the server didn't send says so rather than guessing. secret and
+ * has_open_favorite can't say that, so they only get a line when they're true.
  */
 public final class AccountFacts {
     static final String SHOW_FACTS = "Account facts";
@@ -74,11 +75,14 @@ public final class AccountFacts {
                 date(seconds(Reflect.readField(user, "uniqueIdModifyTime")), locale, zone)));
         facts.add(new Fact("Display name last changed",
                 date(seconds(Reflect.readField(user, "nickNameModifyTs")), locale, zone)));
-        facts.add(new Fact("Private account", yesNo(Reflect.readField(user, "secret"))));
-        Object likes = Reflect.readField(user, "hasOpenFavorite");
-        facts.add(new Fact("Liked videos", likes instanceof Boolean
-                ? L10n.t((Boolean) likes ? "Public" : "Private")
-                : L10n.t(NOT_SENT)));
+        // Both are plain booleans on the model, so one the server left out reads false. Only a
+        // true one is a fact, and false leaves its line out.
+        if (Boolean.TRUE.equals(Reflect.readField(user, "secret"))) {
+            facts.add(new Fact("Private account", L10n.t("Yes")));
+        }
+        if (Boolean.TRUE.equals(Reflect.readField(user, "hasOpenFavorite"))) {
+            facts.add(new Fact("Liked videos", L10n.t("Public")));
+        }
         return facts;
     }
 
@@ -146,11 +150,6 @@ public final class AccountFacts {
         if (tag == null) return L10n.t(NOT_SENT);
         String name = Locale.forLanguageTag(tag.replace('_', '-')).getDisplayName(locale);
         return name.isEmpty() || name.equalsIgnoreCase(tag) ? tag : name + " (" + tag + ")";
-    }
-
-    private static String yesNo(@Nullable Object value) {
-        if (!(value instanceof Boolean)) return L10n.t(NOT_SENT);
-        return L10n.t((Boolean) value ? "Yes" : "No");
     }
 
     @Nullable

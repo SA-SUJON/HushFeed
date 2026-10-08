@@ -5,7 +5,9 @@
 package app.morphe.extension.tiktok.interaction;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import com.ss.android.ugc.aweme.profile.model.User;
 
@@ -74,15 +76,28 @@ public class AccountFactsTest {
     }
 
     @Test public void whatTheServerLeftOutSaysSo() {
+        // secret and hasOpenFavorite are plain booleans, so left out they read false and say nothing.
         assertEquals(List.of(
                 "Joined=Not sent",
                 "Region=Not sent",
                 "Language=Not sent",
                 "Username last changed=Not sent",
-                "Display name last changed=Not sent",
-                "Private account=No",
-                "Liked videos=Private"
+                "Display name last changed=Not sent"
         ), lines(new User()));
+    }
+
+    @Test public void onlyATrueFlagGetsALine() {
+        User user = new User();
+        user.secret = true;
+        List<String> lines = lines(user);
+        assertTrue(lines.toString(), lines.contains("Private account=Yes"));
+        assertFalse(lines.toString(), lines.stream().anyMatch(line -> line.startsWith("Liked videos=")));
+
+        user.secret = false;
+        user.hasOpenFavorite = true;
+        lines = lines(user);
+        assertFalse(lines.toString(), lines.stream().anyMatch(line -> line.startsWith("Private account=")));
+        assertTrue(lines.toString(), lines.contains("Liked videos=Public"));
     }
 
     @Test public void theRegisterTimeStandsInAndADifferentAccountRegionGetsItsOwnLine() {
@@ -99,8 +114,8 @@ public class AccountFactsTest {
     @Test public void theSheetCopiesAsOneLabelledLineEach() {
         List<AccountFacts.Fact> facts = List.of(
                 new AccountFacts.Fact("Region", "Germany (DE)"),
-                new AccountFacts.Fact("Private account", "No"));
-        assertEquals("Region: Germany (DE)\nPrivate account: No", AccountFacts.format(facts));
+                new AccountFacts.Fact("Private account", "Yes"));
+        assertEquals("Region: Germany (DE)\nPrivate account: Yes", AccountFacts.format(facts));
     }
 
     @Test public void timesInMillisecondsAreReadAsSeconds() {
