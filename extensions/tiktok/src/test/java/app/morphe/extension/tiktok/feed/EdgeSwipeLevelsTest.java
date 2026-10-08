@@ -73,8 +73,7 @@ public class EdgeSwipeLevelsTest {
         SettingsStatus.liveSpeedEnabled = previousSpeedPatch;
         setPaused(previousPaused);
         PlaybackSpeedPatch.nativeForTests = null;
-        ReflectionHelpers.setStaticField(PlaybackSpeedPatch.class, "onScreen", null);
-        PlaybackSpeedPatch.beginVideo(null);
+        forgetSpeedState();
         Settings.SWIPE_LEVELS.resetToDefault();
         Settings.SWIPE_LEVELS_STRIP_PERCENT.resetToDefault();
         Settings.SWIPE_LEVELS_LEFT.resetToDefault();
@@ -114,11 +113,22 @@ public class EdgeSwipeLevelsTest {
         SettingsStatus.liveSpeedEnabled = true;
         Settings.DEFAULT_SPEED_ENABLED.save(true);
         Settings.DEFAULT_SPEED.save("1");
-        PlaybackSpeedPatch.beginVideo(null);
+        forgetSpeedState();
         Player player = new Player(id);
         PlaybackSpeedPatch.nativeForTests = player;
         PlaybackSpeedPatch.onPlayerProgress(player.controller, id);
         return player;
+    }
+
+    /**
+     * The on-screen player and the last drag are process-wide, and a drag stays with its video id,
+     * so every test that uses video "a" would start at the speed an earlier one dragged it to.
+     */
+    private static void forgetSpeedState() {
+        ReflectionHelpers.setStaticField(PlaybackSpeedPatch.class, "onScreen", null);
+        ReflectionHelpers.setStaticField(PlaybackSpeedPatch.class, "liveVideoId", "");
+        ReflectionHelpers.setStaticField(PlaybackSpeedPatch.class, "liveSpeed", Float.NaN);
+        PlaybackSpeedPatch.beginVideo(null);
     }
 
     private static void setPaused(boolean value) {
