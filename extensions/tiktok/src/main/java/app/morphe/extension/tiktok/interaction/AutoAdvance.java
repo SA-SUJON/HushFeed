@@ -213,8 +213,14 @@ public final class AutoAdvance {
         private int sessionLimit = Settings.AUTO_ADVANCE_LIMIT.get();
         Control(View view) { this.view = new WeakReference<>(view); }
 
-        /** Read just before the host's search restore: armed only when that could start it. */
+        /**
+         * Read just before the host's search restore: armed only when that could start it. An arm
+         * already waiting on its check stays as it is. onViewCreated restores and onResume follows
+         * in the same message when a page is added to a running activity, and the second read
+         * would see the START the first one is waiting to claim and disarm it.
+         */
         boolean armRestore(boolean searchForced, Object stateBefore) {
+            if (restoreArmed) return false;
             restoreArmed = searchForced && !owned && named(stateBefore, "AUTO_SCROLL_STATE_STOP");
             return restoreArmed;
         }

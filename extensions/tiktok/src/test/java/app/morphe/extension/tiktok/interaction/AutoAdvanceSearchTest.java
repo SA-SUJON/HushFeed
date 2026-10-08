@@ -136,6 +136,27 @@ public class AutoAdvanceSearchTest {
     }
 
     @Test @Config(shadows = HostComponent.class)
+    public void aResumeInTheSameMessageAsTheRestoreDoesNotDisarmIt() {
+        // A page added to a running activity gets onViewCreated, which restores, and onResume in
+        // one message. The resume reads the START the first check is waiting to claim.
+        Settings.AUTO_ADVANCE.save(true);
+        Settings.AUTO_ADVANCE_SEARCH.save(true);
+        holdTheFeed();
+        Object component = new Object();
+        try {
+            AutoAdvance.onView(component, new View(RuntimeEnvironment.getApplication()));
+            HostComponent.state = State.AUTO_SCROLL_STATE_START;
+            AutoAdvance.onResume(component);
+            AutoAdvance.onPageResume(component);
+            idle();
+            assertEquals("the restored scroll was never claimed", 1, HostComponent.stops);
+            assertEquals(State.AUTO_SCROLL_STATE_STOP, HostComponent.state);
+        } finally {
+            AutoAdvance.onDestroy(component);
+        }
+    }
+
+    @Test @Config(shadows = HostComponent.class)
     public void withoutTheSearchSwitchARestoredScrollStaysTikToks() {
         // Then it's the server's own flag that let search remember it, and a scroll Hushfeed
         // didn't cause is left to TikTok the way it always was.
@@ -174,7 +195,9 @@ public class AutoAdvanceSearchTest {
 
         assertFalse("the search switch is off", control.armRestore(false, State.AUTO_SCROLL_STATE_STOP));
 
+        // A second read before the check runs leaves the waiting arm alone.
         assertTrue(control.armRestore(true, State.AUTO_SCROLL_STATE_STOP));
+        assertFalse(control.armRestore(true, State.AUTO_SCROLL_STATE_START));
         assertTrue(control.adoptRestore(State.AUTO_SCROLL_STATE_START));
         assertTrue(control.owned);
     }
