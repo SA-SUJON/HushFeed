@@ -39,8 +39,68 @@ public class RegionSpoofTest {
         Settings.SIMSPOOF_MCCMNC.save("44010");
     }
     @After public void tearDown() {
+        RegionSpoof.requestDone();
         SettingsStatus.simSpoofEnabled = false;
         SettingsStatus.regionSpoofEnabled = false;
+    }
+
+    @Test public void onlyPassportPathsAreSignIns() {
+        for (String path : new String[]{"/passport/user/login/", "/passport/mobile/send_code/v1/",
+                "//passport/email/register/v2/", "/passport/"}) {
+            assertTrue(path, RegionSpoof.isSignIn(path));
+        }
+        for (String path : new String[]{null, "", "/", "/aweme/v1/feed/", "/aweme/v1/passport/",
+                "/passports/", "/passport", "passport/user/login/", "/Passport/user/login/"}) {
+            assertFalse(String.valueOf(path), RegionSpoof.isSignIn(path));
+        }
+    }
+
+    @Test public void aSignInKeepsTheRealRegionOnItsOwnThreadOnly() throws Exception {
+        Settings.REGION_REQUEST_SPOOF.save(true);
+        Settings.REGION_STORE_SPOOF.save(true);
+        Locale locale = Locale.US;
+        TimeZone zone = TimeZone.getTimeZone("UTC");
+        RegionSpoof.requestPath("/passport/user/login/");
+        Map<String, String> params = requestParams();
+        RegionSpoof.requestParams(params);
+        assertEquals("a sign-in's fields took the preset", requestParams(), params);
+        assertEquals("US", RegionSpoof.country("US"));
+        assertEquals("US", RegionSpoof.storeCountry("US"));
+        assertSame(locale, RegionSpoof.locale(locale));
+        assertSame(zone, RegionSpoof.timeZone(zone));
+
+        // A feed request built on another thread at the same moment keeps the preset.
+        String[] elsewhere = new String[1];
+        Thread other = new Thread(() -> elsewhere[0] = RegionSpoof.country("US"));
+        other.start();
+        other.join();
+        assertEquals("JP", elsewhere[0]);
+
+        RegionSpoof.requestDone();
+        assertEquals("JP", RegionSpoof.country("US"));
+        assertEquals("JP", RegionSpoof.locale(locale).getCountry());
+        RegionSpoof.requestPath("/aweme/v1/feed/");
+        params = requestParams();
+        RegionSpoof.requestParams(params);
+        RegionSpoof.requestDone();
+        assertEquals("JP", params.get("current_region"));
+        assertEquals("440", params.get("carrier_region_v2"));
+    }
+
+    @Test public void aSignInIsLeftAloneWithoutTheRequestSwitchAndAMissedEndIsPutRight() {
+        // Without Match region fields in requests a sign-in is spoofed as it always was.
+        RegionSpoof.requestPath("/passport/user/login/");
+        assertEquals("JP", RegionSpoof.country("US"));
+        RegionSpoof.requestDone();
+
+        Settings.REGION_REQUEST_SPOOF.save(true);
+        RegionSpoof.requestPath("/passport/user/login/");
+        // TikTok's fill threw before the end was called: the thread's next request puts it right.
+        RegionSpoof.requestPath("/aweme/v1/feed/");
+        assertEquals("JP", RegionSpoof.country("US"));
+        RegionSpoof.requestDone();
+        RegionSpoof.requestDone();
+        assertEquals("JP", RegionSpoof.country("US"));
     }
     @Test public void aKeptAnswerFollowsTheSettingAndEachZoneIsItsOwnCopy() {
         // Answers are kept between calls, because every Locale and TimeZone default in the app

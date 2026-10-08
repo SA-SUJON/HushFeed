@@ -7,6 +7,7 @@
 package app.morphe.extension.tiktok.spoof.region;
 
 import android.os.Build;
+import androidx.annotation.Nullable;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.BaseSettings;
@@ -22,6 +23,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public final class RegionSpoof {
     private static final Set<String> COUNTRIES = new HashSet<>(Arrays.asList(Locale.getISOCountries()));
@@ -62,7 +64,61 @@ public final class RegionSpoof {
         return COUNTRIES.contains(code.toUpperCase(Locale.ROOT));
     }
 
+    /*
+     * Sign-in requests. TTNet's common-parameter handler hands over each request's path just
+     * before it builds that request's parameters, on the same thread, and calls requestDone()
+     * right after. While a /passport/ request's parameters are built with Match region fields in
+     * requests on, that thread gets TikTok's own answers: the region getters, the locale, the
+     * timezone and the request fields the builder hook would set. A value TikTok worked out
+     * earlier and kept, like the copy of sys_region it makes at start-up, stays as it was.
+     */
+    private static final ThreadLocal<Boolean> SIGN_IN = new ThreadLocal<>();
+    /** Threads building a sign-in request's parameters now, so every other call skips the ThreadLocal. */
+    private static final AtomicInteger signingIn = new AtomicInteger();
+    private static final String SIGN_IN_PATH = "passport/";
+
+    /** From the common-parameter handler, with the path of the request it's about to fill. */
+    public static void requestPath(@Nullable String path) {
+        try {
+            mark(isSignIn(path) && Utils.getContext() != null && Settings.REGION_REQUEST_SPOOF.get());
+        } catch (RuntimeException error) {
+            Logger.printException(() -> "Region spoof could not read a request's path", error);
+        }
+    }
+
+    /** From the common-parameter handler, once the request's parameters are built. */
+    public static void requestDone() {
+        mark(false);
+    }
+
+    private static void mark(boolean signIn) {
+        if ((SIGN_IN.get() != null) == signIn) return;
+        if (signIn) {
+            SIGN_IN.set(Boolean.TRUE);
+            signingIn.incrementAndGet();
+        } else {
+            SIGN_IN.remove();
+            signingIn.decrementAndGet();
+        }
+    }
+
+    /** TikTok's sign-in, sign-up and account verification endpoints all sit under /passport/. */
+    static boolean isSignIn(@Nullable String path) {
+        if (path == null) return false;
+        int start = 0;
+        while (start < path.length() && path.charAt(start) == '/') start++;
+        return start > 0 && path.regionMatches(start, SIGN_IN_PATH, 0, SIGN_IN_PATH.length());
+    }
+
+    private static boolean signingIn() {
+        return signingIn.get() > 0 && SIGN_IN.get() != null;
+    }
+
     private static String selectedCountry() {
+        return signingIn() ? "" : presetCountry();
+    }
+
+    private static String presetCountry() {
         if (Utils.getContext() == null || !Settings.SIM_SPOOF.get() || !Settings.REGION_SPOOF.get()) return "";
         String value = Settings.SIM_SPOOF_ISO.get();
         if (value == null) return "";
@@ -103,6 +159,12 @@ public final class RegionSpoof {
     public static void requestParams(Map params) {
         try {
             if (params == null || Utils.getContext() == null || !Settings.REGION_REQUEST_SPOOF.get()) return;
+            if (signingIn()) {
+                // A sign-in goes out with the fields TikTok set, so the account sees the real region.
+                String preset = presetCountry();
+                if (!preset.isEmpty()) report(params, preset, null);
+                return;
+            }
             String country = selectedCountry();
             if (country.isEmpty()) return;
             List<String> set = new ArrayList<>();
@@ -142,20 +204,26 @@ public final class RegionSpoof {
     /*
      * One debug line each time the outcome changes, not one per request. It names fields and says
      * whether the hub's fields already carry the preset, and never prints a value the phone had
-     * before, since that is the real region.
+     * before, since that is the real region. A null set is a sign-in request, where nothing is set
+     * and every region field is looked at.
      */
     @SuppressWarnings("rawtypes")
-    private static void report(Map params, String country, List<String> set) {
+    private static void report(Map params, String country, @Nullable List<String> set) {
         if (!BaseSettings.DEBUG.get()) return;
         List<String> matching = new ArrayList<>();
         List<String> other = new ArrayList<>();
-        for (String field : HUB_REGION_FIELDS) {
+        List<String> fields = new ArrayList<>(Arrays.asList(HUB_REGION_FIELDS));
+        if (set == null) fields.addAll(Arrays.asList(SAVED_REGION_FIELDS));
+        for (String field : fields) {
             Object value = params.get(field);
             if (!(value instanceof String)) continue;
             (country.equalsIgnoreCase((String) value) ? matching : other).add(field);
         }
-        String line = "Request region fields for " + country + ". Set to the preset " + set
-                + ", already the preset " + matching + ", something else " + other;
+        String line = set == null
+                ? "Sign-in request region fields left as TikTok set them for " + country
+                        + ". Still the preset " + matching + ", something else " + other
+                : "Request region fields for " + country + ". Set to the preset " + set
+                        + ", already the preset " + matching + ", something else " + other;
         if (line.equals(lastRequestReport)) return;
         lastRequestReport = line;
         Logger.printDebug(() -> line);

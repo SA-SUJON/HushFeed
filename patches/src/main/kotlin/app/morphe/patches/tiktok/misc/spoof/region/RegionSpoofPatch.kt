@@ -22,9 +22,14 @@ import app.morphe.util.implementationOrPatchException
 import app.morphe.util.singleOrPatchException
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.Method
+import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
+import com.android.tools.smali.dexlib2.iface.reference.TypeReference
 
 private const val EXTENSION = "Lapp/morphe/extension/tiktok/spoof/region/RegionSpoof;"
 private object RegionService : Fingerprint(
@@ -47,6 +52,100 @@ internal object CommonParamsBuilderFingerprint : Fingerprint(
     strings = listOf("ssmix", "_rticket"),
 )
 
+internal const val COMMON_PARAMS_HANDLER = "Lcom/ss/android/ugc/aweme/net/partner/CommonParamsTTNetHandler;"
+internal const val REGEX_MATCHES = "Lkotlin/text/Regex;->matches(Ljava/lang/CharSequence;)Z"
+
+/**
+ * TTNet's common-parameter handler: for each request it hands a new map to a static
+ * (Map, boolean) fill, which reaches the builder above on the same thread, and copies the map
+ * into the request's query. It's the only place that sees both the request's path and its common
+ * parameters being built. R8 renames the method; the fill and the path read find it.
+ */
+internal object CommonParamsHandlerFingerprint : Fingerprint(
+    definingClass = COMMON_PARAMS_HANDLER,
+    returnType = "V",
+    custom = { method, _ -> commonParamsFill(method) != null },
+)
+
+/** Where the handler makes the map and fills it, and how it reads the request's path. */
+internal class CommonParamsFill(
+    val mapAt: Int,
+    val mapRegister: Int,
+    val fillAt: Int,
+    val requestField: FieldReference,
+    val urlField: FieldReference,
+    val pathGetter: MethodReference,
+)
+
+/**
+ * The handler's fill, or null when [method] doesn't have exactly this shape: `new LinkedHashMap`,
+ * its constructor, then one static `(Map, boolean)V` call taking it, and a path read off p1 as
+ * `iget-object` (the request), `iget-object` (its URL) and a no-argument String getter whose
+ * result TikTok matches its hpack-optimization pattern against. The getter joins the URL's path
+ * segments with "/" (RegionSpoofAnchorsTest).
+ */
+internal fun commonParamsFill(method: Method): CommonParamsFill? {
+    if (AccessFlags.STATIC.isSet(method.accessFlags) || method.parameterTypes.size != 2) return null
+    val body = method.implementation ?: return null
+    val instructions = body.instructions.toList()
+    val request = body.registerCount - 2
+    val fillAt = instructions.indices.filter { index ->
+        val instruction = instructions[index]
+        val reference = instruction.getReference<MethodReference>() ?: return@filter false
+        instruction.opcode == Opcode.INVOKE_STATIC && reference.returnType == "V" &&
+            reference.parameterTypes.map(CharSequence::toString) == listOf("Ljava/util/Map;", "Z")
+    }.singleOrNull() ?: return null
+    val map = (instructions[fillAt] as FiveRegisterInstruction).registerC
+    val mapAt = fillAt - 2
+    val created = instructions.getOrNull(mapAt) ?: return null
+    if (created.opcode != Opcode.NEW_INSTANCE || (created as OneRegisterInstruction).registerA != map ||
+        created.getReference<TypeReference>()?.type != "Ljava/util/LinkedHashMap;"
+    ) {
+        return null
+    }
+    val init = instructions[fillAt - 1]
+    if (init.opcode != Opcode.INVOKE_DIRECT || init.getReference<MethodReference>()?.name != "<init>" ||
+        (init as FiveRegisterInstruction).registerC != map
+    ) {
+        return null
+    }
+
+    val matches = instructions.indexOfFirst {
+        it.opcode == Opcode.INVOKE_VIRTUAL && it.getReference<MethodReference>()?.toString() == REGEX_MATCHES
+    }
+    if (matches < 0) return null
+    val path = (instructions[matches] as FiveRegisterInstruction).registerD
+    val result = (matches - 1 downTo 0).firstOrNull { writes(instructions[it], path) } ?: return null
+    if (instructions[result].opcode != Opcode.MOVE_RESULT_OBJECT || result < 3) return null
+    val call = instructions[result - 1]
+    val getter = call.getReference<MethodReference>() ?: return null
+    if (call.opcode != Opcode.INVOKE_VIRTUAL || getter.parameterTypes.isNotEmpty() ||
+        getter.returnType != "Ljava/lang/String;"
+    ) {
+        return null
+    }
+    val url = instructions[result - 2]
+    val requestRead = instructions[result - 3]
+    if (url.opcode != Opcode.IGET_OBJECT || requestRead.opcode != Opcode.IGET_OBJECT) return null
+    url as TwoRegisterInstruction
+    requestRead as TwoRegisterInstruction
+    if ((call as FiveRegisterInstruction).registerC != url.registerA || url.registerB != requestRead.registerA ||
+        requestRead.registerB != request
+    ) {
+        return null
+    }
+    val urlField = url.getReference<FieldReference>() ?: return null
+    val requestField = requestRead.getReference<FieldReference>() ?: return null
+    if (requestField.type != urlField.definingClass || urlField.type != getter.definingClass) return null
+    return CommonParamsFill(mapAt, map, fillAt, requestField, urlField, getter)
+}
+
+private fun writes(instruction: Instruction, register: Int): Boolean {
+    if (!instruction.opcode.setsRegister()) return false
+    val target = (instruction as? OneRegisterInstruction)?.registerA ?: return false
+    return target == register || (instruction.opcode.setsWideRegister() && target + 1 == register)
+}
+
 @Suppress("unused")
 val regionSpoofPatch = bytecodePatch(
     name = "Region spoof",
@@ -57,6 +156,17 @@ val regionSpoofPatch = bytecodePatch(
     compatibleWith(*AppCompatibilities.tiktok())
     dependsOn(settingsPatch, simSpoofPatch)
     execute {
+        // Found and checked before anything is written: the patcher doesn't take a failed
+        // patch's writes back out.
+        val handler = CommonParamsHandlerFingerprint.method
+        val fill = commonParamsFill(handler) ?: throw PatchException(
+            "Region spoof: the common-parameter handler no longer fills a new map and reads its request's path the way it did.",
+        )
+        val requestRegister = handler.implementationOrPatchException("Region spoof").registerCount - 2
+        if (fill.mapRegister > 15 || requestRegister > 15) {
+            throw PatchException("Region spoof: the common-parameter handler's registers are out of reach of the path read.")
+        }
+
         val replacements = mapOf("Ljava/util/Locale;" to "locale", "Ljava/util/TimeZone;" to "timeZone")
         val counts = mutableMapOf<String, Int>()
         classDefForEach { definition ->
@@ -172,6 +282,22 @@ val regionSpoofPatch = bytecodePatch(
                 )
             }
         }
+
+        // Sign-in requests: the handler says which request it's about to fill, in the map's own
+        // register just before the map is made, and when the fill is over. A fill that throws
+        // skips the second call, and the thread's next request puts the mark right.
+        val register = "v${fill.mapRegister}"
+        handler.addInstruction(fill.fillAt + 1, "invoke-static {}, $EXTENSION->requestDone()V")
+        handler.addInstructionsAtControlFlowLabel(
+            fill.mapAt,
+            """
+                iget-object $register, p1, ${fill.requestField}
+                iget-object $register, $register, ${fill.urlField}
+                invoke-virtual { $register }, ${fill.pathGetter}
+                move-result-object $register
+                invoke-static { $register }, $EXTENSION->requestPath(Ljava/lang/String;)V
+            """,
+        )
         SettingsStatusLoadFingerprint.method.addInstruction(0,
             "invoke-static {}, Lapp/morphe/extension/tiktok/settings/SettingsStatus;->enableRegionSpoof()V")
     }

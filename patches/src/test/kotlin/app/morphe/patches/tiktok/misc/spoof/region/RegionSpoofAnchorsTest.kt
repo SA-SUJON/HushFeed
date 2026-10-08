@@ -9,6 +9,7 @@ import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.Instruction
+import com.android.tools.smali.dexlib2.iface.instruction.NarrowLiteralInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
@@ -22,6 +23,10 @@ import org.junit.Test
 
 /**
  * What Region spoof's request fields rest on, held to each declared TikTok build.
+ *
+ * Sign-in requests keep the real region through TTNet's common-parameter handler, which reads the
+ * request's path off p1 and fills a new map on the same thread; the patch copies that path read
+ * in front of the map and calls the extension around the fill.
  *
  * The patch hooks every return of AppLog's common-parameter builder and hands the extension the
  * map in p3. That needs the builder to be one instance method that never puts anything else in
@@ -102,6 +107,47 @@ class RegionSpoofAnchorsTest {
                 }
             }
         }
+    }
+
+    @Test
+    fun `the common-parameter handler fills one new map and reads the request path off p1`() {
+        Fixtures.forEachDeclared { apk ->
+            val version = Fixtures.versionOf(apk)
+            val handlers = mutableListOf<Method>()
+            // Every no-argument String method that joins with '/', keyed the way a reference prints.
+            val joiners = mutableSetOf<String>()
+            forEachMethod(apk) { classDef, method ->
+                if (CommonParamsHandlerFingerprint.takes(method, classDef)) handlers += method
+                if (method.returnType == STRING && method.parameterTypes.isEmpty() && joinsWithSlash(method)) {
+                    joiners += "${method.definingClass}->${method.name}()$STRING"
+                }
+            }
+
+            assertEquals("$version: handlers ${handlers.map { it.name }}", 1, handlers.size)
+            val handler = handlers.single()
+            val fill = commonParamsFill(handler) ?: error("$version: the handler's fill was not found")
+            val registers = handler.implementation!!.registerCount
+            assertTrue("$version: the map register v${fill.mapRegister} is past v15", fill.mapRegister <= 15)
+            assertTrue("$version: p1 is past v15", registers - 2 <= 15)
+            assertEquals("$version: what p1 is", handler.parameterTypes.first().toString(), fill.requestField.definingClass)
+            assertTrue("$version: the fill comes after the map", fill.fillAt == fill.mapAt + 2)
+            assertTrue(
+                "$version: ${fill.pathGetter} doesn't join path segments with '/'",
+                fill.pathGetter.toString() in joiners,
+            )
+        }
+    }
+
+    private fun joinsWithSlash(method: Method): Boolean {
+        val instructions = method.implementation?.instructions ?: return false
+        var slash = false
+        var appendsChar = false
+        for (instruction in instructions) {
+            if ((instruction as? NarrowLiteralInstruction)?.narrowLiteral == '/'.code) slash = true
+            val reference = (instruction as? ReferenceInstruction)?.reference as? MethodReference ?: continue
+            if (reference.toString() == "Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;") appendsChar = true
+        }
+        return slash && appendsChar
     }
 
     private fun forEachMethod(apk: File, visit: (ClassDef, Method) -> Unit) {
