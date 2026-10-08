@@ -13,6 +13,7 @@ import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
@@ -71,9 +72,13 @@ class BottomTabLabelsAnchorsTest {
             // The store puts a TuxTextView the tab logic just made onto the logic's own icon.
             val code = sites.labelSetter.implementation!!.instructions.toList()
             val before = code.subList(0, sites.labelStore)
-            val iconLoad = before.last { (it as? OneRegisterInstruction)?.registerA == sites.icon }
+            // Writes only: the label's null check reads the same register between its load and the store.
+            fun writes(register: Int) = { instruction: Instruction ->
+                instruction.opcode.setsRegister() && (instruction as? OneRegisterInstruction)?.registerA == register
+            }
+            val iconLoad = before.last(writes(sites.icon))
             assertEquals("$version: what the store goes on", icon.type, iconLoad.getReference<FieldReference>()?.type)
-            val labelLoad = before.indexOfLast { (it as? OneRegisterInstruction)?.registerA == sites.label }
+            val labelLoad = before.indexOfLast(writes(sites.label))
             assertEquals(Opcode.MOVE_RESULT_OBJECT, before[labelLoad].opcode)
             assertEquals("$version: what the store holds", TUX_TEXT_VIEW, before[labelLoad - 1].getReference<MethodReference>()?.returnType)
 
