@@ -141,7 +141,9 @@ public final class ResourceTableCheck {
         Iterator<?> elements = root.recursiveElements();
         while (elements.hasNext()) {
             ResXmlElement element = (ResXmlElement) elements.next();
-            if (!elementNames.contains(element.getName())) continue;
+            // Set.of refuses a null lookup, and an element can come back without a name.
+            String name = element.getName();
+            if (name == null || !elementNames.contains(name)) continue;
             for (int attribute : attributes) {
                 ResXmlAttribute value = element.searchAttributeByResourceId(attribute);
                 if (value != null && value.getValueType() == ValueType.REFERENCE) ids.add(value.getData());
