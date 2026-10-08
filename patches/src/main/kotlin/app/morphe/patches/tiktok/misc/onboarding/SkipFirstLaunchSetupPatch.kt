@@ -5,7 +5,7 @@
 package app.morphe.patches.tiktok.misc.onboarding
 
 import app.morphe.patcher.Fingerprint
-import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
+import app.morphe.util.addInstructionsWithLabels
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
@@ -98,7 +98,7 @@ internal fun MutableMethod.skipSetupSteps(step: String) {
 val skipFirstLaunchSetupPatch = bytecodePatch(
     name = "Skip first-launch setup",
     description = "Opens a fresh install on the feed without the interest picker, the language and gender " +
-        "questions, the creators to follow, the swipe up tutorial or TikTok's own notification pages in front " +
+        "questions, the creators to follow, the swipe up tutorial or TikTok's own notification page in front " +
         "of it. Consent, age and sign-in screens still show, and so does Android's notification prompt. " +
         "Its switch starts on once you pick the patch. Switch: Hushfeed settings > App.",
     default = false,

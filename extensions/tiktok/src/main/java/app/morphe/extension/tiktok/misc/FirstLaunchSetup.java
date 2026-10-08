@@ -26,7 +26,8 @@ public final class FirstLaunchSetup {
      * The steps that only ask about taste or teach a gesture. Every other step keeps TikTok's own
      * answer: consent and the Hungarian consent box, the age gate, ad choice and the subscription
      * offers, the teen privacy pages and the private account tip, every sign-in step, deep links,
-     * Android's own notification prompt, and the slogan page, since one of its layouts carries
+     * Android's own notification prompt (push_page_advance and push_popup_background both show
+     * it, over a background of TikTok's), and the slogan page, since one of its layouts carries
      * the consent box. So does a step this list doesn't know, a new one in a later build included.
      */
     static final Set<String> SKIPPED = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
@@ -36,8 +37,7 @@ public final class FirstLaunchSetup {
             "gender_selection",
             "follow_trending_creators",
             "swipe_up",
-            "push_auth_preposition_page",
-            "push_page_advance"
+            "push_auth_preposition_page"
     )));
 
     private FirstLaunchSetup() {

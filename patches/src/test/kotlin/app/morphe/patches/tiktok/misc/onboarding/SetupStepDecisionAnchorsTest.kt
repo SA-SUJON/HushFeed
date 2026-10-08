@@ -15,6 +15,7 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
+import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.RegisterRangeInstruction
@@ -29,7 +30,7 @@ import org.junit.Test
 /** The steps FirstLaunchSetup.SKIPPED names. Kept here too, so a step that leaves TikTok shows up. */
 private val SKIPPED = setOf(
     "interest_list", "interest_sub_tag", "content_language", "gender_selection",
-    "follow_trending_creators", "swipe_up", "push_auth_preposition_page", "push_page_advance",
+    "follow_trending_creators", "swipe_up", "push_auth_preposition_page",
 )
 
 /**
@@ -38,10 +39,11 @@ private val SKIPPED = setOf(
  */
 private val STEP_IDS = setOf(
     "ad_choice", "ad_subscription", "age_gate", "consent_box_page", "consent_box_page_hu",
-    "content_language", "deep_link", "follow_trending_creators", "free_trial", "gender_selection",
-    "interest_list", "interest_sub_tag", "login", "m2_one_tap_login", "privacy_for_teens",
-    "private_account", "push_auth_preposition_page", "push_page_advance", "push_popup_background",
-    "skippable_login", "slogan_page", "swipe_up",
+    "content_language", "deep_link", "feed_refresh", "follow_trending_creators", "free_trial",
+    "gender_selection", "interest_list", "interest_sub_tag", "login", "m2_one_tap_login",
+    "privacy_for_teens", "private_account", "push_auth_preposition_page", "push_page_advance",
+    "push_popup_background", "server_delay", "skippable_login", "slogan_consent_box_page",
+    "slogan_page", "store_age_check", "swipe_up",
 )
 
 /**
@@ -70,13 +72,22 @@ class SetupStepDecisionAnchorsTest {
                 it.opcode == Opcode.NEW_INSTANCE && (it as ReferenceInstruction).reference.toString() == "Lkotlin/Pair;"
             }
             assertTrue("$version: pairs built", pairs >= 4)
+            // TikTok's own skip is the answer the hook gives: the reason first, then FALSE.
+            val body = decision.implementation!!.instructions.toList()
+            val reason = body.indices.single { body[it].getReference<StringReference>()?.string == "ignore_by_deeplink" }
+            val pair = body.drop(reason).first { it.opcode == Opcode.INVOKE_DIRECT } as FiveRegisterInstruction
+            assertEquals("$version: the reason goes first", (body[reason] as OneRegisterInstruction).registerA, pair.registerD)
+            val shown = body.take(reason).last {
+                it.opcode == Opcode.SGET_OBJECT && (it as OneRegisterInstruction).registerA == pair.registerE
+            }.getReference<FieldReference>()!!
+            assertEquals("$version: the deep link skip answers FALSE", "Ljava/lang/Boolean;.FALSE", "${shown.definingClass}.${shown.name}")
 
             checkHook(version, decision, step)
 
             val ids = stepIds(app)
             val expected = if (version == "47.0.3") STEP_IDS - "push_page_advance" else STEP_IDS
             assertEquals("$version: setup step ids", expected.sorted(), ids.sorted())
-            assertTrue("$version: every skipped step exists", (SKIPPED - "push_page_advance").all { it in ids })
+            assertTrue("$version: every skipped step exists", SKIPPED.all { it in ids })
         }
     }
 
@@ -109,6 +120,16 @@ class SetupStepDecisionAnchorsTest {
         assertTrue(after.take(11).none { (it as? OneRegisterInstruction)?.registerA == self && it.opcode.setsRegister() })
         // TikTok's own first check follows the hook untouched.
         assertEquals(decision.implementation!!.instructions.first().opcode, after[11].opcode)
+    }
+
+    /** The list above is the one the extension ships, and neither step that shows Android's notification prompt is on it. */
+    @Test
+    fun `the shipped skip list is this one and keeps Android's notification prompt`() {
+        val path = "extensions/tiktok/src/main/java/app/morphe/extension/tiktok/misc/FirstLaunchSetup.java"
+        val source = listOf(java.io.File("../$path"), java.io.File(path)).first { it.isFile }.readText()
+        val list = source.substringAfter("SKIPPED = ").substringBefore(")));")
+        assertEquals(SKIPPED, Regex("\"([a-z_]+)\"").findAll(list).map { it.groupValues[1] }.toSet())
+        assertTrue("push_page_advance" !in SKIPPED && "push_popup_background" !in SKIPPED)
     }
 
     @Test

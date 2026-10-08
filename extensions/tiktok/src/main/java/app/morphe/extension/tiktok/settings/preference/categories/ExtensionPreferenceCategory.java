@@ -284,7 +284,7 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     context,
                     "Skip TikTok's setup screens",
                     "Leave out the interest picker, the language and gender questions, the creators "
-                            + "to follow, the swipe up tutorial and TikTok's notification pages when TikTok "
+                            + "to follow, the swipe up tutorial and TikTok's notification page when TikTok "
                             + "runs its setup. Consent, age and sign-in screens still show.",
                     Settings.SKIP_FIRST_LAUNCH_SETUP
             ));
