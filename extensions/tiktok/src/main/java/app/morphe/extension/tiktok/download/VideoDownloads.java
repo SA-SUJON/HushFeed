@@ -52,6 +52,11 @@ final class VideoDownloads {
         return withCaptions ? QualitySelector.chooseForFile(video, (List<?>) rates, "highest") : null;
     }
 
+    /** With the already-saved check on every video Download is this save's, and so is its cover. */
+    static boolean savesTheCover() {
+        return Settings.CHECK_SAVED_VIDEOS.get();
+    }
+
     static boolean start(Object aweme, Context context) {
         if (context == null) return false;
         if (android.os.Build.VERSION.SDK_INT < 29
@@ -283,6 +288,7 @@ final class VideoDownloads {
         // held for this second job, which lets go when it ends, or at once when the line is full.
         Runnable saveAgain = () -> {
             ASKING.remove(id);
+            CoverSaver.beside(app, aweme);
             SaveProgress again = SaveProgress.queued(files, showProgress);
             again.submit("video", key, () -> save.accept(again), release);
             again.acknowledge(null, L10n.t("Waiting to save video"));
@@ -307,6 +313,7 @@ final class VideoDownloads {
                     Utils.showToastLong(L10n.t("The already-saved check failed. Try again."));
                     return;
                 }
+                Utils.runOnMainThread(() -> CoverSaver.beside(app, aweme));
             }
             save.accept(first);
         }, () -> {

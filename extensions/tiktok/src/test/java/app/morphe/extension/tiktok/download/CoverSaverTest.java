@@ -113,6 +113,19 @@ public class CoverSaverTest {
         }
     }
 
+    /** With the already-saved check on the video's save makes the cover, so Open adds no second one. */
+    @Test public void theAlreadySavedCheckTakesTheCoverWithIt() {
+        boolean before = Settings.CHECK_SAVED_VIDEOS.get();
+        try {
+            Settings.CHECK_SAVED_VIDEOS.save(false);
+            assertFalse(VideoDownloads.savesTheCover());
+            Settings.CHECK_SAVED_VIDEOS.save(true);
+            assertTrue(VideoDownloads.savesTheCover());
+        } finally {
+            Settings.CHECK_SAVED_VIDEOS.save(before);
+        }
+    }
+
     public static final class UrlModel {
         public List<String> urlList;
         public int width, height;
