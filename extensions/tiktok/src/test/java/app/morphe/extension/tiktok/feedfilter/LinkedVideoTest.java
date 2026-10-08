@@ -19,8 +19,10 @@ import app.morphe.extension.tiktok.settings.Settings;
 import com.ss.android.ugc.aweme.feed.model.Aweme;
 import com.ss.android.ugc.aweme.feed.model.FeedItemList;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.After;
 import org.junit.Before;
@@ -59,6 +61,7 @@ public class LinkedVideoTest {
         LinkedVideo.forgetForTests();
         SeenVideoHistory.clear();
         Settings.HIDE_SEEN_VIDEOS.resetToDefault();
+        Settings.REMOVE_ADS.resetToDefault();
         BaseSettings.DEBUG.resetToDefault();
         FeedItemsFilter.resetDiagnosticsForTests();
     }
@@ -96,6 +99,44 @@ public class LinkedVideoTest {
         LinkedVideo.onNewIntent(view("https://vm.tiktok.com/ZMabcdef/"));
         assertEquals(List.of("7001"), survivors(page("7001")));
         assertEquals("a page of the feed is never the link's", List.of(), survivors(page("7002", "7003")));
+    }
+
+    @Test
+    public void aShortLinkVouchesForOneVideoOnly() {
+        seen("7001");
+        seen("7002");
+        LinkedVideo.onNewIntent(view("https://vt.tiktok.com/ZSabcdef/"));
+        assertEquals(List.of("7001"), survivors(page("7001")));
+        assertEquals("the same video again, as a retry asks for it", List.of("7001"), survivors(page("7001")));
+        assertEquals("a later one-video response isn't the link's", List.of(), survivors(page("7002")));
+    }
+
+    @Test
+    public void aShortLinkNeverVouchesForAnAd() {
+        Settings.REMOVE_ADS.save(true);
+        LinkedVideo.onNewIntent(view("https://vm.tiktok.com/ZMabcdef/"));
+        CreatorExceptionsTest.Item ad = stranger("7009");
+        ad.ad = true;
+        assertEquals(List.of(), survivors(page(ad)));
+        assertEquals("the ad didn't use up the link", List.of("7001"), survivors(page(seenStranger("7001"))));
+    }
+
+    @Test
+    public void aVideoAFullLinkNamesStaysWhateverRuleMatches() {
+        Settings.REMOVE_ADS.save(true);
+        LinkedVideo.onNewIntent(view("https://www.tiktok.com/@someone/video/7009"));
+        CreatorExceptionsTest.Item labelled = stranger("7009");
+        labelled.ad = true;
+        assertEquals(List.of("7009"), survivors(page(labelled)));
+    }
+
+    @Test
+    public void onlyTheResponseAListOpensIsSpared() {
+        LinkedVideo.onNewIntent(view("https://www.tiktok.com/@someone/video/7001"));
+        CreatorExceptionsTest.Item item = stranger("7001");
+        assertEquals(false, LinkedVideo.spares("FeedItemList:cold-cache", item, 1, "SeenVideosFilter"));
+        assertEquals(false, LinkedVideo.spares(FeedItemsFilter.OFFLINE_FALLBACK_SOURCE, item, 1, "SeenVideosFilter"));
+        assertEquals(true, LinkedVideo.spares(LinkedVideo.RESPONSE_SOURCE, item, 1, "SeenVideosFilter"));
     }
 
     @Test
@@ -142,22 +183,44 @@ public class LinkedVideoTest {
         SeenVideoHistory.onPlayProgressChange(aid, 9_000, 10_000);
     }
 
+    private static CreatorExceptionsTest.Item stranger(String aid) {
+        CreatorExceptionsTest.Item item = new CreatorExceptionsTest.Item(aid);
+        item.author.handle = "creator_" + aid;
+        item.author.uid = "uid_" + aid;
+        item.author.secUid = "sec_" + aid;
+        return item;
+    }
+
+    private static CreatorExceptionsTest.Item seenStranger(String aid) {
+        seen(aid);
+        return stranger(aid);
+    }
+
     private static FeedItemList page(String... aids) {
         List<Object> items = new ArrayList<>();
-        for (String aid : aids) {
-            CreatorExceptionsTest.Item item = new CreatorExceptionsTest.Item(aid);
-            item.author.handle = "creator_" + aid;
-            item.author.uid = "uid_" + aid;
-            item.author.secUid = "sec_" + aid;
-            items.add(item);
-        }
+        for (String aid : aids) items.add(stranger(aid));
         FeedItemList list = new FeedItemList();
         list.items = items;
         return list;
     }
 
+    private static FeedItemList page(CreatorExceptionsTest.Item... items) {
+        FeedItemList list = new FeedItemList();
+        list.items = new ArrayList<Object>(List.of((Object[]) items));
+        return list;
+    }
+
+    /** The aids left on a page after the filter, in order, with no filter having thrown. */
     private static List<String> survivors(FeedItemList list) {
         FeedItemsFilter.filter(list);
+        try {
+            Field errors = FeedItemsFilter.class.getDeclaredField("filterExceptionLogCount");
+            errors.setAccessible(true);
+            assertEquals("a filter swallowed an unstubbed getter or another runtime failure", 0,
+                    ((AtomicInteger) errors.get(null)).get());
+        } catch (ReflectiveOperationException exception) {
+            throw new AssertionError(exception);
+        }
         List<String> aids = new ArrayList<>();
         for (Object item : list.items) aids.add(((Aweme) item).getAid());
         return aids;
