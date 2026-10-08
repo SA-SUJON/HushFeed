@@ -75,8 +75,12 @@ public final class RegionSpoof {
      * out once as it started, sys_region and timezone_name, were worked out under the preset and
      * kept, so requestParams() puts back what their sources say now.
      */
-    /** When this thread's mark was set, in {@link SystemClock#elapsedRealtime()}. */
-    private static final ThreadLocal<Long> SIGN_IN = new ThreadLocal<>();
+    /**
+     * This thread's mark: when it was set, in {@link SystemClock#elapsedRealtime()}, and how many
+     * sign-in fills it spans. A fill can run inside another for the same request (AppLog's inside
+     * the handler's), and only the outer one's end takes the mark off.
+     */
+    private static final ThreadLocal<long[]> SIGN_IN = new ThreadLocal<>();
     /** Threads building a sign-in request's parameters now, so every other call skips the ThreadLocal. */
     private static final AtomicInteger signingIn = new AtomicInteger();
     private static final String SIGN_IN_PATH = "passport/";
@@ -130,18 +134,35 @@ public final class RegionSpoof {
 
     /** From the common-parameter handler, once the request's parameters are built. */
     public static void requestDone() {
-        mark(false);
+        long[] mark = SIGN_IN.get();
+        if (mark != null && --mark[1] <= 0) clearMark();
     }
 
+    /**
+     * A sign-in's fill marks the thread, or goes one deeper into a mark already there. Any other
+     * request takes the mark off, whatever its depth: that's how a fill that threw before its end
+     * gets put right by the thread's next request.
+     */
     private static void mark(boolean signIn) {
-        if ((SIGN_IN.get() != null) == signIn) return;
+        long[] mark = SIGN_IN.get();
         if (signIn) {
-            SIGN_IN.set(SystemClock.elapsedRealtime());
+            long now = SystemClock.elapsedRealtime();
+            if (mark != null && now - mark[0] < MARK_LIFETIME_MS) {
+                mark[1]++;
+                return;
+            }
+            // A mark run out is a fill that threw long ago, so this sign-in starts its own.
+            if (mark != null) clearMark();
+            SIGN_IN.set(new long[]{now, 1});
             signingIn.incrementAndGet();
-        } else {
-            SIGN_IN.remove();
-            signingIn.decrementAndGet();
+        } else if (mark != null) {
+            clearMark();
         }
+    }
+
+    private static void clearMark() {
+        SIGN_IN.remove();
+        signingIn.decrementAndGet();
     }
 
     /** TikTok's sign-in, sign-up and account verification endpoints all sit under /passport/. */
@@ -154,10 +175,10 @@ public final class RegionSpoof {
 
     private static boolean signingIn() {
         if (signingIn.get() <= 0) return false;
-        Long markedAt = SIGN_IN.get();
-        if (markedAt == null) return false;
-        if (SystemClock.elapsedRealtime() - markedAt < MARK_LIFETIME_MS) return true;
-        mark(false);
+        long[] mark = SIGN_IN.get();
+        if (mark == null) return false;
+        if (SystemClock.elapsedRealtime() - mark[0] < MARK_LIFETIME_MS) return true;
+        clearMark();
         return false;
     }
 

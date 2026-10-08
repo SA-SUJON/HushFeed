@@ -92,6 +92,30 @@ public class RegionSpoofTest {
         assertEquals("JP", RegionSpoof.country("US"));
     }
 
+    @Test public void aFillInsideASignInsOwnLeavesTheMarkToTheOuterEnd() {
+        Settings.REGION_REQUEST_SPOOF.save(true);
+        RegionSpoof.requestPath("/passport/user/login/");
+        // AppLog's own fill for the same URL, run from inside the handler's.
+        RegionSpoof.requestUrl("https://api.tiktokv.com/passport/user/login/?aid=1233");
+        assertEquals("US", RegionSpoof.country("US"));
+        RegionSpoof.requestDone();
+        assertEquals("the handler's fill is still a sign-in's", "US", RegionSpoof.country("US"));
+        RegionSpoof.requestDone();
+        assertEquals("JP", RegionSpoof.country("US"));
+    }
+
+    @Test public void aSignInAfterAMarkRanOutGetsAFullMarkOfItsOwn() {
+        Settings.REGION_REQUEST_SPOOF.save(true);
+        RegionSpoof.requestPath("/passport/user/login/");
+        ShadowSystemClock.advanceBy(Duration.ofMillis(RegionSpoof.MARK_LIFETIME_MS));
+        // The first fill threw before its end. The next sign-in comes after its mark ran out.
+        RegionSpoof.requestPath("/passport/user/login/");
+        ShadowSystemClock.advanceBy(Duration.ofMillis(RegionSpoof.MARK_LIFETIME_MS - 1));
+        assertEquals("US", RegionSpoof.country("US"));
+        RegionSpoof.requestDone();
+        assertEquals("its end takes it off", "JP", RegionSpoof.country("US"));
+    }
+
     @Test public void aTokenRequestMarksTheThreadLikeASignIn() {
         Settings.REGION_REQUEST_SPOOF.save(true);
         RegionSpoof.requestUrl("https://api.tiktokv.com/passport/token/beat/v2/?aid=1233");
