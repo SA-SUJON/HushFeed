@@ -12,6 +12,7 @@ import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.tiktok.misc.extension.sharedExtensionPatch
+import app.morphe.patches.tiktok.misc.theme.declaredVersions
 import app.morphe.util.addInstructions
 import app.morphe.util.addInstructionsAtControlFlowLabel
 import app.morphe.util.findInstructionIndicesReversedOrThrow
@@ -204,6 +205,8 @@ val runBesideStoreAppPatch = bytecodePatch(
     compatibleWith(*AppCompatibilities.tiktok())
 
     execute {
+        // Everything is found and checked before the first write: a patch that fails part way
+        // keeps what it already wrote.
         val loader = RegistrationPackageHeaderFingerprint.method
         val writes = registrationPackageWrites(loader)
         if (writes.size != 1) {
@@ -217,6 +220,41 @@ val runBesideStoreAppPatch = bytecodePatch(
         if (maxOf(put.registerC, put.registerD, put.registerE) > 15) {
             throw PatchException("Run beside the store app: the header write's registers don't fit a static call.")
         }
+        val template = ProviderNameTemplateFingerprint.method
+        val templateReturns = template.findInstructionIndicesReversedOrThrow(Opcode.RETURN_OBJECT)
+
+        // The wallpaper data and the own-package checks matter far less than signing in. On a
+        // declared build RenamedCopyAnchorsTest holds them, so a miss there is a fault and fails
+        // the patch. On any other build a miss leaves just that part out, with a note.
+        val declaredBuild = packageMetadata.versionName in declaredVersions()
+        fun leftOut(problem: String): Nothing? {
+            if (declaredBuild) throw PatchException("Run beside the store app: $problem")
+            println("[Run beside the store app] Left out on ${packageMetadata.versionName}: $problem")
+            return null
+        }
+        // The wallpaper caller's authority, loaded once into the register every URI of the
+        // provider is built from.
+        val wallpaper = WallpaperCallerUrisFingerprint.methodOrNull
+        val wallpaperLoads = wallpaper?.let { stringLoads(it, WALLPAPER_AUTHORITY) }.orEmpty()
+        val wallpaperLoad = if (wallpaper != null && wallpaperLoads.size == 1) {
+            wallpaper to wallpaperLoads.single()
+        } else {
+            leftOut(
+                "${wallpaper?.let { "${it.definingClass}->${it.name}" } ?: "WallPaperDataProvider.<clinit>"} loads " +
+                    "the wallpaper caller's authority ${wallpaperLoads.size} times, not once.",
+            )
+        }
+        // TikTok's checks for its own package: the store package each loads becomes the running one.
+        val checks = OwnPackageCheckFingerprint.matchAll()
+        val ownPackageSites = if (checks.size == OWN_PACKAGE_CHECKS) {
+            checks.map { it.method to storePackageChecks(it.method) }
+        } else {
+            leftOut(
+                "${checks.size} checks for TikTok's own package, not $OWN_PACKAGE_CHECKS: " +
+                    checks.map { "${it.originalClassDef.type}->${it.method.name}" },
+            )
+        }
+
         // Replaced in place with a static call on the same three registers: the header, the key
         // and the running package. Its result goes unread, as the original's did.
         loader.replaceInstruction(
@@ -228,44 +266,20 @@ val runBesideStoreAppPatch = bytecodePatch(
         // The provider shell's template fill. Every authority and permission of the providers it
         // hosts comes back through here, the multiprocess settings one among them, and the
         // extension answers with the name the copy's manifest declares for it.
-        ProviderNameTemplateFingerprint.method.apply {
-            findInstructionIndicesReversedOrThrow(Opcode.RETURN_OBJECT).forEach { at ->
-                val register = getInstruction<OneRegisterInstruction>(at).registerA
-                addInstructionsAtControlFlowLabel(
-                    at,
-                    """
-                        invoke-static/range { v$register .. v$register }, $EXTENSION->declared($STRING)$STRING
-                        move-result-object v$register
-                    """,
-                )
-            }
-        }
-
-        // The wallpaper caller's authority, loaded once into the register every URI of the
-        // provider is built from.
-        WallpaperCallerUrisFingerprint.method.apply {
-            val loads = stringLoads(this, WALLPAPER_AUTHORITY)
-            if (loads.size != 1) {
-                throw PatchException(
-                    "Run beside the store app: $definingClass->$name loads the wallpaper caller's authority " +
-                        "${loads.size} times, not once.",
-                )
-            }
-            swapAfterLoad(loads.single(), "declared")
-        }
-
-        // TikTok's checks for its own package: the store package each loads becomes the running one.
-        val checks = OwnPackageCheckFingerprint.matchAll()
-        if (checks.size != OWN_PACKAGE_CHECKS) {
-            throw PatchException(
-                "Run beside the store app: ${checks.size} checks for TikTok's own package, not $OWN_PACKAGE_CHECKS: " +
-                    checks.map { "${it.originalClassDef.type}->${it.method.name}" },
+        templateReturns.forEach { at ->
+            val register = template.getInstruction<OneRegisterInstruction>(at).registerA
+            template.addInstructionsAtControlFlowLabel(
+                at,
+                """
+                    invoke-static/range { v$register .. v$register }, $EXTENSION->declared($STRING)$STRING
+                    move-result-object v$register
+                """,
             )
         }
-        checks.forEach { match ->
-            match.method.apply {
-                storePackageChecks(this).asReversed().forEach { at -> swapAfterLoad(at, "ownPackage") }
-            }
+
+        wallpaperLoad?.let { (method, at) -> method.swapAfterLoad(at, "declared") }
+        ownPackageSites?.forEach { (method, sites) ->
+            sites.asReversed().forEach { at -> method.swapAfterLoad(at, "ownPackage") }
         }
     }
 }
