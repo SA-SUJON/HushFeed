@@ -5715,7 +5715,7 @@
     },
     {
       "name": "Remove content credential and card scanner assets",
-      "description": "Empties TikTok's bundled C2PA and Microblink card-scanning assets, the Pitaya AI model libraries, the live-cast dynamic feature, and the ART log monitor probe. Saves about 12.5 MB of storage.",
+      "description": "Empties TikTok's bundled C2PA and Microblink card-scanning assets, the Pitaya AI model libraries and the Python runtime they run on, the live-cast dynamic feature, and the ART log monitor probe. Saves about 19 MB of storage.",
       "category": "Performance",
       "use": false,
       "dependencies": [
@@ -6816,7 +6816,7 @@
     },
     {
       "name": "Skip content warnings",
-      "description": "Play videos TikTok has classified without the warning overlay asking to be tapped through first. A second switch takes away the Check sources banner on videos TikTok flags as unverified, and the warnings it shows when you share one. Switches: Hushfeed settings > Feed screen.",
+      "description": "Play videos TikTok has classified without the warning overlay asking to be tapped through first. A second switch takes away the Check sources banner on videos TikTok marks as unverified, and the warnings it shows when you share one. Switches: Hushfeed settings > Feed screen.",
       "category": "Feed",
       "use": false,
       "dependencies": [
@@ -6877,7 +6877,7 @@
     },
     {
       "name": "Skip first-launch setup",
-      "description": "Opens a fresh install on the feed without the interest picker, the language and gender questions, the creators to follow, the swipe up tutorial or TikTok's own notification pages in front of it. Consent, age and sign-in screens still show, and so does Android's notification prompt. Its switch starts on once you pick the patch. Switch: Hushfeed settings > App.",
+      "description": "Opens a fresh install on the feed without the interest picker, the language and gender questions, the creators to follow, the swipe up tutorial or TikTok's own notification page in front of it. Consent, age and sign-in screens still show, and so does Android's notification prompt. Its switch starts on once you pick the patch. Switch: Hushfeed settings > App.",
       "category": "Settings",
       "use": false,
       "dependencies": [
