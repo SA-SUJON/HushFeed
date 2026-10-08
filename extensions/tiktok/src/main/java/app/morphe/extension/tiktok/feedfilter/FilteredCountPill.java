@@ -29,10 +29,11 @@ import app.morphe.extension.tiktok.settings.SettingsStatus;
 import app.morphe.extension.tiktok.wellbeing.SessionBudget;
 
 /**
- * Show how many were filtered: a small label on the main feed with the number of items the feed
+ * Show how many were filtered: a small label on the main feed with the number of posts the feed
  * filter has taken out since TikTok started. It sits under TikTok's top tabs, shows only while
- * the feed itself is on screen and something has been taken out, and takes no touches, so a tap
- * on it reaches the video. It reads the running count on the feed window's layout passes, which
+ * the Home feed is certainly on screen and something has been taken out, and takes no touches,
+ * so a tap on it reaches the video. It's a label nobody can dismiss, so it asks the strict feed
+ * check rather than the one that assumes the feed when it can't tell. It reads the running count on the feed window's layout passes, which
  * playback keeps coming, and only sets its text when the number has moved, so it can't start a
  * layout loop of its own.
  */
@@ -73,7 +74,12 @@ public final class FilteredCountPill {
             }
 
             @Override public void onActivityDestroyed(Activity destroyed) {
-                if (activityReference.get() == destroyed) detach();
+                if (activityReference.get() != destroyed) return;
+                try {
+                    detach();
+                } catch (Throwable error) {
+                    Logger.printException(() -> "Could not take the filtered count off the feed", error);
+                }
             }
 
             @Override public void onActivityCreated(Activity created, Bundle state) { }
@@ -123,11 +129,11 @@ public final class FilteredCountPill {
         if (pill == null || activity == null) return;
         try {
             long count = FeedFilterCounters.sessionRemoved();
+            // The Home tab shown and selected with no comment sheet over it; a cleared screen
+            // puts the tab bar away, so the label goes with it.
             boolean visible = wanted() && count > 0
                     && !SessionBudget.isLocked()
-                    && FeedVisibility.isOnFeed(activity)
-                    && !FeedVisibility.isFeedCleared(activity)
-                    && !FeedVisibility.isCommentSheetVisible(activity);
+                    && FeedVisibility.onRecommendationFeed(activity);
             if (visible && count != shown) {
                 shown = count;
                 pill.setText(text(activity, count));

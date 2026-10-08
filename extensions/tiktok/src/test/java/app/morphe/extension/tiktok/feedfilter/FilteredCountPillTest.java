@@ -10,11 +10,17 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import android.app.Activity;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import java.lang.ref.WeakReference;
 
 import app.morphe.extension.shared.diagnostics.FeedFilterCounters;
 import app.morphe.extension.tiktok.SettingsContextRule;
+import app.morphe.extension.tiktok.blockauthor.FeedVisibility;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
 
@@ -27,11 +33,11 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 /**
- * Show how many were filtered, on a plain activity standing in for TikTok's main one. It has no
- * Home tab, which FeedVisibility reads as the feed, so the label shows whenever the switch and
- * the count say it should.
+ * Show how many were filtered, on a plain activity standing in for TikTok's main one, with a
+ * selected Home tab seeded the way the budget cue's tests seed it.
  */
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE, sdk = 28)
@@ -40,6 +46,7 @@ public class FilteredCountPillTest {
 
     private boolean feedFilterWas;
     private ActivityController<Activity> controller;
+    private View home;
 
     @Before
     public void setUp() {
@@ -48,6 +55,7 @@ public class FilteredCountPillTest {
         Settings.FILTERED_COUNT_PILL.save(false);
         FeedFilterCounters.resetSessionForTests();
         controller = Robolectric.buildActivity(Activity.class).create();
+        home = standOnTheFeed(controller.get());
         FilteredCountPill.install(controller.get());
     }
 
@@ -57,6 +65,16 @@ public class FilteredCountPillTest {
         Settings.FILTERED_COUNT_PILL.resetToDefault();
         SettingsStatus.feedFilterEnabled = feedFilterWas;
         FeedFilterCounters.resetSessionForTests();
+    }
+
+    /** A shown, selected Home tab, as the lookup would find it in TikTok. */
+    private static View standOnTheFeed(Activity activity) {
+        ViewGroup root = activity.findViewById(android.R.id.content);
+        View home = new View(activity);
+        root.addView(home, new FrameLayout.LayoutParams(96, 100, Gravity.BOTTOM));
+        home.setSelected(true);
+        ReflectionHelpers.setStaticField(FeedVisibility.class, "homeTabReference", new WeakReference<>(home));
+        return home;
     }
 
     /** One layout pass of the window, which is what moves the label on a phone. */
@@ -102,6 +120,31 @@ public class FilteredCountPillTest {
         layout();
         assertEquals(View.VISIBLE, pill.getVisibility());
         assertEquals("1 filtered out", pill.getText().toString());
+    }
+
+    @Test
+    public void offTheHomeFeedTheLabelHides() {
+        Settings.FILTERED_COUNT_PILL.save(true);
+        FeedFilterCounters.removedItems("FeedItemList", 2, "AdsFilter");
+        controller.start().resume().visible();
+        TextView pill = FilteredCountPill.pillForTests();
+        assertNotNull(pill);
+        // The resume ran before the window was up, when no tab could be on screen.
+        layout();
+        assertEquals(View.VISIBLE, pill.getVisibility());
+
+        // Another tab, or a page opened over the feed.
+        home.setSelected(false);
+        layout();
+        assertEquals(View.GONE, pill.getVisibility());
+        home.setSelected(true);
+        layout();
+        assertEquals(View.VISIBLE, pill.getVisibility());
+
+        // A Home tab that can't be found isn't taken for the feed.
+        ((ViewGroup) home.getParent()).removeView(home);
+        layout();
+        assertEquals(View.GONE, pill.getVisibility());
     }
 
     @Test
