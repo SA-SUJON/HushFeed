@@ -4,6 +4,7 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** A TikTok link you open from another app now shows its video even when a feed filter would hide it, like Hide videos you have already seen for a video you watched before (#117). TikTok loads a linked video as a feed page of its own, so filtering it out left TikTok's error screen there. The filters still run on everything else.
 * **TikTok:** Leaving a LIVE room no longer closes TikTok when Remove LIVE extras is in your bundle (#119). The patch skipped a start-up step of the gift-effect widget that TikTok needs again when the room closes. It keeps that step now and still skips the widget's own setup, so animated gifts stay off.
 * **TikTok:** Remove content credential and card scanner assets now empties Pitaya's Python runtime too, the five Python and NumPy libraries the Pitaya models ran on. Nothing else in TikTok loads them once the Pitaya feature is gone, which this patch already empties. The APK gets about 6.7 MB smaller than before, about 19 MB in all, and split bundles still match, since they carry the same files for arm64.
 * **TikTok:** Skip content warnings has a second switch under Feed screen, Hide unverified content notices, off until you turn it on. It takes away the Check sources banner TikTok puts on a video it marks as unverified, and the warnings TikTok shows when you go to share one. Skipping the tap-through overlay still has its own switch.

@@ -1187,6 +1187,12 @@ public final class FeedItemsFilter {
                 rangeKept.add(container);
                 continue;
             }
+            // The video a link from outside TikTok opened arrives in a For You response of its
+            // own, and taking it out left TikTok's error screen in its place (#117).
+            if ((contentReason != null || rangeReason != null) && forYou && LinkedVideo.spares(item, initialSize)) {
+                rangeKept.add(container);
+                continue;
+            }
             if (contentReason != null) {
                 if (contentReason.equals("QualityFilter") && getFilterReason(activeRangeFilters, item) == null) {
                     double distance = AdvancedFeedRules.QualityFilter.distance(item);
