@@ -56,6 +56,7 @@ public class SavedVideoArchiveTest {
     private static final String FOLDER = "DCIM/SavedVideoArchiveTest";
     private static final byte[] VIDEO = new byte[]{0, 0, 0, 16, 'f', 't', 'y', 'p', 'i', 's', 'o', 'm', 0, 0, 0, 0};
     private final AtomicInteger requests = new AtomicInteger();
+    private final AtomicInteger coverRequests = new AtomicInteger();
     private Hashtable<String, URLStreamHandler> handlers;
     private URLStreamHandler oldHttps;
     private ActivityController<PageActivity> owner;
@@ -92,6 +93,7 @@ public class SavedVideoArchiveTest {
             @Override protected URLConnection openConnection(URL url, java.net.Proxy proxy) throws java.io.IOException { return openConnection(url); }
             @Override protected URLConnection openConnection(URL url) {
                 requests.incrementAndGet();
+                if (url.getPath().startsWith("/cover")) coverRequests.incrementAndGet();
                 return new FakeHttpsConnection(url) {
                     @Override public int getResponseCode() {
                         if (url.getPath().equals(refusePath)) return HTTP_NOT_FOUND;
@@ -211,6 +213,32 @@ public class SavedVideoArchiveTest {
         assertArrayEquals(VIDEO, Files.readAllBytes(new File(root, "alice/123_2.mp4").toPath()));
         assertEquals(details, new String(Files.readAllBytes(new File(root, "alice/123_2.txt").toPath()), StandardCharsets.UTF_8));
         assertEquals("123_2.mp4", SavedVideoArchive.find(owner.get(), "123").name);
+    }
+
+    /** A story's save shares this one and never made a cover; a video's Download does, once it's new. */
+    @Test public void aStorysSaveLeavesTheCoverOutAndAVideosTakesIt() throws Exception {
+        boolean advanced = app.morphe.extension.tiktok.settings.SettingsStatus.advancedDownloadsEnabled;
+        boolean oldCover = Settings.DOWNLOAD_COVER.get();
+        app.morphe.extension.tiktok.settings.SettingsStatus.advancedDownloadsEnabled = true;
+        Settings.DOWNLOAD_COVER.save(true);
+        try {
+            CoverPost post = new CoverPost();
+            assertTrue(VideoDownloads.start(post, owner.get(), false));
+            // The cover starts from the main thread once the video's job has checked the record.
+            awaitJobs();
+            awaitJobs();
+            assertTrue(new File(root, "alice/123.mp4").isFile());
+            assertEquals("the story's save fetched a cover", 0, coverRequests.get());
+
+            assertTrue(new File(root, "alice/123.mp4").delete());
+            assertTrue(VideoDownloads.start(post, owner.get()));
+            awaitJobs();
+            awaitJobs();
+            assertEquals("the video's Download left its cover out", 1, coverRequests.get());
+        } finally {
+            app.morphe.extension.tiktok.settings.SettingsStatus.advancedDownloadsEnabled = advanced;
+            Settings.DOWNLOAD_COVER.save(oldCover);
+        }
     }
 
     @Test public void deletingTheRememberedFileAllowsANewSave() throws Exception {
@@ -668,6 +696,18 @@ public class SavedVideoArchiveTest {
     }
     public static final class Video {
         public Address getDownloadNoWatermarkAddr() { return new Address(); }
+    }
+    public static final class CoverPost extends DownloadDetailsTest.Post {
+        public final CoverVideo video = new CoverVideo();
+        CoverPost() { super("alice", "123"); desc = "A saved caption"; }
+        public CoverVideo getVideo() { return video; }
+    }
+    public static final class CoverVideo {
+        public Address getDownloadNoWatermarkAddr() { return new Address(); }
+        public Cover getOriginCover() { return new Cover(); }
+    }
+    public static final class Cover {
+        public List<String> getUrlList() { return List.of("https://8.8.8.8/cover.jpg"); }
     }
     public static final class Address {
         public List<String> getUrlList() { return List.of("https://8.8.8.8/video.mp4"); }

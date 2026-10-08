@@ -58,6 +58,14 @@ final class VideoDownloads {
     }
 
     static boolean start(Object aweme, Context context) {
+        return start(aweme, context, true);
+    }
+
+    /**
+     * {@code withCover} is false for a story's save, which goes through here too and has never
+     * made a cover.
+     */
+    static boolean start(Object aweme, Context context, boolean withCover) {
         if (context == null) return false;
         if (android.os.Build.VERSION.SDK_INT < 29
                 && context.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -288,7 +296,7 @@ final class VideoDownloads {
         // held for this second job, which lets go when it ends, or at once when the line is full.
         Runnable saveAgain = () -> {
             ASKING.remove(id);
-            CoverSaver.beside(app, aweme);
+            if (withCover) CoverSaver.beside(app, aweme);
             SaveProgress again = SaveProgress.queued(files, showProgress);
             again.submit("video", key, () -> save.accept(again), release);
             again.acknowledge(null, L10n.t("Waiting to save video"));
@@ -313,7 +321,7 @@ final class VideoDownloads {
                     Utils.showToastLong(L10n.t("The already-saved check failed. Try again."));
                     return;
                 }
-                Utils.runOnMainThread(() -> CoverSaver.beside(app, aweme));
+                if (withCover) Utils.runOnMainThread(() -> CoverSaver.beside(app, aweme));
             }
             save.accept(first);
         }, () -> {

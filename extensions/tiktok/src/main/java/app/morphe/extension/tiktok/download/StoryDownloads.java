@@ -274,7 +274,7 @@ public final class StoryDownloads {
         // then the story is fetched from whatever address it carries.
         // The same hand-off the save button gets, so one setting covers both.
         if (ExternalDownloader.handOff(aweme, context)) return true;
-        if (VideoDownloads.start(aweme, context)) return true;
+        if (VideoDownloads.start(aweme, context, false)) return true;
 
         List<List<String>> photos = OriginalPhotos.sources(aweme);
         List<String> video = photos.isEmpty()
