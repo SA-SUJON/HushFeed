@@ -71,8 +71,9 @@ public final class ScreenTimePreferenceCategory extends ConditionalPreferenceCat
                         + "still opens that video, and the app opens on Inbox instead of the feed.",
                 Settings.FEED_LOCK));
         // The link's arrival, cold and warm, is read by Feed tab navigation's hooks, so without
-        // that patch there is nothing for the switch to act on.
-        if (SettingsStatus.feedNavigationEnabled) {
+        // that patch there is nothing for the switch to act on. The block author patch carries
+        // the rest of what it stands on and this whole page, as FeedLock.aloneIsOn asks of both.
+        if (SettingsStatus.blockAuthorEnabled && SettingsStatus.feedNavigationEnabled) {
             // The time away is formatted in from the constant that applies it.
             addPreference(new TogglePreference(context, "Open shared videos alone",
                     L10n.f(context, "A link to one video opens just that video, and the feed won't "
