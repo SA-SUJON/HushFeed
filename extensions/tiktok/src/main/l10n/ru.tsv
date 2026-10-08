@@ -1796,7 +1796,6 @@ A LIVE in the feed can count down and take you into the room on its own. This ke
 Play sounds TikTok pulled	Воспроизводить звуки, удалённые TikTok
 Play the audio on videos TikTok silenced because their sound was pulled for copyright or in your region. TikTok may still say the sound isn't available.	Воспроизводит звук в видео, которые TikTok заглушил, потому что их звук удалён из-за авторских прав или в вашем регионе. TikTok может по-прежнему писать, что звук недоступен.
 Match region fields in requests	Подменять поля региона в запросах
-Play the audio on videos TikTok silenced because their sound was pulled for copyright or in your region. TikTok still says the sound isn't available.	Воспроизводит звук в видео, которые TikTok заглушил, потому что их звук удалён из-за авторских прав или в вашем регионе. TikTok по-прежнему пишет, что звук недоступен.
 Show exact LIVE viewer counts	Показывать точное число зрителей LIVE
 A LIVE room shows how many people are watching as a rounded number like 1.2K. This shows the exact count instead.	В комнате LIVE число зрителей показано округлённо, например 1,2K. Этот переключатель показывает точное число.
 Keep watching in a small window	Смотреть в маленьком окне
@@ -1949,7 +1948,7 @@ Hide the question cards TikTok sometimes puts in a comment list to ask what you 
 Hide comment box buttons	Скрывать кнопки в поле комментария
 Hide the photo, @ and gift buttons in the box where you write a comment. Emoji and sending work as before.	Скрывать кнопки фото, @ и подарка в поле, где вы пишете комментарий. Эмодзи и отправка работают как раньше.
 Turn off push notifications	Отключить push-уведомления
-TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification dropped while this is on doesn't come back. Ongoing ones like media controls stay.	Push-служба TikTok не запускается, и ничего из того, что он присылает, не попадает в шторку. Удерживать телефон в активном режиме он тоже не сможет. О новых сообщениях вы узнаете, только открыв TikTok, а уведомление, отброшенное, пока это включено, не вернётся. Текущие, например управление воспроизведением, остаются.
+TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification hidden while this is on doesn't come back. Ongoing ones like media controls stay.	Push-служба TikTok не запускается, и ничего из того, что он присылает, не попадает в шторку. Удерживать телефон в активном режиме он тоже не сможет. О новых сообщениях вы узнаете, только открыв TikTok, а уведомление, скрытое, пока это включено, не вернётся. Текущие, например управление воспроизведением, остаются.
 Save details as JSON	Сохранять сведения в JSON
 Write the details file as JSON instead of plain text, for scripts and archive tools.	Записывать файл со сведениями в формате JSON вместо обычного текста, для скриптов и программ архивации.
 Tag saved videos with their details	Записывать сведения в теги сохранённых видео
@@ -1968,7 +1967,7 @@ Show dates on profile grids	Показывать даты в сетке проф
 Show the day each video was posted under its view count on profile grids.	Показывать день публикации каждого видео под числом просмотров в сетке профиля.
 Fall back to the watermarked copy	Сохранять копию с водяным знаком, если иначе нельзя
 When the video without the watermark can't be fetched, save TikTok's own watermarked copy instead and say so. It's the size TikTok's own save uses, so it may be smaller than the quality you picked.	Если видео без водяного знака не удаётся загрузить, сохраняется собственная копия TikTok с водяным знаком, и об этом сообщается. У неё размер, который использует сохранение TikTok, поэтому она может быть меньше выбранного качества.
-The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s	Не удалось загрузить видео без водяного знака, поэтому копия TikTok с водяным знаком сохранена в %1$s
+The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s. Try again later for the clean copy.	Не удалось загрузить видео без водяного знака, поэтому копия TikTok с водяным знаком сохранена в %1$s. Повторите попытку позже, чтобы получить чистую копию.
 Match text stickers too	Проверять и текстовые стикеры
 Also hide videos whose text stickers match a blocked caption word. Text stickers are the words a creator types over the video in TikTok's editor. Text that's part of the picture itself can't be read.	Скрывает и видео, в текстовых стикерах которых есть заблокированное слово из подписей. Текстовыми стикерами называются слова, которые автор пишет поверх видео в редакторе TikTok. Текст, который является частью самого изображения, прочитать нельзя.
 Text sticker words	Слова в текстовых стикерах
@@ -1976,9 +1975,13 @@ Show how many were filtered	Показывать, сколько отфильт�
 A small label under TikTok's top tabs counts what the feed filter has taken out since TikTok started. It shows only on the feed, and a tap on it reaches the video under it.	Небольшая метка под верхними вкладками TikTok считает, что фильтр ленты убрал с запуска TikTok. Она видна только в ленте, а нажатие на неё доходит до видео под ней.
 1 filtered out	Отфильтровано: 1
 %1$d filtered out	Отфильтровано: %1$d
+%1$d filtered out|one	Отфильтровано: %1$d
+%1$d filtered out|few	Отфильтровано: %1$d
+%1$d filtered out|many	Отфильтровано: %1$d
 Account facts on profiles	Сведения об аккаунте в профилях
 A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched.	В меню «Поделиться» профиля появляется кнопка «Сведения об аккаунте». Она показывает то, что TikTok уже прислал об аккаунте: когда он создан, его регион и язык, когда последний раз менялись имя пользователя и отображаемое имя, закрыт ли он и открыты ли понравившиеся видео. Ничего дополнительно не загружается.
 Account facts	Сведения об аккаунте
+TikTok account facts	Сведения об аккаунте TikTok
 Account facts copied	Сведения об аккаунте скопированы
 Not sent	Не прислано
 Joined	Создан

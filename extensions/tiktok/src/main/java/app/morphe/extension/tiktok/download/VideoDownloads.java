@@ -276,7 +276,7 @@ final class VideoDownloads {
                     String own = subtitleResult(captionSnapshot.size(), subtitles[0], path);
                     if (details != null) own = L10n.f("Video and details saved to %1$s", path);
                     // Said over everything else, since it's not the file that was asked for.
-                    if (stamped[0]) own = L10n.f("The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s", path);
+                    if (stamped[0]) own = L10n.f("The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s. Try again later for the clean copy.", path);
                     boolean onlyTracks = details == null && outcome.cancelled == 0
                             && outcome.stop == SaveProgress.Stop.NONE && !soundSkipped[0];
                     String said = onlyTracks ? own : SaveProgress.message(outcome, own);

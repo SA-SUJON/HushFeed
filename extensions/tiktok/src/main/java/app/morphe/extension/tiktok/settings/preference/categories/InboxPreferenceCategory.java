@@ -184,7 +184,7 @@ public final class InboxPreferenceCategory extends ConditionalPreferenceCategory
                     "Turn off push notifications",
                     "TikTok's push service stays off and nothing it sends reaches the drawer. "
                             + "It can't keep your phone awake either. You won't hear about new "
-                            + "messages until you open TikTok, and a notification dropped while "
+                            + "messages until you open TikTok, and a notification hidden while "
                             + "this is on doesn't come back. Ongoing ones like media controls stay.",
                     Settings.TURN_OFF_PUSH_NOTIFICATIONS
             ));

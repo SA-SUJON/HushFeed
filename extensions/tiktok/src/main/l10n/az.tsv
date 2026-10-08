@@ -1655,7 +1655,6 @@ A LIVE in the feed can count down and take you into the room on its own. This ke
 Play sounds TikTok pulled	TikTok-un çıxardığı səsləri oynat
 Play the audio on videos TikTok silenced because their sound was pulled for copyright or in your region. TikTok may still say the sound isn't available.	Səsi müəllif hüququna görə və ya bölgənizdə çıxarıldığı üçün TikTok-un səssizləşdirdiyi videolarda səsi oynadır. TikTok yenə də səsin əlçatan olmadığını göstərə bilər.
 Match region fields in requests	Sorğulardakı region sahələrini uyğunlaşdır
-Play the audio on videos TikTok silenced because their sound was pulled for copyright or in your region. TikTok still says the sound isn't available.	Səsi müəllif hüququna görə və ya bölgənizdə çıxarıldığı üçün TikTok-un səssizləşdirdiyi videolarda səsi oynadır. TikTok yenə də səsin əlçatan olmadığını göstərir.
 Show exact LIVE viewer counts	Dəqiq LIVE izləyici sayını göstər
 A LIVE room shows how many people are watching as a rounded number like 1.2K. This shows the exact count instead.	LIVE otağı kimin baxdığını 1.2K kimi yuvarlaqlaşdırılmış rəqəmlə göstərir. Bu, əvəzinə dəqiq sayı göstərir.
 Keep watching in a small window	Kiçik pəncərədə izləməyə davam et
@@ -1784,7 +1783,7 @@ Hide the question cards TikTok sometimes puts in a comment list to ask what you 
 Hide comment box buttons	Şərh qutusundakı düymələri gizlədin
 Hide the photo, @ and gift buttons in the box where you write a comment. Emoji and sending work as before.	Şərh yazdığınız qutudakı foto, @ və hədiyyə düymələrini gizlədin. Emoji və göndərmə əvvəlki kimi işləyir.
 Turn off push notifications	Push bildirişlərini söndürün
-TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification dropped while this is on doesn't come back. Ongoing ones like media controls stay.	TikTok-un push xidməti söndürülü qalır və onun göndərdiyi heç nə bildiriş pərdəsinə çatmır. Telefonunuzu oyaq da saxlaya bilməz. Yeni mesajlardan yalnız TikTok-u açanda xəbər tutacaqsınız, bu açıq olarkən atılan bildiriş isə geri qayıtmır. Media idarəetməsi kimi davam edən bildirişlər qalır.
+TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification hidden while this is on doesn't come back. Ongoing ones like media controls stay.	TikTok-un push xidməti söndürülü qalır və onun göndərdiyi heç nə bildiriş pərdəsinə çatmır. Telefonunuzu oyaq da saxlaya bilməz. Yeni mesajlardan yalnız TikTok-u açanda xəbər tutacaqsınız, bu açıq olarkən gizlədilən bildiriş isə geri qayıtmır. Media idarəetməsi kimi davam edən bildirişlər qalır.
 Save details as JSON	Təfərrüatları JSON kimi saxlayın
 Write the details file as JSON instead of plain text, for scripts and archive tools.	Təfərrüat faylını adi mətn əvəzinə JSON kimi yazın, skriptlər və arxiv alətləri üçün.
 Tag saved videos with their details	Saxlanılan videolara təfərrüatlarını etiket kimi yazın
@@ -1803,7 +1802,7 @@ Show dates on profile grids	Profil şəbəkəsində tarixləri göstərin
 Show the day each video was posted under its view count on profile grids.	Profil şəbəkəsində hər videonun paylaşıldığı günü baxış sayının altında göstərin.
 Fall back to the watermarked copy	Su nişanlı nüsxəyə keçin
 When the video without the watermark can't be fetched, save TikTok's own watermarked copy instead and say so. It's the size TikTok's own save uses, so it may be smaller than the quality you picked.	Su nişanı olmayan video alına bilmədikdə, əvəzində TikTok-un öz su nişanlı nüsxəsini saxlayın və bunu bildirin. Ölçüsü TikTok-un öz saxlamasındakı kimidir, ona görə seçdiyiniz keyfiyyətdən kiçik ola bilər.
-The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s	Su nişanı olmayan video alına bilmədi, ona görə TikTok-un su nişanlı nüsxəsi %1$s yerinə saxlanıldı
+The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s. Try again later for the clean copy.	Su nişanı olmayan video alına bilmədi, ona görə TikTok-un su nişanlı nüsxəsi %1$s yerinə saxlanıldı. Təmiz nüsxə üçün sonra yenidən cəhd edin.
 Match text stickers too	Mətn stikerlərini də yoxlayın
 Also hide videos whose text stickers match a blocked caption word. Text stickers are the words a creator types over the video in TikTok's editor. Text that's part of the picture itself can't be read.	Mətn stikerləri bloklanmış başlıq sözünə uyğun gələn videoları da gizlədin. Mətn stikerləri yaradıcının TikTok redaktorunda videonun üzərinə yazdığı sözlərdir. Şəklin özünə aid olan mətn oxuna bilməz.
 Text sticker words	Mətn stikeri sözləri
@@ -1814,6 +1813,7 @@ A small label under TikTok's top tabs counts what the feed filter has taken out 
 Account facts on profiles	Profillərdə hesab faktları
 A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched.	Profilin paylaşma panelinə Hesab faktları düyməsi əlavə olunur. O, TikTok-un hesab haqqında artıq göndərdiklərini göstərir: nə vaxt qoşulduğunu, regionunu və dilini, istifadəçi adının və görünən adının sonuncu dəfə nə vaxt dəyişdiyini, hesabın gizli olub-olmadığını və bəyəndiyi videoların açıq olub-olmadığını. Əlavə heç nə yüklənmir.
 Account facts	Hesab faktları
+TikTok account facts	TikTok hesab faktları
 Account facts copied	Hesab faktları kopyalandı
 Not sent	Göndərilməyib
 Joined	Qoşulub

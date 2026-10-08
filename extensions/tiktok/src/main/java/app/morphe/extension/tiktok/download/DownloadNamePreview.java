@@ -76,19 +76,28 @@ public final class DownloadNamePreview {
             String path = details ? DownloadDetails.pairedPath(destination)
                     : subtitles ? SubtitleDownloads.pairedPath(destination) : destination;
             String stem = stem(name);
-            lines.add(L10n.f("Hushfeed's downloader: %1$s", path + "/" + name));
+            // File names and paths are built before they reach L10n, so the only literals in
+            // those calls are the sentences the table translates.
+            String saved = path + "/" + name;
+            lines.add(L10n.f("Hushfeed's downloader: %1$s", saved));
             if (AudioDownloads.enabled()) {
-                lines.add(L10n.f("Sound: %1$s", AudioDownloads.audioPath(path) + "/" + stem + ".m4a"));
+                String sound = AudioDownloads.audioPath(path) + "/" + stem + ".m4a";
+                lines.add(L10n.f("Sound: %1$s", sound));
             }
             if (details) {
                 String extension = Settings.DOWNLOAD_DETAILS_JSON.get() ? ".json" : ".txt";
-                lines.add(L10n.f("Details: %1$s", path + "/" + stem + extension));
+                String detailsFile = path + "/" + stem + extension;
+                lines.add(L10n.f("Details: %1$s", detailsFile));
             }
             // The made-up post has English captions only, which every language choice falls back to.
-            if (subtitles) lines.add(L10n.f("Subtitles: %1$s", path + "/" + stem + ".en.srt"));
+            if (subtitles) {
+                String subtitleFile = path + "/" + stem + ".en.srt";
+                lines.add(L10n.f("Subtitles: %1$s", subtitleFile));
+            }
         }
         if (SettingsStatus.downloadEnabled) {
-            lines.add(L10n.f("TikTok's downloader: %1$s", tiktokRoute(template, root, "mp4", now, 1)));
+            String tiktoks = tiktokRoute(template, root, "mp4", now, 1);
+            lines.add(L10n.f("TikTok's downloader: %1$s", tiktoks));
         }
         return finish(lines, template, SettingsStatus.advancedDownloadsEnabled);
     }
@@ -100,10 +109,12 @@ public final class DownloadNamePreview {
             String path = folder(root, template);
             String first = DownloadFilenameFormatter.formatSourceName(template, CREATOR, VIDEO_ID, now, 1, "jpg", true);
             String second = DownloadFilenameFormatter.formatSourceName(template, CREATOR, VIDEO_ID, now, 2, "jpg", true);
-            lines.add(L10n.f("Hushfeed's downloader: %1$s", path + "/" + first + ", " + second));
+            String saved = path + "/" + first + ", " + second;
+            lines.add(L10n.f("Hushfeed's downloader: %1$s", saved));
         }
         if (SettingsStatus.downloadEnabled) {
-            lines.add(L10n.f("TikTok's downloader: %1$s", tiktokRoute(template, root, "jpg", now, 1)));
+            String tiktoks = tiktokRoute(template, root, "jpg", now, 1);
+            lines.add(L10n.f("TikTok's downloader: %1$s", tiktoks));
         }
         return finish(lines, template, SettingsStatus.advancedDownloadsEnabled);
     }
@@ -111,10 +122,12 @@ public final class DownloadNamePreview {
     static String commentMedia(String template, long now) {
         List<String> lines = new ArrayList<>();
         String sticker = DownloadDestination.resolve(Settings.DOWNLOAD_STICKER_PATH.get(), DownloadDestination.Kind.STICKER);
-        lines.add(L10n.f("Stickers: %1$s", sticker + "/"
-                + DownloadFilenameFormatter.formatCommentMediaName(template, "png", MEDIA_ID, now)));
-        lines.add(L10n.f("Live photo clips: %1$s", DownloadsPatch.getPhotoDownloadPath() + "/"
-                + DownloadFilenameFormatter.formatCommentMediaName(template, "mp4", MEDIA_ID + "-live", now)));
+        String stickerFile = sticker + "/"
+                + DownloadFilenameFormatter.formatCommentMediaName(template, "png", MEDIA_ID, now);
+        String clipFile = DownloadsPatch.getPhotoDownloadPath() + "/"
+                + DownloadFilenameFormatter.formatCommentMediaName(template, "mp4", MEDIA_ID + "-live", now);
+        lines.add(L10n.f("Stickers: %1$s", stickerFile));
+        lines.add(L10n.f("Live photo clips: %1$s", clipFile));
         return finish(lines, template, false);
     }
 
@@ -161,14 +174,15 @@ public final class DownloadNamePreview {
     private static String finish(List<String> lines, String template, boolean hushfeeds) {
         List<String> unknown = unknownTokens(template, TOKENS);
         if (!unknown.isEmpty()) {
-            lines.add(L10n.f("Not a token here, kept as typed: %1$s", String.join(", ", unknown)));
+            String typed = String.join(", ", unknown);
+            lines.add(L10n.f("Not a token here, kept as typed: %1$s", typed));
         }
         if (hushfeeds) {
             List<String> onlyTikToks = unknownTokens(template, SOURCE_TOKENS);
             onlyTikToks.removeAll(unknown);
             if (!onlyTikToks.isEmpty()) {
-                lines.add(L10n.f("Not a token for Hushfeed's downloader, kept as typed: %1$s",
-                        String.join(", ", onlyTikToks)));
+                String typedHere = String.join(", ", onlyTikToks);
+                lines.add(L10n.f("Not a token for Hushfeed's downloader, kept as typed: %1$s", typedHere));
             }
         }
         // On Android 10 and later the media store picks the number, below that the writer does.

@@ -1658,7 +1658,6 @@ A LIVE in the feed can count down and take you into the room on its own. This ke
 Play sounds TikTok pulled	Von TikTok entfernte Sounds abspielen
 Play the audio on videos TikTok silenced because their sound was pulled for copyright or in your region. TikTok may still say the sound isn't available.	Spielt den Ton von Videos ab, die TikTok stummgeschaltet hat, weil ihr Sound wegen des Urheberrechts oder in deiner Region entfernt wurde. TikTok zeigt den Sound eventuell weiterhin als nicht verfügbar an.
 Match region fields in requests	Regionsfelder in Anfragen angleichen
-Play the audio on videos TikTok silenced because their sound was pulled for copyright or in your region. TikTok still says the sound isn't available.	Spielt den Ton von Videos ab, die TikTok stummgeschaltet hat, weil ihr Sound wegen des Urheberrechts oder in deiner Region entfernt wurde. TikTok zeigt den Sound weiterhin als nicht verfügbar an.
 Show exact LIVE viewer counts	Genaue LIVE-Zuschauerzahl anzeigen
 A LIVE room shows how many people are watching as a rounded number like 1.2K. This shows the exact count instead.	Ein LIVE-Raum zeigt die Zuschauerzahl als gerundete Zahl wie 1,2K. Damit siehst du stattdessen die genaue Zahl.
 Keep watching in a small window	In einem kleinen Fenster weiterschauen
@@ -1787,7 +1786,7 @@ Hide the question cards TikTok sometimes puts in a comment list to ask what you 
 Hide comment box buttons	Schaltflächen im Kommentarfeld ausblenden
 Hide the photo, @ and gift buttons in the box where you write a comment. Emoji and sending work as before.	Blende die Foto-, @- und Geschenk-Schaltflächen im Feld aus, in dem du einen Kommentar schreibst. Emojis und Senden funktionieren wie bisher.
 Turn off push notifications	Push-Benachrichtigungen ausschalten
-TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification dropped while this is on doesn't come back. Ongoing ones like media controls stay.	TikToks Push-Dienst bleibt aus, und nichts, was TikTok schickt, landet in der Leiste. Dein Handy kann es auch nicht mehr wach halten. Von neuen Nachrichten erfährst du erst, wenn du TikTok öffnest, und eine Benachrichtigung, die verworfen wird, solange das an ist, kommt nicht zurück. Laufende wie die Mediensteuerung bleiben.
+TikTok's push service stays off and nothing it sends reaches the drawer. It can't keep your phone awake either. You won't hear about new messages until you open TikTok, and a notification hidden while this is on doesn't come back. Ongoing ones like media controls stay.	TikToks Push-Dienst bleibt aus, und nichts, was TikTok schickt, landet in der Leiste. Dein Handy kann es auch nicht mehr wach halten. Von neuen Nachrichten erfährst du erst, wenn du TikTok öffnest, und eine Benachrichtigung, die ausgeblendet wird, solange das an ist, kommt nicht zurück. Laufende wie die Mediensteuerung bleiben.
 Save details as JSON	Details als JSON speichern
 Write the details file as JSON instead of plain text, for scripts and archive tools.	Schreibe die Detaildatei als JSON statt als einfachen Text, für Skripte und Archivprogramme.
 Tag saved videos with their details	Gespeicherte Videos mit ihren Details versehen
@@ -1806,7 +1805,7 @@ Show dates on profile grids	Datum im Profilraster anzeigen
 Show the day each video was posted under its view count on profile grids.	Im Profilraster unter der Aufrufzahl jedes Videos anzeigen, an welchem Tag es gepostet wurde.
 Fall back to the watermarked copy	Auf die Kopie mit Wasserzeichen ausweichen
 When the video without the watermark can't be fetched, save TikTok's own watermarked copy instead and say so. It's the size TikTok's own save uses, so it may be smaller than the quality you picked.	Wenn das Video ohne Wasserzeichen nicht geladen werden kann, wird stattdessen TikToks eigene Kopie mit Wasserzeichen gespeichert, mit Hinweis. Sie hat die Größe, die TikToks eigenes Speichern nutzt, und kann daher kleiner sein als die gewählte Qualität.
-The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s	Das Video ohne Wasserzeichen konnte nicht geladen werden, deshalb wurde TikToks Kopie mit Wasserzeichen unter %1$s gespeichert
+The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to %1$s. Try again later for the clean copy.	Das Video ohne Wasserzeichen konnte nicht geladen werden, deshalb wurde TikToks Kopie mit Wasserzeichen unter %1$s gespeichert. Versuch es später noch einmal, um die saubere Kopie zu bekommen.
 Match text stickers too	Auch Textsticker prüfen
 Also hide videos whose text stickers match a blocked caption word. Text stickers are the words a creator types over the video in TikTok's editor. Text that's part of the picture itself can't be read.	Blendet auch Videos aus, deren Textsticker ein gesperrtes Wort aus den Beschreibungen enthalten. Textsticker sind die Wörter, die jemand im TikTok-Editor über das Video schreibt. Text, der zum Bild selbst gehört, kann nicht gelesen werden.
 Text sticker words	Wörter in Textstickern
@@ -1817,6 +1816,7 @@ A small label under TikTok's top tabs counts what the feed filter has taken out 
 Account facts on profiles	Kontofakten auf Profilen
 A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched.	Das Teilen-Menü eines Profils bekommt eine Schaltfläche Kontofakten. Sie zeigt, was TikTok über das Konto ohnehin geschickt hat: wann es beigetreten ist, Region und Sprache, wann Nutzername und Anzeigename zuletzt geändert wurden, ob es privat ist und ob die gelikten Videos öffentlich sind. Es wird nichts zusätzlich abgerufen.
 Account facts	Kontofakten
+TikTok account facts	TikTok-Kontofakten
 Account facts copied	Kontofakten kopiert
 Not sent	Nicht gesendet
 Joined	Beigetreten

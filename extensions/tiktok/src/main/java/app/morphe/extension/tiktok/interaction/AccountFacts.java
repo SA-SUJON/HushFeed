@@ -109,7 +109,7 @@ public final class AccountFacts {
                     .setMessage(text)
                     .setPositiveButton(L10n.t("Close"), null)
                     .setNeutralButton(L10n.t("Copy"), (ignored, which) -> {
-                        if (GestureActions.copyToClipboard("TikTok account facts", text)) {
+                        if (GestureActions.copyToClipboard(L10n.t("TikTok account facts"), text)) {
                             Utils.showToastShort(L10n.t(FACTS_COPIED));
                         }
                     })

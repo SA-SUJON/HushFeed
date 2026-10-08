@@ -633,7 +633,7 @@ public class SavedVideoArchiveTest {
             assertArrayEquals(VIDEO, Files.readAllBytes(new File(root, "alice/126.mp4").toPath()));
             assertEquals("126.mp4", SavedVideoArchive.find(owner.get(), "126").name);
             assertEquals("The video without the watermark couldn't be fetched, so TikTok's watermarked copy was saved to "
-                    + FOLDER + "/alice", ShadowToast.getTextOfLatestToast());
+                    + FOLDER + "/alice. Try again later for the clean copy.", ShadowToast.getTextOfLatestToast());
         } finally {
             refusePath = null;
             Settings.REMOVE_DOWNLOAD_WATERMARK.save(watermark);
