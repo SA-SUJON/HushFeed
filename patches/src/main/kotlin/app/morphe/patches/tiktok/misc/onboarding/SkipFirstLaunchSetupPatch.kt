@@ -96,7 +96,7 @@ internal fun MutableMethod.skipSetupSteps(step: String) {
  */
 @Suppress("unused")
 val skipFirstLaunchSetupPatch = bytecodePatch(
-    name = PATCH_NAME,
+    name = "Skip first-launch setup",
     description = "Opens a fresh install on the feed without the interest picker, the language and gender " +
         "questions, the creators to follow, the swipe up tutorial or TikTok's own notification pages in front " +
         "of it. Consent, age and sign-in screens still show, and so does Android's notification prompt. " +
