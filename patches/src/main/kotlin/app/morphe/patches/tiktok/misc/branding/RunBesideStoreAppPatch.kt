@@ -5,11 +5,16 @@
 package app.morphe.patches.tiktok.misc.branding
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.tiktok.misc.extension.sharedExtensionPatch
+import app.morphe.util.addInstructions
+import app.morphe.util.addInstructionsAtControlFlowLabel
+import app.morphe.util.findInstructionIndicesReversedOrThrow
 import app.morphe.util.getReference
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.Method
@@ -21,12 +26,29 @@ import com.android.tools.smali.dexlib2.iface.reference.StringReference
 
 private const val EXTENSION = "Lapp/morphe/extension/tiktok/misc/BesideStoreApp;"
 private const val JSON = "Lorg/json/JSONObject;"
+private const val STRING = "Ljava/lang/String;"
+private const val WALLPAPER_DATA_PROVIDER = "Lcom/ss/android/ugc/aweme/livewallpaper/WallPaperDataProvider;"
 
 internal const val JSON_PUT = "$JSON->put(Ljava/lang/String;Ljava/lang/Object;)$JSON"
 internal const val GET_PACKAGE_NAME = "Landroid/content/Context;->getPackageName()Ljava/lang/String;"
 
 /** The registration header field TikTok's servers read the app's identity from. */
 internal const val PACKAGE_KEY = "package"
+
+/** The package the store app installs as, named outright where TikTok's code means itself. */
+internal const val STORE_PACKAGE = "com.zhiliaoapp.musically"
+
+/** TikTok Asia's package, which every check for TikTok's own package names beside the store one. */
+internal const val ASIA_PACKAGE = "com.ss.android.ugc.trill"
+
+/** The authority of TikTok's live wallpaper data provider, written into its URIs outright. */
+internal const val WALLPAPER_AUTHORITY = "com.zhiliaoapp.musically.wallpapercaller"
+
+/** How many checks for TikTok's own package a declared build has: a media path resolver and two activity rules. */
+internal const val OWN_PACKAGE_CHECKS = 3
+
+/** Kotlin's `contains(CharSequence, CharSequence, ignoreCase)`, as the checks call it. */
+private val CONTAINS_PARAMETERS = listOf("Ljava/lang/CharSequence;", "Ljava/lang/CharSequence;", "Z")
 
 /** How far before the write its key's `const-string` may sit (two on every declared build). */
 private const val KEY_LOOKBACK = 3
@@ -46,6 +68,42 @@ internal object RegistrationPackageHeaderFingerprint : Fingerprint(
     returnType = "Z",
     parameters = listOf(JSON),
     strings = listOf("real_package_name", "app_version_minor", "manifest_version_code"),
+)
+
+/**
+ * The template fill of TikTok's provider shell, the one manifest provider that hosts the
+ * multiprocess settings, push, auth token and other providers under one roof: `${applicationId}`
+ * becomes the running package, `${APP_ID}` TikTok's app id and `${FACEBOOK_APP_ID}` its Facebook
+ * app id. Every authority and permission of the providers it hosts comes back through here on
+ * its way into a ProviderInfo, so this is where a renamed copy's names are put right.
+ * X.03bE.LJIIIIZZ on 47.0.3, X.03d9.LJIIIIZZ on 47.1.3 and X.03dD.LJIIIIZZ on 47.1.4.
+ */
+internal object ProviderNameTemplateFingerprint : Fingerprint(
+    returnType = STRING,
+    parameters = listOf(STRING),
+    strings = listOf("\${applicationId}", "\${APP_ID}", "\${FACEBOOK_APP_ID}"),
+)
+
+/**
+ * The live wallpaper data provider's static initializer, which loads [WALLPAPER_AUTHORITY] once
+ * and builds every `content://` URI of the provider from that register.
+ */
+internal object WallpaperCallerUrisFingerprint : Fingerprint(
+    definingClass = WALLPAPER_DATA_PROVIDER,
+    name = "<clinit>",
+    strings = listOf(WALLPAPER_AUTHORITY),
+)
+
+/**
+ * TikTok's checks for its own package: a content URI whose authority holds it is TikTok's own and
+ * isn't copied in as another app's would be, and under Family Pairing an app-settings page or a
+ * Play link may open when its URI names it. Each loads the store package and TikTok Asia's and
+ * asks Kotlin's `contains` about each in turn. A list of TikTok's packages and an installed-app
+ * check load the same two strings and aren't counted ([storePackageChecks]).
+ */
+internal object OwnPackageCheckFingerprint : Fingerprint(
+    strings = listOf(STORE_PACKAGE, ASIA_PACKAGE),
+    custom = { method, _ -> storePackageChecks(method).isNotEmpty() },
 )
 
 /**
@@ -80,11 +138,54 @@ internal fun registrationPackageWrites(method: Method): List<Int> {
     }
 }
 
+/** The index of each `const-string` of [string] in [method], jumbo or not. */
+internal fun stringLoads(method: Method, string: String): List<Int> {
+    val instructions = method.implementation?.instructions?.toList() ?: return emptyList()
+    return instructions.indices.filter { index ->
+        val instruction = instructions[index]
+        (instruction.opcode == Opcode.CONST_STRING || instruction.opcode == Opcode.CONST_STRING_JUMBO) &&
+            instruction.getReference<StringReference>()?.string == string
+    }
+}
+
+/**
+ * Where [method] asks whether some text holds the store package: the index of each `const-string`
+ * of [STORE_PACKAGE] that the very next instruction hands, as the text looked for, to a static
+ * `(CharSequence, CharSequence, Z)Z`, Kotlin's `contains`. A load used any other way, in a list
+ * of TikTok's packages or an installed-app check, isn't counted.
+ */
+internal fun storePackageChecks(method: Method): List<Int> {
+    val instructions = method.implementation?.instructions?.toList() ?: return emptyList()
+    return stringLoads(method, STORE_PACKAGE).filter { index ->
+        val call = instructions.getOrNull(index + 1) as? FiveRegisterInstruction ?: return@filter false
+        if (call.opcode != Opcode.INVOKE_STATIC || call.registerCount != 3) return@filter false
+        val reference = call.getReference<MethodReference>() ?: return@filter false
+        reference.returnType == "Z" && reference.parameterTypes.map { it.toString() } == CONTAINS_PARAMETERS &&
+            call.registerD == (instructions[index] as OneRegisterInstruction).registerA
+    }
+}
+
 /** The index of the last instruction within [lookback] before [before] that writes [register]. */
 private fun lastWriteOf(instructions: List<Instruction>, register: Int, before: Int, lookback: Int): Int? =
     (before - 1 downTo maxOf(0, before - lookback)).firstOrNull {
         instructions[it].opcode.setsRegister() && (instructions[it] as? OneRegisterInstruction)?.registerA == register
     }
+
+/**
+ * Hands the string the `const-string` at [index] just loaded to the extension's [method], whose
+ * answer takes its place in the same register. The load keeps its index and any label on it, so
+ * a jump to it runs the swap too.
+ */
+private fun MutableMethod.swapAfterLoad(index: Int, method: String) {
+    val register = getInstruction<OneRegisterInstruction>(index).registerA
+    addInstructions(
+        index + 1,
+        """
+            invoke-static/range { v$register .. v$register }, $EXTENSION->$method($STRING)$STRING
+            move-result-object v$register
+        """,
+    )
+}
 
 @Suppress("unused")
 val runBesideStoreAppPatch = bytecodePatch(
@@ -92,8 +193,10 @@ val runBesideStoreAppPatch = bytecodePatch(
     description = "Lets a TikTok copy renamed with Morphe's Clone app patch sign in while the store app stays " +
         "installed. Select it together with Clone app. When the copy registers your phone with TikTok it gives " +
         "TikTok's own package name, because TikTok's servers don't hand out a device ID for a name they don't " +
-        "know and signing in fails without one. A build that keeps TikTok's package name is left alone. Google " +
-        "and Facebook sign-in can't work in a renamed copy, so log in with your email or phone number.",
+        "know and signing in fails without one. Its settings shared between TikTok's processes, its live " +
+        "wallpaper data and the app links it checks for its own name are pointed at the copy as well, not at " +
+        "the store app beside it. A build that keeps TikTok's package name is left alone. Google and Facebook " +
+        "sign-in can't work in a renamed copy, so log in with your email or phone number.",
     default = false,
 ) {
     category("Settings")
@@ -121,5 +224,48 @@ val runBesideStoreAppPatch = bytecodePatch(
             "invoke-static { v${put.registerC}, v${put.registerD}, v${put.registerE} }, " +
                 "$EXTENSION->putPackage(${JSON}Ljava/lang/String;Ljava/lang/Object;)$JSON",
         )
+
+        // The provider shell's template fill. Every authority and permission of the providers it
+        // hosts comes back through here, the multiprocess settings one among them, and the
+        // extension answers with the name the copy's manifest declares for it.
+        ProviderNameTemplateFingerprint.method.apply {
+            findInstructionIndicesReversedOrThrow(Opcode.RETURN_OBJECT).forEach { at ->
+                val register = getInstruction<OneRegisterInstruction>(at).registerA
+                addInstructionsAtControlFlowLabel(
+                    at,
+                    """
+                        invoke-static/range { v$register .. v$register }, $EXTENSION->declared($STRING)$STRING
+                        move-result-object v$register
+                    """,
+                )
+            }
+        }
+
+        // The wallpaper caller's authority, loaded once into the register every URI of the
+        // provider is built from.
+        WallpaperCallerUrisFingerprint.method.apply {
+            val loads = stringLoads(this, WALLPAPER_AUTHORITY)
+            if (loads.size != 1) {
+                throw PatchException(
+                    "Run beside the store app: $definingClass->$name loads the wallpaper caller's authority " +
+                        "${loads.size} times, not once.",
+                )
+            }
+            swapAfterLoad(loads.single(), "declared")
+        }
+
+        // TikTok's checks for its own package: the store package each loads becomes the running one.
+        val checks = OwnPackageCheckFingerprint.matchAll()
+        if (checks.size != OWN_PACKAGE_CHECKS) {
+            throw PatchException(
+                "Run beside the store app: ${checks.size} checks for TikTok's own package, not $OWN_PACKAGE_CHECKS: " +
+                    checks.map { "${it.originalClassDef.type}->${it.method.name}" },
+            )
+        }
+        checks.forEach { match ->
+            match.method.apply {
+                storePackageChecks(this).asReversed().forEach { at -> swapAfterLoad(at, "ownPackage") }
+            }
+        }
     }
 }
