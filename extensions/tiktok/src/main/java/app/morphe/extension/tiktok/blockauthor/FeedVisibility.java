@@ -41,9 +41,8 @@ public final class FeedVisibility {
     private static final String[] HOME_TAB_RESOURCE_NAMES = {"47.0.3:omq", "47.1.3:oph", "47.1.4:oph"};
     private static final String[] INBOX_TAB_RESOURCE_NAMES = {"47.0.3:omr", "47.1.3:opi", "47.1.4:opi"};
     /**
-     * The bottom Friends tab. 47.0.3's omp is read off the S22. The two 47.1 builds number their
-     * ids in the same order, Home one after Friends, so theirs is the id before Home's; a build
-     * with no such view answers null and the tab is simply not covered.
+     * The bottom Friends tab, the id FriendsTabProtocol loads on every declared build (one before
+     * Home's). A build with no such view answers null and the tab is simply not covered.
      */
     private static final String[] FRIENDS_TAB_RESOURCE_NAMES = {"47.0.3:omp", "47.1.3:opg", "47.1.4:opg"};
     private static final String[] COMMENT_SHEET_RESOURCE_NAMES = {"47.0.3:pvp", "47.1.3:pyf", "47.1.4:pyf"};
