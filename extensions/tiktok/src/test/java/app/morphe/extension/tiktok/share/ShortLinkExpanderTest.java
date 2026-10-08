@@ -18,11 +18,14 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import app.morphe.extension.tiktok.SettingsContextRule;
 import app.morphe.extension.tiktok.settings.Settings;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,37 +41,69 @@ public class ShortLinkExpanderTest {
     @Rule public final SettingsContextRule settingsContext = new SettingsContextRule();
 
     private static final String SHORT = "https://vt.tiktok.com/ZS123/";
+    private static final String OTHER = "https://vt.tiktok.com/ZS9/";
     private static final String VIDEO = "https://www.tiktok.com/@nasa/video/7312345678901234567";
+    private static final String PHOTO = "https://www.tiktok.com/@nasa/photo/7312345678901234999";
+
+    private final Map<String, String> landings = new HashMap<>();
+    private final AtomicInteger opens = new AtomicInteger();
+    private Executor oldOpener;
+    private Context context;
+    private ClipboardManager clipboard;
+
+    /** Counts each open, and lands where {@link #landings} says. */
+    private final ShortLinkExpander.Resolver resolver = url -> {
+        opens.incrementAndGet();
+        return landings.get(url);
+    };
+
+    @Before public void setUp() {
+        oldOpener = ShortLinkExpander.opener;
+        ShortLinkExpander.opener = Runnable::run;
+        context = RuntimeEnvironment.getApplication();
+        clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        landings.put(SHORT, VIDEO + "?_r=1&u_code=abc");
+        landings.put(OTHER, PHOTO + "?_r=1");
+    }
 
     @After public void tearDown() {
+        ShortLinkExpander.opener = oldOpener;
         Settings.EXPAND_SHORT_SHARE_LINKS.resetToDefault();
         ShortLinkExpander.forgetForTests();
     }
 
     @Test public void aShortLinkLeadsToTheVideo() {
-        Map<String, String> landings = new HashMap<>();
-        landings.put(SHORT, VIDEO + "?_r=1&u_code=abc");
-        landings.put("https://vm.tiktok.com/ZM456/", "https://m.tiktok.com/@nasa/video/7312345678901234567");
-        assertEquals(VIDEO + "?_r=1&u_code=abc", ShortLinkExpander.expand(SHORT, landings::get));
+        Map<String, String> landed = new HashMap<>();
+        landed.put(SHORT, VIDEO + "?_r=1&u_code=abc");
+        landed.put("https://vm.tiktok.com/ZM456/", "https://m.tiktok.com/@nasa/video/7312345678901234567");
+        landed.put(OTHER, PHOTO);
+        assertEquals(VIDEO + "?_r=1&u_code=abc", ShortLinkExpander.expand(SHORT, landed::get));
         assertEquals("https://m.tiktok.com/@nasa/video/7312345678901234567",
-                ShortLinkExpander.expand("https://vm.tiktok.com/ZM456/", landings::get));
+                ShortLinkExpander.expand("https://vm.tiktok.com/ZM456/", landed::get));
+        assertEquals(PHOTO, ShortLinkExpander.expand(OTHER, landed::get));
         assertNull("a full link isn't opened", ShortLinkExpander.expand(VIDEO, url -> {
             throw new AssertionError("opened " + url);
         }));
     }
 
-    @Test public void onlyALandingOnTikToksOwnSiteIsTaken() {
-        Map<String, String> landings = new HashMap<>();
-        landings.put(SHORT, "https://example.com/@nasa/video/1");
-        assertNull("a landing off TikTok", ShortLinkExpander.expand(SHORT, landings::get));
-        landings.put(SHORT, "http://www.tiktok.com/@nasa/video/1");
-        assertNull("a landing over plain HTTP", ShortLinkExpander.expand(SHORT, landings::get));
-        landings.put(SHORT, SHORT);
-        assertNull("no redirect at all", ShortLinkExpander.expand(SHORT, landings::get));
-        landings.put(SHORT, "https://m.tiktok.com/v/7312345678901234567.html");
-        assertNull("TikTok's old video page, which names no account", ShortLinkExpander.expand(SHORT, landings::get));
-        landings.clear();
-        assertNull("nothing came back", ShortLinkExpander.expand(SHORT, landings::get));
+    @Test public void onlyAVideoOrPhotoPageOnTikToksOwnSiteIsTaken() {
+        Map<String, String> landed = new HashMap<>();
+        for (String page : new String[]{
+                "https://example.com/@nasa/video/1",
+                "http://www.tiktok.com/@nasa/video/1",
+                SHORT,
+                "https://m.tiktok.com/v/7312345678901234567.html",
+                "https://www.tiktok.com/",
+                "https://www.tiktok.com/login?redirect_url=x",
+                "https://www.tiktok.com/@nasa",
+                "https://www.tiktok.com/@nasa/video/",
+                "https://www.tiktok.com.example.com/@nasa/video/1",
+        }) {
+            landed.put(SHORT, page);
+            assertNull(page, ShortLinkExpander.expand(SHORT, landed::get));
+        }
+        landed.clear();
+        assertNull("nothing came back", ShortLinkExpander.expand(SHORT, landed::get));
         assertNull("the open failed", ShortLinkExpander.expand(SHORT, url -> {
             throw new IOException("offline");
         }));
@@ -88,48 +123,93 @@ public class ShortLinkExpanderTest {
         assertFalse(ShortLinkExpander.wants(null));
     }
 
-    @Test public void theFullLinkTakesTheShortOnesPlaceOnlyOnTheClipboard() {
-        Context context = RuntimeEnvironment.getApplication();
-        ClipboardManager clipboard = clipboard(context);
-
-        clipboard.setPrimaryClip(ClipData.newPlainText("link", SHORT));
-        ShortLinkExpander.watch(context, SHORT, VIDEO);
+    @Test public void nothingIsOpenedUntilTheLinkIsCopiedAndThenOnlyTheClipboardChanges() {
+        copy("hello");
+        long before = ShortLinkExpander.clipStamp(context);
+        // The sheet makes its link once per channel as it opens: one wait, and no open yet.
+        for (int channel = 0; channel < 4; channel++) {
+            ShortLinkExpander.watch(context, SHORT, SHORT, before, resolver);
+        }
         idle();
-        assertEquals(VIDEO, text(clipboard));
+        assertEquals(0, opens.get());
+        assertEquals("hello", text());
+
+        copy("Look: " + SHORT);
+        idle();
+        assertEquals(1, opens.get());
+        assertEquals("Look: " + VIDEO, text());
         assertEquals("Full link copied", ShadowToast.getTextOfLatestToast());
 
-        // Copied before the link is: left alone, and the link is swapped once it arrives.
-        String other = "https://vt.tiktok.com/ZS9/";
-        clipboard.setPrimaryClip(ClipData.newPlainText("note", "hello"));
-        ShortLinkExpander.watch(context, other, VIDEO);
-        idle();
-        assertEquals("hello", text(clipboard));
-        clipboard.setPrimaryClip(ClipData.newPlainText("link", "Look: " + other));
-        idle();
-        assertEquals("Look: " + VIDEO, text(clipboard));
-
         // One swap per link made: copying it again later stays as copied.
-        clipboard.setPrimaryClip(ClipData.newPlainText("link", other));
+        copy(SHORT);
         idle();
-        assertEquals(other, text(clipboard));
+        assertEquals(SHORT, text());
+        assertEquals(1, opens.get());
     }
 
-    @Test public void theWaitForCopyLinkEnds() {
-        Context context = RuntimeEnvironment.getApplication();
-        ClipboardManager clipboard = clipboard(context);
-        clipboard.setPrimaryClip(ClipData.newPlainText("note", "hello"));
-        ShortLinkExpander.watch(context, SHORT, VIDEO);
+    @Test public void aCopyThatCameBeforeTheWaitIsSwappedAtOnce() {
+        long before = ShortLinkExpander.clipStamp(context);
+        copy(SHORT);
+        ShortLinkExpander.watch(context, SHORT, SHORT, before, resolver);
+        idle();
+        assertEquals(VIDEO, text());
+        assertEquals(1, opens.get());
+
+        // A link opened before is swapped from memory.
+        long again = ShortLinkExpander.clipStamp(context);
+        copy(SHORT);
+        idle();
+        ShortLinkExpander.watch(context, SHORT, SHORT, again, resolver);
+        idle();
+        assertEquals(VIDEO, text());
+        assertEquals(1, opens.get());
+    }
+
+    @Test public void theClipThatWasThereWhenTheLinkWasMadeIsNeverRead() {
+        // The same link copied earlier, before this sheet made it.
+        copy(SHORT);
+        ShortLinkExpander.watch(context, SHORT, SHORT, ShortLinkExpander.clipStamp(context), resolver);
+        idle();
+        assertEquals(SHORT, text());
+        assertEquals(0, opens.get());
+    }
+
+    @Test public void aLinkNeverCopiedIsNeverOpenedAndTheWaitEnds() {
+        copy("hello");
+        ShortLinkExpander.watch(context, SHORT, SHORT, ShortLinkExpander.clipStamp(context), resolver);
         Shadows.shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(ShortLinkExpander.WATCH_MS + 1));
-        clipboard.setPrimaryClip(ClipData.newPlainText("link", SHORT));
+        copy(SHORT);
         idle();
-        assertEquals(SHORT, text(clipboard));
+        assertEquals(SHORT, text());
+        assertEquals(0, opens.get());
     }
 
-    private static ClipboardManager clipboard(Context context) {
-        return (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+    @Test public void aLinkThatCouldntBeOpenedIsLeftForAWhile() {
+        landings.put(SHORT, "https://www.tiktok.com/login");
+        for (int copy = 0; copy < 2; copy++) {
+            ShortLinkExpander.watch(context, SHORT, SHORT, ShortLinkExpander.clipStamp(context), resolver);
+            copy(SHORT);
+            idle();
+            assertEquals(SHORT, text());
+        }
+        assertEquals("a failed link was opened again at once", 1, opens.get());
+
+        Shadows.shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(ShortLinkExpander.RETRY_AFTER_MS + 1));
+        landings.put(SHORT, VIDEO);
+        ShortLinkExpander.watch(context, SHORT, SHORT, ShortLinkExpander.clipStamp(context), resolver);
+        copy(SHORT);
+        idle();
+        assertEquals(2, opens.get());
+        assertEquals(VIDEO, text());
     }
 
-    private static String text(ClipboardManager clipboard) {
+    /** Puts {@code text} on the clipboard a moment later, so its clip carries a stamp of its own. */
+    private void copy(String text) {
+        Shadows.shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(1));
+        clipboard.setPrimaryClip(ClipData.newPlainText("link", text));
+    }
+
+    private String text() {
         return clipboard.getPrimaryClip().getItemAt(0).getText().toString();
     }
 

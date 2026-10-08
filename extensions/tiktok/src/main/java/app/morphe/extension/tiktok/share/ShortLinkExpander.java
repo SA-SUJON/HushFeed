@@ -5,15 +5,24 @@
 package app.morphe.extension.tiktok.share;
 
 import android.content.ClipData;
+import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.os.Build;
+import android.os.SystemClock;
 
 import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.Executor;
+import java.util.regex.Pattern;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
@@ -22,31 +31,50 @@ import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.tiktok.settings.Settings;
 
 /**
- * Copy the full link for short links: a vt.tiktok.com or vm.tiktok.com link TikTok hands out is
- * opened once in the background, the way a browser opening it would, and the full video link it
- * points to replaces it on the clipboard. The share itself goes out at once as TikTok made it.
- * TikTok may make the link as the sheet opens rather than at Copy link, so the swap waits a short
- * while for the clipboard to hold that link and only ever replaces that text: a link sent to
- * another app, or something else copied, is left alone. The link is opened through the media
- * transport, with its checks on every redirect, and the page it lands on is never read; only a
- * landing on TikTok's own site over HTTPS is taken.
+ * Copy the full link for short links: once the clipboard holds a short vt.tiktok.com or
+ * vm.tiktok.com link TikTok made, that link is opened in the background, the way a browser
+ * opening it would, and the full video link it points to takes its place on the clipboard.
+ *
+ * <p>Nothing is opened before the link is copied. TikTok makes its share link once for every
+ * channel as the sheet opens, so each link made only starts a wait of {@link #WATCH_MS} for Copy
+ * link, one per link, and a link sent straight to another app goes out as TikTok made it,
+ * unopened. A short link is opened once at a time, and one that couldn't be opened is left for
+ * {@link #RETRY_AFTER_MS}. The link is opened through the media transport, with its checks on
+ * every redirect, and the page it lands on is never read; only a landing on a video or photo
+ * page on TikTok's own site over HTTPS is taken.
  */
 public final class ShortLinkExpander {
     private static final List<String> SHORT_HOSTS = Arrays.asList("vm.tiktok.com", "vt.tiktok.com");
-    private static final List<String> TIKTOK_HOSTS = Arrays.asList(
-            "tiktok.com", "www.tiktok.com", "m.tiktok.com", "vm.tiktok.com", "vt.tiktok.com");
+    private static final List<String> TIKTOK_HOSTS = Arrays.asList("tiktok.com", "www.tiktok.com", "m.tiktok.com");
+    /** A post's own page, /@name/video/123 or /@name/photo/123, with anything after it. */
+    private static final Pattern POST_PATH = Pattern.compile("/@[^/?#]+/(video|photo)/\\d+([/?#].*)?");
     /** How long after the link is made a Copy link still gets the full one. */
-    static final long WATCH_MS = 15_000;
+    static final long WATCH_MS = 60_000;
+    /** How long a short link that couldn't be opened is left before it's tried again. */
+    static final long RETRY_AFTER_MS = 10 * 60_000;
     static final String FULL_LINK_COPIED = "Full link copied";
-    /** The last short link opened and where it led, so a sheet that asks again doesn't reopen it. */
-    private static String lastShort, lastFull;
 
     /** Where a link ends up after its redirects. */
     interface Resolver {
         String finalUrl(String url) throws IOException;
     }
 
+    /** What's done with the full link once it's known, on the main thread. */
+    interface Then {
+        void accept(String full);
+    }
+
     static final Resolver NETWORK = LinkResolver::finalUrl;
+    /** Where a short link is opened. Tests open it in place. */
+    static Executor opener = task -> Utils.runOnOwnThread("Hushfeed short link", task);
+
+    /** Each copied text being waited for, with its listener. Main thread. */
+    private static final Map<String, ClipboardManager.OnPrimaryClipChangedListener> WATCHING = new HashMap<>();
+    /** Short links being opened now. */
+    private static final Set<String> OPENING = new HashSet<>();
+    /** The last short link opened and where it led, null when it couldn't be, and when. */
+    private static String lastShort, lastFull;
+    private static long lastOpenedAt;
 
     private ShortLinkExpander() {
     }
@@ -62,19 +90,83 @@ public final class ShortLinkExpander {
 
     /**
      * From the share link rewrite: {@code copied} is what TikTok goes on to share or copy, and
-     * {@code shortLink} the short link it was made from.
+     * {@code shortLink} the short link it was made from. Nothing is opened here.
      */
     static void later(String copied, String shortLink) {
-        String known = known(shortLink);
-        if (known != null) {
-            Utils.runOnMainThread(() -> watch(Utils.getContext(), copied, rewrite(known)));
+        Context context = Utils.getContext();
+        long before = clipStamp(context);
+        Utils.runOnMainThreadNowOrLater(() -> watch(context, copied, shortLink, before, NETWORK));
+    }
+
+    /**
+     * Waits {@link #WATCH_MS} for the clipboard to hold {@code copied}, then opens
+     * {@code shortLink} and swaps the full link in for {@code copied}. {@code before} is the
+     * stamp of the clip that was there when the link was made ({@link #clipStamp}). Main thread.
+     */
+    static void watch(@Nullable Context context, String copied, String shortLink, long before, Resolver resolver) {
+        if (context == null || WATCHING.containsKey(copied)) return;
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        if (clipboard == null) return;
+        Then swapIn = full -> swap(clipboard, copied, full);
+        // Copy link may have come before this ran. The clip that was there when the link was made
+        // is never read, so Android has no reason to say TikTok read another app's clip.
+        if (changedSince(clipboard, before) && holds(clipboard, copied)) {
+            open(shortLink, resolver, swapIn);
             return;
         }
-        Utils.runOnOwnThread("Hushfeed short link", () -> {
-            String full = expand(shortLink, NETWORK);
-            if (full == null) return;
-            remember(shortLink, full);
-            Utils.runOnMainThread(() -> watch(Utils.getContext(), copied, rewrite(full)));
+        ClipboardManager.OnPrimaryClipChangedListener[] listener = new ClipboardManager.OnPrimaryClipChangedListener[1];
+        listener[0] = () -> {
+            if (!holds(clipboard, copied)) return;
+            // Off before the swap, whose own change would otherwise come back here.
+            stopWatching(clipboard, copied, listener[0]);
+            open(shortLink, resolver, swapIn);
+        };
+        WATCHING.put(copied, listener[0]);
+        clipboard.addPrimaryClipChangedListener(listener[0]);
+        Utils.runOnMainThreadDelayed(() -> stopWatching(clipboard, copied, listener[0]), WATCH_MS);
+    }
+
+    private static void stopWatching(ClipboardManager clipboard, String copied,
+                                     ClipboardManager.OnPrimaryClipChangedListener listener) {
+        clipboard.removePrimaryClipChangedListener(listener);
+        // A later wait for the same text has its own listener, which stays.
+        if (WATCHING.get(copied) == listener) WATCHING.remove(copied);
+    }
+
+    /**
+     * Hands {@code then} where {@code shortLink} leads, with the share link settings applied, on
+     * the main thread. A link already being opened, or one that couldn't be opened a moment ago,
+     * isn't opened again.
+     */
+    static void open(String shortLink, Resolver resolver, Then then) {
+        String known = null;
+        synchronized (ShortLinkExpander.class) {
+            if (shortLink.equals(lastShort)) {
+                if (lastFull == null && SystemClock.elapsedRealtime() - lastOpenedAt < RETRY_AFTER_MS) return;
+                known = lastFull;
+            }
+            if (known == null && !OPENING.add(shortLink)) return;
+        }
+        if (known != null) {
+            String full = known;
+            Utils.runOnMainThreadNowOrLater(() -> then.accept(rewrite(full)));
+            return;
+        }
+        opener.execute(() -> {
+            String landed = null;
+            try {
+                landed = expand(shortLink, resolver);
+            } finally {
+                synchronized (ShortLinkExpander.class) {
+                    OPENING.remove(shortLink);
+                    lastShort = shortLink;
+                    lastFull = landed;
+                    lastOpenedAt = SystemClock.elapsedRealtime();
+                }
+            }
+            if (landed == null) return;
+            String full = landed;
+            Utils.runOnMainThread(() -> then.accept(rewrite(full)));
         });
     }
 
@@ -82,44 +174,18 @@ public final class ShortLinkExpander {
         return ShareUrlSanitizer.stripAllQueryParams(ShareUrlSanitizer.withCustomDomain(full));
     }
 
-    @Nullable
-    private static synchronized String known(String shortLink) {
-        return shortLink.equals(lastShort) ? lastFull : null;
-    }
-
-    private static synchronized void remember(String shortLink, String full) {
-        lastShort = shortLink;
-        lastFull = full;
-    }
-
     static synchronized void forgetForTests() {
         lastShort = null;
         lastFull = null;
+        lastOpenedAt = 0;
+        OPENING.clear();
+        WATCHING.clear();
     }
 
     /**
-     * Swaps {@code full} in for {@code copied} if the clipboard holds it now, or as soon as it does
-     * within {@link #WATCH_MS}. Main thread.
-     */
-    static void watch(@Nullable Context context, String copied, String full) {
-        if (context == null) return;
-        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-        if (clipboard == null) return;
-        if (swap(clipboard, copied, full)) return;
-        ClipboardManager.OnPrimaryClipChangedListener[] listener = new ClipboardManager.OnPrimaryClipChangedListener[1];
-        listener[0] = () -> {
-            // Off before the swap, whose own change would otherwise come back here.
-            if (!holds(clipboard, copied)) return;
-            clipboard.removePrimaryClipChangedListener(listener[0]);
-            swap(clipboard, copied, full);
-        };
-        clipboard.addPrimaryClipChangedListener(listener[0]);
-        Utils.runOnMainThreadDelayed(() -> clipboard.removePrimaryClipChangedListener(listener[0]), WATCH_MS);
-    }
-
-    /**
-     * Where the short link {@code url} leads, when that's a page on TikTok's own site over HTTPS
-     * other than another short link or TikTok's old /v/ page. Null otherwise.
+     * Where the short link {@code url} leads, when that's a video or photo page on TikTok's own
+     * site over HTTPS. Null otherwise: a landing on the home page, a sign-in page or TikTok's old
+     * /v/ page would only lose the video the short link named.
      */
     @Nullable
     static String expand(String url, Resolver resolver) {
@@ -132,9 +198,44 @@ public final class ShortLinkExpander {
             return null;
         }
         if (landed == null || !landed.startsWith("https://")) return null;
-        String host = host(landed);
-        if (!TIKTOK_HOSTS.contains(host) || SHORT_HOSTS.contains(host) || path(landed).startsWith("/v/")) return null;
+        if (!TIKTOK_HOSTS.contains(host(landed)) || !POST_PATH.matcher(path(landed)).matches()) return null;
         return landed;
+    }
+
+    /**
+     * The stamp Android put on the clip that's on the clipboard now, or -1 when there's none.
+     * Reading the clip's description, unlike the clip, never shows Android's notice.
+     */
+    static long clipStamp(@Nullable Context context) {
+        if (context != null && Build.VERSION.SDK_INT >= 26) {
+            try {
+                ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipDescription description = clipboard == null ? null : clipboard.getPrimaryClipDescription();
+                return description == null ? -1 : description.getTimestamp();
+            } catch (RuntimeException failure) {
+                return -1;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Whether the clip on the clipboard isn't the one stamped {@code before}. Android 7 and
+     * older stamp nothing, and show no notice for reading a clip either.
+     */
+    private static boolean changedSince(ClipboardManager clipboard, long before) {
+        if (Build.VERSION.SDK_INT >= 26) {
+            try {
+                ClipDescription description = clipboard.getPrimaryClipDescription();
+                if (description == null) return false;
+                long setAt = description.getTimestamp();
+                // Zero is a clip whose time wasn't recorded.
+                return setAt == 0 || setAt != before;
+            } catch (RuntimeException failure) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static boolean holds(ClipboardManager clipboard, String copied) {
@@ -148,20 +249,18 @@ public final class ShortLinkExpander {
         }
     }
 
-    /** Puts {@code full} in place of {@code copied} when the clipboard holds it. */
-    private static boolean swap(ClipboardManager clipboard, String copied, String full) {
+    /** Puts {@code full} in place of {@code copied} when the clipboard still holds it. */
+    private static void swap(ClipboardManager clipboard, String copied, String full) {
         try {
             ClipData clip = clipboard.getPrimaryClip();
-            if (clip == null || clip.getItemCount() == 0) return false;
+            if (clip == null || clip.getItemCount() == 0) return;
             CharSequence text = clip.getItemAt(0).getText();
-            if (text == null || !text.toString().contains(copied)) return false;
+            if (text == null || !text.toString().contains(copied)) return;
             CharSequence label = clip.getDescription() == null ? null : clip.getDescription().getLabel();
             clipboard.setPrimaryClip(ClipData.newPlainText(label, text.toString().replace(copied, full)));
             Utils.showToastShort(L10n.t(FULL_LINK_COPIED));
-            return true;
         } catch (RuntimeException failure) {
             Logger.printException(() -> "Could not swap in the full share link", failure);
-            return false;
         }
     }
 
