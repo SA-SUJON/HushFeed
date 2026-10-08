@@ -2157,9 +2157,9 @@ try {
                 'exit 0')
             $env:HUSHFEED_BUILD_WRAPPER = $wrapperStub
             Set-Content -LiteralPath (Join-Path $hookRoot 'scripts/verify-all-patches.ps1') -Encoding UTF8 -Value @(
-                'param([string]$Apk, [string]$DesktopJar, [string]$WorkDir, [string]$Bundle, [string]$PatchList)',
+                'param([string]$Apk, [string]$DesktopJar, [string]$WorkDir, [string]$Bundle, [string]$PatchList, [string]$KeepIn)',
                 "Set-Content -LiteralPath (Join-Path '$applyCalls' ([guid]::NewGuid().ToString('N') + '.txt')) -Value (",
-                '    "apk=$(Split-Path -Leaf $Apk) jar=$DesktopJar bundle=$Bundle list=$PatchList")',
+                '    "apk=$(Split-Path -Leaf $Apk) jar=$DesktopJar bundle=$Bundle list=$PatchList keep=$KeepIn")',
                 "if (Test-Path -LiteralPath '$applySlow') {",
                 '    $started = [DateTime]::UtcNow.Ticks',
                 '    Start-Sleep -Milliseconds 1500',
@@ -2182,8 +2182,10 @@ try {
             Assert-True ($wrapped.Trim() -like '*:patches:test*,:patches:buildAndroid') `
                 "A patch source push did not end its build with :patches:buildAndroid: $wrapped"
             $calls = Get-ApplyCalls
-            $expected = @('com.zhiliaoapp.musically_1.0.3-100_apkmirror.com.apk', 'tiktok-1.1.3.apk') | ForEach-Object {
-                "apk=$_ jar=$env:HUSHFEED_DESKTOP_JAR bundle=$bundleStub list=$stubCatalog"
+            # Each run is kept by version under the gate root, where the release receipt reads it.
+            $keptRoot = Join-Path $hookRoot 'patches/build/fixture-apply'
+            $expected = @(@('com.zhiliaoapp.musically_1.0.3-100_apkmirror.com.apk', '1.0.3'), @('tiktok-1.1.3.apk', '1.1.3')) | ForEach-Object {
+                "apk=$($_[0]) jar=$env:HUSHFEED_DESKTOP_JAR bundle=$bundleStub list=$stubCatalog keep=$(Join-Path $keptRoot $_[1])"
             }
             Assert-True (($calls -join "`n") -eq ($expected -join "`n")) `
                 ("A patch source push did not apply the built bundle to each declared build once, and only those: " + ($calls -join '; '))

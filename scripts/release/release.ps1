@@ -182,7 +182,11 @@ switch ($Stage) {
         $work = Join-Path ([IO.Path]::GetTempPath()) "hushfeed-receipt-$Version"
         New-Item -ItemType Directory -Force -Path $work | Out-Null
         try {
-            Invoke-Queued 'receipt' { & (Join-Path $root 'scripts/build-release-receipt.ps1') -WorkDir $work -Fixture $fixtures -Bundle $bundle }
+            # The release gate kept its fixture runs; the receipt reads any made with this bundle.
+            Invoke-Queued 'receipt' {
+                & (Join-Path $root 'scripts/build-release-receipt.ps1') -WorkDir $work -Fixture $fixtures -Bundle $bundle `
+                    -AppliedDir (Join-Path $root 'patches/build/fixture-apply')
+            }
         } finally { Remove-Item -LiteralPath $work -Recurse -Force -ErrorAction SilentlyContinue }
         New-Item -ItemType Directory -Force -Path $assets | Out-Null
         Copy-Item -LiteralPath $bundle, (Join-Path $root $receiptName) -Destination $assets -Force

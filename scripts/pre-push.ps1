@@ -302,16 +302,21 @@ function Invoke-FixturePatching {
     }
     $patchList = Join-Path $GateRoot 'patches-list.json'
     $work = Join-Path ([IO.Path]::GetTempPath()) ('hushfeed-pre-push-apply-' + [guid]::NewGuid().ToString('N'))
+    # Each passing run is kept, stamped, for the release receipt (build-release-receipt.ps1
+    # -AppliedDir), so a release patches each fixture once. A stale run from an earlier bundle
+    # goes first: its stamp would not match anyway.
+    $kept = Join-Path $GateRoot 'patches/build/fixture-apply'
+    if (Test-Path -LiteralPath $kept) { Remove-Item -LiteralPath $kept -Recurse -Force }
     Write-Step ("patch sources changed, applying $($bundles[0].Name) to TikTok " +
         (Format-VersionList -Versions @($Fixtures | ForEach-Object { $_.Version })) + ' with the desktop CLI')
     $runs = @(Invoke-WithoutGitEnvironment {
         foreach ($fixture in $Fixtures) {
             $job = Start-Job -ArgumentList $verify, $fixture.Apk, $env:HUSHFEED_DESKTOP_JAR,
-                (Join-Path $work $fixture.Version), $bundles[0].FullName, $patchList -ScriptBlock {
-                param($Verify, $Apk, $Jar, $WorkDir, $Bundle, $PatchList)
+                (Join-Path $work $fixture.Version), $bundles[0].FullName, $patchList, (Join-Path $kept $fixture.Version) -ScriptBlock {
+                param($Verify, $Apk, $Jar, $WorkDir, $Bundle, $PatchList, $KeepIn)
                 $global:LASTEXITCODE = 0
                 try {
-                    & $Verify -Apk $Apk -DesktopJar $Jar -WorkDir $WorkDir -Bundle $Bundle -PatchList $PatchList *>&1 |
+                    & $Verify -Apk $Apk -DesktopJar $Jar -WorkDir $WorkDir -Bundle $Bundle -PatchList $PatchList -KeepIn $KeepIn *>&1 |
                         ForEach-Object { "$_" }
                     $code = $LASTEXITCODE
                 } catch {
