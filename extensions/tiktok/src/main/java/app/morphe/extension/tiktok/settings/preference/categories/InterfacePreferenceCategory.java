@@ -512,6 +512,18 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     "Drag up or down along the left edge of a video to change the screen brightness, or along "
                             + "the right edge to change the volume. Swiping anywhere else still scrolls the feed.",
                     Settings.SWIPE_LEVELS));
+            // Speed is the playing video's, so it is only offered where the Playback speed patch
+            // is in the bundle. Brightness and volume stay where they were on each side.
+            String[] stripLabels = SettingsStatus.playbackSpeedEnabled
+                    ? new String[]{"Brightness", "Volume", "Speed"}
+                    : new String[]{"Brightness", "Volume"};
+            String[] stripValues = SettingsStatus.playbackSpeedEnabled
+                    ? new String[]{"brightness", "volume", "speed"}
+                    : new String[]{"brightness", "volume"};
+            addPreference(new ChoicePreference(context, "Left edge strip", Settings.SWIPE_LEVELS_LEFT,
+                    stripLabels, stripValues));
+            addPreference(new ChoicePreference(context, "Right edge strip", Settings.SWIPE_LEVELS_RIGHT,
+                    stripLabels, stripValues));
             addPreference(new NumberInputPreference(context, "Edge strip width",
                     "How wide each edge strip is, as a percent of the screen width.",
                     Settings.SWIPE_LEVELS_STRIP_PERCENT, "%1$s%%"));

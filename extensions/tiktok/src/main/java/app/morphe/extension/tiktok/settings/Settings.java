@@ -198,6 +198,15 @@ public class Settings extends BaseSettings {
     /** How wide each edge strip is, as a percent of the screen width. */
     public static final IntegerSetting SWIPE_LEVELS_STRIP_PERCENT =
             new IntegerSetting("swipe_levels_strip_percent", 15, false, Setting.parent(SWIPE_LEVELS)).withRange(5, 30);
+    /**
+     * What a drag along each edge strip changes: "brightness", "volume" or "speed" (the playing
+     * video's speed, which needs the Playback speed patch). The left strip starts on brightness and
+     * the right on volume, which is what the switch did before the strips could be chosen.
+     */
+    public static final StringSetting SWIPE_LEVELS_LEFT =
+            new StringSetting("swipe_levels_left", "brightness", false, Setting.parent(SWIPE_LEVELS));
+    public static final StringSetting SWIPE_LEVELS_RIGHT =
+            new StringSetting("swipe_levels_right", "volume", false, Setting.parent(SWIPE_LEVELS));
     public static final BooleanSetting FIT_VIDEO_TO_SCREEN =
             new BooleanSetting("fit_video_to_screen", FALSE);
     /** The opposite: crop the video until it covers the window (issue #29). Fit wins when both are on. */

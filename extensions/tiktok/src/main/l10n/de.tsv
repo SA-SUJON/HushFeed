@@ -1642,6 +1642,8 @@ Edge strip width	Breite der Randstreifen
 How wide each edge strip is, as a percent of the screen width.	Wie breit jeder Randstreifen ist, in Prozent der Bildschirmbreite.
 Brightness	Helligkeit
 Volume	Lautstärke
+Left edge strip	Linker Randstreifen
+Right edge strip	Rechter Randstreifen
 Stop search results playing on their own	Suchergebnisse nicht von selbst abspielen
 Videos in search results show their cover and play when you open them. The feed and the videos you open play as usual.	Videos in den Suchergebnissen zeigen ihr Vorschaubild und spielen erst, wenn du sie öffnest. Der Feed und Videos, die du öffnest, spielen wie gewohnt.
 In a chat	In einem Chat
