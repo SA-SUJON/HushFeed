@@ -596,6 +596,14 @@ tasks.withType<Test>().matching { it.name == "test" || it.name == "nativeTest" }
     // while it walks it; the fixture scans in nativeTest hold the same dex. Gradle's default
     // test heap is 512 MB, where that ran out of memory.
     maxHeapSize = "4g"
+    // nativeTest is some 600 single-threaded scans over the one declared build's dex. Two forks
+    // each decode it once (the [fixtures] line in the report counts decodes) and split the
+    // classes, which takes the two workers the build governor allows. 2 GB holds one 47.1.4 dex
+    // and a scan, so two forks take no more heap than the single 4 GB JVM did.
+    if (name == "nativeTest") {
+        maxParallelForks = 2
+        maxHeapSize = "2g"
+    }
     // What the folder holds is the input, not its name: a run whose APK was swapped, re-signed
     // or deleted under the same path has to run again, not come back up to date or out of the
     // build cache with the last folder's verdict. Relative, so where the folder sits on this
