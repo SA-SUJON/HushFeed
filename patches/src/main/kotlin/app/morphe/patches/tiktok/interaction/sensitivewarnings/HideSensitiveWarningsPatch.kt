@@ -7,6 +7,7 @@
 package app.morphe.patches.tiktok.interaction.sensitivewarnings
 
 import app.morphe.util.addInstruction
+import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
@@ -15,11 +16,25 @@ import app.morphe.patches.tiktok.misc.extension.sharedExtensionPatch
 import app.morphe.patches.tiktok.misc.settings.SettingsStatusLoadFingerprint
 import app.morphe.patches.tiktok.interaction.blockauthor.registerOfParameter
 import app.morphe.patches.tiktok.misc.settings.settingsPatch
+import app.morphe.patches.tiktok.shared.guardAtEntry
 
 private const val EXTENSION_CLASS_DESCRIPTOR =
     "Lapp/morphe/extension/tiktok/feed/SensitiveWarnings;"
 private const val VIDEO_ITEM_PARAMS_DESCRIPTOR =
     "Lcom/ss/android/ugc/aweme/feed/model/VideoItemParams;"
+
+/**
+ * The getter every reader of a video's risk model goes through: the Check sources banner
+ * (TnsBannerAssemTrigger), the warning label, the bottom notice, the share panel's warning flag
+ * and the share request's server extra. The field itself is only read here and where a video is
+ * copied or merged, which carry it over as it is. Named on every build.
+ */
+internal object AwemeRiskModelFingerprint : Fingerprint(
+    definingClass = "Lcom/ss/android/ugc/aweme/feed/model/Aweme;",
+    name = "getAwemeRiskModel",
+    returnType = "Lcom/ss/android/ugc/aweme/feed/model/AwemeRiskModel;",
+    parameters = emptyList(),
+)
 
 /**
  * Hooks the item bind rather than the overlay itself: the masks live on the Aweme, and
@@ -31,7 +46,9 @@ private const val VIDEO_ITEM_PARAMS_DESCRIPTOR =
 val hideSensitiveWarningsPatch = bytecodePatch(
     name = "Skip content warnings",
     description = "Play videos TikTok has classified without the warning " +
-        "overlay asking to be tapped through first. Switch: Hushfeed settings > Feed screen.",
+        "overlay asking to be tapped through first. A second switch takes away the Check sources banner " +
+        "on videos TikTok flags as unverified, and the warnings it shows when you share one. " +
+        "Switches: Hushfeed settings > Feed screen.",
     default = false,
 ) {
     category("Feed")
@@ -53,11 +70,23 @@ val hideSensitiveWarningsPatch = bytecodePatch(
                     "$VIDEO_ITEM_PARAMS_DESCRIPTOR parameter to clear.",
             )
 
+        val riskModel = AwemeRiskModelFingerprint.method
+
         // /range: a parameter register on a method this size sits well above v15.
         method.addInstruction(
             0,
             "invoke-static/range { $paramsRegister .. $paramsRegister }, " +
                 "$EXTENSION_CLASS_DESCRIPTOR->clear(Ljava/lang/Object;)V",
+        )
+
+        // No risk model is what most videos have, and every reader checks for one.
+        riskModel.guardAtEntry(
+            "Skip content warnings",
+            "invoke-static {}, $EXTENSION_CLASS_DESCRIPTOR->hideUnverifiedNotices()Z",
+            """
+                const/4 v0, 0x0
+                return-object v0
+            """,
         )
     }
 }

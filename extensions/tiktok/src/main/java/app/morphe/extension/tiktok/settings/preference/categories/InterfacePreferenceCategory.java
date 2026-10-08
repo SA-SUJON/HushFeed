@@ -456,6 +456,13 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                             + "through first.",
                     Settings.HIDE_SENSITIVE_WARNINGS
             ));
+            addPreference(new TogglePreference(
+                    context,
+                    "Hide unverified content notices",
+                    "Take away the Check sources banner TikTok puts on videos it flags as unverified, "
+                            + "and the warnings it shows when you share one.",
+                    Settings.HIDE_UNVERIFIED_NOTICES
+            ));
         }
         if (SettingsStatus.videoOverlaysEnabled) {
             addPreference(new TogglePreference(
