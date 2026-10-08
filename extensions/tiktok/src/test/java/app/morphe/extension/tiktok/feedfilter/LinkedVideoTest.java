@@ -92,6 +92,16 @@ public class LinkedVideoTest {
     }
 
     @Test
+    public void aPhotoPostLinkAndAMobileSiteLinkNameTheirPost() {
+        seen("7001");
+        seen("7002");
+        LinkedVideo.onNewIntent(view("https://www.tiktok.com/@someone/photo/7001"));
+        assertEquals(List.of("7001"), survivors(page("7001", "7002")));
+        LinkedVideo.onNewIntent(view("https://m.tiktok.com/v/7002.html"));
+        assertEquals(List.of("7002"), survivors(page("7001", "7002")));
+    }
+
+    @Test
     public void aShortLinkLetsTheLoneVideoOfAOneVideoResponseThrough() {
         seen("7001");
         seen("7002");

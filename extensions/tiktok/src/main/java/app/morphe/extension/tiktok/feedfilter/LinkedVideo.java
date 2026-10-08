@@ -39,9 +39,9 @@ public final class LinkedVideo {
     /** A launch ad can arrive on its own too, so a short link never vouches for one. */
     private static final String ADS_REASON = "AdsFilter";
 
-    /** The video id in a TikTok video page or the app's own detail address. */
+    /** The post id in a TikTok video or photo page, or in the app's own detail address. */
     private static final Pattern VIDEO_ID = Pattern.compile(
-            "/(?:share/video/|v/|@[^/]*/video/|detail/)([0-9]{1,20})/?");
+            "/(?:share/video/|v/|@[^/]*/(?:video|photo)/|detail/)([0-9]{1,20})(?:\\.html)?/?");
 
     /** The last link, replaced whole so a reader never sees half of one. */
     private static final AtomicReference<Link> last = new AtomicReference<>();
