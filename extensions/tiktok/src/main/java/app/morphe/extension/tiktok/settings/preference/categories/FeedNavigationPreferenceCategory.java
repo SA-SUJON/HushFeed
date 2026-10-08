@@ -25,7 +25,7 @@ public class FeedNavigationPreferenceCategory extends ConditionalPreferenceCateg
 
     /** Whether this page has anything on it. The row into it asks the same question. */
     public static boolean isAvailable() {
-        return SettingsStatus.feedNavigationEnabled;
+        return SettingsStatus.feedNavigationEnabled || SettingsStatus.bottomTabLabelsEnabled;
     }
 
     @Override
