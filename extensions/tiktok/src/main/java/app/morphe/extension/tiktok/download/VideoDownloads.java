@@ -69,11 +69,10 @@ final class VideoDownloads {
         // Read as the save is accepted: a forget in settings while it runs leaves it unrecorded.
         long archiveGeneration = SavedVideoArchive.generation();
         boolean showProgress = Settings.DOWNLOAD_PROGRESS.get();
-        boolean stampedFallback = Settings.DOWNLOAD_WATERMARK_FALLBACK.get();
+        boolean stampedFallback = stampedFallbackWanted();
         // TikTok's own save has no second try, so a fallback to the stamped copy needs the save
-        // here. With Remove watermark off TikTok's save is the stamped one already.
-        boolean extras = withDetails || withTags || checkSaved || showProgress
-                || (stampedFallback && DownloadsPatch.shouldRemoveWatermark());
+        // here.
+        boolean extras = withDetails || withTags || checkSaved || showProgress || stampedFallback;
         // Photo posts can carry a video model too. Quality, mute and subtitle choices must
         // not intercept their save before OriginalPhotos or TikTok's still/live-photo job.
         if (Reflect.property(aweme, "getPhotoModeImageInfo", "photoModeImageInfo") != null) return false;
@@ -366,6 +365,15 @@ final class VideoDownloads {
         if (DownloadsPatch.shouldRemoveWatermark()) return sourceUrls(video);
         List<String> stamped = urls(Reflect.property(video, "getDownloadAddr", "downloadAddr"));
         return stamped.isEmpty() ? sourceUrls(video) : stamped;
+    }
+
+    /**
+     * The stamped copy as a fallback is for a save that asked for the clean one. With Remove
+     * watermark off a failed fetch of a picked quality isn't a missing clean file, and the notice
+     * would blame the watermark for it.
+     */
+    static boolean stampedFallbackWanted() {
+        return Settings.DOWNLOAD_WATERMARK_FALLBACK.get() && DownloadsPatch.shouldRemoveWatermark();
     }
 
     /**

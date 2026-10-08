@@ -613,6 +613,23 @@ public class SavedVideoArchiveTest {
         }
     }
 
+    /** Without Remove watermark nothing asked for the clean file, so there's nothing to fall back from. */
+    @Test public void theFallbackWaitsForRemoveWatermark() {
+        boolean watermark = Settings.REMOVE_DOWNLOAD_WATERMARK.get();
+        try {
+            Settings.DOWNLOAD_WATERMARK_FALLBACK.save(true);
+            Settings.REMOVE_DOWNLOAD_WATERMARK.save(false);
+            assertFalse(VideoDownloads.stampedFallbackWanted());
+            Settings.REMOVE_DOWNLOAD_WATERMARK.save(true);
+            assertTrue(VideoDownloads.stampedFallbackWanted());
+            Settings.DOWNLOAD_WATERMARK_FALLBACK.save(false);
+            assertFalse(VideoDownloads.stampedFallbackWanted());
+        } finally {
+            Settings.REMOVE_DOWNLOAD_WATERMARK.save(watermark);
+            Settings.DOWNLOAD_WATERMARK_FALLBACK.resetToDefault();
+        }
+    }
+
     /** A video with TikTok's stamped address beside the clean one. */
     public static final class StampedPost extends DownloadDetailsTest.Post {
         StampedPost(String id) { super("alice", id); }
