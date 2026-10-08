@@ -12,6 +12,7 @@ import android.text.format.DateUtils;
 import com.ss.android.ugc.aweme.feed.model.Aweme;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -61,7 +62,13 @@ public final class AlwaysShowPublishDatePatch {
         }
         try {
             long seconds = postedAt(item, System.currentTimeMillis());
-            return seconds > 0 ? exactTime(seconds, Locale.getDefault(), TimeZone.getDefault()) : original;
+            if (seconds <= 0) return original;
+            Context context = Utils.getContext();
+            // Without a context the language's own clock stands.
+            boolean hour24 = context != null
+                    ? android.text.format.DateFormat.is24HourFormat(context)
+                    : ((SimpleDateFormat) DateFormat.getTimeInstance(DateFormat.LONG)).toPattern().indexOf('H') >= 0;
+            return exactTime(seconds, Locale.getDefault(), TimeZone.getDefault(), hour24);
         } catch (Throwable ex) {
             Logger.printException(() -> "Could not write the exact posting time", ex);
             return original;
@@ -136,12 +143,78 @@ public final class AlwaysShowPublishDatePatch {
     /**
      * The date with the time to the second and the zone, the way the phone's language writes them:
      * "Oct 7, 2025, 3:04:05 PM EDT" in American English, "07.10.2025, 15:04:05 MESZ" in German.
+     * The hours follow the phone's own 12 or 24 hour setting, which java.text never reads.
      */
-    static String exactTime(long seconds, Locale locale, TimeZone zone) {
+    static String exactTime(long seconds, Locale locale, TimeZone zone, boolean hour24) {
         // A new instance per call: DateFormat isn't thread safe.
         DateFormat format = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.LONG, locale);
+        if (format instanceof SimpleDateFormat) {
+            SimpleDateFormat simple = (SimpleDateFormat) format;
+            String pattern = simple.toPattern();
+            String clock = hourStyle(pattern, hour24);
+            if (!clock.equals(pattern)) simple.applyPattern(clock);
+        }
         format.setTimeZone(zone);
         return format.format(new Date(seconds * 1000L));
+    }
+
+    /**
+     * A date pattern with its hours written on a 24 hour clock ("HH", no AM/PM) or a 12 hour one
+     * ("h" with "a" after the seconds). Quoted text is left alone, and a pattern already on the
+     * asked clock comes back as it was.
+     */
+    static String hourStyle(String pattern, boolean hour24) {
+        boolean twelve = false, twentyFour = false, marker = false, quoted = false;
+        for (int i = 0; i < pattern.length(); i++) {
+            char c = pattern.charAt(i);
+            if (c == ''') quoted = !quoted;
+            else if (!quoted && (c == 'h' || c == 'K')) twelve = true;
+            else if (!quoted && (c == 'H' || c == 'k')) twentyFour = true;
+            else if (!quoted && c == 'a') marker = true;
+        }
+        if (hour24 ? !twelve && !marker : !twentyFour) return pattern;
+        StringBuilder out = new StringBuilder(pattern.length() + 2);
+        int afterTime = -1;
+        quoted = false;
+        for (int i = 0; i < pattern.length(); i++) {
+            char c = pattern.charAt(i);
+            if (c == ''') {
+                quoted = !quoted;
+                out.append(c);
+                continue;
+            }
+            if (quoted) {
+                out.append(c);
+                continue;
+            }
+            boolean hour = c == 'h' || c == 'K' || c == 'H' || c == 'k';
+            if (hour) {
+                while (i + 1 < pattern.length() && pattern.charAt(i + 1) == c) i++;
+                out.append(hour24 ? "HH" : "h");
+            } else if (c == 'a') {
+                if (!hour24) out.append(c);
+                // The space that set the marker apart goes with it, on whichever side it was.
+                else if (trimSpace(out) == 0 && i + 1 < pattern.length() && isSpace(pattern.charAt(i + 1))) i++;
+            } else {
+                out.append(c);
+            }
+            if (hour || c == 'm' || c == 's') afterTime = out.length();
+        }
+        if (!hour24 && !marker && afterTime >= 0) out.insert(afterTime, " a");
+        return out.toString();
+    }
+
+    private static int trimSpace(StringBuilder text) {
+        int removed = 0;
+        while (text.length() > 0 && isSpace(text.charAt(text.length() - 1))) {
+            text.setLength(text.length() - 1);
+            removed++;
+        }
+        return removed;
+    }
+
+    private static boolean isSpace(char c) {
+        return c == ' ' || c == ' ' || c == ' ';
     }
 
     /**

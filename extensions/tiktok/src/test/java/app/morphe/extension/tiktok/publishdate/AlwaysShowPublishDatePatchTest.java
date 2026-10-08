@@ -153,30 +153,54 @@ public class AlwaysShowPublishDatePatchTest {
 
     @Test
     public void theExactTimeHasTheSecondsAndTheZone() {
-        String utc = AlwaysShowPublishDatePatch.exactTime(POSTED, Locale.US, TimeZone.getTimeZone("UTC"));
+        String utc = AlwaysShowPublishDatePatch.exactTime(POSTED, Locale.US, TimeZone.getTimeZone("UTC"), false);
         assertTrue(utc, utc.startsWith("Oct 7, 2025"));
         assertTrue(utc, utc.contains("3:04:05"));
         assertTrue(utc, utc.contains("PM"));
         assertTrue(utc, utc.contains("UTC"));
 
-        String eastern = AlwaysShowPublishDatePatch.exactTime(POSTED, Locale.US, TimeZone.getTimeZone("America/New_York"));
+        String eastern = AlwaysShowPublishDatePatch.exactTime(POSTED, Locale.US, TimeZone.getTimeZone("America/New_York"), false);
         assertTrue(eastern, eastern.contains("11:04:05"));
         assertTrue(eastern, eastern.contains("EDT"));
     }
 
     @Test
     public void theExactTimeIsWrittenTheWayThePhonesLanguageWritesIt() {
-        String german = AlwaysShowPublishDatePatch.exactTime(POSTED, Locale.GERMANY, TimeZone.getTimeZone("UTC"));
+        String german = AlwaysShowPublishDatePatch.exactTime(POSTED, Locale.GERMANY, TimeZone.getTimeZone("UTC"), true);
         assertTrue(german, german.contains("07.10.2025"));
         assertTrue(german, german.contains("15:04:05"));
         assertFalse(german, german.contains("PM"));
     }
 
     @Test
+    public void theHoursFollowThePhonesClockSetting() {
+        String us24 = AlwaysShowPublishDatePatch.exactTime(POSTED, Locale.US, TimeZone.getTimeZone("UTC"), true);
+        assertTrue(us24, us24.startsWith("Oct 7, 2025"));
+        assertTrue(us24, us24.contains("15:04:05"));
+        assertFalse(us24, us24.contains("PM"));
+        assertTrue(us24, us24.contains("UTC"));
+
+        String german12 = AlwaysShowPublishDatePatch.exactTime(POSTED, Locale.GERMANY, TimeZone.getTimeZone("UTC"), false);
+        assertTrue(german12, german12.contains("07.10.2025"));
+        assertTrue(german12, Pattern.compile("\b3:04:05\b").matcher(german12).find());
+        assertTrue(german12, german12.contains("PM"));
+    }
+
+    @Test
+    public void theClockRewriteLeavesQuotesAndMatchingPatternsAlone() {
+        assertEquals("MMM d, y, HH:mm:ss z", AlwaysShowPublishDatePatch.hourStyle("MMM d, y, h:mm:ss a z", true));
+        assertEquals("MMM d, y, h:mm:ss a z", AlwaysShowPublishDatePatch.hourStyle("MMM d, y, h:mm:ss a z", false));
+        assertEquals("dd.MM.y, h:mm:ss a z", AlwaysShowPublishDatePatch.hourStyle("dd.MM.y, HH:mm:ss z", false));
+        assertEquals("dd.MM.y, HH:mm:ss z", AlwaysShowPublishDatePatch.hourStyle("dd.MM.y, HH:mm:ss z", true));
+        assertEquals("y. M. d. HH:mm:ss z", AlwaysShowPublishDatePatch.hourStyle("y. M. d. a h:mm:ss z", true));
+        assertEquals("d 'h' HH:mm", AlwaysShowPublishDatePatch.hourStyle("d 'h' h:mm a", true));
+    }
+
+    @Test
     public void theSwitchPutsTheExactTimeOnTheCreatorsRow() {
         Settings.PUBLISH_DATE_EXACT_TIME.save(true);
         String text = AlwaysShowPublishDatePatch.postTime("2d ago", new Post(POSTED, POSTED_ID));
-        assertEquals(AlwaysShowPublishDatePatch.exactTime(POSTED, Locale.US, TimeZone.getTimeZone("UTC")), text);
+        assertEquals(AlwaysShowPublishDatePatch.exactTime(POSTED, Locale.US, TimeZone.getTimeZone("UTC"), false), text);
         assertTrue(text, Pattern.compile("\\b3:04:05\\b").matcher(text).find());
         // Nothing to go on leaves TikTok's own text.
         assertEquals("2d ago", AlwaysShowPublishDatePatch.postTime("2d ago", new Post(0, "not an id")));
