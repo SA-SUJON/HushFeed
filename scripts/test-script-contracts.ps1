@@ -3082,6 +3082,18 @@ Assert-True ($libsReaders.Count -eq 0) `
 
 Write-Host '[scripts] release bundle path contracts passed'
 
+# Every tracked PowerShell file parses. Most scripts here run only on a release or on a phone, so
+# a syntax slip would otherwise surface there first: a "$label:" in build-release-receipt.ps1
+# passed every contract above and stopped the first receipt that reached it.
+$unparsed = New-Object System.Collections.Generic.List[string]
+foreach ($tracked in @(& git -C $Root ls-files -- '*.ps1')) {
+    $parseErrors = $null
+    [void][System.Management.Automation.Language.Parser]::ParseFile((Join-Path $Root $tracked), [ref]$null, [ref]$parseErrors)
+    foreach ($parseError in @($parseErrors)) { $unparsed.Add("${tracked}:$($parseError.Extent.StartLineNumber) $($parseError.Message)") }
+}
+Assert-True ($unparsed.Count -eq 0) ("These scripts don't parse: " + ($unparsed -join '; '))
+Write-Host '[scripts] every tracked PowerShell file parses'
+
 # --- tracked files name no machine -----------------------------------------------------------
 #
 # No tracked file names the working-notes folder .gitignore keeps out, the backup folders on the
