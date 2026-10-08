@@ -6,11 +6,14 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PermissionInfo;
 import android.content.pm.ProviderInfo;
 
@@ -203,6 +206,27 @@ public class BesideStoreAppTest {
         assertEquals(MULTIPROCESS_AUTHORITY, BesideStoreApp.declared(MULTIPROCESS_AUTHORITY));
     }
 
+    @Test public void aProviderTheManifestDeclaresDisabledIsFoundToo() {
+        assertTrue("the read leaves disabled providers out",
+                (BesideStoreApp.MANIFEST_FLAGS & PackageManager.GET_DISABLED_COMPONENTS) != 0);
+        install(ownPackage, false, ownPackage + "_" + MULTIPROCESS_AUTHORITY);
+        assertEquals(ownPackage + "_" + MULTIPROCESS_AUTHORITY, BesideStoreApp.declared(MULTIPROCESS_AUTHORITY));
+    }
+
+    @Test public void aManifestReadThatFailedIsTriedAgainAtTheNextName() {
+        // A package the package manager doesn't know yet makes the read fail, as a binder
+        // error early in a start would.
+        String copy = "com.example.tiktokcopy";
+        Utils.setContext(new ContextWrapper(context) {
+            @Override public String getPackageName() {
+                return copy;
+            }
+        });
+        assertEquals(MULTIPROCESS_AUTHORITY, BesideStoreApp.declared(MULTIPROCESS_AUTHORITY));
+        install(copy, true, copy + "_" + MULTIPROCESS_AUTHORITY);
+        assertEquals(copy + "_" + MULTIPROCESS_AUTHORITY, BesideStoreApp.declared(MULTIPROCESS_AUTHORITY));
+    }
+
     @Test public void theStoreAppAPauseAndNoContextLeaveANameAsTikTokBuiltIt() {
         declareInManifest(ownPackage + "_" + MULTIPROCESS_AUTHORITY);
         Utils.setContext(storeApp());
@@ -235,20 +259,32 @@ public class BesideStoreAppTest {
      * package, into the package manager as the copy's manifest would declare them.
      */
     private void declareInManifest(String... authorities) {
+        install(ownPackage, true, authorities);
+    }
+
+    /** Installs {@code packageName} with providers of these authorities, enabled or not, and the wallpaper permission. */
+    private void install(String packageName, boolean enabled, String... authorities) {
         PackageInfo info = new PackageInfo();
-        info.packageName = ownPackage;
-        info.applicationInfo = context.getApplicationInfo();
+        info.packageName = packageName;
+        if (packageName.equals(ownPackage)) {
+            info.applicationInfo = context.getApplicationInfo();
+        } else {
+            info.applicationInfo = new ApplicationInfo();
+            info.applicationInfo.packageName = packageName;
+        }
         info.providers = new ProviderInfo[authorities.length];
         for (int i = 0; i < authorities.length; i++) {
             ProviderInfo provider = new ProviderInfo();
-            provider.packageName = ownPackage;
+            provider.packageName = packageName;
             provider.name = "com.ss.android.ugc.aweme.crash.cp.ShellProvider" + i;
             provider.authority = authorities[i];
+            provider.enabled = enabled;
+            provider.applicationInfo = info.applicationInfo;
             info.providers[i] = provider;
         }
         PermissionInfo permission = new PermissionInfo();
-        permission.packageName = ownPackage;
-        permission.name = ownPackage + ".permission.wallpaper";
+        permission.packageName = packageName;
+        permission.name = packageName + ".permission.wallpaper";
         info.permissions = new PermissionInfo[] { permission };
         shadowOf(context.getPackageManager()).installPackage(info);
     }

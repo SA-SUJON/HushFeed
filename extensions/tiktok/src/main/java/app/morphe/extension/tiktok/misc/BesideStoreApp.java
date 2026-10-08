@@ -56,6 +56,8 @@ public final class BesideStoreApp {
     static final String PACKAGE_KEY = "package";
 
     private static volatile boolean logged;
+    /** Whether a manifest read already failed and said so, so a failing read logs once. */
+    private static volatile boolean readFailed;
     /** Every provider authority and permission this package's manifest declares, read once. */
     @Nullable
     private static volatile Set<String> declaredNames;
@@ -151,20 +153,33 @@ public final class BesideStoreApp {
         return name;
     }
 
-    /** Every provider authority and permission this package declares, read from the manifest once. */
+    /**
+     * What the manifest read asks for. A provider the manifest declares disabled, for TikTok to
+     * turn on later, still has the name Clone app gave it, and without the disabled flag Android
+     * leaves it out of the list. GET_DISABLED_COMPONENTS is MATCH_DISABLED_COMPONENTS's API 23
+     * name, the same bit.
+     */
+    @SuppressWarnings("deprecation")
+    static final int MANIFEST_FLAGS = PackageManager.GET_PROVIDERS | PackageManager.GET_PERMISSIONS
+            | PackageManager.GET_DISABLED_COMPONENTS;
+
+    /** Every provider authority and permission this package declares, read from the manifest once it reads. */
     static Set<String> declaredNames(Context context) {
         Set<String> names = declaredNames;
         if (names != null) return names;
         names = readDeclaredNames(context);
+        // A read that failed isn't kept, so the next name asks again rather than the whole
+        // process answering every name as TikTok built it.
+        if (names == null) return Collections.emptySet();
         declaredNames = names;
         return names;
     }
 
+    @Nullable
     private static Set<String> readDeclaredNames(Context context) {
         Set<String> names = new HashSet<>();
         try {
-            PackageInfo info = context.getPackageManager().getPackageInfo(
-                    context.getPackageName(), PackageManager.GET_PROVIDERS | PackageManager.GET_PERMISSIONS);
+            PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), MANIFEST_FLAGS);
             if (info.providers != null) {
                 for (ProviderInfo provider : info.providers) {
                     // One provider may serve several authorities, written with ';' between them.
@@ -177,13 +192,18 @@ public final class BesideStoreApp {
                 }
             }
         } catch (PackageManager.NameNotFoundException | RuntimeException failure) {
-            Logger.printException(() -> "Beside the store app: could not read this package's providers", failure);
+            if (!readFailed) {
+                readFailed = true;
+                Logger.printException(() -> "Beside the store app: could not read this package's providers", failure);
+            }
+            return null;
         }
         return Collections.unmodifiableSet(names);
     }
 
     static void resetForTests() {
         logged = false;
+        readFailed = false;
         declaredNames = null;
         reported.clear();
     }
