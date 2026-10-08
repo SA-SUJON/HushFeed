@@ -315,6 +315,31 @@ try {
     Assert-True ($notIcon.Output -match 'layout/bj \[default\]: res/layout/bj\.xml is not the file the stock archive holds for it') `
         "The changed layout beside the icon was not named.`n$($notIcon.Output)"
 
+    # Trust user certificates adds the user's certificates to the network security config the
+    # manifest's application names, so other bytes there are reported. The same APK's layout with
+    # other bytes still fails.
+    $networkFiles = [ordered]@{}
+    foreach ($entry in $stockFiles.GetEnumerator()) { $networkFiles[$entry.Key] = $entry.Value }
+    $networkFiles['res/xml/network.xml'] = @'
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" overridePins="true" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
+'@
+    $networkManifest = $manifest -replace '<application ', '<application android:networkSecurityConfig="@xml/network" '
+    $networkStock = New-ResourceApk -Name 'network-stock' -Files $networkFiles -ManifestText $networkManifest
+    $trusting = Copy-ApkWithLongerFile -From $networkStock -Name 'network-trusting' -Path 'res/xml/network.xml'
+    $network = Invoke-Check -Stock $networkStock -Patched $trusting -Name 'network-trusting'
+    Assert-True ($network.ExitCode -eq 0) "A rewritten network security config failed the check.`n$($network.Output)"
+    Assert-True ($network.Output -match '(?m)network security config files rewritten \(Trust user certificates\): 1$') `
+        "The rewritten network security config was not reported.`n$($network.Output)"
+    $networkAndLayout = Copy-ApkWithLongerFile -From $trusting -Name 'network-and-layout' -Path 'res/layout/bj.xml'
+    $notNetwork = Invoke-Check -Stock $networkStock -Patched $networkAndLayout -Name 'network-and-layout'
+    Assert-True ($notNetwork.ExitCode -eq 1) "A changed layout passed beside a rewritten network security config.`n$($notNetwork.Output)"
+
     # A type renamed in the table's own type pool: every color resolves to a type called colox.
     # The pool is UTF-16 as aapt2 writes type names (length 5, then the characters); UTF-8 is the
     # other layout a pool can have.
