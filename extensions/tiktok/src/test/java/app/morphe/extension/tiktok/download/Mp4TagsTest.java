@@ -136,7 +136,7 @@ public class Mp4TagsTest {
     }
 
     @Test public void aNarrowOffsetThatWouldOverflowStopsTheRewrite() {
-        byte[] moov = box("moov", box("trak", box("mdia", box("minf", box("stbl", stco(false, 0xFFFFFF00L)))))));
+        byte[] moov = box("moov", box("trak", box("mdia", box("minf", box("stbl", stco(false, 0xFFFFFF00L))))));
         assertFalse(Mp4Tags.shiftChunkOffsets(moov, 0, moov.length, 0, 0x200, true));
         assertTrue(Mp4Tags.shiftChunkOffsets(moov, 0, moov.length, 0xFFFFFFFFL, 0x200, true));
     }

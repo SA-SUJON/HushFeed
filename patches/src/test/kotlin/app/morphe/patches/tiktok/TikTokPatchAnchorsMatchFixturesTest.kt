@@ -748,11 +748,11 @@ class TikTokPatchAnchorsMatchFixturesTest {
                 Triple(sticker, "getType", "I"),
                 Triple(sticker, "getTextStruct", "Ljava/lang/String;"),
             )) {
-                assertTrue("${apk.name}: $type.$name()$returns", classes[type]?.methods.orEmpty().any {
+                assertTrue("${apk.name}: $type.$name()$returns", classes[type]?.methods?.toList().orEmpty().any {
                     it.name == name && it.parameterTypes.isEmpty() && it.returnType == returns
                 })
             }
-            val readsTextStickerWords = classes[translation]?.methods.orEmpty().any { method ->
+            val readsTextStickerWords = classes[translation]?.methods?.toList().orEmpty().any { method ->
                 val instructions = method.implementation?.instructions?.toList().orEmpty()
                 fun calls(name: String) = instructions.any {
                     val reference = (it as? ReferenceInstruction)?.reference as? MethodReference
@@ -764,7 +764,7 @@ class TikTokPatchAnchorsMatchFixturesTest {
             }
             assertTrue("${apk.name}: the translation service reads a type 18 sticker's textStruct", readsTextStickerWords)
             // The editor writes the typed text into textStruct as type 20 with a caption model, else 18.
-            val written = classes[textModel]?.methods.orEmpty().singleOrNull { it.name == "getInteractStickerStruct" }
+            val written = classes[textModel]?.methods?.toList().orEmpty().singleOrNull { it.name == "getInteractStickerStruct" }
             val instructions = written?.implementation?.instructions?.toList().orEmpty()
             val literals = instructions.filter { it.opcode == Opcode.CONST_16 }
                 .map { (it as NarrowLiteralInstruction).narrowLiteral }.toSet()

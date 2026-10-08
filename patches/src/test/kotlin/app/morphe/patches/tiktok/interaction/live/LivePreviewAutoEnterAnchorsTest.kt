@@ -71,7 +71,7 @@ class LivePreviewAutoEnterAnchorsTest {
             assertTrue(
                 "${apk.name}: the fixed countdown no longer reads live_preview_page_auto_entering_request_delay",
                 fixed.any { candidate ->
-                    candidate.implementation?.instructions.orEmpty().any {
+                    candidate.implementation?.instructions?.toList().orEmpty().any {
                         ((it as? ReferenceInstruction)?.reference as? StringReference)?.string ==
                             "live_preview_page_auto_entering_request_delay"
                     }

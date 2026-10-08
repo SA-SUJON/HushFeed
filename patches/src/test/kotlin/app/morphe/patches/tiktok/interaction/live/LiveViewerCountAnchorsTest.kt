@@ -78,7 +78,7 @@ class LiveViewerCountAnchorsTest {
             }
             // Every static (J)String call to a non-JDK class in the widget is one of the four,
             // so no formatted count is left showing TikTok's rounded text.
-            val all = widget.methods.flatMap { it.implementation?.instructions.orEmpty() }.count {
+            val all = widget.methods.flatMap { it.implementation?.instructions?.toList().orEmpty() }.count {
                 val ref = (it as? ReferenceInstruction)?.reference as? MethodReference
                 it.opcode == Opcode.INVOKE_STATIC && ref != null && !ref.definingClass.startsWith("Ljava/") &&
                     ref.returnType == "Ljava/lang/String;" && ref.parameterTypes.map(CharSequence::toString) == listOf("J")

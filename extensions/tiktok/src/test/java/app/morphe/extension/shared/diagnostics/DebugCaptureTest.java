@@ -9,6 +9,7 @@ import android.text.format.DateFormat;
 
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.BaseSettings;
+import app.morphe.extension.shared.settings.PausedProcess;
 import app.morphe.extension.shared.settings.Setting;
 import app.morphe.extension.tiktok.SettingsContextRule;
 import app.morphe.extension.tiktok.settings.SettingsBackup;
@@ -63,7 +64,7 @@ public class DebugCaptureTest {
     }
 
     @After public void tearDown() {
-        Setting.setPausedForProcess(false);
+        PausedProcess.set(false);
         DebugCapture.resetForTests();
         BaseSettings.DEBUG.resetToDefault();
     }
@@ -223,7 +224,7 @@ public class DebugCaptureTest {
     }
 
     @Test public void aCaptureLogsWhileHushfeedIsPaused() {
-        Setting.setPausedForProcess(true);
+        PausedProcess.set(true);
         DebugCapture.start();
 
         assertTrue(BaseSettings.DEBUG.get());
