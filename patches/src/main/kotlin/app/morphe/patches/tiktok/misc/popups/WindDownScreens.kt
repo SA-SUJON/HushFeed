@@ -53,7 +53,7 @@ internal fun windDownCheckName(classBy: (String) -> ClassDef?): String {
     val built = slot.methods.singleOrNull {
         it.name == "onViewCreated" && it.parameterTypes.map(CharSequence::toString) == listOf("Landroid/view/View;")
     } ?: throw PatchException("Block popups: the sleep-hour slot has no onViewCreated(View).")
-    val asked = built.implementation?.instructions.orEmpty().mapNotNull { instruction ->
+    val asked = built.implementation?.instructions?.toList().orEmpty().mapNotNull { instruction ->
         instruction.getReference<MethodReference>()?.takeIf {
             it.definingClass == SLEEP_HOUR_TRIGGER && it.name in checks && it.parameterTypes.isEmpty()
         }?.name
@@ -93,7 +93,7 @@ internal fun windDownSites(classBy: (String) -> ClassDef?): WindDownSites {
 
 /** Each return in [method] with the register it returns, in code order. */
 internal fun returnRegisters(method: Method): List<Pair<Int, Int>> =
-    method.implementation?.instructions.orEmpty().withIndex()
+    method.implementation?.instructions?.toList().orEmpty().withIndex()
         .filter { it.value.opcode == Opcode.RETURN }
         .map { (index, instruction) -> index to (instruction as OneRegisterInstruction).registerA }
 

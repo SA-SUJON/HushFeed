@@ -53,7 +53,7 @@ class WindDownScreensAnchorsTest {
             val other = app.getValue(SLEEP_HOUR_TRIGGER).methods
                 .single { it.parameterTypes.isEmpty() && it.returnType == "Z" && it.name != sites.check }.name
             fun calls(owner: String, name: String) = app.getValue(owner).methods.sumOf { method ->
-                method.implementation?.instructions.orEmpty().count { instruction ->
+                method.implementation?.instructions?.toList().orEmpty().count { instruction ->
                     instruction.getReference<MethodReference>()?.let {
                         it.definingClass == SLEEP_HOUR_TRIGGER && it.name == name
                     } == true
