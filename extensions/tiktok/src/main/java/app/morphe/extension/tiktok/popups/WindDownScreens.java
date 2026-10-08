@@ -91,7 +91,8 @@ public final class WindDownScreens {
 
     private static boolean tiktokSaysAdult() {
         // Signed out, the saved details can be a previous account's.
-        if (SignedInUser.id() == null) return false;
+        String user = SignedInUser.id();
+        if (user == null) return false;
         Lookups found = lookups();
         if (found == null) return false;
         try {
@@ -101,11 +102,31 @@ public final class WindDownScreens {
                 if (service == null) return false;
                 found.service = service;
             }
-            return adultFrom(found.role.invoke(found.pairing), found.details.invoke(service));
+            Object details = found.details.invoke(service);
+            return detailsAreFor(user, details) && adultFrom(found.role.invoke(found.pairing), details);
         } catch (Throwable unreadable) {
             // The service may still be starting; the next check asks again.
             return false;
         }
+    }
+
+    /** The saved details last seen, and who was signed in when that copy first showed up. */
+    private static Object detailsSeen;
+    private static String detailsOwner;
+
+    /**
+     * Whether {@code details} are {@code user}'s. They carry no account id, but TikTok keeps one
+     * copy and swaps it for a new one when its server answers again, as it does after a switch of
+     * account. So a copy belongs to whoever was signed in when it first showed up, and after a
+     * switch the old copy is no one's until TikTok has the new account's.
+     */
+    static synchronized boolean detailsAreFor(String user, @Nullable Object details) {
+        if (details == null) return false;
+        if (details != detailsSeen) {
+            detailsSeen = details;
+            detailsOwner = user;
+        }
+        return user.equals(detailsOwner);
     }
 
     private static final class Lookups {
@@ -199,9 +220,11 @@ public final class WindDownScreens {
         }
     }
 
-    static void resetForTests() {
+    static synchronized void resetForTests() {
         lookups = null;
         unavailable = false;
         adultCheck = WindDownScreens::tiktokSaysAdult;
+        detailsSeen = null;
+        detailsOwner = null;
     }
 }

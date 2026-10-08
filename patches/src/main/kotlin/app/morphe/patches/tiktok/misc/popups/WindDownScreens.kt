@@ -12,6 +12,7 @@ import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
+import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
@@ -86,9 +87,19 @@ internal fun windDownSites(classBy: (String) -> ClassDef?): WindDownSites {
         if (self > 15 || returns.any { (_, register) -> register > 15 }) {
             throw PatchException("Block popups: $type->$check works in registers too high for the hook.")
         }
+        // The hook hands p0 over as the trigger at each return, so nothing before may reuse it.
+        if (code.instructions.any { it.writes(self) }) {
+            throw PatchException("Block popups: $type->$check reuses p0, so it isn't the trigger at its returns.")
+        }
         method
     }
     return WindDownSites(check, triggers)
+}
+
+/** Whether this instruction writes [register], either half of a wide write included. */
+internal fun Instruction.writes(register: Int): Boolean {
+    if (!opcode.setsRegister() || this !is OneRegisterInstruction) return false
+    return registerA == register || (opcode.setsWideRegister() && registerA + 1 == register)
 }
 
 /** Each return in [method] with the register it returns, in code order. */

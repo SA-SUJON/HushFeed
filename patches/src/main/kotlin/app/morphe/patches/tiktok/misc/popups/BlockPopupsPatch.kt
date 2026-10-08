@@ -261,10 +261,16 @@ val blockPopupsPatch = bytecodePatch(
         PopSuiteTriggerFingerprint.method.passCampaignToChecklist()
         LiveBubbleCheckFingerprint.method.returnEarlyWhen("hideLiveBubble", "return-void")
 
-        windDown?.triggers?.forEach { trigger ->
-            mutableClassDefBy(trigger.definingClass).methods.single {
-                it.name == trigger.name && it.parameterTypes.isEmpty() && it.returnType == "Z"
-            }.keepBackWindDown()
+        if (windDown != null) {
+            windDown.triggers.forEach { trigger ->
+                mutableClassDefBy(trigger.definingClass).methods.single {
+                    it.name == trigger.name && it.parameterTypes.isEmpty() && it.returnType == "Z"
+                }.keepBackWindDown()
+            }
+            SettingsStatusLoadFingerprint.method.addInstruction(
+                0,
+                "invoke-static {}, Lapp/morphe/extension/tiktok/settings/SettingsStatus;->enableWindDownScreens()V",
+            )
         }
     }
 }

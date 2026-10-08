@@ -426,16 +426,19 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     "Stop the bubble TikTok floats at the top of the feed to point you to a LIVE.",
                     Settings.HIDE_LIVE_BUBBLE
             ));
-            addPreference(new TogglePreference(
-                    context,
-                    "Hide TikTok's wind-down screens",
-                    "Stop the bedtime wind-down, the breathing exercise and the daily limit screen "
-                            + "TikTok puts over the feed. It only works on an account TikTok knows is an "
-                            + "adult's. A teen's account keeps them, and so does one Family Pairing links "
-                            + "to a parent. With Leave when TikTok says time is up on, the daily limit "
-                            + "screen still comes up so that switch can act on it.",
-                    Settings.HIDE_WIND_DOWN_SCREENS
-            ));
+            // Left out with its hook on a build where the triggers' check wasn't found.
+            if (SettingsStatus.windDownScreensEnabled) {
+                addPreference(new TogglePreference(
+                        context,
+                        "Hide TikTok's wind-down screens",
+                        "Stop the bedtime wind-down, the breathing exercise and the daily limit screen "
+                                + "TikTok puts over the feed. It only works on an account TikTok knows is an "
+                                + "adult's. A teen's account keeps them, and so does one Family Pairing links "
+                                + "to a parent. With Leave when TikTok says time is up on, the daily limit "
+                                + "screen still comes up so that switch can act on it.",
+                        Settings.HIDE_WIND_DOWN_SCREENS
+                ));
+            }
         }
         if (SettingsStatus.sensitiveWarningsEnabled) {
             addPreference(new TogglePreference(

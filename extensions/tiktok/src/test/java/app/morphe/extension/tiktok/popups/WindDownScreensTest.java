@@ -163,6 +163,22 @@ public class WindDownScreensTest {
         assertTrue("signed out, the saved details may be someone else's", WindDownScreens.eligible(meditation, true));
     }
 
+    @Test public void aSwitchOfAccountWaitsForTikTokToSaveTheNewOnesDetails() {
+        Settings.HIDE_WIND_DOWN_SCREENS.save(true);
+        SignedInUser.idForTests = "7000000000000000001";
+        Service service = new Service(new UserDetailsInfoBean(Boolean.FALSE));
+        PluggableExtentionKt.service = service;
+        assertFalse("the adult's own details", WindDownScreens.eligible(meditation, true));
+
+        SignedInUser.idForTests = "7000000000000000002";
+        assertTrue("the copy is still the adult's after the switch", WindDownScreens.eligible(meditation, true));
+        service.saved = new UserDetailsInfoBean(Boolean.FALSE);
+        assertFalse("TikTok saved the new account's", WindDownScreens.eligible(meditation, true));
+
+        SignedInUser.idForTests = "7000000000000000001";
+        assertTrue("switching back waits again", WindDownScreens.eligible(meditation, true));
+    }
+
     @Test public void aServiceThatIsntThereYetIsAskedForAgain() {
         Settings.HIDE_WIND_DOWN_SCREENS.save(true);
         SignedInUser.idForTests = "7000000000000000001";

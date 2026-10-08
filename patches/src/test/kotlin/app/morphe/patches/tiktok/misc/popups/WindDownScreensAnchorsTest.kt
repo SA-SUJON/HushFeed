@@ -136,7 +136,7 @@ class WindDownScreensAnchorsTest {
     }
 
     @Test
-    fun `a slot asking both checks as it's built, or a trigger in high registers, leaves the screens out`() {
+    fun `a slot asking both checks as it's built, or a trigger in high registers or reusing p0, leaves the screens out`() {
         val apk = Fixtures.declared().firstOrNull { it.isFile } ?: return
         val app = load(apk)
         val checks = app.getValue(SLEEP_HOUR_TRIGGER).methods
@@ -177,6 +177,16 @@ class WindDownScreensAnchorsTest {
             windDownSites { if (it == type) high else app[it] }
         }
         assertTrue(registers.message, registers.message!!.contains("registers too high"))
+
+        // A check that writes over p0 would hand the hook something other than the trigger.
+        val reusesSelf = trigger.withMethods(trigger.methods.map { method ->
+            if (method.name != check || method.parameterTypes.isNotEmpty()) return@map method
+            MutableMethod(method).apply { addInstructionsWithLabels(0, "const/4 p0, 0x0") }
+        })
+        val self = assertThrows(PatchException::class.java) {
+            windDownSites { if (it == type) reusesSelf else app[it] }
+        }
+        assertTrue(self.message, self.message!!.contains("reuses p0"))
 
         val missing = assertThrows(PatchException::class.java) {
             windDownSites { if (it == type) null else app[it] }
