@@ -9,6 +9,7 @@ import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.instruction.OffsetInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethodImplementation
@@ -43,10 +44,13 @@ class WatchHistoryFixturesTest {
             val flushes = methods.filter(::isViewReportFlush)
             assertEquals("$version batch send", 1, flushes.size)
 
-            // The class holds these two and its static initializer, nothing else that could send.
-            val onApi = methods.filter { it.definingClass == AWEME_STATS_API && it.name != "<clinit>" }
-            assertEquals("$version: every AwemeStatsApi method is guarded",
-                (reports + flushes).toSet(), onApi.toSet())
+            // The class holds these two, its static initializer and, on 47.0.3, LIZJ(List)Map, which
+            // only folds the batch's maps into one. Nothing else on it could send.
+            val onApi = methods.filter { it.definingClass == AWEME_STATS_API && it.name != "<clinit>" }.toSet()
+            assertTrue("$version: both senders are on AwemeStatsApi", onApi.containsAll(reports + flushes))
+            val others = onApi - (reports + flushes).toSet()
+            assertTrue("$version: every other AwemeStatsApi method only builds data: ${others.map { it.name }}",
+                others.all(::onlyBuildsData))
 
             for (method in reports + flushes) {
                 assertTrue("$version ${method.name}: TikTok already leaves it early",
@@ -78,6 +82,7 @@ class WatchHistoryFixturesTest {
         val flush = method(AWEME_STATS_API, "Ljava/util/List;", static = true,
             "const-string v0, \"first_install_time\"\nreturn-void")
         assertTrue(isViewReportFlush(flush))
+        assertFalse("a void method is a sender, not a helper", onlyBuildsData(flush))
         assertFalse("the one-item report also loads it", isViewReportFlush(
             method(AWEME_STATS_API, "LX/09bN;", static = true, "const-string v0, \"first_install_time\"\nreturn-void")))
     }
@@ -101,6 +106,15 @@ class WatchHistoryFixturesTest {
         assertEquals(before.size + 5, after.size)
         before.forEachIndexed { index, instruction -> assertSame(instruction, after[index + 5]) }
     }
+
+    /** A method that returns what it builds and calls nothing past the JDK, org.json and TikTok's list guard. */
+    private fun onlyBuildsData(method: Method) = method.returnType != "V" &&
+        method.implementation!!.instructions.all { instruction ->
+            val reference = (instruction as? ReferenceInstruction)?.reference as? MethodReference
+                ?: return@all true
+            reference.definingClass.startsWith("Ljava/") || reference.definingClass.startsWith("Lorg/json/") ||
+                reference.definingClass == "Lcom/bytedance/mt/protector/impl/collections/ListProtector;"
+        }
 
     private fun method(owner: String, parameter: String, static: Boolean, body: String): Method {
         val mutable = MutableMethod(ImmutableMethod(
