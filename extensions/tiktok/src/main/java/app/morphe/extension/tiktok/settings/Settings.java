@@ -683,6 +683,11 @@ public class Settings extends BaseSettings {
             new BooleanSetting("hide_chat_sticker_banner", FALSE);
     public static final BooleanSetting HIDE_CHAT_AI_REPLIES =
             new BooleanSetting("hide_chat_ai_replies", FALSE);
+    /** A message's double tap and sideways swipe in a chat, read at each gesture. */
+    public static final BooleanSetting TURN_OFF_CHAT_DOUBLE_TAP =
+            new BooleanSetting("turn_off_chat_double_tap", FALSE);
+    public static final BooleanSetting TURN_OFF_CHAT_SWIPE_REPLY =
+            new BooleanSetting("turn_off_chat_swipe_reply", FALSE);
     public static final StringSetting HIDE_INBOX_CUSTOM_TITLES =
             new StringSetting("hide_inbox_custom_titles", "");
     // Feed filter additions. The list based ones are read live, so a sound blocked from

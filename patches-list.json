@@ -3508,7 +3508,7 @@
     },
     {
       "name": "Hide inbox items",
-      "description": "Adds a switch for each row and header control on the Inbox tab, so message requests, TikTok Tako, TikTok Shop, the stories tray and the rest can be hidden individually, and switches for the call buttons, sticker suggestions and suggested replies inside a chat. Switch: Hushfeed settings > Inbox.",
+      "description": "Adds a switch for each row and header control on the Inbox tab, so message requests, TikTok Tako, TikTok Shop, the stories tray and the rest can be hidden individually, and switches for the call buttons, sticker suggestions and suggested replies inside a chat and for a message's double tap heart and swipe to reply. Switch: Hushfeed settings > Inbox.",
       "category": "Inbox",
       "use": false,
       "dependencies": [

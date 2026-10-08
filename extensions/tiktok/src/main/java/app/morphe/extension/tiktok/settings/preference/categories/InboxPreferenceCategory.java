@@ -155,6 +155,20 @@ public final class InboxPreferenceCategory extends ConditionalPreferenceCategory
                             + "chat. Messages you type or receive are untouched.",
                     Settings.HIDE_CHAT_AI_REPLIES
             ));
+            addPreference(new TogglePreference(
+                    context,
+                    "Turn off double tap to react",
+                    "A double tap on a message no longer adds a heart to it. A single tap and "
+                            + "a long press work as before.",
+                    Settings.TURN_OFF_CHAT_DOUBLE_TAP
+            ));
+            addPreference(new TogglePreference(
+                    context,
+                    "Turn off swipe to reply",
+                    "Swiping a message sideways no longer starts a reply to it. Taps and long "
+                            + "presses work as before.",
+                    Settings.TURN_OFF_CHAT_SWIPE_REPLY
+            ));
         }
         if (SettingsStatus.notificationControlsEnabled || SettingsStatus.expandActivityListEnabled
                 || SettingsStatus.suggestedVideoPushBlockEnabled) {

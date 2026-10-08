@@ -117,6 +117,7 @@ A change that loosens the budget waits until the day starts over and one that ti
 A comment poll shows how many picked each answer before you vote. Tapping an answer still votes.,A comment poll shows how many picked each answer before you vote. Tapping an answer still votes.
 A diagnostic report is already being saved,A diagnostic report is already being saved
 "A different account is signed in. Switch back to the one you set this up on, or enter who to message again.","A different account is signed in. Switch back to the one you set this up on, or enter who to message again."
+A double tap on a message no longer adds a heart to it. A single tap and a long press work as before.,A double tap on a message no longer adds a heart to it. A single tap and a long press work as before.
 A few seconds,A few seconds
 A field value couldn't be read. Check the values and try again.,A field value couldn't be read. Check the values and try again.
 A file named hushfeed-safe-mode in TikTok's folder under Android/data paused Hushfeed. Your settings stay as they are.,A file named hushfeed-safe-mode in TikTok's folder under Android/data paused Hushfeed. Your settings stay as they are.
@@ -1453,6 +1454,7 @@ Subtitles,Subtitles
 Subtitles: %1$s,Subtitles: %1$s
 Swipe for brightness and volume,Swipe for brightness and volume
 Swipe left,Swipe left
+Swiping a message sideways no longer starts a reply to it. Taps and long presses work as before.,Swiping a message sideways no longer starts a reply to it. Taps and long presses work as before.
 System,System
 Tag saved videos with their details,Tag saved videos with their details
 "Take the Add comment bar off videos you open from a profile, a hashtag, a sound or search, so the video fills the screen down to the bottom. The comment button on the right still opens comments.","Take the Add comment bar off videos you open from a profile, a hashtag, a sound or search, so the video fills the screen down to the bottom. The comment button on the right still opens comments."
@@ -1683,9 +1685,11 @@ Try a different word or clear the search.,Try a different word or clear the sear
 Try a different word or clear the search. Switches from patches you didn't tick in Morphe Manager aren't listed.,Try a different word or clear the search. Switches from patches you didn't tick in Morphe Manager aren't listed.
 "Try again, or go back to TikTok.","Try again, or go back to TikTok."
 Turn Hushfeed back on,Turn Hushfeed back on
+Turn off double tap to react,Turn off double tap to react
 Turn off haptics,Turn off haptics
 Turn off push notifications,Turn off push notifications
 Turn off screen transitions,Turn off screen transitions
+Turn off swipe to reply,Turn off swipe to reply
 Turn off the timer (TikTok closes at %1$s),Turn off the timer (TikTok closes at %1$s)
 Turn on %1$s first.,Turn on %1$s first.
 Turn on Keep a streak going first,Turn on Keep a streak going first

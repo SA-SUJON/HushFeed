@@ -62,7 +62,8 @@ val inboxFilterPatch = bytecodePatch(
     description = "Adds a switch for each row and header control on the Inbox tab, so " +
         "message requests, TikTok Tako, TikTok Shop, the stories tray and the rest can be " +
         "hidden individually, and switches for the call buttons, sticker suggestions and " +
-        "suggested replies inside a chat. Switch: Hushfeed settings > Inbox.",
+        "suggested replies inside a chat and for a message's double tap heart and swipe to " +
+        "reply. Switch: Hushfeed settings > Inbox.",
     default = false,
 ) {
     category("Inbox")
@@ -71,6 +72,10 @@ val inboxFilterPatch = bytecodePatch(
     compatibleWith(*AppCompatibilities.tiktok())
 
     execute {
+        // Found and checked before anything is written: a patch that fails part way keeps
+        // what it already wrote.
+        val gestures = ChatMessageGestureFingerprint.method
+        val gestureRegister = chatGestureRegister(gestures)
         val binding = InboxRowBindingFingerprint.method
         check(binding.implementation!!.instructions.any { instruction ->
             instruction.getReference<FieldReference>()?.let {
@@ -102,5 +107,6 @@ val inboxFilterPatch = bytecodePatch(
         ChatStickerBannerEnabledFingerprint.method.hideInboxWidget("shouldShowChatStickerBanner")
         ChatSuggestedReplyEnabledFingerprint.method.hideInboxWidget("shouldShowChatAiReplies")
         ChatSmartReplyIntroEnabledFingerprint.method.hideInboxWidget("shouldShowChatAiReplies")
+        gestures.skipChatGestures(gestureRegister)
     }
 }
