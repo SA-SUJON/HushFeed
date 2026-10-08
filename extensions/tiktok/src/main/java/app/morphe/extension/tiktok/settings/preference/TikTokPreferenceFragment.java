@@ -486,6 +486,23 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     }
 
     /**
+     * A choice row keeps its own summary, the chosen label with the restart note under it when
+     * its setting needs one. The shared sync writes the bare label over that, which is how the
+     * Proxy type and Store installer rows lost the note. A value the row has no label for still
+     * takes the shared path, which shows the raw value.
+     */
+    @Override
+    protected void updateListPreferenceSummary(android.preference.ListPreference list,
+                                               Setting<?> setting) {
+        if (list instanceof ChoicePreference
+                && list.findIndexOfValue(setting.savedValue().toString()) >= 0) {
+            ((ChoicePreference) list).showValue();
+            return;
+        }
+        super.updateListPreferenceSummary(list, setting);
+    }
+
+    /**
      * Pins the restart row while a restart is owed and takes it away when nothing is, and lets
      * the rows that owe it say "Restart pending" in place of the sentence every restart-gated
      * row carries, so the reader can see which of their changes are still waiting.
