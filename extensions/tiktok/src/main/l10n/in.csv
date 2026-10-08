@@ -1808,3 +1808,18 @@ Show how many were filtered,Tampilkan jumlah yang disaring
 "A small label under TikTok's top tabs counts what the feed filter has taken out since TikTok started. It shows only on the feed, and a tap on it reaches the video under it.","Label kecil di bawah tab atas TikTok menghitung apa saja yang sudah disaring filter feed sejak TikTok dibuka. Label ini hanya muncul di feed, dan ketukan di atasnya tetap sampai ke video di bawahnya."
 1 filtered out,1 disaring
 %1$d filtered out,%1$d disaring
+Account facts on profiles,Fakta akun di profil
+"A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched.","Lembar bagikan profil mendapat tombol Fakta akun. Tombol ini menampilkan apa yang sudah dikirim TikTok tentang akun itu: kapan bergabung, wilayah dan bahasanya, kapan nama pengguna dan nama tampilannya terakhir diubah, apakah akunnya privat, dan apakah video yang disukainya publik. Tidak ada data tambahan yang diambil."
+Account facts,Fakta akun
+Account facts copied,Fakta akun disalin
+Not sent,Tidak dikirim
+Joined,Bergabung
+Account region,Wilayah akun
+Language,Bahasa
+Username last changed,Nama pengguna terakhir diubah
+Display name last changed,Nama tampilan terakhir diubah
+Private account,Akun privat
+Liked videos,Video yang disukai
+Public,Publik
+Private,Privat
+Copy,Salin

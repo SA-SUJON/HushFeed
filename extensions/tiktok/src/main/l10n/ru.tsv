@@ -1979,3 +1979,18 @@ Show how many were filtered	Показывать, сколько отфильт�
 A small label under TikTok's top tabs counts what the feed filter has taken out since TikTok started. It shows only on the feed, and a tap on it reaches the video under it.	Небольшая метка под верхними вкладками TikTok считает, что фильтр ленты убрал с запуска TikTok. Она видна только в ленте, а нажатие на неё доходит до видео под ней.
 1 filtered out	Отфильтровано: 1
 %1$d filtered out	Отфильтровано: %1$d
+Account facts on profiles	Сведения об аккаунте в профилях
+A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched.	В меню «Поделиться» профиля появляется кнопка «Сведения об аккаунте». Она показывает то, что TikTok уже прислал об аккаунте: когда он создан, его регион и язык, когда последний раз менялись имя пользователя и отображаемое имя, закрыт ли он и открыты ли понравившиеся видео. Ничего дополнительно не загружается.
+Account facts	Сведения об аккаунте
+Account facts copied	Сведения об аккаунте скопированы
+Not sent	Не прислано
+Joined	Создан
+Account region	Регион аккаунта
+Language	Язык
+Username last changed	Имя пользователя изменено
+Display name last changed	Отображаемое имя изменено
+Private account	Закрытый аккаунт
+Liked videos	Понравившиеся видео
+Public	Открыты
+Private	Скрыты
+Copy	Копировать

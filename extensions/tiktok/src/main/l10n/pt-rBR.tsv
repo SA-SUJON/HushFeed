@@ -1814,3 +1814,18 @@ Show how many were filtered	Mostrar quantos foram filtrados
 A small label under TikTok's top tabs counts what the feed filter has taken out since TikTok started. It shows only on the feed, and a tap on it reaches the video under it.	Um pequeno rótulo abaixo das abas superiores do TikTok conta o que o filtro do feed tirou desde que o TikTok abriu. Ele só aparece no feed, e um toque nele chega ao vídeo embaixo.
 1 filtered out	1 filtrado
 %1$d filtered out	%1$d filtrados
+Account facts on profiles	Dados da conta nos perfis
+A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched.	O menu de compartilhar de um perfil ganha um botão Dados da conta. Ele mostra o que o TikTok já enviou sobre a conta: quando ela entrou, a região e o idioma, quando o nome de usuário e o nome de exibição mudaram pela última vez, se ela é privada e se os vídeos curtidos são públicos. Nada a mais é baixado.
+Account facts	Dados da conta
+Account facts copied	Dados da conta copiados
+Not sent	Não enviado
+Joined	Entrou em
+Account region	Região da conta
+Language	Idioma
+Username last changed	Última troca do nome de usuário
+Display name last changed	Última troca do nome de exibição
+Private account	Conta privada
+Liked videos	Vídeos curtidos
+Public	Públicos
+Private	Privados
+Copy	Copiar

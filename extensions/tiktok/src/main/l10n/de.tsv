@@ -1817,3 +1817,18 @@ Show how many were filtered	Anzahl der herausgefilterten Beiträge zeigen
 A small label under TikTok's top tabs counts what the feed filter has taken out since TikTok started. It shows only on the feed, and a tap on it reaches the video under it.	Ein kleines Etikett unter TikToks oberen Tabs zählt, was der Feed-Filter seit dem Start von TikTok entfernt hat. Es erscheint nur im Feed, und ein Tippen darauf erreicht das Video darunter.
 1 filtered out	1 herausgefiltert
 %1$d filtered out	%1$d herausgefiltert
+Account facts on profiles	Kontofakten auf Profilen
+A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched.	Das Teilen-Menü eines Profils bekommt eine Schaltfläche Kontofakten. Sie zeigt, was TikTok über das Konto ohnehin geschickt hat: wann es beigetreten ist, Region und Sprache, wann Nutzername und Anzeigename zuletzt geändert wurden, ob es privat ist und ob die gelikten Videos öffentlich sind. Es wird nichts zusätzlich abgerufen.
+Account facts	Kontofakten
+Account facts copied	Kontofakten kopiert
+Not sent	Nicht gesendet
+Joined	Beigetreten
+Account region	Kontoregion
+Language	Sprache
+Username last changed	Nutzername zuletzt geändert
+Display name last changed	Anzeigename zuletzt geändert
+Private account	Privates Konto
+Liked videos	Gelikte Videos
+Public	Öffentlich
+Private	Privat
+Copy	Kopieren

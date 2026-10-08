@@ -192,6 +192,15 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                             + "username and user ID, and a video's share sheet one that copies the video ID.",
                     Settings.COPY_IDS
             ));
+            addPreference(new TogglePreference(
+                    context,
+                    "Account facts on profiles",
+                    "A profile's share sheet gets an Account facts button. It shows what TikTok already "
+                            + "sent about the account: when it joined, its region and language, when its "
+                            + "username and display name last changed, whether it's private and whether "
+                            + "its liked videos are public. Nothing extra is fetched.",
+                    Settings.ACCOUNT_FACTS
+            ));
         }
         if (SettingsStatus.promotionalBannersEnabled) {
             addPreference(new TogglePreference(

@@ -4,6 +4,7 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Copy bio and IDs has a new switch in Hushfeed settings > App, Account facts on profiles, off by default. A profile's share sheet then gets an Account facts button next to the copy buttons. It lists when the account joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public, all from what TikTok already sent for the profile. Nothing extra is fetched, and anything the server left out says Not sent. Copy puts the whole list on the clipboard.
 * **TikTok:** Feed filter has a new switch under Advanced, Show how many were filtered, off by default. It puts a small label under TikTok's top tabs that counts what the feed filter has taken out since TikTok started, ads and the rest alike. It only shows on the feed once something's been taken out, and taps go through it to the video.
 
 * **TikTok:** Feed filter has a new switch under Words, countries and languages, Match text stickers too, off by default. With it on, Blocked caption words also reads the text stickers on a video, the words a creator types over it in TikTok's editor, and hides the video when one matches, the same way a caption match does. Text that's part of the picture itself isn't there to read. If your filters ever hide everything TikTok just sent, the notice names these as Text sticker words.

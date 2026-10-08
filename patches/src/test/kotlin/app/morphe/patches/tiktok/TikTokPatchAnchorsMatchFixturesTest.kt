@@ -983,6 +983,21 @@ class TikTokPatchAnchorsMatchFixturesTest {
                     it.name == getter && it.parameterTypes.isEmpty() && it.returnType == "Ljava/lang/String;"
                 })
             }
+            // Account facts reads these by their real names; a renamed or retyped one says Not sent.
+            val accountFields = classes.getValue(user).fields.associate { it.name to it.type }
+            for ((name, type) in listOf(
+                "createTime" to "Ljava/lang/Long;",
+                "registerTime" to "J",
+                "region" to "Ljava/lang/String;",
+                "accountRegion" to "Ljava/lang/String;",
+                "language" to "Ljava/lang/String;",
+                "uniqueIdModifyTime" to "J",
+                "nickNameModifyTs" to "I",
+                "secret" to "Z",
+                "hasOpenFavorite" to "Z",
+            )) {
+                assertEquals("the account's $name", type, accountFields[name])
+            }
         }
     }
 

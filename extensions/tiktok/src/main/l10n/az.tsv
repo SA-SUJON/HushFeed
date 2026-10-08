@@ -1814,3 +1814,18 @@ Show how many were filtered	Neçəsinin süzüldüyünü göstərin
 A small label under TikTok's top tabs counts what the feed filter has taken out since TikTok started. It shows only on the feed, and a tap on it reaches the video under it.	TikTok-un yuxarı tablarının altındakı kiçik nişan TikTok açılandan bəri lent filtrinin çıxardıqlarını sayır. O, yalnız lentdə görünür və ona toxunuş altındakı videoya çatır.
 1 filtered out	1 süzüldü
 %1$d filtered out	%1$d süzüldü
+Account facts on profiles	Profillərdə hesab faktları
+A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched.	Profilin paylaşma panelinə Hesab faktları düyməsi əlavə olunur. O, TikTok-un hesab haqqında artıq göndərdiklərini göstərir: nə vaxt qoşulduğunu, regionunu və dilini, istifadəçi adının və görünən adının sonuncu dəfə nə vaxt dəyişdiyini, hesabın gizli olub-olmadığını və bəyəndiyi videoların açıq olub-olmadığını. Əlavə heç nə yüklənmir.
+Account facts	Hesab faktları
+Account facts copied	Hesab faktları kopyalandı
+Not sent	Göndərilməyib
+Joined	Qoşulub
+Account region	Hesab regionu
+Language	Dil
+Username last changed	İstifadəçi adı sonuncu dəfə dəyişib
+Display name last changed	Görünən ad sonuncu dəfə dəyişib
+Private account	Gizli hesab
+Liked videos	Bəyənilən videolar
+Public	Hamıya açıq
+Private	Gizli
+Copy	Kopyala

@@ -130,6 +130,7 @@ A long press on Favorites plays the video at the hold speed instead of offering 
 A long press on Share plays the video at the hold speed instead of opening the quick share row. It needs Long press on TikTok default and Seek from the edges off.,A long press on Share plays the video at the hold speed instead of opening the quick share row. It needs Long press on TikTok default and Seek from the edges off.
 A message is already on its way,A message is already on its way
 A port is a whole number from 1 to 65535,A port is a whole number from 1 to 65535
+"A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched.","A profile's share sheet gets an Account facts button. It shows what TikTok already sent about the account: when it joined, its region and language, when its username and display name last changed, whether it's private and whether its liked videos are public. Nothing extra is fetched."
 "A screen's layout is recorded. Export the diagnostic report to send it, or tap to record another.","A screen's layout is recorded. Export the diagnostic report to send it, or tap to record another."
 "A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out.","A small label on the feed shows the minutes or videos left of today's budget, whichever is closer to running out."
 "A small label under TikTok's top tabs counts what the feed filter has taken out since TikTok started. It shows only on the feed, and a tap on it reaches the video under it.","A small label under TikTok's top tabs counts what the feed filter has taken out since TikTok started. It shows only on the feed, and a tap on it reaches the video under it."
@@ -141,6 +142,10 @@ AI-generated posts,AI-generated posts
 About,About
 About %1$s of storage at this limit,About %1$s of storage at this limit
 About overrides,About overrides
+Account facts,Account facts
+Account facts copied,Account facts copied
+Account facts on profiles,Account facts on profiles
+Account region,Account region
 Activity,Activity
 Activity center (PIA),Activity center (PIA)
 Add,Add
@@ -352,6 +357,7 @@ Confirm before liking a comment,Confirm before liking a comment
 Confirm before liking a story,Confirm before liking a story
 Continue supported videos from where you stopped when you scroll back to them.,Continue supported videos from where you stopped when you scroll back to them.
 Controls,Controls
+Copy,Copy
 Copy a quick report or save the full report as a file.,Copy a quick report or save the full report as a file.
 Copy bio and IDs,Copy bio and IDs
 Copy build details,Copy build details
@@ -449,6 +455,7 @@ Disabled,Disabled
 Discard edits,Discard edits
 Dismissed %1$s suggested accounts,Dismissed %1$s suggested accounts
 Dismissed one suggested account,Dismissed one suggested account
+Display name last changed,Display name last changed
 Do nothing,Do nothing
 Doesn't follow you back,Doesn't follow you back
 Don't save new searches,Don't save new searches
@@ -775,6 +782,7 @@ Includes all diagnostic events.,Includes all diagnostic events.
 Includes these events: %1$s,Includes these events: %1$s
 Inserted cards,Inserted cards
 "Install one, then come back here.","Install one, then come back here."
+Joined,Joined
 Keep For You on a Home tap,Keep For You on a Home tap
 Keep For You on a pull down,Keep For You on a pull down
 "Keep TikTok from telling you're on a VPN. Only the VPN shows as off to it, and your other connections read as they really are. Leave this off if you need a feature that checks for a VPN.","Keep TikTok from telling you're on a VPN. Only the VPN shows as off to it, and your other connections read as they really are. Leave this off if you need a feature that checks for a VPN."
@@ -814,6 +822,7 @@ Lab data reset. Undo last Lab change is in the menu. Restart TikTok to apply thi
 "Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this.","Lab data was over its rule limit, so it was cleared without an undo copy. Restart TikTok to apply this."
 Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok to apply this.,Lab overrides reset. Undo last Lab change is in the menu. Restart TikTok to apply this.
 Lab settings put back. Restart TikTok to apply this.,Lab settings put back. Restart TikTok to apply this.
+Language,Language
 Larger (1.25x),Larger (1.25x)
 Last change put back. Restart TikTok to apply all changes.,Last change put back. Restart TikTok to apply all changes.
 Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.,Last change put back. The Feature Gate Lab rules were for another TikTok version and were left out. Restart TikTok to apply all changes.
@@ -836,6 +845,7 @@ Let the last video finish,Let the last video finish
 Licenses,Licenses
 Lift text length limits,Lift text length limits
 Like,Like
+Liked videos,Liked videos
 Likes range,Likes range
 Limits,Limits
 Link copied,Link copied
@@ -962,6 +972,7 @@ Not requested in this process yet,Not requested in this process yet
 Not saved yet,Not saved yet
 Not seen,Not seen
 Not seen yet,Not seen yet
+Not sent,Not sent
 "Nothing has been checked yet, so there's nothing to report.","Nothing has been checked yet, so there's nothing to report."
 "Nothing has been looked up yet. Use the app for a moment, then come back.","Nothing has been looked up yet. Use the app for a moment, then come back."
 Nothing hidden.,Nothing hidden.
@@ -1082,6 +1093,8 @@ Preview shortened. Save report keeps the full report.,Preview shortened. Save re
 Preview with a made-up post:,Preview with a made-up post:
 Privacy,Privacy
 Privacy and system,Privacy and system
+Private,Private
+Private account,Private account
 Problem detected.,Problem detected.
 Problem detected. Story views may still be reported. Check Ghost mode diagnostics. The warning stays until TikTok restarts.,Problem detected. Story views may still be reported. Check Ghost mode diagnostics. The warning stays until TikTok restarts.
 Profile,Profile
@@ -1097,6 +1110,7 @@ Proxy password,Proxy password
 Proxy port,Proxy port
 Proxy type,Proxy type
 Proxy user name,Proxy user name
+Public,Public
 Pulling down at the top of For You no longer reloads it.,Pulling down at the top of For You no longer reloads it.
 Put %1$s in %2$s first.,Put %1$s in %2$s first.
 "Put a ✓ before the view count on profile grids for videos Hushfeed saved here. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos.","Put a ✓ before the view count on profile grids for videos Hushfeed saved here. It reads the record Check for already-saved videos keeps, so it works only while that switch is on. Photo posts aren't marked, and a video you've deleted since keeps its mark until you use Forget saved videos."
@@ -1723,6 +1737,7 @@ Use value,Use value
 Use your own offline videos limit,Use your own offline videos limit
 User ID copied,User ID copied
 Username copied,Username copied
+Username last changed,Username last changed
 Using TikTok's value,Using TikTok's value
 Value,Value
 Value to return,Value to return
