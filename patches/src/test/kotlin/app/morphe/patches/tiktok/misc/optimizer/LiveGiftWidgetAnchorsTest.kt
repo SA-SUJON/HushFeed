@@ -52,13 +52,13 @@ class LiveGiftWidgetAnchorsTest {
             val patched = MutableMethod(onCreate).apply { keepOnlyLiveWidgetCreate() }
             val after = patched.implementation!!.instructions.toList()
             val call = after[0].getReference<MethodReference>()!!
-            assertEquals("$version: opens with the super call", Opcode.INVOKE_SUPER, after[0].opcode)
+            assertTrue("$version: opens with the super call", after[0].opcode in setOf(Opcode.INVOKE_SUPER, Opcode.INVOKE_SUPER_RANGE))
             assertEquals("$version: the super call", "$LIVE_WIDGET_DESCRIPTOR->onCreate", "${call.definingClass}->${call.name}")
             assertEquals("$version: returns right after it", Opcode.RETURN_VOID, after[1].opcode)
 
             // With the widget's own setup skipped, every field onDestroy calls through without a
-            // null test has to be one the constructor sets.
-            val built = widget.methods.single { it.name == "<init>" }.fieldsSetOnSelf()
+            // null test has to be one a constructor sets.
+            val built = widget.methods.filter { it.name == "<init>" }.flatMap { it.fieldsSetOnSelf() }.toSet()
             val unsafe = widget.methods.single { it.name == "onDestroy" && it.parameterTypes.isEmpty() }
                 .uncheckedFieldCalls().filter { it !in built }
             assertEquals("$version: fields onDestroy calls through that only setup fills", emptyList<String>(), unsafe)
@@ -76,13 +76,16 @@ class LiveGiftWidgetAnchorsTest {
         assertTrue(failure.message, failure.message!!.contains("doesn't start with LiveWidget.onCreate"))
     }
 
-    private val Method.self get() = implementation!!.registerCount - 1
+    /** The register holding this: the parameters fill the last registers, after it. */
+    private val Method.self
+        get() = implementation!!.registerCount - 1 -
+            parameterTypes.sumOf { type -> if (type.toString() == "J" || type.toString() == "D") 2 else 1 }
 
     private fun Method.fieldsSetOnSelf(): Set<String> = implementation!!.instructions.filter { instruction ->
         instruction.opcode.name.startsWith("iput") && (instruction as TwoRegisterInstruction).registerB == self
     }.mapNotNull { it.getReference<FieldReference>()?.name }.toSet()
 
-    /** Fields read off this whose first use is a call made on them, not a null test. */
+    /** Fields read off this whose first use dereferences them (a call or a field access), not a null test. */
     private fun Method.uncheckedFieldCalls(): List<String> {
         val body = implementation!!.instructions.toList()
         return body.indices.filter { at ->
@@ -93,6 +96,8 @@ class LiveGiftWidgetAnchorsTest {
             val receiver = when (use) {
                 is FiveRegisterInstruction -> use.registerCount > 0 && use.registerC == register
                 is RegisterRangeInstruction -> use.startRegister == register
+                is TwoRegisterInstruction -> use.registerB == register &&
+                    (use.opcode.name.startsWith("iget") || use.opcode.name.startsWith("iput"))
                 else -> false
             }
             if (receiver && use.opcode != Opcode.INVOKE_STATIC && use.opcode != Opcode.INVOKE_STATIC_RANGE) {

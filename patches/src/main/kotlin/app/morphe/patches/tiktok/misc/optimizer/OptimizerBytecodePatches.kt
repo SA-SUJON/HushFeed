@@ -197,7 +197,9 @@ internal fun MutableMethod.keepOnlyLiveWidgetCreate() {
 internal fun Method.liveWidgetCreateIndex(): Int? {
     val first = implementation?.instructions?.firstOrNull() ?: return null
     val call = first.getReference<MethodReference>() ?: return null
-    val opensWithSuper = first.opcode == Opcode.INVOKE_SUPER && call.definingClass == LIVE_WIDGET_DESCRIPTOR &&
+    // A method with more than 16 registers gets the range form of the same call.
+    val superCall = first.opcode == Opcode.INVOKE_SUPER || first.opcode == Opcode.INVOKE_SUPER_RANGE
+    val opensWithSuper = superCall && call.definingClass == LIVE_WIDGET_DESCRIPTOR &&
         call.name == "onCreate" && call.parameterTypes.isEmpty() && call.returnType == "V"
     return if (opensWithSuper) 0 else null
 }
