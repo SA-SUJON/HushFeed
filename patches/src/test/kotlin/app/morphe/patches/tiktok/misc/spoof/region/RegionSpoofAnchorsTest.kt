@@ -130,13 +130,71 @@ class RegionSpoofAnchorsTest {
             assertTrue("$version: the map register v${fill.mapRegister} is past v15", fill.mapRegister <= 15)
             assertTrue("$version: p1 is past v15", registers - 2 <= 15)
             assertEquals("$version: what p1 is", handler.parameterTypes.first().toString(), fill.requestField.definingClass)
-            assertTrue("$version: the fill comes after the map", fill.fillAt == fill.mapAt + 2)
+            // Read off the bytecode itself rather than off what commonParamsFill hands back.
+            val instructions = handler.implementation!!.instructions.toList()
+            val created = instructions[fill.mapAt]
+            assertEquals("$version: what makes the map", Opcode.NEW_INSTANCE, created.opcode)
+            assertEquals("$version: the map's type", "Ljava/util/LinkedHashMap;", created.typeReference())
+            assertEquals("$version: where the map is made", fill.mapRegister, (created as OneRegisterInstruction).registerA)
+            val init = instructions[fill.fillAt - 1]
+            assertEquals("$version: what follows new-instance", Opcode.INVOKE_DIRECT, init.opcode)
+            assertEquals("$version: the constructor", "<init>", ((init as ReferenceInstruction).reference as MethodReference).name)
+            assertEquals("$version: what the constructor runs on", fill.mapRegister, (init as FiveRegisterInstruction).registerC)
+            assertEquals("$version: the fill takes the map", fill.mapRegister, (instructions[fill.fillAt] as FiveRegisterInstruction).registerC)
             assertTrue(
                 "$version: ${fill.pathGetter} doesn't join path segments with '/'",
                 fill.pathGetter.toString() in joiners,
             )
         }
     }
+
+    @Test
+    fun `the token interceptor fills its own map through the handler's fill, off the request's URL`() {
+        Fixtures.forEachDeclared { apk ->
+            val version = Fixtures.versionOf(apk)
+            val handlers = mutableListOf<Method>()
+            val interceptors = mutableListOf<Method>()
+            forEachMethod(apk) { classDef, method ->
+                if (CommonParamsHandlerFingerprint.takes(method, classDef)) handlers += method
+                if (TokenInterceptorFingerprint.takes(method, classDef)) interceptors += method
+            }
+            assertEquals("$version: token interceptors ${interceptors.map { it.name }}", 1, interceptors.size)
+            val interceptor = interceptors.single()
+            val fill = tokenFill(interceptor) ?: error("$version: the token interceptor's fill was not found")
+            val instructions = interceptor.implementation!!.instructions.toList()
+            val handlerInstructions = handlers.single().implementation!!.instructions.toList()
+            assertEquals(
+                "$version: the interceptor and the handler call different fills",
+                (handlerInstructions[commonParamsFill(handlers.single())!!.fillAt] as ReferenceInstruction).reference.toString(),
+                (instructions[fill.fillAt] as ReferenceInstruction).reference.toString(),
+            )
+            // Each token path is loaded and tested with contains before the map is made, so the
+            // fill only runs for one of them. The extension checks the URL's path again anyway.
+            TOKEN_PATHS.forEach { path ->
+                val load = instructions.indexOfFirst { string(it) == path }
+                assertTrue("$version: $path isn't loaded before the map", load in 0 until fill.mapAt)
+                val contains = instructions[load + 1].let { (it as? ReferenceInstruction)?.reference?.toString() }
+                assertEquals("$version: what $path goes to", "Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z", contains)
+            }
+            val created = instructions[fill.mapAt]
+            assertEquals("$version: the map's type", "Ljava/util/HashMap;", created.typeReference())
+            assertEquals("$version: the map register", fill.mapRegister, (created as OneRegisterInstruction).registerA)
+            assertTrue("$version: registers past v15", fill.mapRegister <= 15 && fill.requestRegister <= 15)
+            // The URL read the patch copies in front of the map is the last one, on a register
+            // that still holds the request there.
+            val urlRead = (fill.mapAt - 1 downTo 0).first {
+                (instructions[it] as? ReferenceInstruction)?.reference?.toString() == REQUEST_GET_URL
+            }
+            assertEquals("$version: the request register", fill.requestRegister, (instructions[urlRead] as FiveRegisterInstruction).registerC)
+            assertTrue(
+                "$version: the request register is written between its URL read and the map",
+                (urlRead + 1 until fill.mapAt).none { writes(instructions[it], fill.requestRegister) },
+            )
+        }
+    }
+
+    private fun Instruction.typeReference(): String? =
+        ((this as? ReferenceInstruction)?.reference as? com.android.tools.smali.dexlib2.iface.reference.TypeReference)?.type
 
     private fun joinsWithSlash(method: Method): Boolean {
         val instructions = method.implementation?.instructions ?: return false

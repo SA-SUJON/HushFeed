@@ -55,6 +55,33 @@ public class RegionSpoofTest {
         }
     }
 
+    @Test public void theTokenInterceptorsUrlsAreSignInsByTheirPath() {
+        for (String url : new String[]{
+                "https://api16-normal-useast5.tiktokv.us/passport/token/beat/v2/?aid=1233&ts=1",
+                "https://api.tiktokv.com/passport/token/change/",
+                "https://api.tiktokv.com/passport/user/logout/#x"}) {
+            assertTrue(url, RegionSpoof.isSignIn(RegionSpoof.pathOf(url)));
+        }
+        for (String url : new String[]{null, "", "https://api.tiktokv.com",
+                "https://api.tiktokv.com?next=/passport/user/logout/",
+                "https://api.tiktokv.com/aweme/v1/feed/?next=/passport/token/beat/",
+                "https://api.tiktokv.com/aweme/v1/passport/"}) {
+            assertFalse(String.valueOf(url), RegionSpoof.isSignIn(RegionSpoof.pathOf(url)));
+        }
+        assertEquals("/passport/token/beat/", RegionSpoof.pathOf("https://h/passport/token/beat/?a=1#b"));
+    }
+
+    @Test public void aTokenRequestMarksTheThreadLikeASignIn() {
+        Settings.REGION_REQUEST_SPOOF.save(true);
+        RegionSpoof.requestUrl("https://api.tiktokv.com/passport/token/beat/v2/?aid=1233");
+        assertEquals("US", RegionSpoof.country("US"));
+        RegionSpoof.requestDone();
+        assertEquals("JP", RegionSpoof.country("US"));
+        RegionSpoof.requestUrl("https://api.tiktokv.com/aweme/v1/feed/");
+        assertEquals("JP", RegionSpoof.country("US"));
+        RegionSpoof.requestDone();
+    }
+
     @Test public void aSignInKeepsTheRealRegionOnItsOwnThreadOnly() throws Exception {
         Settings.REGION_REQUEST_SPOOF.save(true);
         Settings.REGION_STORE_SPOOF.save(true);

@@ -140,6 +140,63 @@ internal fun commonParamsFill(method: Method): CommonParamsFill? {
     return CommonParamsFill(mapAt, map, fillAt, requestField, urlField, getter)
 }
 
+internal const val TOKEN_INTERCEPTOR = "Lcom/ss/android/ugc/aweme/net/interceptor/TokenSdkCommonParamsInterceptorTTNet;"
+internal const val REQUEST_GET_URL = "Lcom/bytedance/retrofit2/client/Request;->getUrl()Ljava/lang/String;"
+
+/** The three account-token URLs the interceptor fills common parameters for itself. */
+internal val TOKEN_PATHS = listOf("/passport/token/beat/", "/passport/token/change/", "/passport/user/logout/")
+
+/**
+ * The token SDK's interceptor. For the token heartbeat, token change and logout it fills a new
+ * map through the same static (Map, boolean) fill the handler uses and adds it to the URL, which
+ * the handler's path read never sees. The class keeps its name; R8 renames the chain type only.
+ */
+internal object TokenInterceptorFingerprint : Fingerprint(
+    definingClass = TOKEN_INTERCEPTOR,
+    name = "intercept",
+    strings = TOKEN_PATHS,
+)
+
+/** Where the interceptor makes its map and fills it, and which register holds the request. */
+internal class TokenFill(val mapAt: Int, val mapRegister: Int, val fillAt: Int, val requestRegister: Int)
+
+/**
+ * The interceptor's fill, or null when [method] doesn't have exactly this shape: one static
+ * `(Map, boolean)V` call, on a `new HashMap` made and constructed just before it (a constant for
+ * the boolean may sit between), with the request's last `getUrl()` before the map on a register
+ * nothing writes until the fill. Both registers fit a four-bit call.
+ */
+internal fun tokenFill(method: Method): TokenFill? {
+    val instructions = method.implementation?.instructions?.toList() ?: return null
+    val fillAt = instructions.indices.filter { index ->
+        val reference = instructions[index].getReference<MethodReference>() ?: return@filter false
+        instructions[index].opcode == Opcode.INVOKE_STATIC && reference.returnType == "V" &&
+            reference.parameterTypes.map(CharSequence::toString) == listOf("Ljava/util/Map;", "Z")
+    }.singleOrNull() ?: return null
+    val map = (instructions[fillAt] as FiveRegisterInstruction).registerC
+    val mapAt = (fillAt - 1 downTo maxOf(0, fillAt - 3)).firstOrNull { instructions[it].opcode == Opcode.NEW_INSTANCE }
+        ?: return null
+    val created = instructions[mapAt] as OneRegisterInstruction
+    if (created.registerA != map || instructions[mapAt].getReference<TypeReference>()?.type != "Ljava/util/HashMap;") {
+        return null
+    }
+    val init = instructions[mapAt + 1]
+    if (init.opcode != Opcode.INVOKE_DIRECT || init.getReference<MethodReference>()?.name != "<init>" ||
+        (init as FiveRegisterInstruction).registerC != map
+    ) {
+        return null
+    }
+    if ((mapAt + 2 until fillAt).any { writes(instructions[it], map) }) return null
+    val urlRead = (mapAt - 1 downTo 0).firstOrNull {
+        instructions[it].opcode == Opcode.INVOKE_VIRTUAL &&
+            instructions[it].getReference<MethodReference>()?.toString() == REQUEST_GET_URL
+    } ?: return null
+    val request = (instructions[urlRead] as FiveRegisterInstruction).registerC
+    if ((urlRead + 1 until mapAt).any { writes(instructions[it], request) }) return null
+    if (map > 15 || request > 15) return null
+    return TokenFill(mapAt, map, fillAt, request)
+}
+
 private fun writes(instruction: Instruction, register: Int): Boolean {
     if (!instruction.opcode.setsRegister()) return false
     val target = (instruction as? OneRegisterInstruction)?.registerA ?: return false
@@ -166,6 +223,10 @@ val regionSpoofPatch = bytecodePatch(
         if (fill.mapRegister > 15 || requestRegister > 15) {
             throw PatchException("Region spoof: the common-parameter handler's registers are out of reach of the path read.")
         }
+        val tokenInterceptor = TokenInterceptorFingerprint.method
+        val tokenFill = tokenFill(tokenInterceptor) ?: throw PatchException(
+            "Region spoof: the token interceptor no longer fills a new map off its request the way it did.",
+        )
 
         val replacements = mapOf("Ljava/util/Locale;" to "locale", "Ljava/util/TimeZone;" to "timeZone")
         val counts = mutableMapOf<String, Int>()
@@ -296,6 +357,18 @@ val regionSpoofPatch = bytecodePatch(
                 invoke-virtual { $register }, ${fill.pathGetter}
                 move-result-object $register
                 invoke-static { $register }, $EXTENSION->requestPath(Ljava/lang/String;)V
+            """,
+        )
+        // The token interceptor's own fill, marked the same way off the request's full URL. The
+        // map register is free until the map is made, so the URL goes through it.
+        val tokenMap = "v${tokenFill.mapRegister}"
+        tokenInterceptor.addInstruction(tokenFill.fillAt + 1, "invoke-static {}, $EXTENSION->requestDone()V")
+        tokenInterceptor.addInstructionsAtControlFlowLabel(
+            tokenFill.mapAt,
+            """
+                invoke-virtual { v${tokenFill.requestRegister} }, $REQUEST_GET_URL
+                move-result-object $tokenMap
+                invoke-static { $tokenMap }, $EXTENSION->requestUrl(Ljava/lang/String;)V
             """,
         )
         SettingsStatusLoadFingerprint.method.addInstruction(0,

@@ -86,6 +86,29 @@ public final class RegionSpoof {
         }
     }
 
+    /**
+     * From the token interceptor, with the full URL of the request it's about to fill. It fills
+     * common parameters of its own for the token heartbeat, token change and logout, which
+     * never pass the handler's path read.
+     */
+    public static void requestUrl(@Nullable String url) {
+        requestPath(pathOf(url));
+    }
+
+    /** The path of a URL, without its scheme, host, query or fragment. Null when it has none. */
+    @Nullable
+    static String pathOf(@Nullable String url) {
+        if (url == null) return null;
+        int scheme = url.indexOf("://");
+        int start = scheme < 0 ? 0 : scheme + 3;
+        // The host ends at the first slash, query or fragment. Only a slash starts a path.
+        while (start < url.length() && "/?#".indexOf(url.charAt(start)) < 0) start++;
+        if (start == url.length() || url.charAt(start) != '/') return null;
+        int end = start;
+        while (end < url.length() && "?#".indexOf(url.charAt(end)) < 0) end++;
+        return url.substring(start, end);
+    }
+
     /** From the common-parameter handler, once the request's parameters are built. */
     public static void requestDone() {
         mark(false);
