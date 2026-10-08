@@ -11,6 +11,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
@@ -77,11 +78,24 @@ class RenamedCopyAnchorsTest {
             val providerClass = provider ?: error("$version: $MULTIPROCESS_PROVIDER wasn't seen")
             val attach = providerClass.methods.single { it.name == "attachInfo" }
             val body = attach.implementation!!.instructions.toList()
-            assertTrue(
-                "$version: attachInfo doesn't keep ProviderInfo.authority in a static field",
-                body.any { (it as? ReferenceInstruction)?.reference?.let { reference -> reference is FieldReference && reference.name == "authority" } == true } &&
-                    body.any { it.opcode == Opcode.SPUT_OBJECT },
-            )
+            // The value stored is the one read off the ProviderInfo it's attached with (the last
+            // parameter), traced register to register, not just a read and a store side by side.
+            val providerInfo = attach.implementation!!.registerCount - 1
+            val keeps = body.indices.any { read ->
+                val get = body[read] as? TwoRegisterInstruction
+                if (body[read].opcode != Opcode.IGET_OBJECT || get == null || get.registerB != providerInfo ||
+                    (body[read] as ReferenceInstruction).reference.toString() != PROVIDER_INFO_AUTHORITY
+                ) {
+                    return@any false
+                }
+                val value = get.registerA
+                val store = (read + 1 until body.size).firstOrNull { body[it].opcode == Opcode.SPUT_OBJECT && (body[it] as OneRegisterInstruction).registerA == value }
+                    ?: return@any false
+                val field = (body[store] as ReferenceInstruction).reference as FieldReference
+                field.definingClass == MULTIPROCESS_PROVIDER && field.type == "Ljava/lang/String;" &&
+                    (read + 1 until store).none { (body[it] as? OneRegisterInstruction)?.registerA == value && body[it].opcode.setsRegister() }
+            }
+            assertTrue("$version: attachInfo doesn't keep the ProviderInfo's authority in a static String field of its own", keeps)
         }
     }
 
@@ -204,6 +218,7 @@ class RenamedCopyAnchorsTest {
 
     private companion object {
         const val MULTIPROCESS_PROVIDER = "Lcom/ss/android/common/util/MultiProcessSharedProvider;"
+        const val PROVIDER_INFO_AUTHORITY = "Landroid/content/pm/ProviderInfo;->authority:Ljava/lang/String;"
         const val INTENT = "Landroid/content/Intent;"
         const val URI = "Landroid/net/Uri;"
         const val STRING = "Ljava/lang/String;"

@@ -14,6 +14,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.iface.reference.StringReference
+import com.android.tools.smali.dexlib2.iface.reference.TypeReference
 import java.io.File
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -194,7 +195,7 @@ class RegionSpoofAnchorsTest {
     }
 
     private fun Instruction.typeReference(): String? =
-        ((this as? ReferenceInstruction)?.reference as? com.android.tools.smali.dexlib2.iface.reference.TypeReference)?.type
+        ((this as? ReferenceInstruction)?.reference as? TypeReference)?.type
 
     private fun joinsWithSlash(method: Method): Boolean {
         val instructions = method.implementation?.instructions ?: return false

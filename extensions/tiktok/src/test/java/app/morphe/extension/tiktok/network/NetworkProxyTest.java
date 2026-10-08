@@ -542,20 +542,28 @@ public class NetworkProxyTest {
         });
         int port = server.getLocalPort();
         turnOn("socks5", "127.0.0.1", String.valueOf(port), "", "");
-        NetworkProxy.checker = Runnable::run;
+        // Counted, so "one toast" can't pass because the second come-back never checked at all.
+        int[] checks = {0};
+        NetworkProxy.checker = task -> {
+            checks[0]++;
+            task.run();
+        };
         NetworkProxy.install(context);
         shadowOf(Looper.getMainLooper()).idle();
         assertEquals("the proxy answered at start-up", 0, ShadowToast.shownToastCount());
+        assertEquals("the start-up check", 1, checks[0]);
 
         server.close();
         try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
             shadowOf(Looper.getMainLooper()).idle();
             assertEquals("too soon after the start-up check to ask again", 0, ShadowToast.shownToastCount());
+            assertEquals("too soon after the start-up check to check again", 1, checks[0]);
 
             for (int comeBack = 0; comeBack < 2; comeBack++) {
                 shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(NetworkProxy.RECHECK_AFTER_MS));
                 controller.pause().resume();
                 shadowOf(Looper.getMainLooper()).idle();
+                assertEquals("come-back " + comeBack + " checks the proxy", 2 + comeBack, checks[0]);
             }
         }
         assertEquals("one outage, one toast", 1, ShadowToast.shownToastCount());
