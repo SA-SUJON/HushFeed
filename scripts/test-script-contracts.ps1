@@ -2080,6 +2080,39 @@ try {
         Assert-True ($wrapped -like "dir=$hookRoot tasks=*:extensions:tiktok:test*:patches:test*") `
             "The build wrapper was not handed the repository and the test tasks: $wrapped"
 
+        # Cheap checks first: one build without nativeTest's fixture scans, then the full one. A
+        # slip in a two-minute test used to show only after the half-hour partition. A stub that
+        # logs every call, and fails the quick one while the fail marker exists.
+        $passLog = Join-Path $hookRoot 'wrapper-passes.txt'
+        $passFails = Join-Path $hookRoot 'wrapper-quick-fails.txt'
+        $passStub = Join-Path $hookRoot 'build-wrapper-passes.ps1'
+        Set-Content -LiteralPath $passStub -Encoding UTF8 -Value @(
+            'param([string]$ProjectDir, [string[]]$Tasks)',
+            "Add-Content -LiteralPath '$passLog' -Value (`$Tasks -join ',')",
+            "if ((Test-Path -LiteralPath '$passFails') -and `$Tasks -contains '-x') { exit 1 }",
+            'exit 0')
+        $env:HUSHFEED_BUILD_WRAPPER = $passStub
+        try {
+            Remove-Item -LiteralPath $passLog, $passFails -Force -ErrorAction SilentlyContinue
+            & $prePushScript -Root $hookRoot -ChangedPaths @('extensions/tiktok/src/test/java/AnyTest.java') 6> $null
+            $passes = @(Get-Content -LiteralPath $passLog)
+            Assert-True ($passes.Count -eq 2) "The gate did not build twice, quick then full: $($passes -join ' | ')"
+            Assert-True ($passes[0] -like '*:patches:test*-x,:patches:nativeTest*' -and
+                $passes[0] -like '*-x,:patches:verifyPatchTestSelection*' -and $passes[0] -like '*:extensions:tiktok:lint*') `
+                "The first build was not the quick one without nativeTest: $($passes[0])"
+            Assert-True ($passes[1] -notlike '*-x*' -and $passes[1] -like '*:patches:test*') `
+                "The second build was not the full one: $($passes[1])"
+
+            Remove-Item -LiteralPath $passLog -Force -ErrorAction SilentlyContinue
+            Set-Content -LiteralPath $passFails -Value 'fail' -Encoding ASCII
+            Assert-Throws { & $prePushScript -Root $hookRoot -ChangedPaths @('extensions/tiktok/src/test/java/AnyTest.java') 6> $null } `
+                '*runtime test build did not pass*' 'A failed quick build was ignored.'
+            Assert-True (@(Get-Content -LiteralPath $passLog).Count -eq 1) 'The full build ran after the quick one failed.'
+        } finally {
+            Remove-Item -LiteralPath $passLog, $passFails, $passStub -Force -ErrorAction SilentlyContinue
+            $env:HUSHFEED_BUILD_WRAPPER = $wrapperStub
+        }
+
         $env:HUSHFEED_BUILD_WRAPPER = Join-Path $hookRoot 'no-such-wrapper.ps1'
         Assert-Throws { & $prePushScript -Root $hookRoot -ChangedPaths @('patches/build.gradle.kts') 6> $null } `
             '*HUSHFEED_BUILD_WRAPPER*' 'A build wrapper that is not there was ignored rather than reported.'
