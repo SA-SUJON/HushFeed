@@ -6816,8 +6816,69 @@
     },
     {
       "name": "Skip content warnings",
-      "description": "Play videos TikTok has classified without the warning overlay asking to be tapped through first. Switch: Hushfeed settings > Feed screen.",
+      "description": "Play videos TikTok has classified without the warning overlay asking to be tapped through first. A second switch takes away the Check sources banner on videos TikTok flags as unverified, and the warnings it shows when you share one. Switches: Hushfeed settings > Feed screen.",
       "category": "Feed",
+      "use": false,
+      "dependencies": [
+        "BytecodePatch",
+        "Settings"
+      ],
+      "compatiblePackages": {
+        "com.zhiliaoapp.musically": [
+          "47.0.3",
+          "47.1.3",
+          "47.1.4"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "TikTok",
+          "packageName": "com.zhiliaoapp.musically",
+          "description": null,
+          "appIconColor": 16657493,
+          "signatures": [
+            "9041803e91bcb814b4b4399fb5c85a91640b755e5e8ba76813814bf4cf2ab5ba"
+          ],
+          "targets": [
+            {
+              "version": "47.0.3",
+              "experimental": false,
+              "versionCodes": {
+                "ARM64_V8A": 2024700030,
+                "ARMEABI_V7A": 2024700030,
+                "X86": 2024700030,
+                "X86_64": 2024700030
+              }
+            },
+            {
+              "version": "47.1.3",
+              "experimental": false,
+              "versionCodes": {
+                "ARM64_V8A": 2024701030,
+                "ARMEABI_V7A": 2024701030,
+                "X86": 2024701030,
+                "X86_64": 2024701030
+              }
+            },
+            {
+              "version": "47.1.4",
+              "experimental": false,
+              "versionCodes": {
+                "ARM64_V8A": 2024701040,
+                "ARMEABI_V7A": 2024701040,
+                "X86": 2024701040,
+                "X86_64": 2024701040
+              }
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Skip first-launch setup",
+      "description": "Opens a fresh install on the feed without the interest picker, the language and gender questions, the creators to follow, the swipe up tutorial or TikTok's own notification pages in front of it. Consent, age and sign-in screens still show, and so does Android's notification prompt. Its switch starts on once you pick the patch. Switch: Hushfeed settings > App.",
+      "category": "Settings",
       "use": false,
       "dependencies": [
         "BytecodePatch",
