@@ -55,7 +55,8 @@ import java.util.WeakHashMap;
  *                         the floating card in search results
  *   id/k_5                the Live entrance, top left, 158 px square, no description
  *   id/liy                the interaction area over the video: the right-hand column's slots,
- *                         the caption block and the music row
+ *                         the caption block and the music row. 47.1.x's llj is the column
+ *                         alone: the caption frame bqv and videomusiccoverblock sit beside it
  *   id/f7u                the root of every feed survey card; the cell's survey ViewStubs
  *                         carry no inflatedId, so the card keeps its own layout id. All
  *                         seven layouts those stubs inflate have it on 47.0.3, where 46.2.3
@@ -130,6 +131,12 @@ public final class VideoOverlayHider {
      * takes it out of reach without moving the caption above it.
      */
     private static final String[] ANCHOR_IDS = {"47.0.3:bql", "47.1.3:bqv", "47.1.4:bqv"};
+    /**
+     * The spinning music disc at the bottom right, beside the rail's column. On 47.1.4 the
+     * anchor's frame above also holds the caption and the music row, and neither sits in the
+     * column, so the fade reaches them through these two (S22, 2026-10-08).
+     */
+    private static final String[] MUSIC_COVER_IDS = {"videomusiccoverblock"};
     /**
      * The blank TikTok keeps above the video on tall screens, as tall as the status bar, so the
      * bar never covers the picture. With the bar hidden it's only a black strip (#97).
@@ -240,6 +247,7 @@ public final class VideoOverlayHider {
     private static final int CLEAR_PHOTO_EXIT_TARGET = STATUS_BAR_SPACER_TARGET + 1;
     private static final int BOTTOM_TABS_TARGET = CLEAR_PHOTO_EXIT_TARGET + 1;
     private static final int ANCHOR_TARGET = BOTTOM_TABS_TARGET + 1;
+    private static final int MUSIC_COVER_TARGET = ANCHOR_TARGET + 1;
     private static final String[][] TRAVERSAL_TARGET_IDS = traversalTargetIds();
     private static final int LOGICAL_TARGET_COUNT = TRAVERSAL_TARGET_IDS.length;
     private static final int TRAVERSAL_TARGET_COUNT = candidateCount(TRAVERSAL_TARGET_IDS);
@@ -474,6 +482,8 @@ public final class VideoOverlayHider {
                 wanted[CLEAR_SEEK_BAR_TARGET] = clearControls;
                 wanted[CLEAR_PHOTO_EXIT_TARGET] = clearControls;
                 wanted[ANCHOR_TARGET] = anchor;
+                // Only ever faded, never hidden by a switch of its own.
+                wanted[MUSIC_COVER_TARGET] = false;
                 wanted[STATUS_BAR_SPACER_TARGET] = statusBar;
                 for (int i = 0; i < RAIL_BUTTON_IDS.length; i++) {
                     wanted[RAIL_TARGET_START + i] = rail[i] || carry;
@@ -674,7 +684,7 @@ public final class VideoOverlayHider {
     }
 
     private static String[][] traversalTargetIds() {
-        String[][] targets = new String[ANCHOR_TARGET + 1][];
+        String[][] targets = new String[MUSIC_COVER_TARGET + 1][];
         targets[CAPTION_TARGET] = CAPTION_IDS;
         targets[MUSIC_TARGET] = MUSIC_IDS;
         targets[ACTION_BAR_TARGET] = ACTION_BAR_IDS;
@@ -697,6 +707,7 @@ public final class VideoOverlayHider {
         targets[CLEAR_PHOTO_EXIT_TARGET] = CLEAR_PHOTO_EXIT_IDS;
         targets[BOTTOM_TABS_TARGET] = BOTTOM_TABS_IDS;
         targets[ANCHOR_TARGET] = ANCHOR_IDS;
+        targets[MUSIC_COVER_TARGET] = MUSIC_COVER_IDS;
         return targets;
     }
 
@@ -809,10 +820,17 @@ public final class VideoOverlayHider {
                     // The progress bar only goes see-through, so a drag along the bottom edge
                     // still seeks while it's out of sight (#84).
                     if (target == CLEAR_SEEK_BAR_TARGET) setTransparent(view, wanted);
-                    else if (target == ANCHOR_TARGET) setHidden(view, wanted, View.INVISIBLE);
-                    else if (target == ACTION_BAR_TARGET) {
-                        // The rail, caption and music row share this column. Fully faded it goes
-                        // the way Clear display takes it, so nothing invisible takes a tap.
+                    else if (target == ANCHOR_TARGET || target == MUSIC_COVER_TARGET) {
+                        // 47.1.x keeps the caption frame and the music disc beside the column, so
+                        // they fade here; on 47.0.3 the column holds the caption frame, and a
+                        // second fade inside it would square the opacity. Invisible rather than
+                        // gone, so the caption doesn't move.
+                        boolean gone = wanted || fadeLevel == 0;
+                        setFaded(view, gone || insideFaded(view) ? 100 : fadeLevel);
+                        setHidden(view, gone, View.INVISIBLE);
+                    } else if (target == ACTION_BAR_TARGET) {
+                        // The rail's column (on 47.0.3 also the caption and music row). Fully faded
+                        // it goes the way Clear display takes it, so nothing invisible takes a tap.
                         boolean gone = wanted || fadeLevel == 0;
                         setFaded(view, gone ? 100 : fadeLevel);
                         setHidden(view, gone);
@@ -1117,6 +1135,14 @@ public final class VideoOverlayHider {
         }
         held[1] = held[0] * percent / 100f;
         if (view.getAlpha() != held[1]) view.setAlpha(held[1]);
+    }
+
+    /** Whether a view sits inside one this class has faded, which already fades it too. */
+    private static boolean insideFaded(View view) {
+        for (android.view.ViewParent parent = view.getParent(); parent instanceof View; parent = parent.getParent()) {
+            if (FADED_TO.containsKey((View) parent)) return true;
+        }
+        return false;
     }
 
     /** Lets a test stand in for a TikTok resource id, which only the real APK resolves. */
