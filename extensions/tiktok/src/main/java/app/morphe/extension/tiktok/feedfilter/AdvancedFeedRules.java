@@ -72,6 +72,11 @@ public final class AdvancedFeedRules {
      * the string TikTok's own translation service sends; a few other types keep JSON there.
      */
     static final int TEXT_STICKER_TYPE = 18;
+    /**
+     * A text sticker that also carries a caption model. TikTok's editor writes the same typed
+     * text into its textStruct (TextStickerModel.getInteractStickerStruct picks 20 or 18).
+     */
+    static final int CAPTIONED_TEXT_STICKER_TYPE = 20;
 
     /** The words of each text sticker on {@code item}, in order, or an empty list. */
     static List<String> stickerTexts(Object item) {
@@ -81,7 +86,9 @@ public final class AdvancedFeedRules {
         for (Object sticker : (List<?>) stickers) {
             if (sticker == null) continue;
             Object type = Reflect.property(sticker, "getType", "type");
-            if (!(type instanceof Integer) || (Integer) type != TEXT_STICKER_TYPE) continue;
+            if (!(type instanceof Integer)) continue;
+            int kind = (Integer) type;
+            if (kind != TEXT_STICKER_TYPE && kind != CAPTIONED_TEXT_STICKER_TYPE) continue;
             String text = Reflect.string(sticker, "getTextStruct", "textStruct");
             if (text != null) texts.add(text);
         }

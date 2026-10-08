@@ -736,11 +736,12 @@ class TikTokPatchAnchorsMatchFixturesTest {
         val aweme = "Lcom/ss/android/ugc/aweme/feed/model/Aweme;"
         val sticker = "Lcom/ss/android/ugc/aweme/sticker/data/InteractStickerStruct;"
         val translation = "Lcom/ss/android/ugc/aweme/translation/service/TranslationServiceImpl;"
+        val textModel = "Lcom/ss/android/ugc/aweme/tools/sticker/core/text/model/TextStickerModel;"
         Fixtures.forEachDeclared { apk ->
             val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
             val classes = container.dexEntryNames.asSequence()
                 .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
-                .filter { it.type == aweme || it.type == sticker || it.type == translation }
+                .filter { it.type == aweme || it.type == sticker || it.type == translation || it.type == textModel }
                 .associateBy { it.type }
             for ((type, name, returns) in listOf(
                 Triple(aweme, "getInteractStickerStructs", "Ljava/util/List;"),
@@ -762,6 +763,16 @@ class TikTokPatchAnchorsMatchFixturesTest {
                 }
             }
             assertTrue("${apk.name}: the translation service reads a type 18 sticker's textStruct", readsTextStickerWords)
+            // The editor writes the typed text into textStruct as type 20 with a caption model, else 18.
+            val written = classes[textModel]?.methods.orEmpty().singleOrNull { it.name == "getInteractStickerStruct" }
+            val instructions = written?.implementation?.instructions?.toList().orEmpty()
+            val literals = instructions.filter { it.opcode == Opcode.CONST_16 }
+                .map { (it as NarrowLiteralInstruction).narrowLiteral }.toSet()
+            assertTrue("${apk.name}: the editor's text sticker types $literals", literals.containsAll(setOf(18, 20)))
+            assertTrue("${apk.name}: the editor writes textStruct", instructions.any {
+                val reference = (it as? ReferenceInstruction)?.reference as? MethodReference
+                reference != null && reference.definingClass == sticker && reference.name == "setTextStruct"
+            })
         }
     }
 

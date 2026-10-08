@@ -41,6 +41,7 @@ public class StickerTextFilterTest {
     @Rule public final SettingsContextRule settingsContext = new SettingsContextRule();
 
     private static final int TEXT = AdvancedFeedRules.TEXT_STICKER_TYPE;
+    private static final int CAPTIONED = AdvancedFeedRules.CAPTIONED_TEXT_STICKER_TYPE;
     /** A sticker type that keeps JSON in textStruct rather than the sticker's words. */
     private static final int ANCHORED = 5;
 
@@ -78,8 +79,9 @@ public class StickerTextFilterTest {
     @Test
     public void onlyTheWordsOfTextStickersAreRead() {
         Item item = post("a", new Sticker(TEXT, "  first words "), new Sticker(ANCHORED, "{\"anchors\":[]}"),
-                null, new Sticker(TEXT, " "), new Sticker(TEXT, null), new Sticker(TEXT, "second"));
-        assertEquals(List.of("first words", "second"), AdvancedFeedRules.stickerTexts(item));
+                null, new Sticker(TEXT, " "), new Sticker(TEXT, null), new Sticker(TEXT, "second"),
+                new Sticker(CAPTIONED, "captioned words"));
+        assertEquals(List.of("first words", "second", "captioned words"), AdvancedFeedRules.stickerTexts(item));
         assertEquals(List.of(), AdvancedFeedRules.stickerTexts(post("none")));
     }
 
