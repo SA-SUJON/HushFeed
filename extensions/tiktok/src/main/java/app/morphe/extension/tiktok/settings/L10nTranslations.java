@@ -493,8 +493,8 @@ public final class L10nTranslations {
                 "Mətn stikerləri bloklanmış başlıq sözünə uyğun gələn videoları da gizlədin. Mətn stikerləri yaradıcının TikTok redaktorunda videonun üzərinə yazdığı sözlərdir. Şəklin özünə aid olan mətn oxuna bilməz.");
         table.put("Also on a block list, so still hidden: %1$s",
                 "Həm də bloklama siyahısındadır, ona görə yenə gizlədilir: %1$s");
-        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in sends your real region, apart from a few values TikTok saved as it started, which keep the preset. Your IP address and your account's own rules still apply.",
-                "TikTok serverlərinin bu telefonda saxladığı region və şəbəkənin ölkə kodu hər sorğu ilə göndərilir. Onların yerinə də hazır ayarı göndərin. Hesaba daxil olarkən əsl regionunuz göndərilir, yalnız TikTok-un açılarkən saxladığı bir neçə dəyər hazır ayarda qalır. IP ünvanınız və hesabınızın öz qaydaları yenə də tətbiq olunur.");
+        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
+                "TikTok serverlərinin bu telefonda saxladığı region və şəbəkənin ölkə kodu hər sorğu ilə göndərilir. Onların yerinə də hazır ayarı göndərin. Hesaba daxil olarkən yenə də əsl regionunuz göndərilir. IP ünvanınız və hesabınızın öz qaydaları yenə də tətbiq olunur.");
         table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "Axtarışdan açılan videolar üçün TikTok-un öz avtomatik sürüşdürməsini də aktivləşdirir. Tətbiq etmək üçün TikTok-u yenidən başladın.");
         table.put("Always show publish date",
@@ -4306,8 +4306,8 @@ public final class L10nTranslations {
                 "Blendet auch Videos aus, deren Textsticker ein gesperrtes Wort aus den Beschreibungen enthalten. Textsticker sind die Wörter, die jemand im TikTok-Editor über das Video schreibt. Text, der zum Bild selbst gehört, kann nicht gelesen werden.");
         table.put("Also on a block list, so still hidden: %1$s",
                 "Steht auch auf einer Sperrliste und bleibt daher ausgeblendet: %1$s");
-        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in sends your real region, apart from a few values TikTok saved as it started, which keep the preset. Your IP address and your account's own rules still apply.",
-                "Die Vorlage auch anstelle der Region senden, die TikToks Server auf diesem Telefon gespeichert haben, und anstelle des Ländercodes des Netzes. Beide gehen bei jeder Anfrage mit. Bei der Anmeldung wird deine echte Region gesendet, nur ein paar Werte, die TikTok beim Start gespeichert hat, behalten die Vorlage. Deine IP-Adresse und die Regeln deines Kontos gelten weiterhin.");
+        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
+                "Die Vorlage auch anstelle der Region senden, die TikToks Server auf diesem Telefon gespeichert haben, und anstelle des Ländercodes des Netzes. Beide gehen bei jeder Anfrage mit. Bei der Anmeldung wird weiterhin deine echte Region gesendet. Deine IP-Adresse und die Regeln deines Kontos gelten weiterhin.");
         table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "Schaltet auch TikToks eigenes automatisches Scrollen für Videos ein, die du aus der Suche öffnest. Starte TikTok neu, damit es wirkt.");
         table.put("Always show publish date",
@@ -8119,8 +8119,8 @@ public final class L10nTranslations {
                 "Oculta también los vídeos cuyos stickers de texto coinciden con una palabra bloqueada en las descripciones. Los stickers de texto son las palabras que alguien escribe sobre el vídeo en el editor de TikTok. El texto que forma parte de la propia imagen no se puede leer.");
         table.put("Also on a block list, so still hidden: %1$s",
                 "También está en una lista de bloqueo, así que sigue oculto: %1$s");
-        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in sends your real region, apart from a few values TikTok saved as it started, which keep the preset. Your IP address and your account's own rules still apply.",
-                "Enviar también el preajuste en lugar de la región que los servidores de TikTok guardaron en este teléfono y del código de país de la red, que van en cada solicitud. Al iniciar sesión se envía tu región real, salvo unos pocos valores que TikTok guardó al abrirse, que mantienen el preajuste. Tu dirección IP y las reglas de tu cuenta siguen aplicándose.");
+        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
+                "Enviar también el preajuste en lugar de la región que los servidores de TikTok guardaron en este teléfono y del código de país de la red, que van en cada solicitud. Al iniciar sesión se sigue enviando tu región real. Tu dirección IP y las reglas de tu cuenta siguen aplicándose.");
         table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "También activa el desplazamiento automático propio de TikTok en los videos abiertos desde la búsqueda. Reinicia TikTok para aplicarlo.");
         table.put("Always show publish date",
@@ -11932,8 +11932,8 @@ public final class L10nTranslations {
                 "Sembunyikan juga video yang stiker teksnya cocok dengan kata yang diblokir di keterangan. Stiker teks adalah kata-kata yang diketik kreator di atas video di editor TikTok. Teks yang menjadi bagian dari gambarnya sendiri tidak bisa dibaca.");
         table.put("Also on a block list, so still hidden: %1$s",
                 "Juga ada di daftar blokir, jadi tetap disembunyikan: %1$s");
-        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in sends your real region, apart from a few values TikTok saved as it started, which keep the preset. Your IP address and your account's own rules still apply.",
-                "Kirim juga preset sebagai ganti wilayah yang disimpan server TikTok di ponsel ini dan kode negara jaringan, yang ikut terkirim di setiap permintaan. Saat masuk, wilayah asli kamu dikirim, kecuali beberapa nilai yang disimpan TikTok saat dibuka, yang tetap memakai preset. Alamat IP dan aturan akun kamu tetap berlaku.");
+        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
+                "Kirim juga preset sebagai ganti wilayah yang disimpan server TikTok di ponsel ini dan kode negara jaringan, yang ikut terkirim di setiap permintaan. Saat masuk, wilayah asli kamu tetap dikirim. Alamat IP dan aturan akun kamu tetap berlaku.");
         table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "Juga menyalakan gulir otomatis TikTok sendiri untuk video yang dibuka dari pencarian. Mulai ulang TikTok untuk menerapkannya.");
         table.put("Always show publish date",
@@ -15745,8 +15745,8 @@ public final class L10nTranslations {
                 "Nasconde anche i video i cui sticker di testo contengono una parola bloccata nelle descrizioni. Gli sticker di testo sono le parole che qualcuno scrive sopra il video nell'editor di TikTok. Il testo che fa parte dell'immagine stessa non si può leggere.");
         table.put("Also on a block list, so still hidden: %1$s",
                 "Presente anche in una lista di blocco, quindi resta nascosto: %1$s");
-        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in sends your real region, apart from a few values TikTok saved as it started, which keep the preset. Your IP address and your account's own rules still apply.",
-                "Invia il preset anche al posto della regione che i server di TikTok hanno salvato su questo telefono e del codice paese della rete, che partono con ogni richiesta. All'accesso viene inviata la tua regione reale, tranne alcuni valori che TikTok ha salvato all'avvio, che mantengono il preset. Il tuo indirizzo IP e le regole del tuo account continuano ad applicarsi.");
+        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
+                "Invia il preset anche al posto della regione che i server di TikTok hanno salvato su questo telefono e del codice paese della rete, che partono con ogni richiesta. All'accesso viene comunque inviata la tua regione reale. Il tuo indirizzo IP e le regole del tuo account continuano ad applicarsi.");
         table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "Attiva anche lo scorrimento automatico di TikTok per i video aperti dalla ricerca. Riavvia TikTok per applicarlo.");
         table.put("Always show publish date",
@@ -19558,8 +19558,8 @@ public final class L10nTranslations {
                 "Oculta também vídeos cujos stickers de texto batem com uma palavra bloqueada nas legendas. Stickers de texto são as palavras que alguém digita sobre o vídeo no editor do TikTok. Texto que faz parte da própria imagem não pode ser lido.");
         table.put("Also on a block list, so still hidden: %1$s",
                 "Também está numa lista de bloqueio, então continua escondido: %1$s");
-        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in sends your real region, apart from a few values TikTok saved as it started, which keep the preset. Your IP address and your account's own rules still apply.",
-                "Enviar também a predefinição no lugar da região que os servidores do TikTok salvaram neste celular e do código de país da rede, que vão em cada solicitação. Ao entrar na conta, sua região real é enviada, exceto alguns valores que o TikTok salvou ao abrir, que mantêm a predefinição. Seu endereço IP e as regras da sua conta continuam valendo.");
+        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
+                "Enviar também a predefinição no lugar da região que os servidores do TikTok salvaram neste celular e do código de país da rede, que vão em cada solicitação. Ao entrar na conta, sua região real continua sendo enviada. Seu endereço IP e as regras da sua conta continuam valendo.");
         table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "Também ativa a rolagem automática do próprio TikTok nos vídeos abertos pela busca. Reinicie o TikTok para aplicar.");
         table.put("Always show publish date",
@@ -23581,8 +23581,8 @@ public final class L10nTranslations {
                 "Скрывает и видео, в текстовых стикерах которых есть заблокированное слово из подписей. Текстовыми стикерами называются слова, которые автор пишет поверх видео в редакторе TikTok. Текст, который является частью самого изображения, прочитать нельзя.");
         table.put("Also on a block list, so still hidden: %1$s",
                 "Также в списке блокировки, поэтому всё ещё скрыт: %1$s");
-        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in sends your real region, apart from a few values TikTok saved as it started, which keep the preset. Your IP address and your account's own rules still apply.",
-                "Также отправлять предустановку вместо региона, который серверы TikTok сохранили на этом телефоне, и кода страны сети, которые уходят с каждым запросом. При входе в аккаунт отправляется ваш настоящий регион, кроме нескольких значений, сохранённых TikTok при запуске, в которых остаётся предустановка. Ваш IP-адрес и правила вашего аккаунта по-прежнему действуют.");
+        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
+                "Также отправлять предустановку вместо региона, который серверы TikTok сохранили на этом телефоне, и кода страны сети, которые уходят с каждым запросом. При входе в аккаунт по-прежнему отправляется ваш настоящий регион. Ваш IP-адрес и правила вашего аккаунта по-прежнему действуют.");
         table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "Также включает собственную автопрокрутку TikTok для видео, открытых из поиска. Перезапустите TikTok, чтобы применить.");
     }
@@ -27532,8 +27532,8 @@ public final class L10nTranslations {
                 "Metin çıkartmaları engellenen bir açıklama kelimesiyle eşleşen videoları da gizler. Metin çıkartmaları, birinin TikTok düzenleyicisinde videonun üzerine yazdığı kelimelerdir. Görüntünün kendisine ait metin okunamaz.");
         table.put("Also on a block list, so still hidden: %1$s",
                 "Bir engelleme listesinde de var, bu yüzden gizli kalır: %1$s");
-        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in sends your real region, apart from a few values TikTok saved as it started, which keep the preset. Your IP address and your account's own rules still apply.",
-                "TikTok sunucularının bu telefona kaydettiği bölge ve ağın ülke kodu yerine her istekle giden hazır ayarı da gönder. Giriş yaparken gerçek bölgen gönderilir, yalnızca TikTok'un açılırken kaydettiği birkaç değer hazır ayarda kalır. IP adresin ve hesabının kendi kuralları geçerli olmaya devam eder.");
+        table.put("Also send the preset in place of the region TikTok's servers saved on this phone and the network country code, which go out with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
+                "TikTok sunucularının bu telefona kaydettiği bölge ve ağın ülke kodu yerine her istekle giden hazır ayarı da gönder. Giriş yaparken yine gerçek bölgen gönderilir. IP adresin ve hesabının kendi kuralları geçerli olmaya devam eder.");
         table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "Aramadan açılan videolar için TikTok'un kendi otomatik kaydırmasını da açar. Uygulamak için TikTok'u yeniden başlat.");
         table.put("Always show publish date",

@@ -6,6 +6,7 @@
  */
 package app.morphe.extension.tiktok.spoof.region;
 
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.SystemClock;
 import androidx.annotation.Nullable;
@@ -70,8 +71,9 @@ public final class RegionSpoof {
      * before it builds that request's parameters, on the same thread, and calls requestDone()
      * right after. While a /passport/ request's parameters are built with Match region fields in
      * requests on, that thread gets TikTok's own answers: the region getters, the locale, the
-     * timezone and the request fields the builder hook would set. A value TikTok worked out
-     * earlier and kept, like the copy of sys_region it makes at start-up, stays as it was.
+     * timezone and the request fields the builder hook would set. The two values TikTok worked
+     * out once as it started, sys_region and timezone_name, were worked out under the preset and
+     * kept, so requestParams() puts back what their sources say now.
      */
     /** When this thread's mark was set, in {@link SystemClock#elapsedRealtime()}. */
     private static final ThreadLocal<Long> SIGN_IN = new ThreadLocal<>();
@@ -95,12 +97,21 @@ public final class RegionSpoof {
     }
 
     /**
-     * From the token interceptor, with the full URL of the request it's about to fill. It fills
-     * common parameters of its own for the token heartbeat, token change and logout, which
-     * never pass the handler's path read.
+     * With the full URL of the request about to be filled, from the routes that fill common
+     * parameters without passing the handler's path read: the token interceptor (the token
+     * heartbeat, token change and logout), AppLog's URL entry point, and the JS request helpers
+     * that fill a POST body before they send it.
      */
     public static void requestUrl(@Nullable String url) {
         requestPath(pathOf(url));
+    }
+
+    /**
+     * From the places that add common parameters to a URL TikTok is still building, and the
+     * StringBuilder holds that URL so far. Null when there's nothing to read.
+     */
+    public static void requestUrlBuilder(@Nullable StringBuilder url) {
+        requestUrl(url == null ? null : url.toString());
     }
 
     /** The path of a URL, without its scheme, host, query or fragment. Null when it has none. */
@@ -181,10 +192,19 @@ public final class RegionSpoof {
      * current_region and residence are what TikTok's servers last told this phone, kept in its
      * preferences, and carrier_region_v2 is the network's country code (an MCC) read from the
      * system configuration. No getter hook reaches those three.
+     *
+     * Two fields in that map are copies TikTok took once as it started: sys_region, from the
+     * hub's getter, and timezone_name, from TimeZone.getDefault().getID(). Both were worked out
+     * with the hooks answering the preset, and the copies stay in a cache for the life of the
+     * process. A sign-in puts the live answers back: the system locale's country, and the
+     * system's default zone. This class is skipped by the TimeZone hook, so its own calls are
+     * the unhooked ones.
      */
     static final String[] SAVED_REGION_FIELDS = {"current_region", "residence"};
     static final String NETWORK_COUNTRY_FIELD = "carrier_region_v2";
     static final String[] HUB_REGION_FIELDS = {"carrier_region", "sys_region", "region"};
+    static final String SYSTEM_REGION_FIELD = "sys_region";
+    static final String TIMEZONE_NAME_FIELD = "timezone_name";
     private static volatile String lastRequestReport = "";
 
     /**
@@ -196,9 +216,11 @@ public final class RegionSpoof {
         try {
             if (params == null || Utils.getContext() == null || !Settings.REGION_REQUEST_SPOOF.get()) return;
             if (signingIn()) {
-                // A sign-in goes out with the fields TikTok set, so the account sees the real region.
+                // A sign-in goes out with the fields TikTok set, so the account sees the real
+                // region, and the copies it made at start-up are put back to what they are now.
+                List<String> live = liveStartUpFields(params);
                 String preset = presetCountry();
-                if (!preset.isEmpty()) report(params, preset, null);
+                if (!preset.isEmpty()) report(params, preset, null, live);
                 return;
             }
             String country = selectedCountry();
@@ -216,10 +238,39 @@ public final class RegionSpoof {
                 params.put(NETWORK_COUNTRY_FIELD, mcc);
                 set.add(NETWORK_COUNTRY_FIELD);
             }
-            report(params, country, set);
+            report(params, country, set, null);
         } catch (RuntimeException error) {
             Logger.printException(() -> "Region spoof could not set a request's region fields", error);
         }
+    }
+
+    /**
+     * Puts the live answer in each start-up copy the map holds, and returns the fields it did.
+     * A field TikTok left out stays out, and so does one that isn't a String.
+     */
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private static List<String> liveStartUpFields(Map params) {
+        List<String> live = new ArrayList<>();
+        if (params.get(SYSTEM_REGION_FIELD) instanceof String) {
+            String region = systemRegion();
+            // TikTok's cache never takes an empty value, so a system locale with no country
+            // would have left the field out altogether.
+            if (region.isEmpty()) params.remove(SYSTEM_REGION_FIELD);
+            else params.put(SYSTEM_REGION_FIELD, region);
+            live.add(SYSTEM_REGION_FIELD);
+        }
+        if (params.get(TIMEZONE_NAME_FIELD) instanceof String) {
+            params.put(TIMEZONE_NAME_FIELD, TimeZone.getDefault().getID());
+            live.add(TIMEZONE_NAME_FIELD);
+        }
+        return live;
+    }
+
+    /** The country of the system configuration's locale, which is what the hub's sys_region getter reads. */
+    @SuppressWarnings("deprecation")
+    private static String systemRegion() {
+        Locale locale = Resources.getSystem().getConfiguration().locale;
+        return locale == null ? "" : locale.getCountry();
     }
 
     /** The first three digits of the SIM preset's operator code, or null when there isn't a usable one. */
@@ -241,10 +292,12 @@ public final class RegionSpoof {
      * One debug line each time the outcome changes, not one per request. It names fields and says
      * whether the hub's fields already carry the preset, and never prints a value the phone had
      * before, since that is the real region. A null set is a sign-in request, where nothing is set
-     * and every region field is looked at.
+     * to the preset, every region field is looked at, and live names the start-up copies that were
+     * put back to their live answers.
      */
     @SuppressWarnings("rawtypes")
-    private static void report(Map params, String country, @Nullable List<String> set) {
+    private static void report(Map params, String country, @Nullable List<String> set,
+                               @Nullable List<String> live) {
         if (!BaseSettings.DEBUG.get()) return;
         List<String> matching = new ArrayList<>();
         List<String> other = new ArrayList<>();
@@ -257,6 +310,7 @@ public final class RegionSpoof {
         }
         String line = set == null
                 ? "Sign-in request region fields left as TikTok set them for " + country
+                        + ", start-up copies put back " + live
                         + ". Still the preset " + matching + ", something else " + other
                 : "Request region fields for " + country + ". Set to the preset " + set
                         + ", already the preset " + matching + ", something else " + other;
