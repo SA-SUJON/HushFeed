@@ -40,8 +40,8 @@ import app.morphe.extension.shared.settings.Setting;
  * live wallpaper data provider's URIs are built on, the package a content URI's authority or an
  * activity's link has to hold to count as TikTok's own, and the multiprocess settings authority
  * its provider shell fills from a template. In a renamed copy each of those reaches the store app
- * installed beside it, which doesn't export the provider, or nothing at all. {@link #ownPackage}
- * answers the copy's own name for the checks, and {@link #declared} answers the name the copy's
+ * installed beside it, which doesn't export the provider, or nothing at all. {@link #holdsOwnPackage}
+ * lets the checks accept the copy's own name too, and {@link #declared} answers the name the copy's
  * manifest declares for a provider authority or a permission, whatever Clone app made of it.
  *
  * <p>Only the one write of the running package into {@code package} comes to {@link #putPackage}.
@@ -95,15 +95,38 @@ public final class BesideStoreApp {
     }
 
     /**
-     * TikTok's own package where its code names the store package to mean this app: the package
-     * a content URI's authority has to hold for the URI to count as TikTok's own rather than
-     * another app's, and the one an app-settings page or a Play link has to name to open under
-     * Family Pairing. A renamed copy gets its own name there, as the store app gets its own;
-     * {@code storePackage} comes back unchanged everywhere else, and whenever Hushfeed is paused
-     * or has no context yet.
+     * In place of Kotlin's {@code contains(text, storePackage, ignoreCase)} where TikTok asks
+     * whether some text names its own package: whether a content URI's authority counts as
+     * TikTok's own rather than another app's, and whether an app-settings page or a Play link
+     * may open under Family Pairing. True wherever TikTok's call is, and in a renamed copy also
+     * where the text holds the copy's own name, so the copy's own URIs and pages count while
+     * whatever named the store package still does.
+     */
+    public static boolean holdsOwnPackage(CharSequence text, CharSequence storePackage, boolean ignoreCase) {
+        if (contains(text, storePackage, ignoreCase)) return true;
+        String needle = storePackage.toString();
+        String own = ownPackage(needle);
+        return own != null && !own.equals(needle) && contains(text, own, ignoreCase);
+    }
+
+    /** Kotlin's {@code CharSequence.contains(other, ignoreCase)}, which throws on a null text as it does. */
+    static boolean contains(CharSequence text, CharSequence other, boolean ignoreCase) {
+        String haystack = text.toString();
+        String needle = other.toString();
+        if (!ignoreCase) return haystack.contains(needle);
+        for (int start = 0; start + needle.length() <= haystack.length(); start++) {
+            if (haystack.regionMatches(true, start, needle, 0, needle.length())) return true;
+        }
+        return false;
+    }
+
+    /**
+     * The package that counts as this app's own where TikTok's code names the store package: a
+     * renamed copy's own name, as the store app gets its own. {@code storePackage} comes back
+     * unchanged for any other name, and whenever Hushfeed is paused or has no context yet.
      */
     @Nullable
-    public static String ownPackage(@Nullable String storePackage) {
+    static String ownPackage(@Nullable String storePackage) {
         Context context = Utils.getContext();
         if (context == null || Setting.isPaused() || !STORE_PACKAGE.equals(storePackage)) return storePackage;
         String running = context.getPackageName();

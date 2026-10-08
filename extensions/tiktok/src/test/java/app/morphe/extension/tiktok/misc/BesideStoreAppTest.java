@@ -144,6 +144,39 @@ public class BesideStoreAppTest {
         assertNull(BesideStoreApp.ownPackage(null));
     }
 
+    /** TikTok's own-package checks: what named the store package still counts, and the copy's own name joins it. */
+    @Test public void aCheckForTikToksOwnPackageAcceptsTheCopysNameAsWell() {
+        String store = BesideStoreApp.STORE_PACKAGE;
+        assertTrue("a Play link to the store app, as stock",
+                BesideStoreApp.holdsOwnPackage("market://details?id=" + store, store, false));
+        assertTrue("the copy's own settings page",
+                BesideStoreApp.holdsOwnPackage("package:" + ownPackage, store, false));
+        assertTrue("the copy's own provider authority",
+                BesideStoreApp.holdsOwnPackage("content://" + ownPackage + ".fileprovider/x", store, false));
+        assertFalse("another app's link",
+                BesideStoreApp.holdsOwnPackage("market://details?id=com.example.app", store, false));
+        assertFalse("a look-alike that only shares the first letters of the copy's name",
+                BesideStoreApp.holdsOwnPackage("package:" + ownPackage.substring(0, ownPackage.length() - 1), store, false));
+        assertTrue("ignoring case as TikTok asked",
+                BesideStoreApp.holdsOwnPackage("PACKAGE:" + ownPackage.toUpperCase(java.util.Locale.ROOT), store, true));
+        assertFalse("case kept as TikTok asked",
+                BesideStoreApp.holdsOwnPackage("PACKAGE:" + ownPackage.toUpperCase(java.util.Locale.ROOT), store, false));
+        // TikTok Asia's check rides the same call: only a copy's own name is added to it.
+        assertFalse(BesideStoreApp.holdsOwnPackage("package:" + ownPackage, "com.ss.android.ugc.trill", false));
+        assertThrows(NullPointerException.class, () -> BesideStoreApp.holdsOwnPackage(null, store, false));
+    }
+
+    @Test public void theStoreAppAndAPauseCheckOnlyForTheStorePackage() {
+        String store = BesideStoreApp.STORE_PACKAGE;
+        PausedProcess.set(true);
+        assertFalse(BesideStoreApp.holdsOwnPackage("package:" + ownPackage, store, false));
+        assertTrue(BesideStoreApp.holdsOwnPackage("package:" + store, store, false));
+        PausedProcess.set(false);
+        Utils.setContext(storeApp());
+        assertFalse(BesideStoreApp.holdsOwnPackage("package:" + ownPackage, store, false));
+        assertTrue(BesideStoreApp.holdsOwnPackage("package:" + store, store, false));
+    }
+
     @Test public void theStoreAppAPauseAndNoContextKeepTheStorePackageInTheChecks() {
         Utils.setContext(storeApp());
         assertEquals(BesideStoreApp.STORE_PACKAGE, BesideStoreApp.ownPackage(BesideStoreApp.STORE_PACKAGE));
