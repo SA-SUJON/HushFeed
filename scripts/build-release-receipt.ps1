@@ -213,7 +213,6 @@ $targets = New-Object System.Collections.Generic.List[object]
 foreach ($apk in $Fixture) {
     if (-not (Test-Path -LiteralPath $apk -PathType Leaf)) { throw "Fixture not found: $apk" }
     $label = Split-Path -Leaf $apk
-    Write-Host "[receipt] patching $label with $($patchNames.Count) patches"
 
     $stock = Get-ApkManifestFacts -Apk $apk -Aapt2 $Aapt2
     if ($stock.package -ne $expectedTarget.PackageName) {
@@ -257,6 +256,7 @@ foreach ($apk in $Fixture) {
             $cliOutput = @()
             $cliExitCode = 0
         } else {
+            Write-Host "[receipt] patching $label with $($patchNames.Count) patches"
             $enable = @()
             foreach ($name in $patchNames) { $enable += '-e'; $enable += $name }
             $arguments = @('patch', '--exclusive', '--continue-on-error', '--unsigned', '-p', $Bundle,
