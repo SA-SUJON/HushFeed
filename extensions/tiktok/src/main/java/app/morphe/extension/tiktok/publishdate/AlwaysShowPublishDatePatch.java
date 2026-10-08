@@ -173,7 +173,7 @@ public final class AlwaysShowPublishDatePatch {
         boolean twelve = false, twentyFour = false, marker = false, quoted = false;
         for (int i = 0; i < pattern.length(); i++) {
             char c = pattern.charAt(i);
-            if (c == ''') quoted = !quoted;
+            if (c == '\'') quoted = !quoted;
             else if (!quoted && (c == 'h' || c == 'K')) twelve = true;
             else if (!quoted && (c == 'H' || c == 'k')) twentyFour = true;
             else if (!quoted && c == 'a') marker = true;
@@ -184,7 +184,7 @@ public final class AlwaysShowPublishDatePatch {
         quoted = false;
         for (int i = 0; i < pattern.length(); i++) {
             char c = pattern.charAt(i);
-            if (c == ''') {
+            if (c == '\'') {
                 quoted = !quoted;
                 out.append(c);
                 continue;
