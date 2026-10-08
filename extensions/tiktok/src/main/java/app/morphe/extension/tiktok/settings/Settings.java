@@ -219,6 +219,12 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting HIDE_LAUNCHER_SHORTCUTS =
             new BooleanSetting("hide_launcher_shortcuts", FALSE);
     /**
+     * On by default: the setup runs before anyone can reach this switch, so picking the patch is
+     * the choice. Off brings the screens back the next time TikTok runs its setup.
+     */
+    public static final BooleanSetting SKIP_FIRST_LAUNCH_SETUP =
+            new BooleanSetting("skip_first_launch_setup", TRUE);
+    /**
      * Whether {@link #HIDE_LAUNCHER_SHORTCUTS} has taken the launcher shortcuts away and not yet
      * put them back. No row of its own: it is how turning that switch back off knows there is
      * something to ask TikTok to rebuild, rather than asking on behalf of somebody who never

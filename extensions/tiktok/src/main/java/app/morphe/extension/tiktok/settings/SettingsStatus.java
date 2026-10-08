@@ -107,6 +107,7 @@ public class SettingsStatus {
     public static boolean videoFitEnabled = false;
     public static boolean refreshRateEnabled = false;
     public static boolean launcherShortcutsEnabled = false;
+    public static boolean firstLaunchSetupEnabled = false;
     public static boolean duetStitchEnabled = false;
     public static boolean notificationControlsEnabled = false;
     public static boolean suggestedVideoPushBlockEnabled = false;
@@ -393,6 +394,10 @@ public class SettingsStatus {
 
     public static void enableLauncherShortcuts() {
         launcherShortcutsEnabled = true;
+    }
+
+    public static void enableFirstLaunchSetup() {
+        firstLaunchSetupEnabled = true;
     }
 
     public static void enableVideoFit() {

@@ -13,14 +13,14 @@
 
 Hushfeed is a [Morphe](https://github.com/MorpheApp/morphe-manager) patch bundle for people who want TikTok to behave differently. It can cut feed clutter, guard risky taps, improve downloads and expose controls TikTok leaves buried or unavailable. Every selected patch is configured from one native settings screen inside the app.
 
-**[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse the 129 source patches](#patches)
+**[Add Hushfeed to Morphe](https://morphe.software/add-source?github=SysAdminDoc%2Fhushfeed)** | [Download the latest bundle](https://github.com/SysAdminDoc/hushfeed/releases/latest) | [Tour the settings](#settings-tour) | [Browse the 130 source patches](#patches)
 
 > [!IMPORTANT]
 > Hushfeed targets the global TikTok package, `com.zhiliaoapp.musically`, versions [47.0.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-0-3-release/tiktok-47-0-3-3-android-apk-download/), [47.1.3](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-1-3-release/tiktok-47-1-3-android-apk-download/) and [47.1.4](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-1-4-release/tiktok-47-1-4-2-android-apk-download/). Use one of those exact APKs when patching. See [Supported target](#supported-target) for the verified build details.
 
 Hushfeed v0.68.0 contains 106 patches for TikTok 47.0.3, 47.1.3 and 47.1.4. New in this one: original photos save as full-size JPEGs, hiding the status bar takes TikTok's black strip with it, a switch clears the controls left on Clear display, and Back up, Restore and the Lab's file actions stop waiting on a stuck file app when you ask. It needs Morphe Manager 1.34.0 or newer.
 
-The main branch contains 129 patches, twenty-three more than v0.68.0.
+The main branch contains 130 patches, twenty-four more than v0.68.0.
 
 ## Pick what changes
 
@@ -311,6 +311,7 @@ Eleven of the optional patches in the Performance group were measured on a Galax
 | `Show the progress bar thumbnail` | Shows TikTok's video preview thumbnail while dragging the seekbar. |
 | `SIM spoof` | Spoofs SIM country and operator information retrieved by TikTok, with country presets for easier setup. Switch: Hushfeed settings > Region. |
 | `Skip content warnings` | Play videos TikTok has classified without the warning overlay asking to be tapped through first. Switch: Hushfeed settings > Feed screen. |
+| `Skip first-launch setup` | Opens a fresh install on the feed without the interest picker, the language and gender questions, the creators to follow, the swipe up tutorial or TikTok's own notification pages in front of it. Consent, age and sign-in screens still show, and so does Android's notification prompt. Its switch starts on once you pick the patch. Switch: Hushfeed settings > App. |
 | `Skip the splash ad` | Stops TikTok's splash-ad preload tasks and returns false from its reviewed splash and TopView gates. Other startup behavior is left in place. |
 | `Skip update checks` | Skips TikTok's background and boot-finished device-ID update-check tasks. This may suppress some in-app update checks. Play Store updates are unaffected. |
 | `Stay on the video in full screen` | Keeps TikTok's full-screen viewer on a video when it ends instead of moving to the next one, and leaves out its next-video countdown. Swiping still moves on. Switch: Hushfeed settings > Playback. |

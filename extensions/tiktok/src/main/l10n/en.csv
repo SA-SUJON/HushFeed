@@ -846,6 +846,7 @@ Later,Later
 Layout,Layout
 "Layout, search, profile and system","Layout, search, profile and system"
 Leave maximum empty to keep it unlimited.,Leave maximum empty to keep it unlimited.
+"Leave out the interest picker, the language and gender questions, the creators to follow, the swipe up tutorial and TikTok's notification pages when TikTok runs its setup. Consent, age and sign-in screens still show.","Leave out the interest picker, the language and gender questions, the creators to follow, the swipe up tutorial and TikTok's notification pages when TikTok runs its setup. Consent, age and sign-in screens still show."
 Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.,Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.
 Leave when TikTok says time is up,Leave when TikTok says time is up
 Left edge strip,Left edge strip
@@ -1390,6 +1391,7 @@ Showing %1$s again,Showing %1$s again
 Sign in to TikTok before importing watch history.,Sign in to TikTok before importing watch history.
 Sign in to TikTok before saving or restoring seen history.,Sign in to TikTok before saving or restoring seen history.
 Silence the feed while comments are open,Silence the feed while comments are open
+Skip TikTok's setup screens,Skip TikTok's setup screens
 Skip content warnings,Skip content warnings
 "Skipped entries are invalid, expired, already recorded, or older than the newest %1$s videos.","Skipped entries are invalid, expired, already recorded, or older than the newest %1$s videos."
 Skipping videos with %1$s,Skipping videos with %1$s
