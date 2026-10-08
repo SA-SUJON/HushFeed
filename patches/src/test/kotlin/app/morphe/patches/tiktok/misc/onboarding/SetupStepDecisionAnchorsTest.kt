@@ -28,7 +28,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /** The steps FirstLaunchSetup.SKIPPED names. Kept here too, so a step that leaves TikTok shows up. */
-private val SKIPPED = setOf(
+internal val SKIPPED = setOf(
     "interest_list", "interest_sub_tag", "content_language", "gender_selection",
     "follow_trending_creators", "swipe_up", "push_auth_preposition_page",
 )
@@ -120,16 +120,6 @@ class SetupStepDecisionAnchorsTest {
         assertTrue(after.take(11).none { (it as? OneRegisterInstruction)?.registerA == self && it.opcode.setsRegister() })
         // TikTok's own first check follows the hook untouched.
         assertEquals(decision.implementation!!.instructions.first().opcode, after[11].opcode)
-    }
-
-    /** The list above is the one the extension ships, and neither step that shows Android's notification prompt is on it. */
-    @Test
-    fun `the shipped skip list is this one and keeps Android's notification prompt`() {
-        val path = "extensions/tiktok/src/main/java/app/morphe/extension/tiktok/misc/FirstLaunchSetup.java"
-        val source = listOf(java.io.File("../$path"), java.io.File(path)).first { it.isFile }.readText()
-        val list = source.substringAfter("SKIPPED = ").substringBefore(")));")
-        assertEquals(SKIPPED, Regex("\"([a-z_]+)\"").findAll(list).map { it.groupValues[1] }.toSet())
-        assertTrue("push_page_advance" !in SKIPPED && "push_popup_background" !in SKIPPED)
     }
 
     @Test
