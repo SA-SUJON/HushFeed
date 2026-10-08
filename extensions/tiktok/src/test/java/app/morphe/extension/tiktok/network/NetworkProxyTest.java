@@ -20,6 +20,7 @@ import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.Setting;
 import app.morphe.extension.shared.settings.StringSetting;
 import app.morphe.extension.tiktok.settings.Settings;
+import app.morphe.extension.tiktok.settings.SettingsBackup;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
 import app.morphe.extension.tiktok.settings.preference.InputTextPreference;
 import app.morphe.extension.tiktok.settings.preference.categories.SimSpoofPreferenceCategory;
@@ -51,6 +52,7 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -146,6 +148,41 @@ public class NetworkProxyTest {
         }
         assertNull(NetworkProxy.hostProblem("proxy.example.com"));
         assertNotNull(NetworkProxy.hostProblem("http://proxy.example.com"));
+        assertNotNull(NetworkProxy.hostProblem(" a;b "));
+    }
+
+    @Test public void clearingTheHostOrPortTurnsTheProxyOff() {
+        for (String empty : new String[]{"", "   ", null}) {
+            assertNull("an empty host is taken", NetworkProxy.hostProblem(empty));
+            assertNull("an empty port is taken", NetworkProxy.portProblem(empty));
+        }
+
+        turnOn("http", "proxy.example.com", "8080", "", "");
+        assertNotNull(NetworkProxy.configured());
+        Settings.NETWORK_PROXY_HOST.save("");
+        assertNull("no host, no proxy", NetworkProxy.configured());
+        assertSame("", NetworkProxy.ttnetConfig(""));
+        Settings.NETWORK_PROXY_HOST.save("proxy.example.com");
+        Settings.NETWORK_PROXY_PORT.save(" ");
+        assertNull("no port, no proxy", NetworkProxy.configured());
+        NetworkProxy.install(context);
+        assertNull(NetworkProxy.active());
+        assertSame(originalSelector, ProxySelector.getDefault());
+
+        // The rows' editors save an empty field and still refuse a bad one.
+        try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
+            Context activity = controller.get();
+            InputTextPreference host = new InputTextPreference(activity, "Proxy host",
+                    "The proxy's address, like 192.168.1.20 or proxy.example.com.",
+                    Settings.NETWORK_PROXY_HOST).withCheck(NetworkProxy::hostProblem);
+            InputTextPreference port = new InputTextPreference(activity, "Proxy port",
+                    "The port the proxy listens on, like 8080 or 1080.",
+                    Settings.NETWORK_PROXY_PORT).withCheck(NetworkProxy::portProblem);
+            assertTrue(host.callChangeListener(""));
+            assertTrue(port.callChangeListener(""));
+            assertFalse(host.callChangeListener("http://proxy.example.com"));
+            assertFalse(port.callChangeListener("0"));
+        }
     }
 
     @Test public void portsAreWholeNumbersInRange() {
@@ -157,6 +194,7 @@ public class NetworkProxyTest {
         }
         assertNull(NetworkProxy.portProblem("1080"));
         assertNotNull(NetworkProxy.portProblem("70000"));
+        assertNotNull(NetworkProxy.portProblem(" 8 0 "));
     }
 
     @Test public void parseNeedsATypeAHostAndAPort() {
@@ -481,6 +519,61 @@ public class NetworkProxyTest {
         assertTrue(said, said.contains("proxy.example.com:8080") && said.contains("password"));
         assertFalse(said, said.contains(USER));
         assertFalse(said, said.contains(PASSWORD));
+    }
+
+    @Test public void aProxyThatAnsweredInBetweenIsToldAboutAgain() {
+        NetworkProxy.Config config = NetworkProxy.parse("http", "proxy.example.com", "8080", "", "");
+        NetworkProxy.report(config, NetworkProxy.Probe.UNREACHABLE);
+        NetworkProxy.report(config, NetworkProxy.Probe.UNREACHABLE);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertEquals(1, ShadowToast.shownToastCount());
+
+        NetworkProxy.report(config, NetworkProxy.Probe.REACHED);
+        NetworkProxy.report(config, NetworkProxy.Probe.UNREACHABLE);
+        NetworkProxy.report(config, NetworkProxy.Probe.UNREACHABLE);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertEquals(2, ShadowToast.shownToastCount());
+    }
+
+    @Test public void aProxyThatStopsAnsweringIsToldOnceAtTheNextCheck() throws Exception {
+        ServerSocket server = serve(socket -> {
+            readFully(socket.getInputStream(), 3);
+            socket.getOutputStream().write(new byte[]{5, 0});
+        });
+        int port = server.getLocalPort();
+        turnOn("socks5", "127.0.0.1", String.valueOf(port), "", "");
+        NetworkProxy.checker = Runnable::run;
+        NetworkProxy.install(context);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertEquals("the proxy answered at start-up", 0, ShadowToast.shownToastCount());
+
+        server.close();
+        try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
+            shadowOf(Looper.getMainLooper()).idle();
+            assertEquals("too soon after the start-up check to ask again", 0, ShadowToast.shownToastCount());
+
+            for (int comeBack = 0; comeBack < 2; comeBack++) {
+                shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(NetworkProxy.RECHECK_AFTER_MS));
+                controller.pause().resume();
+                shadowOf(Looper.getMainLooper()).idle();
+            }
+        }
+        assertEquals("one outage, one toast", 1, ShadowToast.shownToastCount());
+        String said = ShadowToast.getTextOfLatestToast();
+        assertTrue(said, said.contains("127.0.0.1:" + port));
+    }
+
+    @Test public void resetSettingsClearsTheSignInAndARestoreLeavesIt() throws Exception {
+        turnOn("http", "proxy.example.com", "8080", USER, PASSWORD);
+        SettingsBackup.restore(context, SettingsBackup.create(false), false);
+        assertEquals("a backup never carried this phone's sign-in", USER, Settings.NETWORK_PROXY_USER.get());
+        assertEquals(PASSWORD, Settings.NETWORK_PROXY_PASSWORD.get());
+
+        SettingsBackup.reset(context);
+        assertFalse(Settings.NETWORK_PROXY.get());
+        assertEquals("", Settings.NETWORK_PROXY_HOST.get());
+        assertEquals("", Settings.NETWORK_PROXY_USER.get());
+        assertEquals("", Settings.NETWORK_PROXY_PASSWORD.get());
     }
 
     // -- The rows -------------------------------------------------------------------------------------

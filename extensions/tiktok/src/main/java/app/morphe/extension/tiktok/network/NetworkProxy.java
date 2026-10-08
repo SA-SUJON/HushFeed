@@ -4,7 +4,11 @@
  */
 package app.morphe.extension.tiktok.network;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
+import android.os.SystemClock;
 
 import androidx.annotation.Nullable;
 
@@ -33,6 +37,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 
@@ -55,6 +60,12 @@ import java.util.regex.Pattern;
  * native code that open their own sockets. Chromium can't sign in to a proxy for TTNet, so a
  * user name and password only reach the Java side, through {@link Authenticator}.
  *
+ * <p>The Java side keeps this phone and its local network direct. TTNet's rule has no room for
+ * a list of exceptions (Chromium reads one apart from the rule, and TTNet's builder takes the rule
+ * alone), so there only Chromium's own exceptions apply: localhost, loopback and link-local
+ * addresses. TikTok's API hosts are all public, so that difference only shows for a private
+ * address TikTok's own stack is pointed at.
+ *
  * <p>The user name and password are never logged, and they're left out of the rules, the
  * descriptions and every debug line here.
  */
@@ -70,6 +81,14 @@ public final class NetworkProxy {
     static final String PROBE_TARGET = "www.tiktok.com:443";
 
     static final int PROBE_TIMEOUT_MS = 6000;
+
+    /** How long after a check TikTok coming back to the screen checks the proxy again. */
+    static final long RECHECK_AFTER_MS = 5 * 60_000L;
+
+    private static final Executor OWN_THREAD = task -> Utils.runOnOwnThread("Hushfeed proxy check", task);
+
+    /** Where a check runs: a thread of its own, since it waits on the network. Tests run it in place. */
+    static Executor checker = OWN_THREAD;
 
     /** A label of a host name: letters, digits and hyphens, never a hyphen at either end. */
     private static final Pattern LABEL = Pattern.compile("[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?");
@@ -133,7 +152,11 @@ public final class NetworkProxy {
     /** What this process put in place at start-up, or null when the proxy is off. */
     private static volatile Config active;
     private static volatile boolean installed;
+    /** Whether a problem was told and the proxy hasn't answered since. */
     private static final AtomicBoolean reported = new AtomicBoolean();
+    /** When the last check started, on {@link SystemClock#elapsedRealtime()}. */
+    private static volatile long checkedAt;
+    private static volatile boolean following;
 
     private NetworkProxy() {
     }
@@ -182,17 +205,25 @@ public final class NetworkProxy {
         return port >= 1 && port <= 65535 ? port : -1;
     }
 
-    /** What the host row's editor says about a typed value, or null when it's usable. */
+    /**
+     * What the host row's editor says about a typed value, or null when it's usable. An empty
+     * field is usable: it leaves the proxy off, and refusing it kept a saved host for good.
+     */
     @Nullable
     public static String hostProblem(String value) {
-        return normalizeHost(value) != null
+        return isBlank(value) || normalizeHost(value) != null
                 ? null : L10n.t("Enter a host name or IP address, without a scheme or port");
     }
 
-    /** What the port row's editor says about a typed value, or null when it's usable. */
+    /** What the port row's editor says about a typed value, or null when it's usable. Empty is too. */
     @Nullable
     public static String portProblem(String value) {
-        return parsePort(value) > 0 ? null : L10n.t("A port is a whole number from 1 to 65535");
+        return isBlank(value) || parsePort(value) > 0
+                ? null : L10n.t("A port is a whole number from 1 to 65535");
+    }
+
+    private static boolean isBlank(@Nullable String value) {
+        return value == null || value.trim().isEmpty();
     }
 
     /** A proxy from the five values, or null when any of them makes it unusable. */
@@ -213,7 +244,7 @@ public final class NetworkProxy {
     /**
      * The proxy the settings turn on, or null. Off while the patch isn't in the bundle, before
      * the extension has a context (Settings isn't loaded that early), while Hushfeed is paused
-     * (the switch answers off then) and while the switch is off.
+     * (the switch answers off then), while the switch is off and while the host or port is empty.
      */
     @Nullable
     static Config configured() {
@@ -221,9 +252,13 @@ public final class NetworkProxy {
                 || !Settings.NETWORK_PROXY.get()) {
             return null;
         }
-        return parse(Settings.NETWORK_PROXY_TYPE.get(), Settings.NETWORK_PROXY_HOST.get(),
+        Config config = parse(Settings.NETWORK_PROXY_TYPE.get(), Settings.NETWORK_PROXY_HOST.get(),
                 Settings.NETWORK_PROXY_PORT.get(), Settings.NETWORK_PROXY_USER.get(),
                 Settings.NETWORK_PROXY_PASSWORD.get());
+        if (config == null) {
+            Logger.printDebug(() -> "Network proxy: the switch is on, but the host or port is empty or unusable, so TikTok connects directly");
+        }
+        return config;
     }
 
     @Nullable
@@ -270,7 +305,7 @@ public final class NetworkProxy {
      * Called once per process from the host application's attachBaseContext, after the
      * extension has its context and before TikTok builds a network client. Puts the selector and,
      * with a user name, the authenticator in place, and in TikTok's main process checks the
-     * proxy answers.
+     * proxy answers, then checks again as TikTok comes back to the screen.
      */
     public static void install(Context context) {
         if (installed) return;
@@ -284,11 +319,46 @@ public final class NetworkProxy {
             Logger.printDebug(() -> "Network proxy: Java connections go through the " + config.describe()
                     + (config.hasCredentials() ? ", signing in when asked" : ""));
             if (Utils.isMainProcess()) {
-                Utils.runOnOwnThread("Hushfeed proxy check", () -> report(config, probe(config, PROBE_TIMEOUT_MS)));
+                check(config);
+                // Queued, not now: during attachBaseContext the base context has no application yet.
+                Utils.runOnMainThread(() -> follow(context, config));
             }
         } catch (RuntimeException error) {
             Logger.printException(() -> "Network proxy could not be put in place", error);
         }
+    }
+
+    /** Asks the proxy whether it answers, off the main thread, and says so if it doesn't. */
+    static void check(Config config) {
+        checkedAt = SystemClock.elapsedRealtime();
+        checker.execute(() -> report(config, probe(config, PROBE_TIMEOUT_MS)));
+    }
+
+    /**
+     * Checks the proxy again whenever one of TikTok's screens comes back, at most once every
+     * {@link #RECHECK_AFTER_MS}. TikTok's own stack never tells the JVM a connection failed, so
+     * without this a proxy that stopped answering later in a session went unmentioned.
+     */
+    static void follow(Context context, Config config) {
+        if (following) return;
+        Context application = context.getApplicationContext();
+        if (!(application instanceof Application)) {
+            Logger.printDebug(() -> "Network proxy: no application to follow, so the proxy is only checked at start-up");
+            return;
+        }
+        following = true;
+        ((Application) application).registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+            @Override public void onActivityResumed(Activity resumed) {
+                if (SystemClock.elapsedRealtime() - checkedAt >= RECHECK_AFTER_MS) check(config);
+            }
+
+            @Override public void onActivityCreated(Activity created, Bundle state) { }
+            @Override public void onActivityStarted(Activity started) { }
+            @Override public void onActivityPaused(Activity paused) { }
+            @Override public void onActivityStopped(Activity stopped) { }
+            @Override public void onActivitySaveInstanceState(Activity activity, Bundle state) { }
+            @Override public void onActivityDestroyed(Activity destroyed) { }
+        });
     }
 
     /** Whether a host is this phone or its local network, which the proxy never carries. */
@@ -448,9 +518,13 @@ public final class NetworkProxy {
         return line.toString();
     }
 
-    /** Says once per process when the proxy is down or wants a sign-in TTNet can't give. */
+    /**
+     * Says when the proxy is down or wants a sign-in TTNet can't give, once until it answers
+     * again, so a proxy that comes back and drops later is told about a second time.
+     */
     static void report(Config config, Probe probe) {
         if (probe == Probe.REACHED) {
+            reported.set(false);
             Logger.printDebug(() -> "Network proxy: the " + config.describe() + " answered");
             return;
         }
@@ -471,6 +545,9 @@ public final class NetworkProxy {
         installed = false;
         active = null;
         reported.set(false);
+        checkedAt = 0;
+        following = false;
+        checker = OWN_THREAD;
     }
 
     static boolean isInstalled() {
