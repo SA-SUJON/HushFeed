@@ -1233,7 +1233,9 @@ public final class FeedItemsFilter {
         }
         if (countDistribution) {
             Integer dropped = reasonCounts.get(UNPERSONALIZED_REASON);
-            FeedFilterCounters.removedItems(FOR_YOU_DISTRIBUTION_SOURCE, dropped == null ? 0 : dropped, UNPERSONALIZED_REASON);
+            // A diagnostic share of this list's removals: the list's own count below adds them to
+            // the running count.
+            FeedFilterCounters.removed(FOR_YOU_DISTRIBUTION_SOURCE, dropped == null ? 0 : dropped, UNPERSONALIZED_REASON);
         }
         // Never restore ads, blocked creators/words, seen videos, or other hard rejects.
         if (rangeKept.isEmpty() && qualityFallback != null) rangeKept.add(qualityFallback);
