@@ -176,7 +176,7 @@ public final class AlwaysShowPublishDatePatch {
             if (c == '\'') quoted = !quoted;
             else if (!quoted && (c == 'h' || c == 'K')) twelve = true;
             else if (!quoted && (c == 'H' || c == 'k')) twentyFour = true;
-            else if (!quoted && c == 'a') marker = true;
+            else if (!quoted && isDayPeriod(c)) marker = true;
         }
         if (hour24 ? !twelve && !marker : !twentyFour) return pattern;
         StringBuilder out = new StringBuilder(pattern.length() + 2);
@@ -193,13 +193,16 @@ public final class AlwaysShowPublishDatePatch {
                 out.append(c);
                 continue;
             }
-            boolean hour = c == 'h' || c == 'K' || c == 'H' || c == 'k';
+            boolean hour = isHour(c);
             if (hour) {
                 while (i + 1 < pattern.length() && pattern.charAt(i + 1) == c) i++;
                 out.append(hour24 ? "HH" : "h");
-            } else if (c == 'a') {
+            } else if (isDayPeriod(c)) {
                 if (!hour24) out.append(c);
-                // The space that set the marker apart goes with it, on whichever side it was.
+                // A marker joined to its hour ("d日 ah:mm") goes alone: the space before it parts
+                // the date from the time. Otherwise the space that set it apart goes with it, on
+                // whichever side it was.
+                else if (i + 1 < pattern.length() && isHour(pattern.charAt(i + 1))) continue;
                 else if (trimSpace(out) == 0 && i + 1 < pattern.length() && isSpace(pattern.charAt(i + 1))) i++;
             } else {
                 out.append(c);
@@ -208,6 +211,15 @@ public final class AlwaysShowPublishDatePatch {
         }
         if (!hour24 && !marker && afterTime >= 0) out.insert(afterTime, " a");
         return out.toString();
+    }
+
+    private static boolean isHour(char c) {
+        return c == 'h' || c == 'K' || c == 'H' || c == 'k';
+    }
+
+    /** AM/PM, and the noon and midnight ("b") and flexible ("B", "下午") day periods. */
+    private static boolean isDayPeriod(char c) {
+        return c == 'a' || c == 'b' || c == 'B';
     }
 
     private static int trimSpace(StringBuilder text) {

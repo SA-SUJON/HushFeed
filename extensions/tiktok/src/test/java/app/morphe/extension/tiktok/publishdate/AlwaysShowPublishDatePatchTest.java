@@ -182,7 +182,7 @@ public class AlwaysShowPublishDatePatchTest {
 
         String german12 = AlwaysShowPublishDatePatch.exactTime(POSTED, Locale.GERMANY, TimeZone.getTimeZone("UTC"), false);
         assertTrue(german12, german12.contains("07.10.2025"));
-        assertTrue(german12, Pattern.compile("\b3:04:05\b").matcher(german12).find());
+        assertTrue(german12, Pattern.compile("\\b3:04:05\\b").matcher(german12).find());
         assertTrue(german12, german12.contains("PM"));
     }
 
@@ -194,6 +194,19 @@ public class AlwaysShowPublishDatePatchTest {
         assertEquals("dd.MM.y, HH:mm:ss z", AlwaysShowPublishDatePatch.hourStyle("dd.MM.y, HH:mm:ss z", true));
         assertEquals("y. M. d. HH:mm:ss z", AlwaysShowPublishDatePatch.hourStyle("y. M. d. a h:mm:ss z", true));
         assertEquals("d 'h' HH:mm", AlwaysShowPublishDatePatch.hourStyle("d 'h' h:mm a", true));
+    }
+
+    @Test
+    public void aMarkerJoinedToTheHourLeavesTheSpaceBeforeIt() {
+        // zh_HK writes "y年M月d日 ah:mm:ss [z]": the space parts the date from the time.
+        assertEquals("y年M月d日 HH:mm:ss [z]",
+                AlwaysShowPublishDatePatch.hourStyle("y年M月d日 ah:mm:ss [z]", true));
+        assertEquals("y/MM/dd HH:mm:ss z", AlwaysShowPublishDatePatch.hourStyle("y/MM/dd aK:mm:ss z", true));
+        // A flexible day period ("下午") goes the same way as AM/PM.
+        assertEquals("y/M/d HH:mm:ss", AlwaysShowPublishDatePatch.hourStyle("y/M/d Bh:mm:ss", true));
+        assertEquals("y/M/d Bh:mm:ss", AlwaysShowPublishDatePatch.hourStyle("y/M/d BH:mm:ss", false));
+        // en_US puts a narrow no-break space before AM/PM; the plain one after it stays.
+        assertEquals("MMM d, y, HH:mm:ss z", AlwaysShowPublishDatePatch.hourStyle("MMM d, y, h:mm:ss a z", true));
     }
 
     @Test
