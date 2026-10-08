@@ -138,6 +138,12 @@ public class DownloadsPreferenceCategory extends ConditionalPreferenceCategory {
                     L10n.f(context, "Remember up to %1$s video saves made here while this is on. If the file still exists, offer Open or Save again before downloading another copy.",
                             java.text.NumberFormat.getIntegerInstance().format(SavedVideoArchive.LIMIT)),
                     Settings.CHECK_SAVED_VIDEOS));
+            addPreference(new TogglePreference(context, "Mark saved videos on profile grids",
+                    "Put a ✓ before the view count on profile grids for videos Hushfeed saved here. "
+                            + "It reads the record Check for already-saved videos keeps, so it works only "
+                            + "while that switch is on. Photo posts aren't marked, and a video you've deleted "
+                            + "since keeps its mark until you use Forget saved videos.",
+                    Settings.MARK_SAVED_VIDEOS));
             addPreference(new ForgetSavedVideosPreference(context));
         }
         if (SettingsStatus.advancedDownloadsEnabled || SettingsStatus.downloadEnabled) {
