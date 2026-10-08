@@ -1,3 +1,7 @@
+## Unreleased
+
+* **TikTok:** Hushfeed unterstützt jetzt nur noch TikTok 47.1.4. Wenn du 47.0.3 oder 47.1.3 nutzt, lade die APK von 47.1.4 bei APKMirror herunter und patche sie in Morphe Manager mit demselben Signaturschlüssel, damit Anmeldung und Einstellungen erhalten bleiben. Das Feature Gate Lab behält jede Überschreibung, deren Schalter es in 47.1.4 noch gibt, und schaltet die übrigen mit seinem üblichen Hinweis aus.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Ein TikTok-Videolink, den du öffnest, zeigt jetzt sein Video auch dann, wenn ein Feed-Filter es ausblenden würde, etwa Bereits gesehene Videos ausblenden bei einem Video, das du schon angesehen hast (#117). TikTok lädt ein verlinktes Video als eigene Feed-Seite, deshalb blieb nach dem Herausfiltern nur TikToks Fehlerbildschirm übrig. Nur dieses eine Video kommt an den Filtern vorbei, und nur für eine Minute nach dem Link. Links zu Fotobeiträgen und die älteren `m.tiktok.com/v/<id>.html`-Links der mobilen Website zählen ebenfalls als ein Beitrag, hier und bei `Feed sperren`.
