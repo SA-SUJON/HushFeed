@@ -19,6 +19,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executor;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import app.morphe.extension.tiktok.SettingsContextRule;
@@ -200,6 +201,44 @@ public class ShortLinkExpanderTest {
         copy(SHORT);
         idle();
         assertEquals(2, opens.get());
+        assertEquals(VIDEO, text());
+    }
+
+    @Test public void aFailedLinkIsLeftAloneWhileOthersAreOpened() {
+        landings.put(SHORT, "https://www.tiktok.com/login");
+        ShortLinkExpander.watch(context, SHORT, SHORT, ShortLinkExpander.clipStamp(context), resolver);
+        copy(SHORT);
+        idle();
+        assertEquals(1, opens.get());
+
+        ShortLinkExpander.watch(context, OTHER, OTHER, ShortLinkExpander.clipStamp(context), resolver);
+        copy(OTHER);
+        idle();
+        assertEquals(2, opens.get());
+        assertEquals(PHOTO, text());
+
+        ShortLinkExpander.watch(context, SHORT, SHORT, ShortLinkExpander.clipStamp(context), resolver);
+        copy(SHORT);
+        idle();
+        assertEquals("opening another link made the failed one fair game again", 2, opens.get());
+        assertEquals(SHORT, text());
+    }
+
+    @Test public void aLinkWhoseThreadCouldntStartIsTriedOnTheNextCopy() {
+        ShortLinkExpander.opener = task -> {
+            throw new RejectedExecutionException("no thread");
+        };
+        ShortLinkExpander.watch(context, SHORT, SHORT, ShortLinkExpander.clipStamp(context), resolver);
+        copy(SHORT);
+        idle();
+        assertEquals(0, opens.get());
+        assertEquals(SHORT, text());
+
+        ShortLinkExpander.opener = Runnable::run;
+        ShortLinkExpander.watch(context, SHORT, SHORT, ShortLinkExpander.clipStamp(context), resolver);
+        copy(SHORT);
+        idle();
+        assertEquals(1, opens.get());
         assertEquals(VIDEO, text());
     }
 

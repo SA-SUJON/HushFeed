@@ -17,11 +17,13 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.regex.Pattern;
 
 import app.morphe.extension.shared.Logger;
@@ -65,16 +67,34 @@ public final class ShortLinkExpander {
     }
 
     static final Resolver NETWORK = LinkResolver::finalUrl;
-    /** Where a short link is opened. Tests open it in place. */
-    static Executor opener = task -> Utils.runOnOwnThread("Hushfeed short link", task);
+    /** Where a short link is opened. Tests open it in place. Refuses when no thread starts. */
+    static Executor opener = task -> {
+        if (!Utils.runOnOwnThread("Hushfeed short link", task)) throw new RejectedExecutionException("no thread");
+    };
+    /** How many opened short links are remembered, with where they led. */
+    static final int REMEMBERED = 16;
 
     /** Each copied text being waited for, with its listener. Main thread. */
     private static final Map<String, ClipboardManager.OnPrimaryClipChangedListener> WATCHING = new HashMap<>();
     /** Short links being opened now. */
     private static final Set<String> OPENING = new HashSet<>();
-    /** The last short link opened and where it led, null when it couldn't be, and when. */
-    private static String lastShort, lastFull;
-    private static long lastOpenedAt;
+    /** The latest short links opened, oldest first, each with where it led and when. */
+    private static final Map<String, Opened> OPENED = new LinkedHashMap<String, Opened>(REMEMBERED, 0.75f, true) {
+        @Override protected boolean removeEldestEntry(Map.Entry<String, Opened> eldest) {
+            return size() > REMEMBERED;
+        }
+    };
+
+    /** Where a short link led, null when it couldn't be opened, and when it was tried. */
+    private static final class Opened {
+        @Nullable final String full;
+        final long at;
+
+        Opened(@Nullable String full, long at) {
+            this.full = full;
+            this.at = at;
+        }
+    }
 
     private ShortLinkExpander() {
     }
@@ -141,9 +161,10 @@ public final class ShortLinkExpander {
     static void open(String shortLink, Resolver resolver, Then then) {
         String known = null;
         synchronized (ShortLinkExpander.class) {
-            if (shortLink.equals(lastShort)) {
-                if (lastFull == null && SystemClock.elapsedRealtime() - lastOpenedAt < RETRY_AFTER_MS) return;
-                known = lastFull;
+            Opened opened = OPENED.get(shortLink);
+            if (opened != null) {
+                if (opened.full == null && SystemClock.elapsedRealtime() - opened.at < RETRY_AFTER_MS) return;
+                known = opened.full;
             }
             if (known == null && !OPENING.add(shortLink)) return;
         }
@@ -152,22 +173,28 @@ public final class ShortLinkExpander {
             Utils.runOnMainThreadNowOrLater(() -> then.accept(rewrite(full)));
             return;
         }
-        opener.execute(() -> {
-            String landed = null;
-            try {
-                landed = expand(shortLink, resolver);
-            } finally {
-                synchronized (ShortLinkExpander.class) {
-                    OPENING.remove(shortLink);
-                    lastShort = shortLink;
-                    lastFull = landed;
-                    lastOpenedAt = SystemClock.elapsedRealtime();
+        try {
+            opener.execute(() -> {
+                String landed = null;
+                try {
+                    landed = expand(shortLink, resolver);
+                } finally {
+                    synchronized (ShortLinkExpander.class) {
+                        OPENING.remove(shortLink);
+                        OPENED.put(shortLink, new Opened(landed, SystemClock.elapsedRealtime()));
+                    }
                 }
+                if (landed == null) return;
+                String full = landed;
+                Utils.runOnMainThread(() -> then.accept(rewrite(full)));
+            });
+        } catch (RejectedExecutionException refused) {
+            // Nothing will open it, so it mustn't stay marked as opening until TikTok restarts.
+            synchronized (ShortLinkExpander.class) {
+                OPENING.remove(shortLink);
             }
-            if (landed == null) return;
-            String full = landed;
-            Utils.runOnMainThread(() -> then.accept(rewrite(full)));
-        });
+            Logger.printInfo(() -> "Short link expansion couldn't start a thread, so the link stays short");
+        }
     }
 
     private static String rewrite(String full) {
@@ -175,9 +202,7 @@ public final class ShortLinkExpander {
     }
 
     static synchronized void forgetForTests() {
-        lastShort = null;
-        lastFull = null;
-        lastOpenedAt = 0;
+        OPENED.clear();
         OPENING.clear();
         WATCHING.clear();
     }
