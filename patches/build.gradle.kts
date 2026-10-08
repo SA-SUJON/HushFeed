@@ -254,7 +254,7 @@ group = "app.morphe"
 patches {
     about {
         name = "Hushfeed"
-        description = "Hushfeed patches for TikTok 47.0.3, 47.1.3 and 47.1.4, built for Morphe. Fewer accidental taps, less noise, more control over the feed, inbox, comments and downloads."
+        description = "Hushfeed patches for TikTok 47.1.4, built for Morphe. Fewer accidental taps, less noise, more control over the feed, inbox, comments and downloads."
         source = "https://github.com/SysAdminDoc/hushfeed"
         author = "SysAdminDoc"
         contact = "https://github.com/SysAdminDoc/hushfeed/issues"
@@ -592,7 +592,7 @@ val fixtureDigests by lazy {
 // Both partitions that open TikTok APKs.
 tasks.withType<Test>().matching { it.name == "test" || it.name == "nativeTest" }.configureEach {
     // GateCatalogFixturesTest runs the catalog generator on each declared build, and the
-    // generator holds a whole APK's dex (some 430 MB on 47.1.3, feature modules included)
+    // generator holds a whole APK's dex (some 430 MB on 47.1.x, feature modules included)
     // while it walks it; the fixture scans in nativeTest hold the same dex. Gradle's default
     // test heap is 512 MB, where that ran out of memory.
     maxHeapSize = "4g"
