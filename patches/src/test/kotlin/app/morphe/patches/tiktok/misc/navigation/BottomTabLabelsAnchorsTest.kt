@@ -95,8 +95,10 @@ class BottomTabLabelsAnchorsTest {
         constructor.reportBottomTab(sites.tag)
         val after = constructor.implementation!!.instructions.toList()
         assertEquals(size + 2, after.size)
+        // One return, though not always last: R8 can move a branch's tail past it (47.1.4 has a
+        // const and a goto back after the return-void).
         val end = after.indexOfFirst { it.opcode == Opcode.RETURN_VOID }
-        assertEquals(after.size - 1, after.indexOfLast { it.opcode == Opcode.RETURN_VOID })
+        assertEquals("$version: returns", 1, after.count { it.opcode == Opcode.RETURN_VOID })
         assertEquals(
             "$version: the tag hook",
             listOf(Opcode.IGET_OBJECT, Opcode.INVOKE_STATIC, Opcode.RETURN_VOID),
