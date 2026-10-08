@@ -1628,7 +1628,7 @@ Galaxy Store,Galaxy Store
 AppGallery,AppGallery
 Amazon Appstore,Amazon Appstore
 Swipe for brightness and volume,Geser untuk kecerahan dan volume
-"Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.","Geser ke atas atau bawah di tepi kiri video untuk mengubah kecerahan layar, atau di tepi kanan untuk mengubah volume. Di tempat lain, feed tetap bergulir seperti biasa."
+Drag up or down along the left or right edge of a video to change what that edge strip is set to below. By default that's the screen brightness on the left and the volume on the right. Swiping anywhere else still scrolls the feed.,"Geser ke atas atau bawah di tepi kiri atau kanan video untuk mengubah apa yang diatur untuk strip tepi itu di bawah. Secara bawaan, kiri untuk kecerahan layar dan kanan untuk volume. Di tempat lain, feed tetap bergulir seperti biasa."
 Edge strip width,Lebar strip tepi
 "How wide each edge strip is, as a percent of the screen width.","Lebar setiap strip tepi, dalam persen dari lebar layar."
 Brightness,Kecerahan

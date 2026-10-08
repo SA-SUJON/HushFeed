@@ -9,6 +9,8 @@ import app.morphe.util.addInstruction
 import app.morphe.util.addInstructions
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
+import app.morphe.patches.tiktok.misc.theme.declaredVersions
 import app.morphe.patches.tiktok.misc.extension.sharedExtensionPatch
 import app.morphe.patches.tiktok.misc.settings.settingsPatch
 import app.morphe.patches.tiktok.shared.OnRenderFirstFrameFingerprint
@@ -84,6 +86,9 @@ internal fun liveSpeedBridgeBody(
     return-void
 """
 
+/** The live speed change's hook site and the two extension stubs it fills in. */
+private class LiveSpeedSites(val progress: MutableMethod, val setter: MutableMethod, val aweme: MutableMethod)
+
 /** The body of the bridge that answers which video a PlayerController has, for the same getter. */
 internal fun liveAwemeBridgeBody(controller: String, awemeGetter: MethodReference): String = """
     check-cast p0, $controller
@@ -105,32 +110,41 @@ val playbackSpeedPatch = bytecodePatch(
 
     execute {
         // The live speed gesture's hook and bridges are resolved before the first write below, so
-        // a build that lost one of them leaves nothing half patched.
-        val progress = PlayerProgressAidFingerprint.method
-        check(!AccessFlags.STATIC.isSet(progress.accessFlags)) {
-            "Playback speed: ${progress.name} became static, so p0 is not the player."
-        }
-        check(progress.parameterTypes.firstOrNull()?.toString() == "Ljava/lang/String;") {
-            "Playback speed: ${progress.name} no longer takes the video id first, so p1 is not it."
-        }
-        // The live bridge casts the reporting player to the first frame's controller class.
-        check(progress.definingClass == OnRenderFirstFrameBodyFingerprint.method.definingClass) {
-            "Playback speed: the progress report sits on ${progress.definingClass}, not on the first " +
-                "frame's ${OnRenderFirstFrameBodyFingerprint.method.definingClass}."
-        }
+        // a build that lost one of them leaves nothing half patched. They're an add-on: on a build
+        // nobody has checked, a miss leaves the live change out with a note and the rest of the
+        // patch goes on. On a declared one LiveSpeedAnchorsTest holds them, so a miss fails it.
         val liveExtension = mutableClassDefBy(EXTENSION)
-        val liveSetter = liveExtension.methods.filter { it.name == "setNativeSpeed" }
-            .singleOrPatchException("Playback speed: extension setNativeSpeed bridge")
-        val liveAweme = liveExtension.methods.filter { it.name == "nativeAweme" }
-            .singleOrPatchException("Playback speed: extension nativeAweme bridge")
-        check(
-            AccessFlags.STATIC.isSet(liveSetter.accessFlags) && liveSetter.returnType == "V" &&
-                liveSetter.parameterTypes.map(CharSequence::toString) == listOf("Ljava/lang/Object;", "F"),
-        ) { "Playback speed: the extension's setNativeSpeed stub is not static (Object, float)V." }
-        check(
-            AccessFlags.STATIC.isSet(liveAweme.accessFlags) && liveAweme.returnType == AWEME &&
-                liveAweme.parameterTypes.map(CharSequence::toString) == listOf("Ljava/lang/Object;"),
-        ) { "Playback speed: the extension's nativeAweme stub is not static (Object)Aweme." }
+        val live = try {
+            val progress = PlayerProgressAidFingerprint.method
+            check(!AccessFlags.STATIC.isSet(progress.accessFlags)) {
+                "Playback speed: ${progress.name} became static, so p0 is not the player."
+            }
+            check(progress.parameterTypes.firstOrNull()?.toString() == "Ljava/lang/String;") {
+                "Playback speed: ${progress.name} no longer takes the video id first, so p1 is not it."
+            }
+            // The live bridge casts the reporting player to the first frame's controller class.
+            check(progress.definingClass == OnRenderFirstFrameBodyFingerprint.method.definingClass) {
+                "Playback speed: the progress report sits on ${progress.definingClass}, not on the first " +
+                    "frame's ${OnRenderFirstFrameBodyFingerprint.method.definingClass}."
+            }
+            val liveSetter = liveExtension.methods.filter { it.name == "setNativeSpeed" }
+                .singleOrPatchException("Playback speed: extension setNativeSpeed bridge")
+            val liveAweme = liveExtension.methods.filter { it.name == "nativeAweme" }
+                .singleOrPatchException("Playback speed: extension nativeAweme bridge")
+            check(
+                AccessFlags.STATIC.isSet(liveSetter.accessFlags) && liveSetter.returnType == "V" &&
+                    liveSetter.parameterTypes.map(CharSequence::toString) == listOf("Ljava/lang/Object;", "F"),
+            ) { "Playback speed: the extension's setNativeSpeed stub is not static (Object, float)V." }
+            check(
+                AccessFlags.STATIC.isSet(liveAweme.accessFlags) && liveAweme.returnType == AWEME &&
+                    liveAweme.parameterTypes.map(CharSequence::toString) == listOf("Ljava/lang/Object;"),
+            ) { "Playback speed: the extension's nativeAweme stub is not static (Object)Aweme." }
+            LiveSpeedSites(progress, liveSetter, liveAweme)
+        } catch (problem: Exception) {
+            if (packageMetadata.versionName in declaredVersions()) throw problem
+            println("[Playback speed] Left out the live speed change on ${packageMetadata.versionName}: ${problem.message}")
+            null
+        }
 
         val selection = PlaybackSpeedSelectionBoundaryFingerprint.method
         check(AccessFlags.STATIC.isSet(selection.accessFlags)) {
@@ -256,21 +270,27 @@ val playbackSpeedPatch = bytecodePatch(
         // a speed in, the native selection state brought along, the controller's setSpeed called.
         // Which controller is on screen is the progress report's to say (a preloaded neighbour
         // can draw its first frame early), so that report hands the extension its controller.
-        val liveSetterBridge = liveSetter.cloneMutable(additionalRegisters = 2)
-        liveExtension.methods.remove(liveSetter)
-        liveExtension.methods.add(liveSetterBridge)
-        liveSetterBridge.addInstructions(
-            0,
-            liveSpeedBridgeBody(frame.definingClass, awemeGetter, currentAwemeField, speedFields, controllerSetSpeed),
-        )
-        val liveAwemeBridge = liveAweme.cloneMutable(additionalRegisters = 2)
-        liveExtension.methods.remove(liveAweme)
-        liveExtension.methods.add(liveAwemeBridge)
-        liveAwemeBridge.addInstructions(0, liveAwemeBridgeBody(frame.definingClass, awemeGetter))
-        progress.addInstruction(
-            0,
-            "invoke-static/range {p0 .. p1}, $EXTENSION->onPlayerProgress(Ljava/lang/Object;Ljava/lang/String;)V",
-        )
+        if (live != null) {
+            val liveSetterBridge = live.setter.cloneMutable(additionalRegisters = 2)
+            liveExtension.methods.remove(live.setter)
+            liveExtension.methods.add(liveSetterBridge)
+            liveSetterBridge.addInstructions(
+                0,
+                liveSpeedBridgeBody(frame.definingClass, awemeGetter, currentAwemeField, speedFields, controllerSetSpeed),
+            )
+            val liveAwemeBridge = live.aweme.cloneMutable(additionalRegisters = 2)
+            liveExtension.methods.remove(live.aweme)
+            liveExtension.methods.add(liveAwemeBridge)
+            liveAwemeBridge.addInstructions(0, liveAwemeBridgeBody(frame.definingClass, awemeGetter))
+            live.progress.addInstruction(
+                0,
+                "invoke-static/range {p0 .. p1}, $EXTENSION->onPlayerProgress(Ljava/lang/Object;Ljava/lang/String;)V",
+            )
+            SettingsStatusLoadFingerprint.method.addInstruction(
+                0,
+                "invoke-static {}, Lapp/morphe/extension/tiktok/settings/SettingsStatus;->enableLiveSpeed()V",
+            )
+        }
 
         // Resolve the menu's lazy Float-list factory from its own constructor references.
         val menuClass = mutableClassDefBy(PlaybackSpeedMenuFingerprint.method.definingClass)

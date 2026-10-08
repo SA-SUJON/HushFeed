@@ -86,9 +86,11 @@ public class LiveSpeedTest {
         Settings.REMEMBERED_SPEED.resetToDefault();
     }
 
-    /** The on-screen player is process-wide state, so a test starts and ends without one. */
+    /** The on-screen player and the last drag are process-wide state, so a test starts and ends without them. */
     private static void forgetPlayer() {
         ReflectionHelpers.setStaticField(PlaybackSpeedPatch.class, "onScreen", null);
+        ReflectionHelpers.setStaticField(PlaybackSpeedPatch.class, "liveVideoId", "");
+        ReflectionHelpers.setStaticField(PlaybackSpeedPatch.class, "liveSpeed", Float.NaN);
     }
 
     /** A player that has reported video {@code id} playing, as the progress hook says it. */
@@ -166,6 +168,35 @@ public class LiveSpeedTest {
         Settings.DEFAULT_SPEED_ENABLED.save(true);
         assertEquals("and at the default when that is on",
                 1.5f, PlaybackSpeedPatch.getPlaybackSpeedForVideo(video("c")), 0f);
+    }
+
+    @Test
+    public void aNeighboursEarlyFirstFrameLeavesTheDragOnTheVideoOnScreen() {
+        playing("a");
+        assertTrue(PlaybackSpeedPatch.setLiveSpeed(2.5f));
+
+        // The next video's player was preloaded and drew its first frame while "a" still plays.
+        assertEquals(1.5f, PlaybackSpeedPatch.getPlaybackSpeedForVideo(video("b")), 0f);
+
+        assertEquals("a second drag starts where the first stopped", 2.5f, PlaybackSpeedPatch.liveStartSpeed(), 0f);
+        assertEquals("and the dragged video keeps its speed", 2.5f,
+                PlaybackSpeedPatch.getPlaybackSpeedForVideo(video("a")), 0f);
+    }
+
+    @Test
+    public void theSwipeToTheNextVideoLeavesTheDraggedSpeedBehind() {
+        playing("a");
+        Settings.DEFAULT_SPEED_ENABLED.save(false);
+        assertTrue(PlaybackSpeedPatch.setLiveSpeed(2.5f));
+
+        // The transition reset begins the next video, then asks what TikTok's own state carries.
+        PlaybackSpeedPatch.beginVideo(video("b"));
+        assertEquals("the drag was the last video's alone", 1f, PlaybackSpeedPatch.preserveTransitionSpeed(2.5f), 0f);
+        assertEquals("another speed TikTok carries is kept as before",
+                1.75f, PlaybackSpeedPatch.preserveTransitionSpeed(1.75f), 0f);
+
+        PlaybackSpeedPatch.beginVideo(video("a"));
+        assertEquals("back on the dragged video it stands", 2.5f, PlaybackSpeedPatch.preserveTransitionSpeed(2.5f), 0f);
     }
 
     @Test

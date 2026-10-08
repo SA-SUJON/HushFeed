@@ -61,6 +61,8 @@ public class SettingsStatus {
     public static boolean windDownScreensEnabled = false;
     /** Feed tab navigation found the bottom tab icons' names on this build and hooked them. */
     public static boolean bottomTabLabelsEnabled = false;
+    /** Playback speed found the on-screen player's progress report, so a strip can drag the speed. */
+    public static boolean liveSpeedEnabled = false;
     public static boolean longPressSpeedLockEnabled = false;
     public static boolean disableLongPressQuickShareEnabled = false;
     public static boolean disableLongPressRepostEnabled = false;
@@ -251,6 +253,10 @@ public class SettingsStatus {
 
     public static void enableBottomTabLabels() {
         bottomTabLabelsEnabled = true;
+    }
+
+    public static void enableLiveSpeed() {
+        liveSpeedEnabled = true;
     }
 
     public static void enableLongPressSpeedLock() {

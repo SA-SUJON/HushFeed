@@ -522,15 +522,17 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
         addPreference(new SectionHeadingPreference(context, "Gestures"));
         if (SettingsStatus.videoOverlaysEnabled) {
             addPreference(new TogglePreference(context, "Swipe for brightness and volume",
-                    "Drag up or down along the left edge of a video to change the screen brightness, or along "
-                            + "the right edge to change the volume. Swiping anywhere else still scrolls the feed.",
+                    "Drag up or down along the left or right edge of a video to change what that edge strip is set "
+                            + "to below. By default that's the screen brightness on the left and the volume on the "
+                            + "right. Swiping anywhere else still scrolls the feed.",
                     Settings.SWIPE_LEVELS));
             // Speed is the playing video's, so it is only offered where the Playback speed patch
-            // is in the bundle. Brightness and volume stay where they were on each side.
-            String[] stripLabels = SettingsStatus.playbackSpeedEnabled
+            // is in the bundle and found the player on screen. Brightness and volume stay where
+            // they were on each side.
+            String[] stripLabels = SettingsStatus.liveSpeedEnabled
                     ? new String[]{"Brightness", "Volume", "Speed"}
                     : new String[]{"Brightness", "Volume"};
-            String[] stripValues = SettingsStatus.playbackSpeedEnabled
+            String[] stripValues = SettingsStatus.liveSpeedEnabled
                     ? new String[]{"brightness", "volume", "speed"}
                     : new String[]{"brightness", "volume"};
             addPreference(new ChoicePreference(context, "Left edge strip", Settings.SWIPE_LEVELS_LEFT,

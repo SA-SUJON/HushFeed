@@ -34,7 +34,7 @@ public class SwipeStripRowsTest {
     @After
     public void tearDown() {
         SettingsStatus.videoOverlaysEnabled = false;
-        SettingsStatus.playbackSpeedEnabled = false;
+        SettingsStatus.liveSpeedEnabled = false;
         Settings.SWIPE_LEVELS_LEFT.resetToDefault();
         Settings.SWIPE_LEVELS_RIGHT.resetToDefault();
     }
@@ -51,7 +51,7 @@ public class SwipeStripRowsTest {
     public void withTheSpeedPatchEachStripCanChooseBrightnessVolumeOrSpeed() {
         try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
             SettingsStatus.videoOverlaysEnabled = true;
-            SettingsStatus.playbackSpeedEnabled = true;
+            SettingsStatus.liveSpeedEnabled = true;
             PreferenceScreen screen = gesturesPage(controller.get());
 
             for (String key : new String[]{"swipe_levels_left", "swipe_levels_right"}) {
@@ -66,7 +66,7 @@ public class SwipeStripRowsTest {
     public void withoutTheSpeedPatchTheRowsOfferOnlyWhatTheyAlwaysDid() {
         try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
             SettingsStatus.videoOverlaysEnabled = true;
-            SettingsStatus.playbackSpeedEnabled = false;
+            SettingsStatus.liveSpeedEnabled = false;
             PreferenceScreen screen = gesturesPage(controller.get());
 
             for (String key : new String[]{"swipe_levels_left", "swipe_levels_right"}) {
@@ -81,7 +81,7 @@ public class SwipeStripRowsTest {
     public void withoutTheOverlayPatchThereAreNoStripRows() {
         try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
             SettingsStatus.videoOverlaysEnabled = false;
-            SettingsStatus.playbackSpeedEnabled = true;
+            SettingsStatus.liveSpeedEnabled = true;
             PreferenceScreen screen = gesturesPage(controller.get());
 
             assertNull(screen.findPreference("swipe_levels_left"));

@@ -105,15 +105,16 @@ public final class EdgeSwipeLevels {
 
     /**
      * What a drag in the strip on {@code side} changes. The left strip's own default is brightness
-     * and the right's is volume. Speed needs the Playback speed patch, so a bundle without it (or
-     * a value imported from one that had it) keeps the strip on its default.
+     * and the right's is volume. Speed needs the Playback speed patch to have found the player on
+     * screen, so a bundle without it (or a value imported from one that had it) keeps the strip on
+     * its default.
      */
     static Mode modeFor(Side side) {
         Mode fallback = side == Side.RIGHT ? Mode.VOLUME : Mode.BRIGHTNESS;
         if (side == Side.NONE) return fallback;
         String saved = (side == Side.LEFT ? Settings.SWIPE_LEVELS_LEFT : Settings.SWIPE_LEVELS_RIGHT).get();
         Mode chosen = parseMode(saved, fallback);
-        return chosen == Mode.SPEED && !SettingsStatus.playbackSpeedEnabled ? fallback : chosen;
+        return chosen == Mode.SPEED && !SettingsStatus.liveSpeedEnabled ? fallback : chosen;
     }
 
     /** True once a move is far enough, and mostly enough up or down, to be this gesture. */

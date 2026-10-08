@@ -1634,7 +1634,7 @@ Galaxy Store	Galaxy Store
 AppGallery	AppGallery
 Amazon Appstore	Amazon Appstore
 Swipe for brightness and volume	Parlaklık ve ses için kaydır
-Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.	Ekran parlaklığını değiştirmek için videonun sol kenarı boyunca, sesi değiştirmek için sağ kenarı boyunca yukarı veya aşağı kaydırın. Başka yerde kaydırmak akışı yine eskisi gibi kaydırır.
+Drag up or down along the left or right edge of a video to change what that edge strip is set to below. By default that's the screen brightness on the left and the volume on the right. Swiping anywhere else still scrolls the feed.	Aşağıda o kenar şeridi için seçili olanı değiştirmek için videonun sol veya sağ kenarı boyunca yukarı veya aşağı kaydırın. Varsayılan olarak solda ekran parlaklığı, sağda ses düzeyidir. Başka yerde kaydırmak akışı yine eskisi gibi kaydırır.
 Edge strip width	Kenar şeridi genişliği
 How wide each edge strip is, as a percent of the screen width.	Her kenar şeridinin genişliği, ekran genişliğinin yüzdesi olarak.
 Brightness	Parlaklık

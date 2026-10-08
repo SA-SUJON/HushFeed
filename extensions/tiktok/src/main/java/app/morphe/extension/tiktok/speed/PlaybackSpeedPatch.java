@@ -49,8 +49,13 @@ public final class PlaybackSpeedPatch {
     private static volatile float rememberedSpeed = 1.0f;
     private static String currentVideoId = "";
     private static float manualSpeed = Float.NaN;
-    /** Whether {@link #manualSpeed} came from a live change, which is saved nowhere. */
-    private static boolean liveChoice;
+    /**
+     * The last live change, which is saved nowhere: the video it was made on and its speed. It's
+     * kept apart from {@link #currentVideoId}, since a preloaded neighbour's early first frame moves
+     * that on while the dragged video is still the one on screen.
+     */
+    private static String liveVideoId = "";
+    private static float liveSpeed = Float.NaN;
 
     private PlaybackSpeedPatch() {}
 
@@ -67,7 +72,6 @@ public final class PlaybackSpeedPatch {
         if (!id.equals(currentVideoId) || id.isEmpty()) {
             currentVideoId = id;
             manualSpeed = Float.NaN;
-            liveChoice = false;
         }
     }
 
@@ -76,7 +80,7 @@ public final class PlaybackSpeedPatch {
                 (!isExplicitSelectionSource(source) && !isEdgeSpeedupSelection(source))) return;
         beginVideo(aweme);
         manualSpeed = speed;
-        liveChoice = false;
+        forgetLiveSpeed();
         rememberPlaybackSpeed(speed, source);
     }
 
@@ -84,8 +88,19 @@ public final class PlaybackSpeedPatch {
         beginVideo(aweme);
         // A speed dragged in for this video stands for as long as the video does, even when the
         // first frame is drawn again (nothing was saved for it to come back from).
-        if (liveChoice && isValidSpeed(manualSpeed)) return manualSpeed;
+        float live = liveSpeedFor(currentVideoId);
+        if (isValidSpeed(live)) return live;
         return getPlaybackSpeed();
+    }
+
+    /** The speed dragged in for video {@code id}, or NaN when the last live change wasn't on it. */
+    private static float liveSpeedFor(String id) {
+        return !id.isEmpty() && id.equals(liveVideoId) ? liveSpeed : Float.NaN;
+    }
+
+    private static void forgetLiveSpeed() {
+        liveVideoId = "";
+        liveSpeed = Float.NaN;
     }
 
     /** Replaced with the verified native Aweme getter and controller setSpeed calls. */
@@ -193,6 +208,8 @@ public final class PlaybackSpeedPatch {
         if (live == null) return Float.NaN;
         String id = live.aweme.getAid();
         synchronized (PlaybackSpeedPatch.class) {
+            float dragged = liveSpeedFor(id == null ? "" : id);
+            if (isValidSpeed(dragged)) return dragged;
             if (id != null && id.equals(currentVideoId) && isValidSpeed(manualSpeed)) return manualSpeed;
             return getPlaybackSpeed();
         }
@@ -207,9 +224,8 @@ public final class PlaybackSpeedPatch {
 
     /**
      * Plays the video on screen at {@code speed} (snapped), for a gesture. The choice is this
-     * video's alone: only the manual speed is set (and marked as a live one, so this video's first
-     * frame drawn again keeps it), which the next video's first frame replaces with the default or
-     * the remembered speed, and nothing is saved.
+     * video's alone: it's kept as this video's live speed (so its first frame drawn again keeps
+     * it), the next video starts at the default or the remembered speed, and nothing is saved.
      *
      * @return whether the video's own player took it
      */
@@ -224,7 +240,8 @@ public final class PlaybackSpeedPatch {
             synchronized (PlaybackSpeedPatch.class) {
                 beginVideo(live.aweme);
                 manualSpeed = snapped;
-                liveChoice = true;
+                liveVideoId = live.aweme.getAid();
+                liveSpeed = snapped;
             }
             return true;
         } catch (Throwable ex) {
@@ -391,6 +408,15 @@ public final class PlaybackSpeedPatch {
     }
 
     public static float preserveTransitionSpeed(float requestedSpeed) {
+        synchronized (PlaybackSpeedPatch.class) {
+            // The live bridge brought TikTok's own speed state to a dragged speed, and TikTok carries
+            // that state into the next video. The transition began that video just before this, so
+            // a dragged speed asked for any other video is the dragged one's alone.
+            if (isValidSpeed(liveSpeed) && !currentVideoId.equals(liveVideoId)
+                    && Float.compare(requestedSpeed, liveSpeed) == 0) {
+                return getPlaybackSpeed();
+            }
+        }
         if (Settings.DEFAULT_SPEED_ENABLED.get()) return getPlaybackSpeed();
         if (Float.compare(requestedSpeed, 1.0f) != 0) {
             return requestedSpeed;

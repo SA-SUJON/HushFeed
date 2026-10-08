@@ -1637,7 +1637,7 @@ Galaxy Store	Galaxy Store
 AppGallery	AppGallery
 Amazon Appstore	Amazon Appstore
 Swipe for brightness and volume	Wischen für Helligkeit und Lautstärke
-Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.	Wische am linken Rand eines Videos nach oben oder unten, um die Bildschirmhelligkeit zu ändern, oder am rechten Rand für die Lautstärke. Überall sonst scrollt der Feed wie gewohnt.
+Drag up or down along the left or right edge of a video to change what that edge strip is set to below. By default that's the screen brightness on the left and the volume on the right. Swiping anywhere else still scrolls the feed.	Wische am linken oder rechten Rand eines Videos nach oben oder unten, um zu ändern, worauf dieser Randstreifen unten eingestellt ist. Standardmäßig ist das links die Bildschirmhelligkeit und rechts die Lautstärke. Überall sonst scrollt der Feed wie gewohnt.
 Edge strip width	Breite der Randstreifen
 How wide each edge strip is, as a percent of the screen width.	Wie breit jeder Randstreifen ist, in Prozent der Bildschirmbreite.
 Brightness	Helligkeit

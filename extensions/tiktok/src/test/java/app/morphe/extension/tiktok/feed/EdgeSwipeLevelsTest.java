@@ -55,7 +55,7 @@ public class EdgeSwipeLevelsTest {
     @Before
     public void setUp() {
         previousOverlays = SettingsStatus.videoOverlaysEnabled;
-        previousSpeedPatch = SettingsStatus.playbackSpeedEnabled;
+        previousSpeedPatch = SettingsStatus.liveSpeedEnabled;
         previousPaused = Setting.isPaused();
         setPaused(false);
         SettingsStatus.videoOverlaysEnabled = true;
@@ -70,7 +70,7 @@ public class EdgeSwipeLevelsTest {
     @After
     public void tearDown() {
         SettingsStatus.videoOverlaysEnabled = previousOverlays;
-        SettingsStatus.playbackSpeedEnabled = previousSpeedPatch;
+        SettingsStatus.liveSpeedEnabled = previousSpeedPatch;
         setPaused(previousPaused);
         PlaybackSpeedPatch.nativeForTests = null;
         ReflectionHelpers.setStaticField(PlaybackSpeedPatch.class, "onScreen", null);
@@ -111,7 +111,7 @@ public class EdgeSwipeLevelsTest {
 
     /** A bundle with the speed patch, and a player that has reported video {@code id} playing at 1x. */
     private Player speedPlayerOnScreen(String id) {
-        SettingsStatus.playbackSpeedEnabled = true;
+        SettingsStatus.liveSpeedEnabled = true;
         Settings.DEFAULT_SPEED_ENABLED.save(true);
         Settings.DEFAULT_SPEED.save("1");
         PlaybackSpeedPatch.beginVideo(null);
@@ -348,11 +348,11 @@ public class EdgeSwipeLevelsTest {
         Settings.SWIPE_LEVELS_LEFT.save("speed");
         Settings.SWIPE_LEVELS_RIGHT.save("speed");
 
-        SettingsStatus.playbackSpeedEnabled = true;
+        SettingsStatus.liveSpeedEnabled = true;
         assertEquals(EdgeSwipeLevels.Mode.SPEED, EdgeSwipeLevels.modeFor(EdgeSwipeLevels.Side.LEFT));
         assertEquals(EdgeSwipeLevels.Mode.SPEED, EdgeSwipeLevels.modeFor(EdgeSwipeLevels.Side.RIGHT));
 
-        SettingsStatus.playbackSpeedEnabled = false;
+        SettingsStatus.liveSpeedEnabled = false;
         assertEquals("a value saved by a bundle that had the patch", EdgeSwipeLevels.Mode.BRIGHTNESS,
                 EdgeSwipeLevels.modeFor(EdgeSwipeLevels.Side.LEFT));
         assertEquals(EdgeSwipeLevels.Mode.VOLUME, EdgeSwipeLevels.modeFor(EdgeSwipeLevels.Side.RIGHT));
@@ -484,7 +484,7 @@ public class EdgeSwipeLevelsTest {
     @Test
     public void withNoPlayerToGiveASpeedToTheFeedKeepsTheDrag() {
         Settings.SWIPE_LEVELS_LEFT.save("speed");
-        SettingsStatus.playbackSpeedEnabled = true;
+        SettingsStatus.liveSpeedEnabled = true;
         EdgeSwipeLevels.Gesture gesture = new EdgeSwipeLevels.Gesture(activity);
         Below below = new Below();
         float x = 5f;
@@ -503,7 +503,7 @@ public class EdgeSwipeLevelsTest {
     @Test
     public void aStripSavedAsSpeedWithoutThePatchStillDoesBrightness() {
         Settings.SWIPE_LEVELS_LEFT.save("speed");
-        SettingsStatus.playbackSpeedEnabled = false;
+        SettingsStatus.liveSpeedEnabled = false;
 
         dragBrightness();
 

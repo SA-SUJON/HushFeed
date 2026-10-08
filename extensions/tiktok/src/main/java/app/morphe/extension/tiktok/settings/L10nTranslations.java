@@ -1055,8 +1055,8 @@ public final class L10nTranslations {
                 "Endirmələr");
         table.put("Drag to move, release to place",
                 "Daşımaq üçün sürüşdürün, yerləşdirmək üçün buraxın");
-        table.put("Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.",
-                "Ekranın parlaqlığını dəyişmək üçün videonun sol kənarı boyunca, səsi dəyişmək üçün sağ kənarı boyunca yuxarı və ya aşağı sürüşdür. Başqa yerdə sürüşdürmək lenti yenə də fırladır.");
+        table.put("Drag up or down along the left or right edge of a video to change what that edge strip is set to below. By default that's the screen brightness on the left and the volume on the right. Swiping anywhere else still scrolls the feed.",
+                "Aşağıda həmin kənar zolaq üçün seçdiyini dəyişmək üçün videonun sol və ya sağ kənarı boyunca yuxarı və ya aşağı sürüşdür. Defolt olaraq solda ekranın parlaqlığı, sağda isə səsdir. Başqa yerdə sürüşdürmək lenti yenə də fırladır.");
         table.put("Drama and Series",
                 "Dram və Seriallar");
         table.put("Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.",
@@ -4868,8 +4868,8 @@ public final class L10nTranslations {
                 "Downloads");
         table.put("Drag to move, release to place",
                 "Zum Verschieben ziehen, zum Ablegen loslassen");
-        table.put("Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.",
-                "Wische am linken Rand eines Videos nach oben oder unten, um die Bildschirmhelligkeit zu ändern, oder am rechten Rand für die Lautstärke. Überall sonst scrollt der Feed wie gewohnt.");
+        table.put("Drag up or down along the left or right edge of a video to change what that edge strip is set to below. By default that's the screen brightness on the left and the volume on the right. Swiping anywhere else still scrolls the feed.",
+                "Wische am linken oder rechten Rand eines Videos nach oben oder unten, um zu ändern, worauf dieser Randstreifen unten eingestellt ist. Standardmäßig ist das links die Bildschirmhelligkeit und rechts die Lautstärke. Überall sonst scrollt der Feed wie gewohnt.");
         table.put("Drama and Series",
                 "Drama und Serien");
         table.put("Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.",
@@ -8681,8 +8681,8 @@ public final class L10nTranslations {
                 "Descargas");
         table.put("Drag to move, release to place",
                 "Arrastra para mover, suelta para colocar");
-        table.put("Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.",
-                "Desliza hacia arriba o abajo por el borde izquierdo de un vídeo para cambiar el brillo de la pantalla, o por el borde derecho para cambiar el volumen. En cualquier otro sitio el feed sigue desplazándose igual.");
+        table.put("Drag up or down along the left or right edge of a video to change what that edge strip is set to below. By default that's the screen brightness on the left and the volume on the right. Swiping anywhere else still scrolls the feed.",
+                "Desliza hacia arriba o abajo por el borde izquierdo o derecho de un vídeo para cambiar lo que tenga asignado esa franja lateral más abajo. De forma predeterminada es el brillo de la pantalla a la izquierda y el volumen a la derecha. En cualquier otro sitio el feed sigue desplazándose igual.");
         table.put("Drama and Series",
                 "Drama y series");
         table.put("Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.",
@@ -12494,8 +12494,8 @@ public final class L10nTranslations {
                 "Unduhan");
         table.put("Drag to move, release to place",
                 "Seret untuk memindahkan, lepaskan untuk menempatkan");
-        table.put("Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.",
-                "Geser ke atas atau bawah di tepi kiri video untuk mengubah kecerahan layar, atau di tepi kanan untuk mengubah volume. Di tempat lain, feed tetap bergulir seperti biasa.");
+        table.put("Drag up or down along the left or right edge of a video to change what that edge strip is set to below. By default that's the screen brightness on the left and the volume on the right. Swiping anywhere else still scrolls the feed.",
+                "Geser ke atas atau bawah di tepi kiri atau kanan video untuk mengubah apa yang diatur untuk strip tepi itu di bawah. Secara bawaan, kiri untuk kecerahan layar dan kanan untuk volume. Di tempat lain, feed tetap bergulir seperti biasa.");
         table.put("Drama and Series",
                 "Drama dan Serial");
         table.put("Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.",
@@ -16307,8 +16307,8 @@ public final class L10nTranslations {
                 "Download");
         table.put("Drag to move, release to place",
                 "Trascina per spostare, rilascia per posizionare");
-        table.put("Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.",
-                "Scorri su o giù lungo il bordo sinistro di un video per cambiare la luminosità dello schermo, o lungo il bordo destro per cambiare il volume. Altrove il feed continua a scorrere come sempre.");
+        table.put("Drag up or down along the left or right edge of a video to change what that edge strip is set to below. By default that's the screen brightness on the left and the volume on the right. Swiping anywhere else still scrolls the feed.",
+                "Scorri su o giù lungo il bordo sinistro o destro di un video per cambiare ciò che è impostato per quella fascia laterale qui sotto. Di base è la luminosità dello schermo a sinistra e il volume a destra. Altrove il feed continua a scorrere come sempre.");
         table.put("Drama and Series",
                 "Drama e Serie");
         table.put("Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.",
@@ -20120,8 +20120,8 @@ public final class L10nTranslations {
                 "Downloads");
         table.put("Drag to move, release to place",
                 "Arraste para mover, solte para posicionar");
-        table.put("Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.",
-                "Deslize para cima ou para baixo na borda esquerda de um vídeo para mudar o brilho da tela, ou na borda direita para mudar o volume. Em qualquer outro lugar o feed continua rolando normalmente.");
+        table.put("Drag up or down along the left or right edge of a video to change what that edge strip is set to below. By default that's the screen brightness on the left and the volume on the right. Swiping anywhere else still scrolls the feed.",
+                "Deslize para cima ou para baixo na borda esquerda ou direita de um vídeo para mudar o que estiver definido para essa faixa lateral abaixo. Por padrão é o brilho da tela à esquerda e o volume à direita. Em qualquer outro lugar o feed continua rolando normalmente.");
         table.put("Drama and Series",
                 "Drama e séries");
         table.put("Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.",
@@ -24158,8 +24158,8 @@ public final class L10nTranslations {
                 "Загрузки");
         table.put("Drag to move, release to place",
                 "Перетащите, чтобы переместить, отпустите, чтобы разместить");
-        table.put("Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.",
-                "Проведите вверх или вниз у левого края видео, чтобы изменить яркость экрана, или у правого края, чтобы изменить громкость. В любом другом месте лента листается как обычно.");
+        table.put("Drag up or down along the left or right edge of a video to change what that edge strip is set to below. By default that's the screen brightness on the left and the volume on the right. Swiping anywhere else still scrolls the feed.",
+                "Проведите вверх или вниз у левого или правого края видео, чтобы изменить то, что выбрано для этой боковой полосы ниже. По умолчанию слева это яркость экрана, а справа громкость. В любом другом месте лента листается как обычно.");
         table.put("Drama and Series",
                 "Драма и сериалы");
         table.put("Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.",
@@ -28094,8 +28094,8 @@ public final class L10nTranslations {
                 "İndirilenler");
         table.put("Drag to move, release to place",
                 "Taşımak için sürükle, yerleştirmek için bırak");
-        table.put("Drag up or down along the left edge of a video to change the screen brightness, or along the right edge to change the volume. Swiping anywhere else still scrolls the feed.",
-                "Ekran parlaklığını değiştirmek için videonun sol kenarı boyunca, sesi değiştirmek için sağ kenarı boyunca yukarı veya aşağı kaydırın. Başka yerde kaydırmak akışı yine eskisi gibi kaydırır.");
+        table.put("Drag up or down along the left or right edge of a video to change what that edge strip is set to below. By default that's the screen brightness on the left and the volume on the right. Swiping anywhere else still scrolls the feed.",
+                "Aşağıda o kenar şeridi için seçili olanı değiştirmek için videonun sol veya sağ kenarı boyunca yukarı veya aşağı kaydırın. Varsayılan olarak solda ekran parlaklığı, sağda ses düzeyidir. Başka yerde kaydırmak akışı yine eskisi gibi kaydırır.");
         table.put("Drama and Series",
                 "Drama ve Seri");
         table.put("Draw TikTok's text in your device's font instead of TikTok Sans. Icons, gift animations and the @ and # glyphs keep their own fonts. Restart TikTok to apply this.",
