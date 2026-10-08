@@ -251,7 +251,7 @@ foreach ($apk in $Fixture) {
             }
         }
         if ($keptRun) {
-            Write-Host "[receipt] reading the gate's run of $label: same bundle, APK, patch list and CLI"
+            Write-Host "[receipt] reading the gate's run of ${label}: same bundle, APK, patch list and CLI"
             $out = Join-Path $keptRun 'patched.apk'
             $resultPath = Join-Path $keptRun 'result.json'
             $cliOutput = @()
