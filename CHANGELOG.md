@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Feed filter has a new switch under Words, countries and languages, Match text stickers too, off by default. With it on, Blocked caption words also reads the text stickers on a video, the words a creator types over it in TikTok's editor, and hides the video when one matches, the same way a caption match does. Text that's part of the picture itself isn't there to read. If your filters ever hide everything TikTok just sent, the notice names these as Text sticker words.
+
 * **TikTok:** Advanced downloads has a new switch under Video, Fall back to the watermarked copy, off by default. When the video without the watermark can't be fetched, Hushfeed saves TikTok's own watermarked copy instead of nothing and says so when it's done. That copy is the size TikTok's own save uses, so it can be smaller than the quality you picked. A cancel, or running out of space or time, still stops the save as before.
 
 * **TikTok:** Advanced downloads has a new switch under Video, Mark saved videos on profile grids, off by default. It puts a ✓ before the view count of every grid video Hushfeed has saved on this phone, so you can tell what you already have without opening it. It goes by the record Check for already-saved videos keeps, so it works only while that switch is on, and photo posts never get the mark. A video you've deleted since keeps it until you use Forget saved videos. Pause Hushfeed turns it off.

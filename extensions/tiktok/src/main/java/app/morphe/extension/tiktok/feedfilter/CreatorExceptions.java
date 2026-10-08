@@ -74,6 +74,7 @@ public final class CreatorExceptions {
             SeenVideoFilter.class,
             OfflineVideoFilter.class,
             AdvancedFeedRules.KeywordFilter.class,
+            AdvancedFeedRules.StickerTextFilter.class,
             AdvancedFeedRules.CreatorFilter.class,
             AdvancedFeedRules.PromotionalMusicFilter.class,
             AdvancedFeedRules.LiveReplayFilter.class,

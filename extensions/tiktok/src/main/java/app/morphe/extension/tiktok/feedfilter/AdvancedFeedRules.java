@@ -46,6 +46,48 @@ public final class AdvancedFeedRules {
         }
     }
 
+    /**
+     * Blocked caption words matched against the words of the post's text stickers, the text a
+     * creator types over the video in TikTok's editor. Text burned into the video's pictures
+     * isn't in the post and can't be read.
+     */
+    public static final class StickerTextFilter implements IFilter {
+        public boolean getEnabled() {
+            return Settings.BLOCKED_WORDS_IN_STICKERS.get()
+                    && !Settings.BLOCKED_CAPTION_WORDS.get().trim().isEmpty();
+        }
+        public boolean getFiltered(Aweme item) {
+            List<String> texts = stickerTexts(item);
+            if (texts.isEmpty()) return false;
+            List<KeywordRules.Rule> rules = KeywordRules.cached(Settings.BLOCKED_CAPTION_WORDS.get());
+            for (String text : texts) {
+                if (KeywordRules.anyMatches(rules, text)) return true;
+            }
+            return false;
+        }
+    }
+
+    /**
+     * TikTok's type for a text sticker. Its textStruct holds the sticker's words as plain text,
+     * the string TikTok's own translation service sends; a few other types keep JSON there.
+     */
+    static final int TEXT_STICKER_TYPE = 18;
+
+    /** The words of each text sticker on {@code item}, in order, or an empty list. */
+    static List<String> stickerTexts(Object item) {
+        Object stickers = Reflect.property(item, "getInteractStickerStructs", "interactStickerStructs");
+        if (!(stickers instanceof List)) return Collections.emptyList();
+        List<String> texts = new ArrayList<>();
+        for (Object sticker : (List<?>) stickers) {
+            if (sticker == null) continue;
+            Object type = Reflect.property(sticker, "getType", "type");
+            if (!(type instanceof Integer) || (Integer) type != TEXT_STICKER_TYPE) continue;
+            String text = Reflect.string(sticker, "getTextStruct", "textStruct");
+            if (text != null) texts.add(text);
+        }
+        return texts;
+    }
+
     public static final class CreatorFilter implements IFilter {
         public boolean getEnabled() {
             return !Settings.BLOCKED_CREATORS.get().trim().isEmpty()

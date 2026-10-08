@@ -253,6 +253,9 @@ public class FeedFilterPreferenceCategory extends ConditionalPreferenceCategory 
                 .withSamplePreview(app.morphe.extension.tiktok.settings.L10n.t("Sample caption to test"),
                         app.morphe.extension.tiktok.feedfilter.KeywordRulePreview.MAX_SAMPLE_CHARS,
                         app.morphe.extension.tiktok.feedfilter.KeywordRulePreview::result));
+        addPreference(new TogglePreference(context, "Match text stickers too",
+                "Also hide videos whose text stickers match a blocked caption word. Text stickers are the words a creator types over the video in TikTok's editor. Text that's part of the picture itself can't be read.",
+                Settings.BLOCKED_WORDS_IN_STICKERS));
         addPreference(new InputTextPreference(context, "Only from these countries",
                 "Comma separated country codes, like GB, IE. Videos posted from anywhere else are hidden. Leave empty for all countries.",
                 Settings.REGION_ONLY_FROM)

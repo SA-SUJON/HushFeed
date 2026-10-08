@@ -727,6 +727,45 @@ class TikTokPatchAnchorsMatchFixturesTest {
     }
 
     /**
+     * Match text stickers too reads Aweme's sticker list and each sticker's type and textStruct.
+     * TikTok's own translation service is what says a type 18 sticker's textStruct is its words:
+     * it checks the type against 18 before it reads the string; type 5 keeps anchor JSON there.
+     */
+    @Test
+    fun `text sticker members the sticker word rule reads resolve on every declared build`() {
+        val aweme = "Lcom/ss/android/ugc/aweme/feed/model/Aweme;"
+        val sticker = "Lcom/ss/android/ugc/aweme/sticker/data/InteractStickerStruct;"
+        val translation = "Lcom/ss/android/ugc/aweme/translation/service/TranslationServiceImpl;"
+        Fixtures.forEachDeclared { apk ->
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            val classes = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }
+                .filter { it.type == aweme || it.type == sticker || it.type == translation }
+                .associateBy { it.type }
+            for ((type, name, returns) in listOf(
+                Triple(aweme, "getInteractStickerStructs", "Ljava/util/List;"),
+                Triple(sticker, "getType", "I"),
+                Triple(sticker, "getTextStruct", "Ljava/lang/String;"),
+            )) {
+                assertTrue("${apk.name}: $type.$name()$returns", classes[type]?.methods.orEmpty().any {
+                    it.name == name && it.parameterTypes.isEmpty() && it.returnType == returns
+                })
+            }
+            val readsTextStickerWords = classes[translation]?.methods.orEmpty().any { method ->
+                val instructions = method.implementation?.instructions?.toList().orEmpty()
+                fun calls(name: String) = instructions.any {
+                    val reference = (it as? ReferenceInstruction)?.reference as? MethodReference
+                    reference != null && reference.definingClass == sticker && reference.name == name
+                }
+                calls("getType") && calls("getTextStruct") && instructions.any {
+                    it.opcode == Opcode.CONST_16 && (it as NarrowLiteralInstruction).narrowLiteral == 18
+                }
+            }
+            assertTrue("${apk.name}: the translation service reads a type 18 sticker's textStruct", readsTextStickerWords)
+        }
+    }
+
+    /**
      * Remove avatar rings: the story status getter, the feed avatar's bind and the one author
      * live check it calls, and the User.isLive reads in AvatarLiveDataAdapter, on every declared
      * build. The bind and the check are R8 names that move each build.

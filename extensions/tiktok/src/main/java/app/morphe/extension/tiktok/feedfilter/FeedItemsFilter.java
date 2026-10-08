@@ -57,6 +57,7 @@ public final class FeedItemsFilter {
         new SeenVideoFilter(),
         new OfflineVideoFilter(),
         new AdvancedFeedRules.KeywordFilter(),
+        new AdvancedFeedRules.StickerTextFilter(),
         new AdvancedFeedRules.CreatorFilter(),
         new AdvancedFeedRules.PromotionalMusicFilter(),
         new AdvancedFeedRules.LiveReplayFilter(),
