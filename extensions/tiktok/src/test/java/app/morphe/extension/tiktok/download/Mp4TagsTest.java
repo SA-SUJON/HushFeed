@@ -149,7 +149,8 @@ public class Mp4TagsTest {
         assertEquals("@alice", tags.get(name(Mp4Tags.ARTIST)));
         assertEquals("2023-11-14T22:13:20Z", tags.get(name(Mp4Tags.DATE)));
         assertEquals("https://www.tiktok.com/@alice/video/123", tags.get(name(Mp4Tags.COMMENT)));
-        assertEquals("  First line \nSecond line", tags.get(name(Mp4Tags.DESCRIPTION)));
+        // The whole caption as the details file keeps it, trimmed at its ends like every value read off the post.
+        assertEquals("First line \nSecond line", tags.get(name(Mp4Tags.DESCRIPTION)));
         post.desc = "";
         post.author.uniqueId = "";
         post.createTime = 0;

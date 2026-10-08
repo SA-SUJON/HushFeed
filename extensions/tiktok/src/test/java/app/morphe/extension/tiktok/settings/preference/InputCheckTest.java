@@ -398,6 +398,9 @@ public class InputCheckTest {
             assertFalse(shown, shown.contains("Not a token"));
             assertEquals("looking saves nothing", saved, Settings.DOWNLOAD_VIDEO_FILENAME_TEMPLATE.get());
             dialog.dismiss();
+            // The dismissal reaches the row as a posted message, and run after the second opening
+            // it would clear that dialog instead, the way no tap can.
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
 
             // Opened again, the editor has one watcher, not one per opening.
             openDialog(field);

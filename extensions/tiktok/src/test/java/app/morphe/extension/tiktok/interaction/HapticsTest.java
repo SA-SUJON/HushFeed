@@ -283,10 +283,17 @@ public class HapticsTest {
 
     @Test public void clearingTheListenerStillClearsIt() {
         inAWindow(target -> {
-            Haptics.setOnLongClickListener(target, v -> true);
-            assertTrue(target.hasOnLongClickListeners());
+            // View.hasOnLongClickListeners is API 30 and this runs on 28, so count the calls instead.
+            java.util.concurrent.atomic.AtomicInteger calls = new java.util.concurrent.atomic.AtomicInteger();
+            Haptics.setOnLongClickListener(target, v -> {
+                calls.incrementAndGet();
+                return true;
+            });
+            assertTrue(target.performLongClick());
+            assertEquals(1, calls.get());
             Haptics.setOnLongClickListener(target, null);
-            assertFalse(target.hasOnLongClickListeners());
+            target.performLongClick();
+            assertEquals("a cleared listener isn't called again", 1, calls.get());
         });
     }
 }
