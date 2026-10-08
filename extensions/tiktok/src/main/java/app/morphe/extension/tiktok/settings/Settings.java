@@ -632,6 +632,8 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting HIDE_FEED_MUSIC = new BooleanSetting("hide_feed_music", FALSE);
     public static final BooleanSetting HIDE_FEED_ACTION_BAR = new BooleanSetting("hide_feed_action_bar", FALSE);
     public static final BooleanSetting HIDE_FEED_SURVEYS = new BooleanSetting("hide_feed_surveys", FALSE);
+    /** The Footnotes banner TikTok lays over a video that carries a note. */
+    public static final BooleanSetting HIDE_FOOTNOTES = new BooleanSetting("hide_footnotes", FALSE);
     /** The Add comment bar under a video opened from a profile, a hashtag or a sound, and the strip kept for it (#50). */
     public static final BooleanSetting HIDE_DETAIL_COMMENT_BAR = new BooleanSetting("hide_detail_comment_bar", FALSE);
     /** The progress bar, close button and pause/speed pill TikTok draws while Clear display is on (#97). */
@@ -681,6 +683,8 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting HIDE_INBOX_ARCHIVE = new BooleanSetting("hide_inbox_archive", FALSE);
     public static final BooleanSetting HIDE_INBOX_TAKO = new BooleanSetting("hide_inbox_tako", FALSE);
     public static final BooleanSetting HIDE_INBOX_SHOP = new BooleanSetting("hide_inbox_shop", FALSE);
+    public static final BooleanSetting HIDE_INBOX_BULLETIN_BOARDS =
+            new BooleanSetting("hide_inbox_bulletin_boards", FALSE);
     public static final BooleanSetting HIDE_INBOX_SUGGESTED_ACCOUNTS =
             new BooleanSetting("hide_inbox_suggested_accounts", FALSE);
     public static final BooleanSetting HIDE_INBOX_MESSAGE_REQUESTS =
@@ -691,6 +695,9 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting HIDE_INBOX_SEARCH = new BooleanSetting("hide_inbox_search", FALSE);
     public static final BooleanSetting HIDE_INBOX_ACTIVITY_STATUS =
             new BooleanSetting("hide_inbox_activity_status", FALSE);
+    /** The banner at the top of the Inbox that invites you to start a group chat. */
+    public static final BooleanSetting HIDE_INBOX_GROUP_CHAT_BANNER =
+            new BooleanSetting("hide_inbox_group_chat_banner", FALSE);
     public static final BooleanSetting EXPAND_ACTIVITY_LIST = new BooleanSetting("expand_activity_list", FALSE);
     /** Chat screen clutter. Each is off by default and read live when a chat opens. */
     public static final BooleanSetting HIDE_CHAT_CALL_BUTTONS =

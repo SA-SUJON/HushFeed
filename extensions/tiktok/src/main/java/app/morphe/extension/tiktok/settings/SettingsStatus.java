@@ -496,6 +496,20 @@ public class SettingsStatus {
         feedTextSizeEnabled = true;
     }
 
+    /** Hide video overlays found the Footnotes banner's gate on this build and hooked it. */
+    public static boolean footnotesEnabled = false;
+
+    public static void enableFootnotes() {
+        footnotesEnabled = true;
+    }
+
+    /** Hide inbox items found the group chat banner's update on this build and hooked it. */
+    public static boolean groupChatBannerEnabled = false;
+
+    public static void enableGroupChatBanner() {
+        groupChatBannerEnabled = true;
+    }
+
     static {
         // The patcher fills load() with selected registrations. Runtime hooks can run before settings opens.
         // Keep this after field initializers so their default values cannot overwrite those registrations.

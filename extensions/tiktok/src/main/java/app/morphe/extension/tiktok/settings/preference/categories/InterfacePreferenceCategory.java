@@ -348,6 +348,14 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                     "Hide the question cards TikTok slides over a video near its end.",
                     Settings.HIDE_FEED_SURVEYS
             ));
+            if (SettingsStatus.footnotesEnabled) {
+                addPreference(new TogglePreference(
+                        context,
+                        "Hide Footnotes",
+                        "Hide the Footnotes banner TikTok shows on a video that has a note attached. The video and its comments stay as they are.",
+                        Settings.HIDE_FOOTNOTES
+                ));
+            }
             addPreference(new TogglePreference(
                     context,
                     "Hide Search this image prompts",
