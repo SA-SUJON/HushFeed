@@ -459,7 +459,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             addPreference(new TogglePreference(
                     context,
                     "Hide unverified content notices",
-                    "Take away the Check sources banner TikTok puts on videos it flags as unverified, "
+                    "Hide the Check sources banner TikTok puts on videos it marks as unverified, "
                             + "and the warnings it shows when you share one.",
                     Settings.HIDE_UNVERIFIED_NOTICES
             ));
