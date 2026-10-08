@@ -346,7 +346,8 @@ val regionSpoofPatch = bytecodePatch(
 
         // Sign-in requests: the handler says which request it's about to fill, in the map's own
         // register just before the map is made, and when the fill is over. A fill that throws
-        // skips the second call, and the thread's next request puts the mark right.
+        // skips the second call; the thread's next request puts the mark right, and the mark
+        // runs out after RegionSpoof.MARK_LIFETIME_MS if no request comes.
         val register = "v${fill.mapRegister}"
         handler.addInstruction(fill.fillAt + 1, "invoke-static {}, $EXTENSION->requestDone()V")
         handler.addInstructionsAtControlFlowLabel(

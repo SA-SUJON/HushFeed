@@ -7,6 +7,7 @@
 package app.morphe.extension.tiktok.spoof.region;
 
 import android.os.Build;
+import android.os.SystemClock;
 import androidx.annotation.Nullable;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
@@ -72,10 +73,17 @@ public final class RegionSpoof {
      * timezone and the request fields the builder hook would set. A value TikTok worked out
      * earlier and kept, like the copy of sys_region it makes at start-up, stays as it was.
      */
-    private static final ThreadLocal<Boolean> SIGN_IN = new ThreadLocal<>();
+    /** When this thread's mark was set, in {@link SystemClock#elapsedRealtime()}. */
+    private static final ThreadLocal<Long> SIGN_IN = new ThreadLocal<>();
     /** Threads building a sign-in request's parameters now, so every other call skips the ThreadLocal. */
     private static final AtomicInteger signingIn = new AtomicInteger();
     private static final String SIGN_IN_PATH = "passport/";
+    /**
+     * How long a mark lasts. A fill takes milliseconds, so a mark this old is one whose fill threw
+     * before requestDone() and whose thread hasn't sent another request since; it goes, rather
+     * than leaving that thread on the real region until it does.
+     */
+    static final long MARK_LIFETIME_MS = 10_000L;
 
     /** From the common-parameter handler, with the path of the request it's about to fill. */
     public static void requestPath(@Nullable String path) {
@@ -117,7 +125,7 @@ public final class RegionSpoof {
     private static void mark(boolean signIn) {
         if ((SIGN_IN.get() != null) == signIn) return;
         if (signIn) {
-            SIGN_IN.set(Boolean.TRUE);
+            SIGN_IN.set(SystemClock.elapsedRealtime());
             signingIn.incrementAndGet();
         } else {
             SIGN_IN.remove();
@@ -134,7 +142,12 @@ public final class RegionSpoof {
     }
 
     private static boolean signingIn() {
-        return signingIn.get() > 0 && SIGN_IN.get() != null;
+        if (signingIn.get() <= 0) return false;
+        Long markedAt = SIGN_IN.get();
+        if (markedAt == null) return false;
+        if (SystemClock.elapsedRealtime() - markedAt < MARK_LIFETIME_MS) return true;
+        mark(false);
+        return false;
     }
 
     private static String selectedCountry() {

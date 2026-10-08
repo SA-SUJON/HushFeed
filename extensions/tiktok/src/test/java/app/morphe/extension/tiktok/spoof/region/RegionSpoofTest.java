@@ -8,6 +8,7 @@ import app.morphe.extension.tiktok.settings.SettingsStatus;
 import app.morphe.extension.tiktok.settings.preference.categories.SimSpoofPreferenceCategory;
 import app.morphe.extension.tiktok.spoof.sim.SimPreset;
 import app.morphe.extension.tiktok.spoof.sim.SimPresets;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.GraphicsMode;
+import org.robolectric.shadows.ShadowSystemClock;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk = {23, 28})
@@ -69,6 +71,23 @@ public class RegionSpoofTest {
             assertFalse(String.valueOf(url), RegionSpoof.isSignIn(RegionSpoof.pathOf(url)));
         }
         assertEquals("/passport/token/beat/", RegionSpoof.pathOf("https://h/passport/token/beat/?a=1#b"));
+    }
+
+    @Test public void aMarkWhoseEndNeverCameRunsOut() {
+        Settings.REGION_REQUEST_SPOOF.save(true);
+        // TikTok's fill threw before requestDone() and the thread sends nothing after it.
+        RegionSpoof.requestPath("/passport/user/login/");
+        assertEquals("US", RegionSpoof.country("US"));
+        ShadowSystemClock.advanceBy(
+                Duration.ofMillis(RegionSpoof.MARK_LIFETIME_MS - 1));
+        assertEquals("still in the fill's time", "US", RegionSpoof.country("US"));
+        ShadowSystemClock.advanceBy(Duration.ofMillis(1));
+        assertEquals("the mark ran out", "JP", RegionSpoof.country("US"));
+        // And it went cleanly: the next sign-in marks the thread again, and its end takes it off.
+        RegionSpoof.requestPath("/passport/user/login/");
+        assertEquals("US", RegionSpoof.country("US"));
+        RegionSpoof.requestDone();
+        assertEquals("JP", RegionSpoof.country("US"));
     }
 
     @Test public void aTokenRequestMarksTheThreadLikeASignIn() {
