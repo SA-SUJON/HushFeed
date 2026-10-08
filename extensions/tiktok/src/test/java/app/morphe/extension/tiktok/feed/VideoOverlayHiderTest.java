@@ -1898,6 +1898,57 @@ public class VideoOverlayHiderTest {
         }
     }
 
+    /**
+     * Clear display ending animates the controls back to full opacity, and no layout follows,
+     * so the fade was gone until the next video (S22, 2026-10-08). The next frame fades what
+     * TikTok wrote, and back at 100 the frame pass leaves TikTok's own values alone.
+     */
+    @Test
+    public void theFadeComesBackOnTheNextFrameAfterTikTokWritesItsOwnOpacity() {
+        int barId = 0x7f0a0d16;
+        resolveFadeIds();
+        VideoOverlayHider.resolveForTests("47.1.4:ll8", barId);
+        boolean overlays = app.morphe.extension.tiktok.settings.SettingsStatus.videoOverlaysEnabled;
+        app.morphe.extension.tiktok.settings.SettingsStatus.videoOverlaysEnabled = true;
+        try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
+            Activity activity = controller.get();
+            Utils.setContext(activity);
+            FrameLayout cell = new FrameLayout(activity);
+            cell.setId(FADE_CELL_ID);
+            View bar = new View(activity);
+            bar.setId(barId);
+            cell.addView(bar);
+            FrameLayout root = new FrameLayout(activity);
+            root.addView(cell);
+            activity.setContentView(root);
+            View content = activity.findViewById(android.R.id.content);
+
+            Settings.FADE_CONTROLS_OPACITY.save(50);
+            VideoOverlayHider.applyTo(activity);
+            assertEquals(0.5f, bar.getAlpha(), 0f);
+
+            // Restore display's animation ends on 1, then midway through the next one on 0.6.
+            bar.setAlpha(1f);
+            content.getViewTreeObserver().dispatchOnPreDraw();
+            assertEquals("faded again before the frame", 0.5f, bar.getAlpha(), 0f);
+            bar.setAlpha(0.6f);
+            content.getViewTreeObserver().dispatchOnPreDraw();
+            assertEquals(0.3f, bar.getAlpha(), 0.0001f);
+            content.getViewTreeObserver().dispatchOnPreDraw();
+            assertEquals("its own value is left as it is", 0.3f, bar.getAlpha(), 0.0001f);
+
+            Settings.FADE_CONTROLS_OPACITY.save(100);
+            VideoOverlayHider.applyTo(activity);
+            bar.setAlpha(0.8f);
+            content.getViewTreeObserver().dispatchOnPreDraw();
+            assertEquals("100 must not keep rewriting TikTok's own opacity", 0.8f, bar.getAlpha(), 0f);
+        } finally {
+            Settings.FADE_CONTROLS_OPACITY.save(100);
+            app.morphe.extension.tiktok.settings.SettingsStatus.videoOverlaysEnabled = overlays;
+            clearFadeIds();
+            VideoOverlayHider.resolveForTests("47.1.4:ll8", 0);
+        }
+    }
 
     @Test
     public void theFadeFollowsRecycledViewsAndTikToksOwnAlphaWrites() {

@@ -196,6 +196,7 @@ public final class VideoOverlayHider {
     private static WeakReference<View> rescaleRoot = new WeakReference<>(null);
     private static final ViewTreeObserver.OnPreDrawListener RESCALE = () -> {
         reapplyScale();
+        reapplyFade();
         return true;
     };
     /** The row under each rail button holding its count, without the button itself. */
@@ -278,8 +279,9 @@ public final class VideoOverlayHider {
     private static final Map<View, Float> FADED_HERE = new WeakHashMap<>();
 
     /**
-     * Views faded to the chosen opacity (#84): the alpha each had before, and the alpha this class
-     * wrote, so a value TikTok wrote since (an animation ending) is told apart from our own.
+     * Views faded to the chosen opacity (#84): the alpha each had before, the alpha this class
+     * wrote, so a value TikTok wrote since (an animation ending) is told apart from our own, and
+     * the fraction it was faded by, for the pre-draw pass that fades such a value again.
      */
     private static final Map<View, float[]> FADED_TO = new WeakHashMap<>();
 
@@ -632,7 +634,12 @@ public final class VideoOverlayHider {
         if (view.getScaleY() != scale) view.setScaleY(scale);
     }
 
-    /** Keeps the scaled icons for the pre-draw pass, and the pass itself on the root. */
+    /**
+     * Keeps the scaled icons for the pre-draw pass, and the pass itself on the root while
+     * anything is scaled or faded. The fade needs it too: Clear display ending animates the
+     * caption, the rail and the search bar back to full opacity, and no layout follows, so
+     * they stayed at full until the next video (S22, 2026-10-08).
+     */
     private static void rememberScaled(List<View> scaled, float touchScale, View root) {
         SCALED.clear();
         scaleWanted = touchScale;
@@ -642,7 +649,7 @@ public final class VideoOverlayHider {
             }
         }
         View watched = rescaleRoot.get();
-        if (touchScale != 1f) {
+        if (touchScale != 1f || !FADED_TO.isEmpty()) {
             if (watched != root && root != null) {
                 if (watched != null && watched.getViewTreeObserver().isAlive()) {
                     watched.getViewTreeObserver().removeOnPreDrawListener(RESCALE);
@@ -680,6 +687,30 @@ public final class VideoOverlayHider {
             final int put = corrected;
             final int held = seen;
             Logger.printDebug(() -> "Rail scale " + scale + " put back on " + put + " of " + held + " icons");
+        }
+    }
+
+    /** When the frame pass last said what it faded again, so the log is not written per frame. */
+    private static long refadeLoggedAt;
+
+    /** The pre-draw pass: every faded view TikTok has written its own opacity to, faded again. */
+    static void reapplyFade() {
+        if (FADED_TO.isEmpty()) return;
+        int corrected = 0;
+        for (Map.Entry<View, float[]> entry : FADED_TO.entrySet()) {
+            View view = entry.getKey();
+            float[] held = entry.getValue();
+            if (view == null || !view.isAttachedToWindow() || view.getAlpha() == held[1]) continue;
+            held[0] = view.getAlpha();
+            held[1] = held[0] * held[2];
+            view.setAlpha(held[1]);
+            corrected++;
+        }
+        long now = SystemClock.uptimeMillis();
+        if (corrected > 0 && now - refadeLoggedAt > 2000L) {
+            refadeLoggedAt = now;
+            final int put = corrected;
+            Logger.printDebug(() -> "Fade put back on " + put + " views TikTok had written");
         }
     }
 
@@ -1138,13 +1169,14 @@ public final class VideoOverlayHider {
             return;
         }
         if (held == null) {
-            held = new float[]{view.getAlpha(), view.getAlpha()};
+            held = new float[]{view.getAlpha(), view.getAlpha(), 1f};
             FADED_TO.put(view, held);
         } else if (view.getAlpha() != held[1]) {
             // TikTok wrote its own value since the last pass; that is the new look to fade.
             held[0] = view.getAlpha();
         }
-        held[1] = held[0] * percent / 100f;
+        held[2] = percent / 100f;
+        held[1] = held[0] * held[2];
         if (view.getAlpha() != held[1]) view.setAlpha(held[1]);
     }
 
