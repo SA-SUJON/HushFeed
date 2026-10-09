@@ -44,7 +44,7 @@
         {
           "key": "backgroundColor",
           "title": "Dark background color",
-          "description": "Pick a color, or type a solid one as a hex code like #000000. Black lets OLED screens switch those pixels off.",
+          "description": "Pick a color, or type a solid color code like #000000. Black lets OLED screens turn those pixels off completely.",
           "required": false,
           "type": "kotlin.String",
           "default": "#000000",

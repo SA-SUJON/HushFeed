@@ -6,6 +6,8 @@
 
 * **TikTok:** Ein paar Meldungen und Statuszeilen sind ebenfalls verständlicher, etwa der Ghost-Modus-Status, die Erklärung zu Hook status, der Hinweis zum Proxy-Passwort und die Vorschau des Dateinamens.
 
+* **TikTok:** Die Option Dark background color in Morphe Manager sagt jetzt „Farbcode“ statt „Hex-Code“ und erklärt, dass Schwarz diese Pixel auf OLED-Bildschirmen komplett ausschaltet.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** Hushfeed unterstützt jetzt nur noch TikTok 47.1.4. Wenn du 47.0.3 oder 47.1.3 nutzt, lade die APK von 47.1.4 bei APKMirror herunter und patche sie in Morphe Manager mit demselben Signaturschlüssel, damit Anmeldung und Einstellungen erhalten bleiben. Das Feature Gate Lab behält jede Überschreibung, deren Schalter es in 47.1.4 noch gibt, und schaltet die übrigen mit seinem üblichen Hinweis aus.

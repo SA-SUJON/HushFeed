@@ -34,8 +34,8 @@ val amoledThemePatch = resourcePatch(
         key = "backgroundColor",
         default = "#000000",
         title = "Dark background color",
-        description = "Pick a color, or type a solid one as a hex code like #000000. Black lets " +
-            "OLED screens switch those pixels off.",
+        description = "Pick a color, or type a solid color code like #000000. Black lets " +
+            "OLED screens turn those pixels off completely.",
         values = mapOf("Black" to "#000000", "Mocha" to "#181825", "Dark gray" to "#121212"),
     )
     execute {
