@@ -960,7 +960,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                     null,
                     FEATURE_GATE_LAB_KEY,
                     L10n.t(context, "Feature Gate Lab"),
-                    L10n.t(context, "Search and override gates"),
+                    L10n.t(context, "Advanced. Find and force the hidden switches TikTok uses "
+                            + "to test features."),
                     L10n.t(context, "Settings")
             ));
         }
@@ -1257,7 +1258,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
             SettingsMenuPreference featureGateLab = new SettingsMenuPreference(
                     context,
                     L10n.t(context, "Feature Gate Lab"),
-                    L10n.t(context, "Search and override gates"),
+                    L10n.t(context, "Advanced. Find and force the hidden switches TikTok uses "
+                            + "to test features."),
                     SettingsMenuPreference.Icon.LAB,
                     0,
                     preference -> {

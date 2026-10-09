@@ -2,6 +2,8 @@
 
 * **TikTok:** Morphe Manager-dəki bütün yamaq təsvirləri sadə ingilis dilində yenidən yazılıb. İndi hər biri yamağın nəyi dəyişdiyini, onu niyə istəyə biləcəyini, açarının açıq və ya bağlı başladığını və Hushfeed ayarlarında harada olduğunu deyir. Bəzi yamaq seçimləri də daha aydın yazılıb, Skip push setup isə indi Skip notification setup adlanır.
 
+* **TikTok:** Hushfeed ayarlarındakı sətirlər sadə ingiliscə ilə yenidən yazıldı. Privacy, Comments, Downloads, Feed filter, Screen time, Region və digər səhifələr indi texniki terminlər olmadan hər açarın nə etdiyini və nəyi hiss edəcəyinizi deyir. Bir neçə başlıq da dəyişdi, məsələn Stop TikTok's speed tests və Clean up shared links.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** Hushfeed indi yalnız TikTok 47.1.4-ü dəstəkləyir. 47.0.3 və ya 47.1.3 istifadə edirsənsə, 47.1.4 APK-sını APKMirror-dan endir və Morphe Manager-də eyni imza açarı ilə yamala ki, girişin və ayarların qalsın. Feature Gate Lab 47.1.4-də hələ də olan açarların dəyişikliklərini saxlayır, qalanlarını isə adi bildirişi ilə söndürür.
