@@ -962,7 +962,8 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                     L10n.t(context, "Feature Gate Lab"),
                     L10n.t(context, "Advanced. Find and force the hidden switches TikTok uses "
                             + "to test features."),
-                    L10n.t(context, "Settings")
+                    L10n.t(context, "Settings"),
+                    "override gates"
             ));
         }
         // Pause Hushfeed sits on the master menu too, and it is what a reader asking whether a

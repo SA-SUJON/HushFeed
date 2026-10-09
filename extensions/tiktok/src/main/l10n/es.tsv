@@ -1162,7 +1162,7 @@ Today: %1$d minute	Hoy: %1$d minuto
 Today: %1$d minutes	Hoy: %1$d minutos
 Today: %1$d video	Hoy: %1$d vídeo
 Today: %1$d videos	Hoy: %1$d vídeos
-Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you.	Usa {creator}, {date}, {video_id} e {index} para formar el nombre. {index} numera las fotos de una presentación guardada con Descargar fotos originales. El botón de guardar de TikTok numera los archivos por carpeta. La extensión del archivo se añade sola.
+Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you.	Usa {creator}, {date}, {video_id} e {index} para formar el nombre. {index} numera las fotos de una presentación guardada con «Descargar las fotos originales». El botón de guardar de TikTok numera los archivos por carpeta. La extensión del archivo se añade sola.
 Use {date} and {media_id} to build the name. Works for image and video stickers.	Usa {date} y {media_id} para formar el nombre. Funciona con stickers de imagen y de video.
 Too many media saves are already running. Try again in a moment.	Ya se están guardando demasiados archivos. Inténtalo dentro de un momento.
 Tracking	Rastreo
@@ -1485,7 +1485,7 @@ Install one, then come back here.	Instala una y vuelve aquí.
 No apps match this search	Ninguna app coincide con esta búsqueda
 LIVE feed	Feed de LIVE
 Filter the LIVE feed	Filtrar el feed de LIVE
-Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.	Oculta salas del feed de LIVE por el que deslizas, según las reglas de abajo. Los creadores bloqueados, los creadores ocultos en este teléfono y las excepciones de creadores también se aplican aquí, y las palabras bloqueadas de la descripción se comparan con el título de cada LIVE. La primera sala que abre el botón LIVE no se filtra. Si se ocultaran todas las salas, una pasa para que el feed siga cargando.
+Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.	Oculta salas del feed de LIVE por el que deslizas, según las reglas de abajo. Los «Creadores bloqueados», los «Creadores ocultos en este dispositivo» y las «Excepciones de creadores» también se aplican aquí, y las «Palabras bloqueadas en las descripciones» se comparan con el título de cada LIVE. La primera sala que abre el botón LIVE no se filtra. Si se ocultaran todas las salas, una pasa para que el feed siga cargando.
 Hide gaming LIVEs	Ocultar LIVE de videojuegos
 Hide LIVEs that TikTok tags with a game or a gaming category.	Ocultar los LIVE que TikTok marca con un juego o una categoría de videojuegos.
 Hide shopping LIVEs	Ocultar LIVE de compras

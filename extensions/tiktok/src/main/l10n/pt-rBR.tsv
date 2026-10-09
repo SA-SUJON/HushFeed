@@ -1162,7 +1162,7 @@ Today: %1$d minute	Hoje: %1$d minuto
 Today: %1$d minutes	Hoje: %1$d minutos
 Today: %1$d video	Hoje: %1$d vídeo
 Today: %1$d videos	Hoje: %1$d vídeos
-Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you.	Use {creator}, {date}, {video_id} e {index} para montar o nome. {index} numera as fotos de uma apresentação salva com Baixar fotos originais. O botão de salvar do próprio TikTok numera os arquivos pela pasta. A extensão do arquivo é adicionada automaticamente.
+Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you.	Use {creator}, {date}, {video_id} e {index} para montar o nome. {index} numera as fotos de uma apresentação salva com «Baixar as fotos originais». O botão de salvar do próprio TikTok numera os arquivos pela pasta. A extensão do arquivo é adicionada automaticamente.
 Use {date} and {media_id} to build the name. Works for image and video stickers.	Use {date} e {media_id} para montar o nome. Funciona para figurinhas de imagem e de vídeo.
 Too many media saves are already running. Try again in a moment.	Muitos salvamentos de mídia já estão em andamento. Tente daqui a pouco.
 Tracking	Rastreamento
@@ -1485,7 +1485,7 @@ Install one, then come back here.	Instale um e depois volte aqui.
 No apps match this search	Nenhum app corresponde a esta pesquisa
 LIVE feed	Feed de LIVE
 Filter the LIVE feed	Filtrar o feed de LIVE
-Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.	Oculta salas do feed de LIVE que você desliza, usando as regras abaixo. Criadores bloqueados, Criadores ocultos neste celular e Exceções de criadores também valem aqui, e as Palavras bloqueadas na legenda são comparadas com o título de cada LIVE. A primeira sala que o botão LIVE abre não é filtrada. Se todas as salas fossem ocultadas, uma passa para o feed continuar carregando.
+Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.	Oculta salas do feed de LIVE que você desliza, usando as regras abaixo. Criadores bloqueados, «Criadores escondidos neste aparelho» e Exceções de criadores também valem aqui, e as «Palavras bloqueadas nas legendas» são comparadas com o título de cada LIVE. A primeira sala que o botão LIVE abre não é filtrada. Se todas as salas fossem ocultadas, uma passa para o feed continuar carregando.
 Hide gaming LIVEs	Esconder LIVEs de games
 Hide LIVEs that TikTok tags with a game or a gaming category.	Esconder as LIVEs que o TikTok marca com um jogo ou uma categoria de games.
 Hide shopping LIVEs	Esconder LIVEs de compras
@@ -1617,7 +1617,7 @@ Video of photos	Vídeo de fotos
 # context: search words for the Log diagnostics switch. Never shown, only matched when someone searches settings. Give the words people type for debug logging in this language, separated by spaces.
 debug debugging logs logging	depurar depuração registros logs
 Export comments	Exportar comentários
-Adds Export CSV and Export JSON buttons under the search box, so Search within comments must be on. They save the comments and replies loaded so far to a file you pick. Open the reply threads you want first.	Adiciona os botões Export CSV e Export JSON abaixo da caixa de busca, então Buscar nos comentários precisa estar ligado. Eles salvam em um arquivo à sua escolha os comentários e respostas carregados até agora. Abra antes as conversas de respostas que você quiser.
+Adds Export CSV and Export JSON buttons under the search box, so Search within comments must be on. They save the comments and replies loaded so far to a file you pick. Open the reply threads you want first.	Adiciona os botões Export CSV e Export JSON abaixo da caixa de busca, então «Pesquisar nos comentários» precisa estar ligado. Eles salvam em um arquivo à sua escolha os comentários e respostas carregados até agora. Abra antes as conversas de respostas que você quiser.
 Export CSV	Exportar CSV
 Export JSON	Exportar JSON
 1 comment or reply loaded	1 comentário ou resposta carregado

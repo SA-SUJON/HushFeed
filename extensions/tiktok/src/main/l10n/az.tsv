@@ -1200,7 +1200,7 @@ Today: %1$d minute	Bu gün: %1$d dəqiqə
 Today: %1$d minutes	Bu gün: %1$d dəqiqə
 Today: %1$d video	Bu gün: %1$d video
 Today: %1$d videos	Bu gün: %1$d video
-Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you.	Adı qurmaq üçün {creator}, {date}, {video_id} və {index} istifadə edin. {index} Download original photos ilə saxlanan slayd şousunun şəkillərini nömrələyir. TikTok-un öz saxlama düyməsi isə faylları qovluğa görə nömrələyir. Fayl uzantısı sizin üçün əlavə olunur.
+Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you.	Adı qurmaq üçün {creator}, {date}, {video_id} və {index} istifadə edin. {index} “Orijinal fotoları endirin” ilə saxlanan slayd şousunun şəkillərini nömrələyir. TikTok-un öz saxlama düyməsi isə faylları qovluğa görə nömrələyir. Fayl uzantısı sizin üçün əlavə olunur.
 Use {date} and {media_id} to build the name. Works for image and video stickers.	Adı qurmaq üçün {date} və {media_id} istifadə edin. Şəkil və video stikerləri üçün işləyir.
 Too many media saves are already running. Try again in a moment.	Çoxlu media saxlama artıq işləyir. Bir azdan yenidən cəhd edin.
 Tracking	İzləmə
@@ -1485,7 +1485,7 @@ Install one, then come back here.	Birini quraşdırın, sonra bura qayıdın.
 No apps match this search	Bu axtarışa uyğun tətbiq yoxdur
 LIVE feed	LIVE lenti
 Filter the LIVE feed	LIVE lentini süzün
-Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.	Aşağıdakı qaydalarla sürüşdürdüyünüz LIVE lentindəki otaqları gizlədir. Blocked creators, Creators hidden on this phone və Creator exceptions burada da tətbiq olunur, Blocked caption words isə hər LIVE-ın başlığına qarşı yoxlanır. LIVE düyməsinin açdığı ilk otaq filtrlənmir. Bütün otaqlar gizlədiləcəksə, biri keçir ki, lent yüklənməyə davam etsin.
+Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.	Aşağıdakı qaydalarla sürüşdürdüyünüz LIVE lentindəki otaqları gizlədir. “Bloklanmış yaradıcılar”, “Bu telefonda gizlədilən yaradıcılar” və “Yaradıcı istisnaları” burada da tətbiq olunur, “Bloklanmış başlıq sözləri” isə hər LIVE-ın başlığına qarşı yoxlanır. LIVE düyməsinin açdığı ilk otaq filtrlənmir. Bütün otaqlar gizlədiləcəksə, biri keçir ki, lent yüklənməyə davam etsin.
 Hide gaming LIVEs	Oyun LIVE-larını gizlədin
 Hide LIVEs that TikTok tags with a game or a gaming category.	TikTok-un oyun və ya oyun kateqoriyası ilə etiketlədiyi LIVE-ları gizlədin.
 Hide shopping LIVEs	Alış-veriş LIVE-larını gizlədin
@@ -1617,7 +1617,7 @@ Video of photos	Fotolardan video
 # context: search words for the Log diagnostics switch. Never shown, only matched when someone searches settings. Give the words people type for debug logging in this language, separated by spaces.
 debug debugging logs logging	sazlama xəta axtarışı jurnallar loglar
 Export comments	Şərhləri ixrac et
-Adds Export CSV and Export JSON buttons under the search box, so Search within comments must be on. They save the comments and replies loaded so far to a file you pick. Open the reply threads you want first.	Axtarış qutusunun altına Export CSV və Export JSON düymələri əlavə edir, ona görə də Search within comments açıq olmalıdır. Onlar indiyə qədər yüklənmiş şərhləri və cavabları seçdiyiniz fayla saxlayır. Əvvəlcə istədiyiniz cavab zəncirlərini açın.
+Adds Export CSV and Export JSON buttons under the search box, so Search within comments must be on. They save the comments and replies loaded so far to a file you pick. Open the reply threads you want first.	Axtarış qutusunun altına Export CSV və Export JSON düymələri əlavə edir, ona görə də “Şərhlər daxilində axtarın” açıq olmalıdır. Onlar indiyə qədər yüklənmiş şərhləri və cavabları seçdiyiniz fayla saxlayır. Əvvəlcə istədiyiniz cavab zəncirlərini açın.
 Export CSV	CSV ixracı
 Export JSON	JSON ixracı
 1 comment or reply loaded	1 şərh və ya cavab yüklənib
@@ -1843,7 +1843,7 @@ Copy the full link for short links	Qısa linklər üçün tam linki kopyalayın
 When Copy link gives a short vt.tiktok.com or vm.tiktok.com link, Hushfeed opens it once in the background to find the full video link and copies that instead. TikTok sees that visit. Links you send to another app go out as they were.	Link kopyala qısa vt.tiktok.com və ya vm.tiktok.com linki verəndə, Hushfeed onu arxa planda bir dəfə açıb tam video linkini tapır və onu kopyalayır. TikTok bu ziyarəti görür. Başqa tətbiqə göndərdiyiniz linklər olduğu kimi gedir.
 Full link copied	Tam link kopyalandı
 Mark saved videos	Saxlanılmış videoları işarələyin
-Puts a ✓ by videos you saved with Hushfeed, on profile grids and next to the time in the feed. Works only while Check for already-saved videos is on. Photo posts aren't marked.	Hushfeed ilə saxladığınız videoların yanına profil şəbəkələrində və lentdə vaxtın yanında ✓ qoyur. Yalnız Check for already-saved videos açıq olduqda işləyir. Foto yazılar işarələnmir.
+Puts a ✓ by videos you saved with Hushfeed, on profile grids and next to the time in the feed. Works only while Check for already-saved videos is on. Photo posts aren't marked.	Hushfeed ilə saxladığınız videoların yanına profil şəbəkələrində və lentdə vaxtın yanında ✓ qoyur. Yalnız “Artıq saxlanılmış videoları yoxlayın” açıq olduqda işləyir. Foto yazılar işarələnmir.
 Also replaces the saved region and country code TikTok sends with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.	TikTok-un hər sorğu ilə göndərdiyi saxlanmış region və ölkə kodunu da əvəz edir. Daxil olmaq yenə də əsl regionunuzu göndərir. IP ünvanınız və hesabınızın öz qaydaları hələ də tətbiq olunur.
 Turn off double tap to react	Reaksiya üçün iki dəfə toxunmanı söndür
 A double tap on a message no longer adds a heart to it. A single tap and a long press work as before.	Mesaja iki dəfə toxunmaq artıq ona ürək əlavə etmir. Bir dəfə toxunma və uzun basma əvvəlki kimi işləyir.
@@ -1858,7 +1858,7 @@ Profile tab name	Profil bölməsinin adı
 Shop tab name	Mağaza bölməsinin adı
 A name of your own under this tab's icon. Leave it empty to keep TikTok's.	Bu bölmənin ikonunun altında öz adınız. TikTok-un adını saxlamaq üçün boş qoyun.
 Hide TikTok's wind-down screens	TikTok-un sakitləşmə ekranlarını gizlət
-Stops the bedtime wind-down, the breathing exercise and the daily limit screen TikTok puts over the feed. Works only on accounts TikTok knows belong to adults. Teen accounts, and ones a parent links with Family Pairing, keep them. With Leave when TikTok says time is up on, the daily limit screen still shows so that switch can work.	TikTok-un lentin üstünə qoyduğu yatmazdan əvvəl sakitləşmə, nəfəs məşqi və gündəlik limit ekranlarını dayandırır. Yalnız TikTok-un yetkinə aid olduğunu bildiyi hesablarda işləyir. Yeniyetmə hesabları və valideynin Family Pairing ilə bağladığı hesablar onları saxlayır. Leave when TikTok says time is up açıq olduqda gündəlik limit ekranı yenə də görünür ki, həmin açar işləyə bilsin.
+Stops the bedtime wind-down, the breathing exercise and the daily limit screen TikTok puts over the feed. Works only on accounts TikTok knows belong to adults. Teen accounts, and ones a parent links with Family Pairing, keep them. With Leave when TikTok says time is up on, the daily limit screen still shows so that switch can work.	TikTok-un lentin üstünə qoyduğu yatmazdan əvvəl sakitləşmə, nəfəs məşqi və gündəlik limit ekranlarını dayandırır. Yalnız TikTok-un yetkinə aid olduğunu bildiyi hesablarda işləyir. Yeniyetmə hesabları və valideynin Family Pairing ilə bağladığı hesablar onları saxlayır. “TikTok vaxtın bitdiyini dedikdə çıxın” açıq olduqda gündəlik limit ekranı yenə də görünür ki, həmin açar işləyə bilsin.
 Hide Footnotes	Footnotes-u gizlədin
 Hide the Footnotes banner TikTok shows on a video that has a note attached. The video and its comments stay as they are.	TikTok-un qeyd əlavə olunmuş videoda göstərdiyi Footnotes bannerini gizlədin. Video və onun şərhləri olduğu kimi qalır.
 Hide Bulletin board	Bulletin board-u gizlədin

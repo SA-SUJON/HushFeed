@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **Project:** Kept settings search and translated descriptions aligned with renamed rows, and updated their wording checks.
+
 * Documented the original 47.1.4 manifest, verified signer, SDK entry points, network security and backup rules, with a reusable sanitized inventory.
 
 * **Project:** Added measured TikTok network, CPU, background and battery observations from a physical phone, with sanitized datasets and a CPU chart. The report distinguishes the paused modified APK from an official build and records capture gaps, overlapping VPN counters and follow-up patch checks. The README now explains Pause's limits more clearly.

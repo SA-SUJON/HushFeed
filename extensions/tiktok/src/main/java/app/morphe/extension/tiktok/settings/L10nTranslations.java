@@ -436,7 +436,7 @@ public final class L10nTranslations {
         table.put("Added to this account.",
                 "Bu hesaba əlavə edildi.");
         table.put("Adds Export CSV and Export JSON buttons under the search box, so Search within comments must be on. They save the comments and replies loaded so far to a file you pick. Open the reply threads you want first.",
-                "Axtarış qutusunun altına Export CSV və Export JSON düymələri əlavə edir, ona görə də Search within comments açıq olmalıdır. Onlar indiyə qədər yüklənmiş şərhləri və cavabları seçdiyiniz fayla saxlayır. Əvvəlcə istədiyiniz cavab zəncirlərini açın.");
+                "Axtarış qutusunun altına Export CSV və Export JSON düymələri əlavə edir, ona görə də “Şərhlər daxilində axtarın” açıq olmalıdır. Onlar indiyə qədər yüklənmiş şərhləri və cavabları seçdiyiniz fayla saxlayır. Əvvəlcə istədiyiniz cavab zəncirlərini açın.");
         table.put("Adds a search box that finds comments already loaded on this video, by words or username. It doesn't search all of TikTok.",
                 "Bu videoda artıq yüklənmiş şərhləri sözlə və ya istifadəçi adı ilə tapan axtarış qutusu əlavə edir. Bütün TikTok-da axtarış etmir.");
         table.put("Ads",
@@ -1606,7 +1606,7 @@ public final class L10nTranslations {
         table.put("Hide voting cards and poll results above the comments, including polls that have ended.",
                 "Şərhlərin üstündəki səsvermə kartlarını və sorğu nəticələrini, o cümlədən bitmiş sorğuları gizlədin.");
         table.put("Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.",
-                "Aşağıdakı qaydalarla sürüşdürdüyünüz LIVE lentindəki otaqları gizlədir. Blocked creators, Creators hidden on this phone və Creator exceptions burada da tətbiq olunur, Blocked caption words isə hər LIVE-ın başlığına qarşı yoxlanır. LIVE düyməsinin açdığı ilk otaq filtrlənmir. Bütün otaqlar gizlədiləcəksə, biri keçir ki, lent yüklənməyə davam etsin.");
+                "Aşağıdakı qaydalarla sürüşdürdüyünüz LIVE lentindəki otaqları gizlədir. “Bloklanmış yaradıcılar”, “Bu telefonda gizlədilən yaradıcılar” və “Yaradıcı istisnaları” burada da tətbiq olunur, “Bloklanmış başlıq sözləri” isə hər LIVE-ın başlığına qarşı yoxlanır. LIVE düyməsinin açdığı ilk otaq filtrlənmir. Bütün otaqlar gizlədiləcəksə, biri keçir ki, lent yüklənməyə davam etsin.");
         table.put("Hides the comment count, the sort and close buttons and the suggestions above them. Use Back or swipe down to close comments.",
                 "Şərh sayını, çeşidləmə və bağlama düymələrini və onların üstündəki təklifləri gizlədir. Şərhləri bağlamaq üçün Geri düyməsindən istifadə edin və ya aşağı sürüşdürün.");
         table.put("Hiding",
@@ -2386,7 +2386,7 @@ public final class L10nTranslations {
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
                 "Bütün ayarları dərhal defoltlarına qaytarın. Cari ayarlarınız Geri qaytar üçün saxlanılır.");
         table.put("Puts a ✓ by videos you saved with Hushfeed, on profile grids and next to the time in the feed. Works only while Check for already-saved videos is on. Photo posts aren't marked.",
-                "Hushfeed ilə saxladığınız videoların yanına profil şəbəkələrində və lentdə vaxtın yanında ✓ qoyur. Yalnız Check for already-saved videos açıq olduqda işləyir. Foto yazılar işarələnmir.");
+                "Hushfeed ilə saxladığınız videoların yanına profil şəbəkələrində və lentdə vaxtın yanında ✓ qoyur. Yalnız “Artıq saxlanılmış videoları yoxlayın” açıq olduqda işləyir. Foto yazılar işarələnmir.");
         table.put("Putting seen videos back",
                 "Baxılmış videolar bərpa edilir");
         table.put("Putting the saved videos back",
@@ -3094,7 +3094,7 @@ public final class L10nTranslations {
         table.put("Stops TikTok from slowing your screen to match each video's frame rate. On a 90 or 120 Hz phone, that request makes the whole app, scrolling too, run slower.",
                 "TikTok-un ekranınızı hər videonun kadr sürətinə uyğun yavaşlatmasının qarşısını alır. 90 və ya 120 Hz telefonda bu tələb bütün tətbiqi, o cümlədən sürüşdürməni yavaşladır.");
         table.put("Stops the bedtime wind-down, the breathing exercise and the daily limit screen TikTok puts over the feed. Works only on accounts TikTok knows belong to adults. Teen accounts, and ones a parent links with Family Pairing, keep them. With Leave when TikTok says time is up on, the daily limit screen still shows so that switch can work.",
-                "TikTok-un lentin üstünə qoyduğu yatmazdan əvvəl sakitləşmə, nəfəs məşqi və gündəlik limit ekranlarını dayandırır. Yalnız TikTok-un yetkinə aid olduğunu bildiyi hesablarda işləyir. Yeniyetmə hesabları və valideynin Family Pairing ilə bağladığı hesablar onları saxlayır. Leave when TikTok says time is up açıq olduqda gündəlik limit ekranı yenə də görünür ki, həmin açar işləyə bilsin.");
+                "TikTok-un lentin üstünə qoyduğu yatmazdan əvvəl sakitləşmə, nəfəs məşqi və gündəlik limit ekranlarını dayandırır. Yalnız TikTok-un yetkinə aid olduğunu bildiyi hesablarda işləyir. Yeniyetmə hesabları və valideynin Family Pairing ilə bağladığı hesablar onları saxlayır. “TikTok vaxtın bitdiyini dedikdə çıxın” açıq olduqda gündəlik limit ekranı yenə də görünür ki, həmin açar işləyə bilsin.");
         table.put("Stops websites you open from inside TikTok from reaching back into the app. TikTok's own pages, such as Activity center, Watch history, shop checkout and CAPTCHA, keep working.",
                 "TikTok-un içindən açdığınız saytların tətbiqə geri çıxış əldə etməsinin qarşısını alır. Activity center, Watch history, mağaza ödənişi və CAPTCHA kimi TikTok-un öz səhifələri işləməyə davam edir.");
         table.put("Store TikTok thinks it came from",
@@ -3733,7 +3733,7 @@ public final class L10nTranslations {
         table.put("Use {creator}, {date} and {video_id} to build the name. Start with {creator}/ to put each creator in a folder. The file ending is added for you.",
                 "Adı qurmaq üçün {creator}, {date} və {video_id} istifadə edin. Hər yaradıcını ayrıca qovluğa qoymaq üçün {creator}/ ilə başlayın. Fayl uzantısı sizin üçün əlavə olunur.");
         table.put("Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you.",
-                "Adı qurmaq üçün {creator}, {date}, {video_id} və {index} istifadə edin. {index} Download original photos ilə saxlanan slayd şousunun şəkillərini nömrələyir. TikTok-un öz saxlama düyməsi isə faylları qovluğa görə nömrələyir. Fayl uzantısı sizin üçün əlavə olunur.");
+                "Adı qurmaq üçün {creator}, {date}, {video_id} və {index} istifadə edin. {index} “Orijinal fotoları endirin” ilə saxlanan slayd şousunun şəkillərini nömrələyir. TikTok-un öz saxlama düyməsi isə faylları qovluğa görə nömrələyir. Fayl uzantısı sizin üçün əlavə olunur.");
         table.put("Use {date} and {media_id} to build the name. Works for image and video stickers.",
                 "Adı qurmaq üçün {date} və {media_id} istifadə edin. Şəkil və video stikerləri üçün işləyir.");
         table.put("User ID copied",
@@ -4303,7 +4303,7 @@ public final class L10nTranslations {
         table.put("Added to this account.",
                 "Zu diesem Konto hinzugefügt.");
         table.put("Adds Export CSV and Export JSON buttons under the search box, so Search within comments must be on. They save the comments and replies loaded so far to a file you pick. Open the reply threads you want first.",
-                "Fügt unter dem Suchfeld die Schaltflächen Export CSV und Export JSON hinzu, daher muss „Kommentare durchsuchen“ an sein. Sie speichern die bisher geladenen Kommentare und Antworten in einer Datei deiner Wahl. Öffne vorher die Antwortverläufe, die du brauchst.");
+                "Fügt unter dem Suchfeld die Schaltflächen Export CSV und Export JSON hinzu, daher muss „In Kommentaren suchen“ an sein. Sie speichern die bisher geladenen Kommentare und Antworten in einer Datei deiner Wahl. Öffne vorher die Antwortverläufe, die du brauchst.");
         table.put("Adds a search box that finds comments already loaded on this video, by words or username. It doesn't search all of TikTok.",
                 "Fügt ein Suchfeld hinzu, das bereits geladene Kommentare dieses Videos nach Wörtern oder Benutzernamen findet. Es durchsucht nicht ganz TikTok.");
         table.put("Ads",
@@ -5473,7 +5473,7 @@ public final class L10nTranslations {
         table.put("Hide voting cards and poll results above the comments, including polls that have ended.",
                 "Blende Abstimmungen und ihre Ergebnisse über den Kommentaren aus, auch wenn die Abstimmung bereits beendet ist.");
         table.put("Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.",
-                "Blendet Räume im LIVE-Feed, durch den du wischst, anhand der Regeln unten aus. Blockierte Creator, auf diesem Telefon ausgeblendete Creator und Creator-Ausnahmen gelten auch hier, und blockierte Beschreibungswörter werden mit dem Titel jedes LIVE verglichen. Der erste Raum, den die LIVE-Schaltfläche öffnet, wird nicht gefiltert. Würde jeder Raum ausgeblendet, kommt einer durch, damit der Feed weiterlädt.");
+                "Blendet Räume im LIVE-Feed, durch den du wischst, anhand der Regeln unten aus. „Gesperrte Creator“, „Auf diesem Gerät ausgeblendete Creator“ und „Creator-Ausnahmen“ gelten auch hier, und „Gesperrte Wörter in Beschreibungen“ werden mit dem Titel jedes LIVE verglichen. Der erste Raum, den die LIVE-Schaltfläche öffnet, wird nicht gefiltert. Würde jeder Raum ausgeblendet, kommt einer durch, damit der Feed weiterlädt.");
         table.put("Hides the comment count, the sort and close buttons and the suggestions above them. Use Back or swipe down to close comments.",
                 "Blendet die Kommentarzahl, die Sortier- und Schließen-Schaltflächen und die Vorschläge darüber aus. Zum Schließen der Kommentare Zurück nutzen oder nach unten wischen.");
         table.put("Hiding",
@@ -6253,7 +6253,7 @@ public final class L10nTranslations {
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
                 "Jede Einstellung sofort auf ihren Standardwert zurücksetzen. Deine aktuellen Einstellungen bleiben zum Rückgängigmachen erhalten.");
         table.put("Puts a ✓ by videos you saved with Hushfeed, on profile grids and next to the time in the feed. Works only while Check for already-saved videos is on. Photo posts aren't marked.",
-                "Setzt ein ✓ an Videos, die du mit Hushfeed gespeichert hast, in Profilrastern und neben der Uhrzeit im Feed. Funktioniert nur, solange „Auf bereits gespeicherte Videos prüfen“ an ist. Fotobeiträge werden nicht markiert.");
+                "Setzt ein ✓ an Videos, die du mit Hushfeed gespeichert hast, in Profilrastern und neben der Uhrzeit im Feed. Funktioniert nur, solange „Bereits gespeicherte Videos prüfen“ an ist. Fotobeiträge werden nicht markiert.");
         table.put("Putting seen videos back",
                 "Gesehene Videos werden zurückgeholt");
         table.put("Putting the saved videos back",
@@ -6961,7 +6961,7 @@ public final class L10nTranslations {
         table.put("Stops TikTok from slowing your screen to match each video's frame rate. On a 90 or 120 Hz phone, that request makes the whole app, scrolling too, run slower.",
                 "Verhindert, dass TikTok deinen Bildschirm auf die Bildrate des jeweiligen Videos bremst. Auf einem Telefon mit 90 oder 120 Hz macht diese Anfrage die ganze App langsamer, auch das Scrollen.");
         table.put("Stops the bedtime wind-down, the breathing exercise and the daily limit screen TikTok puts over the feed. Works only on accounts TikTok knows belong to adults. Teen accounts, and ones a parent links with Family Pairing, keep them. With Leave when TikTok says time is up on, the daily limit screen still shows so that switch can work.",
-                "Stoppt die Einschlaf-Erinnerung, die Atemübung und den Tageslimit-Bildschirm, die TikTok über den Feed legt. Funktioniert nur bei Konten, von denen TikTok weiß, dass sie Erwachsenen gehören. Teen-Konten und solche, die Eltern per Family Pairing verknüpft haben, behalten sie. Bei eingeschaltetem „Verlassen, wenn TikTok sagt, die Zeit ist um“ erscheint der Tageslimit-Bildschirm trotzdem, damit dieser Schalter arbeiten kann.");
+                "Stoppt die Einschlaf-Erinnerung, die Atemübung und den Tageslimit-Bildschirm, die TikTok über den Feed legt. Funktioniert nur bei Konten, von denen TikTok weiß, dass sie Erwachsenen gehören. Teen-Konten und solche, die Eltern per Family Pairing verknüpft haben, behalten sie. Bei eingeschaltetem „Die App verlassen, wenn TikTok sagt, die Zeit ist um“ erscheint der Tageslimit-Bildschirm trotzdem, damit dieser Schalter arbeiten kann.");
         table.put("Stops websites you open from inside TikTok from reaching back into the app. TikTok's own pages, such as Activity center, Watch history, shop checkout and CAPTCHA, keep working.",
                 "Verhindert, dass Websites, die du aus TikTok heraus öffnest, auf die App zugreifen. TikToks eigene Seiten wie Activity center, Wiedergabeverlauf, Shop-Kasse und CAPTCHA funktionieren weiter.");
         table.put("Store TikTok thinks it came from",
@@ -9340,7 +9340,7 @@ public final class L10nTranslations {
         table.put("Hide voting cards and poll results above the comments, including polls that have ended.",
                 "Oculta las tarjetas de votación y sus resultados sobre los comentarios, incluidas las encuestas finalizadas.");
         table.put("Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.",
-                "Oculta salas del feed de LIVE por el que deslizas, según las reglas de abajo. Los creadores bloqueados, los creadores ocultos en este teléfono y las excepciones de creadores también se aplican aquí, y las palabras bloqueadas de la descripción se comparan con el título de cada LIVE. La primera sala que abre el botón LIVE no se filtra. Si se ocultaran todas las salas, una pasa para que el feed siga cargando.");
+                "Oculta salas del feed de LIVE por el que deslizas, según las reglas de abajo. Los «Creadores bloqueados», los «Creadores ocultos en este dispositivo» y las «Excepciones de creadores» también se aplican aquí, y las «Palabras bloqueadas en las descripciones» se comparan con el título de cada LIVE. La primera sala que abre el botón LIVE no se filtra. Si se ocultaran todas las salas, una pasa para que el feed siga cargando.");
         table.put("Hides the comment count, the sort and close buttons and the suggestions above them. Use Back or swipe down to close comments.",
                 "Oculta el número de comentarios, los botones de orden y de cerrar y las sugerencias que hay encima. Usa Atrás o desliza hacia abajo para cerrar los comentarios.");
         table.put("Hiding",
@@ -11467,7 +11467,7 @@ public final class L10nTranslations {
         table.put("Use {creator}, {date} and {video_id} to build the name. Start with {creator}/ to put each creator in a folder. The file ending is added for you.",
                 "Usa {creator}, {date} y {video_id} para formar el nombre. Empieza con {creator}/ para poner a cada creador en su propia carpeta. La extensión del archivo se añade sola.");
         table.put("Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you.",
-                "Usa {creator}, {date}, {video_id} e {index} para formar el nombre. {index} numera las fotos de una presentación guardada con Descargar fotos originales. El botón de guardar de TikTok numera los archivos por carpeta. La extensión del archivo se añade sola.");
+                "Usa {creator}, {date}, {video_id} e {index} para formar el nombre. {index} numera las fotos de una presentación guardada con «Descargar las fotos originales». El botón de guardar de TikTok numera los archivos por carpeta. La extensión del archivo se añade sola.");
         table.put("Use {date} and {media_id} to build the name. Works for image and video stickers.",
                 "Usa {date} y {media_id} para formar el nombre. Funciona con stickers de imagen y de video.");
         table.put("User ID copied",
@@ -12037,7 +12037,7 @@ public final class L10nTranslations {
         table.put("Added to this account.",
                 "Ditambahkan ke akun ini.");
         table.put("Adds Export CSV and Export JSON buttons under the search box, so Search within comments must be on. They save the comments and replies loaded so far to a file you pick. Open the reply threads you want first.",
-                "Menambahkan tombol Export CSV dan Export JSON di bawah kotak pencarian, jadi Cari di komentar harus menyala. Tombol itu menyimpan komentar dan balasan yang sudah dimuat ke file pilihanmu. Buka dulu utas balasan yang kamu mau.");
+                "Menambahkan tombol Export CSV dan Export JSON di bawah kotak pencarian, jadi “Cari dalam komentar” harus menyala. Tombol itu menyimpan komentar dan balasan yang sudah dimuat ke file pilihanmu. Buka dulu utas balasan yang kamu mau.");
         table.put("Adds a search box that finds comments already loaded on this video, by words or username. It doesn't search all of TikTok.",
                 "Menambahkan kotak pencarian yang menemukan komentar yang sudah dimuat di video ini, berdasarkan kata atau nama pengguna. Tidak mencari di seluruh TikTok.");
         table.put("Ads",
@@ -13207,7 +13207,7 @@ public final class L10nTranslations {
         table.put("Hide voting cards and poll results above the comments, including polls that have ended.",
                 "Sembunyikan kartu jajak pendapat dan hasilnya di atas komentar, termasuk jajak pendapat yang sudah berakhir.");
         table.put("Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.",
-                "Menyembunyikan ruang di feed LIVE yang kamu geser, memakai aturan di bawah. Kreator yang diblokir, Kreator yang disembunyikan di ponsel ini, dan Pengecualian kreator berlaku di sini juga, dan Kata keterangan yang diblokir dicocokkan dengan judul tiap LIVE. Ruang pertama yang dibuka tombol LIVE tidak difilter. Jika semua ruang akan disembunyikan, satu dibiarkan lolos agar feed tetap memuat.");
+                "Menyembunyikan ruang di feed LIVE yang kamu geser, memakai aturan di bawah. Kreator yang diblokir, Kreator yang disembunyikan di ponsel ini, dan Pengecualian kreator berlaku di sini juga, dan “Kata yang diblokir di keterangan” dicocokkan dengan judul tiap LIVE. Ruang pertama yang dibuka tombol LIVE tidak difilter. Jika semua ruang akan disembunyikan, satu dibiarkan lolos agar feed tetap memuat.");
         table.put("Hides the comment count, the sort and close buttons and the suggestions above them. Use Back or swipe down to close comments.",
                 "Menyembunyikan jumlah komentar, tombol urutkan dan tutup, serta saran di atasnya. Pakai Kembali atau geser ke bawah untuk menutup komentar.");
         table.put("Hiding",
@@ -14695,7 +14695,7 @@ public final class L10nTranslations {
         table.put("Stops TikTok from slowing your screen to match each video's frame rate. On a 90 or 120 Hz phone, that request makes the whole app, scrolling too, run slower.",
                 "Menghentikan TikTok memperlambat layarmu agar sesuai frame rate tiap video. Di ponsel 90 atau 120 Hz, permintaan itu membuat seluruh aplikasi, termasuk menggulir, berjalan lebih lambat.");
         table.put("Stops the bedtime wind-down, the breathing exercise and the daily limit screen TikTok puts over the feed. Works only on accounts TikTok knows belong to adults. Teen accounts, and ones a parent links with Family Pairing, keep them. With Leave when TikTok says time is up on, the daily limit screen still shows so that switch can work.",
-                "Menghentikan jeda sebelum tidur, latihan napas, dan layar batas harian yang ditaruh TikTok di atas feed. Hanya berfungsi di akun yang TikTok tahu milik orang dewasa. Akun remaja, dan akun yang dihubungkan orang tua lewat Family Pairing, tetap memilikinya. Saat Keluar saat TikTok bilang waktu habis menyala, layar batas harian tetap muncul agar sakelar itu bisa bekerja.");
+                "Menghentikan jeda sebelum tidur, latihan napas, dan layar batas harian yang ditaruh TikTok di atas feed. Hanya berfungsi di akun yang TikTok tahu milik orang dewasa. Akun remaja, dan akun yang dihubungkan orang tua lewat Family Pairing, tetap memilikinya. Saat “Keluar saat TikTok bilang waktunya habis” menyala, layar batas harian tetap muncul agar sakelar itu bisa bekerja.");
         table.put("Stops websites you open from inside TikTok from reaching back into the app. TikTok's own pages, such as Activity center, Watch history, shop checkout and CAPTCHA, keep working.",
                 "Mencegah situs yang kamu buka dari dalam TikTok mengakses balik ke aplikasi. Halaman TikTok sendiri, seperti Activity center, Riwayat tontonan, pembayaran toko, dan CAPTCHA, tetap berfungsi.");
         table.put("Store TikTok thinks it came from",
@@ -17074,7 +17074,7 @@ public final class L10nTranslations {
         table.put("Hide voting cards and poll results above the comments, including polls that have ended.",
                 "Nasconde le schede di voto e i risultati dei sondaggi sopra i commenti, anche per i sondaggi già conclusi.");
         table.put("Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.",
-                "Nasconde le stanze nel feed LIVE che scorri, usando le regole qui sotto. Creator bloccati, Creator nascosti su questo telefono ed Eccezioni creator valgono anche qui, e le Parole bloccate nelle didascalie vengono confrontate con il titolo di ogni LIVE. La prima stanza aperta dal pulsante LIVE non viene filtrata. Se tutte le stanze fossero nascoste, una passa così il feed continua a caricare.");
+                "Nasconde le stanze nel feed LIVE che scorri, usando le regole qui sotto. Creator bloccati, Creator nascosti su questo telefono ed Eccezioni creator valgono anche qui, e le «Parole bloccate nelle descrizioni» vengono confrontate con il titolo di ogni LIVE. La prima stanza aperta dal pulsante LIVE non viene filtrata. Se tutte le stanze fossero nascoste, una passa così il feed continua a caricare.");
         table.put("Hides the comment count, the sort and close buttons and the suggestions above them. Use Back or swipe down to close comments.",
                 "Nasconde il numero di commenti, i pulsanti di ordinamento e di chiusura e i suggerimenti sopra di essi. Usa Indietro o scorri verso il basso per chiudere i commenti.");
         table.put("Hiding",
@@ -18562,7 +18562,7 @@ public final class L10nTranslations {
         table.put("Stops TikTok from slowing your screen to match each video's frame rate. On a 90 or 120 Hz phone, that request makes the whole app, scrolling too, run slower.",
                 "Impedisce a TikTok di rallentare lo schermo per adeguarlo al frame rate di ogni video. Su un telefono a 90 o 120 Hz, quella richiesta rallenta tutta l'app, scorrimento compreso.");
         table.put("Stops the bedtime wind-down, the breathing exercise and the daily limit screen TikTok puts over the feed. Works only on accounts TikTok knows belong to adults. Teen accounts, and ones a parent links with Family Pairing, keep them. With Leave when TikTok says time is up on, the daily limit screen still shows so that switch can work.",
-                "Blocca la pausa serale, l'esercizio di respirazione e la schermata del limite giornaliero che TikTok mette sopra il feed. Funziona solo sugli account che TikTok sa essere di adulti. Gli account di adolescenti, e quelli che un genitore collega con Family Pairing, li mantengono. Con Esci quando TikTok dice che il tempo è finito attivo, la schermata del limite giornaliero compare comunque così quell'interruttore può agire.");
+                "Blocca la pausa serale, l'esercizio di respirazione e la schermata del limite giornaliero che TikTok mette sopra il feed. Funziona solo sugli account che TikTok sa essere di adulti. Gli account di adolescenti, e quelli che un genitore collega con Family Pairing, li mantengono. Con «Esci quando TikTok dice che il tempo è scaduto» attivo, la schermata del limite giornaliero compare comunque così quell'interruttore può agire.");
         table.put("Stops websites you open from inside TikTok from reaching back into the app. TikTok's own pages, such as Activity center, Watch history, shop checkout and CAPTCHA, keep working.",
                 "Impedisce ai siti web che apri da TikTok di accedere all'app. Le pagine di TikTok, come Activity center, Cronologia visualizzazioni, pagamento dello shop e CAPTCHA, continuano a funzionare.");
         table.put("Store TikTok thinks it came from",
@@ -19201,7 +19201,7 @@ public final class L10nTranslations {
         table.put("Use {creator}, {date} and {video_id} to build the name. Start with {creator}/ to put each creator in a folder. The file ending is added for you.",
                 "Usa {creator}, {date} e {video_id} per comporre il nome. Inizia con {creator}/ per mettere ogni creator in una cartella. L'estensione del file viene aggiunta in automatico.");
         table.put("Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you.",
-                "Usa {creator}, {date}, {video_id} e {index} per comporre il nome. {index} numera le foto di una presentazione salvata con Scarica foto originali. Il pulsante di salvataggio di TikTok numera invece i file per cartella. L'estensione del file viene aggiunta in automatico.");
+                "Usa {creator}, {date}, {video_id} e {index} per comporre il nome. {index} numera le foto di una presentazione salvata con «Scarica le foto originali». Il pulsante di salvataggio di TikTok numera invece i file per cartella. L'estensione del file viene aggiunta in automatico.");
         table.put("Use {date} and {media_id} to build the name. Works for image and video stickers.",
                 "Usa {date} e {media_id} per comporre il nome. Funziona con sticker immagine e video.");
         table.put("User ID copied",
@@ -19771,7 +19771,7 @@ public final class L10nTranslations {
         table.put("Added to this account.",
                 "Adicionados a esta conta.");
         table.put("Adds Export CSV and Export JSON buttons under the search box, so Search within comments must be on. They save the comments and replies loaded so far to a file you pick. Open the reply threads you want first.",
-                "Adiciona os botões Export CSV e Export JSON abaixo da caixa de busca, então Buscar nos comentários precisa estar ligado. Eles salvam em um arquivo à sua escolha os comentários e respostas carregados até agora. Abra antes as conversas de respostas que você quiser.");
+                "Adiciona os botões Export CSV e Export JSON abaixo da caixa de busca, então «Pesquisar nos comentários» precisa estar ligado. Eles salvam em um arquivo à sua escolha os comentários e respostas carregados até agora. Abra antes as conversas de respostas que você quiser.");
         table.put("Adds a search box that finds comments already loaded on this video, by words or username. It doesn't search all of TikTok.",
                 "Adiciona uma caixa de busca que encontra os comentários já carregados neste vídeo, por palavras ou nome de usuário. Ela não busca em todo o TikTok.");
         table.put("Ads",
@@ -20941,7 +20941,7 @@ public final class L10nTranslations {
         table.put("Hide voting cards and poll results above the comments, including polls that have ended.",
                 "Oculte os cartões de votação e os resultados acima dos comentários, incluindo enquetes encerradas.");
         table.put("Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.",
-                "Oculta salas do feed de LIVE que você desliza, usando as regras abaixo. Criadores bloqueados, Criadores ocultos neste celular e Exceções de criadores também valem aqui, e as Palavras bloqueadas na legenda são comparadas com o título de cada LIVE. A primeira sala que o botão LIVE abre não é filtrada. Se todas as salas fossem ocultadas, uma passa para o feed continuar carregando.");
+                "Oculta salas do feed de LIVE que você desliza, usando as regras abaixo. Criadores bloqueados, «Criadores escondidos neste aparelho» e Exceções de criadores também valem aqui, e as «Palavras bloqueadas nas legendas» são comparadas com o título de cada LIVE. A primeira sala que o botão LIVE abre não é filtrada. Se todas as salas fossem ocultadas, uma passa para o feed continuar carregando.");
         table.put("Hides the comment count, the sort and close buttons and the suggestions above them. Use Back or swipe down to close comments.",
                 "Oculta a contagem de comentários, os botões de ordenar e de fechar e as sugestões acima deles. Use Voltar ou deslize para baixo para fechar os comentários.");
         table.put("Hiding",
@@ -23068,7 +23068,7 @@ public final class L10nTranslations {
         table.put("Use {creator}, {date} and {video_id} to build the name. Start with {creator}/ to put each creator in a folder. The file ending is added for you.",
                 "Use {creator}, {date} e {video_id} para montar o nome. Comece com {creator}/ para colocar cada criador em uma pasta. A extensão do arquivo é adicionada automaticamente.");
         table.put("Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you.",
-                "Use {creator}, {date}, {video_id} e {index} para montar o nome. {index} numera as fotos de uma apresentação salva com Baixar fotos originais. O botão de salvar do próprio TikTok numera os arquivos pela pasta. A extensão do arquivo é adicionada automaticamente.");
+                "Use {creator}, {date}, {video_id} e {index} para montar o nome. {index} numera as fotos de uma apresentação salva com «Baixar as fotos originais». O botão de salvar do próprio TikTok numera os arquivos pela pasta. A extensão do arquivo é adicionada automaticamente.");
         table.put("Use {date} and {media_id} to build the name. Works for image and video stickers.",
                 "Use {date} e {media_id} para montar o nome. Funciona para figurinhas de imagem e de vídeo.");
         table.put("User ID copied",
@@ -23850,7 +23850,7 @@ public final class L10nTranslations {
         table.put("Added to this account.",
                 "Добавлено к этому аккаунту.");
         table.put("Adds Export CSV and Export JSON buttons under the search box, so Search within comments must be on. They save the comments and replies loaded so far to a file you pick. Open the reply threads you want first.",
-                "Добавляет под полем поиска кнопки Export CSV и Export JSON, поэтому поиск по комментариям должен быть включён. Они сохраняют в выбранный вами файл комментарии и ответы, загруженные на данный момент. Сначала откройте нужные ветки ответов.");
+                "Добавляет под полем поиска кнопки Export CSV и Export JSON, поэтому «Поиск по комментариям» должен быть включён. Они сохраняют в выбранный вами файл комментарии и ответы, загруженные на данный момент. Сначала откройте нужные ветки ответов.");
         table.put("Adds a search box that finds comments already loaded on this video, by words or username. It doesn't search all of TikTok.",
                 "Добавляет поле поиска, которое находит уже загруженные комментарии к этому видео по словам или имени пользователя. По всему TikTok оно не ищет.");
         table.put("Ads",
@@ -25062,7 +25062,7 @@ public final class L10nTranslations {
         table.put("Hide voting cards and poll results above the comments, including polls that have ended.",
                 "Скрывать карточки голосования и результаты опросов над комментариями, включая уже завершённые опросы.");
         table.put("Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.",
-                "Скрывает комнаты в ленте LIVE, по которой вы листаете, по правилам ниже. Заблокированные авторы, авторы, скрытые на этом телефоне, и исключения для авторов действуют и здесь, а заблокированные слова в описании сверяются с названием каждого LIVE. Первая комната, которую открывает кнопка LIVE, не фильтруется. Если бы скрылись все комнаты, одна пропускается, чтобы лента продолжала загружаться.");
+                "Скрывает комнаты в ленте LIVE, по которой вы листаете, по правилам ниже. Заблокированные авторы, «Авторы, скрытые на этом телефоне», и «Исключения для авторов» действуют и здесь, а «Заблокированные слова в подписях» сверяются с названием каждого LIVE. Первая комната, которую открывает кнопка LIVE, не фильтруется. Если бы скрылись все комнаты, одна пропускается, чтобы лента продолжала загружаться.");
         table.put("Hides the comment count, the sort and close buttons and the suggestions above them. Use Back or swipe down to close comments.",
                 "Скрывает число комментариев, кнопки сортировки и закрытия и подсказки над ними. Чтобы закрыть комментарии, нажмите «Назад» или проведите вниз.");
         table.put("Hiding",
@@ -25848,7 +25848,7 @@ public final class L10nTranslations {
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
                 "Сразу вернуть все настройки к значениям по умолчанию. Текущие настройки сохраняются для отмены действия.");
         table.put("Puts a ✓ by videos you saved with Hushfeed, on profile grids and next to the time in the feed. Works only while Check for already-saved videos is on. Photo posts aren't marked.",
-                "Ставит ✓ у видео, сохранённых через Hushfeed, в сетках профилей и рядом со временем в ленте. Работает только при включённой проверке уже сохранённых видео. Фотопосты не отмечаются.");
+                "Ставит ✓ у видео, сохранённых через Hushfeed, в сетках профилей и рядом со временем в ленте. Работает только при включённом параметре «Проверять уже сохранённые видео». Фотопосты не отмечаются.");
         table.put("Putting seen videos back",
                 "Восстановление просмотренных видео");
         table.put("Putting the saved videos back",
@@ -27276,7 +27276,7 @@ public final class L10nTranslations {
         table.put("Use {creator}, {date} and {video_id} to build the name. Start with {creator}/ to put each creator in a folder. The file ending is added for you.",
                 "Составьте имя из {creator}, {date} и {video_id}. Начните с {creator}/, чтобы класть каждого автора в отдельную папку. Расширение файла добавляется само.");
         table.put("Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you.",
-                "Составьте имя из {creator}, {date}, {video_id} и {index}. {index} нумерует фото слайд-шоу, сохранённого через «Скачать оригинальные фото». Собственная кнопка сохранения TikTok нумерует файлы по папке. Расширение файла добавляется само.");
+                "Составьте имя из {creator}, {date}, {video_id} и {index}. {index} нумерует фото слайд-шоу, сохранённого через «Загружать оригиналы фото». Собственная кнопка сохранения TikTok нумерует файлы по папке. Расширение файла добавляется само.");
         table.put("Use {date} and {media_id} to build the name. Works for image and video stickers.",
                 "Составьте имя из {date} и {media_id}. Работает для стикеров-изображений и видеостикеров.");
         table.put("User ID copied",
@@ -27849,7 +27849,7 @@ public final class L10nTranslations {
         table.put("Added to this account.",
                 "Bu hesaba eklendi.");
         table.put("Adds Export CSV and Export JSON buttons under the search box, so Search within comments must be on. They save the comments and replies loaded so far to a file you pick. Open the reply threads you want first.",
-                "Arama kutusunun altına Export CSV ve Export JSON düğmelerini ekler, bu yüzden Yorumlarda ara açık olmalı. Şimdiye kadar yüklenen yorumları ve yanıtları seçtiğin bir dosyaya kaydederler. Önce istediğin yanıt dizilerini aç.");
+                "Arama kutusunun altına Export CSV ve Export JSON düğmelerini ekler, bu yüzden “Yorumların içinde ara” açık olmalı. Şimdiye kadar yüklenen yorumları ve yanıtları seçtiğin bir dosyaya kaydederler. Önce istediğin yanıt dizilerini aç.");
         table.put("Adds a search box that finds comments already loaded on this video, by words or username. It doesn't search all of TikTok.",
                 "Bu videoda zaten yüklenmiş yorumları kelimeyle veya kullanıcı adıyla bulan bir arama kutusu ekler. Tüm TikTok'ta arama yapmaz.");
         table.put("Ads",
@@ -29019,7 +29019,7 @@ public final class L10nTranslations {
         table.put("Hide voting cards and poll results above the comments, including polls that have ended.",
                 "Yorumların üzerindeki oylama kartlarını ve anket sonuçlarını, sona ermiş anketler dahil gizle.");
         table.put("Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.",
-                "Aşağıdaki kurallara göre kaydırdığın LIVE akışındaki odaları gizler. Engellenen içerik üreticileri, bu telefonda gizlenen içerik üreticileri ve içerik üreticisi istisnaları burada da geçerlidir, engellenen açıklama kelimeleri de her LIVE'ın başlığıyla karşılaştırılır. LIVE düğmesinin açtığı ilk oda filtrelenmez. Tüm odalar gizlenecek olursa biri geçer, böylece akış yüklenmeye devam eder.");
+                "Aşağıdaki kurallara göre kaydırdığın LIVE akışındaki odaları gizler. Engellenen içerik üreticileri, “Bu telefonda gizlenen içerik üreticileri” ve “İçerik üretici istisnaları” burada da geçerlidir, “Engellenen açıklama kelimeleri” de her LIVE'ın başlığıyla karşılaştırılır. LIVE düğmesinin açtığı ilk oda filtrelenmez. Tüm odalar gizlenecek olursa biri geçer, böylece akış yüklenmeye devam eder.");
         table.put("Hides the comment count, the sort and close buttons and the suggestions above them. Use Back or swipe down to close comments.",
                 "Yorum sayısını, sıralama ve kapatma düğmelerini ve üstlerindeki önerileri gizler. Yorumları kapatmak için Geri'yi kullan veya aşağı kaydır.");
         table.put("Hiding",
@@ -29799,7 +29799,7 @@ public final class L10nTranslations {
         table.put("Put every setting back to its default straight away. Your current settings are kept for Undo.",
                 "Her ayarı hemen varsayılanına döndür. Geçerli ayarların Geri al için saklanır.");
         table.put("Puts a ✓ by videos you saved with Hushfeed, on profile grids and next to the time in the feed. Works only while Check for already-saved videos is on. Photo posts aren't marked.",
-                "Hushfeed ile kaydettiğin videolara profil ızgaralarında ve akışta saatin yanında ✓ koyar. Yalnızca Daha önce kaydedilmiş videoları kontrol et açıkken çalışır. Fotoğraf gönderileri işaretlenmez.");
+                "Hushfeed ile kaydettiğin videolara profil ızgaralarında ve akışta saatin yanında ✓ koyar. Yalnızca “Önceden kaydedilen videoları kontrol et” açıkken çalışır. Fotoğraf gönderileri işaretlenmez.");
         table.put("Putting seen videos back",
                 "İzlenen videolar geri yükleniyor");
         table.put("Putting the saved videos back",
@@ -30507,7 +30507,7 @@ public final class L10nTranslations {
         table.put("Stops TikTok from slowing your screen to match each video's frame rate. On a 90 or 120 Hz phone, that request makes the whole app, scrolling too, run slower.",
                 "TikTok'un ekranını her videonun kare hızına göre yavaşlatmasını engeller. 90 veya 120 Hz'lik bir telefonda bu istek tüm uygulamayı, kaydırma dahil, yavaşlatır.");
         table.put("Stops the bedtime wind-down, the breathing exercise and the daily limit screen TikTok puts over the feed. Works only on accounts TikTok knows belong to adults. Teen accounts, and ones a parent links with Family Pairing, keep them. With Leave when TikTok says time is up on, the daily limit screen still shows so that switch can work.",
-                "TikTok'un akışın üstüne koyduğu uyku öncesi sakinleşme, nefes egzersizi ve günlük sınır ekranını durdurur. Yalnızca TikTok'un yetişkin olduğunu bildiği hesaplarda çalışır. Genç hesapları ve bir ebeveynin Family Pairing ile bağladığı hesaplar bunları korur. TikTok süre doldu dediğinde çık açıkken günlük sınır ekranı yine görünür, böylece o anahtar çalışabilir.");
+                "TikTok'un akışın üstüne koyduğu uyku öncesi sakinleşme, nefes egzersizi ve günlük sınır ekranını durdurur. Yalnızca TikTok'un yetişkin olduğunu bildiği hesaplarda çalışır. Genç hesapları ve bir ebeveynin Family Pairing ile bağladığı hesaplar bunları korur. “TikTok süre doldu deyince uygulamadan çık” açıkken günlük sınır ekranı yine görünür, böylece o anahtar çalışabilir.");
         table.put("Stops websites you open from inside TikTok from reaching back into the app. TikTok's own pages, such as Activity center, Watch history, shop checkout and CAPTCHA, keep working.",
                 "TikTok içinden açtığın sitelerin uygulamaya geri erişmesini engeller. Activity center, İzleme geçmişi, mağaza ödemesi ve CAPTCHA gibi TikTok'un kendi sayfaları çalışmaya devam eder.");
         table.put("Store TikTok thinks it came from",

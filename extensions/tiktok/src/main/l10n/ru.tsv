@@ -1252,7 +1252,7 @@ Today: %1$d videos	Сегодня: %1$d видео
 Today: %1$d videos|one	Сегодня: %1$d видео
 Today: %1$d videos|few	Сегодня: %1$d видео
 Today: %1$d videos|many	Сегодня: %1$d видео
-Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you.	Составьте имя из {creator}, {date}, {video_id} и {index}. {index} нумерует фото слайд-шоу, сохранённого через «Скачать оригинальные фото». Собственная кнопка сохранения TikTok нумерует файлы по папке. Расширение файла добавляется само.
+Use {creator}, {date}, {video_id} and {index} to build the name. {index} numbers the photos of a slideshow saved with Download original photos. TikTok's own save button numbers files by folder instead. The file ending is added for you.	Составьте имя из {creator}, {date}, {video_id} и {index}. {index} нумерует фото слайд-шоу, сохранённого через «Загружать оригиналы фото». Собственная кнопка сохранения TikTok нумерует файлы по папке. Расширение файла добавляется само.
 Use {date} and {media_id} to build the name. Works for image and video stickers.	Составьте имя из {date} и {media_id}. Работает для стикеров-изображений и видеостикеров.
 Too many media saves are already running. Try again in a moment.	Уже выполняется слишком много сохранений медиафайлов. Повторите попытку через момент.
 Tracking	Трекинг
@@ -1623,7 +1623,7 @@ Install one, then come back here.	Установите одно и возвра�
 No apps match this search	Нет приложений, соответствующих этому запросу
 LIVE feed	Лента LIVE
 Filter the LIVE feed	Фильтровать ленту LIVE
-Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.	Скрывает комнаты в ленте LIVE, по которой вы листаете, по правилам ниже. Заблокированные авторы, авторы, скрытые на этом телефоне, и исключения для авторов действуют и здесь, а заблокированные слова в описании сверяются с названием каждого LIVE. Первая комната, которую открывает кнопка LIVE, не фильтруется. Если бы скрылись все комнаты, одна пропускается, чтобы лента продолжала загружаться.
+Hides rooms in the LIVE feed you swipe through, using the rules below. Blocked creators, Creators hidden on this phone and Creator exceptions apply here too, and Blocked caption words are checked against each LIVE's title. The first room the LIVE button opens isn't filtered. If every room would be hidden, one gets through so the feed keeps loading.	Скрывает комнаты в ленте LIVE, по которой вы листаете, по правилам ниже. Заблокированные авторы, «Авторы, скрытые на этом телефоне», и «Исключения для авторов» действуют и здесь, а «Заблокированные слова в подписях» сверяются с названием каждого LIVE. Первая комната, которую открывает кнопка LIVE, не фильтруется. Если бы скрылись все комнаты, одна пропускается, чтобы лента продолжала загружаться.
 Hide gaming LIVEs	Скрывать игровые трансляции
 Hide LIVEs that TikTok tags with a game or a gaming category.	Скрывать трансляции, которые TikTok помечает игрой или игровой категорией.
 Hide shopping LIVEs	Скрывать торговые трансляции
@@ -1755,7 +1755,7 @@ Video of photos	Видео из фото
 # context: search words for the Log diagnostics switch. Never shown, only matched when someone searches settings. Give the words people type for debug logging in this language, separated by spaces.
 debug debugging logs logging	отладка дебаг логи журналы
 Export comments	Экспорт комментариев
-Adds Export CSV and Export JSON buttons under the search box, so Search within comments must be on. They save the comments and replies loaded so far to a file you pick. Open the reply threads you want first.	Добавляет под полем поиска кнопки Export CSV и Export JSON, поэтому поиск по комментариям должен быть включён. Они сохраняют в выбранный вами файл комментарии и ответы, загруженные на данный момент. Сначала откройте нужные ветки ответов.
+Adds Export CSV and Export JSON buttons under the search box, so Search within comments must be on. They save the comments and replies loaded so far to a file you pick. Open the reply threads you want first.	Добавляет под полем поиска кнопки Export CSV и Export JSON, поэтому «Поиск по комментариям» должен быть включён. Они сохраняют в выбранный вами файл комментарии и ответы, загруженные на данный момент. Сначала откройте нужные ветки ответов.
 Export CSV	Экспорт CSV
 Export JSON	Экспорт JSON
 1 comment or reply loaded	Загружен 1 комментарий или ответ
@@ -2011,7 +2011,7 @@ Copy the full link for short links	Копировать полную ссылк�
 When Copy link gives a short vt.tiktok.com or vm.tiktok.com link, Hushfeed opens it once in the background to find the full video link and copies that instead. TikTok sees that visit. Links you send to another app go out as they were.	Когда «Копировать ссылку» даёт короткую ссылку vt.tiktok.com или vm.tiktok.com, Hushfeed один раз открывает её в фоне, находит полную ссылку на видео и копирует её. TikTok видит это открытие. Ссылки, которые вы отправляете в другое приложение, уходят как есть.
 Full link copied	Полная ссылка скопирована
 Mark saved videos	Отмечать сохранённые видео
-Puts a ✓ by videos you saved with Hushfeed, on profile grids and next to the time in the feed. Works only while Check for already-saved videos is on. Photo posts aren't marked.	Ставит ✓ у видео, сохранённых через Hushfeed, в сетках профилей и рядом со временем в ленте. Работает только при включённой проверке уже сохранённых видео. Фотопосты не отмечаются.
+Puts a ✓ by videos you saved with Hushfeed, on profile grids and next to the time in the feed. Works only while Check for already-saved videos is on. Photo posts aren't marked.	Ставит ✓ у видео, сохранённых через Hushfeed, в сетках профилей и рядом со временем в ленте. Работает только при включённом параметре «Проверять уже сохранённые видео». Фотопосты не отмечаются.
 Also replaces the saved region and country code TikTok sends with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.	Также подменяет сохранённый регион и код страны, которые TikTok отправляет с каждым запросом. При входе по-прежнему отправляется ваш настоящий регион. IP-адрес и собственные правила вашего аккаунта продолжают действовать.
 Turn off double tap to react	Отключить двойное касание для реакции
 A double tap on a message no longer adds a heart to it. A single tap and a long press work as before.	Двойное касание сообщения больше не ставит на него сердечко. Одиночное касание и долгое нажатие работают как раньше.
