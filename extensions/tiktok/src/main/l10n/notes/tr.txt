@@ -16,6 +16,8 @@
 
 * **TikTok:** Morphe Manager'ın basit modu artık Hushfeed'in 130 yamasından 55 yerine 107'sini seçiyor, yani çoğu için artık uzman moduna gerek yok. Yeni seçilen yamaların eklediği her anahtar kapalı başlıyor ve sen Hushfeed ayarlarında bir şeyi açana kadar TikTok geldiği gibi görünüp çalışıyor. Kalan 23 yama yine uzman modundan seçiliyor ve README'deki Patches bölümü her birini neden dışarıda kaldığıyla birlikte listeliyor. Her yamanın açıklaması artık anahtarının nerede olduğunu ve kapalı başladığını söylüyor.
 
+* **TikTok:** Morphe Manager'da TikTok'un görünüşünü değiştiren yamalar için yeni bir Interface grubu var. AMOLED koyu tema, Sistem yazı tipini kullan ve Ekran geçişlerini kapat oraya Performance'tan, Uygulama adını değiştir, Özel başlatıcı simgesi ve Başlatıcı kısayollarını gizle Settings'ten, Akış metin boyutları da Interaction'dan taşındı.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Açtığın bir TikTok video bağlantısı, bir akış filtresi onu gizleyecek olsa bile artık videosunu gösteriyor, örneğin daha önce izlediğin bir video için Daha önce gördüğün videoları gizle (#117). TikTok bağlantıyla gelen videoyu kendi başına bir akış sayfası olarak yüklüyor, bu yüzden filtreyle elenince orada TikTok'un hata ekranı kalıyordu. Filtrelerden yalnızca o tek video geçiyor, o da bağlantıdan sonra sadece bir dakika boyunca. Fotoğraf gönderilerine giden bağlantılar ve mobil sitenin eski `m.tiktok.com/v/<id>.html` bağlantıları da hem burada hem de `Akışı kilitle` için tek bir gönderi sayılıyor.

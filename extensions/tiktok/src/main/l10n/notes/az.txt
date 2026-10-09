@@ -16,6 +16,8 @@
 
 * **TikTok:** Morphe Manager-in sadə rejimi indi Hushfeed-in 130 yamasından 55 əvəzinə 107-sini seçir, ona görə də onların çoxu üçün artıq ekspert rejimi lazım deyil. Yeni seçilən yamaların əlavə etdiyi hər açar söndürülmüş başlayır və siz Hushfeed ayarlarında nəyisə yandırana qədər TikTok olduğu kimi görünür və işləyir. Qalan 23 yama yenə ekspert rejimindən seçilir, README-dəki Patches bölməsi isə hər birini kənarda qalma səbəbi ilə sadalayır. Hər yamanın təsviri indi açarının harada olduğunu və söndürülmüş başladığını deyir.
 
+* **TikTok:** Morphe Manager-də TikTok-un görünüşünü dəyişən yamalar üçün yeni Interface qrupu var. AMOLED qaranlıq mövzu, Sistem şriftindən istifadə edin və Ekran keçidlərini söndürün ora Performance qrupundan, Tətbiqin adını dəyişin, Fərdi başladıcı ikonu və Başladıcı qısayollarını gizlədin Settings qrupundan, Lent mətn ölçüləri isə Interaction qrupundan köçdü.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Açdığınız TikTok video keçidi indi lent filtri onu gizlədəcək olsa belə öz videosunu göstərir, məsələn, əvvəl izlədiyiniz video üçün Artıq izlədiyiniz videoları gizlədin (#117). TikTok keçidlə açılan videonu ayrıca lent səhifəsi kimi yüklədiyi üçün onu süzmək orada TikTok-un xəta ekranını qoyurdu. Filtrlərdən yalnız həmin tək video keçir, o da keçiddən sonra yalnız bir dəqiqə ərzində. Foto paylaşımlarına keçidlər və mobil saytın köhnə `m.tiktok.com/v/<id>.html` keçidləri də həm burada, həm də `Lenti kilidlə` üçün bir paylaşım sayılır.

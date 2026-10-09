@@ -54,7 +54,7 @@ val turnOffScreenTransitionsPatch = bytecodePatch(
     description = "Opens and closes TikTok's screens without their slide. Swipes inside a screen " +
         "still follow your finger. Off until you turn it on. Switch: Hushfeed settings > App.",
 ) {
-    category("Performance")
+    category("Interface")
     dependsOn(settingsPatch, sharedExtensionPatch)
     compatibleWith(*AppCompatibilities.tiktok())
 

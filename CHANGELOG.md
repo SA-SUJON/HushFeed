@@ -20,6 +20,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Morphe Manager's simple mode now picks 107 of Hushfeed's 130 patches, up from 55, so most of them no longer need Expert mode. Every switch the newly picked patches add starts off, and TikTok looks and works the way it ships until you turn something on in Hushfeed settings. Expert mode is still how you get the other 23, and the README's Patches section lists them with the reason each one stays out. Each patch's description now says where its switch is and that it starts off.
 
+* **TikTok:** Morphe Manager has a new Interface group for the patches that change how TikTok looks. AMOLED dark theme, Use system font and Turn off screen transitions move there from Performance, Change app name, Custom launcher icon and Hide the launcher shortcuts from Settings, and Feed text sizes from Interaction.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** A TikTok video link you open now shows its video even when a feed filter would hide it, like Hide videos you have already seen for one you watched before (#117). TikTok loads a linked video as a feed page of its own, so filtering it out left TikTok's error screen there. Only that one video gets past the filters, and only for a minute after the link. Links to photo posts and the mobile site's older `m.tiktok.com/v/<id>.html` links count as one post too, here and for `Lock the feed`.

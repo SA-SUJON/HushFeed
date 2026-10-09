@@ -7,7 +7,7 @@
     {
       "name": "AMOLED dark theme",
       "description": "Replaces TikTok's dark background palette with black or a chosen color. The light theme keeps its colors. It rewrites TikTok's resources, so patching with it on is slower when the manager's memory limit is low. Give the manager 768 MB or more. At 640 MB it still finishes, just more slowly.",
-      "category": "Performance",
+      "category": "Interface",
       "use": false,
       "dependencies": [
         "RawResourcePatch"
@@ -604,7 +604,7 @@
     {
       "name": "Change app name",
       "description": "Shows a name you choose under the app's icon and in Android's app list, so the patched TikTok is easy to tell from another one. Type the name in this patch's options. Inside the app everything still says TikTok.",
-      "category": "Settings",
+      "category": "Interface",
       "use": false,
       "dependencies": [],
       "compatiblePackages": {
@@ -924,7 +924,7 @@
     {
       "name": "Custom launcher icon",
       "description": "Gives TikTok's launcher icon a themed version, so on Android 13 and up it takes your wallpaper's color when themed icons are on. Its options can also swap in a black background or a plain one-color note on Android 8 and up, or put a PNG of your own in the note's place.",
-      "category": "Settings",
+      "category": "Interface",
       "use": false,
       "dependencies": [],
       "compatiblePackages": {
@@ -1635,7 +1635,7 @@
     {
       "name": "Feed text sizes",
       "description": "Sets separate sizes for video descriptions and creator names. Both keep TikTok's size until you pick another. Switch: Hushfeed settings > Feed screen.",
-      "category": "Interaction",
+      "category": "Interface",
       "use": true,
       "dependencies": [
         "BytecodePatch",
@@ -2450,7 +2450,7 @@
     {
       "name": "Hide the launcher shortcuts",
       "description": "Empties the menu that opens on pressing and holding TikTok's icon on the home screen. The entries are built while the app runs rather than declared in it, and TikTok only rewrites them when it notices a difference, so this removes what is already published and answers the handover that would publish more. Turning it off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut pinned to a home screen is left alone. Off until you turn it on. Switch: Hushfeed settings > App.",
-      "category": "Settings",
+      "category": "Interface",
       "use": true,
       "dependencies": [
         "BytecodePatch",
@@ -4991,7 +4991,7 @@
     {
       "name": "Turn off screen transitions",
       "description": "Opens and closes TikTok's screens without their slide. Swipes inside a screen still follow your finger. Off until you turn it on. Switch: Hushfeed settings > App.",
-      "category": "Performance",
+      "category": "Interface",
       "use": true,
       "dependencies": [
         "BytecodePatch",
@@ -5069,7 +5069,7 @@
     {
       "name": "Use system font",
       "description": "Draws TikTok's text in your device's font instead of TikTok Sans. The icons, the gift animations and the @ and # glyphs keep their own fonts. A second switch draws every emoji with your device's emoji font instead of filling in the newest ones with Google's. Both are off until you turn them on. Restart TikTok after changing them. Switches: Hushfeed settings > App.",
-      "category": "Performance",
+      "category": "Interface",
       "use": true,
       "dependencies": [
         "BytecodePatch",

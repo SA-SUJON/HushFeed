@@ -143,7 +143,7 @@ val feedTextSizePatch = bytecodePatch(
     description = "Sets separate sizes for video descriptions and creator names. Both keep " +
         "TikTok's size until you pick another. Switch: Hushfeed settings > Feed screen.",
 ) {
-    category("Interaction")
+    category("Interface")
     compatibleWith(*AppCompatibilities.tiktok())
     dependsOn(settingsPatch, sharedExtensionPatch)
     execute {

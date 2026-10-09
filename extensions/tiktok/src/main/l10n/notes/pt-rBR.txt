@@ -16,6 +16,8 @@
 
 * **TikTok:** O modo simples do Morphe Manager agora escolhe 107 dos 130 patches do Hushfeed, em vez de 55, então a maioria não precisa mais do modo especialista. Cada chave que os patches recém escolhidos trazem começa desligada, e o TikTok fica com a aparência e o funcionamento de fábrica até você ligar algo em Configurações do Hushfeed. Os outros 23 continuam no modo especialista, e a seção Patches do README lista cada um com o motivo de ficar de fora. A descrição de cada patch agora diz onde fica a chave dele e que ela começa desligada.
 
+* **TikTok:** O Morphe Manager tem um grupo novo, Interface, para os patches que mudam a aparência do TikTok. Tema escuro AMOLED, Usar a fonte do sistema e Desativar as transições de tela vão para lá saindo de Performance, Mudar o nome do app, Ícone de launcher personalizado e Ocultar os atalhos do inicializador saindo de Settings, e Tamanhos de texto do feed saindo de Interaction.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Um link de vídeo do TikTok que você abre agora mostra o vídeo mesmo quando um filtro do feed o esconderia, como Esconder os vídeos que você já viu para um vídeo que você assistiu antes (#117). O TikTok carrega um vídeo de link como uma página de feed própria, então filtrá-lo deixava a tela de erro do TikTok no lugar. Só esse vídeo passa pelos filtros, e só por um minuto depois do link. Links de publicações de fotos e os links antigos do site para celular, `m.tiktok.com/v/<id>.html`, também contam como uma publicação, aqui e para `Bloquear o feed`.

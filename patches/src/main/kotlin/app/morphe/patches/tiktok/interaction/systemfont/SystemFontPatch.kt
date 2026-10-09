@@ -52,7 +52,7 @@ val systemFontPatch = bytecodePatch(
         "Google's. Both are off until you turn them on. Restart TikTok after changing them. " +
         "Switches: Hushfeed settings > App.",
 ) {
-    category("Performance")
+    category("Interface")
     dependsOn(settingsPatch, sharedExtensionPatch)
 
     compatibleWith(*AppCompatibilities.tiktok())

@@ -125,7 +125,7 @@ val hideLauncherShortcutsPatch = bytecodePatch(
         "to build them again. Tapping the icon still opens the app, and a shortcut pinned to a " +
         "home screen is left alone. Off until you turn it on. Switch: Hushfeed settings > App.",
 ) {
-    category("Settings")
+    category("Interface")
     dependsOn(settingsPatch, sharedExtensionPatch)
 
     compatibleWith(*AppCompatibilities.tiktok())
