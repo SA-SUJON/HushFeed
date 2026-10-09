@@ -8,6 +8,8 @@
 
 * **TikTok:** Ekran görüntülərinə və Circle to Search-ə icazə verin indi təhlükəsiz pəncərə işarəsini onu öz pəncərə ayarlarında qoyan açılan və üzən pəncərələrdən də götürür, məsələn TikTok-un Compose açılan pəncərələrindən. Onlar ekrana yamanın artıq dəyişdiyi pəncərə çağırışlarından keçmədən çatırdı, ona görə ekran görüntülərində və ekran yazılarında hələ də qara görünə bilirdilər. İdeya icysymmetra-nın TikTok yamalarından gəlir.
 
+* **TikTok:** Diaqnostika bölməsində yeni sətir var, Lenti qeydə alın. Göstərmək təsvir etməkdən asan olan lent problemləri üçündür. Ona toxunun, problem görünənə qədər sürüşdürün, sonra geri qayıdıb yenidən toxunun və Hushfeed Download/Hushfeed qovluğuna mətn faylı saxlayır. Faylda lent filtrlərinin qeyd zamanı işlədiyi hər video dəsti üçün bir sətir var, hər videonun nəticəsi və onu gizlədən qayda ilə birlikdə. Videolar və yaradıcılar yalnız hər qeyd üçün yenidən yaradılan qısa kodlarla görünür, faylda başlıqlar, adlar, istifadəçi adları və ya veb ünvanlar olmur. Yenə də paylaşmazdan əvvəl onu oxuyun. Siz qeydi başladana qədər heç nə qeyd edilmir. İdeya icysymmetra-nın TikTok yamalarından gəlir.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Açdığınız TikTok video keçidi indi lent filtri onu gizlədəcək olsa belə öz videosunu göstərir, məsələn, əvvəl izlədiyiniz video üçün Artıq izlədiyiniz videoları gizlədin (#117). TikTok keçidlə açılan videonu ayrıca lent səhifəsi kimi yüklədiyi üçün onu süzmək orada TikTok-un xəta ekranını qoyurdu. Filtrlərdən yalnız həmin tək video keçir, o da keçiddən sonra yalnız bir dəqiqə ərzində. Foto paylaşımlarına keçidlər və mobil saytın köhnə `m.tiktok.com/v/<id>.html` keçidləri də həm burada, həm də `Lenti kilidlə` üçün bir paylaşım sayılır.

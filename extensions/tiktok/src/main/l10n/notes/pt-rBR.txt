@@ -8,6 +8,8 @@
 
 * **TikTok:** Permitir capturas de tela e Círculo para pesquisar agora também tira a marcação de janela segura de pop-ups e janelas flutuantes que a definem nas próprias configurações de janela, como os pop-ups Compose do TikTok. Eles chegam à tela sem passar pelas chamadas de janela que o patch já alterava, então ainda podiam aparecer pretos em capturas e gravações de tela. A ideia vem dos patches de TikTok do icysymmetra.
 
+* **TikTok:** Diagnóstico tem uma linha nova, Gravar o feed, para problemas do feed que são mais fáceis de mostrar do que de descrever. Toque nela, role até o problema aparecer, volte e toque nela de novo, e o Hushfeed salva um arquivo de texto em Download/Hushfeed. Ele tem uma linha para cada lote de vídeos que os filtros do feed trataram durante a gravação, com o resultado de cada vídeo e a regra que o ocultou. Vídeos e criadores aparecem só como códigos curtos criados de novo a cada gravação, e o arquivo não traz legendas, nomes, nomes de usuário nem endereços web. Mesmo assim, leia antes de compartilhar. Nada é gravado até você começar uma gravação. A ideia vem dos patches de TikTok do icysymmetra.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Um link de vídeo do TikTok que você abre agora mostra o vídeo mesmo quando um filtro do feed o esconderia, como Esconder os vídeos que você já viu para um vídeo que você assistiu antes (#117). O TikTok carrega um vídeo de link como uma página de feed própria, então filtrá-lo deixava a tela de erro do TikTok no lugar. Só esse vídeo passa pelos filtros, e só por um minuto depois do link. Links de publicações de fotos e os links antigos do site para celular, `m.tiktok.com/v/<id>.html`, também contam como uma publicação, aqui e para `Bloquear o feed`.

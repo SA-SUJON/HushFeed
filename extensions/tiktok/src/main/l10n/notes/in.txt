@@ -8,6 +8,8 @@
 
 * **TikTok:** Izinkan tangkapan layar dan Circle to Search kini juga melepas tanda jendela aman dari pop-up dan jendela mengambang yang memasangnya di pengaturan jendelanya sendiri, seperti pop-up Compose milik TikTok. Jendela itu muncul di layar tanpa lewat panggilan jendela yang sudah diubah patch ini, jadi masih bisa tampak hitam di tangkapan layar dan rekaman layar. Idenya berasal dari patch TikTok milik icysymmetra.
 
+* **TikTok:** Diagnostik punya baris baru, Rekam feed, untuk masalah feed yang lebih mudah ditunjukkan daripada dijelaskan. Ketuk barisnya, gulir sampai masalahnya muncul, lalu kembali dan ketuk lagi, dan Hushfeed menyimpan file teks di Download/Hushfeed. File itu berisi satu baris untuk setiap kelompok video yang ditangani filter feed selama perekaman, dengan hasil untuk tiap video dan aturan yang menyembunyikannya. Video dan kreator hanya muncul sebagai kode pendek yang dibuat baru untuk setiap rekaman, dan file itu tidak berisi takarir, nama, nama pengguna, atau alamat web. Tetap baca dulu sebelum kamu membagikannya. Tidak ada yang direkam sampai kamu memulai rekaman. Idenya berasal dari patch TikTok milik icysymmetra.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Tautan video TikTok yang kamu buka kini menampilkan videonya meski filter feed akan menyembunyikannya, seperti Sembunyikan video yang sudah kamu tonton untuk video yang pernah kamu tonton (#117). TikTok memuat video bertautan sebagai halaman feed tersendiri, jadi menyaringnya malah menyisakan layar error TikTok di situ. Hanya video itu yang lolos dari filter, dan hanya selama semenit setelah tautan dibuka. Tautan ke postingan foto dan tautan lama situs seluler `m.tiktok.com/v/<id>.html` juga dihitung sebagai satu postingan, di sini maupun untuk `Kunci feed`.

@@ -12,6 +12,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Allow screenshots and Circle to Search now also takes the secure flag off popups and floating windows that set it in their own window settings, such as TikTok's Compose popups. They reach the screen without the window calls the patch already changed, so they could still show up black in screenshots and screen recordings. The idea comes from icysymmetra's TikTok patches.
 
+* **TikTok:** Diagnostics has a new row, Capture the feed, for a feed problem that's easier to show than to describe. Tap it, scroll until the problem shows up, then come back and tap it again, and Hushfeed saves a text file to Download/Hushfeed. It has a line for every batch of videos the feed filters handled while it ran, with each video's verdict and the rule that hid it. Videos and creators appear only as short codes made fresh for each capture, and the file has no captions, names, handles or web addresses. Read it before you share it anyway. Nothing is recorded until you start a capture. The idea comes from icysymmetra's TikTok patches.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** A TikTok video link you open now shows its video even when a feed filter would hide it, like Hide videos you have already seen for one you watched before (#117). TikTok loads a linked video as a feed page of its own, so filtering it out left TikTok's error screen there. Only that one video gets past the filters, and only for a minute after the link. Links to photo posts and the mobile site's older `m.tiktok.com/v/<id>.html` links count as one post too, here and for `Lock the feed`.

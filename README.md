@@ -235,7 +235,7 @@ Eleven of the optional patches in the Performance group were measured on a Galax
 | `Custom launcher icon` | Gives TikTok's launcher icon a themed version, so on Android 13 and up it takes your wallpaper's color when themed icons are on. Its options can also swap in a black background or a plain one-color note on Android 8 and up, or put a PNG of your own in the note's place. |
 | `Custom offline videos limit` | Adds a custom entry to TikTok's offline videos menu with a configurable limit from 1 to 10,000 videos, with the storage it needs shown under the setting, and a switch that keeps offline videos until you delete them. Switch: Hushfeed settings > Downloads. |
 | `Device privacy guard` | Stops TikTok reading a few things about your device. Blocking what you copied is on by default, and copying a link from TikTok still works. Hiding a VPN connection and handing it a blank advertising id are each a switch you turn on. All of them sit under Hushfeed settings > Privacy. |
-| `Diagnostic tools` | Adds diagnostic logging, a 15-minute log that stops by itself, filtered reports and local TikTok crash capture. The switches are under Diagnostics in Hushfeed settings. Switch: Hushfeed settings > Diagnostics. |
+| `Diagnostic tools` | Adds diagnostic logging, a 15-minute log that stops by itself, filtered reports, a feed capture and local TikTok crash capture. The switches are under Diagnostics in Hushfeed settings. Switch: Hushfeed settings > Diagnostics. |
 | `Disable login requirement` | Removes TikTok's mandatory login gate from supported flows. |
 | `Disable screen capture detection` | Prevents TikTok from reacting to screenshots and screen recordings. |
 | `Disable telemetry` | Adds a switch on the Privacy page that stops ByteDance AppLog analytics, AppsFlyer attribution, explicit Firebase screen reports and TikTok's Npth or MonitorCrash startup reporting. TikTok's own diagnostics go quiet with them. Off by default. Switch: Hushfeed settings > Privacy. |
@@ -515,6 +515,8 @@ The exported report also carries a feed filter table, and that one counts whethe
 
 When something on screen needs hiding and nobody can see it on their own phone, Record a screen's layout helps. Tap it, then go to that screen. Twenty seconds later Hushfeed notes how the screen is built: each view's class, its resource name, whether it's hidden and where it sits, for the screen and any sheet or popup over it. It reads none of the text. The next exported report ends with that layout, a quick copy included, and Clear diagnostic data removes it with everything else.
 
+Capture the feed, under Clear diagnostic data, is for a feed problem that's easier to show than to describe. Tap it, scroll until the problem shows up, then come back and tap it again. Hushfeed saves a text file to Download/Hushfeed (the app's own Documents folder before Android 10) with a line for every list the feed filters handled while it ran. Each line says where the list came from and how many videos went in and came out, with the rules that were on. Under it every video gets its verdict and the rule that hid it. A list TikTok reads again unchanged is only counted. The file keeps about 4 MB of events. On a long capture the oldest go first, and the file says how many it dropped. Nothing is recorded until you start a capture. Videos and creators show up only as short codes made fresh for each capture, and the file has no captions, names, handles or web addresses. Read it before you share it anyway. If the file can't be written, the row keeps the capture and offers to save it again.
+
 Build details is always under About. Copy or save it even when Diagnostic tools wasn't selected or there are no events to report. It lists the bundle's source identity, the patcher used to apply it and the choices made while patching, including the AMOLED color and retained native languages. Older APKs show unknown for facts they didn't record. Pause, settings imports and Clear diagnostic data can't change these APK facts. Automatic reports include them when there's matching diagnostic data. Reports stay local. Use an original TikTok APK when applying patches again.
 
 <img src="assets/settings/diagnostics.png" alt="Diagnostics and report controls" width="300" /> <img src="assets/settings/diagnostics-light.png" alt="Diagnostics in light mode" width="300" />
@@ -758,6 +760,8 @@ It goes online by itself for one job. When you save a video, a photo, a sound, s
 The only web addresses written into Hushfeed's code are github.com for this project, gitlab.com and gnu.org for licence texts, tiktok.com for the share links TikTok itself uses, and music.youtube.com for the search the Find the sound on YouTube Music long press hands to the YouTube Music app on your phone. A test fails the build if another one turns up, or if code outside that download path and the proxy check opens a connection.
 
 The diagnostic report stays on your phone until you copy or save it. It leaves out web addresses, login tokens and cookies, device ids, the ids of videos, comments and messages, and creator names and handles. Read it through before you share it anyway.
+
+A feed capture file follows the same rules. Video and creator ids go in as short codes that mean nothing outside that one file, and it never reads a caption.
 
 ## Notes
 
