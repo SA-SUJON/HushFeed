@@ -1,4 +1,4 @@
-## Unreleased
+## 0.70.0 (2026-10-09)
 
 * **TikTok:** Hushfeed ora supporta solo TikTok 47.1.4. Se usi 47.0.3 o 47.1.3, scarica l'APK di 47.1.4 da APKMirror e patchalo in Morphe Manager con la stessa chiave di firma, così accesso e impostazioni restano. Feature Gate Lab mantiene ogni modifica il cui interruttore esiste ancora in 47.1.4 e disattiva le altre con il solito avviso.
 
