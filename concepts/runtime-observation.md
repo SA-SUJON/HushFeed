@@ -2,6 +2,8 @@
 
 This protocol measures the installed `com.zhiliaoapp.musically` build. A patched installation with patch behavior paused remains a modified, differently signed build. Label it as a paused patched baseline. An official-stock comparison requires an independently identified official build under matched conditions.
 
+The [October 9 physical-device results](runtime-results-2026-10-09.md) apply this method to TikTok 47.1.4 with Hushfeed 0.68.0 paused. Keep those observations separate from the 0.70.0 source review below.
+
 ## Identity and reproducibility
 
 Record the app version and version code, APK and signer digests, Android build, active Android user, full package UID, patch version, and pause/settings state. Record the observation interval, screen state, charging state, battery level, temperature, network transport, signal conditions and VPN status. Keep account state and content conditions consistent when comparing runs.
@@ -29,6 +31,21 @@ If `android.log` is advertised and produces marker events, capture only a fresh 
 rtk proxy adb -s <TRANSPORT> shell log -p i -t <RUN_TAG> phase.begin.background
 rtk proxy adb -s <TRANSPORT> shell log -p i -t <RUN_TAG> phase.end.background
 ```
+
+### Trace duration during suspend
+
+Check the installed Perfetto version before choosing configuration fields. In the [upstream v51.2 schema](https://github.com/google/perfetto/blob/v51.2/protos/perfetto/config/trace_config.proto#L127-L141), `duration_ms` normally counts active system time and excludes suspend. A five-minute trace can last much longer than five minutes on the wall clock.
+
+For a version that supports it, request a duration that includes suspend:
+
+```text
+duration_ms: 300000
+prefer_suspend_clock_for_duration: true
+```
+
+This asks Linux or Android to use `CLOCK_BOOTTIME` instead of `CLOCK_MONOTONIC`. Inspect the recorded clock snapshots and actual counter endpoints afterward. The requested duration and a host timeout don't establish the captured interval, and waiting for child processes can delay a host timeout result.
+
+If the phone changes screen, app or charging state during capture, retain the trace as a mixed-state diagnostic. Don't label the full interval as a clean phase. Gaps during suspend and an unchanged service discard counter don't establish complete sampling or zero data loss.
 
 ## Network activity and attribution
 
@@ -84,7 +101,7 @@ Use sampled process runtime counters for a low-overhead CPU estimate. State that
 
 Measure battery drain in a separate quiet interval with USB physically disconnected and no wired or wireless charger. Using wireless ADB while leaving USB attached does not satisfy this condition. Do not simulate disconnection with `dumpsys battery unplug`. USB data can prevent normal suspend even when charging is disabled. [Perfetto power guidance](https://perfetto.dev/docs/data-sources/battery-counters)
 
-Use endpoint snapshots around a sufficiently long quiet interval, such as 30 to 60 minutes. Avoid continuous ADB polling, screenshots, log streaming or detailed scheduler tracing during it. Record the true charging state and interruptions. Compare repeated intervals with matched conditions before estimating an incremental app cost.
+Use endpoint snapshots around a sufficiently long quiet interval, such as 30 to 60 minutes. Avoid continuous ADB polling, screenshots, log streaming or detailed scheduler tracing during it. Record the true charging state and interruptions. Compare repeated intervals with matched conditions before estimating an incremental app cost. Confirm continuity with accumulated screen-on, interactive and on-battery timers. Two screen-off snapshots cannot exclude a wake between them. Report a mixed interval when those timers show intervening screen activity, even if the collection runner sent no commands.
 
 ```text
 rtk proxy adb -s <TRANSPORT> shell dumpsys battery

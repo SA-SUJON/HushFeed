@@ -159,7 +159,9 @@ TikTok already does this. Open your profile, tap Following, then Manage at the r
 
 ### Is it Hushfeed? Pause it and see
 
-Hushfeed settings > Pause Hushfeed turns off everything a switch, list or limit controls, from the next start. TikTok then runs the way it ships. If the problem is still there, it isn't coming from any of that. Your settings stay exactly as they were, and switching Pause off brings every one of them back after a restart, with no patching again. A diagnostic export made while paused says so at the top.
+Hushfeed settings > Pause Hushfeed turns off supported runtime features from the next start. Your settings stay exactly as they were, and switching Pause off brings them back after a restart. A diagnostic export made while paused says so at the top.
+
+Pause doesn't restore the original APK. The static changes below remain, and startup behavior can differ by Hushfeed version. If a problem persists while paused, compare with an identified official build before ruling out every patch.
 
 Pausing also turns off your screen-time budget, so a day you've locked refuses it until the day starts over. App lock is the other way around: it stays on while Hushfeed is paused, so pausing can't be used to get past it.
 
@@ -741,6 +743,7 @@ These whole-file SHA-256 values identify the recorded 2026-09-13 runs. ZIP metad
 - [App and patch development map](concepts/patch-development.md): target boundary, source modules, factory install notes, and the workflow for adding patches.
 - [TikTok app audit](concepts/tiktok-app-audit.md): ad routes, tracking controls, clean-install and signed-in observations, privacy controls, and patch opportunities.
 - [Network and power measurements](concepts/runtime-observation.md): capture methods, attribution limits, battery comparisons, and the patch source behind each control.
+- [Measured TikTok runtime](concepts/runtime-results-2026-10-09.md): physical-device traffic, CPU, sensor activity and battery observations, with the installed build and each measurement boundary recorded.
 - `scripts/`: `gen-l10n.py` generates translations, `verify-all-patches.ps1` checks every patch against a fixture and then has `ResourceTableCheck.java` hold the patched resource table to TikTok's own, `patch-for-device.ps1` builds a signed APK for a named phone, `measure-patch-heap.ps1` checks selected memory limits, `time-patches.ps1` times each patch of one desktop CLI run and notes the heap it peaked at, and `validate-release-facts.ps1` checks the public version, patch facts, indexed URL and published bundle hash. `common.ps1` holds the helpers the rest of them share: the work-directory path guard, the cleanup that will not delete outside it, the version read, the release bundle's path with the check for sources newer than it, and the desktop CLI lookup. `test-script-contracts.ps1` covers all of those, the shared target reader and the guarded replacement step, which files a push runs which gate on, and that a released version keeps its changelog heading. It also checks that a first branch push examines the complete resulting tree, that phone input reads and targets the focused window on display 0, and that result reports can include declared patch dependencies without hiding a missing or unrelated patch.
 - `tools/verification-probe/`: the test-only instrumentation a device check drives on a test phone. `record-markers.ps1` records the content-marker corpus, and `strip-hunt.ps1` tallies the kinds of caption strip and bottom banner a feed is served.
 - `patches-list.json`: generated patch metadata.

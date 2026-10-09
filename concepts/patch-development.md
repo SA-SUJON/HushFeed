@@ -39,7 +39,7 @@ The factory APK was installed into a separate writable emulator data image. The 
 - Continue with Google
 - Already have an account? Log in
 
-The initial sign-up screen offered Skip, phone or email, Facebook, Google, and Log in. A later launch led to TikTok's birthday gate, with a Birthday field, month, day, and year picker labels, a disabled Continue button, and a Sign up action. The picker initially showed October 9, 2025. The clean pass ended there. The account holder later completed onboarding and sign-in on the visible emulator, which reached the For You feed and settings. That pass showed one in-feed video ad with an Ad label and Shop now button. It also exposed TikTok's ad, privacy, contact-sync, and content preference controls. No preferences were changed and no account-specific values were recorded. The birthday-gate screenshot and detailed route, tracking, and patch analysis are in [the TikTok app audit](tiktok-app-audit.md). All live UI observations are from 38.3.3, not evidence about the supported 47.1.4 build.
+The initial sign-up screen offered Skip, phone or email, Facebook, Google, and Log in. A later launch led to TikTok's birthday gate, with a Birthday field, month, day, and year picker labels, a disabled Continue button, and a Sign up action. The picker initially showed October 9, 2025. The clean pass ended there. The account holder later completed onboarding and sign-in on the visible emulator, which reached the For You feed and settings. That pass showed one in-feed video ad with an Ad label and Shop now button. It also exposed TikTok's ad, privacy, contact-sync, and content preference controls. No preferences were changed and no account-specific values were recorded. The birthday-gate screenshot and detailed route, tracking, and patch analysis are in [the TikTok app audit](tiktok-app-audit.md). These factory-install UI observations are from 38.3.3, not evidence about the supported 47.1.4 build. The separately labeled physical-device report below covers the later modified 47.1.4 installation.
 
 ## Build and injection path
 
@@ -106,6 +106,8 @@ The [patch catalog](../patches-list.json) has the complete names and plain-Engli
 
 The settings patch is defined in patches/src/main/kotlin/app/morphe/patches/tiktok/misc/settings/SettingsPatch.kt. It hooks TikTok's AdPersonalizationActivity and calls TikTokActivityHook, which builds the extension's TikTokPreferenceFragment inside that activity. Preference category classes build the pages and rows.
 
+The hook checks the launch intent. It accepts the Hushfeed settings extra or the `morphe_settings` action, then returns to TikTok's original path for other launches. An activity dump naming `AdPersonalizationActivity` can therefore describe Hushfeed settings rather than TikTok's ad controls. Record the intent and visible screen together. The physical-device pause check in the [runtime report](runtime-results-2026-10-09.md) used this reused activity with `morphe_settings`.
+
 Settings.java declares runtime setting keys, types, defaults, and availability rules. BaseSettings and Setting in extensions/shared/library provide storage and common behavior. SettingsStatus loads settings and exposes the values that bytecode hooks read. A setting key is persisted on the user's device, so keep existing keys stable across updates. A renamed key needs a migration.
 
 An install-time Morphe patch option is different from an in-app setting. For example, AMOLED dark theme has a color option applied while building the patched APK. Advanced downloads depends on the Settings patch and exposes runtime switches in TikTok's Hushfeed settings. The generated catalog lists those dependencies and patch options.
@@ -167,7 +169,7 @@ Treat a target update as a new reverse-engineering pass. TikTok can reuse short 
 
 The APK fixtures are vendor files outside the repository. Set HUSHFEED_FIXTURE_DIR to their folder. Set HUSHFEED_DESKTOP_JAR to the Morphe desktop CLI jar for the apply-all verification. CONTRIBUTING.md documents the other script inputs and the pre-push checks.
 
-For traffic, background work and battery checks, follow the [runtime observation protocol](runtime-observation.md). It separates actual transfers from API attempts, whole-phone charge from per-app estimates, and paused runtime settings from static APK changes. Its source map identifies the controls that can change the workload.
+For traffic, background work and battery checks, follow the [runtime observation protocol](runtime-observation.md). It separates actual transfers from API attempts, whole-phone charge from per-app estimates, and paused runtime settings from static APK changes. Its source map identifies the controls that can change the workload. The [October 9 measurements](runtime-results-2026-10-09.md) add a physical-device example on TikTok 47.1.4 with Hushfeed 0.68.0 paused, including capture limits that future checks must handle.
 
 The test commands and their required order are maintained in [README.md](../README.md#building-from-source). The release procedure and fixture setup live in [CONTRIBUTING.md](../CONTRIBUTING.md). Update those instructions when the Gradle task graph or release gates change.
 

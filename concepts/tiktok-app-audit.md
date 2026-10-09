@@ -1,6 +1,6 @@
 # TikTok app audit for Hushfeed patch work
 
-This audit records what an unpatched factory install showed during onboarding and a later signed-in check, what Hushfeed's supported-build source proves about delivery and tracking paths, and where future patch work could improve control or diagnostics. It is a working reference for maintainers. It does not claim that every screen or server behavior was observed.
+This audit records what an unpatched factory install showed during onboarding and a later signed-in check, what the original 47.1.4 manifest declares, what Hushfeed's supported-build source proves about delivery and tracking paths, and where future patch work could improve control or diagnostics. It is a working reference for maintainers. It does not claim that every screen or server behavior was observed.
 
 Reviewed on 2026-10-09 against Hushfeed 0.70.0 source. The supported target in this checkout is global TikTok 47.1.4, version code 2024701040. The clean factory APK used for the first-run check was TikTok 38.3.3, version code 2023803030. The older APK was installed into a separate emulator data image and was not patched. It is useful for onboarding observations only, not for checking patch anchors.
 
@@ -16,6 +16,7 @@ Reviewed on 2026-10-09 against Hushfeed 0.70.0 source. The supported target in t
 | Label | Meaning in this document |
 | --- | --- |
 | **Observed** | Captured directly in the isolated, unpatched TikTok 38.3.3 install, including onboarding and a user-authorized signed-in session |
+| **APK confirmed** | Read from the original signed 47.1.4 fixture, without executing it |
 | **Source confirmed** | Implemented or described in the current Hushfeed source for the declared 47.1.4 target |
 | **TikTok published** | Described in a first-party TikTok policy, help page, or business resource |
 | **Needs a live check** | The code or policy gives a strong lead, but a current signed-in target session is needed to confirm delivery or presentation |
@@ -24,7 +25,7 @@ The clean install first stopped at the birthday gate. The account holder later c
 
 The first-run observations are version-specific. TikTok's UI and server responses change independently of Hushfeed's patch source. Recheck the app after each supported-target move.
 
-The [network and power measurement protocol](runtime-observation.md) documents how to collect physical-device evidence and interpret it against the patch source. It includes traffic-counter checks, destination metadata, background execution and quiet battery intervals.
+The [network and power measurement protocol](runtime-observation.md) documents how to collect physical-device evidence and interpret it against the patch source. It includes traffic-counter checks, destination metadata, background execution and quiet battery intervals. The later [physical-device results](runtime-results-2026-10-09.md) contain actual network and power observations from TikTok 47.1.4 with Hushfeed 0.68.0 paused. That remains a modified APK and is separate from the factory 38.3.3 observations here.
 
 ## First-run flow
 
@@ -56,6 +57,54 @@ How your ads are personalized separates Inferred by TikTok from Your choices, wi
 The Privacy page groups Discoverability and Interactions controls. It exposes private-account and activity-status switches, account suggestions, contact and Facebook friend syncing, comment and mention audiences, direct messages, content reuse, profile display when sharing links, and downloads. Account suggestions have separate Contacts and Facebook friends sources. The sync page says phone contacts and Facebook friends may be synced periodically to help people find each other and get discovered. It also shows separate controls for removing previously synced contacts and Facebook friends, which the copy describes as removing server-side synced data and stopping sync across devices. No sync or removal control was changed.
 
 Content preferences exposed Filter keywords, Restricted Mode, STEM feed, Manage topics, Refresh your For You feed, and Muted accounts. These overlap with feed filtering and topic controls, but their account values were left untouched. The live app surface can move or rename rows across versions, so use these observations as a versioned map, not a permanent UI contract.
+
+## Original 47.1.4 manifest and resource review
+
+This static pass covers the original declared-target TikTok 47.1.4 APK, package `com.zhiliaoapp.musically`, version code `2024701040`, min SDK 23 and target SDK 36. Its SHA-256 is `4226ed5d3031b68208c29f62d80ac421b281fc74201bc4163d98e442d0991a40`. Offline `apksigner` verification passed v1, v2 and v3 with one APK signer. The signer certificate SHA-256 is `9041803e91bcb814b4b4399fb5c85a91640b755e5e8ba76813814bf4cf2ab5ba`, matching the declared target certificate. The source stamp is separate from the APK signer.
+
+The signer receipt contains 150 warning lines. There are 146 warnings about protection of `META-INF` JAR entries, including licenses, library version metadata and service descriptors. Four lines concern Java native access in the verification tool. Scheme verification succeeded despite those warnings. It doesn't establish that the artifact is warning-free or generally safe.
+
+This fixture wasn't run for the measurements. The measured installed TikTok 47.1.4 artifact contains Hushfeed 0.68.0 with Pause enabled. The factory UI observation used a separate, unpatched 38.3.3 artifact. Keep those three identities attached to their evidence.
+
+### Components and permission guards
+
+The manifest declares 650 components. These counts distinguish literal `android:exported` values from an omitted attribute. They don't count components proven reachable at runtime.
+
+| Component | Total | Exported true | Exported false | Attribute absent |
+| --- | ---: | ---: | ---: | ---: |
+| Activity | 498 | 30 | 57 | 411 |
+| Activity alias | 2 | 2 | 0 | 0 |
+| Service | 87 | 17 | 48 | 22 |
+| Receiver | 52 | 12 | 37 | 3 |
+| Provider | 11 | 6 | 5 | 0 |
+
+Of the 67 explicit exported declarations, 18 have a component permission, read permission or write permission attribute. Five also declare `enabled=false`. One uses a resource-backed enabled value. There is no application-wide permission attribute. Preserve those distinctions when comparing a patched manifest.
+
+The six exported providers deserve separate checks. `WallPaperDataProvider` uses the app's signature-level wallpaper permission. `OneTapLoginTokenProvider` and `AccountInfoProvider` declare the signature-level `WRITE_OTL_TOKEN` write permission, with no general or read permission attribute. `ExportedShellProvider`, `FacebookContentProvider` and `SecShareDataProvider` have none of those permission attributes. None of these six contains a nested `path-permission` or `grant-uri-permission` declaration. This is a review list, not evidence of readable account data. Check enabled state and caller validation in each implementation before describing reachability or access. [Android provider permission rules](https://developer.android.com/guide/topics/manifest/provider-element) explain the separate read, write and URI-grant controls.
+
+Exported service guards include `BIND_JOB_SERVICE` for upload jobs and WorkManager, `BIND_QUICK_SETTINGS_TILE` for the two disabled tile services, and `BIND_WALLPAPER` for the wallpaper service. OEM push handlers declare their vendor permissions. `TiktokAuthService`, `NotifyService`, the Custom Tabs post-message service, Samsung's browser service and the Heytap data-message service have no component permission attribute. Receiver guards include Google and Amazon push sender permissions, `DUMP` for WorkManager diagnostics, and `INSTALL_PACKAGES` for the asset-pack receiver. The dataset retains every explicit exported declaration and its filters so a maintainer can inspect the exact entry points before changing them.
+
+### Startup, push and SDK leads
+
+The declarations include AppsFlyer's two install-referrer receivers, Firebase messaging and component-discovery services, Google measurement services, AndroidX startup and WorkManager components, OEM push handlers, and ByteDance message and WebSocket services. The startup provider lists `ProcessLifecycleInitializer`. `FirebaseInitProvider` is explicitly disabled. Some names match runtime investigation leads, but names alone don't prove that code ran.
+
+Application metadata keys reference Google ads, Facebook integration and Firebase analytics. Values are omitted from the sanitized dataset. The fixture requests 65 permission entries with 64 unique names, including location, contacts, microphone, camera, media access, advertising ID and AdServices permissions. Those declarations don't establish grants or collection. It doesn't request `RECEIVE_BOOT_COMPLETED` or either exact-alarm permission, even though the WorkManager reschedule receiver includes a boot action. Keep permission and receiver checks together when maintaining background-work patches.
+
+### Network and backup policy
+
+`debuggable` and `testOnly` are absent. Android's default for `debuggable` is false. `usesCleartextTraffic=true` is present, but Android 7 and later use the referenced Network Security Configuration when one is supplied. [Application attribute rules](https://developer.android.com/guide/topics/manifest/application-element)
+
+The decoded network XML permits cleartext in its base configuration and explicitly permits `zero-rating.tiktok.com` without subdomains. It denies cleartext for 52 listed domain suffixes, including `tiktok.com`, `tiktokv.com` and `tiktokcdn.com`. Its base system trust anchor explicitly sets `overridePins=true`. The base configuration disables certificate transparency, and the XML contains no `pin-set`. Its user-CA debug override applies only to debuggable builds. These are declared policies for clients that honor Android's configuration. They don't prove a cleartext transfer, enforcement by every networking stack, or absence of pinning in native or application code. Preserve the exact domain spellings when comparing changes. [Network Security Configuration](https://developer.android.com/privacy-and-security/security-config)
+
+`allowBackup=true`, `fullBackupOnly=true` and a custom `AutoBackupAgent` are declared. The referenced legacy full-backup XML has one include, shared preferences file `tpc_sp.xml`, and no excludes. `dataExtractionRules` is absent. Actual cloud backup and device transfer still depend on Android version, device policy and the unreviewed backup-agent implementation. No backup or exposed file was observed.
+
+### Package visibility and maintenance use
+
+The query section lists 94 packages, 26 intent queries and one provider query. It doesn't request `QUERY_ALL_PACKAGES`. The list includes browser, sharing, login, payment and OEM integrations. Some queries use broad `VIEW` or sharing filters. These entries allow matching packages or handlers to be visible under Android's rules; they don't prove enumeration or an uploaded app inventory. A visibility patch should check share targets, browser selection and authentication flows before removing entries. [Package visibility declarations](https://developer.android.com/training/package-visibility/declaring)
+
+Use this inventory as a baseline for a separate patched-artifact manifest comparison. Prioritize provider caller checks, exported intent handling, SDK startup controls and backup-agent behavior before making claims about their effects. No executable code was decompiled in this pass. The companion JSON contains code identifiers and source hashes, with embedded application identifiers redacted and metadata values omitted.
+
+The [sanitized manifest dataset](assets/tiktok-47.1.4/manifest-observations.v1.json) preserves the permission list, exported entry points, SDK component inventory and decoded resource policy. Its source digests identify the exact inputs.
 
 ## How ad delivery appears to work
 
@@ -161,7 +210,7 @@ The 38.3.3 package requested both Google Play advertising-ID access and Android'
 | Block clipboard reads | Returns empty or false results for intercepted clipboard calls | Patch is selected by default. Its runtime switch starts off | Copying a TikTok link still works |
 | Hide VPN | Hides VPN transport and common tunnel interfaces from hooked calls | Patch is selected by default. Its runtime switch starts off | It changes what TikTok sees and can break features that check VPN state |
 | Stop on-device AI profiling | Prevents TikTok's Pitaya on-device engine from starting through the hooked providers | Patch is not selected by default. It has no runtime switch | This does not turn off server-side recommendations or ad personalization |
-| Network request report | Counts TikTok Retrofit calls by registrable domain and host kind, with request-body sizes | Patch is not selected by default | It does not count media downloads or other companies' SDK traffic, and does not record response bodies |
+| Network request report | Counts TikTok Retrofit calls by heuristic domain bucket and host kind, with request-body sizes | Patch is not selected by default | It does not count media downloads or other companies' SDK traffic, and does not record response bodies |
 | In-app browser privacy guard | Keeps TikTok JavaScript bridges on trusted app pages and withholds them on external pages | Patch is selected by default. Its runtime switch starts off | It is not a general cookie blocker or a network request blocker |
 
 The source lives under [privacy patches](../patches/src/main/kotlin/app/morphe/patches/tiktok/privacy/) and [runtime privacy hooks](../extensions/tiktok/src/main/java/app/morphe/extension/tiktok/privacy/). Ghost mode is implemented in [GhostModePatch.kt](../patches/src/main/kotlin/app/morphe/patches/tiktok/interaction/ghostmode/GhostModePatch.kt) and [GhostMode.java](../extensions/tiktok/src/main/java/app/morphe/extension/tiktok/ghostmode/GhostMode.java). In-app titles and descriptions live in [PrivacyPreferenceCategory.java](../extensions/tiktok/src/main/java/app/morphe/extension/tiktok/settings/preference/categories/PrivacyPreferenceCategory.java), with stable values and defaults in [Settings.java](../extensions/tiktok/src/main/java/app/morphe/extension/tiktok/settings/Settings.java).
@@ -181,7 +230,7 @@ Ad and privacy work sits inside a wider set of user controls. The generated cata
 
 The source is a capability inventory, not proof that each surface appeared during this audit. The signed-in pass reached the For You feed and several privacy and content settings pages. It did not exercise comments, search results, LIVE, Shop, or account actions, and it did not capture decoded network traffic.
 
-The diagnostics patch is useful, but its name can sound broader than its data. [NetworkRequests.java](../extensions/tiktok/src/main/java/app/morphe/extension/tiktok/privacy/NetworkRequests.java) counts TikTok's own Retrofit client, excludes third-party SDK clients and media downloads, strips region-specific hostnames to a registrable domain, and records only request sizes. Debug logging can include a path for log hosts, but removes the query string. This is not a packet capture and cannot prove that no other SDK sent data.
+The diagnostics patch is useful, but its name can sound broader than its data. [NetworkRequests.java](../extensions/tiktok/src/main/java/app/morphe/extension/tiktok/privacy/NetworkRequests.java) counts TikTok's own Retrofit client, excludes third-party SDK clients and media downloads, groups hostnames with a domain-suffix heuristic rather than a public suffix database, and records only request sizes. Debug logging can include a path for log hosts, but removes the query string. This is not a packet capture and cannot prove that no other SDK sent data.
 
 Feed filter diagnostics are deliberately more privacy-preserving. [FeedCapture.java](../extensions/tiktok/src/main/java/app/morphe/extension/tiktok/feedfilter/FeedCapture.java) uses a fresh random salt for each capture, stores short hashes instead of creator or video IDs, does not read captions or handles, and limits the rolling buffer to about 4 MiB. Keep those protections if a future report adds ad evidence.
 
