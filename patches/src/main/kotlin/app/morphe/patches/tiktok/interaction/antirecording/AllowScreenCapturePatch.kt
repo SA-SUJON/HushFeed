@@ -66,8 +66,9 @@ private object CircleSearchBlockFingerprint : Fingerprint(
 @Suppress("unused")
 val allowScreenCapturePatch = bytecodePatch(
     name = "Allow screenshots and Circle to Search",
-    description = "Removes secure window flags and disables the Circle to Search block. Off by default. Restart after changing. Switch: Hushfeed settings > App.",
-    default = false,
+    description = "Takes TikTok's secure flag off its windows, so screenshots and screen " +
+        "recordings aren't black, and turns off its Circle to Search block. Off until you turn " +
+        "it on. Restart TikTok after changing it. Switch: Hushfeed settings > App.",
 ) {
     category("Downloads")
     dependsOn(settingsPatch, sharedExtensionPatch)
