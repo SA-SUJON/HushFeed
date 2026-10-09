@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **Project:** Failed preference-test saves now retain the underlying logs and file state.
+
 * **Project:** Kept settings search and translated descriptions aligned with renamed rows, and updated their wording checks.
 
 * Documented the original 47.1.4 manifest, verified signer, SDK entry points, network security and backup rules, with a reusable sanitized inventory.
