@@ -132,6 +132,43 @@ The current in-app settings pages are separate from Morphe Manager's patch categ
 
 Translations live in extensions/tiktok/src/main/l10n/. The generator scripts/gen-l10n.py refreshes the English base table and generated translation class. Run it after editing translation tables. The tests compare the sources and generated output.
 
+## Settings design concepts
+
+Design study v0.1.0, October 9, 2026. These are proposed layouts, not screenshots of a shipped redesign. The current settings screen supplied the visual reference and the existing category classes supplied the feature inventory. No layout has been selected for implementation.
+
+The current home screen repeats Feed filter, Privacy and Screen time as shortcuts above their full rows. Its large status panel and search card also push most categories below the first screen. These concepts replace that stack with a compact status indicator and search field. Detailed controls remain reachable.
+
+| Concept | Preview | Navigation tradeoff |
+| --- | --- | --- |
+| Quiet Index | [Open mockup](assets/settings-design-2026-10-09/quiet-index.png) | Seven grouped destinations give the clearest overview. Some existing pages move one level deeper. Recommended starting point. |
+| Three-domain Workspace | [Open mockup](assets/settings-design-2026-10-09/three-domain-workspace.png) | Experience, Privacy and Tools divide the library. Less scrolling, but users need to learn which tab owns a setting. |
+| Focused Controls | [Open mockup](assets/settings-design-2026-10-09/focused-controls.png) | Expandable groups expose common controls in place. Faster adjustments, but expansion state and accidental changes need attention. |
+
+### Category coverage for Quiet Index
+
+| Proposed destination | Existing pages and actions |
+| --- | --- |
+| Feed & layout | Feed filter, Feed tabs, Feed screen |
+| Playback | Playback |
+| Privacy | Privacy |
+| Comments & inbox | Comments, Inbox |
+| Downloads & sharing | Downloads, Share sheet |
+| Screen time | Screen time |
+| App & advanced | App, Region, Backup and restore, Diagnostics, Feature Gate Lab, Pause Hushfeed |
+| About Hushfeed | Build details, attribution and licenses |
+
+The tabbed concept puts Region beside Privacy. Its Tools tab owns App, maintenance and About. The expandable concept combines Playback with Screen time, puts Region beside Privacy, and keeps maintenance under Tools & backup. Those are proposed groupings, not new patch behavior.
+
+### Implementation constraints
+
+Keep persisted setting keys stable. Search must still find individual controls and checklist members, including old names retained as search aliases. Preserve visibility rules for installed patches, dependency explanations, restart notices, backup and undo behavior. The home screen can get smaller without dropping those controls.
+
+Use a black base, quiet dividers, small consistent icons and a restrained pink accent. Aim for 16px row titles, readable secondary text and touch targets of at least 48dp. The mockups use a 390 by 844 logical frame. Check actual Android font scaling and translated labels before adopting the spacing.
+
+Active, Paused and Restart pending need distinct text states. Pause preserves settings and affects runtime behavior after restart. Static APK changes remain, so it must never be described as a factory mode. Mockup switch positions are examples, not captured device settings. There are no measured protection scores or battery savings in these designs.
+
+The previews were reviewed for hierarchy, readable labels and coverage of existing categories. They don't verify Android layout, accessibility, interaction or localization. A chosen design still needs those checks on the supported app build.
+
 ## Adding or changing a patch
 
 1. Start from the exact patch name in patches-list.json. Read its Kotlin declaration, dependencies, runtime hook, tests, and the matching README entry.

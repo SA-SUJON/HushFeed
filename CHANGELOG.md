@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **Project:** Added three settings design concepts with a category map and notes on search, accessibility and restart behavior. They're visual proposals for a smaller, clearer menu.
+
 * **Project:** Failed preference-test saves now retain the underlying logs and file state.
 
 * **Project:** Kept settings search and translated descriptions aligned with renamed rows, and updated their wording checks.
