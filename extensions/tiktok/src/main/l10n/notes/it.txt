@@ -12,6 +12,8 @@
 
 * **TikTok:** La descrizione di Nascondi i controlli della vista pulita ora cita anche il pizzico sullo schermo come altro modo per uscire dalla vista pulita (#84).
 
+* **TikTok:** Alcuni interruttori ora partono disattivati, come tutti gli altri interruttori di Hushfeed, perché le loro patch entrano nella selezione predefinita. Se avevi già scelto una di queste patch e vuoi che continui a funzionare, riattiva il suo interruttore dopo l'aggiornamento. In Privacy sono Blocca l'accesso alla lista contatti, Blocca la scansione delle app installate, Blocca la posizione, Blocca le letture degli appunti, Blocca i sensori di movimento, Non salvare le nuove ricerche e Mostra quando la fotocamera o il microfono sono in uso. In Commenti sono Il pollice verso blocca chi ha commentato, I link nei commenti si aprono e Nascondi gli annunci popup nei commenti, e in App Disattiva il feedback aptico e Disattiva le transizioni tra schermate.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Un link a un video di TikTok che apri ora mostra il video anche quando un filtro del feed lo nasconderebbe, come Nascondi i video che hai già visto per uno che hai guardato prima (#117). TikTok carica un video collegato come una pagina del feed a sé, quindi filtrarlo lasciava lì la schermata di errore di TikTok. Solo quel video supera i filtri, e solo per un minuto dopo il link. I link ai post di foto e i vecchi link `m.tiktok.com/v/<id>.html` del sito mobile contano come un solo post, qui e per `Blocca il feed`.

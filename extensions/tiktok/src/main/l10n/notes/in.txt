@@ -12,6 +12,8 @@
 
 * **TikTok:** Deskripsi Sembunyikan kontrol Tampilan bersih kini menyebut mencubit layar sebagai cara lain untuk keluar dari Tampilan bersih (#84).
 
+* **TikTok:** Beberapa sakelar kini mulai dalam keadaan mati, seperti sakelar Hushfeed lainnya, karena patch-nya masuk ke pilihan bawaan. Kalau sebelumnya kamu sudah memilih salah satu patch ini dan ingin patch itu tetap bekerja, nyalakan lagi sakelarnya setelah memperbarui. Di Privasi, sakelar itu adalah Blokir akses ke daftar kontak, Blokir pemindaian aplikasi terpasang, Blokir lokasi, Blokir pembacaan papan klip, Blokir sensor gerak, Jangan simpan pencarian baru, dan Tampilkan saat kamera atau mikrofon dipakai. Di Komentar ada Jempol ke bawah memblokir pengomentar, Tautan di komentar bisa dibuka, dan Sembunyikan iklan popup di komentar, lalu di Aplikasi ada Matikan getaran haptik dan Matikan transisi layar.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Tautan video TikTok yang kamu buka kini menampilkan videonya meski filter feed akan menyembunyikannya, seperti Sembunyikan video yang sudah kamu tonton untuk video yang pernah kamu tonton (#117). TikTok memuat video bertautan sebagai halaman feed tersendiri, jadi menyaringnya malah menyisakan layar error TikTok di situ. Hanya video itu yang lolos dari filter, dan hanya selama semenit setelah tautan dibuka. Tautan ke postingan foto dan tautan lama situs seluler `m.tiktok.com/v/<id>.html` juga dihitung sebagai satu postingan, di sini maupun untuk `Kunci feed`.

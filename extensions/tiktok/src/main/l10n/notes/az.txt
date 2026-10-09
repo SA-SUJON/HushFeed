@@ -12,6 +12,8 @@
 
 * **TikTok:** Təmiz ekran idarəetmələrini gizlədin açarının təsviri indi Təmiz ekrandan çıxmağın başqa yolu kimi ekranı iki barmaqla sıxmağı da qeyd edir (#84).
 
+* **TikTok:** Bir neçə açar indi Hushfeed-in digər açarları kimi söndürülmüş başlayır, çünki onların yamaları susmaya görə seçimə daxil olur. Bu yamalardan birini əvvəl seçmisinizsə və işləməyə davam etməsini istəyirsinizsə, yenilədikdən sonra onun açarını yenidən yandırın. Məxfilik altında bunlar Kontakt siyahısına girişi bloklayın, Quraşdırılmış tətbiqlərin skanını bloklayın, Məkanı bloklayın, Mübadilə buferinin oxunmasını bloklayın, Hərəkət sensorlarını bloklayın, Yeni axtarışları saxlamayın və Kamera və ya mikrofon istifadə olunanda göstərin açarlarıdır. Şərhlər altında Bəyənməmə şərh yazanı bloklayır, Şərhlərdəki keçidlər açılır və Şərh pəncərəsi reklamlarını gizlədin, Tətbiq altında isə Haptik titrəməni söndürün və Ekran keçidlərini söndürün.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Açdığınız TikTok video keçidi indi lent filtri onu gizlədəcək olsa belə öz videosunu göstərir, məsələn, əvvəl izlədiyiniz video üçün Artıq izlədiyiniz videoları gizlədin (#117). TikTok keçidlə açılan videonu ayrıca lent səhifəsi kimi yüklədiyi üçün onu süzmək orada TikTok-un xəta ekranını qoyurdu. Filtrlərdən yalnız həmin tək video keçir, o da keçiddən sonra yalnız bir dəqiqə ərzində. Foto paylaşımlarına keçidlər və mobil saytın köhnə `m.tiktok.com/v/<id>.html` keçidləri də həm burada, həm də `Lenti kilidlə` üçün bir paylaşım sayılır.

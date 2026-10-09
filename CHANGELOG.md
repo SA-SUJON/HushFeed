@@ -16,6 +16,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** The Hide the Clear display controls description now mentions pinching the screen as another way to leave Clear display (#84).
 
+* **TikTok:** A handful of switches now start off, like the rest of Hushfeed's switches, because their patches join the default selection. If you picked one of these patches before and want it to keep working, turn its switch back on after you update. Under Privacy that's Block contact list access, Block installed app scanning, Block location, Block clipboard reads, Block motion sensors, Don't save new searches and Show when the camera or microphone is in use. Under Comments it's Thumbs down blocks the commenter, Links in comments open and Hide comment popup ads, and under App it's Turn off haptics and Turn off screen transitions.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** A TikTok video link you open now shows its video even when a feed filter would hide it, like Hide videos you have already seen for one you watched before (#117). TikTok loads a linked video as a feed page of its own, so filtering it out left TikTok's error screen there. Only that one video gets past the filters, and only for a minute after the link. Links to photo posts and the mobile site's older `m.tiktok.com/v/<id>.html` links count as one post too, here and for `Lock the feed`.

@@ -12,6 +12,8 @@
 
 * **TikTok:** La descripción de Ocultar también los controles que quedan en Controles ocultos ahora menciona pellizcar la pantalla como otra forma de salir de Controles ocultos (#84).
 
+* **TikTok:** Algunos interruptores ahora empiezan desactivados, como el resto de los interruptores de Hushfeed, porque sus parches pasan a la selección predeterminada. Si ya habías elegido uno de esos parches y quieres que siga funcionando, vuelve a activar su interruptor después de actualizar. En Privacidad son Bloquear el acceso a los contactos, Bloquear el escaneo de apps instaladas, Bloquear la ubicación, Bloquear la lectura del portapapeles, Bloquear los sensores de movimiento, No guardar búsquedas nuevas y Mostrar cuando la cámara o el micrófono estén en uso. En Comentarios son El pulgar hacia abajo bloquea a quien comenta, Los enlaces de los comentarios se abren y Ocultar los anuncios emergentes de los comentarios, y en Aplicación, Desactivar la respuesta háptica y Desactivar las transiciones de pantalla.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Un enlace a un vídeo de TikTok que abres ahora muestra su vídeo aunque un filtro del feed lo ocultaría, como Ocultar los vídeos que ya has visto con uno que viste antes (#117). TikTok carga un vídeo enlazado como una página de feed propia, así que al filtrarlo ahí quedaba la pantalla de error de TikTok. Solo ese vídeo pasa los filtros, y solo durante un minuto después del enlace. Los enlaces a publicaciones de fotos y los enlaces antiguos del sitio móvil `m.tiktok.com/v/<id>.html` también cuentan como una sola publicación, aquí y para `Bloquear el feed`.

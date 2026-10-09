@@ -12,6 +12,8 @@
 
 * **TikTok:** Temiz ekran kontrollerini gizle açıklaması artık Temiz ekrandan çıkmanın bir başka yolu olarak ekranı iki parmakla kıstırmayı da anıyor (#84).
 
+* **TikTok:** Bazı anahtarlar artık Hushfeed'in diğer anahtarları gibi kapalı başlıyor, çünkü yamaları varsayılan seçime giriyor. Bu yamalardan birini daha önce seçtiysen ve çalışmaya devam etmesini istiyorsan, güncellemeden sonra anahtarını yeniden aç. Gizlilik altında bunlar Kişi listesine erişimi engelle, Yüklü uygulama taramasını engelle, Konumu engelle, Pano okumalarını engelle, Hareket sensörlerini engelle, Yeni aramaları kaydetme ve Kamera veya mikrofon kullanılırken göster. Yorumlar altında Aşağı başparmak yorumu yazanı engeller, Yorumlardaki bağlantıların açılacağı yer ve Yorumlardaki açılır reklamları gizle, Uygulama altında ise Dokunsal titreşimi kapat ve Ekran geçişlerini kapat.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Açtığın bir TikTok video bağlantısı, bir akış filtresi onu gizleyecek olsa bile artık videosunu gösteriyor, örneğin daha önce izlediğin bir video için Daha önce gördüğün videoları gizle (#117). TikTok bağlantıyla gelen videoyu kendi başına bir akış sayfası olarak yüklüyor, bu yüzden filtreyle elenince orada TikTok'un hata ekranı kalıyordu. Filtrelerden yalnızca o tek video geçiyor, o da bağlantıdan sonra sadece bir dakika boyunca. Fotoğraf gönderilerine giden bağlantılar ve mobil sitenin eski `m.tiktok.com/v/<id>.html` bağlantıları da hem burada hem de `Akışı kilitle` için tek bir gönderi sayılıyor.
