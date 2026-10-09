@@ -24,6 +24,8 @@ The clean install first stopped at the birthday gate. The account holder later c
 
 The first-run observations are version-specific. TikTok's UI and server responses change independently of Hushfeed's patch source. Recheck the app after each supported-target move.
 
+The [network and power measurement protocol](runtime-observation.md) documents how to collect physical-device evidence and interpret it against the patch source. It includes traffic-counter checks, destination metadata, background execution and quiet battery intervals.
+
 ## First-run flow
 
 1. The clean app first displayed an account-entry screen. It offered Skip, phone or email, Facebook, Google, and Log in. No account action was taken.

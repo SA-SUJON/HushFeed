@@ -167,6 +167,8 @@ Treat a target update as a new reverse-engineering pass. TikTok can reuse short 
 
 The APK fixtures are vendor files outside the repository. Set HUSHFEED_FIXTURE_DIR to their folder. Set HUSHFEED_DESKTOP_JAR to the Morphe desktop CLI jar for the apply-all verification. CONTRIBUTING.md documents the other script inputs and the pre-push checks.
 
+For traffic, background work and battery checks, follow the [runtime observation protocol](runtime-observation.md). It separates actual transfers from API attempts, whole-phone charge from per-app estimates, and paused runtime settings from static APK changes. Its source map identifies the controls that can change the workload.
+
 The test commands and their required order are maintained in [README.md](../README.md#building-from-source). The release procedure and fixture setup live in [CONTRIBUTING.md](../CONTRIBUTING.md). Update those instructions when the Gradle task graph or release gates change.
 
 ## Updating this guide

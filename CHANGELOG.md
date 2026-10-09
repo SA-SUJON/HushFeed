@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **Project:** Added a repeatable protocol for measuring TikTok traffic, background work and battery use, with a source map for the controls that can affect each result.
+
 * **Project:** Added app and patch development notes plus a TikTok audit covering ad routes, upstream issue evidence, tracking scope, factory onboarding, signed-in controls, and patch opportunities.
 
 * **TikTok:** Every patch description in Morphe Manager is rewritten in plain English. Each one now says what the patch changes, why you might want it, and whether its switch starts on or off and where to find it in Hushfeed settings. A few patch options read more clearly too, and Skip push setup is now called Skip notification setup.
