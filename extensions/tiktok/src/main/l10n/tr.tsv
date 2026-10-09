@@ -404,7 +404,7 @@ Drag to move, release to place	Taşımak için sürükle, yerleştirmek için b�
 Drama and Series	Drama ve Seri
 Shows TikTok's text in your phone's font instead of TikTok Sans. Icons and gift animations keep their own fonts. Restart TikTok to see the change.	TikTok'un yazısını TikTok Sans yerine telefonunun yazı tipiyle gösterir. Simgeler ve hediye animasyonları kendi yazı tiplerini korur. Değişikliği görmek için TikTok'u yeniden başlat.
 Hide the notification saying somebody new followed you before it reaches the drawer. Every other notification is left alone, and the follower still appears in the Inbox.	Birinin seni takip etmeye başladığını söyleyen bildirimi bildirim paneline ulaşmadan gizle. Diğer tüm bildirimlere dokunulmaz ve takipçi yine Gelen Kutusu'nda görünür.
-Each area, how many of the things it looks for are in this build and how many aren't.	Her alan için, aradığı şeylerden kaçının bu sürümde bulunduğu ve kaçının bulunmadığı.
+Each area shows how many of the things Hushfeed looks for were found in this TikTok and how many are missing.	Her alan, Hushfeed'in aradığı şeylerden kaçının bu TikTok'ta bulunduğunu ve kaçının eksik olduğunu gösterir.
 Easier comment likes	Daha kolay yorum beğenme
 Empty	Boş
 Empty the menu that opens when you press and hold TikTok's icon on the home screen. Turning this off asks TikTok to build them again. Tapping the icon still opens the app, and a shortcut you pinned yourself stays where you put it.	Ana ekranda TikTok simgesine basılı tuttuğunda açılan menüyü boşalt. Bunu kapatırsan TikTok'tan kısayolları yeniden oluşturması istenir. Simgeye dokunmak yine uygulamayı açar ve kendi sabitlediğin bir kısayol koyduğun yerde kalır.
@@ -1172,7 +1172,7 @@ TikTok default (hold to speed up, quick share)	TikTok varsayılanı (hızlandır
 TikTok didn't block %1$s. Try again in a moment.	TikTok %1$s hesabını engellemedi. Birazdan yeniden dene.
 TikTok didn't unblock %1$s. Try again in a moment.	TikTok %1$s hesabının engelini kaldırmadı. Birazdan yeniden dene.
 TikTok didn't accept the feedback. Try again later.	TikTok geri bildirimi kabul etmedi. Daha sonra yeniden dene.
-TikTok hasn't handed this setting an object to change yet. Open the part of the app that uses it, then come back.	TikTok bu ayara henüz değiştirilecek bir nesne vermedi. Uygulamanın bunu kullanan bölümünü aç, sonra geri gel.
+TikTok hasn't loaded this setting yet. Open the part of the app that uses it, then come back.	TikTok bu ayarı henüz yüklemedi. Onu kullanan uygulama bölümünü aç, sonra geri dön.
 TikTok read it	TikTok bunu okudu
 TikTok read it, but the override couldn't be applied. Reset it and save it again.	TikTok bunu okudu ama geçersiz kılma uygulanamadı. Sıfırla ve yeniden kaydet.
 TikTok refused the follow: %1$s	TikTok takibi reddetti: %1$s
@@ -1437,8 +1437,8 @@ Couldn't save the change. Try again.	Değişiklik kaydedilemedi. Tekrar dene.
 Off. TikTok can report views and typing.	Kapalı. TikTok görüntülemeleri ve yazıyor durumunu bildirebilir.
 Hushfeed is paused. Ghost mode isn't active.	Hushfeed duraklatıldı. Hayalet modu etkin değil.
 Problem detected. Story views may still be reported. Check Ghost mode diagnostics. The warning stays until TikTok restarts.	Sorun algılandı. Hikâye görüntülemeleri yine de bildirilebilir. Hayalet modu tanılamasına bak. Uyarı, TikTok yeniden başlatılana kadar kalır.
-Reporting calls were blocked here. Viewer-list privacy hasn't been verified.	Bildirim çağrıları burada engellendi. İzleyici listesindeki gizlilik doğrulanmadı.
-On. No reporting call has been observed in this process.	Açık. Bu işlemde henüz bir bildirim çağrısı gözlenmedi.
+Hushfeed blocked TikTok's reports here. It hasn't confirmed that you stay off viewer lists.	Hushfeed burada TikTok'un raporlarını engelledi. İzleyici listelerinde görünmediğini henüz doğrulamadı.
+On. Hushfeed hasn't seen TikTok send any reports since it started.	Açık. Hushfeed, TikTok başladığından beri onun herhangi bir rapor gönderdiğini görmedi.
 Ghost mode diagnostics	Hayalet modu tanılaması
 The partial file couldn't be removed. Delete it from the folder you chose.	Eksik dosya kaldırılamadı. Seçtiğin klasörden sil.
 The backup didn't start and its partial file couldn't be removed. Delete it from the folder you chose.	Yedekleme başlamadı ve eksik dosyası kaldırılamadı. Seçtiğin klasörden sil.
@@ -1693,8 +1693,8 @@ Subtitles: %1$s	Altyazılar: %1$s
 Stickers: %1$s	Çıkartmalar: %1$s
 Live photo clips: %1$s	Canlı fotoğraf klipleri: %1$s
 TikTok's own name	TikTok'un kendi adı
-Not a token here, kept as typed: %1$s	Burada bir belirteç değil, yazıldığı gibi kalır: %1$s
-Not a token for Hushfeed's downloader, kept as typed: %1$s	Hushfeed indiricisi için bir belirteç değil, yazıldığı gibi kalır: %1$s
+Not a part Hushfeed fills in, so it's kept as typed: %1$s	Hushfeed'in doldurduğu bir parça değil, bu yüzden yazdığın gibi kalır: %1$s
+Hushfeed's downloader doesn't fill this in, so it's kept as typed: %1$s	Hushfeed'in indiricisi bunu doldurmaz, bu yüzden yazdığın gibi kalır: %1$s
 If that name is taken, Android adds a number to the new file.	Bu ad alınmışsa Android yeni dosyaya bir sayı ekler.
 If that name is taken, Hushfeed adds a number to the new file.	Bu ad alınmışsa Hushfeed yeni dosyaya bir sayı ekler.
 Don't start the first video	İlk videoyu başlatma
@@ -1713,9 +1713,9 @@ Proxy user name	Proxy kullanıcı adı
 Optional. Only connections made by Android itself can sign in to a proxy, not TikTok's own. Leave empty for a proxy without a password.	İsteğe bağlı. Bir proxy'ye yalnızca Android'in kendi kurduğu bağlantılar giriş yapabilir, TikTok'un bağlantıları yapamaz. Parolasız bir proxy için boş bırak.
 Proxy password	Proxy şifresi
 Optional, used with the user name. It isn't shown, logged or put in a backup.	İsteğe bağlı, kullanıcı adıyla birlikte kullanılır. Gösterilmez, günlüğe yazılmaz ve yedeğe konmaz.
-Enter a host name or IP address, without a scheme or port	Şema veya bağlantı noktası olmadan bir sunucu adı ya da IP adresi gir
+Enter a server name or IP address, without http:// or a port number	Bir sunucu adı veya IP adresi gir, http:// ve bağlantı noktası numarası olmadan
 A port is a whole number from 1 to 65535	Bağlantı noktası 1 ile 65535 arasında bir tam sayıdır
-The proxy at %1$s asks for a password. TikTok's own network stack can't send one, so use a proxy that doesn't need one.	%1$s adresindeki proxy şifre istiyor. TikTok'un kendi ağ yığını şifre gönderemez, bu yüzden şifre gerektirmeyen bir proxy kullan.
+The proxy at %1$s asks for a password, and TikTok can't send one. Use a proxy that doesn't need one.	%1$s adresindeki proxy parola istiyor ve TikTok parola gönderemiyor. Parola gerektirmeyen bir proxy kullan.
 Couldn't reach the proxy at %1$s. TikTok may not load until it's back or you turn the proxy off.	%1$s adresindeki proxy'ye ulaşılamadı. Proxy geri gelene ya da sen onu kapatana kadar TikTok yüklenmeyebilir.
 Word rules only, not every feed filter:	Yalnızca kelime kuralları, akıştaki her filtre değil:
 This list is too long to preview here. Saving still follows the usual limit.	Bu liste burada önizlemek için çok uzun. Kaydederken olağan sınır geçerli olmaya devam eder.

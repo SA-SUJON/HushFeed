@@ -4,6 +4,8 @@
 
 * **TikTok:** Hushfeed ayarlarındaki satırlar sade İngilizceyle yeniden yazıldı. Privacy, Comments, Downloads, Feed filter, Screen time, Region ve diğer sayfalar artık teknik terimler olmadan her anahtarın ne yaptığını ve neyi fark edeceğini söylüyor. Birkaç başlık da değişti, örneğin Stop TikTok's speed tests ve Clean up shared links.
 
+* **TikTok:** Birkaç mesaj ve durum satırı da daha sade oldu, örneğin Ghost mode durumu, Hook status açıklaması, proxy parolası bildirimi ve dosya adı önizlemesi.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** Hushfeed artık yalnızca TikTok 47.1.4'ü destekliyor. 47.0.3 veya 47.1.3 kullanıyorsan 47.1.4 APK'sını APKMirror'dan indir ve Morphe Manager'da aynı imza anahtarıyla yamala, böylece oturumun ve ayarların korunur. Feature Gate Lab, düğmesi 47.1.4'te hâlâ bulunan her geçersiz kılmayı korur ve gerisini her zamanki bildirimiyle kapatır.
