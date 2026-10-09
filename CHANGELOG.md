@@ -14,6 +14,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Diagnostics has a new row, Capture the feed, for a feed problem that's easier to show than to describe. Tap it, scroll until the problem shows up, then come back and tap it again, and Hushfeed saves a text file to Download/Hushfeed. It has a line for every batch of videos the feed filters handled while it ran, with each video's verdict and the rule that hid it. Videos and creators appear only as short codes made fresh for each capture, and the file has no captions, names, handles or web addresses. Read it before you share it anyway. Nothing is recorded until you start a capture. The idea comes from icysymmetra's TikTok patches.
 
+* **TikTok:** The Hide the Clear display controls description now mentions pinching the screen as another way to leave Clear display (#84).
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** A TikTok video link you open now shows its video even when a feed filter would hide it, like Hide videos you have already seen for one you watched before (#117). TikTok loads a linked video as a feed page of its own, so filtering it out left TikTok's error screen there. Only that one video gets past the filters, and only for a minute after the link. Links to photo posts and the mobile site's older `m.tiktok.com/v/<id>.html` links count as one post too, here and for `Lock the feed`.
@@ -142,7 +144,7 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Remove feed ads now also keeps the "Find fresh ideas on Lemon8" card out of For You. It's an install promo TikTok slots between videos, so no ad flag marks it. Hushfeed stops TikTok asking for it and drops it from the feed if one arrives anyway, and it shows up in the feed filter report under Ads.
 
-* **TikTok:** New patch, App lock. Turn on Lock TikTok under Privacy and TikTok asks for your fingerprint, face or screen lock PIN when it starts, and again when you come back after the delay you pick (right away, or after 1, 5 or 15 minutes). Nothing shows and the video stays stopped until you unlock. A link you open from another app still lands on its video once you're in, and TikTok's preview in recent apps is blank while the lock is on. Android 9 and up use the system's unlock prompt, and older phones get the screen lock check. A phone with no screen lock opens TikTok as before and says why. Pause Hushfeed leaves the lock on, so pausing isn't a way past it.
+* **TikTok:** New patch, App lock. Turn on Lock TikTok under Privacy and TikTok asks for your fingerprint, face or screen lock PIN when it starts, and again when you come back after the delay you pick (right away, or after 1, 5 or 15 minutes). Nothing shows and the video stays stopped until you verify with your screen lock. A link you open from another app still lands on its video once you're in, and TikTok's preview in recent apps is blank while the lock is on. Android 9 and up use the system authentication prompt, and older phones get the screen lock check. A phone with no screen lock opens TikTok as before and says why. Pause Hushfeed leaves the lock on, so pausing isn't a way past it.
 
 * **TikTok:** Advanced downloads can save a photo post as one MP4 with its sound. Turn on Save photo posts as a video under Downloads. TikTok's Download video on a one-photo post then makes a clean video with no logo, handle or end card, and a post with several photos asks whether you want the photos you picked or a video of them. Each photo shows for 3 seconds by default (Seconds per photo goes from 1 to 10), the sound is cut or repeated to fit, and if it can't be fetched the video saves silent and the notice tells you.
 
@@ -170,7 +172,7 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Show where a video was posted now works on videos where TikTok hides the post time, which is most of For You unless Always show publish date is on. It also shows on videos you open from search, a creator's profile or a shared link, and it switches to the right country as soon as an opened video starts instead of keeping the one from the feed. A long name gets shortened a little so the country isn't cut off along with it.
 
-* **TikTok:** In Feature Gate Lab, turning overrides on from a gate's own page now unlocks its Forced result switch right away. Before, it stayed greyed out until you left the page and came back.
+* **TikTok:** In Feature Gate Lab, turning overrides on from a gate's own page now makes its Forced result switch available right away. Before, it stayed greyed out until you left the page and came back.
 
 * **TikTok:** Remove LIVE extras now says in its description that it can take away the red and blue battle score bar and the co-host guests' names in LIVE. It's off unless you pick it, so leave it unticked if you watch battles.
 
@@ -188,7 +190,7 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** With Hide the Clear display controls on, the progress bar is still there to drag, just invisible, so you can move through a video along the bottom edge without leaving Clear display (#84).
 
-* **TikTok:** Feature Gate Lab has 13 new reviewed presets for features other TikTok mods unlock by flag. There's repost with a comment, the profile banner with the new profile layout, live photo, camera and audio comments, comments saved to Favorites, comment sort and dislike styles, message bubble colors with the Inbox archive and sharing to more chats at once, Manage topics, visual search, AI Self, the long-press menu on every post, TikTok's own hold to speed up, its background play and auto-scroll, and post dates in the feed. Every preset was checked against 47.0.3, 47.1.3 and 47.1.4. Show See translation was 47.1.3 only and now covers all three. The list shows just the presets for the TikTok you have installed. Some of these features also depend on what TikTok's servers allow for your account.
+* **TikTok:** Feature Gate Lab has 13 new reviewed presets for features other TikTok mods enable by flag. There's repost with a comment, the profile banner with the new profile layout, live photo, camera and audio comments, comments saved to Favorites, comment sort and dislike styles, message bubble colors with the Inbox archive and sharing to more chats at once, Manage topics, visual search, AI Self, the long-press menu on every post, TikTok's own hold to speed up, its background play and auto-scroll, and post dates in the feed. Every preset was checked against 47.0.3, 47.1.3 and 47.1.4. Show See translation was 47.1.3 only and now covers all three. The list shows just the presets for the TikTok you have installed. Some of these features also depend on what TikTok's servers allow for your account.
 
 * **TikTok:** Remove ads now also catches creator posts TikTok runs as ads. They don't carry TikTok's ad flag, so they were getting through, but TikTok marks them in the post's commerce details and Hushfeed reads the same mark TikTok does. The filter report counts them under AdSignals. Skip the splash ad also stops the startup tasks that preload TopView takeover ads and ask the server for a real-time splash.
 
