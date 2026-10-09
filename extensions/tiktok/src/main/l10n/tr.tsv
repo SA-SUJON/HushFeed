@@ -310,6 +310,18 @@ Confirm before liking a story	Bir hikayeyi beğenmeden önce onay iste
 Continue supported videos from where you stopped when you scroll back to them.	Desteklenen videolara geri kaydırdığında kaldığın yerden devam et.
 Controls	Kontroller
 Feature gate report copied	Özellik kapısı raporu kopyalandı
+# context: Diagnostics, the feed capture row (its titles and summaries) and its toasts
+Capture the feed	Akışı kaydet
+Tap to start, then scroll until the feed problem shows up and come back here to save it. The file has no captions or names, and videos and creators appear only as short codes. Read it before you share it.	Başlatmak için dokun, sonra akıştaki sorun görünene kadar kaydır ve kaydetmek için buraya dön. Dosyada altyazı veya ad bulunmaz, videolar ve içerik üreticileri yalnızca kısa kodlarla görünür. Paylaşmadan önce dosyayı oku.
+Stop and save the feed capture	Akış kaydını durdur ve kaydet
+Recording what the feed filters keep and hide. Tap to stop and save it in %1$s.	Akış filtrelerinin bıraktıkları ve gizledikleri kaydediliyor. Durdurup %1$s konumuna kaydetmek için dokun.
+Save the feed capture	Akış kaydını kaydet
+The last feed capture wasn't saved. Tap to try again.	Son akış kaydı kaydedilmedi. Yeniden denemek için dokun.
+Feed capture started. Scroll until the problem shows up, then come back here to stop.	Akış kaydı başladı. Sorun görünene kadar kaydır, sonra durdurmak için buraya dön.
+The feed capture is still being saved	Akış kaydı hâlâ kaydediliyor
+Feed capture saved to %1$s. Read it before you share it.	Akış kaydı %1$s konumuna kaydedildi. Paylaşmadan önce oku.
+The feed capture couldn't be saved. Tap the row to try again.	Akış kaydı kaydedilemedi. Yeniden denemek için satıra dokun.
+Couldn't start saving the feed capture. Try again in a moment.	Akış kaydını kaydetme başlatılamadı. Birazdan tekrar dene.
 Copy a quick report or save the full report as a file.	Hızlı bir rapor kopyala veya tam raporu dosya olarak kaydet.
 Copy comments without username	Yorumları kullanıcı adı olmadan kopyala
 Copy only the comment text when using TikTok's copy comment action.	TikTok'un yorumu kopyala eylemini kullanırken yalnızca yorum metnini kopyala.

@@ -304,6 +304,18 @@ Confirm before liking a story	Confirmar antes de dar me gusta a una historia
 Continue supported videos from where you stopped when you scroll back to them.	Continuar los vídeos compatibles desde donde los dejaste cuando vuelvas a ellos.
 Controls	Controles
 Feature gate report copied	Informe de interruptores copiado
+# context: Diagnostics, the feed capture row (its titles and summaries) and its toasts
+Capture the feed	Grabar el feed
+Tap to start, then scroll until the feed problem shows up and come back here to save it. The file has no captions or names, and videos and creators appear only as short codes. Read it before you share it.	Toca para empezar, desplázate hasta que aparezca el problema del feed y vuelve aquí para guardarlo. El archivo no incluye subtítulos ni nombres, y los videos y creadores aparecen solo como códigos cortos. Léelo antes de compartirlo.
+Stop and save the feed capture	Detener y guardar la grabación del feed
+Recording what the feed filters keep and hide. Tap to stop and save it in %1$s.	Grabando lo que los filtros del feed dejan y ocultan. Toca para detener y guardar en %1$s.
+Save the feed capture	Guardar la grabación del feed
+The last feed capture wasn't saved. Tap to try again.	La última grabación del feed no se guardó. Toca para intentarlo otra vez.
+Feed capture started. Scroll until the problem shows up, then come back here to stop.	Grabación del feed iniciada. Desplázate hasta que aparezca el problema y luego vuelve aquí para detenerla.
+The feed capture is still being saved	Todavía se está guardando la grabación del feed
+Feed capture saved to %1$s. Read it before you share it.	Grabación del feed guardada en %1$s. Léela antes de compartirla.
+The feed capture couldn't be saved. Tap the row to try again.	No se pudo guardar la grabación del feed. Toca la fila para intentarlo otra vez.
+Couldn't start saving the feed capture. Try again in a moment.	No se pudo empezar a guardar la grabación del feed. Inténtalo de nuevo en breve.
 Copy a quick report or save the full report as a file.	Copia un informe rápido o guarda el informe completo como archivo.
 Copy comments without username	Copiar los comentarios sin el nombre de usuario
 Copy only the comment text when using TikTok's copy comment action.	Copiar solo el texto del comentario al usar la acción de copiar comentario de TikTok.

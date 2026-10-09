@@ -303,6 +303,17 @@ Confirm before liking a story,Konfirmasi sebelum menyukai Story
 Continue supported videos from where you stopped when you scroll back to them.,Lanjutkan video yang didukung dari titik terakhir saat kamu menggulir kembali ke video itu.
 Controls,Kontrol
 Feature gate report copied,Laporan gate disalin
+Capture the feed,Rekam feed
+"Tap to start, then scroll until the feed problem shows up and come back here to save it. The file has no captions or names, and videos and creators appear only as short codes. Read it before you share it.","Ketuk untuk mulai, lalu gulir sampai masalah feed muncul dan kembali ke sini untuk menyimpannya. File ini tidak berisi takarir atau nama, dan video serta kreator hanya muncul sebagai kode pendek. Baca dulu sebelum kamu membagikannya."
+Stop and save the feed capture,Hentikan dan simpan rekaman feed
+Recording what the feed filters keep and hide. Tap to stop and save it in %1$s.,Merekam apa yang dipertahankan dan disembunyikan filter feed. Ketuk untuk berhenti dan menyimpannya di %1$s.
+Save the feed capture,Simpan rekaman feed
+The last feed capture wasn't saved. Tap to try again.,Rekaman feed terakhir tidak tersimpan. Ketuk untuk mencoba lagi.
+"Feed capture started. Scroll until the problem shows up, then come back here to stop.","Rekaman feed dimulai. Gulir sampai masalahnya muncul, lalu kembali ke sini untuk berhenti."
+The feed capture is still being saved,Rekaman feed masih disimpan
+Feed capture saved to %1$s. Read it before you share it.,Rekaman feed disimpan di %1$s. Baca dulu sebelum kamu membagikannya.
+The feed capture couldn't be saved. Tap the row to try again.,Rekaman feed tidak bisa disimpan. Ketuk barisnya untuk mencoba lagi.
+Couldn't start saving the feed capture. Try again in a moment.,Penyimpanan rekaman feed tidak bisa dimulai. Coba lagi sebentar.
 Copy a quick report or save the full report as a file.,Salin laporan ringkas atau simpan laporan lengkap sebagai berkas.
 Copy comments without username,Salin komentar tanpa nama pengguna
 Copy only the comment text when using TikTok's copy comment action.,Salin teks komentarnya saja saat memakai aksi salin komentar milik TikTok.
