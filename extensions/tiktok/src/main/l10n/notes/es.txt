@@ -6,6 +6,8 @@
 
 * **TikTok:** Ocultar accesos directos del perfil tiene un interruptor nuevo en Aplicación, Ocultar Thoughts en los perfiles, desactivado hasta que lo actives (#122). Oculta la burbuja de Thoughts que TikTok pone sobre la foto de un perfil y, en tu propio perfil, la invitación a compartir uno. Reinicia TikTok después de cambiarlo.
 
+* **TikTok:** Permitir capturas de pantalla y Círculo para buscar ahora también quita la marca de ventana segura de las ventanas emergentes y flotantes que la ponen en su propia configuración de ventana, como las ventanas emergentes de Compose de TikTok. Llegan a la pantalla sin pasar por las llamadas de ventana que el parche ya cambiaba, así que todavía podían salir en negro en capturas y grabaciones de pantalla. La idea viene de los parches de TikTok de icysymmetra.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Un enlace a un vídeo de TikTok que abres ahora muestra su vídeo aunque un filtro del feed lo ocultaría, como Ocultar los vídeos que ya has visto con uno que viste antes (#117). TikTok carga un vídeo enlazado como una página de feed propia, así que al filtrarlo ahí quedaba la pantalla de error de TikTok. Solo ese vídeo pasa los filtros, y solo durante un minuto después del enlace. Los enlaces a publicaciones de fotos y los enlaces antiguos del sitio móvil `m.tiktok.com/v/<id>.html` también cuentan como una sola publicación, aquí y para `Bloquear el feed`.

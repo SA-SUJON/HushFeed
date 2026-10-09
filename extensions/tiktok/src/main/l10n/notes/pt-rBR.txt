@@ -6,6 +6,8 @@
 
 * **TikTok:** Esconder atalhos do perfil tem uma chave nova em Aplicativo, Esconder o Thoughts nos perfis, desligada até você ligar (#122). Ela esconde o balão do Thoughts que o TikTok coloca acima da foto de um perfil e, no seu próprio perfil, o convite para compartilhar um. Reinicie o TikTok depois de mudar.
 
+* **TikTok:** Permitir capturas de tela e Círculo para pesquisar agora também tira a marcação de janela segura de pop-ups e janelas flutuantes que a definem nas próprias configurações de janela, como os pop-ups Compose do TikTok. Eles chegam à tela sem passar pelas chamadas de janela que o patch já alterava, então ainda podiam aparecer pretos em capturas e gravações de tela. A ideia vem dos patches de TikTok do icysymmetra.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Um link de vídeo do TikTok que você abre agora mostra o vídeo mesmo quando um filtro do feed o esconderia, como Esconder os vídeos que você já viu para um vídeo que você assistiu antes (#117). O TikTok carrega um vídeo de link como uma página de feed própria, então filtrá-lo deixava a tela de erro do TikTok no lugar. Só esse vídeo passa pelos filtros, e só por um minuto depois do link. Links de publicações de fotos e os links antigos do site para celular, `m.tiktok.com/v/<id>.html`, também contam como uma publicação, aqui e para `Bloquear o feed`.

@@ -6,6 +6,8 @@
 
 * **TikTok:** Sembunyikan pintasan profil punya sakelar baru di bawah Aplikasi, Sembunyikan Thoughts di profil, yang mati sampai kamu menyalakannya (#122). Sakelar ini menyembunyikan gelembung Thoughts yang TikTok pasang di atas foto profil, dan di profilmu sendiri ajakan untuk membagikannya. Mulai ulang TikTok setelah kamu mengubahnya.
 
+* **TikTok:** Izinkan tangkapan layar dan Circle to Search kini juga melepas tanda jendela aman dari pop-up dan jendela mengambang yang memasangnya di pengaturan jendelanya sendiri, seperti pop-up Compose milik TikTok. Jendela itu muncul di layar tanpa lewat panggilan jendela yang sudah diubah patch ini, jadi masih bisa tampak hitam di tangkapan layar dan rekaman layar. Idenya berasal dari patch TikTok milik icysymmetra.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Tautan video TikTok yang kamu buka kini menampilkan videonya meski filter feed akan menyembunyikannya, seperti Sembunyikan video yang sudah kamu tonton untuk video yang pernah kamu tonton (#117). TikTok memuat video bertautan sebagai halaman feed tersendiri, jadi menyaringnya malah menyisakan layar error TikTok di situ. Hanya video itu yang lolos dari filter, dan hanya selama semenit setelah tautan dibuka. Tautan ke postingan foto dan tautan lama situs seluler `m.tiktok.com/v/<id>.html` juga dihitung sebagai satu postingan, di sini maupun untuk `Kunci feed`.

@@ -6,6 +6,8 @@
 
 * **TikTok:** Profil qısayollarını gizlədin üçün Tətbiq altında yeni açar var, Profillərdə Thoughts-u gizlədin, siz yandırana qədər söndürülü qalır (#122). O, TikTok-un profil şəklinin üstünə qoyduğu Thoughts balonunu, öz profilinizdə isə onu paylaşmaq təklifini gizlədir. Dəyişdirdikdən sonra TikTok-u yenidən başladın.
 
+* **TikTok:** Ekran görüntülərinə və Circle to Search-ə icazə verin indi təhlükəsiz pəncərə işarəsini onu öz pəncərə ayarlarında qoyan açılan və üzən pəncərələrdən də götürür, məsələn TikTok-un Compose açılan pəncərələrindən. Onlar ekrana yamanın artıq dəyişdiyi pəncərə çağırışlarından keçmədən çatırdı, ona görə ekran görüntülərində və ekran yazılarında hələ də qara görünə bilirdilər. İdeya icysymmetra-nın TikTok yamalarından gəlir.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Açdığınız TikTok video keçidi indi lent filtri onu gizlədəcək olsa belə öz videosunu göstərir, məsələn, əvvəl izlədiyiniz video üçün Artıq izlədiyiniz videoları gizlədin (#117). TikTok keçidlə açılan videonu ayrıca lent səhifəsi kimi yüklədiyi üçün onu süzmək orada TikTok-un xəta ekranını qoyurdu. Filtrlərdən yalnız həmin tək video keçir, o da keçiddən sonra yalnız bir dəqiqə ərzində. Foto paylaşımlarına keçidlər və mobil saytın köhnə `m.tiktok.com/v/<id>.html` keçidləri də həm burada, həm də `Lenti kilidlə` üçün bir paylaşım sayılır.

@@ -6,6 +6,8 @@
 
 * **TikTok:** Profil kısayollarını gizle'nin Uygulama altında yeni bir anahtarı var, Profillerde Thoughts'u gizle, sen açana kadar kapalı (#122). TikTok'un bir profil fotoğrafının üstüne koyduğu Thoughts balonunu ve kendi profilinde bir tane paylaşma önerisini gizler. Değiştirdikten sonra TikTok'u yeniden başlat.
 
+* **TikTok:** Ekran görüntüsüne ve Circle to Search'e izin ver artık güvenli pencere işaretini, bunu kendi pencere ayarlarında koyan açılır pencerelerden ve kayan pencerelerden de kaldırıyor, örneğin TikTok'un Compose açılır pencerelerinden. Bunlar ekrana yamanın zaten değiştirdiği pencere çağrılarından geçmeden ulaşıyordu, bu yüzden ekran görüntülerinde ve ekran kayıtlarında hâlâ siyah görünebiliyorlardı. Fikir, icysymmetra'nın TikTok yamalarından geliyor.
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Açtığın bir TikTok video bağlantısı, bir akış filtresi onu gizleyecek olsa bile artık videosunu gösteriyor, örneğin daha önce izlediğin bir video için Daha önce gördüğün videoları gizle (#117). TikTok bağlantıyla gelen videoyu kendi başına bir akış sayfası olarak yüklüyor, bu yüzden filtreyle elenince orada TikTok'un hata ekranı kalıyordu. Filtrelerden yalnızca o tek video geçiyor, o da bağlantıdan sonra sadece bir dakika boyunca. Fotoğraf gönderilerine giden bağlantılar ve mobil sitenin eski `m.tiktok.com/v/<id>.html` bağlantıları da hem burada hem de `Akışı kilitle` için tek bir gönderi sayılıyor.
