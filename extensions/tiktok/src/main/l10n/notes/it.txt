@@ -10,6 +10,8 @@
 
 * **TikTok:** Diagnostica ha una nuova riga, Registra il feed, per i problemi del feed più facili da mostrare che da descrivere. Toccala, scorri finché non compare il problema, poi torna indietro e toccala di nuovo, e Hushfeed salva un file di testo in Download/Hushfeed. Contiene una riga per ogni gruppo di video gestito dai filtri del feed durante la registrazione, con l'esito di ogni video e la regola che l'ha nascosto. Video e creator compaiono solo come codici brevi creati da zero per ogni registrazione, e il file non contiene sottotitoli, nomi, handle o indirizzi web. Leggilo comunque prima di condividerlo. Non viene registrato nulla finché non avvii una registrazione. L'idea viene dalle patch per TikTok di icysymmetra.
 
+* **TikTok:** La descrizione di Nascondi i controlli della vista pulita ora cita anche il pizzico sullo schermo come altro modo per uscire dalla vista pulita (#84).
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Un link a un video di TikTok che apri ora mostra il video anche quando un filtro del feed lo nasconderebbe, come Nascondi i video che hai già visto per uno che hai guardato prima (#117). TikTok carica un video collegato come una pagina del feed a sé, quindi filtrarlo lasciava lì la schermata di errore di TikTok. Solo quel video supera i filtri, e solo per un minuto dopo il link. I link ai post di foto e i vecchi link `m.tiktok.com/v/<id>.html` del sito mobile contano come un solo post, qui e per `Blocca il feed`.

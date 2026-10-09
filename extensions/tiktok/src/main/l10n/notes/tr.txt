@@ -10,6 +10,8 @@
 
 * **TikTok:** Tanılama'nın yeni bir satırı var, Akışı kaydet. Göstermesi anlatmasından kolay olan akış sorunları için. Ona dokun, sorun görünene kadar kaydır, sonra geri gelip yeniden dokun, Hushfeed de Download/Hushfeed klasörüne bir metin dosyası kaydeder. Dosyada akış filtrelerinin kayıt sırasında işlediği her video grubu için bir satır var, her videonun sonucu ve onu gizleyen kuralla birlikte. Videolar ve içerik üreticileri yalnızca her kayıt için yeniden oluşturulan kısa kodlarla görünür, dosyada da altyazı, ad, kullanıcı adı veya web adresi yok. Yine de paylaşmadan önce oku. Sen bir kayıt başlatana kadar hiçbir şey kaydedilmez. Fikir, icysymmetra'nın TikTok yamalarından geliyor.
 
+* **TikTok:** Temiz ekran kontrollerini gizle açıklaması artık Temiz ekrandan çıkmanın bir başka yolu olarak ekranı iki parmakla kıstırmayı da anıyor (#84).
+
 ## 0.69.0 (2026-10-08)
 
 * **TikTok:** Açtığın bir TikTok video bağlantısı, bir akış filtresi onu gizleyecek olsa bile artık videosunu gösteriyor, örneğin daha önce izlediğin bir video için Daha önce gördüğün videoları gizle (#117). TikTok bağlantıyla gelen videoyu kendi başına bir akış sayfası olarak yüklüyor, bu yüzden filtreyle elenince orada TikTok'un hata ekranı kalıyordu. Filtrelerden yalnızca o tek video geçiyor, o da bağlantıdan sonra sadece bir dakika boyunca. Fotoğraf gönderilerine giden bağlantılar ve mobil sitenin eski `m.tiktok.com/v/<id>.html` bağlantıları da hem burada hem de `Akışı kilitle` için tek bir gönderi sayılıyor.
