@@ -28,9 +28,9 @@ Hushfeed is a [Morphe](https://github.com/MorpheApp/morphe-manager) patch bundle
 > [!IMPORTANT]
 > Hushfeed targets the global TikTok package, `com.zhiliaoapp.musically`, version [47.1.4](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-47-1-4-release/tiktok-47-1-4-2-android-apk-download/). Use that exact APK when patching. See [Supported target](#supported-target) for the verified build details.
 
-Hushfeed v0.69.0 contains 130 patches for TikTok 47.0.3, 47.1.3 and 47.1.4. New in this one: picture-in-picture, App lock, Lock the feed and Block popups, a fade for the controls over videos, a first video that waits for your tap, and What's new in your phone's language. It needs Morphe Manager 1.34.0 or newer.
+Hushfeed v0.70.0 contains 130 patches for TikTok 47.1.4. New in this one: a shorter settings home with search, simple mode picking 107 patches with their switches off, switches for the side menu button and Thoughts on profiles, offline videos that stay until you delete them, and languages TikTok's automatic translation leaves alone. It needs Morphe Manager 1.34.0 or newer.
 
-The main branch contains 130 patches, the same set as v0.69.0.
+The main branch contains 130 patches, the same set as v0.70.0.
 
 ## Pick what changes
 
