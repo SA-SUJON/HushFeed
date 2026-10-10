@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Anzahl der herausgefilterten Beiträge zeigen und die Schalter, die Teile des Posteingangs ausblenden, funktionieren jetzt weiter, wenn du TikTok zwischen hell und dunkel umstellst. Vorher konnten sie bis zu einem Neustart von TikTok ausfallen.
+
 * **TikTok:** Startseite lange drücken für Hushfeed-Einstellungen funktioniert jetzt weiter, wenn du TikTok zwischen hell und dunkel umstellst. Vorher ging es erst nach einem Neustart von TikTok wieder.
 
 * **TikTok:** Das Wiederherstellen einer Sicherung schaltet den Netzwerk-Proxy nicht mehr ein und ersetzt keine Proxy-Adresse, die du schon hast, damit eine Sicherung von jemand anderem deinen TikTok-Verkehr nicht über dessen Server leiten kann. Auf einem Handy ohne eingerichteten Proxy kommt die Adresse mit ausgeschaltetem Schalter mit, und ein Hinweis nach dem Wiederherstellen sagt das.

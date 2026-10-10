@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Mostrar cuántos se filtraron y los interruptores que ocultan partes de la Bandeja de entrada siguen funcionando cuando cambias TikTok entre claro y oscuro. Antes podían dejar de funcionar hasta reiniciar TikTok.
+
 * **TikTok:** Mantener pulsado Inicio para abrir los ajustes de Hushfeed sigue funcionando cuando cambias TikTok entre claro y oscuro. Antes dejaba de funcionar hasta reiniciar TikTok.
 
 * **TikTok:** Restaurar una copia de seguridad ya no activa el Proxy de red ni reemplaza la dirección de proxy que ya tienes, así que una copia hecha por otra persona no puede enviar tu tráfico de TikTok por su servidor. En un teléfono sin proxy configurado, la dirección se restaura con el interruptor desactivado, y un aviso después de restaurar lo indica.

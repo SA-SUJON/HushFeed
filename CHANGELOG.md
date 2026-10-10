@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Show how many were filtered and the switches that hide parts of the Inbox keep working after you switch TikTok between light and dark. Before, they could stop until TikTok was restarted.
+
 * **TikTok:** Long-press Home for Hushfeed settings keeps working after you switch TikTok between light and dark. Before, it stopped until TikTok was restarted.
 
 * **TikTok:** Restoring a backup no longer turns on the Network proxy or replaces the proxy address you already have, so a backup someone else made can't send your TikTok traffic through their server. On a phone with no proxy set up yet, the address comes along with the switch off, and a note after the restore says so.

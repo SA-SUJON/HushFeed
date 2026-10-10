@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Tampilkan jumlah yang disaring dan sakelar yang menyembunyikan bagian Kotak Masuk tetap berfungsi setelah kamu mengganti TikTok antara terang dan gelap. Sebelumnya keduanya bisa berhenti sampai TikTok dimulai ulang.
+
 * **TikTok:** Tekan lama Beranda untuk pengaturan Hushfeed tetap berfungsi setelah kamu mengganti TikTok antara terang dan gelap. Sebelumnya fitur ini berhenti sampai TikTok dimulai ulang.
 
 * **TikTok:** Memulihkan cadangan tidak lagi menyalakan Proksi jaringan atau mengganti alamat proksi yang sudah kamu punya, jadi cadangan buatan orang lain tidak bisa mengalirkan lalu lintas TikTok-mu lewat server mereka. Di ponsel yang belum punya proksi, alamatnya ikut dengan sakelar mati, dan ada catatan setelah pemulihan yang memberitahukannya.

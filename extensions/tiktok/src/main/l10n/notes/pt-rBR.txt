@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Mostrar quantos foram filtrados e as chaves que ocultam partes da Caixa de entrada continuam funcionando quando você troca o TikTok entre claro e escuro. Antes, podiam parar até o TikTok ser reiniciado.
+
 * **TikTok:** Toque e segure Início para abrir as configurações do Hushfeed continua funcionando quando você troca o TikTok entre claro e escuro. Antes, parava até o TikTok ser reiniciado.
 
 * **TikTok:** Restaurar um backup não liga mais o Proxy de rede nem substitui o endereço de proxy que você já tem, então um backup feito por outra pessoa não consegue mandar seu tráfego do TikTok pelo servidor dela. Num celular sem proxy configurado, o endereço vem junto com a chave desligada, e um aviso depois da restauração explica isso.

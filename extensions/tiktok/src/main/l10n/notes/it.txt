@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Mostra quanti sono stati filtrati e gli interruttori che nascondono parti della Posta in arrivo continuano a funzionare quando passi TikTok da chiaro a scuro o viceversa. Prima potevano smettere di funzionare finché non riavviavi TikTok.
+
 * **TikTok:** Tieni premuto su Home per le impostazioni di Hushfeed continua a funzionare quando passi TikTok da chiaro a scuro o viceversa. Prima smetteva di funzionare finché non riavviavi TikTok.
 
 * **TikTok:** Ripristinare un backup non attiva più il Proxy di rete e non sostituisce l'indirizzo proxy che hai già, così un backup fatto da qualcun altro non può far passare il tuo traffico TikTok dal suo server. Su un telefono senza proxy configurato, l'indirizzo arriva con l'interruttore spento, e una nota dopo il ripristino lo dice.
