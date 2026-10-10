@@ -319,8 +319,9 @@ public class SettingsSearchQueryTest {
 
     /** While its notes are unread, What's new is found under About Hushfeed and opens there. */
     @Test public void whatsNewIsFoundWhileItsNotesAreUnread() throws Exception {
-        // Newer than every bundled release, so the newest notes are there to read.
-        TikTokPreferenceFragment.setReleaseVersionForTests("999.0.0");
+        // A release with its own bundled notes. With nothing dismissed yet, only the installed
+        // release's section counts as unread, so a version with no section would find nothing.
+        TikTokPreferenceFragment.setReleaseVersionForTests("0.70.0");
         try {
             TikTokPreferenceFragment search = attachSearch();
             assertTrue("What's new is not indexed while pending",
