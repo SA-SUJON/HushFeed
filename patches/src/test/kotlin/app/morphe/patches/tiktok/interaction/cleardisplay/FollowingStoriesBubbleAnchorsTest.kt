@@ -8,6 +8,7 @@ import app.morphe.Fixtures
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.util.getReference
+import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.iface.ClassDef
@@ -49,7 +50,7 @@ class FollowingStoriesBubbleAnchorsTest {
             val hooked = MutableMethod(found.handler)
             hooked.hookBubbleClearMode(found)
             val after = hooked.implementation!!.instructions.toList()
-            assertEquals("$version: three instructions on the way in, twelve on the way out", before.size + 15, after.size)
+            assertEquals("$version: three instructions on the way in, thirteen on the way out", before.size + 16, after.size)
 
             // The way in: the bubble's view goes to the extension right before TikTok hides it.
             val view = after[found.toggleIndex].getReference<MethodReference>()!!
@@ -63,16 +64,21 @@ class FollowingStoriesBubbleAnchorsTest {
             val out = found.exitIndex + 3
             assertEquals("$version: the way out starts at the hook", out, branchTarget(hooked, test))
             assertEquals(found.view.toString(), after[out].getReference<MethodReference>().toString())
-            assertEquals(POWER_LIST_ALL, after[out + 4].getReference<MethodReference>().toString())
-            val ask = after[out + 6].getReference<MethodReference>()!!
+            assertEquals("$version: a private list getter is called directly",
+                if (AccessFlags.PRIVATE.isSet(found.list.accessFlags)) Opcode.INVOKE_DIRECT else Opcode.INVOKE_VIRTUAL,
+                after[out + 2].opcode)
+            assertEquals(Opcode.IF_EQZ, after[out + 4].opcode)
+            assertEquals("$version: no list model asks with no list", out + 7, branchTarget(hooked, out + 4))
+            assertEquals(POWER_LIST_ALL, after[out + 5].getReference<MethodReference>().toString())
+            val ask = after[out + 7].getReference<MethodReference>()!!
             assertEquals(BUBBLE_EXTENSION, ask.definingClass)
             assertEquals("showAgain", ask.name)
-            assertEquals(Opcode.IF_EQZ, after[out + 8].opcode)
-            assertEquals(Opcode.NOP, after[out + 11].opcode)
-            assertEquals("$version: a no skips the show", out + 11, branchTarget(hooked, out + 8))
-            assertEquals(found.toggle.toString(), after[out + 10].getReference<MethodReference>().toString())
+            assertEquals(Opcode.IF_EQZ, after[out + 9].opcode)
+            assertEquals(Opcode.NOP, after[out + 12].opcode)
+            assertEquals("$version: a no skips the show", out + 12, branchTarget(hooked, out + 9))
+            assertEquals(found.toggle.toString(), after[out + 11].getReference<MethodReference>().toString())
 
-            val added = (found.toggleIndex until found.toggleIndex + 3) + (out until out + 12)
+            val added = (found.toggleIndex until found.toggleIndex + 3) + (out until out + 13)
             assertEquals(
                 "$version: TikTok's own instructions keep their order",
                 before.map { it.opcode },

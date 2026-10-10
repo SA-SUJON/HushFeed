@@ -85,9 +85,12 @@ internal fun findBubbleClearMode(bubble: ClassDef): BubbleClearMode {
         it.name == toggle.name && it.parameterTypes.map { type -> type.toString() } == listOf("Z", "Z") &&
             it.returnType == "V"
     }.singleOrPatchException("$WHAT: show and hide method").implementationOrPatchException(WHAT).instructions
-    val view = toggleBody.mapNotNull { it.getReference<MethodReference>() }.firstOrNull {
-        it.parameterTypes.isEmpty() && it.returnType == "Landroid/view/View;"
-    } ?: throw PatchException("$WHAT: the show and hide method reads no view")
+    // The hook makes the same virtual call on the assem, so a view read any other way won't do.
+    val view = toggleBody.firstOrNull {
+        it.opcode == Opcode.INVOKE_VIRTUAL && it.getReference<MethodReference>()?.let { reference ->
+            reference.parameterTypes.isEmpty() && reference.returnType == "Landroid/view/View;"
+        } == true
+    }?.getReference<MethodReference>() ?: throw PatchException("$WHAT: the show and hide method reads no view")
     val list = bubble.methods.filter {
         it.parameterTypes.isEmpty() && it.returnType == SKYLIGHT_LIST && !AccessFlags.STATIC.isSet(it.accessFlags)
     }.singleOrPatchException("$WHAT: list model getter")
@@ -125,7 +128,8 @@ internal fun branchTarget(method: Method, index: Int): Int {
  * On the way in, tells the extension whether the bubble was showing just before TikTok hides it.
  * On the way out, asks the extension and, on yes, makes TikTok's own show call (true, true), which
  * sets it visible and logs the show as TikTok does. The way out goes first so the way in's index
- * still holds.
+ * still holds. A missing list model asks with no list, which answers no, rather than throw inside
+ * TikTok's handler.
  */
 internal fun MutableMethod.hookBubbleClearMode(found: BubbleClearMode) {
     val self = implementation!!.registerCount - 2
@@ -133,15 +137,18 @@ internal fun MutableMethod.hookBubbleClearMode(found: BubbleClearMode) {
     val bubble = out.getFreeRegister()
     val items = out.getFreeRegister()
     if (maxOf(self, bubble, items) > 15) throw PatchException("$WHAT: registers past v15 at the way out")
+    val listCall = if (AccessFlags.PRIVATE.isSet(found.list.accessFlags)) "invoke-direct" else "invoke-virtual"
     addInstructionsAtControlFlowLabel(
         found.exitIndex,
         """
             invoke-virtual { v$self }, ${found.view}
             move-result-object v$bubble
-            invoke-virtual { v$self }, ${found.list}
+            $listCall { v$self }, ${found.list}
             move-result-object v$items
+            if-eqz v$items, :ask
             invoke-virtual { v$items }, $POWER_LIST_ALL
             move-result-object v$items
+            :ask
             invoke-static { v$bubble, v$items }, $BUBBLE_EXTENSION->showAgain(Landroid/view/View;Ljava/util/List;)Z
             move-result v$bubble
             if-eqz v$bubble, :keep

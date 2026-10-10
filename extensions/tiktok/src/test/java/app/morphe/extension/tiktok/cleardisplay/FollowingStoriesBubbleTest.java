@@ -56,6 +56,14 @@ public class FollowingStoriesBubbleTest {
     }
 
     @Test
+    public void aRepeatedStartWhileHiddenKeepsThatItWasShowing() {
+        hiddenForClearDisplay();
+        // Remember clear display posts the start again for the next video.
+        hiddenForClearDisplay();
+        assertTrue(FollowingStoriesBubble.showAgain(bubble, SOMEONE));
+    }
+
+    @Test
     public void aBubbleTikTokWasntShowingStaysGone() {
         bubble.setVisibility(View.GONE);
         hiddenForClearDisplay();

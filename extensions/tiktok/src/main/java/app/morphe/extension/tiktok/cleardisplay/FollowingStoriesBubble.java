@@ -33,6 +33,10 @@ public final class FollowingStoriesBubble {
     /** TikTok is about to hide {@code bubble} because clear display started. */
     public static void hiding(View bubble) {
         if (bubble == null) return;
+        // A second start while the bubble is hidden must not erase that it was showing. TikTok
+        // 47.1.4 skips its hide once clear display is on, but Remember clear display posts a start
+        // for every new video, and a build without that check would land here again.
+        if (Boolean.TRUE.equals(SHOWING_AT_CLEAR.get(bubble))) return;
         SHOWING_AT_CLEAR.put(bubble, bubble.getVisibility() == View.VISIBLE);
     }
 
