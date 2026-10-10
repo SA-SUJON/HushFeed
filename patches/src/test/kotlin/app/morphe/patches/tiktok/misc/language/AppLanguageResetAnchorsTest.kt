@@ -8,6 +8,7 @@ import app.morphe.Fixtures
 import app.morphe.takes
 import app.morphe.util.getReference
 import app.morphe.util.numberOfParameterRegisters
+import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.instruction.OffsetInstruction
@@ -47,6 +48,8 @@ class AppLanguageResetAnchorsTest {
             val reset = taken.single()
             assertEquals("$version: the patch's shape check picks another method",
                 listOf(reset.name), service.methods.filter { it.isAppLanguageReset() }.map { it.name })
+            assertFalse("$version: the reset is static, so p1 isn't its context",
+                AccessFlags.STATIC.isSet(reset.accessFlags))
             val body = reset.implementation!!
             assertTrue("$version: no local for the switch's answer",
                 body.registerCount - reset.numberOfParameterRegisters >= 1)

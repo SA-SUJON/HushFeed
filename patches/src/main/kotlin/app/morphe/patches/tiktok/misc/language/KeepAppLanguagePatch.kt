@@ -15,6 +15,7 @@ import app.morphe.patches.tiktok.misc.settings.settingsPatch
 import app.morphe.patches.tiktok.shared.guardAtEntry
 import app.morphe.util.addInstruction
 import app.morphe.util.getReference
+import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.iface.reference.StringReference
@@ -46,8 +47,12 @@ internal object AppLanguageResetFingerprint : Fingerprint(
     custom = { method, _ -> method.isAppLanguageReset() },
 )
 
-/** Whether [method] takes a context, reads [LANGUAGE_PREFERENCES] and clears a preferences file. */
+/**
+ * Whether [method] takes a context, reads [LANGUAGE_PREFERENCES] and clears a preferences file. It
+ * must be an instance method, since the guard reads the context as p1.
+ */
 internal fun Method.isAppLanguageReset(): Boolean {
+    if (AccessFlags.STATIC.isSet(accessFlags)) return false
     if (returnType != "V" || parameterTypes.map(CharSequence::toString) != listOf(CONTEXT)) return false
     val instructions = implementation?.instructions ?: return false
     return instructions.any { it.getReference<StringReference>()?.string == LANGUAGE_PREFERENCES } &&
