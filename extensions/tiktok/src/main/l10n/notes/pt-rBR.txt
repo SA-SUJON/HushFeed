@@ -1,4 +1,4 @@
-## Unreleased
+## 0.70.0 (2026-10-09)
 
 * **TikTok:** Tamanho do nome do criador agora também ajusta a data de publicação ao lado do nome, para que os dois fiquem do mesmo tamanho (#66).
 

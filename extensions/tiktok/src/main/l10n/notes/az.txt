@@ -1,4 +1,4 @@
-## Unreleased
+## 0.70.0 (2026-10-09)
 
 * **TikTok:** Müəllif mətninin ölçüsü indi müəllifin adının yanındakı paylaşım tarixinin ölçüsünü də dəyişir, ona görə ikisi eyni ölçüdə qalır (#66).
 

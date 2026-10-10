@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+## 0.70.0 (2026-10-09)
+
 * **TikTok:** Author text size now sizes the post date next to the creator's name too, so the two stay the same size (#66).
 
 * **TikTok:** Comments settings has a new row, Don't auto translate these languages. It's empty until you fill it in (#121). Type language codes like `es, de`, and when TikTok translates for you, captions and comments in those languages stay as they were written. See translation still works when you tap it, and TikTok's own Don't translate list isn't changed.

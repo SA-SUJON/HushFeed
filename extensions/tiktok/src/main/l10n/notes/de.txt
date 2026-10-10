@@ -1,4 +1,4 @@
-## Unreleased
+## 0.70.0 (2026-10-09)
 
 * **TikTok:** Textgröße des Creatornamens ändert jetzt auch die Größe des Datums neben dem Namen, damit beide gleich groß bleiben (#66).
 

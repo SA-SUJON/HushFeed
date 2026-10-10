@@ -1,4 +1,4 @@
-## Unreleased
+## 0.70.0 (2026-10-09)
 
 * **TikTok:** Ukuran nama kreator kini juga mengatur ukuran tanggal unggah di sebelah nama kreator, jadi keduanya tetap sama besar (#66).
 
