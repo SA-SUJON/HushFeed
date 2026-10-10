@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** El informe de diagnóstico tiene una nueva sección Storage con las carpetas más grandes del almacenamiento de TikTok, así un informe puede mostrar qué lo está llenando (#70). Solo nombra carpetas, nunca archivos, y oculta los números de cuenta.
+
 * **TikTok:** Pulsar atrás en un video despejado que abriste desde la búsqueda o un perfil ya no cuenta como apagar Clear display. Si abres el mismo video otra vez, se despeja como cualquier otro, y un Clear display recordado sigue activo (#84).
 
 * **TikTok:** Remove LIVE extras ahora dice que quita los archivos para unirte al LIVE de otra persona como invitado, así que con él puede dejar de funcionar unirte por voz o video (#132). No lo incluyas si te unes a LIVEs.

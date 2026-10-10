@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Il report diagnostico ha una nuova sezione Storage con le cartelle più grandi nella memoria di TikTok, così un report può mostrare cosa la sta riempiendo (#70). Nomina solo le cartelle, mai i file, e nasconde i numeri degli account.
+
 * **TikTok:** Premere indietro su un video pulito aperto dalla ricerca o da un profilo non conta più come spegnere Clear display. Riaprendo lo stesso video si pulisce come gli altri, e un Clear display ricordato resta attivo (#84).
 
 * **TikTok:** Remove LIVE extras ora dice che toglie i file per entrare nella LIVE di qualcun altro come ospite, quindi con questa patch entrare con la voce o il video può smettere di funzionare (#132). Lasciala fuori se partecipi alle LIVE.

@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Tanılama raporunda TikTok depolamasındaki en büyük klasörleri listeleyen yeni bir Storage bölümü var. Böylece rapor, alanı neyin doldurduğunu gösterebiliyor (#70). Sadece klasör adlarını yazıyor, dosya adlarını asla, hesap numaralarını da gizliyor.
+
 * **TikTok:** Aramadan ya da bir profilden açılan temizlenmiş bir videoda geriye basmak artık Clear display'i kapatmak sayılmıyor. Aynı videoyu yeniden açınca o da diğerleri gibi temizleniyor ve hatırlanan Clear display açık kalıyor (#84).
 
 * **TikTok:** Remove LIVE extras artık başkasının LIVE yayınına konuk olarak katılma dosyalarını da kaldırdığını söylüyor. Yani bu yamayla sesli ya da görüntülü katılım çalışmayabilir (#132). LIVE yayınlarına katılıyorsan bu yamayı seçme.

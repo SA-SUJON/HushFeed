@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Diaqnostika hesabatında yeni Storage bölməsi var. O, TikTok yaddaşındakı ən böyük qovluqları göstərir, beləliklə hesabat yeri nəyin doldurduğunu göstərə bilir (#70). Yalnız qovluq adlarını yazır, fayl adlarını yox, hesab nömrələrini isə gizlədir.
+
 * **TikTok:** Axtarışdan və ya profildən açılmış təmizlənmiş videoda geri düyməsinə basmaq artıq Clear display-i söndürmək sayılmır. Eyni videonu yenidən açanda o da başqaları kimi təmizlənir, yadda saxlanmış Clear display isə açıq qalır (#84).
 
 * **TikTok:** Remove LIVE extras indi başqasının LIVE-ına qonaq kimi qoşulmaq üçün faylları da sildiyini deyir, ona görə onunla səsli və ya videolu qoşulmaq işləməyə bilər (#132). LIVE-lara qoşulursunuzsa, onu seçməyin.
