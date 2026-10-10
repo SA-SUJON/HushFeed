@@ -104,10 +104,12 @@ public class SearchSettingsClarityTest {
         onPage("INTERFACE", page -> assertNull("the side menu row outlived its toolbar check",
                 page.findPreference("hide_feed_sidebar_button")));
 
+        SettingsStatus.hideFeedSidebarButtonEnabled = true;
         SettingsStatus.hideFeedLiveButtonEnabled = false;
         onPage("INTERFACE", page -> {
             assertNotNull("the LIVE row stays with the overlay hider", page.findPreference("hide_live_entrance"));
-            assertNull("the side menu row needs the toolbar check", page.findPreference("hide_feed_sidebar_button"));
+            assertNotNull("the side menu row follows its own flag, not the LIVE half's",
+                    page.findPreference("hide_feed_sidebar_button"));
         });
     }
 

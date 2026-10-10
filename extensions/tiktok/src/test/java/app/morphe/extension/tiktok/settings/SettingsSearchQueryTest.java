@@ -283,6 +283,40 @@ public class SettingsSearchQueryTest {
         assertEquals("App & advanced", category(search, "Pause Hushfeed"));
     }
 
+    /**
+     * A hand-indexed About row has no section to open, so opening it fell through to the master
+     * menu. It lands on About Hushfeed with the row as the target.
+     */
+    @Test public void openingFoundBuildDetailsLandsOnAboutHushfeed() throws Exception {
+        TikTokPreferenceFragment search = attachSearch();
+        search(search, "build details");
+        Preference result = null;
+        PreferenceScreen screen = search.getPreferenceScreen();
+        for (int position = 0; position < screen.getPreferenceCount(); position++) {
+            Preference candidate = screen.getPreference(position);
+            if (candidate.getTitle() != null && "Build details".contentEquals(candidate.getTitle())) {
+                result = candidate;
+                break;
+            }
+        }
+        assertNotNull(result);
+        assertTrue(result.getOnPreferenceClickListener().onPreferenceClick(result));
+        search.getActivity().getFragmentManager().executePendingTransactions();
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+        android.app.Fragment opened = search.getActivity().getFragmentManager()
+                .findFragmentById(android.R.id.content);
+        assertTrue(opened instanceof TikTokPreferenceFragment);
+        assertEquals("ABOUT", opened.getArguments().getString("morphe_settings_hub"));
+        assertEquals("action_build_details", opened.getArguments().getString("morphe_settings_target_key"));
+    }
+
+    /** What's new leaves About Hushfeed once its notes are read, and its result goes with it. */
+    @Test public void whatsNewIsNotFoundWhenThereIsNothingNew() throws Exception {
+        // Unpatched, the release version is empty, so nothing is pending.
+        TikTokPreferenceFragment search = attachSearch();
+        assertFalse(search(search, "release notes").contains("What's new"));
+    }
+
     /** "???" folds to nothing, and the page said Start typing under a box with text in it. */
     @Test public void aQueryOfOnlyPunctuationSaysNothingMatched() throws Exception {
         TikTokPreferenceFragment search = attachSearch();
