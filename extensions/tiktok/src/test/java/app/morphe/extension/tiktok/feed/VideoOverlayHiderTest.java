@@ -1089,6 +1089,54 @@ public class VideoOverlayHiderTest {
         }
     }
 
+    /**
+     * TikTok's launcher entry is a second MainActivity under the feed's, and a theme change can
+     * resume it for a moment while the feed stays in front and gets no new resume. The layout
+     * listener went with that resume and with the install its onCreate posted, and the feed in
+     * front got its LIVE entrance back on the next layout.
+     */
+    @Test
+    public void aBuriedMainActivityResumedForAMomentHandsTheHidesBack() {
+        int liveId = 0x7f0a0e41;
+        VideoOverlayHider.resolveForTests("47.1.4:kam", liveId);
+        Settings.HIDE_LIVE_ENTRANCE.save(true);
+        try (var feed = Robolectric.buildActivity(
+                     com.ss.android.ugc.aweme.main.MainActivity.class).create();
+             var launcher = Robolectric.buildActivity(
+                     com.ss.android.ugc.aweme.main.MainActivity.class).create()) {
+            View live = liveEntrance(feed.get(), liveId);
+            VideoOverlayHider.install(feed.get());
+            feed.start().resume();
+            org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle();
+            layOut(feed.get());
+            assertEquals(View.GONE, live.getVisibility());
+
+            liveEntrance(launcher.get(), liveId);
+            VideoOverlayHider.install(launcher.get());
+            // Recreated, the buried copy is resumed for a moment and stopped again, and the
+            // install its onCreate posted runs after that.
+            launcher.start().resume().pause().stop();
+            org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle();
+
+            // TikTok shows the entrance again, and the feed's next layout takes it away.
+            live.setVisibility(View.VISIBLE);
+            layOut(feed.get());
+            assertEquals("the feed in front got its LIVE entrance back",
+                    View.GONE, live.getVisibility());
+        } finally {
+            Settings.HIDE_LIVE_ENTRANCE.resetToDefault();
+        }
+    }
+
+    private static View liveEntrance(Activity activity, int id) {
+        FrameLayout root = new FrameLayout(activity);
+        View live = new View(activity);
+        live.setId(id);
+        root.addView(live);
+        activity.setContentView(root);
+        return live;
+    }
+
     @Test
     public void theStatusBarComesBackOnlyIfThisClassHidIt() {
         try (var controller = Robolectric.buildActivity(Activity.class).setup()) {

@@ -26,6 +26,7 @@ import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.HushfeedPause;
 import app.morphe.extension.tiktok.blockauthor.FeedVisibility;
 import app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch;
+import app.morphe.extension.tiktok.navigation.FrontWindow;
 import app.morphe.extension.tiktok.navigation.NavigationTabsFilter;
 import app.morphe.extension.shared.diagnostics.HookStatus;
 import app.morphe.extension.tiktok.settings.Settings;
@@ -308,15 +309,36 @@ public final class VideoOverlayHider {
     private static final Map<View, Boolean> CUTOUT_OPENED = new WeakHashMap<>();
     private static final GlobalLayoutHook LAYOUT_HOOK = new GlobalLayoutHook();
 
+    /**
+     * Moves the one layout listener to whichever feed window is in front: a detail pager as it
+     * opens, the main activity again as the user comes back to it. TikTok's launcher entry is a
+     * second MainActivity under the feed's, and a theme change resumes it for a moment while the
+     * feed can stay in front, so the listener goes back to the feed when that copy pauses.
+     */
+    private static final FrontWindow FRONT = new FrontWindow(true, new FrontWindow.Listener() {
+        @Override public void onFront(Activity activity) {
+            installNow(activity);
+        }
+
+        @Override public void onGone(Activity activity) {
+        }
+    });
+
     private VideoOverlayHider() {
     }
 
-    /** Called from the patched {@code MainActivity.onCreate}; the work is posted. */
+    /**
+     * Called from the patched {@code MainActivity.onCreate}; the work is posted. A copy recreated
+     * behind the feed runs it after it has stopped again, and leaves the hides where they are.
+     */
     public static void install(Activity activity) {
         if (activity == null) {
             return;
         }
-        Utils.runOnMainThread(() -> installNow(activity));
+        FRONT.add(activity);
+        Utils.runOnMainThread(() -> {
+            if (FRONT.mayTake(activity)) installNow(activity);
+        });
     }
 
     private static void installNow(Activity activity) {
@@ -345,18 +367,14 @@ public final class VideoOverlayHider {
     }
 
     /**
-     * Moves the one layout listener to whichever feed window comes to the front: a detail pager
-     * as it opens, the main activity again as the user comes back to it. Registered once per
-     * application, from the main activity's own install.
+     * Gives a window the brightness back as it pauses. Registered once per application, from
+     * the first install; {@link #FRONT} moves the layout listener.
      */
     private static void follow(Application application) {
         if (application == null || followed.get() == application) return;
         followed = new WeakReference<>(application);
         application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
-            @Override public void onActivityResumed(Activity resumed) {
-                if (FeedVisibility.isFeedWindow(resumed)) installNow(resumed);
-            }
-
+            @Override public void onActivityResumed(Activity resumed) { }
             @Override public void onActivityCreated(Activity created, Bundle state) { }
             @Override public void onActivityStarted(Activity started) { }
             @Override public void onActivityPaused(Activity paused) { EdgeSwipeLevels.onPaused(paused); }
