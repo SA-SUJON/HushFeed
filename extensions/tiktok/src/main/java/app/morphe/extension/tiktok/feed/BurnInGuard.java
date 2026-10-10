@@ -105,10 +105,13 @@ public final class BurnInGuard {
             if (passed.get() != activity) {
                 passed = new WeakReference<>(activity);
                 touchedAt = now;
+                // A finger that went down on a window that's gone may never have come up.
+                fingerDown = false;
             }
             if (touchedAt == 0L) touchedAt = now;
         } else {
             touchedAt = 0L;
+            fingerDown = false;
         }
         guarding = on;
         boolean canDim = on && chosen > IDLE_LEVEL;
@@ -174,11 +177,12 @@ public final class BurnInGuard {
     /**
      * A finger on a guarded window ({@code action} is its MotionEvent action, or -1 for the window
      * getting focus back): the dim waits again, dimmed controls come back now, and a lift asks
-     * for a pass so the wait is timed from it.
+     * for a pass so the wait is timed from it. Focus coming back counts as a lift, since a touch
+     * that opened something else may have ended there without an up reaching this window.
      */
     private static void touched(int action) {
         touchedAt = SystemClock.uptimeMillis();
-        boolean lifted = action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL;
+        boolean lifted = action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL || action < 0;
         if (action == MotionEvent.ACTION_DOWN) fingerDown = true;
         else if (lifted) fingerDown = false;
         if (!guarding || !(dimmed || lifted)) return;

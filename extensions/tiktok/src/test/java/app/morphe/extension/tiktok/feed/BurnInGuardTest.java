@@ -139,6 +139,30 @@ public class BurnInGuardTest {
         }
     }
 
+    /** A press that opened something else ends there, and its up never reaches the feed's window. */
+    @Test
+    public void aTouchWhoseLiftWentElsewhereStillLetsTheControlsDim() {
+        try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
+            feed(controller.get());
+            Settings.BURN_IN_GUARD.save(BurnInGuard.DIM);
+            VideoOverlayHider.applyTo(activity);
+            send(MotionEvent.ACTION_DOWN);
+            activity.getWindow().getCallback().onWindowFocusChanged(true);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            after(BurnInGuard.IDLE_AFTER_MS);
+            assertEquals("coming back ends the touch", DIMMED, column.getAlpha(), 0.0001f);
+
+            send(MotionEvent.ACTION_DOWN);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            try (var next = Robolectric.buildActivity(Activity.class).setup()) {
+                feed(next.get());
+                VideoOverlayHider.applyTo(activity);
+                after(BurnInGuard.IDLE_AFTER_MS);
+                assertEquals("a new window doesn't inherit the old one's finger", DIMMED, column.getAlpha(), 0.0001f);
+            }
+        }
+    }
+
     @Test
     public void theControlsDimAfterFiveSecondsWithoutATouchAndComeBackOnTheNext() {
         try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
