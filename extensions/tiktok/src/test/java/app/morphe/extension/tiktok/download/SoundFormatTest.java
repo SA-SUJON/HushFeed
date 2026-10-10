@@ -146,7 +146,7 @@ public class SoundFormatTest {
         ShadowToast.reset();
         assertFalse(OpusTranscoder.transcodeOrKeep(source, output));
         Shadows.shadowOf(Looper.getMainLooper()).idle();
-        assertEquals(L10n.t("Opus didn't work on this phone, so the sound was saved as TikTok sent it."),
+        assertEquals(L10n.t("Opus didn't work on this phone. Saving the sound as TikTok sent it instead."),
                 ShadowToast.getTextOfLatestToast());
     }
 

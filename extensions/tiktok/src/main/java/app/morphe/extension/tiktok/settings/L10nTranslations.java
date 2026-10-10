@@ -2264,8 +2264,8 @@ public final class L10nTranslations {
                 "İstəyə bağlıdır. Proksiyə yalnız Android-in özünün etdiyi bağlantılar daxil ola bilər, TikTok-un öz bağlantıları yox. Parolsuz proksi üçün boş buraxın.");
         table.put("Opus (.ogg), a smaller file",
                 "Opus (.ogg), daha kiçik fayl");
-        table.put("Opus didn't work on this phone, so the sound was saved as TikTok sent it.",
-                "Opus bu telefonda işləmədi, ona görə səs TikTok-un göndərdiyi kimi saxlanıldı.");
+        table.put("Opus didn't work on this phone. Saving the sound as TikTok sent it instead.",
+                "Opus bu telefonda işləmədi. Səs əvəzinə TikTok-un göndərdiyi kimi saxlanılır.");
         table.put("Opus needs Android 10 or later, so sounds save as TikTok sent them.",
                 "Opus üçün Android 10 və ya daha yeni versiya lazımdır, ona görə səslər TikTok-un göndərdiyi kimi saxlanılır.");
         table.put("Original language",
@@ -6215,8 +6215,8 @@ public final class L10nTranslations {
                 "Optional. Nur Verbindungen, die Android selbst aufbaut, können sich an einem Proxy anmelden, nicht die von TikTok. Leer lassen bei einem Proxy ohne Passwort.");
         table.put("Opus (.ogg), a smaller file",
                 "Opus (.ogg), kleinere Datei");
-        table.put("Opus didn't work on this phone, so the sound was saved as TikTok sent it.",
-                "Opus hat auf diesem Handy nicht funktioniert, deshalb wurde der Ton so gespeichert, wie TikTok ihn geschickt hat.");
+        table.put("Opus didn't work on this phone. Saving the sound as TikTok sent it instead.",
+                "Opus hat auf diesem Handy nicht funktioniert. Der Ton wird stattdessen so gespeichert, wie TikTok ihn geschickt hat.");
         table.put("Opus needs Android 10 or later, so sounds save as TikTok sent them.",
                 "Opus braucht Android 10 oder neuer, deshalb werden Töne so gespeichert, wie TikTok sie liefert.");
         table.put("Original language",
@@ -10166,8 +10166,8 @@ public final class L10nTranslations {
                 "Opcional. Solo las conexiones que hace Android mismo pueden iniciar sesión en un proxy, no las de TikTok. Déjalo vacío para un proxy sin contraseña.");
         table.put("Opus (.ogg), a smaller file",
                 "Opus (.ogg), archivo más pequeño");
-        table.put("Opus didn't work on this phone, so the sound was saved as TikTok sent it.",
-                "Opus no funcionó en este teléfono, así que el sonido se guardó tal como lo envió TikTok.");
+        table.put("Opus didn't work on this phone. Saving the sound as TikTok sent it instead.",
+                "Opus no funcionó en este teléfono. Guardando el sonido tal como lo envió TikTok.");
         table.put("Opus needs Android 10 or later, so sounds save as TikTok sent them.",
                 "Opus necesita Android 10 o posterior, así que los sonidos se guardan tal como los envía TikTok.");
         table.put("Original language",
@@ -14117,8 +14117,8 @@ public final class L10nTranslations {
                 "Opsional. Hanya koneksi yang dibuat Android sendiri yang bisa masuk ke proxy, bukan koneksi TikTok. Kosongkan untuk proxy tanpa kata sandi.");
         table.put("Opus (.ogg), a smaller file",
                 "Opus (.ogg), berkas lebih kecil");
-        table.put("Opus didn't work on this phone, so the sound was saved as TikTok sent it.",
-                "Opus tidak berfungsi di ponsel ini, jadi suaranya disimpan seperti yang dikirim TikTok.");
+        table.put("Opus didn't work on this phone. Saving the sound as TikTok sent it instead.",
+                "Opus tidak berfungsi di ponsel ini. Menyimpan suaranya seperti yang dikirim TikTok.");
         table.put("Opus needs Android 10 or later, so sounds save as TikTok sent them.",
                 "Opus butuh Android 10 atau yang lebih baru, jadi suara disimpan seperti yang dikirim TikTok.");
         table.put("Original language",
@@ -18068,8 +18068,8 @@ public final class L10nTranslations {
                 "Facoltativo. Solo le connessioni fatte da Android stesso possono accedere a un proxy, non quelle di TikTok. Lascia vuoto per un proxy senza password.");
         table.put("Opus (.ogg), a smaller file",
                 "Opus (.ogg), file più piccolo");
-        table.put("Opus didn't work on this phone, so the sound was saved as TikTok sent it.",
-                "Opus non ha funzionato su questo telefono, quindi l'audio è stato salvato come l'ha inviato TikTok.");
+        table.put("Opus didn't work on this phone. Saving the sound as TikTok sent it instead.",
+                "Opus non ha funzionato su questo telefono. Salvo l'audio come l'ha inviato TikTok.");
         table.put("Opus needs Android 10 or later, so sounds save as TikTok sent them.",
                 "Opus richiede Android 10 o successivo, quindi l'audio viene salvato come lo invia TikTok.");
         table.put("Original language",
@@ -22019,8 +22019,8 @@ public final class L10nTranslations {
                 "Opcional. Só as conexões feitas pelo próprio Android conseguem entrar em um proxy, não as do TikTok. Deixe vazio para um proxy sem senha.");
         table.put("Opus (.ogg), a smaller file",
                 "Opus (.ogg), arquivo menor");
-        table.put("Opus didn't work on this phone, so the sound was saved as TikTok sent it.",
-                "O Opus não funcionou neste celular, então o som foi salvo do jeito que o TikTok enviou.");
+        table.put("Opus didn't work on this phone. Saving the sound as TikTok sent it instead.",
+                "O Opus não funcionou neste celular. Salvando o som do jeito que o TikTok enviou.");
         table.put("Opus needs Android 10 or later, so sounds save as TikTok sent them.",
                 "O Opus precisa do Android 10 ou mais recente, então os sons são salvos como o TikTok enviou.");
         table.put("Original language",
@@ -26231,8 +26231,8 @@ public final class L10nTranslations {
                 "Необязательно. Входить в прокси могут только соединения, которые устанавливает сам Android, но не соединения TikTok. Оставьте пустым для прокси без пароля.");
         table.put("Opus (.ogg), a smaller file",
                 "Opus (.ogg), файл поменьше");
-        table.put("Opus didn't work on this phone, so the sound was saved as TikTok sent it.",
-                "Opus не сработал на этом телефоне, поэтому звук сохранён в том виде, в каком его прислал TikTok.");
+        table.put("Opus didn't work on this phone. Saving the sound as TikTok sent it instead.",
+                "Opus не сработал на этом телефоне. Звук сохраняется в том виде, в каком его прислал TikTok.");
         table.put("Opus needs Android 10 or later, so sounds save as TikTok sent them.",
                 "Для Opus нужен Android 10 или новее, поэтому звук сохраняется так, как прислал TikTok.");
         table.put("Original language",
@@ -30269,8 +30269,8 @@ public final class L10nTranslations {
                 "İsteğe bağlı. Bir proxy'ye yalnızca Android'in kendi kurduğu bağlantılar giriş yapabilir, TikTok'un bağlantıları yapamaz. Parolasız bir proxy için boş bırak.");
         table.put("Opus (.ogg), a smaller file",
                 "Opus (.ogg), daha küçük dosya");
-        table.put("Opus didn't work on this phone, so the sound was saved as TikTok sent it.",
-                "Opus bu telefonda çalışmadı, bu yüzden ses TikTok'un gönderdiği haliyle kaydedildi.");
+        table.put("Opus didn't work on this phone. Saving the sound as TikTok sent it instead.",
+                "Opus bu telefonda çalışmadı. Ses, TikTok'un gönderdiği haliyle kaydediliyor.");
         table.put("Opus needs Android 10 or later, so sounds save as TikTok sent them.",
                 "Opus için Android 10 veya üstü gerekir, bu yüzden sesler TikTok'un gönderdiği gibi kaydedilir.");
         table.put("Original language",

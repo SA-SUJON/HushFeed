@@ -9,7 +9,7 @@ Importing new history ended Undo for the earlier clear. You can clear the import
 %1$d settings in that file can't be restored here and were skipped	Bu fayldakı %1$d ayar burada bərpa edilə bilmir və ötürüldü
 Import watch history	İzləmə tarixçəsini idxal et
 Opus (.ogg), a smaller file	Opus (.ogg), daha kiçik fayl
-Opus didn't work on this phone, so the sound was saved as TikTok sent it.	Opus bu telefonda işləmədi, ona görə səs TikTok-un göndərdiyi kimi saxlanıldı.
+Opus didn't work on this phone. Saving the sound as TikTok sent it instead.	Opus bu telefonda işləmədi. Səs əvəzinə TikTok-un göndərdiyi kimi saxlanılır.
 Opus needs Android 10 or later, so sounds save as TikTok sent them.	Opus üçün Android 10 və ya daha yeni versiya lazımdır, ona görə səslər TikTok-un göndərdiyi kimi saxlanılır.
 Sound format	Səs formatı
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Bu hesabın TikTok JSON ixracını seçin. Fayl ən çox %1$s MB və %2$s qeyd ola bilər. Saat qurşağı olmayan tarixlər üçün bu telefonun saat qurşağı istifadə edilir.
