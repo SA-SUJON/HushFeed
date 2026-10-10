@@ -34,6 +34,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling and Enable voice comments now each have a switch in Hushfeed settings, so Pause turns them off too and Morphe Manager's simple mode now picks them. Each of those switches starts off. If you patched with any of these before, turn its switch on after you update to keep it working. Skip the splash ad, Skip update checks, Limit background traffic and Cache one frame of animated images are under Performance in App. Stop on-device AI profiling is in Privacy and Allow voice comments is in Comments.
 
+* **TikTok:** New patch, Skip passkey sign-in, in Morphe Manager's simple mode with its switch off (#102). Password managers won't hand a passkey to a patched app, so an account with a passkey could get stuck at TikTok's passkey step. Turn on Sign in without a passkey in Hushfeed settings > App and TikTok treats your phone as one without passkeys, so it offers its other ways to sign in, like your password or a code by email or text. If you're signed out, long-press Home to open Hushfeed settings.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** Author text size now sizes the post date next to the creator's name too, so the two stay the same size (#66).

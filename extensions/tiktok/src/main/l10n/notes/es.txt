@@ -30,6 +30,8 @@
 
 * **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling y Enable voice comments ahora tienen cada uno un interruptor en Ajustes de Hushfeed, así que Pausar también los desactiva y el modo simple de Morphe Manager ahora los elige. Cada uno de esos interruptores empieza desactivado. Si ya habías aplicado alguno de estos parches, activa su interruptor después de actualizar para que siga funcionando. Omitir el anuncio de inicio, Omitir las búsquedas de actualizaciones, Limitar el tráfico en segundo plano y Guardar en caché un solo fotograma de las imágenes animadas están en Rendimiento, dentro de Aplicación. Detener el perfilado de IA en el dispositivo está en Privacidad y Permitir comentarios de voz está en Comentarios.
 
+* **TikTok:** Parche nuevo, Skip passkey sign-in, incluido en el modo simple de Morphe Manager con su interruptor apagado (#102). Los gestores de contraseñas no le dan una llave de acceso a una app parcheada, así que una cuenta con llave de acceso podía quedarse atascada en el paso de llave de acceso de TikTok. Activa Iniciar sesión sin llave de acceso en Ajustes de Hushfeed > Aplicación y TikTok tratará tu teléfono como uno sin llaves de acceso, así que te ofrecerá sus otras formas de iniciar sesión, como tu contraseña o un código por correo o SMS. Si cerraste sesión, mantén pulsado Inicio para abrir los ajustes de Hushfeed.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** Tamaño del nombre del creador ahora también cambia el tamaño de la fecha de publicación junto al nombre, para que los dos sigan iguales (#66).

@@ -30,6 +30,8 @@
 
 * **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling ed Enable voice comments ora hanno ciascuna un interruttore in Impostazioni di Hushfeed, quindi Pausa spegne anche loro e la modalità semplice di Morphe Manager ora le sceglie. Ognuno di questi interruttori parte disattivato. Se avevi già applicato una di queste patch, attiva il suo interruttore dopo l'aggiornamento perché continui a funzionare. Salta l'annuncio di avvio, Salta i controlli degli aggiornamenti, Limita il traffico in background e Memorizza un solo fotogramma delle immagini animate sono in Prestazioni, dentro App. Ferma la profilazione IA sul dispositivo è in Privacy e Consenti i commenti vocali è in Commenti.
 
+* **TikTok:** Nuova patch, Skip passkey sign-in, scelta dalla modalità semplice di Morphe Manager con l'interruttore spento (#102). I gestori di password non danno una passkey a un'app modificata, quindi un account con una passkey poteva bloccarsi al passaggio della passkey di TikTok. Attiva Accedi senza passkey in Impostazioni di Hushfeed > App e TikTok tratterà il tuo telefono come uno senza passkey, offrendo gli altri modi che ha per accedere, come la password o un codice via email o SMS. Se sei disconnesso, tieni premuto su Home per aprire le impostazioni di Hushfeed.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** Dimensione del nome del creator ora cambia anche la dimensione della data di pubblicazione accanto al nome, così i due restano della stessa grandezza (#66).
