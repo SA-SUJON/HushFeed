@@ -102,8 +102,12 @@ public class DoNotAutoTranslateTest {
             assertArrayEquals(entry, new String[]{"zh", "zh-Hant"},
                     DoNotAutoTranslate.withExcluded(new String[0]));
         }
-        Settings.DONT_AUTO_TRANSLATE_LANGUAGES.save("zh-CN");
-        assertArrayEquals(new String[]{"zh", "zh-Hans"}, DoNotAutoTranslate.withExcluded(new String[0]));
+        for (String entry : new String[]{"zh-CN", "zh-Hans-TW", "zh_Hans_HK"}) {
+            // The script says which characters, whatever the place: Simplified written in Taiwan.
+            Settings.DONT_AUTO_TRANSLATE_LANGUAGES.save(entry);
+            assertArrayEquals(entry, new String[]{"zh", "zh-Hans"},
+                    DoNotAutoTranslate.withExcluded(new String[0]));
+        }
     }
 
     @Test

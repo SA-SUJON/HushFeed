@@ -33,9 +33,9 @@ public final class DoNotAutoTranslate {
     /** TikTok tags Chinese items with the script, so the plain code alone matched none of them. */
     private static final String ZH_HANS = "zh-Hans";
     private static final String ZH_HANT = "zh-Hant";
-    /** Subtags after zh that mean Traditional characters: the script, or where it's written. */
-    private static final Set<String> TRADITIONAL = new HashSet<>(
-            Arrays.asList("hant", "tw", "hk", "mo"));
+    /** Where Traditional characters are the default, for an entry that names no script. */
+    private static final Set<String> TRADITIONAL_REGIONS = new HashSet<>(
+            Arrays.asList("tw", "hk", "mo"));
 
     private static String parsedFrom;
     private static Set<String> parsed = Collections.emptySet();
@@ -104,11 +104,15 @@ public final class DoNotAutoTranslate {
         return parsed;
     }
 
+    /** The script decides when the entry names one (zh-Hans-TW is Simplified), else the region. */
     private static boolean traditional(String entry) {
         String[] subtags = entry.trim().toLowerCase(Locale.ROOT).split("[-_]");
+        boolean region = false;
         for (int index = 1; index < subtags.length; index++) {
-            if (TRADITIONAL.contains(subtags[index])) return true;
+            if (subtags[index].equals("hant")) return true;
+            if (subtags[index].equals("hans")) return false;
+            if (TRADITIONAL_REGIONS.contains(subtags[index])) region = true;
         }
-        return false;
+        return region;
     }
 }
