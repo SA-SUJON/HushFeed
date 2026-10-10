@@ -63,7 +63,8 @@ internal fun Method.isAppLanguageReset(): Boolean {
 
 @Suppress("unused")
 val keepAppLanguagePatch = bytecodePatch(
-    name = PATCH,
+    // A literal, not PATCH: DefaultSelectionPolicyTest reads the declarations as text.
+    name = "Keep the app language",
     description = "Lets you keep the language you picked in TikTok's own settings. When TikTok " +
         "starts and decides the phone's language changed, it drops that pick and follows the " +
         "phone, which can leave it in the wrong language after a reboot. Starts off. Turn it on " +
