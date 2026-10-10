@@ -22,11 +22,7 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** The Dark background color option in Morphe Manager now says "color code" instead of "hex code", and explains that black turns those pixels off completely on OLED screens.
 
-## 0.70.1 (2026-10-09)
-
 * **TikTok:** The Hushfeed settings home now shows a compact status and search above seven groups. Related pages sit together, with backups, diagnostics and the Feature Gate Lab under App & advanced. About Hushfeed keeps build details and licenses in one place. Search still takes you straight to a setting, and your saved choices carry over. Pause now explains that saved settings and changes built into the APK remain.
-
-## 0.70.0 (2026-10-09)
 
 * **TikTok:** Hushfeed now supports TikTok 47.1.4 only. If you're on 47.0.3 or 47.1.3, download the 47.1.4 APK from APKMirror and patch it in Morphe Manager with the same signing key, so your login and settings carry over. Feature Gate Lab keeps each override whose switch 47.1.4 still has and turns the rest off with its usual notice.
 

@@ -6,7 +6,7 @@ This guide maps the TikTok app Hushfeed modifies to the code and release checks 
 
 Hushfeed is a Morphe patch bundle, not a TikTok APK. Morphe Manager takes a TikTok APK chosen by the user, applies the selected patches, and signs the result with the user's existing key. The patch definitions and the runtime code they inject live in separate Gradle modules.
 
-The source snapshot in this checkout says version 0.70.1 and contains 130 patch entries. The published source index, patches-bundle.json, still names 0.69.0. This is the release sequence described in CONTRIBUTING.md: publish and verify a bundle before changing the source index. Do not hand-edit the index to make the versions match.
+The source snapshot in this checkout says version 0.70.0 and contains 130 patch entries. The published source index, patches-bundle.json, still names 0.69.0. This is the release sequence described in CONTRIBUTING.md: publish and verify a bundle before changing the source index. Do not hand-edit the index to make the versions match.
 
 ## Target app and version boundary
 
@@ -112,7 +112,7 @@ Settings.java declares runtime setting keys, types, defaults, and availability r
 
 An install-time Morphe patch option is different from an in-app setting. For example, AMOLED dark theme has a color option applied while building the patched APK. Advanced downloads depends on the Settings patch and exposes runtime switches in TikTok's Hushfeed settings. The generated catalog lists those dependencies and patch options.
 
-The detailed in-app settings pages are separate from Morphe Manager's patch categories. Quiet Index groups these pages on the home screen in source version 0.70.1; their category classes and persisted setting keys remain the same:
+The detailed in-app settings pages are separate from Morphe Manager's patch categories. Quiet Index groups these pages on the home screen in source version 0.70.0; their category classes and persisted setting keys remain the same:
 
 | Settings page | Category class |
 | --- | --- |
@@ -134,13 +134,13 @@ Translations live in extensions/tiktok/src/main/l10n/. The generator scripts/gen
 
 ## Settings design concepts
 
-Design study v0.1.0, October 9, 2026. Quiet Index was selected and is implemented in source version 0.70.1. The images below remain design mockups. The native implementation uses the existing preference pages and setting keys. The published bundle remains 0.69.0, so the source redesign awaits publication.
+Design study v0.1.0, October 9, 2026. Quiet Index was selected and is implemented in source version 0.70.0. The images below remain design mockups. The native implementation uses the existing preference pages and setting keys. The published bundle remains 0.69.0, so the source redesign awaits publication.
 
 The previous home repeated Feed filter, Privacy and Screen time as shortcuts above their full rows. Quiet Index replaces that stack with a compact status beside the Hushfeed title, search and seven groups. About Hushfeed sits separately below the groups. Detailed controls remain on their existing pages.
 
 | Concept | Preview | Navigation tradeoff |
 | --- | --- | --- |
-| Quiet Index | [Open mockup](assets/settings-design-2026-10-09/quiet-index.png) | Selected and implemented in source 0.70.1. Seven grouped destinations keep the home compact. Related pages move one level deeper. |
+| Quiet Index | [Open mockup](assets/settings-design-2026-10-09/quiet-index.png) | Selected and implemented in source 0.70.0. Seven grouped destinations keep the home compact. Related pages move one level deeper. |
 | Three-domain Workspace | [Open mockup](assets/settings-design-2026-10-09/three-domain-workspace.png) | Experience, Privacy and Tools divide the library. Less scrolling, but users need to learn which tab owns a setting. |
 | Focused Controls | [Open mockup](assets/settings-design-2026-10-09/focused-controls.png) | Expandable groups expose common controls in place. Faster adjustments, but expansion state and accidental changes need attention. |
 
