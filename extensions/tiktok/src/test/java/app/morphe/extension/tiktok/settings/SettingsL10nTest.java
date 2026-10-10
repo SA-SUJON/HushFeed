@@ -917,7 +917,7 @@ public class SettingsL10nTest {
         String[] titles = {"Description text size", "Author text size"};
         String[] summaries = {
                 "Use 0 for TikTok's size, or %1$d to %2$d. Sizes the description below the author's name and keeps Android's font scaling.",
-                "Use 0 for TikTok's size, or %1$d to %2$d. Sizes the author's name and keeps Android's font scaling."};
+                "Use 0 for TikTok's size, or %1$d to %2$d. Sizes the author's name and the post date next to it, and keeps Android's font scaling."};
         String[] keys = {Settings.FEED_DESCRIPTION_TEXT_SIZE.key, Settings.FEED_AUTHOR_TEXT_SIZE.key};
         SettingsStatus.feedTextSizeEnabled = true;
         List<String> locales = new ArrayList<>(languages());

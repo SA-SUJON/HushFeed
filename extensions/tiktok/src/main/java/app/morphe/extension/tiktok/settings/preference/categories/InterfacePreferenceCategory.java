@@ -228,7 +228,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             descriptionSize.zeroMeans("TikTok's size");
             addPreference(descriptionSize);
             NumberInputPreference authorSize = new NumberInputPreference(context, "Author text size",
-                    L10n.f(context, "Use 0 for TikTok's size, or %1$d to %2$d. Sizes the author's name and keeps Android's font scaling.",
+                    L10n.f(context, "Use 0 for TikTok's size, or %1$d to %2$d. Sizes the author's name and the post date next to it, and keeps Android's font scaling.",
                             FeedTextSize.MIN_TEXT_SIZE, FeedTextSize.MAX_TEXT_SIZE),
                     Settings.FEED_AUTHOR_TEXT_SIZE, "%1$s point", "%1$s points") {
                 @Override protected int clamp(int value) { return FeedTextSize.clampSize(value); }

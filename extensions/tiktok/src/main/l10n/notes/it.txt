@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Dimensione del nome del creator ora cambia anche la dimensione della data di pubblicazione accanto al nome, così i due restano della stessa grandezza (#66).
+
 * **TikTok:** Le impostazioni dei commenti hanno una riga nuova, Non tradurre automaticamente queste lingue. Resta vuota finché non la compili (#121). Scrivi codici lingua come `es, de`, e quando TikTok traduce per te, le didascalie e i commenti in quelle lingue restano come sono stati scritti. Vedi traduzione funziona ancora quando lo tocchi, e l'elenco Non tradurre di TikTok non cambia.
 
 * **TikTok:** Tieni i video offline finché non li elimini ora copre altri due modi in cui TikTok svuotava la tua lista. Con l'interruttore attivo, l'Auto adjust di TikTok non abbassa più il limite dei video offline né accorcia la lista all'avvio di TikTok, e viene saltata la pulizia che TikTok esegue quando finisce il suo test di attivazione dei video offline per impostazione predefinita (#123). Riavvia TikTok dopo aver cambiato l'interruttore.

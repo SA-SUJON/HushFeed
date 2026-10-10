@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Textgröße des Creatornamens ändert jetzt auch die Größe des Datums neben dem Namen, damit beide gleich groß bleiben (#66).
+
 * **TikTok:** Die Kommentar-Einstellungen haben eine neue Zeile, Diese Sprachen nicht automatisch übersetzen. Sie bleibt leer, bis du sie ausfüllst (#121). Gib Sprachcodes wie `es, de` ein, und wenn TikTok für dich übersetzt, bleiben Beschreibungen und Kommentare in diesen Sprachen so, wie sie geschrieben wurden. Übersetzung anzeigen funktioniert weiter, wenn du es antippst, und TikToks eigene Nicht-übersetzen-Liste bleibt unverändert.
 
 * **TikTok:** Offline-Videos behalten, bis du sie löschst deckt jetzt zwei weitere Wege ab, auf denen TikTok deine Liste geleert hat. Bei eingeschaltetem Schalter senkt TikToks Auto adjust dein Offline-Video-Limit beim Start nicht mehr und kürzt die Liste nicht, und die Bereinigung, die TikTok nach dem Ende seines Tests mit standardmäßig aktivierten Offline-Videos ausführt, wird übersprungen (#123). Starte TikTok neu, nachdem du den Schalter geändert hast.
