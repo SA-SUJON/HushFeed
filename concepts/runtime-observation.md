@@ -170,6 +170,9 @@ All Boolean choices in this table default off in the examined source. Saved choi
 | Don’t start first video / `pause_first_video`, Keep a paused video paused / `keep_paused_on_return`, Stop search results playing on their own / `stop_search_autoplay` | Controls when playback begins/resumes. The first-video choice applies to launcher starts, not every deep link. [Lifecycle keys][playbackstates], [search UI][searchplay] | Can reduce actual decoding/downloading by preventing playback. Compare equal actions and elapsed playback, not just equal screen time. |
 | Video playback quality / `playback_quality`, On mobile data / `playback_quality_metered`, Play SDR / `play_sdr`, Prefer H.264 / `prefer_h264` | Selects available quality, SDR or codec alternatives. Selection falls back when alternatives are absent. [Quality UI][quality] | Quality can change data volume. Codec/HDR changes can change decoder/display work in either direction depending on offered streams and hardware. Source does not establish battery savings. |
 | Keep the screen's refresh rate / `uncap_refresh_rate` | Stops TikTok lowering the requested refresh rate to the video's frame rate. [Refresh UI][refresh] | May preserve smoother scrolling while increasing display workload. Record the actual display mode. Do not count this as an energy-saving switch. |
+| Limit background traffic / `limit_background_traffic` | Answers `PreloadStrategyConfig.isEnableBufferPreload()` false while on. When the patch was applied with its `skipPushSetup` option (default false), the same switch also returns from push initialization. Takes effect after a restart. [Patch][preload] | Despite the title, the preload gate is not restricted to OS background state. It may alter foreground buffering and start latency too. Push suppression affects notifications, including messages. |
+| Cache one frame of animated images / `drop_animated_image_cache` | Selects Fresco's keep-last-frame strategy and disables ahead-of-time animated frame preparation for animated images built while it's on. [Patch][cache] | Applies to animated images such as stickers/GIFs, not all video caching or downloads. Memory and CPU effects need observation with animated content. |
+| Skip update checks / `skip_update_checks` | Returns from two updater tasks, including the boot-triggered task. Takes effect after a restart. [Patch][updates] | Does not remove every potential update prompt or disable Play Store updates. |
 
 ### Static patches that survive Pause
 
@@ -177,9 +180,6 @@ These optional patches default unselected in the examined source. A runtime sett
 
 | Patch | Exact intervention | Limit for interpretation |
 |---|---|---|
-| Limit background traffic | Forces `PreloadStrategyConfig.isEnableBufferPreload()` false. Optional `skipPushSetup` returns from push initialization. That option defaults false. [Patch][preload] | Despite the title, the preload gate is not restricted to OS background state. It may alter foreground buffering and start latency too. Push suppression affects notifications, including messages. |
-| Drop the animated image cache | Selects Fresco's keep-last-frame strategy and disables ahead-of-time animated frame preparation. [Patch][cache] | Applies to animated images such as stickers/GIFs, not all video caching or downloads. Memory and CPU effects need observation with animated content. |
-| Skip update checks | Returns from two updater tasks, including the boot-triggered task. [Patch][updates] | Does not remove every potential update prompt or disable Play Store updates. |
 | Stop on-device AI profiling | Returns no Pitaya plugin and prevents real/lite engine start paths. [Patch][ai] | Removes covered startup/processing opportunities, not proof of remote profiling prevention or a particular power saving. |
 | Block P2P video relay | Removes `libavmdlp2pv2.so` and `libp2plivevdp.so` for arm64-v8a and armeabi-v7a using verified resource profiles. [Patch][p2p] | Prevents use of these bundled relay libraries. Does not prove relaying was enabled in the comparison run, or identify all upload traffic as relay traffic. |
 
@@ -226,10 +226,10 @@ Other static changes, including asset removal, screen-capture/login fixes, and s
 [playbackstates]: ../extensions/tiktok/src/main/java/app/morphe/extension/tiktok/settings/Settings.java#L507
 [searchplay]: ../extensions/tiktok/src/main/java/app/morphe/extension/tiktok/settings/preference/categories/ExtensionPreferenceCategory.java#L158
 [quality]: ../extensions/tiktok/src/main/java/app/morphe/extension/tiktok/settings/preference/categories/PlaybackPreferenceCategory.java#L253
-[refresh]: ../extensions/tiktok/src/main/java/app/morphe/extension/tiktok/settings/preference/categories/ExtensionPreferenceCategory.java#L271
-[preload]: ../patches/src/main/kotlin/app/morphe/patches/tiktok/misc/optimizer/OptimizerBytecodePatches.kt#L90
-[cache]: ../patches/src/main/kotlin/app/morphe/patches/tiktok/misc/optimizer/OptimizerBytecodePatches.kt#L120
-[updates]: ../patches/src/main/kotlin/app/morphe/patches/tiktok/misc/optimizer/OptimizerBytecodePatches.kt#L165
+[refresh]: ../extensions/tiktok/src/main/java/app/morphe/extension/tiktok/settings/preference/categories/ExtensionPreferenceCategory.java#L280
+[preload]: ../patches/src/main/kotlin/app/morphe/patches/tiktok/misc/optimizer/OptimizerBytecodePatches.kt#L121
+[cache]: ../patches/src/main/kotlin/app/morphe/patches/tiktok/misc/optimizer/OptimizerBytecodePatches.kt#L172
+[updates]: ../patches/src/main/kotlin/app/morphe/patches/tiktok/misc/optimizer/OptimizerBytecodePatches.kt#L255
 [ai]: ../patches/src/main/kotlin/app/morphe/patches/tiktok/privacy/AiProfilingGovernorPatch.kt#L12
 [p2p]: ../patches/src/main/kotlin/app/morphe/patches/tiktok/misc/optimizer/ResourceOptimizerPatches.kt#L18
 [network]: ../extensions/tiktok/src/main/java/app/morphe/extension/tiktok/privacy/NetworkRequests.java#L23

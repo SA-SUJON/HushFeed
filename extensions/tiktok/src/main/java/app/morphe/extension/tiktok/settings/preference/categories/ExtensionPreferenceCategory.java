@@ -60,7 +60,16 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                 || SettingsStatus.firstLaunchSetupEnabled
                 || SettingsStatus.screenCaptureEnabled
                 || SettingsStatus.videoOverlaysEnabled
-                || SettingsStatus.storeIdentityEnabled;
+                || SettingsStatus.storeIdentityEnabled
+                || hasPerformance();
+    }
+
+    /** The four Performance patches, each with one switch in front of its hooks. */
+    private static boolean hasPerformance() {
+        return SettingsStatus.skipSplashAdEnabled
+                || SettingsStatus.skipUpdateChecksEnabled
+                || SettingsStatus.limitBackgroundTrafficEnabled
+                || SettingsStatus.animatedImageCacheEnabled;
     }
 
     @Override
@@ -313,6 +322,53 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     Settings.STORE_IDENTITY_INSTALLER,
                     new String[]{"Play Store", "Galaxy Store", "AppGallery", "Amazon Appstore"},
                     StoreIdentity.installers()));
+        }
+        // Each of these used to change TikTok the moment it was patched in, with no switch. They
+        // start off now, so a row here is the only way any of them does anything.
+        if (hasPerformance()) {
+            addPreference(new SectionHeadingPreference(context, "Performance"));
+        }
+        if (SettingsStatus.skipSplashAdEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Skip the splash ad",
+                    "Stop the full-screen ad TikTok can show while it starts up.",
+                    Settings.SKIP_SPLASH_AD
+            ));
+        }
+        if (SettingsStatus.skipUpdateChecksEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Skip update checks",
+                    "Stop the two background tasks TikTok uses to check for updates, one of them "
+                            + "when your phone starts. Some in-app update prompts may stop. Play "
+                            + "Store updates still work.",
+                    Settings.SKIP_UPDATE_CHECKS
+            ));
+        }
+        if (SettingsStatus.limitBackgroundTrafficEnabled) {
+            // Patched with Skip notification setup, the same switch stops push setup as well.
+            addPreference(new TogglePreference(
+                    context,
+                    "Limit background traffic",
+                    SettingsStatus.skipPushSetupEnabled
+                            ? "Stop TikTok loading upcoming videos ahead of time and setting up "
+                                    + "notifications. You won't get notifications, messages "
+                                    + "included, while this is on. Videos may take a moment "
+                                    + "longer to start."
+                            : "Stop TikTok loading upcoming videos ahead of time. It uses less "
+                                    + "data, but videos may take a moment longer to start.",
+                    Settings.LIMIT_BACKGROUND_TRAFFIC
+            ));
+        }
+        if (SettingsStatus.animatedImageCacheEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Cache one frame of animated images",
+                    "Keep only the frame on screen for animated stickers and GIFs instead of every "
+                            + "frame, so they use less memory. Applies to the next ones that load.",
+                    Settings.DROP_ANIMATED_IMAGE_CACHE
+            ));
         }
     }
 }

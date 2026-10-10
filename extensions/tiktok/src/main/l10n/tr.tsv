@@ -1891,3 +1891,13 @@ Budgets and reminders	Sınırlar ve hatırlatmalar
 %1$s, %2$s	%1$s, %2$s
 Don't auto translate these languages	Bu dilleri otomatik çevirme
 Separate language codes with commas, like es, de. When TikTok translates for you, captions and comments in these languages stay as they were written. See translation still works when you tap it. TikTok's own Don't translate list stays the way it is.	Dil kodlarını virgülle ayır, örneğin es, de. TikTok senin için çevirdiğinde bu dillerdeki açıklamalar ve yorumlar yazıldığı gibi kalır. Çeviriyi gör'e dokunduğunda yine çalışır. TikTok'un kendi Çevirme listesi olduğu gibi kalır.
+Performance	Performans
+Skip the splash ad	Açılış reklamını atla
+Stop the full-screen ad TikTok can show while it starts up.	TikTok'un açılırken gösterebileceği tam ekran reklamı durdurur.
+Skip update checks	Güncelleme kontrollerini atla
+Stop the two background tasks TikTok uses to check for updates, one of them when your phone starts. Some in-app update prompts may stop. Play Store updates still work.	TikTok'un güncellemeleri kontrol etmek için kullandığı iki arka plan görevini durdurur, bunlardan biri telefon açılırken çalışır. Bazı uygulama içi güncelleme uyarıları görünmeyebilir. Play Store güncellemeleri çalışmaya devam eder.
+Limit background traffic	Arka plan trafiğini sınırla
+Stop TikTok loading upcoming videos ahead of time and setting up notifications. You won't get notifications, messages included, while this is on. Videos may take a moment longer to start.	TikTok'un sıradaki videoları önceden yüklemesini ve bildirimleri kurmasını durdurur. Bu açıkken mesajlar dahil hiçbir bildirim almazsın. Videoların başlaması biraz daha uzun sürebilir.
+Stop TikTok loading upcoming videos ahead of time. It uses less data, but videos may take a moment longer to start.	TikTok'un sıradaki videoları önceden yüklemesini durdurur. Daha az veri kullanır, ancak videoların başlaması biraz daha uzun sürebilir.
+Cache one frame of animated images	Hareketli görsellerin tek karesini önbelleğe al
+Keep only the frame on screen for animated stickers and GIFs instead of every frame, so they use less memory. Applies to the next ones that load.	Hareketli çıkartmalar ve GIF'ler için tüm kareler yerine yalnızca ekrandaki kareyi tutar, böylece daha az bellek kullanırlar. Bundan sonra yüklenenlere uygulanır.

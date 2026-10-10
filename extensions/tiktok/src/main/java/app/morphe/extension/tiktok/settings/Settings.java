@@ -214,6 +214,16 @@ public class Settings extends BaseSettings {
             new BooleanSetting("fill_video_to_screen", FALSE);
     public static final BooleanSetting UNCAP_REFRESH_RATE =
             new BooleanSetting("uncap_refresh_rate", FALSE);
+    // The four Performance patches, in the default selection because each hook asks one of these
+    // first. Off until the reader turns one on, and a paused build answers off. The splash, update
+    // and traffic hooks act on TikTok's startup tasks, so they need a restart. The animated image
+    // cache is read as each sticker or GIF is built, so it reaches the next one without one.
+    public static final BooleanSetting SKIP_SPLASH_AD = new BooleanSetting("skip_splash_ad", FALSE, true);
+    public static final BooleanSetting SKIP_UPDATE_CHECKS = new BooleanSetting("skip_update_checks", FALSE, true);
+    public static final BooleanSetting LIMIT_BACKGROUND_TRAFFIC =
+            new BooleanSetting("limit_background_traffic", FALSE, true);
+    public static final BooleanSetting DROP_ANIMATED_IMAGE_CACHE =
+            new BooleanSetting("drop_animated_image_cache", FALSE);
     /** Keep playing in the background (#52). TikTok reads its gate once a process, so a restart applies it. */
     public static final BooleanSetting BACKGROUND_PLAY = new BooleanSetting("background_play", FALSE, true);
     public static final BooleanSetting HIDE_LAUNCHER_SHORTCUTS =

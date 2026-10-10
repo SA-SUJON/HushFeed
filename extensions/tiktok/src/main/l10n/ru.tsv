@@ -2059,3 +2059,13 @@ Budgets and reminders	Лимиты и напоминания
 %1$s, %2$s	%1$s, %2$s
 Don't auto translate these languages	Не переводить эти языки автоматически
 Separate language codes with commas, like es, de. When TikTok translates for you, captions and comments in these languages stay as they were written. See translation still works when you tap it. TikTok's own Don't translate list stays the way it is.	Разделяйте коды языков запятыми, например es, de. Когда TikTok переводит за вас, описания и комментарии на этих языках остаются как написаны. «Посмотреть перевод» по-прежнему работает, если нажать. Собственный список TikTok «Не переводить» остаётся как есть.
+Performance	Производительность
+Skip the splash ad	Пропускать рекламу при запуске
+Stop the full-screen ad TikTok can show while it starts up.	Не даёт TikTok показывать полноэкранную рекламу при запуске.
+Skip update checks	Пропускать проверку обновлений
+Stop the two background tasks TikTok uses to check for updates, one of them when your phone starts. Some in-app update prompts may stop. Play Store updates still work.	Останавливает две фоновые задачи, которыми TikTok проверяет обновления, одна из них запускается при включении телефона. Некоторые подсказки об обновлении в приложении могут перестать появляться. Обновления через Play Store продолжат работать.
+Limit background traffic	Ограничить фоновый трафик
+Stop TikTok loading upcoming videos ahead of time and setting up notifications. You won't get notifications, messages included, while this is on. Videos may take a moment longer to start.	Не даёт TikTok заранее загружать следующие видео и настраивать уведомления. Пока это включено, вы не будете получать уведомления, в том числе о сообщениях. Видео могут начинаться чуть позже.
+Stop TikTok loading upcoming videos ahead of time. It uses less data, but videos may take a moment longer to start.	Не даёт TikTok заранее загружать следующие видео. Расходуется меньше трафика, но видео могут начинаться чуть позже.
+Cache one frame of animated images	Кэшировать один кадр анимированных изображений
+Keep only the frame on screen for animated stickers and GIFs instead of every frame, so they use less memory. Applies to the next ones that load.	Хранит для анимированных стикеров и GIF только кадр на экране, а не все кадры, чтобы они занимали меньше памяти. Действует для следующих загруженных.

@@ -1891,3 +1891,13 @@ Budgets and reminders	Limiti e promemoria
 %1$s, %2$s	%1$s, %2$s
 Don't auto translate these languages	Non tradurre automaticamente queste lingue
 Separate language codes with commas, like es, de. When TikTok translates for you, captions and comments in these languages stay as they were written. See translation still works when you tap it. TikTok's own Don't translate list stays the way it is.	Separa i codici lingua con virgole, come es, de. Quando TikTok traduce per te, le didascalie e i commenti in queste lingue restano come sono stati scritti. Vedi traduzione funziona ancora quando lo tocchi. L'elenco Non tradurre di TikTok resta com'è.
+Performance	Prestazioni
+Skip the splash ad	Salta l'annuncio di avvio
+Stop the full-screen ad TikTok can show while it starts up.	Blocca l'annuncio a schermo intero che TikTok può mostrare all'avvio.
+Skip update checks	Salta i controlli degli aggiornamenti
+Stop the two background tasks TikTok uses to check for updates, one of them when your phone starts. Some in-app update prompts may stop. Play Store updates still work.	Ferma le due attività in background che TikTok usa per cercare aggiornamenti, una delle quali all'accensione del telefono. Alcuni avvisi di aggiornamento nell'app potrebbero non comparire più. Gli aggiornamenti dal Play Store funzionano ancora.
+Limit background traffic	Limita il traffico in background
+Stop TikTok loading upcoming videos ahead of time and setting up notifications. You won't get notifications, messages included, while this is on. Videos may take a moment longer to start.	Impedisce a TikTok di caricare in anticipo i prossimi video e di configurare le notifiche. Finché è attivo non riceverai notifiche, nemmeno per i messaggi. I video potrebbero metterci un po' di più a partire.
+Stop TikTok loading upcoming videos ahead of time. It uses less data, but videos may take a moment longer to start.	Impedisce a TikTok di caricare in anticipo i prossimi video. Usa meno dati, ma i video potrebbero metterci un po' di più a partire.
+Cache one frame of animated images	Memorizza un solo fotogramma delle immagini animate
+Keep only the frame on screen for animated stickers and GIFs instead of every frame, so they use less memory. Applies to the next ones that load.	Conserva solo il fotogramma sullo schermo per sticker animati e GIF invece di tutti i fotogrammi, così usano meno memoria. Vale per i prossimi che vengono caricati.

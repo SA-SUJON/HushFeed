@@ -549,6 +549,44 @@ public class SettingsStatus {
         profileThoughtsEnabled = true;
     }
 
+    /** Skip the splash ad put its switch in front of the splash tasks and gates. */
+    public static boolean skipSplashAdEnabled = false;
+
+    public static void enableSkipSplashAd() {
+        skipSplashAdEnabled = true;
+    }
+
+    /** Skip update checks put its switch in front of the two update check tasks. */
+    public static boolean skipUpdateChecksEnabled = false;
+
+    public static void enableSkipUpdateChecks() {
+        skipUpdateChecksEnabled = true;
+    }
+
+    /** Limit background traffic put its switch in front of the buffer preload gate. */
+    public static boolean limitBackgroundTrafficEnabled = false;
+
+    public static void enableLimitBackgroundTraffic() {
+        limitBackgroundTrafficEnabled = true;
+    }
+
+    /**
+     * Limit background traffic was patched with Skip notification setup, so its switch stops
+     * push setup too, and the row says so. Only ever set alongside the flag above.
+     */
+    public static boolean skipPushSetupEnabled = false;
+
+    public static void enableSkipPushSetup() {
+        skipPushSetupEnabled = true;
+    }
+
+    /** Drop the animated image cache put its switch in front of Fresco's cache choice. */
+    public static boolean animatedImageCacheEnabled = false;
+
+    public static void enableAnimatedImageCache() {
+        animatedImageCacheEnabled = true;
+    }
+
     static {
         // The patcher fills load() with selected registrations. Runtime hooks can run before settings opens.
         // Keep this after field initializers so their default values cannot overwrite those registrations.

@@ -1882,3 +1882,13 @@ Budgets and reminders,Batas dan pengingat
 "%1$s, %2$s","%1$s, %2$s"
 Don't auto translate these languages,Jangan terjemahkan otomatis bahasa ini
 "Separate language codes with commas, like es, de. When TikTok translates for you, captions and comments in these languages stay as they were written. See translation still works when you tap it. TikTok's own Don't translate list stays the way it is.","Pisahkan kode bahasa dengan koma, misalnya es, de. Saat TikTok menerjemahkan untukmu, keterangan dan komentar dalam bahasa ini tetap seperti saat ditulis. Lihat terjemahan tetap berfungsi saat kamu mengetuknya. Daftar Jangan terjemahkan milik TikTok sendiri tetap seperti semula."
+Performance,Performa
+Skip the splash ad,Lewati iklan pembuka
+Stop the full-screen ad TikTok can show while it starts up.,Hentikan iklan layar penuh yang bisa ditampilkan TikTok saat dibuka.
+Skip update checks,Lewati pemeriksaan pembaruan
+"Stop the two background tasks TikTok uses to check for updates, one of them when your phone starts. Some in-app update prompts may stop. Play Store updates still work.","Hentikan dua tugas latar belakang yang dipakai TikTok untuk memeriksa pembaruan, salah satunya saat ponsel dinyalakan. Beberapa pemberitahuan pembaruan di dalam aplikasi mungkin tidak muncul lagi. Pembaruan lewat Play Store tetap berfungsi."
+Limit background traffic,Batasi lalu lintas latar belakang
+"Stop TikTok loading upcoming videos ahead of time and setting up notifications. You won't get notifications, messages included, while this is on. Videos may take a moment longer to start.","Hentikan TikTok memuat video berikutnya lebih awal dan menyiapkan notifikasi. Selama ini aktif, kamu tidak akan menerima notifikasi, termasuk pesan. Video mungkin butuh waktu sedikit lebih lama untuk mulai."
+"Stop TikTok loading upcoming videos ahead of time. It uses less data, but videos may take a moment longer to start.","Hentikan TikTok memuat video berikutnya lebih awal. Kuota lebih hemat, tetapi video mungkin butuh waktu sedikit lebih lama untuk mulai."
+Cache one frame of animated images,Simpan satu bingkai gambar animasi di cache
+"Keep only the frame on screen for animated stickers and GIFs instead of every frame, so they use less memory. Applies to the next ones that load.","Simpan hanya bingkai yang tampil di layar untuk stiker animasi dan GIF, bukan setiap bingkai, agar memakai lebih sedikit memori. Berlaku untuk yang dimuat berikutnya."
