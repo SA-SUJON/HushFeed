@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Memulihkan cadangan pengaturan dari versi TikTok yang lebih lama sekarang mengembalikan penimpaan Feature Gate Lab yang masih cocok dengan versi ini. Yang tidak cocok tetap disimpan, tetapi dimatikan.
+
 * **TikTok:** Layar feed punya sakelar baru, Sembunyikan tombol menu samping, yang mati sampai kamu menyalakannya. Sakelar ini menghilangkan tombol di pojok kiri atas feed, di samping LIVE, yang membuka menu samping TikTok berisi Pesananmu, TikTok Minis, dan lainnya. Mulai ulang TikTok setelah kamu mengubahnya (#128).
 
 * **TikTok:** Semua deskripsi patch di Morphe Manager ditulis ulang dalam bahasa Inggris yang sederhana. Masing-masing kini menjelaskan apa yang diubah patch, kenapa kamu mungkin menginginkannya, dan apakah sakelarnya mulai menyala atau mati serta letaknya di pengaturan Hushfeed. Beberapa opsi patch juga lebih jelas, dan Skip push setup kini bernama Skip notification setup.

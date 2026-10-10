@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Restoring a settings backup made on an older TikTok build now brings back the Feature Gate Lab overrides that still fit this build. The ones that don't are kept but turned off.
+
 * **TikTok:** Feed screen has a new switch, Hide the side menu button, off until you turn it on. It takes away the button at the top left of the feed, next to LIVE, that opens TikTok's side menu with Your orders, TikTok Minis and more. Restart TikTok after you change it (#128).
 
 * **TikTok:** Every patch description in Morphe Manager is rewritten in plain English. Each one now says what the patch changes, why you might want it, and whether its switch starts on or off and where to find it in Hushfeed settings. A few patch options read more clearly too, and Skip push setup is now called Skip notification setup.

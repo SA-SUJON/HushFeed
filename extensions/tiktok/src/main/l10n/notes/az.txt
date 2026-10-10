@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Köhnə TikTok versiyasında hazırlanmış ayarlar ehtiyat nüsxəsini bərpa etdikdə, bu versiyaya hələ də uyğun gələn Feature Gate Lab əvəzləmələri geri qayıdır. Uyğun gəlməyənlər saxlanılır, amma söndürülür.
+
 * **TikTok:** Lent ekranında yeni açar var, Yan menyu düyməsini gizlədin, siz yandırana qədər söndürülü qalır. O, lentin yuxarı sol küncündə LIVE-ın yanındakı, TikTok-un Your orders, TikTok Minis və başqalarının olduğu yan menyusunu açan düyməni götürür. Dəyişdirdikdən sonra TikTok-u yenidən başladın (#128).
 
 * **TikTok:** Morphe Manager-dəki bütün yamaq təsvirləri sadə ingilis dilində yenidən yazılıb. İndi hər biri yamağın nəyi dəyişdiyini, onu niyə istəyə biləcəyini, açarının açıq və ya bağlı başladığını və Hushfeed ayarlarında harada olduğunu deyir. Bəzi yamaq seçimləri də daha aydın yazılıb, Skip push setup isə indi Skip notification setup adlanır.

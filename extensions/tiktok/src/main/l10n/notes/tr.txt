@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** TikTok'un eski bir sürümünde alınmış ayar yedeğini geri yüklediğinde, bu sürüme hâlâ uyan Feature Gate Lab geçersiz kılmaları artık geri geliyor. Uymayanlar saklanıyor ama kapalı hâlde.
+
 * **TikTok:** Akış ekranının yeni bir anahtarı var, Yan menü düğmesini gizle, sen açana kadar kapalı. Akışın sol üst köşesinde LIVE'ın yanında duran ve TikTok'un Siparişlerin, TikTok Minis ve daha fazlasını içeren yan menüsünü açan düğmeyi kaldırır. Değiştirdikten sonra TikTok'u yeniden başlat (#128).
 
 * **TikTok:** Morphe Manager'daki tüm yama açıklamaları sade bir İngilizceyle yeniden yazıldı. Artık her biri yamanın neyi değiştirdiğini, onu neden isteyebileceğini, düğmesinin açık mı kapalı mı başladığını ve Hushfeed ayarlarında nerede olduğunu söylüyor. Bazı yama seçenekleri de daha anlaşılır oldu ve Skip push setup artık Skip notification setup adını taşıyor.

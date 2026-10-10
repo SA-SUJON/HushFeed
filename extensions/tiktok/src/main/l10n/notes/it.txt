@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Ripristinando un backup delle impostazioni fatto con una versione precedente di TikTok, tornano ora le sostituzioni di Feature Gate Lab che vanno ancora bene con questa versione. Quelle che non vanno bene restano salvate, ma disattivate.
+
 * **TikTok:** Schermata del feed ha un nuovo interruttore, Nascondi il pulsante del menu laterale, disattivato finché non lo attivi. Toglie il pulsante in alto a sinistra del feed, accanto a LIVE, che apre il menu laterale di TikTok con I tuoi ordini, TikTok Minis e altro. Riavvia TikTok dopo averlo cambiato (#128).
 
 * **TikTok:** Tutte le descrizioni delle patch in Morphe Manager sono riscritte in un inglese semplice. Ognuna ora dice cosa cambia la patch, perché potresti volerla e se il suo interruttore parte attivo o disattivo e dove si trova nelle impostazioni di Hushfeed. Anche alcune opzioni delle patch sono più chiare, e Skip push setup ora si chiama Skip notification setup.

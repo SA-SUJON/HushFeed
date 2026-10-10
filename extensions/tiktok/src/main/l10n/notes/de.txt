@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Wenn du eine Einstellungssicherung von einer älteren TikTok-Version wiederherstellst, kommen jetzt die Feature Gate Lab Überschreibungen zurück, die noch zu dieser Version passen. Die anderen bleiben erhalten, sind aber ausgeschaltet.
+
 * **TikTok:** Die Feed-Ansicht hat einen neuen Schalter, Seitenmenü-Knopf ausblenden, der aus bleibt, bis du ihn einschaltest. Er nimmt den Knopf oben links im Feed neben LIVE weg, der TikToks Seitenmenü mit Deine Bestellungen, TikTok Minis und mehr öffnet. Starte TikTok neu, nachdem du ihn geändert hast (#128).
 
 * **TikTok:** Alle Patch-Beschreibungen in Morphe Manager sind neu in einfachem Englisch geschrieben. Jede sagt jetzt, was der Patch ändert, warum du ihn willst und ob sein Schalter an oder aus startet und wo er in den Hushfeed-Einstellungen liegt. Ein paar Patch-Optionen sind auch klarer formuliert, und Skip push setup heißt jetzt Skip notification setup.
