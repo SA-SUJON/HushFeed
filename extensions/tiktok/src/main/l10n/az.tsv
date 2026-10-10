@@ -104,6 +104,7 @@ Separate handles or user IDs with commas. Their videos stay when a filter on pos
 Separate language codes with commas, like en, es. A video whose original caption is in another language is hidden. Videos with no caption, or only translated ones, always stay.	Dil kodlarını vergüllə ayırın, məsələn en, es. Orijinal başlığı başqa dildə olan video gizlədilir. Başlığı olmayan və ya yalnız tərcümə olunmuş başlığı olan videolar həmişə qalır.
 Comma separated names exactly as the row under a profile's bio shows them, such as TikTok Studio or Your orders. Restart TikTok to apply this.	Profilin bio hissəsinin altındakı sətirdə göstərildiyi kimi vergüllə ayrılmış adlar, məsələn TikTok Studio və ya Your orders. Tətbiq etmək üçün TikTok-u yenidən başladın.
 Couldn't add the older seen videos. Try again.	Daha köhnə izlənmiş videoları əlavə etmək alınmadı. Yenidən cəhd edin.
+Couldn't copy the build details. Use Save build details instead.	Build təfərrüatlarını kopyalamaq alınmadı. Əvəzinə Build təfərrüatlarını saxlayın düyməsini istifadə edin.
 Couldn't copy the report. Use Save report instead.	Hesabatı kopyalamaq alınmadı. Əvəzinə Hesabatı saxla düyməsini istifadə edin.
 Couldn't read TikTok's current values (%1$s). Refresh values from the menu to try again.	TikTok-un cari dəyərlərini oxumaq alınmadı (%1$s). Yenidən cəhd etmək üçün menyudan dəyərləri yeniləyin.
 Couldn't restart TikTok. Close it and open it again.	TikTok-u yenidən başlatmaq alınmadı. Onu bağlayıb yenidən açın.

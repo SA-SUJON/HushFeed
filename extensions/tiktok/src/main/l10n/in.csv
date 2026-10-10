@@ -105,6 +105,7 @@ Caption languages,Bahasa takarir
 "Separate language codes with commas, like en, es. A video whose original caption is in another language is hidden. Videos with no caption, or only translated ones, always stay.","Pisahkan kode bahasa dengan koma, misalnya en, es. Video yang keterangan aslinya berbahasa lain disembunyikan. Video tanpa keterangan, atau hanya dengan keterangan terjemahan, selalu tetap tampil."
 "Comma separated names exactly as the row under a profile's bio shows them, such as TikTok Studio or Your orders. Restart TikTok to apply this.","Nama dipisahkan koma, persis seperti yang ditampilkan baris di bawah bio profil, seperti TikTok Studio atau Pesananmu. Mulai ulang TikTok agar berlaku."
 Couldn't add the older seen videos. Try again.,Tidak dapat menambahkan video lama yang dilihat. Coba lagi.
+Couldn't copy the build details. Use Save build details instead.,Detail build tidak bisa disalin. Gunakan Simpan detail build.
 Couldn't copy the report. Use Save report instead.,Laporan tidak bisa disalin. Gunakan Simpan laporan.
 Couldn't read TikTok's current values (%1$s). Refresh values from the menu to try again.,Tidak bisa membaca nilai TikTok saat ini (%1$s). Perbarui nilai dari menu untuk mencoba lagi.
 Couldn't restart TikTok. Close it and open it again.,Tidak bisa memulai ulang TikTok. Tutup lalu buka lagi.

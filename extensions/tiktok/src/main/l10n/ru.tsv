@@ -146,6 +146,7 @@ Separate handles or user IDs with commas. Their videos stay when a filter on pos
 Separate language codes with commas, like en, es. A video whose original caption is in another language is hidden. Videos with no caption, or only translated ones, always stay.	Разделяйте коды языков запятыми, например en, es. Видео, у которого исходное описание на другом языке, скрывается. Видео без описания или только с переведённым остаются всегда.
 Comma separated names exactly as the row under a profile's bio shows them, such as TikTok Studio or Your orders. Restart TikTok to apply this.	Названия через запятую, точно как в строке под описанием профиля, например TikTok Studio или «Ваши заказы». Перезапустите TikTok, чтобы это применить.
 Couldn't add the older seen videos. Try again.	Не удалось добавить старые просмотренные видео. Попробуйте снова.
+Couldn't copy the build details. Use Save build details instead.	Не удалось скопировать сведения о сборке. Используйте вместо этого «Сохранить сведения о сборке».
 Couldn't copy the report. Use Save report instead.	Не удалось скопировать отчёт. Используйте вместо этого «Сохранить отчёт».
 Couldn't read TikTok's current values (%1$s). Refresh values from the menu to try again.	Не удалось прочитать текущие значения TikTok (%1$s). Обновите значения через меню, чтобы попробовать снова.
 Couldn't restart TikTok. Close it and open it again.	Не удалось перезапустить TikTok. Закройте приложение и откройте его снова.

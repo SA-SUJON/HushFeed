@@ -104,6 +104,7 @@ Separate handles or user IDs with commas. Their videos stay when a filter on pos
 Separate language codes with commas, like en, es. A video whose original caption is in another language is hidden. Videos with no caption, or only translated ones, always stay.	Separe os códigos de idioma com vírgulas, como en, es. Um vídeo cuja legenda original está em outro idioma fica oculto. Vídeos sem legenda, ou só com a traduzida, sempre ficam.
 Comma separated names exactly as the row under a profile's bio shows them, such as TikTok Studio or Your orders. Restart TikTok to apply this.	Nomes separados por vírgula, exatamente como aparecem na linha abaixo da bio de um perfil, como TikTok Studio ou Seus pedidos. Reinicie o TikTok para aplicar.
 Couldn't add the older seen videos. Try again.	Não foi possível adicionar os vídeos vistos anteriores. Tente de novo.
+Couldn't copy the build details. Use Save build details instead.	Não foi possível copiar os detalhes da compilação. Use “Salvar detalhes da compilação”.
 Couldn't copy the report. Use Save report instead.	Não foi possível copiar o relatório. Use “Salvar relatório”.
 Couldn't read TikTok's current values (%1$s). Refresh values from the menu to try again.	Não foi possível ler os valores atuais do TikTok (%1$s). Atualize os valores pelo menu para tentar de novo.
 Couldn't restart TikTok. Close it and open it again.	Não foi possível reiniciar o TikTok. Feche e abra de novo.

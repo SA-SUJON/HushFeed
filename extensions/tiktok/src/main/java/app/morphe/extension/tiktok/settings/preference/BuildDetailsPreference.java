@@ -55,7 +55,8 @@ public final class BuildDetailsPreference extends Preference implements Immediat
             Utils.showToastShort(L10n.t(context, "Build details copied to the clipboard"));
         } catch (Exception failure) {
             Logger.printException(() -> "Failed to copy build details", failure);
-            Utils.showToastLong(L10n.t(context, "Couldn't copy the report. Use Save report instead."));
+            Utils.showToastLong(L10n.t(context,
+                    "Couldn't copy the build details. Use Save build details instead."));
         }
     }
 
