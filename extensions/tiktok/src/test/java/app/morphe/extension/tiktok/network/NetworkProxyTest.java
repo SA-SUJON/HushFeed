@@ -73,10 +73,13 @@ public class NetworkProxyTest {
     private static final String PASSWORD = "s3cret-pass";
     private static final int TIMEOUT_MS = 2000;
 
-    private static final StringSetting[] FIELDS = {
-            Settings.NETWORK_PROXY_TYPE, Settings.NETWORK_PROXY_HOST, Settings.NETWORK_PROXY_PORT,
-            Settings.NETWORK_PROXY_USER, Settings.NETWORK_PROXY_PASSWORD,
-    };
+    /** Built on call: touching Settings in a static initializer runs before setUp gives it a context. */
+    private static StringSetting[] fields() {
+        return new StringSetting[] {
+                Settings.NETWORK_PROXY_TYPE, Settings.NETWORK_PROXY_HOST, Settings.NETWORK_PROXY_PORT,
+                Settings.NETWORK_PROXY_USER, Settings.NETWORK_PROXY_PASSWORD,
+        };
+    }
 
     private Context context;
     private ProxySelector originalSelector;
@@ -106,7 +109,7 @@ public class NetworkProxyTest {
         SettingsStatus.simSpoofEnabled = simSpoof;
         SettingsStatus.regionSpoofEnabled = regionSpoof;
         Settings.NETWORK_PROXY.resetToDefault();
-        for (StringSetting field : FIELDS) field.resetToDefault();
+        for (StringSetting field : fields()) field.resetToDefault();
         NetworkProxy.resetForTests();
     }
 
@@ -116,7 +119,7 @@ public class NetworkProxyTest {
         assertFalse(Settings.NETWORK_PROXY.defaultValue);
         assertEquals(NetworkProxy.TYPE_HTTP, Settings.NETWORK_PROXY_TYPE.defaultValue);
         assertTrue(Settings.NETWORK_PROXY.rebootApp);
-        for (StringSetting field : FIELDS) {
+        for (StringSetting field : fields()) {
             assertTrue(field.key + " restarts", field.rebootApp);
             assertEquals(field.key + " starts empty", field == Settings.NETWORK_PROXY_TYPE ? "http" : "",
                     field.defaultValue);
