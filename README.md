@@ -270,7 +270,7 @@ Simple mode in Morphe Manager selects 107 of these patches. Each row below says 
 | `Hide CAPTCHA popups` | Notes in Hushfeed's diagnostic report when TikTok shows a verification puzzle. Its hide switch isn't available on this TikTok version, so every puzzle still shows. Works as soon as you patch it in. |
 | `Hide comment popup ads` | Stops the brand animation that pops up over the comments when someone types a word or emoji an advertiser paid for. Starts off. Turn it on in Hushfeed settings > Comments. |
 | `Hide feed follow button` | Removes the + follow button under creators' pictures on the feed, so you don't follow someone by accident. Starts off. Turn it on in Hushfeed settings > Feed screen. |
-| `Hide feed LIVE button` | Removes the LIVE button from the top left of the feed, for a cleaner screen. Starts off. Turn it on in Hushfeed settings > Feed screen. |
+| `Hide feed LIVE button` | Removes the LIVE button and the side menu button from the top left of the feed, for a cleaner screen. Each has its own switch, and both start off. Turn them on in Hushfeed settings > Feed screen. |
 | `Hide feed save button` | Removes the save button from the right side of the feed, for a cleaner screen. Starts off. Turn it on in Hushfeed settings > Feed screen. |
 | `Hide feed search button` | Removes the search button from the top right of the feed, for a cleaner screen. Starts off. Turn it on in Hushfeed settings > Feed screen. |
 | `Hide floating promotions` | Hides the floating promotion badges, coins and timers on the feed, and can hide the rewards button on your profile. Starts off. Turn it on in Hushfeed settings > Feed screen, and App for the rewards button. |

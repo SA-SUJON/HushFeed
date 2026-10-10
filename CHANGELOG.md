@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Feed screen has a new switch, Hide the side menu button, off until you turn it on. It takes away the button at the top left of the feed, next to LIVE, that opens TikTok's side menu with Your orders, TikTok Minis and more. Restart TikTok after you change it (#128).
+
 * **Project:** Added three settings design concepts with a category map and notes on search, accessibility and restart behavior. They're visual proposals for a smaller, clearer menu.
 
 * **Project:** Failed preference-test saves now retain the underlying logs and file state.

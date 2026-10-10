@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Pantalla del feed tiene un interruptor nuevo, Ocultar el botón del menú lateral, desactivado hasta que lo actives. Quita el botón de la esquina superior izquierda del feed, junto a LIVE, que abre el menú lateral de TikTok con Tus pedidos, TikTok Minis y más. Reinicia TikTok después de cambiarlo (#128).
+
 * **TikTok:** Todas las descripciones de parches en Morphe Manager están reescritas en un inglés sencillo. Cada una dice ahora qué cambia el parche, por qué te puede interesar y si su interruptor empieza encendido o apagado y dónde está en los ajustes de Hushfeed. Algunas opciones de parches también se leen más claras, y Skip push setup ahora se llama Skip notification setup.
 
 * **TikTok:** Las filas de los ajustes de Hushfeed están reescritas en un inglés sencillo. Privacy, Comments, Downloads, Feed filter, Screen time, Region y otras páginas ahora dicen sin términos técnicos qué hace cada interruptor y qué notarás. Algunos títulos también cambiaron, como Stop TikTok's speed tests y Clean up shared links.

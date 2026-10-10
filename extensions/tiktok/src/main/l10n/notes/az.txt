@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Lent ekranında yeni açar var, Yan menyu düyməsini gizlədin, siz yandırana qədər söndürülü qalır. O, lentin yuxarı sol küncündə LIVE-ın yanındakı, TikTok-un Your orders, TikTok Minis və başqalarının olduğu yan menyusunu açan düyməni götürür. Dəyişdirdikdən sonra TikTok-u yenidən başladın (#128).
+
 * **TikTok:** Morphe Manager-dəki bütün yamaq təsvirləri sadə ingilis dilində yenidən yazılıb. İndi hər biri yamağın nəyi dəyişdiyini, onu niyə istəyə biləcəyini, açarının açıq və ya bağlı başladığını və Hushfeed ayarlarında harada olduğunu deyir. Bəzi yamaq seçimləri də daha aydın yazılıb, Skip push setup isə indi Skip notification setup adlanır.
 
 * **TikTok:** Hushfeed ayarlarındakı sətirlər sadə ingiliscə ilə yenidən yazıldı. Privacy, Comments, Downloads, Feed filter, Screen time, Region və digər səhifələr indi texniki terminlər olmadan hər açarın nə etdiyini və nəyi hiss edəcəyinizi deyir. Bir neçə başlıq da dəyişdi, məsələn Stop TikTok's speed tests və Clean up shared links.

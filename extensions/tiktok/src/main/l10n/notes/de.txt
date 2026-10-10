@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Die Feed-Ansicht hat einen neuen Schalter, Seitenmenü-Knopf ausblenden, der aus bleibt, bis du ihn einschaltest. Er nimmt den Knopf oben links im Feed neben LIVE weg, der TikToks Seitenmenü mit Deine Bestellungen, TikTok Minis und mehr öffnet. Starte TikTok neu, nachdem du ihn geändert hast (#128).
+
 * **TikTok:** Alle Patch-Beschreibungen in Morphe Manager sind neu in einfachem Englisch geschrieben. Jede sagt jetzt, was der Patch ändert, warum du ihn willst und ob sein Schalter an oder aus startet und wo er in den Hushfeed-Einstellungen liegt. Ein paar Patch-Optionen sind auch klarer formuliert, und Skip push setup heißt jetzt Skip notification setup.
 
 * **TikTok:** Die Zeilen in den Hushfeed-Einstellungen sind in einfachem Englisch neu formuliert. Privacy, Comments, Downloads, Feed filter, Screen time, Region und weitere Seiten sagen jetzt ohne Fachbegriffe, was jeder Schalter tut und was du davon merkst. Ein paar Titel haben sich auch geändert, zum Beispiel Stop TikTok's speed tests und Clean up shared links.
