@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Clear display hatırlandığında ya da Automatic clear display gecikmesiz olduğunda, TikTok soğuk açılıştan sonra yükleme simgesinin altında sekmeleri ve ilk videonun düğmelerini yaklaşık bir saniye artık göstermiyor. Favorites'ten ya da bir profilden açılan video da aynı şekilde temiz başlıyor (#84).
+
 * **TikTok:** Show where a video was posted açıkken satırda ikisine de yer varsa, içerik üreticisinin adı artık ülkeye yer açmak için kısaltılmıyor. Yani "Rn D… · TR" yine tam okunuyor (#127). Gerçekten çok uzun bir ad ise ülke tam görünsün diye yine kısaltılıyor.
 
 * **TikTok:** Hide already seen videos artık açtığın bir koleksiyondan video çıkarmıyor. Kaydedilmiş bir videoya dokununca yanlış bir video ya da hiçbir şey değil, yine o video oynuyor (#135). For You, Following ve Friends akışlarında izlenen videoları gizlemeye devam ediyor.

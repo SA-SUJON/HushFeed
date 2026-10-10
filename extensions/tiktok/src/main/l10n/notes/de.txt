@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Wenn Clear display gemerkt wird oder Automatic clear display keine Verzögerung hat, zeigt TikTok nach einem Kaltstart nicht mehr die Tabs unter dem Ladekreis und etwa eine Sekunde lang die Knöpfe des ersten Videos. Ein Video, das du aus Favorites oder einem Profil öffnest, startet genauso schon aufgeräumt (#84).
+
 * **TikTok:** Mit Show where a video was posted wird der Name des Creators nicht mehr für das Land gekürzt, wenn die Zeile Platz für beides hat. "Rn D… · TR" ist also wieder ganz lesbar (#127). Ein Name, der wirklich zu lang ist, wird weiter gekürzt, damit das Land ganz zu sehen bleibt.
 
 * **TikTok:** Hide already seen videos nimmt keine Videos mehr aus einer Sammlung, die du öffnest. Ein Tipp auf ein gespeichertes Video spielt also wieder dieses Video ab statt eines falschen oder gar keines (#135). In For You, Following und Friends blendet es gesehene Videos weiter aus.
