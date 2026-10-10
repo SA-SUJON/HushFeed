@@ -1,6 +1,6 @@
 ## Unreleased
 
-* **TikTok:** Restaurar um backup não liga mais o Proxy de rede nem muda um que já esteja ligado, então um backup feito por outra pessoa não consegue mandar seu tráfego do TikTok pelo servidor dela. O endereço do proxy continua vindo junto enquanto ele está desligado, então depois de trocar de celular, ligue a chave de novo você mesmo.
+* **TikTok:** Restaurar um backup não liga mais o Proxy de rede nem substitui o endereço de proxy que você já tem, então um backup feito por outra pessoa não consegue mandar seu tráfego do TikTok pelo servidor dela. Num celular sem proxy configurado, o endereço vem junto com a chave desligada, e um aviso depois da restauração explica isso.
 
 * **TikTok:** Não traduzir automaticamente estes idiomas agora deixa o chinês tradicional como foi escrito quando você digita zh-Hant, zh-TW, zh-HK ou zh-MO, enquanto zh-Hans-TW continua sendo chinês simplificado. Antes, essas entradas protegiam o chinês simplificado no lugar dele (#121).
 

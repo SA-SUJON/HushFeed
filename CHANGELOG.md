@@ -4,7 +4,7 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
-* **TikTok:** Restoring a backup no longer turns on the Network proxy, or changes one that's already on, so a backup someone else made can't send your TikTok traffic through their server. The proxy's address still comes along while it's off, so after a move to a new phone, turn the switch back on yourself.
+* **TikTok:** Restoring a backup no longer turns on the Network proxy or replaces the proxy address you already have, so a backup someone else made can't send your TikTok traffic through their server. On a phone with no proxy set up yet, the address comes along with the switch off, and a note after the restore says so.
 
 * **TikTok:** Don't auto translate these languages now keeps Traditional Chinese as it was written when you type zh-Hant, zh-TW, zh-HK or zh-MO, while zh-Hans-TW still means Simplified. Before, those entries protected Simplified Chinese instead (#121).
 

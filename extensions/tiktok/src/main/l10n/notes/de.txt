@@ -1,6 +1,6 @@
 ## Unreleased
 
-* **TikTok:** Das Wiederherstellen einer Sicherung schaltet den Netzwerk-Proxy nicht mehr ein und ändert keinen, der schon an ist, damit eine Sicherung von jemand anderem deinen TikTok-Verkehr nicht über dessen Server leiten kann. Die Adresse des Proxys kommt mit, solange er aus ist, also schalte ihn nach dem Umzug auf ein neues Handy selbst wieder ein.
+* **TikTok:** Das Wiederherstellen einer Sicherung schaltet den Netzwerk-Proxy nicht mehr ein und ersetzt keine Proxy-Adresse, die du schon hast, damit eine Sicherung von jemand anderem deinen TikTok-Verkehr nicht über dessen Server leiten kann. Auf einem Handy ohne eingerichteten Proxy kommt die Adresse mit ausgeschaltetem Schalter mit, und ein Hinweis nach dem Wiederherstellen sagt das.
 
 * **TikTok:** Diese Sprachen nicht automatisch übersetzen lässt traditionelles Chinesisch jetzt so, wie es geschrieben wurde, wenn du zh-Hant, zh-TW, zh-HK oder zh-MO eingibst, während zh-Hans-TW weiter vereinfachtes Chinesisch bedeutet. Vorher haben diese Einträge stattdessen vereinfachtes Chinesisch geschützt (#121).
 

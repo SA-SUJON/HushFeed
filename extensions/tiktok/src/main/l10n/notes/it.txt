@@ -1,6 +1,6 @@
 ## Unreleased
 
-* **TikTok:** Ripristinare un backup non attiva più il Proxy di rete e non cambia quello già attivo, così un backup fatto da qualcun altro non può far passare il tuo traffico TikTok dal suo server. L'indirizzo del proxy viene comunque ripristinato mentre è spento, quindi dopo il passaggio a un nuovo telefono riattiva tu l'interruttore.
+* **TikTok:** Ripristinare un backup non attiva più il Proxy di rete e non sostituisce l'indirizzo proxy che hai già, così un backup fatto da qualcun altro non può far passare il tuo traffico TikTok dal suo server. Su un telefono senza proxy configurato, l'indirizzo arriva con l'interruttore spento, e una nota dopo il ripristino lo dice.
 
 * **TikTok:** Non tradurre automaticamente queste lingue ora lascia il cinese tradizionale com'è stato scritto quando inserisci zh-Hant, zh-TW, zh-HK o zh-MO, mentre zh-Hans-TW resta cinese semplificato. Prima quelle voci proteggevano invece il cinese semplificato (#121).
 

@@ -1,6 +1,6 @@
 ## Unreleased
 
-* **TikTok:** Memulihkan cadangan tidak lagi menyalakan Proksi jaringan atau mengubah proksi yang sudah menyala, jadi cadangan buatan orang lain tidak bisa mengalirkan lalu lintas TikTok-mu lewat server mereka. Alamat proksi tetap ikut selama proksinya mati, jadi setelah pindah ke ponsel baru, nyalakan lagi sakelarnya sendiri.
+* **TikTok:** Memulihkan cadangan tidak lagi menyalakan Proksi jaringan atau mengganti alamat proksi yang sudah kamu punya, jadi cadangan buatan orang lain tidak bisa mengalirkan lalu lintas TikTok-mu lewat server mereka. Di ponsel yang belum punya proksi, alamatnya ikut dengan sakelar mati, dan ada catatan setelah pemulihan yang memberitahukannya.
 
 * **TikTok:** Jangan terjemahkan otomatis bahasa ini sekarang membiarkan bahasa Mandarin Tradisional seperti aslinya saat kamu mengetik zh-Hant, zh-TW, zh-HK, atau zh-MO, sedangkan zh-Hans-TW tetap berarti Mandarin Sederhana. Sebelumnya, entri itu malah melindungi bahasa Mandarin Sederhana (#121).
 
