@@ -1055,6 +1055,7 @@ Operator name,Operator name
 "Optional, used with the user name. It isn't shown, logged or put in a backup.","Optional, used with the user name. It isn't shown, logged or put in a backup."
 "Optional. Only connections made by Android itself can sign in to a proxy, not TikTok's own. Leave empty for a proxy without a password.","Optional. Only connections made by Android itself can sign in to a proxy, not TikTok's own. Leave empty for a proxy without a password."
 "Opus (.ogg), a smaller file","Opus (.ogg), a smaller file"
+"Opus didn't work on this phone, so the sound was saved as TikTok sent it.","Opus didn't work on this phone, so the sound was saved as TikTok sent it."
 "Opus needs Android 10 or later, so sounds save as TikTok sent them.","Opus needs Android 10 or later, so sounds save as TikTok sent them."
 Original language,Original language
 Original photos,Original photos

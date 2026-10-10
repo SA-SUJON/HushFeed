@@ -144,9 +144,10 @@ public final class OriginalSoundDownloads {
                 // An Ogg that is Opus already goes out as it came, with no second encode.
                 if (SoundFormat.opus() && !OpusTranscoder.isOpus(fetched)) {
                     encoded = MediaCache.createTempFile(app, "original-sound-", ".ogg");
-                    OpusTranscoder.transcode(fetched, encoded);
-                    publish = encoded;
-                    extension = "ogg";
+                    if (OpusTranscoder.transcodeOrKeep(fetched, encoded)) {
+                        publish = encoded;
+                        extension = "ogg";
+                    }
                 }
                 String name = fileName(aweme, extension);
                 String path = AudioDownloads.audioPath(DownloadsPatch.getVideoDownloadPath());

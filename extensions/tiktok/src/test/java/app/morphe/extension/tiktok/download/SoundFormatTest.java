@@ -17,6 +17,7 @@ import android.preference.ListPreference;
 
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.tiktok.SettingsContextRule;
+import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
 import app.morphe.extension.tiktok.settings.preference.categories.DownloadsPreferenceCategory;
@@ -38,6 +39,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.MediaCodecInfoBuilder;
 import org.robolectric.shadows.ShadowMediaCodecList;
 import org.robolectric.shadows.ShadowMediaExtractor;
+import org.robolectric.shadows.ShadowToast;
 import org.robolectric.shadows.util.DataSource;
 
 /**
@@ -133,14 +135,37 @@ public class SoundFormatTest {
         assertEquals("As TikTok sent it (M4A or MP3)\n" + NEEDS_ANDROID_10, row.getSummary().toString());
     }
 
+    /**
+     * An encode that fails hands the save back to the original format with a word on why, rather
+     * than losing the sound. Android 9 is a failure Robolectric can produce without a codec.
+     */
+    @Test
+    public void aFailedEncodeIsSavedAsTikTokSentItAndSaysSo() throws Exception {
+        File source = files.newFile("sound.m4a");
+        File output = files.newFile("sound.ogg");
+        ShadowToast.reset();
+        assertFalse(OpusTranscoder.transcodeOrKeep(source, output));
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+        assertEquals(L10n.t("Opus didn't work on this phone, so the sound was saved as TikTok sent it."),
+                ShadowToast.getTextOfLatestToast());
+    }
+
     @Test @Config(sdk = 35)
     public void androidTenAndLaterNeedAnOpusEncoderToo() {
         Settings.DOWNLOAD_SOUND_FORMAT.save(SoundFormat.OPUS);
         assertFalse("no encoder, no Opus", SoundFormat.opusPossible());
         assertFalse(SoundFormat.opus());
         assertFalse(Settings.DOWNLOAD_SOUND_FORMAT.isAvailable());
+    }
 
+    /**
+     * Its own test: MediaCodecList reads the codecs once per process and keeps them, so an
+     * encoder added after a lookup isn't seen until the shadow's reset between tests.
+     */
+    @Test @Config(sdk = 35)
+    public void anOpusEncoderMakesOpusPossible() {
         addOpusEncoder();
+        Settings.DOWNLOAD_SOUND_FORMAT.save(SoundFormat.OPUS);
         assertTrue(SoundFormat.opusPossible());
         assertTrue(Settings.DOWNLOAD_SOUND_FORMAT.isAvailable());
         assertTrue(SoundFormat.opus());

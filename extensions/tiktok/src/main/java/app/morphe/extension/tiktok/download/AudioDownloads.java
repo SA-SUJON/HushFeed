@@ -135,8 +135,15 @@ final class AudioDownloads {
         boolean opus = SoundFormat.opus();
         try {
             output = MediaCache.createTempFile(app, "sound-", opus ? ".ogg" : ".m4a");
-            if (opus) OpusTranscoder.transcode(source, output);
-            else TrackMuxer.audioOnly(source, output);
+            if (opus && !OpusTranscoder.transcodeOrKeep(source, output)) {
+                // A fresh file for the M4A: the muxer needn't cut off what the encoder left.
+                opus = false;
+                File failed = output;
+                output = null;
+                if (!MediaCache.delete(failed)) Logger.printInfo(() -> "Could not remove sound temporary file");
+                output = MediaCache.createTempFile(app, "sound-", ".m4a");
+            }
+            if (!opus) TrackMuxer.audioOnly(source, output);
             String path = audioPath(videoPath);
             String fileName = opus ? SoundFormat.withExtension(name, "ogg") : name;
             MediaFileWriter.Saved saved = MediaFileWriter.publishForResult(app, output, fileName,

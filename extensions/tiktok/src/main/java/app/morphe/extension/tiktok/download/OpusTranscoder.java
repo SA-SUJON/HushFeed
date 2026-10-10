@@ -10,6 +10,8 @@ import android.media.MediaFormat;
 import android.media.MediaMuxer;
 
 import app.morphe.extension.shared.Logger;
+import app.morphe.extension.shared.Utils;
+import app.morphe.extension.tiktok.settings.L10n;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,6 +69,25 @@ final class OpusTranscoder {
             extractor.release();
         }
         return false;
+    }
+
+    /**
+     * {@link #transcode}, or false when it failed, so the caller saves the sound as TikTok sent it
+     * rather than losing the save to an encoder this phone gets wrong. The reader is told why the
+     * file isn't an .ogg. A refusal from the budget (no room, out of time) still throws, since the
+     * other format wouldn't get through either.
+     */
+    static boolean transcodeOrKeep(File source, File output) throws MediaBudget.StopException {
+        try {
+            transcode(source, output);
+            return true;
+        } catch (MediaBudget.StopException refusal) {
+            throw refusal;
+        } catch (IOException | RuntimeException failure) {
+            Logger.printException(() -> "Opus encode failed, keeping the sound as TikTok sent it", failure);
+            Utils.showToastLong(L10n.t("Opus didn't work on this phone, so the sound was saved as TikTok sent it."));
+            return false;
+        }
     }
 
     static void transcode(File source, File output) throws IOException {

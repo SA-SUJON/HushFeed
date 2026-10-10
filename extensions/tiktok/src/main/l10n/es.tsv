@@ -5,6 +5,7 @@ Importing new history ended Undo for the earlier clear. You can clear the import
 %1$d settings in that file can't be restored here and were skipped	%1$d ajustes del archivo no se pueden restaurar aquí y se omitieron
 Import watch history	Importar historial de visualización
 Opus (.ogg), a smaller file	Opus (.ogg), archivo más pequeño
+Opus didn't work on this phone, so the sound was saved as TikTok sent it.	Opus no funcionó en este teléfono, así que el sonido se guardó tal como lo envió TikTok.
 Opus needs Android 10 or later, so sounds save as TikTok sent them.	Opus necesita Android 10 o posterior, así que los sonidos se guardan tal como los envía TikTok.
 Sound format	Formato del sonido
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Usa la exportación JSON de TikTok de esta cuenta, con un máximo de %1$s MB y %2$s entradas. Las fechas sin zona horaria usan la de este teléfono.
