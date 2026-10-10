@@ -409,7 +409,7 @@ public class FeedTextSizeTest {
             return new FeedTextSize.Native() {
                 @Override public View descriptionViewOf(Object value) { return null; }
                 @Override public TextView authorViewOf(Object value) { return value == row ? row.name : null; }
-                @Override public TextView dateViewOf(Object value) { return value == row ? row.date : null; }
+                @Override public TextView postDateViewOf(Object value) { return value == row ? row.date : null; }
                 @Override public void resizeDescriptionBuilder(Object builder, View value) { }
                 @Override public void refreshDescription(Object value) { }
                 @Override public void refreshAuthor(Object value, Object bound) { assertSame(row.item, bound); row.bind(); }

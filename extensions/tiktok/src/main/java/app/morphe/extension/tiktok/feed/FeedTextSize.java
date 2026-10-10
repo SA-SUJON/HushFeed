@@ -369,7 +369,7 @@ public final class FeedTextSize {
         View descriptionViewOf(Object owner);
         TextView authorViewOf(Object owner);
         /** The post date beside the name, or null for a stand-in that has none. */
-        default TextView dateViewOf(Object owner) { return null; }
+        default TextView postDateViewOf(Object owner) { return null; }
         void resizeDescriptionBuilder(Object builder, View view);
         void refreshDescription(Object owner);
         void refreshAuthor(Object owner, Object item);
@@ -389,7 +389,7 @@ public final class FeedTextSize {
 
     static TextView dateViewOf(Object owner) {
         Native stand = nativeForTests;
-        return stand == null ? null : stand.dateViewOf(owner);
+        return stand == null ? null : stand.postDateViewOf(owner);
     }
 
     static void resizeDescriptionBuilder(Object builder, View view) {
