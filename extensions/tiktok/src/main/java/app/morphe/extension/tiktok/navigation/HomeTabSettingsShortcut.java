@@ -13,6 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 import app.morphe.extension.shared.GlobalLayoutHook;
 import app.morphe.extension.shared.Logger;
@@ -32,11 +38,23 @@ import app.morphe.extension.tiktok.settings.TikTokActivityHook;
  * <p>The tab bar is rebuilt now and then (a tab filter change, a configuration change), so the
  * listener is checked on each layout pass of the main activity, and switching the setting off
  * takes it away again the next time the feed is laid out.
+ *
+ * <p>TikTok's launcher entry is an alias of MainActivity, so the task can hold two of them, the
+ * launcher's under the feed's. Changing TikTok's appearance recreates both, the buried one last,
+ * and following the newest one left Home without its long press until TikTok was restarted. The
+ * shortcut follows the main activity that is resumed instead.
  */
 public final class HomeTabSettingsShortcut {
     private static final GlobalLayoutHook LAYOUT = new GlobalLayoutHook();
     private static WeakReference<Application> followed = new WeakReference<>(null);
     private static WeakReference<Activity> activityReference = new WeakReference<>(null);
+    /** Every activity the patched MainActivity.onCreate handed in. */
+    private static final Set<Activity> mains = Collections.newSetFromMap(new WeakHashMap<>());
+    /**
+     * The main activities resumed now, latest last. A buried one that a theme change recreates is
+     * resumed for a moment while the feed's stays in front, and the feed's gets no new resume.
+     */
+    private static final List<WeakReference<Activity>> resumedMains = new ArrayList<>();
     /** The tab the listener is on, so a rebuilt tab gets it again and an old one is let go. */
     private static WeakReference<View> attached = new WeakReference<>(null);
     /** A tab that was long-clickable before this touched it, so it is never taken over. */
@@ -65,7 +83,7 @@ public final class HomeTabSettingsShortcut {
         try {
             if (!(context instanceof Activity) || !SettingsStatus.feedNavigationEnabled) return;
             Activity activity = (Activity) context;
-            activityReference = new WeakReference<>(activity);
+            mains.add(activity);
             follow(activity.getApplication());
         } catch (Throwable error) {
             Logger.printException(() -> "Could not follow the Home tab", error);
@@ -78,22 +96,52 @@ public final class HomeTabSettingsShortcut {
         application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
             // The main activity alone has the tab bar; a creator's video opens in another one.
             @Override public void onActivityResumed(Activity resumed) {
-                if (activityReference.get() != resumed) return;
-                ViewGroup root = resumed.findViewById(android.R.id.content);
-                if (root != null) LAYOUT.install(root, HomeTabSettingsShortcut::apply);
-                apply();
+                if (!mains.contains(resumed)) return;
+                forgetResumed(resumed);
+                resumedMains.add(new WeakReference<>(resumed));
+                track(resumed);
+            }
+
+            @Override public void onActivityPaused(Activity paused) {
+                if (!mains.contains(paused)) return;
+                forgetResumed(paused);
+                Activity front = latestResumed();
+                if (front != null && activityReference.get() == paused) track(front);
             }
 
             @Override public void onActivityDestroyed(Activity destroyed) {
+                mains.remove(destroyed);
+                forgetResumed(destroyed);
                 if (activityReference.get() == destroyed) LAYOUT.detach();
             }
 
             @Override public void onActivityCreated(Activity created, Bundle state) { }
             @Override public void onActivityStarted(Activity started) { }
-            @Override public void onActivityPaused(Activity paused) { }
             @Override public void onActivityStopped(Activity stopped) { }
             @Override public void onActivitySaveInstanceState(Activity activity, Bundle state) { }
         });
+    }
+
+    private static void track(Activity activity) {
+        activityReference = new WeakReference<>(activity);
+        ViewGroup root = activity.findViewById(android.R.id.content);
+        if (root != null) LAYOUT.install(root, HomeTabSettingsShortcut::apply);
+        apply();
+    }
+
+    private static void forgetResumed(Activity activity) {
+        for (Iterator<WeakReference<Activity>> it = resumedMains.iterator(); it.hasNext(); ) {
+            Activity held = it.next().get();
+            if (held == null || held == activity) it.remove();
+        }
+    }
+
+    private static Activity latestResumed() {
+        for (int i = resumedMains.size() - 1; i >= 0; i--) {
+            Activity held = resumedMains.get(i).get();
+            if (held != null && !held.isFinishing()) return held;
+        }
+        return null;
     }
 
     static void apply() {
@@ -135,6 +183,8 @@ public final class HomeTabSettingsShortcut {
         LAYOUT.detach();
         followed = new WeakReference<>(null);
         activityReference = new WeakReference<>(null);
+        mains.clear();
+        resumedMains.clear();
         attached = new WeakReference<>(null);
         refused = new WeakReference<>(null);
     }
