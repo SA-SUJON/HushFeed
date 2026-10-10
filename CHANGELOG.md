@@ -4,6 +4,22 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Don't auto translate these languages now keeps Traditional Chinese as it was written when you type zh-Hant, zh-TW, zh-HK or zh-MO. Before, those entries protected Simplified Chinese instead (#121).
+
+* **TikTok:** Hide feed LIVE button still patches on a TikTok build where the side menu button can't be found. It skips that part, and the Hide the side menu button row only shows when the button was found (#128).
+
+* **TikTok:** Settings search now finds Build details and What's new. A few results, like Feature Gate Lab and Licenses, now name the group they're in, and a search made only of punctuation says No matching settings.
+
+* **TikTok:** The notice that shows at the bottom of Hushfeed settings now closes when you tap it, and the tap no longer lands on the setting under it. TalkBack reads its action as Close.
+
+* **TikTok:** Pause now says in plain words what stays while it's on. Your settings stay saved, and so do changes made when you patched, like the app's name or icon. TikTok's Auto scroll is also written the same way on every row now.
+
+* **TikTok:** The language lists in Feed filter and Comments now accept an extra comma, like en,,es. They used to refuse the list with a blank name in the message.
+
+* **TikTok:** If copying the build details fails, the message now tells you to use Save build details instead.
+
+* **TikTok:** What's new no longer shows stray backticks around setting names.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** Author text size now sizes the post date next to the creator's name too, so the two stay the same size (#66).

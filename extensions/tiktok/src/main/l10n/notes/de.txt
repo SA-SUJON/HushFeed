@@ -1,3 +1,21 @@
+## Unreleased
+
+* **TikTok:** Diese Sprachen nicht automatisch übersetzen lässt traditionelles Chinesisch jetzt so, wie es geschrieben wurde, wenn du zh-Hant, zh-TW, zh-HK oder zh-MO eingibst. Vorher haben diese Einträge stattdessen vereinfachtes Chinesisch geschützt (#121).
+
+* **TikTok:** Hide feed LIVE button lässt sich jetzt auch auf einer TikTok-Version patchen, in der der Seitenmenü-Knopf nicht gefunden wird. Der Teil wird übersprungen, und die Zeile Seitenmenü-Knopf ausblenden erscheint nur, wenn der Knopf gefunden wurde (#128).
+
+* **TikTok:** Die Suche in den Einstellungen findet jetzt Build-Informationen und Neu in Hushfeed. Einige Ergebnisse, etwa Feature Gate Lab und Lizenzen, nennen jetzt die Gruppe, in der sie stehen, und eine Suche nur aus Satzzeichen zeigt Keine passenden Einstellungen.
+
+* **TikTok:** Der Hinweis unten in den Hushfeed-Einstellungen schließt sich jetzt, wenn du darauf tippst, und der Tipp landet nicht mehr auf der Einstellung darunter. TalkBack liest seine Aktion als Schließen vor.
+
+* **TikTok:** Pausieren sagt jetzt in einfachen Worten, was erhalten bleibt, solange es an ist. Deine Einstellungen bleiben gespeichert, und auch was du beim Patchen geändert hast, etwa Name oder Symbol der App, bleibt. TikToks Auto scroll heißt jetzt außerdem in jeder Zeile gleich.
+
+* **TikTok:** Die Sprachlisten in Feed-Filter und Kommentare nehmen jetzt ein zusätzliches Komma an, etwa en,,es. Früher wurde die Liste abgelehnt, mit einem leeren Namen in der Meldung.
+
+* **TikTok:** Wenn das Kopieren der Build-Informationen fehlschlägt, sagt dir die Meldung jetzt, dass du stattdessen Build-Informationen speichern nutzen sollst.
+
+* **TikTok:** Neu in Hushfeed zeigt keine überzähligen Backticks mehr um Namen von Einstellungen.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** Textgröße des Creatornamens ändert jetzt auch die Größe des Datums neben dem Namen, damit beide gleich groß bleiben (#66).

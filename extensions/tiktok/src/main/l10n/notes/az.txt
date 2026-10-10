@@ -1,3 +1,21 @@
+## Unreleased
+
+* **TikTok:** Bu dilləri avtomatik tərcümə etməyin indi zh-Hant, zh-TW, zh-HK və ya zh-MO yazanda ənənəvi Çin dilini yazıldığı kimi saxlayır. Əvvəllər bu girişlər bunun əvəzinə sadələşdirilmiş Çin dilini qoruyurdu (#121).
+
+* **TikTok:** Hide feed LIVE button indi yan menyu düyməsinin tapılmadığı TikTok versiyasına da tətbiq olunur. O hissə ötürülür, Yan menyu düyməsini gizlədin sətri isə yalnız düymə tapılanda görünür (#128).
+
+* **TikTok:** Ayarlarda axtarış indi Build təfərrüatları və Yeniliklər bölmələrini tapır. Feature Gate Lab və Lisenziyalar kimi bəzi nəticələr indi olduqları qrupu göstərir, yalnız durğu işarələrindən ibarət axtarış isə Uyğun ayar yoxdur yazır.
+
+* **TikTok:** Hushfeed ayarlarının altında görünən bildiriş indi ona toxunanda bağlanır və toxunuş artıq altındakı ayara düşmür. TalkBack onun əməliyyatını Bağlayın kimi oxuyur.
+
+* **TikTok:** Fasilə indi açıq olanda nəyin qaldığını sadə sözlərlə izah edir. Ayarlarınız saxlanılır, yamaqlayanda edilən dəyişikliklər də, məsələn tətbiqin adı və ya ikonu, qalır. TikTok-un Auto scroll funksiyası da indi hər sətirdə eyni cür yazılır.
+
+* **TikTok:** Lent filtri və Şərhlər bölmələrindəki dil siyahıları indi en,,es kimi əlavə vergülü qəbul edir. Əvvəllər siyahı mesajda boş adla rədd edilirdi.
+
+* **TikTok:** Build təfərrüatlarını kopyalamaq alınmasa, mesaj indi Build təfərrüatlarını saxlayın seçimindən istifadə etməyi deyir.
+
+* **TikTok:** Yeniliklər daha ayar adlarının ətrafında lazımsız tərs dırnaq işarələri göstərmir.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** Müəllif mətninin ölçüsü indi müəllifin adının yanındakı paylaşım tarixinin ölçüsünü də dəyişir, ona görə ikisi eyni ölçüdə qalır (#66).

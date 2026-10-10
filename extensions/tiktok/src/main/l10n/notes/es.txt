@@ -1,3 +1,21 @@
+## Unreleased
+
+* **TikTok:** No traducir automáticamente estos idiomas ahora deja el chino tradicional tal como se escribió cuando escribes zh-Hant, zh-TW, zh-HK o zh-MO. Antes, esas entradas protegían el chino simplificado en su lugar (#121).
+
+* **TikTok:** Hide feed LIVE button ahora se aplica también en una versión de TikTok donde no se encuentra el botón del menú lateral. Esa parte se omite, y la fila Ocultar el botón del menú lateral solo aparece cuando se encontró el botón (#128).
+
+* **TikTok:** La búsqueda de ajustes ahora encuentra Detalles de la compilación y Novedades. Algunos resultados, como Laboratorio de interruptores y Licencias, ahora indican el grupo en el que están, y una búsqueda hecha solo de signos de puntuación muestra Ningún ajuste coincide.
+
+* **TikTok:** El aviso que aparece abajo en los ajustes de Hushfeed ahora se cierra al tocarlo, y el toque ya no llega al ajuste que está debajo. TalkBack lee su acción como Cerrar.
+
+* **TikTok:** Pausar ahora explica con palabras sencillas qué se mantiene mientras está activo. Tus ajustes siguen guardados, y también los cambios hechos al aplicar el parche, como el nombre o el icono de la app. Además, el Auto scroll de TikTok ahora se escribe igual en todas las filas.
+
+* **TikTok:** Las listas de idiomas de Filtro del feed y Comentarios ahora aceptan una coma de más, como en,,es. Antes rechazaban la lista con un nombre vacío en el mensaje.
+
+* **TikTok:** Si copiar los detalles de la compilación falla, el mensaje ahora te dice que uses Guardar detalles de la compilación.
+
+* **TikTok:** Novedades ya no muestra comillas invertidas sueltas alrededor de los nombres de los ajustes.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** Tamaño del nombre del creador ahora también cambia el tamaño de la fecha de publicación junto al nombre, para que los dos sigan iguales (#66).

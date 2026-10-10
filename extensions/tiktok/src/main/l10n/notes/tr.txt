@@ -1,3 +1,21 @@
+## Unreleased
+
+* **TikTok:** Bu dilleri otomatik çevirme artık zh-Hant, zh-TW, zh-HK veya zh-MO yazdığında Geleneksel Çince'yi yazıldığı gibi bırakıyor. Önceden bu girişler bunun yerine Basitleştirilmiş Çince'yi koruyordu (#121).
+
+* **TikTok:** Hide feed LIVE button artık yan menü düğmesinin bulunamadığı bir TikTok sürümüne de uygulanıyor. O kısım atlanıyor ve Yan menü düğmesini gizle satırı yalnızca düğme bulunduysa görünüyor (#128).
+
+* **TikTok:** Ayarlarda arama artık Derleme ayrıntıları ve Yenilikler'i buluyor. Feature Gate Lab ve Lisanslar gibi bazı sonuçlar artık bulundukları grubu gösteriyor, yalnızca noktalama işaretlerinden oluşan bir arama ise Eşleşen ayar yok diyor.
+
+* **TikTok:** Hushfeed ayarlarının altında çıkan bildirim artık dokununca kapanıyor ve dokunuş altındaki ayara gitmiyor. TalkBack bu eylemi Kapat olarak okuyor.
+
+* **TikTok:** Duraklat artık açıkken neyin kaldığını sade bir dille anlatıyor. Ayarların kayıtlı kalır, yamalarken yapılan değişiklikler de kalır, uygulamanın adı ya da simgesi gibi. TikTok'un Auto scroll özelliği de artık her satırda aynı yazılıyor.
+
+* **TikTok:** Akış filtresi ve Yorumlar'daki dil listeleri artık en,,es gibi fazladan bir virgülü kabul ediyor. Önceden liste, mesajda boş bir adla reddediliyordu.
+
+* **TikTok:** Derleme ayrıntılarını kopyalama başarısız olursa, mesaj artık Derleme ayrıntılarını kaydet seçeneğini kullanmanı söylüyor.
+
+* **TikTok:** Yenilikler artık ayar adlarının etrafında fazladan ters tırnak göstermiyor.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** İçerik üreticisinin ad boyutu artık adın yanındaki paylaşım tarihini de boyutlandırıyor, böylece ikisi aynı boyutta kalıyor (#66).

@@ -1,3 +1,21 @@
+## Unreleased
+
+* **TikTok:** Jangan terjemahkan otomatis bahasa ini sekarang membiarkan bahasa Mandarin Tradisional seperti aslinya saat kamu mengetik zh-Hant, zh-TW, zh-HK, atau zh-MO. Sebelumnya, entri itu malah melindungi bahasa Mandarin Sederhana (#121).
+
+* **TikTok:** Hide feed LIVE button sekarang tetap bisa di-patch pada build TikTok yang tombol menu sampingnya tidak ditemukan. Bagian itu dilewati, dan baris Sembunyikan tombol menu samping hanya muncul kalau tombolnya ditemukan (#128).
+
+* **TikTok:** Pencarian setelan sekarang menemukan Detail build dan Yang baru. Beberapa hasil, seperti Feature Gate Lab dan Lisensi, sekarang menyebut grupnya, dan pencarian yang hanya berisi tanda baca menampilkan Tidak ada setelan yang cocok.
+
+* **TikTok:** Pemberitahuan di bagian bawah setelan Hushfeed sekarang tertutup saat kamu mengetuknya, dan ketukan itu tidak lagi mengenai setelan di bawahnya. TalkBack membacakan tindakannya sebagai Tutup.
+
+* **TikTok:** Jeda sekarang menjelaskan dengan kata-kata sederhana apa yang tetap ada selama aktif. Pengaturanmu tetap tersimpan, begitu juga perubahan yang dibuat saat kamu mem-patch, seperti nama atau ikon aplikasi. Auto scroll milik TikTok juga kini ditulis sama di setiap baris.
+
+* **TikTok:** Daftar bahasa di Filter feed dan Komentar sekarang menerima koma berlebih, seperti en,,es. Dulu daftarnya ditolak dengan nama kosong di pesannya.
+
+* **TikTok:** Kalau menyalin detail build gagal, pesannya sekarang menyuruhmu memakai Simpan detail build.
+
+* **TikTok:** Yang baru tidak lagi menampilkan tanda backtick yang tersisa di sekitar nama setelan.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** Ukuran nama kreator kini juga mengatur ukuran tanggal unggah di sebelah nama kreator, jadi keduanya tetap sama besar (#66).
