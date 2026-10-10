@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** A new Translate into row in Comments takes one language code, like en or es. Comments and captions TikTok translates come out in that language instead of the app's, so you can keep TikTok in one language and read translations in another. Leave it empty to keep TikTok's choice.
+
 * **TikTok:** A new Burn-in guard choice under Clear display dims the buttons, caption and tabs over the video to a quarter after 5 seconds without a touch, and your next touch brings them back. With Dim when idle and shift, everything on the feed also moves a few pixels every 2 minutes, so an OLED screen doesn't wear in under controls that never move.
 
 * **TikTok:** Hide the comment bar on opened videos now also takes the bar off a photo post you open from search. Before, the Add comment bar stayed on those.

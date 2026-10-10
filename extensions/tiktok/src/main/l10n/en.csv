@@ -39,6 +39,7 @@ source,target
 "%1$s is too long for a settings backup. Shorten it, then save the backup again.","%1$s is too long for a settings backup. Shorten it, then save the backup again."
 "%1$s isn't a country code, so no video would ever match it. Use two letters, like GB, IE or US.","%1$s isn't a country code, so no video would ever match it. Use two letters, like GB, IE or US."
 "%1$s isn't a language code, so no video would ever match it. Use two letters, like en, es or de.","%1$s isn't a language code, so no video would ever match it. Use two letters, like en, es or de."
+"%1$s isn't a language code. Use two letters, like en, es or de.","%1$s isn't a language code. Use two letters, like en, es or de."
 %1$s isn't in this Lab catalog.,%1$s isn't in this Lab catalog.
 %1$s isn't installed or doesn't take links,%1$s isn't installed or doesn't take links
 %1$s left,%1$s left
@@ -1025,6 +1026,7 @@ On. Hushfeed hasn't seen TikTok send any reports since it started.,On. Hushfeed 
 On. Restore puts back the feed setup you had before.,On. Restore puts back the feed setup you had before.
 "Once today's budget runs out, the hold stays and can't be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out.","Once today's budget runs out, the hold stays and can't be dismissed. The budget settings are locked until the day starts over. Turn this off any time before the budget runs out."
 One area was checked and everything it needs is here.,One area was checked and everything it needs is here.
+"One language code, like en or es. Comments and captions TikTok translates come out in this language instead of the app's. Leave it empty to keep TikTok's choice.","One language code, like en or es. Comments and captions TikTok translates come out in this language instead of the app's. Leave it empty to keep TikTok's choice."
 One minute left,One minute left
 One more save waiting,One more save waiting
 "One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out.","One of the quote marks in that list has nothing to close it, so the rest of the line reads as one phrase. Add the missing quote or take the stray one out."
@@ -1755,6 +1757,7 @@ Too many media saves are already running. Try again in a moment.,Too many media 
 Tracking,Tracking
 "Tracking, device access and links","Tracking, device access and links"
 "Translate comments as they load, using TikTok's own translator.","Translate comments as they load, using TikTok's own translator."
+Translate into,Translate into
 Transparent,Transparent
 Try a different word or clear the search.,Try a different word or clear the search.
 Try a different word or clear the search. Switches from patches you didn't tick in Morphe Manager aren't listed.,Try a different word or clear the search. Switches from patches you didn't tick in Morphe Manager aren't listed.
@@ -1778,6 +1781,7 @@ Turns off at %1$s,Turns off at %1$s
 "Two letters, like us, gb or jp.","Two letters, like us, gb or jp."
 Type,Type
 "Type a website name to use instead of tiktok.com in links you share or copy, like vxtiktok.com. Leave empty to share TikTok's own links. Only TikTok links change, and only the website name.","Type a website name to use instead of tiktok.com in links you share or copy, like vxtiktok.com. Leave empty to share TikTok's own links. Only TikTok links change, and only the website name."
+"Type one language code here, like en.","Type one language code here, like en."
 Type some sample text to see whether these rules match it.,Type some sample text to see whether these rules match it.
 "Type the other app's ID, like com.dv.adm. The save button sends the video's link there instead of saving. Leave empty to save here.","Type the other app's ID, like com.dv.adm. The save button sends the video's link there instead of saving. Leave empty to save here."
 Unavailable,Unavailable

@@ -222,6 +222,13 @@ public class SettingsStatus {
         doNotAutoTranslateEnabled = true;
     }
 
+    /** Translate comments hooked the translation service's answer to which language to translate into. */
+    public static boolean translateIntoEnabled = false;
+
+    public static void enableTranslateInto() {
+        translateIntoEnabled = true;
+    }
+
     public static void enableHideCommentQuickReactions() {
         hideCommentQuickReactionsEnabled = true;
     }

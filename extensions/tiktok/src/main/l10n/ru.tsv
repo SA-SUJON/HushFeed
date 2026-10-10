@@ -1,3 +1,4 @@
+%1$s isn't a language code. Use two letters, like en, es or de.	%1$s не является кодом языка. Используйте две буквы, например en, es или de.
 Applies to Save the sound as well and to Save the original sound on a long press. Opus makes a smaller file, but the sound is encoded again from TikTok's copy.	Относится к «Сохранять звук тоже» и к «Сохранять оригинальный звук» по долгому нажатию. Opus даёт файл поменьше, но звук заново кодируется из копии TikTok.
 As TikTok sent it (M4A or MP3)	Как прислал TikTok (M4A или MP3)
 Burn-in guard	Защита от выгорания экрана
@@ -11,10 +12,13 @@ Importing new history ended Undo for the earlier clear. You can clear the import
 %1$d settings in that file can't be restored here and were skipped|few	%1$d настройки из файла нельзя восстановить здесь, и они пропущены
 %1$d settings in that file can't be restored here and were skipped|many	%1$d настроек из файла нельзя восстановить здесь, и они пропущены
 Import watch history	Импортировать историю просмотров
+One language code, like en or es. Comments and captions TikTok translates come out in this language instead of the app's. Leave it empty to keep TikTok's choice.	Один код языка, например en или es. Комментарии и описания, которые переводит TikTok, будут на этом языке, а не на языке приложения. Оставьте поле пустым, чтобы TikTok выбирал сам.
 Opus (.ogg), a smaller file	Opus (.ogg), файл поменьше
 Opus didn't work on this phone. Saving the sound as TikTok sent it instead.	Opus не сработал на этом телефоне. Звук сохраняется в том виде, в каком его прислал TikTok.
 Opus needs Android 10 or later, so sounds save as TikTok sent them.	Для Opus нужен Android 10 или новее, поэтому звук сохраняется так, как прислал TikTok.
 Sound format	Формат звука
+Translate into	Переводить на
+Type one language code here, like en.	Введите здесь один код языка, например en.
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Выберите экспорт JSON из TikTok для этого аккаунта, до %1$s МБ и %2$s записей. Для дат без часового пояса используется часовой пояс этого телефона.
 Sign in to TikTok before importing watch history.	Войдите в TikTok перед импортом истории просмотров.
 Your TikTok account changed. Choose the file again for this account.	Аккаунт TikTok изменился. Выберите файл заново для этого аккаунта.

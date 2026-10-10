@@ -1,3 +1,4 @@
+%1$s isn't a language code. Use two letters, like en, es or de.	%1$s não é um código de idioma. Use duas letras, como en, es ou de.
 Applies to Save the sound as well and to Save the original sound on a long press. Opus makes a smaller file, but the sound is encoded again from TikTok's copy.	Vale para Salvar o som também e para Salvar o som original ao tocar e segurar. O Opus gera um arquivo menor, mas o som é codificado de novo a partir da cópia do TikTok.
 As TikTok sent it (M4A or MP3)	Como o TikTok enviou (M4A ou MP3)
 Burn-in guard	Proteção contra burn-in
@@ -8,10 +9,13 @@ Importing new history ended Undo for the earlier clear. You can clear the import
 %1$d setting in that file can't be restored here and was skipped	%1$d configuração do arquivo não pode ser restaurada aqui e foi ignorada
 %1$d settings in that file can't be restored here and were skipped	%1$d configurações do arquivo não podem ser restauradas aqui e foram ignoradas
 Import watch history	Importar histórico de visualização
+One language code, like en or es. Comments and captions TikTok translates come out in this language instead of the app's. Leave it empty to keep TikTok's choice.	Um código de idioma, como en ou es. Os comentários e legendas que o TikTok traduz saem neste idioma em vez do idioma do app. Deixe vazio para manter a escolha do TikTok.
 Opus (.ogg), a smaller file	Opus (.ogg), arquivo menor
 Opus didn't work on this phone. Saving the sound as TikTok sent it instead.	O Opus não funcionou neste celular. Salvando o som do jeito que o TikTok enviou.
 Opus needs Android 10 or later, so sounds save as TikTok sent them.	O Opus precisa do Android 10 ou mais recente, então os sons são salvos como o TikTok enviou.
 Sound format	Formato do som
+Translate into	Traduzir para
+Type one language code here, like en.	Digite aqui um código de idioma, como en.
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Use a exportação JSON do TikTok desta conta, com até %1$s MB e %2$s entradas. Datas sem fuso horário usam o fuso deste telefone.
 Sign in to TikTok before importing watch history.	Entre no TikTok antes de importar o histórico de visualização.
 Your TikTok account changed. Choose the file again for this account.	Sua conta do TikTok mudou. Escolha o arquivo novamente para esta conta.

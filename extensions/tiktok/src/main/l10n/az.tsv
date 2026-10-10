@@ -1,3 +1,4 @@
+%1$s isn't a language code. Use two letters, like en, es or de.	%1$s dil kodu deyil. İki hərf yazın, məsələn en, es və ya de.
 Applies to Save the sound as well and to Save the original sound on a long press. Opus makes a smaller file, but the sound is encoded again from TikTok's copy.	Səsi də saxla və uzun basmada Orijinal səsi saxlayın üçün keçərlidir. Opus daha kiçik fayl yaradır, amma səs TikTok-un nüsxəsindən yenidən kodlanır.
 As TikTok sent it (M4A or MP3)	TikTok-un göndərdiyi kimi (M4A və ya MP3)
 Burn-in guard	Ekran yanmasından qoruma
@@ -8,10 +9,13 @@ Importing new history ended Undo for the earlier clear. You can clear the import
 %1$d setting in that file can't be restored here and was skipped	Bu fayldakı %1$d ayar burada bərpa edilə bilmir və ötürüldü
 %1$d settings in that file can't be restored here and were skipped	Bu fayldakı %1$d ayar burada bərpa edilə bilmir və ötürüldü
 Import watch history	İzləmə tarixçəsini idxal et
+One language code, like en or es. Comments and captions TikTok translates come out in this language instead of the app's. Leave it empty to keep TikTok's choice.	Bir dil kodu, məsələn en və ya es. TikTok-un tərcümə etdiyi şərhlər və başlıqlar tətbiqin dili əvəzinə bu dildə çıxır. TikTok-un seçimini saxlamaq üçün boş buraxın.
 Opus (.ogg), a smaller file	Opus (.ogg), daha kiçik fayl
 Opus didn't work on this phone. Saving the sound as TikTok sent it instead.	Opus bu telefonda işləmədi. Səs əvəzinə TikTok-un göndərdiyi kimi saxlanılır.
 Opus needs Android 10 or later, so sounds save as TikTok sent them.	Opus üçün Android 10 və ya daha yeni versiya lazımdır, ona görə səslər TikTok-un göndərdiyi kimi saxlanılır.
 Sound format	Səs formatı
+Translate into	Bu dilə tərcümə et
+Type one language code here, like en.	Buraya bir dil kodu yazın, məsələn en.
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Bu hesabın TikTok JSON ixracını seçin. Fayl ən çox %1$s MB və %2$s qeyd ola bilər. Saat qurşağı olmayan tarixlər üçün bu telefonun saat qurşağı istifadə edilir.
 Sign in to TikTok before importing watch history.	İzləmə tarixçəsini idxal etməzdən əvvəl TikTok-a daxil olun.
 Your TikTok account changed. Choose the file again for this account.	TikTok hesabınız dəyişdi. Bu hesab üçün faylı yenidən seçin.

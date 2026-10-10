@@ -1,4 +1,5 @@
 source,target
+"%1$s isn't a language code. Use two letters, like en, es or de.","%1$s bukan kode bahasa. Gunakan dua huruf, seperti en, es, atau de."
 "Applies to Save the sound as well and to Save the original sound on a long press. Opus makes a smaller file, but the sound is encoded again from TikTok's copy.","Berlaku untuk Simpan suaranya juga dan Simpan suara asli saat tekan lama. Opus menghasilkan berkas lebih kecil, tapi suaranya dikodekan ulang dari salinan TikTok."
 As TikTok sent it (M4A or MP3),Seperti yang dikirim TikTok (M4A atau MP3)
 Burn-in guard,Pelindung burn-in layar
@@ -9,10 +10,13 @@ Importing new history ended Undo for the earlier clear. You can clear the import
 %1$d setting in that file can't be restored here and was skipped,%1$d pengaturan dalam berkas tidak dapat dipulihkan di sini dan dilewati
 %1$d settings in that file can't be restored here and were skipped,%1$d pengaturan dalam berkas tidak dapat dipulihkan di sini dan dilewati
 "Import watch history","Impor riwayat tontonan"
+"One language code, like en or es. Comments and captions TikTok translates come out in this language instead of the app's. Leave it empty to keep TikTok's choice.","Satu kode bahasa, seperti en atau es. Komentar dan keterangan yang diterjemahkan TikTok muncul dalam bahasa ini, bukan bahasa aplikasi. Biarkan kosong untuk memakai pilihan TikTok."
 "Opus (.ogg), a smaller file","Opus (.ogg), berkas lebih kecil"
 Opus didn't work on this phone. Saving the sound as TikTok sent it instead.,Opus tidak berfungsi di ponsel ini. Menyimpan suaranya seperti yang dikirim TikTok.
 "Opus needs Android 10 or later, so sounds save as TikTok sent them.","Opus butuh Android 10 atau yang lebih baru, jadi suara disimpan seperti yang dikirim TikTok."
 Sound format,Format suara
+Translate into,Terjemahkan ke
+"Type one language code here, like en.","Ketik satu kode bahasa di sini, seperti en."
 "Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.","Gunakan ekspor JSON TikTok akun ini, maksimal %1$s MB dan %2$s entri. Tanggal tanpa zona waktu memakai zona waktu ponsel ini."
 "Sign in to TikTok before importing watch history.","Masuk ke TikTok sebelum mengimpor riwayat tontonan."
 "Your TikTok account changed. Choose the file again for this account.","Akun TikTok Anda berubah. Pilih kembali berkas untuk akun ini."

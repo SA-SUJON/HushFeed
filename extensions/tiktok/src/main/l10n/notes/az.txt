@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Şərhlər bölməsindəki yeni Bu dilə tərcümə et sətri bir dil kodu qəbul edir, məsələn en və ya es. TikTok-un tərcümə etdiyi şərhlər və başlıqlar tətbiqin dili əvəzinə həmin dildə çıxır, beləliklə TikTok-u bir dildə saxlayıb tərcümələri başqa dildə oxuya bilərsiniz. TikTok-un seçimini saxlamaq üçün boş buraxın.
+
 * **TikTok:** Təmiz ekran altında yeni Ekran yanmasından qoruma seçimi 5 saniyə toxunulmadıqda videonun üzərindəki düymələri, başlığı və tabları dörddə birə qədər solğunlaşdırır, növbəti toxunuşunuz onları geri qaytarır. Toxunulmayanda solğunlaşdır və sürüşdür ilə lentdəki hər şey həm də hər 2 dəqiqədən bir bir neçə piksel tərpənir ki, OLED ekran heç vaxt yerindən tərpənməyən idarəetmə elementlərinin altında yanmasın.
 
 * **TikTok:** Açılmış videolarda şərh panelini gizlədin indi axtarışdan açdığınız foto paylaşımında da paneli götürür. Əvvəllər belə paylaşımlarda Şərh əlavə et paneli qalırdı.
