@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Endirmələr bölməsindəki yeni İstifadəçi adını və açıqlamanı videonun üzərinə yaz açarı Hushfeed-in saxladığı videoların sol alt küncünə @istifadəçi adını və açıqlamanın ilk sətrini yazır. Bunun üçün telefon videonu yenidən kodlayır, ona görə belə saxlamalar daha uzun çəkir və gedişatı Ləğv edin düyməsi ilə göstərilir. Açar sönülü başlayır.
+
 * **TikTok:** Remove creation tools indi xəbərdarlıq edir ki, yaratma alətlərindən birini, məsələn kamerada effekt axtarışını açmaq TikTok-u bağlaya bilər (#133). Video çəkirsinizsə, onu seçməyin.
 
 * **TikTok:** Drop the animated image cache artıq TikTok-un kadr keşini yalnız bir kadr saxlayan keşlə əvəz etmir. Bu, şərhlərdəki animasiyalı stikerlərin ilk kadrda ilişib qalmasına səbəb ola bilərdi (#130). Onun açarı indi Animasiya kadrlarını əvvəlcədən hazırlama adlanır və açıq olanda yalnız TikTok-un kadrları göstərilməzdən əvvəl hazırlamasının qarşısını alır.

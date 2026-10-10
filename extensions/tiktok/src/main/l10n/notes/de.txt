@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Ein neuer Schalter Benutzernamen und Beschreibung ins Video schreiben unter Downloads schreibt den @Benutzernamen und die erste Zeile der Beschreibung unten links in Videos, die Hushfeed speichert. Das Handy kodiert das Video dafür neu, solche Speicherungen dauern also länger und zeigen ihren Fortschritt mit einer Schaltfläche Abbrechen. Er ist zu Beginn aus.
+
 * **TikTok:** Remove creation tools weist jetzt darauf hin, dass das Öffnen eines Erstellungswerkzeugs, etwa der Effektsuche in der Kamera, TikTok schließen kann (#133). Lass den Patch weg, wenn du Videos machst.
 
 * **TikTok:** Drop the animated image cache ersetzt TikToks Bildcache nicht mehr durch einen, der nur ein einziges Bild hält. Dadurch konnten animierte Sticker in Kommentaren auf ihrem ersten Bild hängen bleiben (#130). Der Schalter heißt jetzt Animierte Bilder nicht im Voraus dekodieren, und eingeschaltet hält er TikTok nur davon ab, Bilder zu dekodieren, bevor sie angezeigt werden.

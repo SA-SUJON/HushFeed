@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** İndirilenler altındaki yeni Kullanıcı adını ve açıklamayı videonun üzerine yaz anahtarı, Hushfeed'in kaydettiği videoların sol alt köşesine @kullanıcı adını ve açıklamanın ilk satırını yazar. Telefon bunun için videoyu yeniden kodlar, bu yüzden bu kayıtlar daha uzun sürer ve ilerlemelerini İptal düğmesiyle gösterir. Kapalı başlar.
+
 * **TikTok:** Remove creation tools artık bir oluşturma aracını, örneğin kameradaki efekt aramasını açmanın TikTok'u kapatabileceği konusunda uyarıyor (#133). Video çekiyorsan bu yamayı seçme.
 
 * **TikTok:** Drop the animated image cache artık TikTok'un kare önbelleğini tek bir kare tutan bir önbellekle değiştirmiyor. Bu, yorumlardaki hareketli çıkartmaların ilk karede takılı kalmasına yol açabiliyordu (#130). Anahtarının adı artık Hareketli kareleri önceden çözme. Açıkken yalnızca TikTok'un kareleri gösterilmeden önce çözmesini engeller.

@@ -493,6 +493,8 @@ With `Advanced downloads`, **Save details beside the video** writes a TXT file c
 
 **Tag saved videos with their details** writes the same details into the MP4 itself. The caption's first line becomes the title and the whole caption the description, the creator goes in as the artist, and the link is kept as a comment beside the publication date. Media players and tools like ffprobe read them from there. If a video's layout is one the tags can't be written into, it's saved without them.
 
+**Write the username and caption on the video** draws the @username and the first line of the caption in the bottom left corner of a saved video. The phone encodes the whole video again to do it, so these saves take longer, and they always show their progress with a Cancel button. If a phone can't do it for a video, the video is saved without the text and a message says so.
+
 **Show download progress**, under Downloads & sharing > Downloads, adds a progress bar while a video saves. It shows a percentage when the video stream's size is known, then stays busy while the sound is fetched or the file is prepared and written. The switch starts off. It also works with Automatic quality. A save finished before the share sheet closes skips the progress row and shows its result. Screen readers hear the start once; changing percentages stay quiet.
 
 <img src="assets/settings/single-save-progress.png" alt="A single video save at 50 percent" width="328" />

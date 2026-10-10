@@ -2,6 +2,7 @@
 Applies to Save the sound as well and to Save the original sound on a long press. Opus makes a smaller file, but the sound is encoded again from TikTok's copy.	Səsi də saxla və uzun basmada Orijinal səsi saxlayın üçün keçərlidir. Opus daha kiçik fayl yaradır, amma səs TikTok-un nüsxəsindən yenidən kodlanır.
 As TikTok sent it (M4A or MP3)	TikTok-un göndərdiyi kimi (M4A və ya MP3)
 Burn-in guard	Ekran yanmasından qoruma
+Couldn't write the caption on this video. Saving it without.	Açıqlamanı bu videonun üzərinə yazmaq alınmadı. Onsuz saxlanılır.
 Dim when idle	Toxunulmayanda solğunlaşdır
 Dim when idle and shift	Toxunulmayanda solğunlaşdır və sürüşdür
 For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim to a quarter, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes.	OLED ekranlar üçün. 5 saniyə toxunulmadıqda videonun üzərindəki düymələr, başlıq və tablar dörddə birə qədər solğunlaşır, növbəti toxunuşunuz onları geri qaytarır. Sürüşdürmə həmçinin lentdəki hər şeyi hər 2 dəqiqədən bir bir neçə piksel tərpədir.
@@ -13,11 +14,15 @@ One language code, like en or es. Comments and captions TikTok translates come o
 Opus (.ogg), a smaller file	Opus (.ogg), daha kiçik fayl
 Opus didn't work on this phone. Saving the sound as TikTok sent it instead.	Opus bu telefonda işləmədi. Səs əvəzinə TikTok-un göndərdiyi kimi saxlanılır.
 Opus needs Android 10 or later, so sounds save as TikTok sent them.	Opus üçün Android 10 və ya daha yeni versiya lazımdır, ona görə səslər TikTok-un göndərdiyi kimi saxlanılır.
+Saved videos show the @username and the first line of the caption in the bottom left corner. The phone encodes the whole video again to do it, so saving takes longer. Applies to saves made by Hushfeed.	Saxlanan videolarda sol alt küncdə @istifadəçi adı və açıqlamanın ilk sətri görünür. Bunun üçün telefon bütün videonu yenidən kodlayır, ona görə saxlamaq daha uzun çəkir. Hushfeed-in etdiyi saxlamalara aiddir.
 Sound format	Səs formatı
 Translate into	Bu dilə tərcümə et
 Type one language code here, like en.	Buraya bir dil kodu yazın, məsələn en.
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Bu hesabın TikTok JSON ixracını seçin. Fayl ən çox %1$s MB və %2$s qeyd ola bilər. Saat qurşağı olmayan tarixlər üçün bu telefonun saat qurşağı istifadə edilir.
 Sign in to TikTok before importing watch history.	İzləmə tarixçəsini idxal etməzdən əvvəl TikTok-a daxil olun.
+Write the username and caption on the video	İstifadəçi adını və açıqlamanı videonun üzərinə yaz
+Writing the caption on the video	Açıqlama videonun üzərinə yazılır
+Writing the caption on the video: %1$s	Açıqlama videonun üzərinə yazılır: %1$s
 Your TikTok account changed. Choose the file again for this account.	TikTok hesabınız dəyişdi. Bu hesab üçün faylı yenidən seçin.
 Reading watch history	İzləmə tarixçəsi oxunur
 Importing watch history	İzləmə tarixçəsi idxal edilir

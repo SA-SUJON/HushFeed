@@ -410,6 +410,7 @@ Couldn't tell which folder to update. Choose it again.,Couldn't tell which folde
 Couldn't undo that. Try again.,Couldn't undo that. Try again.
 Couldn't undo the clear. Try again.,Couldn't undo the clear. Try again.
 Couldn't undo the last change. Try again.,Couldn't undo the last change. Try again.
+Couldn't write the caption on this video. Saving it without.,Couldn't write the caption on this video. Saving it without.
 Count a video as seen after,Count a video as seen after
 Country and network preferences,Country and network preferences
 Country code,Country code
@@ -1277,6 +1278,7 @@ Saved the photos as a video in %1$s,Saved the photos as a video in %1$s
 "Saved the photos as a video in %1$s. The sound couldn't be added, so it's silent.","Saved the photos as a video in %1$s. The sound couldn't be added, so it's silent."
 Saved videos forgotten. The files are still there.,Saved videos forgotten. The files are still there.
 Saved videos put back,Saved videos put back
+"Saved videos show the @username and the first line of the caption in the bottom left corner. The phone encodes the whole video again to do it, so saving takes longer. Applies to saves made by Hushfeed.","Saved videos show the @username and the first line of the caption in the bottom left corner. The phone encodes the whole video again to do it, so saving takes longer. Applies to saves made by Hushfeed."
 "Saved, override off","Saved, override off"
 Saved. Restart TikTok to apply this.,Saved. Restart TikTok to apply this.
 Saves TikTok's latest crash report on this phone so it can go in the diagnostic report.,Saves TikTok's latest crash report on this phone so it can go in the diagnostic report.
@@ -1884,8 +1886,11 @@ Window width needed to enable the layout. Restart TikTok to apply this.,Window w
 Working,Working
 Works only with YTDLnis (com.deniscerri.ytdl). Picks audio or video when the save button sends it a link.,Works only with YTDLnis (com.deniscerri.ytdl). Picks audio or video when the save button sends it a link.
 Works only with YTDLnis (com.deniscerri.ytdl). Starts the download in the background without showing its download card.,Works only with YTDLnis (com.deniscerri.ytdl). Starts the download in the background without showing its download card.
+Write the username and caption on the video,Write the username and caption on the video
 "Write the video's sound beside it, in the format picked under Sound format. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos.","Write the video's sound beside it, in the format picked under Sound format. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos."
 Writing,Writing
+Writing the caption on the video,Writing the caption on the video
+Writing the caption on the video: %1$s,Writing the caption on the video: %1$s
 YTDLnis background mode,YTDLnis background mode
 YTDLnis download type,YTDLnis download type
 Yes,Yes

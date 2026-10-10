@@ -150,6 +150,11 @@ public class DownloadsPreferenceCategory extends ConditionalPreferenceCategory {
                             + "where media players can read them. Applies to saves made by "
                             + "Hushfeed.",
                     Settings.DOWNLOAD_TAGS));
+            addPreference(new TogglePreference(context, "Write the username and caption on the video",
+                    "Saved videos show the @username and the first line of the caption in the "
+                            + "bottom left corner. The phone encodes the whole video again to do "
+                            + "it, so saving takes longer. Applies to saves made by Hushfeed.",
+                    Settings.DOWNLOAD_BURN_CAPTION));
             addPreference(new TogglePreference(context, "Check for already-saved videos",
                     L10n.f(context, "Remembers up to %1$s videos you saved here. If the file is "
                             + "still there, you get Open or Save again instead of a second "

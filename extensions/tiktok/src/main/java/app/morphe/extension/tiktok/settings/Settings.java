@@ -143,6 +143,8 @@ public class Settings extends BaseSettings {
             "download_details_json", FALSE, false, Setting.parent(DOWNLOAD_DETAILS));
     /** The caption, creator, date and link written into the saved MP4 as tags players read. */
     public static final BooleanSetting DOWNLOAD_TAGS = new BooleanSetting("download_tags", FALSE);
+    /** The @username and the caption's first line drawn into the saved video's picture. */
+    public static final BooleanSetting DOWNLOAD_BURN_CAPTION = new BooleanSetting("download_burn_caption", FALSE);
     public static final BooleanSetting CHECK_SAVED_VIDEOS = new BooleanSetting("check_saved_videos", FALSE);
     /** A check mark on profile grids for videos in the record the check above keeps. */
     public static final BooleanSetting MARK_SAVED_VIDEOS = new BooleanSetting(

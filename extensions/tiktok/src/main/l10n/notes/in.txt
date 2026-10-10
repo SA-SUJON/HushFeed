@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Sakelar baru Tulis nama pengguna dan keterangan di video di Unduhan menulis @nama pengguna dan baris pertama keterangan di pojok kiri bawah video yang disimpan Hushfeed. Ponsel mengenkode ulang videonya untuk itu, jadi simpanan seperti ini lebih lama dan menampilkan progresnya dengan tombol Batal. Awalnya mati.
+
 * **TikTok:** Remove creation tools sekarang memperingatkan bahwa membuka alat pembuatan, seperti pencarian efek di kamera, bisa menutup TikTok (#133). Jangan pilih patch ini kalau kamu membuat video.
 
 * **TikTok:** Drop the animated image cache tidak lagi mengganti cache bingkai TikTok dengan cache yang hanya menyimpan satu bingkai, yang bisa membuat stiker animasi di komentar macet di bingkai pertamanya (#130). Sakelarnya sekarang bernama Jangan dekode bingkai animasi lebih dulu, dan jika dinyalakan hanya mencegah TikTok mendekode bingkai sebelum ditampilkan.

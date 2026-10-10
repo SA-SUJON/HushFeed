@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** A new Write the username and caption on the video switch in Downloads draws the @username and the first line of the caption in the bottom left corner of videos Hushfeed saves. The phone encodes the video again for it, so those saves take longer and show their progress with a Cancel button. It starts off.
+
 * **TikTok:** Remove creation tools now warns that opening a creation tool, like effect search on the camera, can close TikTok (#133). Leave it out if you make videos.
 
 * **TikTok:** Drop the animated image cache no longer swaps TikTok's frame cache for one that holds a single frame, which could leave animated stickers in comments stuck on their first frame (#130). Its switch is now called Don't decode animated frames ahead, and turning it on only stops TikTok from decoding frames before they're shown.

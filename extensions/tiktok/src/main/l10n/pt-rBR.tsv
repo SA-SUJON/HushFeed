@@ -2,6 +2,7 @@
 Applies to Save the sound as well and to Save the original sound on a long press. Opus makes a smaller file, but the sound is encoded again from TikTok's copy.	Vale para Salvar o som também e para Salvar o som original ao tocar e segurar. O Opus gera um arquivo menor, mas o som é codificado de novo a partir da cópia do TikTok.
 As TikTok sent it (M4A or MP3)	Como o TikTok enviou (M4A ou MP3)
 Burn-in guard	Proteção contra burn-in
+Couldn't write the caption on this video. Saving it without.	Não deu para escrever a legenda neste vídeo. Salvando sem ela.
 Dim when idle	Escurecer quando parado
 Dim when idle and shift	Escurecer quando parado e deslocar
 For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim to a quarter, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes.	Para telas OLED. Depois de 5 segundos sem toque, os botões, a legenda e as abas sobre o vídeo escurecem para um quarto, e o próximo toque os traz de volta. Deslocar também move tudo no feed alguns pixels a cada 2 minutos.
@@ -13,11 +14,15 @@ One language code, like en or es. Comments and captions TikTok translates come o
 Opus (.ogg), a smaller file	Opus (.ogg), arquivo menor
 Opus didn't work on this phone. Saving the sound as TikTok sent it instead.	O Opus não funcionou neste celular. Salvando o som do jeito que o TikTok enviou.
 Opus needs Android 10 or later, so sounds save as TikTok sent them.	O Opus precisa do Android 10 ou mais recente, então os sons são salvos como o TikTok enviou.
+Saved videos show the @username and the first line of the caption in the bottom left corner. The phone encodes the whole video again to do it, so saving takes longer. Applies to saves made by Hushfeed.	Os vídeos salvos mostram o @nome de usuário e a primeira linha da legenda no canto inferior esquerdo. Para isso o celular codifica o vídeo inteiro de novo, então salvar demora mais. Vale para o que o Hushfeed salva.
 Sound format	Formato do som
 Translate into	Traduzir para
 Type one language code here, like en.	Digite aqui um código de idioma, como en.
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Use a exportação JSON do TikTok desta conta, com até %1$s MB e %2$s entradas. Datas sem fuso horário usam o fuso deste telefone.
 Sign in to TikTok before importing watch history.	Entre no TikTok antes de importar o histórico de visualização.
+Write the username and caption on the video	Escrever o nome de usuário e a legenda no vídeo
+Writing the caption on the video	Escrevendo a legenda no vídeo
+Writing the caption on the video: %1$s	Escrevendo a legenda no vídeo: %1$s
 Your TikTok account changed. Choose the file again for this account.	Sua conta do TikTok mudou. Escolha o arquivo novamente para esta conta.
 Reading watch history	Lendo o histórico de visualização
 Importing watch history	Importando o histórico de visualização

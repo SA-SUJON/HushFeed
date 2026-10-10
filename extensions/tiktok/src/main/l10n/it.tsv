@@ -2,6 +2,7 @@
 Applies to Save the sound as well and to Save the original sound on a long press. Opus makes a smaller file, but the sound is encoded again from TikTok's copy.	Vale per Salva anche l'audio e per Salva l'audio originale con la pressione prolungata. Opus crea un file più piccolo, ma l'audio viene ricodificato dalla copia di TikTok.
 As TikTok sent it (M4A or MP3)	Come lo invia TikTok (M4A o MP3)
 Burn-in guard	Protezione dal burn-in
+Couldn't write the caption on this video. Saving it without.	Non è stato possibile scrivere la descrizione su questo video. Viene salvato senza.
 Dim when idle	Attenua quando inattivo
 Dim when idle and shift	Attenua quando inattivo e sposta
 For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim to a quarter, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes.	Per schermi OLED. Dopo 5 secondi senza tocchi, i pulsanti, la didascalia e le schede sopra il video si attenuano a un quarto, e il tocco successivo li riporta. Sposta muove anche tutto il feed di qualche pixel ogni 2 minuti.
@@ -13,11 +14,15 @@ One language code, like en or es. Comments and captions TikTok translates come o
 Opus (.ogg), a smaller file	Opus (.ogg), file più piccolo
 Opus didn't work on this phone. Saving the sound as TikTok sent it instead.	Opus non ha funzionato su questo telefono. Salvo l'audio come l'ha inviato TikTok.
 Opus needs Android 10 or later, so sounds save as TikTok sent them.	Opus richiede Android 10 o successivo, quindi l'audio viene salvato come lo invia TikTok.
+Saved videos show the @username and the first line of the caption in the bottom left corner. The phone encodes the whole video again to do it, so saving takes longer. Applies to saves made by Hushfeed.	I video salvati mostrano il @nome utente e la prima riga della descrizione nell'angolo in basso a sinistra. Per farlo il telefono ricodifica tutto il video, quindi il salvataggio richiede più tempo. Vale per i salvataggi fatti da Hushfeed.
 Sound format	Formato audio
 Translate into	Traduci in
 Type one language code here, like en.	Scrivi qui un codice lingua, come en.
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Usa l'esportazione JSON di TikTok di questo account, fino a %1$s MB e %2$s voci. Le date senza fuso orario usano quello di questo telefono.
 Sign in to TikTok before importing watch history.	Accedi a TikTok prima di importare la cronologia di visualizzazione.
+Write the username and caption on the video	Scrivi nome utente e descrizione sul video
+Writing the caption on the video	Scrittura della descrizione sul video
+Writing the caption on the video: %1$s	Scrittura della descrizione sul video: %1$s
 Your TikTok account changed. Choose the file again for this account.	Il tuo account TikTok è cambiato. Scegli di nuovo il file per questo account.
 Reading watch history	Lettura della cronologia
 Importing watch history	Importazione della cronologia

@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Un nuevo interruptor Escribir el nombre de usuario y la descripción en el video, en Descargas, pone el @nombre de usuario y la primera línea de la descripción en la esquina inferior izquierda de los videos que guarda Hushfeed. El teléfono vuelve a codificar el video para hacerlo, así que esos guardados tardan más y muestran su progreso con un botón Cancelar. Empieza desactivado.
+
 * **TikTok:** Remove creation tools ahora avisa de que abrir una herramienta de creación, como la búsqueda de efectos en la cámara, puede cerrar TikTok (#133). Déjalo fuera si haces videos.
 
 * **TikTok:** Drop the animated image cache ya no cambia la caché de fotogramas de TikTok por una que guarda un solo fotograma, lo que podía dejar los stickers animados de los comentarios congelados en su primer fotograma (#130). Su interruptor ahora se llama No decodificar fotogramas animados por adelantado, y al activarlo solo evita que TikTok decodifique los fotogramas antes de mostrarlos.

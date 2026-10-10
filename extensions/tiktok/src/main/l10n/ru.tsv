@@ -2,6 +2,7 @@
 Applies to Save the sound as well and to Save the original sound on a long press. Opus makes a smaller file, but the sound is encoded again from TikTok's copy.	Относится к «Сохранять звук тоже» и к «Сохранять оригинальный звук» по долгому нажатию. Opus даёт файл поменьше, но звук заново кодируется из копии TikTok.
 As TikTok sent it (M4A or MP3)	Как прислал TikTok (M4A или MP3)
 Burn-in guard	Защита от выгорания экрана
+Couldn't write the caption on this video. Saving it without.	Не удалось написать описание на этом видео. Оно сохраняется без него.
 Dim when idle	Затемнять при бездействии
 Dim when idle and shift	Затемнять при бездействии и сдвигать
 For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim to a quarter, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes.	Для OLED-экранов. Через 5 секунд без касаний кнопки, подпись и вкладки поверх видео затемняются до четверти, а следующее касание возвращает их. Сдвиг также смещает всё в ленте на несколько пикселей каждые 2 минуты.
@@ -16,11 +17,15 @@ One language code, like en or es. Comments and captions TikTok translates come o
 Opus (.ogg), a smaller file	Opus (.ogg), файл поменьше
 Opus didn't work on this phone. Saving the sound as TikTok sent it instead.	Opus не сработал на этом телефоне. Звук сохраняется в том виде, в каком его прислал TikTok.
 Opus needs Android 10 or later, so sounds save as TikTok sent them.	Для Opus нужен Android 10 или новее, поэтому звук сохраняется так, как прислал TikTok.
+Saved videos show the @username and the first line of the caption in the bottom left corner. The phone encodes the whole video again to do it, so saving takes longer. Applies to saves made by Hushfeed.	На сохранённых видео внизу слева видны @имя пользователя и первая строка описания. Для этого телефон заново кодирует всё видео, поэтому сохранение занимает больше времени. Действует для сохранений через Hushfeed.
 Sound format	Формат звука
 Translate into	Переводить на
 Type one language code here, like en.	Введите здесь один код языка, например en.
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Выберите экспорт JSON из TikTok для этого аккаунта, до %1$s МБ и %2$s записей. Для дат без часового пояса используется часовой пояс этого телефона.
 Sign in to TikTok before importing watch history.	Войдите в TikTok перед импортом истории просмотров.
+Write the username and caption on the video	Писать имя пользователя и описание на видео
+Writing the caption on the video	Описание пишется на видео
+Writing the caption on the video: %1$s	Описание пишется на видео: %1$s
 Your TikTok account changed. Choose the file again for this account.	Аккаунт TikTok изменился. Выберите файл заново для этого аккаунта.
 Reading watch history	Чтение истории просмотров
 Importing watch history	Импорт истории просмотров

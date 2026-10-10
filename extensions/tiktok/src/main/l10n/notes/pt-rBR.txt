@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Uma nova chave Escrever o nome de usuário e a legenda no vídeo, em Downloads, coloca o @nome de usuário e a primeira linha da legenda no canto inferior esquerdo dos vídeos que o Hushfeed salva. O celular codifica o vídeo de novo para isso, então esses salvamentos demoram mais e mostram o progresso com um botão Cancelar. Ela começa desligada.
+
 * **TikTok:** Remove creation tools agora avisa que abrir uma ferramenta de criação, como a busca de efeitos na câmera, pode fechar o TikTok (#133). Deixe ele de fora se você faz vídeos.
 
 * **TikTok:** Drop the animated image cache não troca mais o cache de quadros do TikTok por um que guarda um único quadro, o que podia deixar figurinhas animadas nos comentários travadas no primeiro quadro (#130). A chave dele agora se chama Não decodificar quadros animados com antecedência, e ligada ela só impede o TikTok de decodificar quadros antes de aparecerem.
