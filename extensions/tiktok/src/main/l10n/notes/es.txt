@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** La burbuja de historias de Siguiendo arriba del feed vuelve cuando termina Controles ocultos. TikTok la oculta al empezar Controles ocultos y antes no volvía hasta que el feed se recargaba. Solo vuelve si se veía antes y todavía hay alguien en ella.
+
 * **TikTok:** Una nueva fila Traducir al en Comentarios acepta un código de idioma, como en o es. Los comentarios y descripciones que TikTok traduce salen en ese idioma en vez del de la app, así que puedes usar TikTok en un idioma y leer las traducciones en otro. Déjala vacía para mantener la elección de TikTok.
 
 * **TikTok:** Una nueva opción Protección contra el quemado de pantalla en Controles ocultos atenúa los botones, la descripción y las pestañas sobre el vídeo a una cuarta parte tras 5 segundos sin tocar, y tu siguiente toque los devuelve. Con Atenuar en reposo y desplazar, todo el feed también se mueve unos píxeles cada 2 minutos, para que una pantalla OLED no se marque bajo controles que nunca se mueven.

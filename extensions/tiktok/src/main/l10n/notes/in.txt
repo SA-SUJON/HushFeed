@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Gelembung cerita Mengikuti di bagian atas feed muncul lagi saat Tampilan bersih berakhir. TikTok menyembunyikannya saat Tampilan bersih dimulai, dan dulu gelembung itu tetap hilang sampai feed dimuat ulang. Gelembung hanya muncul lagi jika tadinya terlihat dan masih ada orang di dalamnya.
+
 * **TikTok:** Baris baru Terjemahkan ke di Komentar menerima satu kode bahasa, seperti en atau es. Komentar dan keterangan yang diterjemahkan TikTok muncul dalam bahasa itu, bukan bahasa aplikasi, jadi kamu bisa memakai TikTok dalam satu bahasa dan membaca terjemahan dalam bahasa lain. Biarkan kosong untuk memakai pilihan TikTok.
 
 * **TikTok:** Pilihan baru Pelindung burn-in layar di bawah Tampilan bersih meredupkan tombol, keterangan, dan tab di atas video menjadi seperempat setelah 5 detik tanpa sentuhan, dan sentuhan berikutnya mengembalikannya. Dengan Redupkan saat diam dan geser, semua yang ada di feed juga bergeser beberapa piksel setiap 2 menit, supaya layar OLED tidak terbakar di bawah kontrol yang tidak pernah bergerak.

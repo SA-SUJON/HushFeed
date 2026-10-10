@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** A bolha de stories de Seguindo no topo do feed volta quando a Tela limpa termina. O TikTok a esconde quando a Tela limpa começa, e antes ela ficava sumida até o feed recarregar. Ela só volta se estava aparecendo antes e ainda tem alguém nela.
+
 * **TikTok:** Uma nova linha Traduzir para em Comentários aceita um código de idioma, como en ou es. Os comentários e legendas que o TikTok traduz saem nesse idioma em vez do idioma do app, então você pode usar o TikTok em um idioma e ler as traduções em outro. Deixe vazia para manter a escolha do TikTok.
 
 * **TikTok:** Uma nova opção Proteção contra burn-in em Tela limpa escurece os botões, a legenda e as abas sobre o vídeo para um quarto depois de 5 segundos sem toque, e o próximo toque os traz de volta. Com Escurecer quando parado e deslocar, tudo no feed também se move alguns pixels a cada 2 minutos, para a tela OLED não marcar embaixo de controles que nunca saem do lugar.

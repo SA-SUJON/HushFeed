@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Akışın üstündeki Takip Edilenler hikâye balonu Temiz ekran bitince geri gelir. TikTok onu Temiz ekran başlarken gizler ve önceden akış yenilenene kadar gizli kalırdı. Yalnızca daha önce görünüyorsa ve içinde hâlâ biri varsa geri gelir.
+
 * **TikTok:** Yorumlar bölümündeki yeni Şu dile çevir satırı tek bir dil kodu alır, örneğin en veya es. TikTok'un çevirdiği yorumlar ve açıklamalar uygulamanın dili yerine o dilde çıkar, böylece TikTok'u bir dilde kullanıp çevirileri başka bir dilde okuyabilirsin. TikTok'un seçimini korumak için boş bırak.
 
 * **TikTok:** Temiz ekran altındaki yeni Ekran yanması koruması seçimi, 5 saniye dokunulmazsa videonun üzerindeki düğmeleri, açıklamayı ve sekmeleri dörtte bire kadar karartır, bir sonraki dokunuşun onları geri getirir. Boştayken karart ve kaydır seçiliyken akıştaki her şey ayrıca 2 dakikada bir birkaç piksel kayar, böylece OLED ekran hiç yer değiştirmeyen kontrollerin altında yanmaz.

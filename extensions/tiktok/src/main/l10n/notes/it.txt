@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** La bolla delle storie di Seguiti in cima al feed torna quando finisce Vista pulita. TikTok la nasconde quando inizia Vista pulita e prima restava nascosta finché il feed non si ricaricava. Torna solo se prima era visibile e contiene ancora qualcuno.
+
 * **TikTok:** Una nuova riga Traduci in nei Commenti accetta un codice lingua, come en o es. I commenti e le didascalie che TikTok traduce escono in quella lingua invece che in quella dell'app, così puoi usare TikTok in una lingua e leggere le traduzioni in un'altra. Lasciala vuota per tenere la scelta di TikTok.
 
 * **TikTok:** Una nuova scelta Protezione dal burn-in in Vista pulita attenua i pulsanti, la didascalia e le schede sopra il video a un quarto dopo 5 secondi senza tocchi, e il tocco successivo li riporta. Con Attenua quando inattivo e sposta, anche tutto il feed si sposta di qualche pixel ogni 2 minuti, così uno schermo OLED non si segna sotto i controlli che non si muovono mai.

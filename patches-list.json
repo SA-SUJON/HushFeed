@@ -3561,7 +3561,7 @@
     },
     {
       "name": "Remember clear display",
-      "description": "Keeps clear display, TikTok's mode that hides the buttons over a video, on as you swipe to the next video. It can also turn on by itself after a delay you pick, which starts off in Hushfeed settings > Feed screen.",
+      "description": "Keeps clear display, TikTok's mode that hides the buttons over a video, on as you swipe to the next video. It can also turn on by itself after a delay you pick, which starts off in Hushfeed settings > Feed screen. When clear display ends, the Following stories bubble TikTok hid comes back too.",
       "category": "Playback",
       "use": true,
       "dependencies": [
