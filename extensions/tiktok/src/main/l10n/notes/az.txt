@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Show where a video was posted açıq olanda, sırada hər ikisinə yer varsa, yaradıcının adı artıq ölkəyə yer açmaq üçün qısaldılmır, ona görə "Rn D… · TR" yenə tam oxunur (#127). Həqiqətən çox uzun ad isə ölkə tam görünsün deyə yenə qısaldılır.
+
 * **TikTok:** Hide already seen videos artıq açdığınız kolleksiyadan videoları çıxarmır, ona görə saxlanmış videoya toxunanda səhv video və ya heç nə yox, yenə həmin video oynayır (#135). O, For You, Following və Friends lentlərində baxılmış videoları gizlətməyə davam edir.
 
 * **TikTok:** Yeni Keep the app language patçı Tətbiq səhifəsində Sistem altına TikTok-da seçilən dili saxla açarını əlavə edir (#61). TikTok açılanda telefonun dilinin dəyişdiyinə qərar verərsə, öz ayarlarında seçdiyiniz dili atır və telefona uyğunlaşır. Açar yandırılanda seçiminiz qalır. Sönülü başlayır.

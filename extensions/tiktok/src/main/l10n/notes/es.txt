@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Con Show where a video was posted activado, el nombre del creador ya no se corta para que quepa el país cuando la fila tiene espacio para los dos, así que "Rn D… · TR" vuelve a leerse completo (#127). Un nombre que de verdad es demasiado largo se sigue acortando para que el país se vea entero.
+
 * **TikTok:** Hide already seen videos ya no quita videos de una colección que abres, así que al tocar un video guardado se reproduce ese video otra vez, no otro ni nada (#135). Sigue ocultando los videos vistos en For You, Following y Friends.
 
 * **TikTok:** Un parche nuevo, Keep the app language, añade el interruptor Mantener el idioma elegido en TikTok en Sistema, dentro de Aplicación (#61). Cuando TikTok se inicia y decide que el idioma del teléfono cambió, descarta el idioma que elegiste en sus ajustes y sigue al teléfono. Con el interruptor activado, tu elección se mantiene. Empieza desactivado.
