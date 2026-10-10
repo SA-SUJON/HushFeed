@@ -270,6 +270,42 @@ public class SettingsSearchQueryTest {
                 search(search, "github").contains("Hushfeed"));
     }
 
+    /**
+     * Build details sat on About Hushfeed outside every walked category, so "build" found nothing
+     * and the empty state blamed unticked patches. The hand-indexed rows also all said they were
+     * in "Settings", which is no page a reader can find.
+     */
+    @Test public void handIndexedRowsAreFoundAndNameTheirPage() throws Exception {
+        TikTokPreferenceFragment search = attachSearch();
+        assertTrue("Build details is not indexed", search(search, "build details").contains("Build details"));
+        assertEquals("About Hushfeed", category(search, "Build details"));
+        assertEquals("About Hushfeed", category(search, "Hushfeed"));
+        assertEquals("App & advanced", category(search, "Pause Hushfeed"));
+    }
+
+    /** "???" folds to nothing, and the page said Start typing under a box with text in it. */
+    @Test public void aQueryOfOnlyPunctuationSaysNothingMatched() throws Exception {
+        TikTokPreferenceFragment search = attachSearch();
+        java.util.List<String> titles = search(search, "???");
+        assertTrue("punctuation alone was answered with " + titles, titles.contains("No matching settings"));
+        assertFalse(titles.contains("Start typing"));
+        assertTrue(search(search, "  ").contains("Start typing"));
+    }
+
+    private static String category(TikTokPreferenceFragment fragment, String wanted) throws Exception {
+        java.lang.reflect.Field field = TikTokPreferenceFragment.class.getDeclaredField("searchIndex");
+        field.setAccessible(true);
+        for (Object entry : (java.util.List<?>) field.get(fragment)) {
+            java.lang.reflect.Field title = entry.getClass().getDeclaredField("title");
+            title.setAccessible(true);
+            if (!wanted.equals(title.get(entry))) continue;
+            java.lang.reflect.Field category = entry.getClass().getDeclaredField("category");
+            category.setAccessible(true);
+            return (String) category.get(entry);
+        }
+        throw new AssertionError(wanted + " is not in the index at all");
+    }
+
     @Test public void openingAFoundBackupRowLandsOnDiagnostics() throws Exception {
         TikTokPreferenceFragment search = attachSearch();
         java.lang.reflect.Field field = TikTokPreferenceFragment.class.getDeclaredField("searchIndex");
