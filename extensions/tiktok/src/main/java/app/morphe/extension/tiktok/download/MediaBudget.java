@@ -49,8 +49,13 @@ final class MediaBudget {
     }
 
     static void runWithJobDeadline(Runnable work) {
+        runWithJobDeadline(null, work);
+    }
+
+    /** As above, with {@code fresh} (a new one when null) for a job that has no deadline yet. */
+    static void runWithJobDeadline(Deadline fresh, Runnable work) {
         Deadline previous = CURRENT_DEADLINE.get();
-        if (previous == null) CURRENT_DEADLINE.set(deadline());
+        if (previous == null) CURRENT_DEADLINE.set(fresh != null ? fresh : deadline());
         try {
             work.run();
         } finally {

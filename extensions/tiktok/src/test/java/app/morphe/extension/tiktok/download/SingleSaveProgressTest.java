@@ -123,6 +123,24 @@ public class SingleSaveProgressTest {
         assertEquals("Writing the caption on the video: 25%", label.getText().toString());
     }
 
+    /** Once the caption is in, or given up, the tags and the publish are ordinary saving again. */
+    @Test public void afterTheCaptionTheRowSavesAgainWithoutCancel() {
+        progress = SaveProgress.begin(1, true);
+        settle();
+        ViewGroup banner = root.findViewWithTag("hushfeed_save_progress");
+        View cancel = banner.getChildAt(banner.getChildCount() - 1);
+        progress.transfer(500, 1000);
+        progress.captioning(990_000, 1_000_000);
+        idle();
+        assertEquals(View.VISIBLE, cancel.getVisibility());
+
+        progress.captionDone();
+        idle();
+        assertEquals("Saving video", find(root, TextView.class).getText().toString());
+        assertTrue(find(root, ProgressBar.class).isIndeterminate());
+        assertEquals("no Cancel once the caption step is over", View.GONE, cancel.getVisibility());
+    }
+
     @Test @Config(qualifiers = "w360dp-h640dp-notnight-mdpi", fontScale = 2f)
     public void largeTextKeepsTheProgressLabelAndBarInsideTheBanner() throws Exception {
         progress = SaveProgress.begin(1, true);

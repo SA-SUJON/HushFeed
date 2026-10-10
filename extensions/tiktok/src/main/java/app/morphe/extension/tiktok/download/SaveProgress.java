@@ -212,6 +212,14 @@ final class SaveProgress {
         updateTransfer();
     }
 
+    /** The caption step is over, written in or given up, so the row says it's saving again. */
+    void captionDone() {
+        if (!captioning) return;
+        captioning = false;
+        percent = -1;
+        updateTransfer();
+    }
+
     private String progressText() {
         if (!started && fileCount) return L10n.quantity(Utils.getContext(), total,
                 "Waiting to save one file", "Waiting to save %1$s files");

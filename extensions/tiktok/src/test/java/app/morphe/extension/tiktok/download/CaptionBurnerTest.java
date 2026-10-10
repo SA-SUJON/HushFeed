@@ -186,16 +186,52 @@ public class CaptionBurnerTest {
         }
     }
 
-    /** Cancel, or no room, or no time, is the save's answer, not a reason to save it without. */
+    /** Cancel, or no room, is the save's answer, not a reason to save it without. */
     @Test public void aStopIsPassedOnRatherThanSavedWithout() throws Exception {
-        MediaBudget.StopException cancel = new MediaBudget.StopException("Writing the caption was cancelled",
-                MediaBudget.StopException.Reason.CANCELLED);
-        CaptionBurner.burner = (in, out, creator, caption, progress) -> { throw cancel; };
         File source = files.newFile("saved.mp4");
-        assertSame(cancel, assertThrows(MediaBudget.StopException.class,
-                () -> CaptionBurner.burnOrKeep(source, files.newFile("out.mp4"), "@alice", "Hello", null)));
+        for (MediaBudget.StopException.Reason reason : new MediaBudget.StopException.Reason[]{
+                MediaBudget.StopException.Reason.CANCELLED, MediaBudget.StopException.Reason.SPACE}) {
+            MediaBudget.StopException stop = new MediaBudget.StopException("Stopped", reason);
+            CaptionBurner.burner = (in, out, creator, caption, progress) -> { throw stop; };
+            assertSame(stop, assertThrows(MediaBudget.StopException.class,
+                    () -> CaptionBurner.burnOrKeep(source, files.newFile(reason + ".mp4"), "@alice", "Hello", null)));
+        }
         Shadows.shadowOf(Looper.getMainLooper()).idle();
         assertEquals(0, ShadowToast.shownToastCount());
+    }
+
+    /**
+     * Out of time partway through, the video already downloaded is saved without the caption, and
+     * the job gets the time the rest of the save needs rather than failing at the next check.
+     */
+    @Test public void runningOutOfTimeSavesTheVideoWithout() throws Exception {
+        File source = files.newFile("saved.mp4");
+        Files.write(source.toPath(), VIDEO);
+        long[] now = {0};
+        MediaBudget.Clock clock = new MediaBudget.Clock() {
+            @Override public long nanoTime() { return now[0]; }
+            @Override public long wallMillis() { return 0; }
+            @Override public void sleep(long millis) { }
+        };
+        MediaBudget.Deadline deadline = new MediaBudget.Deadline(1_000_000_000L, clock);
+        boolean[] kept = new boolean[1];
+        CaptionBurner.burner = (in, out, creator, caption, progress) -> {
+            now[0] = 2_000_000_000L;
+            MediaBudget.check(deadline);
+        };
+        MediaBudget.runWithJobDeadline(deadline, () -> {
+            try {
+                kept[0] = !CaptionBurner.burnOrKeep(source, files.newFile("out.mp4"), "@alice", "Hello", null);
+            } catch (MediaBudget.StopException stop) {
+                throw new AssertionError("running out of time lost the save", stop);
+            }
+        });
+        assertTrue(kept[0]);
+        assertFalse("the rest of the save has time again", deadline.expired());
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+        assertEquals(L10n.t("Couldn't write the caption on this video. Saving it without."),
+                ShadowToast.getTextOfLatestToast());
+        assertArrayEquals(VIDEO, Files.readAllBytes(source.toPath()));
     }
 
     @Test public void aPostWithNothingToWriteIsLeftAlone() throws Exception {

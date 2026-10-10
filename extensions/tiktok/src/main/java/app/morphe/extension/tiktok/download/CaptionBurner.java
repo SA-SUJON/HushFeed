@@ -82,8 +82,10 @@ final class CaptionBurner {
     /**
      * {@link #burner}, or false when it failed, so the caller saves the video as it came rather
      * than losing the save to a codec this phone gets wrong. The reader is told it's going out
-     * without. False too, and quietly, for a post with neither a creator nor a caption. A stop
-     * (Cancel, no room, out of time) still throws, since that's the save's answer.
+     * without. False too, and quietly, for a post with neither a creator nor a caption. Cancel or
+     * no room still throws, since that's the save's answer. Running out of time doesn't: the video
+     * itself is already here, and a track that doesn't say how long it plays gets only the time
+     * any save gets, so it's saved without and given the time the rest of the save needs.
      */
     static boolean burnOrKeep(File source, File output, String creator, String caption, SaveProgress progress)
             throws MediaBudget.StopException {
@@ -95,12 +97,18 @@ final class CaptionBurner {
             burner.run(source, output, creator, caption, progress);
             return true;
         } catch (MediaBudget.StopException stop) {
-            throw stop;
+            if (stop.reason != MediaBudget.StopException.Reason.TIME) throw stop;
+            MediaBudget.deadline().allowAtLeast(MediaBudget.JOB_DEADLINE_MS);
+            return keep(stop);
         } catch (IOException | RuntimeException | OutOfMemoryError failure) {
-            Logger.printException(() -> "Could not write the caption on the video, so it's saved without", failure);
-            Utils.showToastLong(L10n.t("Couldn't write the caption on this video. Saving it without."));
-            return false;
+            return keep(failure);
         }
+    }
+
+    private static boolean keep(Throwable failure) {
+        Logger.printException(() -> "Could not write the caption on the video, so it's saved without", failure);
+        Utils.showToastLong(L10n.t("Couldn't write the caption on this video. Saving it without."));
+        return false;
     }
 
     /**

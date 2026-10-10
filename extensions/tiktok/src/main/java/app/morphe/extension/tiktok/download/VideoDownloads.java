@@ -389,7 +389,12 @@ final class VideoDownloads {
     private static File captioned(Context context, List<File> files, File video, DownloadDetails facts,
             SaveProgress progress) throws IOException {
         File output = temp(context, files);
-        return CaptionBurner.burnOrKeep(video, output, facts.creator(), facts.caption(), progress) ? output : video;
+        try {
+            return CaptionBurner.burnOrKeep(video, output, facts.creator(), facts.caption(), progress) ? output : video;
+        } finally {
+            // The tags and the publish after it are ordinary saving again, without Cancel.
+            if (progress != null) progress.captionDone();
+        }
     }
 
     /** Every address the video itself can be fetched from, best first. */
