@@ -80,7 +80,7 @@ public final class DoNotAutoTranslate {
         Set<String> codes = new LinkedHashSet<>();
         String trimmed = value.trim();
         if (!trimmed.isEmpty()) {
-            for (String entry : trimmed.split("\s*[,\n]\s*")) {
+            for (String entry : trimmed.split("\\s*[,\\n]\\s*")) {
                 if (codes.size() >= CaptionLanguageFilter.MAX_ENTRIES) break;
                 String code = CaptionLanguageFilter.primary(entry);
                 if (code == null) continue;
