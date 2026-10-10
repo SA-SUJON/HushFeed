@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Senyapkan video feed sekarang tetap membuat feed tanpa suara setelah kamu mengganti TikTok antara terang dan gelap. Sebelumnya, video berikutnya bisa berbunyi sampai kamu keluar dari feed lalu kembali.
+
 * **TikTok:** Tampilkan jumlah yang disaring dan sakelar yang menyembunyikan bagian Kotak Masuk tetap berfungsi setelah kamu mengganti TikTok antara terang dan gelap. Sebelumnya keduanya bisa berhenti sampai TikTok dimulai ulang.
 
 * **TikTok:** Tekan lama Beranda untuk pengaturan Hushfeed tetap berfungsi setelah kamu mengganti TikTok antara terang dan gelap. Sebelumnya fitur ini berhenti sampai TikTok dimulai ulang.

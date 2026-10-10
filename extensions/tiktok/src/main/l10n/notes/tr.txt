@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Akış videolarının sesini kapat, TikTok'u açık ve koyu arasında değiştirdikten sonra da akışı sessiz tutuyor. Önceden, akıştan çıkıp geri dönene kadar sonraki videolar sesli oynayabiliyordu.
+
 * **TikTok:** Kaç tanesinin filtrelendiğini göster ve Gelen Kutusu'nun bölümlerini gizleyen anahtarlar, TikTok'u açık ve koyu tema arasında değiştirdikten sonra da çalışıyor. Önceden TikTok yeniden başlatılana kadar çalışmayı bırakabiliyorlardı.
 
 * **TikTok:** Hushfeed ayarları için Ana Sayfa'ya basılı tut, TikTok'u açık ve koyu tema arasında değiştirdikten sonra da çalışıyor. Önceden TikTok yeniden başlatılana kadar çalışmıyordu.

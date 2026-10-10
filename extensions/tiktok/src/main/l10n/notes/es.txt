@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Silenciar los videos del feed ahora mantiene el feed sin sonido después de cambiar TikTok entre claro y oscuro. Antes, los siguientes videos podían sonar hasta que salías del feed y volvías.
+
 * **TikTok:** Mostrar cuántos se filtraron y los interruptores que ocultan partes de la Bandeja de entrada siguen funcionando cuando cambias TikTok entre claro y oscuro. Antes podían dejar de funcionar hasta reiniciar TikTok.
 
 * **TikTok:** Mantener pulsado Inicio para abrir los ajustes de Hushfeed sigue funcionando cuando cambias TikTok entre claro y oscuro. Antes dejaba de funcionar hasta reiniciar TikTok.

@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Mute feed videos keeps the feed quiet after you switch TikTok between light and dark. Before, the next videos could play with sound until you left the feed and came back.
+
 * **TikTok:** Show how many were filtered and the switches that hide parts of the Inbox keep working after you switch TikTok between light and dark. Before, they could stop until TikTok was restarted.
 
 * **TikTok:** Long-press Home for Hushfeed settings keeps working after you switch TikTok between light and dark. Before, it stopped until TikTok was restarted.

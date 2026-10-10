@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Silenciar os vídeos do feed agora mantém o feed sem som depois que você troca o TikTok entre claro e escuro. Antes, os próximos vídeos podiam tocar com som até você sair do feed e voltar.
+
 * **TikTok:** Mostrar quantos foram filtrados e as chaves que ocultam partes da Caixa de entrada continuam funcionando quando você troca o TikTok entre claro e escuro. Antes, podiam parar até o TikTok ser reiniciado.
 
 * **TikTok:** Toque e segure Início para abrir as configurações do Hushfeed continua funcionando quando você troca o TikTok entre claro e escuro. Antes, parava até o TikTok ser reiniciado.

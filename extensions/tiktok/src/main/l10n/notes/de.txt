@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Feed-Videos stummschalten hält den Feed jetzt auch stumm, wenn du TikTok zwischen hell und dunkel umstellst. Vorher konnten die nächsten Videos mit Ton laufen, bis du den Feed verlassen hast und zurückgekommen bist.
+
 * **TikTok:** Anzahl der herausgefilterten Beiträge zeigen und die Schalter, die Teile des Posteingangs ausblenden, funktionieren jetzt weiter, wenn du TikTok zwischen hell und dunkel umstellst. Vorher konnten sie bis zu einem Neustart von TikTok ausfallen.
 
 * **TikTok:** Startseite lange drücken für Hushfeed-Einstellungen funktioniert jetzt weiter, wenn du TikTok zwischen hell und dunkel umstellst. Vorher ging es erst nach einem Neustart von TikTok wieder.
