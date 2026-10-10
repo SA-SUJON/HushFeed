@@ -191,6 +191,27 @@ public class FeedTextSizeTest {
         }
     }
 
+    @Test public void aBuriedMainActivityResumedForAMomentHandsTheSizesBack() {
+        // A theme change recreates TikTok's launcher copy of MainActivity under the feed's: it is
+        // resumed for a moment and stopped again while the feed stays in front.
+        try (var main = Robolectric.buildActivity(MainActivity.class).create();
+             var launcher = Robolectric.buildActivity(MainActivity.class).create()) {
+            TextView[] feed = authors(main.get());
+            Settings.FEED_AUTHOR_TEXT_SIZE.save(28);
+            FeedTextSize.install(main.get());
+            main.start().resume().visible();
+            layout(main.get());
+            for (TextView author : feed) assertEquals(28, author.getTextSize(), 0);
+            FeedTextSize.install(launcher.get());
+            launcher.start().resume().pause().stop();
+            idle();
+            // TikTok rebinds the rows at its own size, and the next layout pass sizes them again.
+            for (TextView author : feed) author.setTextSize(TypedValue.COMPLEX_UNIT_PX, 16);
+            layout(main.get());
+            for (TextView author : feed) assertEquals("The feed in front lost its sizes", 28, author.getTextSize(), 0);
+        }
+    }
+
     @Test @Config(fontScale = 2f)
     public void authorSizeUsesAndroidFontScalingAndRestoresTheExactNativePixels() {
         try (var owner = Robolectric.buildActivity(MainActivity.class).setup()) {

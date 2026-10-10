@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import app.morphe.extension.shared.GlobalLayoutHook;
 import app.morphe.extension.shared.Utils;
-import app.morphe.extension.tiktok.blockauthor.FeedVisibility;
+import app.morphe.extension.tiktok.navigation.FrontWindow;
 import app.morphe.extension.tiktok.settings.Settings;
 
 import java.lang.ref.WeakReference;
@@ -47,6 +47,19 @@ public final class FeedTextSize {
     private static final GlobalLayoutHook LAYOUT_HOOK = new GlobalLayoutHook();
     private static WeakReference<Activity> activityReference = new WeakReference<>(null);
     private static WeakReference<Application> followed = new WeakReference<>(null);
+    /**
+     * The feed window in front, main or detail. TikTok's launcher entry is a second MainActivity
+     * under the feed's, and a theme change resumes it for a moment while the feed can stay in
+     * front, so the layout hook goes back to the feed when that copy pauses.
+     */
+    private static final FrontWindow FRONT = new FrontWindow(true, new FrontWindow.Listener() {
+        @Override public void onFront(Activity activity) {
+            installNow(activity);
+        }
+
+        @Override public void onGone(Activity activity) {
+        }
+    });
 
     private static final class AuthorSize {
         float nativePx;
@@ -259,9 +272,17 @@ public final class FeedTextSize {
         state.writtenPx = Float.NaN;
     }
 
-    /** Main and detail windows share the same native owners, but not a content root. */
+    /**
+     * Main and detail windows share the same native owners, but not a content root. A copy
+     * recreated behind the window in front runs the posted install after it has stopped again,
+     * and leaves the hook where it is.
+     */
     public static void install(Activity activity) {
-        if (activity != null) Utils.runOnMainThread(() -> installNow(activity));
+        if (activity == null) return;
+        FRONT.add(activity);
+        Utils.runOnMainThread(() -> {
+            if (FRONT.mayTake(activity)) installNow(activity);
+        });
     }
 
     private static void installNow(Activity activity) {
@@ -277,13 +298,12 @@ public final class FeedTextSize {
         if (application != null && followed.get() != application) {
             followed = new WeakReference<>(application);
             application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+                // A feed window coming to the front is FRONT's; anything else gives the sizes back.
                 @Override public void onActivityResumed(Activity resumed) {
-                    if (FeedVisibility.isFeedWindow(resumed)) installNow(resumed);
-                    else {
-                        restoreAll();
-                        LAYOUT_HOOK.detach();
-                        activityReference = new WeakReference<>(null);
-                    }
+                    if (FRONT.follows(resumed)) return;
+                    restoreAll();
+                    LAYOUT_HOOK.detach();
+                    activityReference = new WeakReference<>(null);
                 }
 
                 @Override public void onActivityDestroyed(Activity destroyed) {
@@ -361,6 +381,7 @@ public final class FeedTextSize {
         BUILDERS.clear();
         LAYOUT_HOOK.detach();
         activityReference = new WeakReference<>(null);
+        FRONT.resetForTests();
         nativeForTests = null;
     }
 
