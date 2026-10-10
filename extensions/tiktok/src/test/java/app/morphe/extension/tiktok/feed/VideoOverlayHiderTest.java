@@ -49,6 +49,9 @@ public class VideoOverlayHiderTest {
     public void setUp() {
         context = RuntimeEnvironment.getApplication();
         Utils.setContext(context);
+        // The id cache is static. A cell id left by an earlier test limits the walk to a cell this
+        // test's layout may not have, and its rail buttons were never found.
+        VideoOverlayHider.resolveForTests("view_rootview", 0);
     }
 
     /**
