@@ -4,8 +4,11 @@
  */
 package app.morphe.extension.tiktok.translation;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import app.morphe.extension.shared.Logger;
@@ -29,6 +32,10 @@ public final class DoNotAutoTranslate {
     private static final String ZH = "zh";
     /** TikTok tags Chinese items with the script, so the plain code alone matched none of them. */
     private static final String ZH_HANS = "zh-Hans";
+    private static final String ZH_HANT = "zh-Hant";
+    /** Subtags after zh that mean Traditional characters: the script, or where it's written. */
+    private static final Set<String> TRADITIONAL = new HashSet<>(
+            Arrays.asList("hant", "tw", "hk", "mo"));
 
     private static String parsedFrom;
     private static Set<String> parsed = Collections.emptySet();
@@ -72,7 +79,11 @@ public final class DoNotAutoTranslate {
         return !excludedCodes().isEmpty();
     }
 
-    /** The codes to add: each entry's primary subtag, and zh also as TikTok's zh-Hans. */
+    /**
+     * The codes to add: each entry's primary subtag, and zh also with its script the way TikTok
+     * spells it. zh-Hant or zh-TW used to add zh-Hans, leaving Simplified alone instead of the
+     * Traditional the entry named.
+     */
     static synchronized Set<String> excludedCodes() {
         String value = Settings.DONT_AUTO_TRANSLATE_LANGUAGES.get();
         if (value == null) value = "";
@@ -85,11 +96,19 @@ public final class DoNotAutoTranslate {
                 String code = CaptionLanguageFilter.primary(entry);
                 if (code == null) continue;
                 codes.add(code);
-                if (code.equals(ZH)) codes.add(ZH_HANS);
+                if (code.equals(ZH)) codes.add(traditional(entry) ? ZH_HANT : ZH_HANS);
             }
         }
         parsedFrom = value;
         parsed = Collections.unmodifiableSet(codes);
         return parsed;
+    }
+
+    private static boolean traditional(String entry) {
+        String[] subtags = entry.trim().toLowerCase(Locale.ROOT).split("[-_]");
+        for (int index = 1; index < subtags.length; index++) {
+            if (TRADITIONAL.contains(subtags[index])) return true;
+        }
+        return false;
     }
 }
