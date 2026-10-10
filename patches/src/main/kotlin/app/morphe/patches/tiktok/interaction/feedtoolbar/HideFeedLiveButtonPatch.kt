@@ -81,25 +81,30 @@ val hideFeedLiveButtonPatch = bytecodePatch(
             "hideFeedLiveButtonEnabled",
         )
 
-        // The side menu button (#128). Required on a declared build, where the anchors test holds
-        // it, and left out with a note on any other, so a reworked toolbar there doesn't take the
-        // LIVE switch down with it. Its settings row shows only when the hook went in.
-        val sidebarHooked = try {
-            hookSidebarButton()
-            true
-        } catch (problem: Exception) {
-            if (packageMetadata.versionName in declaredVersions()) throw problem
-            println("[Hide feed LIVE button] Left out the side menu button on ${packageMetadata.versionName}: ${problem.message}")
-            false
-        }
-        if (sidebarHooked) {
-            SettingsStatusLoadFingerprint.method.addInstruction(
-                0,
-                "invoke-static {}, " +
-                    "Lapp/morphe/extension/tiktok/settings/SettingsStatus;->enableHideFeedSidebarButton()V",
-            )
-        }
+        hookSidebarButtonOn(packageMetadata.versionName)
     }
+}
+
+/**
+ * The side menu button (#128), and whether it went in. Required on a declared build, where the
+ * anchors test holds it, and left out with a note on any other, so a reworked toolbar there
+ * doesn't take the LIVE switch down with it. Its settings row shows only when the hook went in.
+ * Takes the version so a test can stand in for a build that isn't declared.
+ */
+internal fun BytecodePatchContext.hookSidebarButtonOn(versionName: String): Boolean {
+    try {
+        hookSidebarButton()
+    } catch (problem: Exception) {
+        if (versionName in declaredVersions()) throw problem
+        println("[Hide feed LIVE button] Left out the side menu button on $versionName: ${problem.message}")
+        return false
+    }
+    SettingsStatusLoadFingerprint.method.addInstruction(
+        0,
+        "invoke-static {}, " +
+            "Lapp/morphe/extension/tiktok/settings/SettingsStatus;->enableHideFeedSidebarButton()V",
+    )
+    return true
 }
 
 private fun BytecodePatchContext.hookSidebarButton() {
