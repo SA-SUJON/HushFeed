@@ -93,7 +93,7 @@ rtk proxy adb -s <TRANSPORT> shell dumpsys activity services com.zhiliaoapp.musi
 rtk proxy adb -s <TRANSPORT> shell dumpsys batterystats --charged com.zhiliaoapp.musically
 ```
 
-Report measured CPU time, job execution, wakeup-alarm delivery and partial-wakelock duration separately. `dumpsys power` is a snapshot of currently held locks and can miss brief acquisitions. Batterystats contains accumulated observations. Subtract only matching counters from the same accounting epoch. Many counters depend on the device genuinely running on battery. [Android diagnostics](https://developer.android.com/tools/dumpsys)
+Report measured CPU time, job execution, wakeup-alarm delivery and partial-wakelock duration separately. `dumpsys power` is a snapshot of currently held locks and can miss brief acquisitions. Batterystats contains accumulated observations. Subtract only matching counters from the same accounting epoch. Many counters depend on the device really running on battery. [Android diagnostics](https://developer.android.com/tools/dumpsys)
 
 Use sampled process runtime counters for a low-overhead CPU estimate. State that short-lived processes and unsampled boundaries can be missed. If needed, use a separate short scheduler trace to sum CPU execution across all processes belonging to the UID. CPU seconds can exceed elapsed seconds when several cores run concurrently. Newer per-UID CPU or app-wakelock sources are optional and require device capability checks.
 
