@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Drop the animated image cache não troca mais o cache de quadros do TikTok por um que guarda um único quadro, o que podia deixar figurinhas animadas nos comentários travadas no primeiro quadro (#130). A chave dele agora se chama Não decodificar quadros animados com antecedência, e ligada ela só impede o TikTok de decodificar quadros antes de aparecerem.
+
 * **TikTok:** A bolha de stories de Seguindo no topo do feed volta quando a Tela limpa termina. O TikTok a esconde quando a Tela limpa começa, e antes ela ficava sumida até o feed recarregar. Ela só volta se estava aparecendo antes e ainda tem alguém nela.
 
 * **TikTok:** Uma nova linha Traduzir para em Comentários aceita um código de idioma, como en ou es. Os comentários e legendas que o TikTok traduz saem nesse idioma em vez do idioma do app, então você pode usar o TikTok em um idioma e ler as traduções em outro. Deixe vazia para manter a escolha do TikTok.
@@ -38,7 +40,7 @@
 
 * **TikTok:** O seletor de horário de Quando enviar em Manter uma sequência agora abre escuro ou claro, igual às configurações do Hushfeed.
 
-* **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling e Enable voice comments agora têm cada um uma chave em Configurações do Hushfeed, então Pausar também os desliga e o modo simples do Morphe Manager agora os escolhe. Cada uma dessas chaves começa desligada. Se você já tinha aplicado algum desses patches, ligue a chave dele depois de atualizar para que continue funcionando. Pular o anúncio de abertura, Pular verificações de atualização, Limitar o tráfego em segundo plano e Guardar só um quadro das imagens animadas ficam em Desempenho, dentro de Aplicativo. Parar o perfilamento por IA no aparelho fica em Privacidade e Permitir comentários de voz fica em Comentários.
+* **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling e Enable voice comments agora têm cada um uma chave em Configurações do Hushfeed, então Pausar também os desliga e o modo simples do Morphe Manager agora os escolhe. Cada uma dessas chaves começa desligada. Se você já tinha aplicado algum desses patches, ligue a chave dele depois de atualizar para que continue funcionando. Pular o anúncio de abertura, Pular verificações de atualização, Limitar o tráfego em segundo plano e Não decodificar quadros animados com antecedência ficam em Desempenho, dentro de Aplicativo. Parar o perfilamento por IA no aparelho fica em Privacidade e Permitir comentários de voz fica em Comentários.
 
 * **TikTok:** Novo patch, Skip passkey sign-in, escolhido pelo modo simples do Morphe Manager com a chave desligada (#102). Gerenciadores de senhas não entregam uma chave de acesso a um app modificado, então uma conta com chave de acesso podia travar na etapa de chave de acesso do TikTok. Ligue Entrar sem chave de acesso em Configurações do Hushfeed > Aplicativo e o TikTok trata seu celular como um aparelho sem chaves de acesso, oferecendo as outras formas que ele tem de entrar, como sua senha ou um código por e-mail ou SMS. Se você estiver desconectado, toque e segure Início para abrir as configurações do Hushfeed.
 

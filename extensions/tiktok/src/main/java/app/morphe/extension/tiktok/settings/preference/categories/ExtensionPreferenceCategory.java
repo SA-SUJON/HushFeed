@@ -376,9 +376,10 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
         if (SettingsStatus.animatedImageCacheEnabled) {
             addPreference(new TogglePreference(
                     context,
-                    "Cache one frame of animated images",
-                    "Keep only the frame on screen for animated stickers and GIFs instead of every "
-                            + "frame, so they use less memory. Applies to the next ones that load.",
+                    "Don't decode animated frames ahead",
+                    "Animated stickers and GIFs decode each frame as it's shown instead of a few "
+                            + "ahead, so they use a little less memory. Applies to the next ones "
+                            + "that load.",
                     Settings.DROP_ANIMATED_IMAGE_CACHE
             ));
         }

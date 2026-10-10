@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Drop the animated image cache artıq TikTok-un kadr keşini yalnız bir kadr saxlayan keşlə əvəz etmir. Bu, şərhlərdəki animasiyalı stikerlərin ilk kadrda ilişib qalmasına səbəb ola bilərdi (#130). Onun açarı indi Animasiya kadrlarını əvvəlcədən hazırlama adlanır və açıq olanda yalnız TikTok-un kadrları göstərilməzdən əvvəl hazırlamasının qarşısını alır.
+
 * **TikTok:** Lentin yuxarısındakı İzlənilənlər hekayələri balonu Təmiz ekran bitəndə geri qayıdır. TikTok onu Təmiz ekran başlayanda gizlədir və əvvəllər lent yenidən yüklənənə qədər gizli qalırdı. O, yalnız əvvəl görünürdüsə və içində hələ kimsə varsa geri qayıdır.
 
 * **TikTok:** Şərhlər bölməsindəki yeni Bu dilə tərcümə et sətri bir dil kodu qəbul edir, məsələn en və ya es. TikTok-un tərcümə etdiyi şərhlər və başlıqlar tətbiqin dili əvəzinə həmin dildə çıxır, beləliklə TikTok-u bir dildə saxlayıb tərcümələri başqa dildə oxuya bilərsiniz. TikTok-un seçimini saxlamaq üçün boş buraxın.
@@ -38,7 +40,7 @@
 
 * **TikTok:** Seriyanı davam etdirin bölməsindəki Nə vaxt göndərilsin üçün vaxt seçicisi indi Hushfeed ayarlarına uyğun olaraq tünd və ya açıq açılır.
 
-* **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling və Enable voice comments indi Hushfeed ayarlarında hər biri öz açarına malikdir, ona görə də Fasilə onları da söndürür və Morphe Manager-in sadə rejimi indi onları da seçir. Bu açarların hər biri söndürülmüş başlayır. Əvvəllər bu yamalardan biri ilə yamaqlamısınızsa, işləməyə davam etməsi üçün yenilədikdən sonra onun açarını yandırın. Açılış reklamını ötür, Yeniləmə yoxlamalarını ötür, Arxa fon trafikini məhdudlaşdır və Animasiyalı şəkillərin yalnız bir kadrını keşlə Tətbiq səhifəsində Performans bölməsindədir. Cihazdaxili süni intellekt profilləşdirməsini dayandır Məxfilik bölməsində, Səsli şərhlərə icazə ver isə Şərhlər bölməsindədir.
+* **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling və Enable voice comments indi Hushfeed ayarlarında hər biri öz açarına malikdir, ona görə də Fasilə onları da söndürür və Morphe Manager-in sadə rejimi indi onları da seçir. Bu açarların hər biri söndürülmüş başlayır. Əvvəllər bu yamalardan biri ilə yamaqlamısınızsa, işləməyə davam etməsi üçün yenilədikdən sonra onun açarını yandırın. Açılış reklamını ötür, Yeniləmə yoxlamalarını ötür, Arxa fon trafikini məhdudlaşdır və Animasiya kadrlarını əvvəlcədən hazırlama Tətbiq səhifəsində Performans bölməsindədir. Cihazdaxili süni intellekt profilləşdirməsini dayandır Məxfilik bölməsində, Səsli şərhlərə icazə ver isə Şərhlər bölməsindədir.
 
 * **TikTok:** Yeni yama, Skip passkey sign-in, Morphe Manager-in sadə rejimində açarı söndürülü halda seçilir (#102). Parol menecerləri yamaqlanmış tətbiqə passkey vermir, ona görə də passkey-i olan hesab TikTok-un passkey addımında ilişib qala bilərdi. Hushfeed ayarları > Tətbiq bölməsində Passkey olmadan daxil olun açarını yandırın, TikTok telefonunuza passkey dəstəkləməyən telefon kimi baxacaq və daxil olmağın başqa yollarını, məsələn parolunuzu və ya e-poçt ya da SMS ilə gələn kodu təklif edəcək. Hesabdan çıxmısınızsa, Hushfeed ayarlarını açmaq üçün Ana səhifəni uzun basın.
 

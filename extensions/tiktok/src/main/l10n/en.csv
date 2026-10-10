@@ -212,6 +212,7 @@ An override changes the value TikTok reads from this gate. It doesn't change Tik
 And %1$s more saves,And %1$s more saves
 And one more save,And one more save
 Animated sticker format,Animated sticker format
+"Animated stickers and GIFs decode each frame as it's shown instead of a few ahead, so they use a little less memory. Applies to the next ones that load.","Animated stickers and GIFs decode each frame as it's shown instead of a few ahead, so they use a little less memory. Applies to the next ones that load."
 App,App
 App & advanced,App & advanced
 App AB,App AB
@@ -281,7 +282,6 @@ Build details,Build details
 Build details copied to the clipboard,Build details copied to the clipboard
 Burn-in guard,Burn-in guard
 Buttons on videos,Buttons on videos
-Cache one frame of animated images,Cache one frame of animated images
 Calm feed,Calm feed
 Calm feed couldn't be applied. Nothing was changed.,Calm feed couldn't be applied. Nothing was changed.
 Calm feed couldn't start. Try again in a moment.,Calm feed couldn't start. Try again in a moment.
@@ -462,6 +462,7 @@ Display name last changed,Display name last changed
 Do nothing,Do nothing
 Doesn't follow you back,Doesn't follow you back
 Don't auto translate these languages,Don't auto translate these languages
+Don't decode animated frames ahead,Don't decode animated frames ahead
 Don't save new searches,Don't save new searches
 Don't start the feed on returning,Don't start the feed on returning
 Don't start the first video,Don't start the first video
@@ -819,7 +820,6 @@ Keep long press from quick sharing,Keep long press from quick sharing
 Keep long press from reposting,Keep long press from reposting
 Keep offline videos out of the feed,Keep offline videos out of the feed
 Keep offline videos until you delete them,Keep offline videos until you delete them
-"Keep only the frame on screen for animated stickers and GIFs instead of every frame, so they use less memory. Applies to the next ones that load.","Keep only the frame on screen for animated stickers and GIFs instead of every frame, so they use less memory. Applies to the next ones that load."
 Keep playing in the background,Keep playing in the background
 "Keep playing in the background is on in Hushfeed's Playback settings, so TikTok gets 2 for this key and an override here has no effect until that switch is off.","Keep playing in the background is on in Hushfeed's Playback settings, so TikTok gets 2 for this key and an override here has no effect until that switch is off."
 Keep the Favorites tab,Keep the Favorites tab

@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Drop the animated image cache non sostituisce più la cache dei fotogrammi di TikTok con una che ne tiene uno solo, cosa che poteva lasciare gli sticker animati nei commenti fermi sul primo fotogramma (#130). Il suo interruttore ora si chiama Non decodificare in anticipo i fotogrammi animati, e quando è attivo impedisce solo a TikTok di decodificare i fotogrammi prima che vengano mostrati.
+
 * **TikTok:** La bolla delle storie di Seguiti in cima al feed torna quando finisce Vista pulita. TikTok la nasconde quando inizia Vista pulita e prima restava nascosta finché il feed non si ricaricava. Torna solo se prima era visibile e contiene ancora qualcuno.
 
 * **TikTok:** Una nuova riga Traduci in nei Commenti accetta un codice lingua, come en o es. I commenti e le didascalie che TikTok traduce escono in quella lingua invece che in quella dell'app, così puoi usare TikTok in una lingua e leggere le traduzioni in un'altra. Lasciala vuota per tenere la scelta di TikTok.
@@ -38,7 +40,7 @@
 
 * **TikTok:** Il selettore dell'ora per Quando inviare in Mantieni viva una serie ora si apre scuro o chiaro come le impostazioni di Hushfeed.
 
-* **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling ed Enable voice comments ora hanno ciascuna un interruttore in Impostazioni di Hushfeed, quindi Pausa spegne anche loro e la modalità semplice di Morphe Manager ora le sceglie. Ognuno di questi interruttori parte disattivato. Se avevi già applicato una di queste patch, attiva il suo interruttore dopo l'aggiornamento perché continui a funzionare. Salta l'annuncio di avvio, Salta i controlli degli aggiornamenti, Limita il traffico in background e Memorizza un solo fotogramma delle immagini animate sono in Prestazioni, dentro App. Ferma la profilazione IA sul dispositivo è in Privacy e Consenti i commenti vocali è in Commenti.
+* **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling ed Enable voice comments ora hanno ciascuna un interruttore in Impostazioni di Hushfeed, quindi Pausa spegne anche loro e la modalità semplice di Morphe Manager ora le sceglie. Ognuno di questi interruttori parte disattivato. Se avevi già applicato una di queste patch, attiva il suo interruttore dopo l'aggiornamento perché continui a funzionare. Salta l'annuncio di avvio, Salta i controlli degli aggiornamenti, Limita il traffico in background e Non decodificare in anticipo i fotogrammi animati sono in Prestazioni, dentro App. Ferma la profilazione IA sul dispositivo è in Privacy e Consenti i commenti vocali è in Commenti.
 
 * **TikTok:** Nuova patch, Skip passkey sign-in, scelta dalla modalità semplice di Morphe Manager con l'interruttore spento (#102). I gestori di password non danno una passkey a un'app modificata, quindi un account con una passkey poteva bloccarsi al passaggio della passkey di TikTok. Attiva Accedi senza passkey in Impostazioni di Hushfeed > App e TikTok tratterà il tuo telefono come uno senza passkey, offrendo gli altri modi che ha per accedere, come la password o un codice via email o SMS. Se sei disconnesso, tieni premuto su Home per aprire le impostazioni di Hushfeed.
 

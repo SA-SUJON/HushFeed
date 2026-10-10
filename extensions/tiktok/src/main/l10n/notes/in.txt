@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Drop the animated image cache tidak lagi mengganti cache bingkai TikTok dengan cache yang hanya menyimpan satu bingkai, yang bisa membuat stiker animasi di komentar macet di bingkai pertamanya (#130). Sakelarnya sekarang bernama Jangan dekode bingkai animasi lebih dulu, dan jika dinyalakan hanya mencegah TikTok mendekode bingkai sebelum ditampilkan.
+
 * **TikTok:** Gelembung cerita Mengikuti di bagian atas feed muncul lagi saat Tampilan bersih berakhir. TikTok menyembunyikannya saat Tampilan bersih dimulai, dan dulu gelembung itu tetap hilang sampai feed dimuat ulang. Gelembung hanya muncul lagi jika tadinya terlihat dan masih ada orang di dalamnya.
 
 * **TikTok:** Baris baru Terjemahkan ke di Komentar menerima satu kode bahasa, seperti en atau es. Komentar dan keterangan yang diterjemahkan TikTok muncul dalam bahasa itu, bukan bahasa aplikasi, jadi kamu bisa memakai TikTok dalam satu bahasa dan membaca terjemahan dalam bahasa lain. Biarkan kosong untuk memakai pilihan TikTok.
@@ -38,7 +40,7 @@
 
 * **TikTok:** Pemilih waktu untuk Kapan dikirim di Pertahankan rentetan sekarang terbuka gelap atau terang sesuai setelan Hushfeed.
 
-* **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling, dan Enable voice comments kini masing-masing punya sakelar di pengaturan Hushfeed, jadi Jeda juga mematikannya dan mode sederhana Morphe Manager kini ikut memilihnya. Setiap sakelar itu mulai dalam keadaan mati. Kalau sebelumnya kamu sudah mem-patch dengan salah satu patch ini, nyalakan sakelarnya setelah memperbarui agar tetap berfungsi. Lewati iklan pembuka, Lewati pemeriksaan pembaruan, Batasi lalu lintas latar belakang, dan Simpan satu bingkai gambar animasi di cache ada di Performa di bagian Aplikasi. Hentikan profiling AI di perangkat ada di Privasi, dan Izinkan komentar suara ada di Komentar.
+* **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling, dan Enable voice comments kini masing-masing punya sakelar di pengaturan Hushfeed, jadi Jeda juga mematikannya dan mode sederhana Morphe Manager kini ikut memilihnya. Setiap sakelar itu mulai dalam keadaan mati. Kalau sebelumnya kamu sudah mem-patch dengan salah satu patch ini, nyalakan sakelarnya setelah memperbarui agar tetap berfungsi. Lewati iklan pembuka, Lewati pemeriksaan pembaruan, Batasi lalu lintas latar belakang, dan Jangan dekode bingkai animasi lebih dulu ada di Performa di bagian Aplikasi. Hentikan profiling AI di perangkat ada di Privasi, dan Izinkan komentar suara ada di Komentar.
 
 * **TikTok:** Patch baru, Skip passkey sign-in, ikut dipilih mode sederhana Morphe Manager dengan sakelarnya mati (#102). Pengelola kata sandi tidak memberikan kunci sandi ke aplikasi yang sudah di-patch, jadi akun yang punya kunci sandi bisa tertahan di langkah kunci sandi TikTok. Nyalakan Masuk tanpa kunci sandi di pengaturan Hushfeed > Aplikasi, lalu TikTok menganggap ponselmu tidak punya kunci sandi dan menawarkan cara masuk lainnya, seperti kata sandimu atau kode lewat email atau SMS. Kalau kamu sedang keluar dari akun, tekan lama Beranda untuk membuka pengaturan Hushfeed.
 

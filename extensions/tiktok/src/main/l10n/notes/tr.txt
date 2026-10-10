@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Drop the animated image cache artık TikTok'un kare önbelleğini tek bir kare tutan bir önbellekle değiştirmiyor. Bu, yorumlardaki hareketli çıkartmaların ilk karede takılı kalmasına yol açabiliyordu (#130). Anahtarının adı artık Hareketli kareleri önceden çözme. Açıkken yalnızca TikTok'un kareleri gösterilmeden önce çözmesini engeller.
+
 * **TikTok:** Akışın üstündeki Takip Edilenler hikâye balonu Temiz ekran bitince geri gelir. TikTok onu Temiz ekran başlarken gizler ve önceden akış yenilenene kadar gizli kalırdı. Yalnızca daha önce görünüyorsa ve içinde hâlâ biri varsa geri gelir.
 
 * **TikTok:** Yorumlar bölümündeki yeni Şu dile çevir satırı tek bir dil kodu alır, örneğin en veya es. TikTok'un çevirdiği yorumlar ve açıklamalar uygulamanın dili yerine o dilde çıkar, böylece TikTok'u bir dilde kullanıp çevirileri başka bir dilde okuyabilirsin. TikTok'un seçimini korumak için boş bırak.
@@ -38,7 +40,7 @@
 
 * **TikTok:** Bir seriyi sürdür altındaki Ne zaman gönderilsin için saat seçici artık Hushfeed ayarlarına uyarak koyu ya da açık açılıyor.
 
-* **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling ve Enable voice comments artık Hushfeed ayarlarında kendi anahtarına sahip, yani Duraklat bunları da kapatıyor ve Morphe Manager'ın basit modu artık bunları da seçiyor. Bu anahtarların her biri kapalı başlıyor. Daha önce bu yamalardan biriyle yamaladıysan, çalışmaya devam etmesi için güncellemeden sonra anahtarını aç. Açılış reklamını atla, Güncelleme kontrollerini atla, Arka plan trafiğini sınırla ve Hareketli görsellerin tek karesini önbelleğe al, Uygulama sayfasında Performans altında. Cihaz üstü yapay zeka profillemesini durdur Gizlilik altında, Sesli yorumlara izin ver ise Yorumlar altında.
+* **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling ve Enable voice comments artık Hushfeed ayarlarında kendi anahtarına sahip, yani Duraklat bunları da kapatıyor ve Morphe Manager'ın basit modu artık bunları da seçiyor. Bu anahtarların her biri kapalı başlıyor. Daha önce bu yamalardan biriyle yamaladıysan, çalışmaya devam etmesi için güncellemeden sonra anahtarını aç. Açılış reklamını atla, Güncelleme kontrollerini atla, Arka plan trafiğini sınırla ve Hareketli kareleri önceden çözme, Uygulama sayfasında Performans altında. Cihaz üstü yapay zeka profillemesini durdur Gizlilik altında, Sesli yorumlara izin ver ise Yorumlar altında.
 
 * **TikTok:** Yeni yama, Skip passkey sign-in, Morphe Manager'ın basit modunda anahtarı kapalı olarak seçiliyor (#102). Şifre yöneticileri yamalı bir uygulamaya geçiş anahtarı vermiyor, bu yüzden geçiş anahtarı olan bir hesap TikTok'un geçiş anahtarı adımında takılı kalabiliyordu. Hushfeed ayarları > Uygulama altında Geçiş anahtarı olmadan giriş yap anahtarını aç, TikTok telefonunu geçiş anahtarı olmayan bir telefon gibi görür ve şifren ya da e-posta veya SMS ile gelen bir kod gibi diğer giriş yollarını sunar. Oturumun kapalıysa Hushfeed ayarlarını açmak için Ana Sayfa'ya basılı tut.
 

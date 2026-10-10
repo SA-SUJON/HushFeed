@@ -1368,7 +1368,7 @@
     },
     {
       "name": "Drop the animated image cache",
-      "description": "Lets you make TikTok keep only the frame on screen for animated stickers and GIFs instead of every frame, so they use less memory. Starts off. Turn it on in Hushfeed settings > App.",
+      "description": "Lets you make TikTok decode animated stickers and GIFs one frame at a time as they play, instead of a few frames ahead, so they use a little less memory. Starts off. Turn it on in Hushfeed settings > App.",
       "category": "Performance",
       "use": true,
       "dependencies": [
