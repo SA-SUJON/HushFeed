@@ -415,11 +415,14 @@ public class FollowDiagnosticsTest {
         ShadowToast.reset();
 
         FollowDiagnostics.logParsedResponse(
-                new CaptchaGateRequest("/webcast/room/chat/"), new ParsedResponse(new ChatBody()));
+                new CaptchaGateRequest("/webcast/room/chat/?room_id=7400000000000000001"),
+                new ParsedResponse(new ChatBody()));
 
         List<String> lines = liveCommentLines();
         assertEquals(lines.toString(), 1, lines.size());
         String line = lines.get(0);
+        assertTrue(line, line.contains("path=/webcast/room/chat/ "));
+        assertFalse("the room id stays out of the report", line.contains("7400000000000000001"));
         assertTrue(line, line.contains("status_code=4003"));
         assertTrue(line, line.contains("status_msg=Slow down"));
         assertTrue(line, line.contains("outcome=refused"));

@@ -367,7 +367,9 @@ public final class FollowDiagnostics {
     private static String liveChatPath(Object request) {
         String path = requestPath(request);
         if (path == null || !path.toLowerCase(Locale.ROOT).contains("/webcast/room/chat/")) return null;
-        return safeShort(path);
+        // The query carries the room id, which a shared report has no use for.
+        int query = path.indexOf('?');
+        return safeShort(query < 0 ? path : path.substring(0, query));
     }
 
     /** Field names only, never values, so a chat body cannot carry its text or ids into a report. */
