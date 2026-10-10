@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Fade the video controls now works with Clear display. Below 100, Clear display keeps the buttons and caption on screen at the level you picked instead of taking them away, and a tap on them goes to the video, so nothing opens by accident. Press and hold or pinch still takes you out of Clear display, and outside it faded controls take taps as before (#84).
+
 * **TikTok:** Mute feed videos keeps the feed quiet after you switch TikTok between light and dark. Before, the next videos could play with sound until you left the feed and came back.
 
 * **TikTok:** Show how many were filtered and the switches that hide parts of the Inbox keep working after you switch TikTok between light and dark. Before, they could stop until TikTok was restarted.

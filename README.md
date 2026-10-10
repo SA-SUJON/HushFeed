@@ -458,7 +458,7 @@ Select `Subtitle tools` in the patcher, then enable subtitle downloads under Dow
 
 Caption appearance and the clear display option are under Feed & layout > Feed screen:
 
-Fade the video controls sets the opacity of the buttons, caption and tabs over the video from 0 to 100. Faded controls still take taps. At 0, the buttons and caption are hidden and the tabs stay at 10.
+Fade the video controls sets the opacity of the buttons, caption and tabs over the video from 0 to 100. Faded controls still take taps. In Clear display the buttons and caption stay on screen at that level, and taps go through them to the video, so a press and hold or a pinch still gets you out. At 0, the buttons and caption are hidden and the tabs stay at 10.
 
 The clear-display caption is removed as soon as you turn its switch off. Turning it back on restores the current cue when its video is still on screen.
 

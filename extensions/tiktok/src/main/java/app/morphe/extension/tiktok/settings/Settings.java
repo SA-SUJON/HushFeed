@@ -661,7 +661,9 @@ public class Settings extends BaseSettings {
     /**
      * How see-through the controls over the video are drawn, as a percentage: 100 leaves them as
      * TikTok draws them, lower fades the rail, caption, music row and tabs while they keep taking
-     * taps, and 0 hides the rail and caption the way Clear display does (#84).
+     * taps, and 0 hides the rail and caption the way Clear display does (#84). In Clear display a
+     * level between keeps the rail and caption in sight at that level and lets taps through them
+     * to the video (VideoOverlayHider, TapThroughControls).
      */
     public static final IntegerSetting FADE_CONTROLS_OPACITY =
             new IntegerSetting("fade_controls_opacity", 100).withRange(0, 100);

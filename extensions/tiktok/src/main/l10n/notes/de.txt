@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Videosteuerung ausblenden lassen funktioniert jetzt auch mit Freie Ansicht. Unter 100 lässt Freie Ansicht die Schaltflächen und die Beschreibung in der gewählten Stufe auf dem Bildschirm, statt sie wegzunehmen, und ein Tippen darauf geht an das Video, damit nichts aus Versehen aufgeht. Gedrückt halten oder zwei Finger zusammenziehen bringt dich weiterhin aus Freie Ansicht heraus, und außerhalb davon nehmen abgedunkelte Steuerelemente wie bisher Tippen an (#84).
+
 * **TikTok:** Feed-Videos stummschalten hält den Feed jetzt auch stumm, wenn du TikTok zwischen hell und dunkel umstellst. Vorher konnten die nächsten Videos mit Ton laufen, bis du den Feed verlassen hast und zurückgekommen bist.
 
 * **TikTok:** Anzahl der herausgefilterten Beiträge zeigen und die Schalter, die Teile des Posteingangs ausblenden, funktionieren jetzt weiter, wenn du TikTok zwischen hell und dunkel umstellst. Vorher konnten sie bis zu einem Neustart von TikTok ausfallen.

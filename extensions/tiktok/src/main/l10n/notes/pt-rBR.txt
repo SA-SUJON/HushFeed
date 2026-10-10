@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Esmaecer os controles do vídeo agora funciona com a Tela limpa. Abaixo de 100, a Tela limpa mantém os botões e a legenda na tela no nível que você escolheu em vez de tirá-los, e um toque neles vai para o vídeo, então nada abre sem querer. Tocar e segurar ou fazer um gesto de pinça ainda tira você da Tela limpa, e fora dela os controles esmaecidos recebem toques como antes (#84).
+
 * **TikTok:** Silenciar os vídeos do feed agora mantém o feed sem som depois que você troca o TikTok entre claro e escuro. Antes, os próximos vídeos podiam tocar com som até você sair do feed e voltar.
 
 * **TikTok:** Mostrar quantos foram filtrados e as chaves que ocultam partes da Caixa de entrada continuam funcionando quando você troca o TikTok entre claro e escuro. Antes, podiam parar até o TikTok ser reiniciado.
