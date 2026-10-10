@@ -197,7 +197,7 @@ Also change the region TikTok reports internally. Keeps your interface language.
 Also hide videos whose text stickers match a blocked caption word. Text stickers are the words a creator types over the video in TikTok's editor. Text that's part of the picture itself can't be read.,Also hide videos whose text stickers match a blocked caption word. Text stickers are the words a creator types over the video in TikTok's editor. Text that's part of the picture itself can't be read.
 "Also on a block list, so still hidden: %1$s","Also on a block list, so still hidden: %1$s"
 Also replaces the saved region and country code TikTok sends with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.,Also replaces the saved region and country code TikTok sends with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.
-Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.,Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.
+Also turns on TikTok's own Auto scroll for videos opened from search. Restart TikTok to apply this.,Also turns on TikTok's own Auto scroll for videos opened from search. Restart TikTok to apply this.
 Always show publish date,Always show publish date
 Always show the publish date in video author information. Restart TikTok to apply this.,Always show the publish date in video author information. Restart TikTok to apply this.
 Always upload in HD,Always upload in HD
@@ -1700,7 +1700,7 @@ TikTok sees an empty contact list instead of yours. Find Friends and People you 
 TikTok slips the videos it saved for offline viewing back into For You when it can't load enough new ones. This takes them all out. Your offline list stays as it is.,TikTok slips the videos it saved for offline viewing back into For You when it can't load enough new ones. This takes them all out. Your offline list stays as it is.
 TikTok sometimes tests a change that empties the Favorites tab on your profile. This keeps the tab and your saved videos.,TikTok sometimes tests a change that empties the Favorites tab on your profile. This keeps the tab and your saved videos.
 TikTok sometimes tests your phone's speed in a background process that can use a lot of memory. This stops that test from starting. One already running ends when TikTok restarts.,TikTok sometimes tests your phone's speed in a background process that can use a lot of memory. This stops that test from starting. One already running ends when TikTok restarts.
-TikTok's background play and auto-scroll,TikTok's background play and auto-scroll
+TikTok's background play and Auto scroll,TikTok's background play and Auto scroll
 TikTok's downloader: %1$s,TikTok's downloader: %1$s
 TikTok's hold to speed up,TikTok's hold to speed up
 TikTok's messages didn't start in time. It tries again at %1$s.,TikTok's messages didn't start in time. It tries again at %1$s.

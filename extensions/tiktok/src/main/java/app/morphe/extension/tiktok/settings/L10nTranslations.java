@@ -498,7 +498,7 @@ public final class L10nTranslations {
                 "Həm də bloklama siyahısındadır, ona görə yenə gizlədilir: %1$s");
         table.put("Also replaces the saved region and country code TikTok sends with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
                 "TikTok-un hər sorğu ilə göndərdiyi saxlanmış region və ölkə kodunu da əvəz edir. Daxil olmaq yenə də əsl regionunuzu göndərir. IP ünvanınız və hesabınızın öz qaydaları hələ də tətbiq olunur.");
-        table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
+        table.put("Also turns on TikTok's own Auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "Axtarışdan açılan videolar üçün TikTok-un öz avtomatik sürüşdürməsini də aktivləşdirir. Tətbiq etmək üçün TikTok-u yenidən başladın.");
         table.put("Always show publish date",
                 "Paylaşım tarixini həmişə göstərin");
@@ -3579,7 +3579,7 @@ public final class L10nTranslations {
                 "TikTok bəzən profilinizdəki Favorites tabını boşaldan dəyişikliyi sınaqdan keçirir. Bu, tabı və saxlanmış videolarınızı qoruyur.");
         table.put("TikTok sometimes tests your phone's speed in a background process that can use a lot of memory. This stops that test from starting. One already running ends when TikTok restarts.",
                 "TikTok bəzən telefonunuzun sürətini çoxlu yaddaş istifadə edə bilən arxa plan prosesində sınayır. Bu, həmin testin başlamasının qarşısını alır. Artıq işləyən test TikTok yenidən başlayanda bitir.");
-        table.put("TikTok's background play and auto-scroll",
+        table.put("TikTok's background play and Auto scroll",
                 "TikTok-un arxa planda oynatma və avtomatik sürüşdürməsi");
         table.put("TikTok's downloader: %1$s",
                 "TikTok yükləyicisi: %1$s");
@@ -4393,7 +4393,7 @@ public final class L10nTranslations {
                 "Steht auch auf einer Sperrliste und bleibt daher ausgeblendet: %1$s");
         table.put("Also replaces the saved region and country code TikTok sends with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
                 "Ersetzt auch die gespeicherte Region und den Ländercode, die TikTok mit jeder Anfrage sendet. Beim Anmelden wird weiterhin deine echte Region gesendet. Deine IP-Adresse und die eigenen Regeln deines Kontos gelten weiterhin.");
-        table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
+        table.put("Also turns on TikTok's own Auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "Schaltet auch TikToks eigenes automatisches Scrollen für Videos ein, die du aus der Suche öffnest. Starte TikTok neu, damit es wirkt.");
         table.put("Always show publish date",
                 "Veröffentlichungsdatum immer anzeigen");
@@ -7474,7 +7474,7 @@ public final class L10nTranslations {
                 "TikTok testet manchmal eine Änderung, die den Tab „Favoriten“ in deinem Profil leert. Das hier behält den Tab und deine gespeicherten Videos.");
         table.put("TikTok sometimes tests your phone's speed in a background process that can use a lot of memory. This stops that test from starting. One already running ends when TikTok restarts.",
                 "TikTok testet manchmal die Geschwindigkeit deines Telefons in einem Hintergrundprozess, der viel Speicher belegen kann. Das verhindert, dass dieser Test startet. Ein bereits laufender Test endet, wenn TikTok neu startet.");
-        table.put("TikTok's background play and auto-scroll",
+        table.put("TikTok's background play and Auto scroll",
                 "TikToks Hintergrundwiedergabe und automatisches Scrollen");
         table.put("TikTok's downloader: %1$s",
                 "TikToks Downloader: %1$s");
@@ -8288,7 +8288,7 @@ public final class L10nTranslations {
                 "También está en una lista de bloqueo, así que sigue oculto: %1$s");
         table.put("Also replaces the saved region and country code TikTok sends with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
                 "También reemplaza la región guardada y el código de país que TikTok envía con cada solicitud. Al iniciar sesión se sigue enviando tu región real. Tu dirección IP y las reglas propias de tu cuenta siguen aplicándose.");
-        table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
+        table.put("Also turns on TikTok's own Auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "También activa el desplazamiento automático propio de TikTok en los videos abiertos desde la búsqueda. Reinicia TikTok para aplicarlo.");
         table.put("Always show publish date",
                 "Mostrar siempre la fecha de publicación");
@@ -11369,7 +11369,7 @@ public final class L10nTranslations {
                 "A veces TikTok prueba un cambio que vacía la pestaña Favoritos de tu perfil. Esto conserva la pestaña y tus videos guardados.");
         table.put("TikTok sometimes tests your phone's speed in a background process that can use a lot of memory. This stops that test from starting. One already running ends when TikTok restarts.",
                 "A veces TikTok prueba la velocidad de tu teléfono en un proceso en segundo plano que puede usar mucha memoria. Esto evita que esa prueba empiece. La que ya esté en marcha termina cuando TikTok se reinicia.");
-        table.put("TikTok's background play and auto-scroll",
+        table.put("TikTok's background play and Auto scroll",
                 "Reproducción en segundo plano y desplazamiento automático de TikTok");
         table.put("TikTok's downloader: %1$s",
                 "Descargador de TikTok: %1$s");
@@ -12183,7 +12183,7 @@ public final class L10nTranslations {
                 "Juga ada di daftar blokir, jadi tetap disembunyikan: %1$s");
         table.put("Also replaces the saved region and country code TikTok sends with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
                 "Juga mengganti wilayah tersimpan dan kode negara yang dikirim TikTok di setiap permintaan. Saat masuk, wilayah aslimu tetap dikirim. Alamat IP dan aturan akunmu sendiri tetap berlaku.");
-        table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
+        table.put("Also turns on TikTok's own Auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "Juga menyalakan gulir otomatis TikTok sendiri untuk video yang dibuka dari pencarian. Mulai ulang TikTok untuk menerapkannya.");
         table.put("Always show publish date",
                 "Selalu tampilkan tanggal unggah");
@@ -15264,7 +15264,7 @@ public final class L10nTranslations {
                 "TikTok kadang menguji perubahan yang mengosongkan tab Favorit di profilmu. Ini menjaga tab itu dan video tersimpanmu.");
         table.put("TikTok sometimes tests your phone's speed in a background process that can use a lot of memory. This stops that test from starting. One already running ends when TikTok restarts.",
                 "TikTok kadang menguji kecepatan ponselmu di proses latar belakang yang bisa memakai banyak memori. Ini mencegah tes itu mulai. Tes yang sudah berjalan berakhir saat TikTok dimulai ulang.");
-        table.put("TikTok's background play and auto-scroll",
+        table.put("TikTok's background play and Auto scroll",
                 "Putar di latar belakang dan gulir otomatis dari TikTok");
         table.put("TikTok's downloader: %1$s",
                 "Pengunduh TikTok: %1$s");
@@ -16078,7 +16078,7 @@ public final class L10nTranslations {
                 "Presente anche in una lista di blocco, quindi resta nascosto: %1$s");
         table.put("Also replaces the saved region and country code TikTok sends with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
                 "Sostituisce anche la regione salvata e il codice paese che TikTok invia a ogni richiesta. L'accesso invia ancora la tua regione reale. Il tuo indirizzo IP e le regole del tuo account continuano a valere.");
-        table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
+        table.put("Also turns on TikTok's own Auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "Attiva anche lo scorrimento automatico di TikTok per i video aperti dalla ricerca. Riavvia TikTok per applicarlo.");
         table.put("Always show publish date",
                 "Mostra sempre la data di pubblicazione");
@@ -19159,7 +19159,7 @@ public final class L10nTranslations {
                 "A volte TikTok prova una modifica che svuota la scheda Preferiti sul tuo profilo. Questo mantiene la scheda e i tuoi video salvati.");
         table.put("TikTok sometimes tests your phone's speed in a background process that can use a lot of memory. This stops that test from starting. One already running ends when TikTok restarts.",
                 "A volte TikTok misura la velocità del telefono in un processo in background che può usare molta memoria. Questo impedisce l'avvio del test. Uno già in corso termina al riavvio di TikTok.");
-        table.put("TikTok's background play and auto-scroll",
+        table.put("TikTok's background play and Auto scroll",
                 "Riproduzione in background e scorrimento automatico di TikTok");
         table.put("TikTok's downloader: %1$s",
                 "Downloader di TikTok: %1$s");
@@ -19973,7 +19973,7 @@ public final class L10nTranslations {
                 "Também está numa lista de bloqueio, então continua escondido: %1$s");
         table.put("Also replaces the saved region and country code TikTok sends with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
                 "Também substitui a região salva e o código de país que o TikTok envia a cada solicitação. Ao entrar, a sua região real ainda é enviada. Seu endereço IP e as regras da sua conta continuam valendo.");
-        table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
+        table.put("Also turns on TikTok's own Auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "Também ativa a rolagem automática do próprio TikTok nos vídeos abertos pela busca. Reinicie o TikTok para aplicar.");
         table.put("Always show publish date",
                 "Sempre mostrar a data de publicação");
@@ -23054,7 +23054,7 @@ public final class L10nTranslations {
                 "Às vezes o TikTok testa uma mudança que esvazia a aba Favoritos do seu perfil. Isso mantém a aba e seus vídeos salvos.");
         table.put("TikTok sometimes tests your phone's speed in a background process that can use a lot of memory. This stops that test from starting. One already running ends when TikTok restarts.",
                 "Às vezes o TikTok testa a velocidade do seu celular em um processo em segundo plano que pode usar muita memória. Isso impede que esse teste comece. Um que já esteja rodando termina quando o TikTok reinicia.");
-        table.put("TikTok's background play and auto-scroll",
+        table.put("TikTok's background play and Auto scroll",
                 "Reprodução em segundo plano e rolagem automática do TikTok");
         table.put("TikTok's downloader: %1$s",
                 "Baixador do TikTok: %1$s");
@@ -24081,7 +24081,7 @@ public final class L10nTranslations {
     }
 
     private static void fillRu5(Map<String, String> table) {
-        table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
+        table.put("Also turns on TikTok's own Auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "Также включает собственную автопрокрутку TikTok для видео, открытых из поиска. Перезапустите TikTok, чтобы применить.");
         table.put("Always show publish date",
                 "Всегда показывать дату публикации");
@@ -27264,7 +27264,7 @@ public final class L10nTranslations {
                 "Иногда TikTok проверяет изменение, из-за которого вкладка «Избранное» в вашем профиле пустеет. Эта настройка сохраняет вкладку и ваши сохранённые видео.");
         table.put("TikTok sometimes tests your phone's speed in a background process that can use a lot of memory. This stops that test from starting. One already running ends when TikTok restarts.",
                 "Иногда TikTok проверяет скорость телефона в фоновом процессе, который может занимать много памяти. Это не даёт такой проверке запуститься. Уже работающая проверка завершится при перезапуске TikTok.");
-        table.put("TikTok's background play and auto-scroll",
+        table.put("TikTok's background play and Auto scroll",
                 "Фоновое воспроизведение и автопрокрутка от TikTok");
         table.put("TikTok's downloader: %1$s",
                 "Загрузчик TikTok: %1$s");
@@ -28111,7 +28111,7 @@ public final class L10nTranslations {
                 "Bir engelleme listesinde de var, bu yüzden gizli kalır: %1$s");
         table.put("Also replaces the saved region and country code TikTok sends with every request. Signing in still sends your real region. Your IP address and your account's own rules still apply.",
                 "TikTok'un her istekle gönderdiği kayıtlı bölgeyi ve ülke kodunu da değiştirir. Giriş yaparken gerçek bölgen yine gönderilir. IP adresin ve hesabının kendi kuralları geçerli olmaya devam eder.");
-        table.put("Also turns on TikTok's own auto scroll for videos opened from search. Restart TikTok to apply this.",
+        table.put("Also turns on TikTok's own Auto scroll for videos opened from search. Restart TikTok to apply this.",
                 "Aramadan açılan videolar için TikTok'un kendi otomatik kaydırmasını da açar. Uygulamak için TikTok'u yeniden başlat.");
         table.put("Always show publish date",
                 "Yayın tarihini her zaman göster");
@@ -31192,7 +31192,7 @@ public final class L10nTranslations {
                 "TikTok bazen profilindeki Favoriler sekmesini boşaltan bir değişikliği dener. Bu, sekmeyi ve kaydettiğin videoları korur.");
         table.put("TikTok sometimes tests your phone's speed in a background process that can use a lot of memory. This stops that test from starting. One already running ends when TikTok restarts.",
                 "TikTok bazen telefonunun hızını çok bellek kullanabilen bir arka plan işleminde test eder. Bu, testin başlamasını engeller. Zaten çalışan bir test, TikTok yeniden başlayınca biter.");
-        table.put("TikTok's background play and auto-scroll",
+        table.put("TikTok's background play and Auto scroll",
                 "TikTok'un arka planda oynatma ve otomatik kaydırması");
         table.put("TikTok's downloader: %1$s",
                 "TikTok indiricisi: %1$s");
