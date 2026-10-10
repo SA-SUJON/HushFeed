@@ -601,6 +601,13 @@ public class SettingsStatus {
         voiceCommentsEnabled = true;
     }
 
+    /** Skip passkey sign-in put its switch in front of TikTok's passkey support check. */
+    public static boolean passkeySignInEnabled = false;
+
+    public static void enablePasskeySignIn() {
+        passkeySignInEnabled = true;
+    }
+
     static {
         // The patcher fills load() with selected registrations. Runtime hooks can run before settings opens.
         // Keep this after field initializers so their default values cannot overwrite those registrations.

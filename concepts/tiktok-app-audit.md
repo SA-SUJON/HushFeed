@@ -217,7 +217,7 @@ The source lives under [privacy patches](../patches/src/main/kotlin/app/morphe/p
 
 ### Other Hushfeed customization areas
 
-Ad and privacy work sits inside a wider set of user controls. The generated catalog has 130 patch entries in this source snapshot. The [patch development map](patch-development.md) records the full category counts and settings pages.
+Ad and privacy work sits inside a wider set of user controls. The generated catalog has 131 patch entries in this source snapshot. The [patch development map](patch-development.md) records the full category counts and settings pages.
 
 | Area | Examples already present in Hushfeed | Likely annoyance it addresses |
 | --- | --- | --- |

@@ -61,6 +61,7 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                 || SettingsStatus.screenCaptureEnabled
                 || SettingsStatus.videoOverlaysEnabled
                 || SettingsStatus.storeIdentityEnabled
+                || SettingsStatus.passkeySignInEnabled
                 || hasPerformance();
     }
 
@@ -254,7 +255,8 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
         // the store check on Privacy, under a heading of its own.
         if (SettingsStatus.screenCaptureEnabled || SettingsStatus.videoOverlaysEnabled
                 || SettingsStatus.refreshRateEnabled || SettingsStatus.launcherShortcutsEnabled
-                || SettingsStatus.firstLaunchSetupEnabled || SettingsStatus.storeIdentityEnabled) {
+                || SettingsStatus.firstLaunchSetupEnabled || SettingsStatus.storeIdentityEnabled
+                || SettingsStatus.passkeySignInEnabled) {
             addPreference(new SectionHeadingPreference(context, "System"));
         }
         if (SettingsStatus.screenCaptureEnabled) {
@@ -322,6 +324,16 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
                     Settings.STORE_IDENTITY_INSTALLER,
                     new String[]{"Play Store", "Galaxy Store", "AppGallery", "Amazon Appstore"},
                     StoreIdentity.installers()));
+        }
+        if (SettingsStatus.passkeySignInEnabled) {
+            addPreference(new TogglePreference(
+                    context,
+                    "Sign in without a passkey",
+                    "TikTok treats your phone as one without passkeys, so signing in asks for your "
+                            + "password or a code by email or text instead. Password managers won't "
+                            + "hand a passkey to a patched app.",
+                    Settings.SKIP_PASSKEY_SIGN_IN
+            ));
         }
         // Each of these used to change TikTok the moment it was patched in, with no switch. They
         // start off now, so a row here is the only way any of them does anything.

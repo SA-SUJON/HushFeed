@@ -823,6 +823,9 @@ public class Settings extends BaseSettings {
     // The store those installer reads name, by package. A restart for the same reason (#112).
     public static final StringSetting STORE_IDENTITY_INSTALLER =
             new StringSetting("store_identity_installer", "com.android.vending", true);
+    // Skip passkey sign-in (#102), in the default selection with this off. Read each time a
+    // sign-in screen asks whether this phone can use passkeys, so no restart.
+    public static final BooleanSetting SKIP_PASSKEY_SIGN_IN = new BooleanSetting("skip_passkey_sign_in", FALSE);
     // App lock. Off until the reader turns it on, and read as each screen starts, so no restart.
     // The delay is whole minutes TikTok may spend in the background before it asks again.
     public static final BooleanSetting APP_LOCK = new BooleanSetting("app_lock", FALSE);

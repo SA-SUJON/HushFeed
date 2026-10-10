@@ -6,7 +6,7 @@ This guide maps the TikTok app Hushfeed modifies to the code and release checks 
 
 Hushfeed is a Morphe patch bundle, not a TikTok APK. Morphe Manager takes a TikTok APK chosen by the user, applies the selected patches, and signs the result with the user's existing key. The patch definitions and the runtime code they inject live in separate Gradle modules.
 
-The source snapshot in this checkout says version 0.70.0 and contains 130 patch entries. The published source index, patches-bundle.json, still names 0.69.0. This is the release sequence described in CONTRIBUTING.md: publish and verify a bundle before changing the source index. Do not hand-edit the index to make the versions match.
+The source snapshot in this checkout says version 0.70.0 and contains 131 patch entries, one more than the published 0.70.0 bundle that patches-bundle.json names. The index moves only after a new bundle is published and verified, which is the release sequence described in CONTRIBUTING.md. Do not hand-edit the index to make the two match.
 
 ## Target app and version boundary
 
@@ -84,7 +84,7 @@ The Morphe Gradle plugin and the default extension namespace are configured in s
 
 The runtime code is grouped by feature under extensions/tiktok/src/main/java/app/morphe/extension/tiktok/. Current package folders are blockauthor, captions, capture, cleardisplay, comment, commentsort, diagnostics, download, externalbrowser, favorites, featurecontrols, featuregatelab, feed, feedfilter, foldable, follow, font, ghostmode, inbox, interaction, live, misc, navigation, network, notinterested, offline, playback, popups, privacy, profile, publishdate, repost, search, seekbar, seen, settings, share, speed, spoof, telemetry, translation, upload, and wellbeing. Search the generated patch catalog by display name first, then follow its dependencies into the Kotlin and Java sources.
 
-The current catalog's 130 patches are grouped as follows:
+The current catalog's 131 patches are grouped as follows:
 
 | Manager category | Patches |
 | --- | ---: |
@@ -98,7 +98,7 @@ The current catalog's 130 patches are grouped as follows:
 | Playback | 20 |
 | Privacy | 16 |
 | Search | 4 |
-| Settings | 13 |
+| Settings | 14 |
 
 The [patch catalog](../patches-list.json) has the complete names and plain-English descriptions. Keep the prose in that generated catalog aligned with the README's patch table and the in-app setting title. The build's documentation checks compare those sources.
 
