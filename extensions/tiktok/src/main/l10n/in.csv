@@ -1892,3 +1892,5 @@ Limit background traffic,Batasi lalu lintas latar belakang
 "Stop TikTok loading upcoming videos ahead of time. It uses less data, but videos may take a moment longer to start.","Hentikan TikTok memuat video berikutnya lebih awal. Kuota lebih hemat, tetapi video mungkin butuh waktu sedikit lebih lama untuk mulai."
 Cache one frame of animated images,Simpan satu bingkai gambar animasi di cache
 "Keep only the frame on screen for animated stickers and GIFs instead of every frame, so they use less memory. Applies to the next ones that load.","Simpan hanya bingkai yang tampil di layar untuk stiker animasi dan GIF, bukan setiap bingkai, agar memakai lebih sedikit memori. Berlaku untuk yang dimuat berikutnya."
+Stop on-device AI profiling,Hentikan profiling AI di perangkat
+"Stop TikTok's built-in AI engine from starting, so it doesn't get a copy of everything TikTok logs about your use. TikTok works as if the engine weren't there.","Cegah mesin AI bawaan TikTok berjalan, sehingga mesin itu tidak mendapat salinan semua yang dicatat TikTok tentang penggunaanmu. TikTok berjalan seolah mesin itu tidak ada."

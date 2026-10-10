@@ -1460,12 +1460,14 @@ Stop LIVE previews opening by themselves,Stop LIVE previews opening by themselve
 "Stop TikTok loading upcoming videos ahead of time and setting up notifications. You won't get notifications, messages included, while this is on. Videos may take a moment longer to start.","Stop TikTok loading upcoming videos ahead of time and setting up notifications. You won't get notifications, messages included, while this is on. Videos may take a moment longer to start."
 "Stop TikTok loading upcoming videos ahead of time. It uses less data, but videos may take a moment longer to start.","Stop TikTok loading upcoming videos ahead of time. It uses less data, but videos may take a moment longer to start."
 Stop TikTok reading what you copied. Copying a link from TikTok still works.,Stop TikTok reading what you copied. Copying a link from TikTok still works.
+"Stop TikTok's built-in AI engine from starting, so it doesn't get a copy of everything TikTok logs about your use. TikTok works as if the engine weren't there.","Stop TikTok's built-in AI engine from starting, so it doesn't get a copy of everything TikTok logs about your use. TikTok works as if the engine weren't there."
 Stop TikTok's speed tests,Stop TikTok's speed tests
 Stop a long press on Like from opening TikTok's repost action.,Stop a long press on Like from opening TikTok's repost action.
 Stop a long press on Share from opening TikTok's quick share action.,Stop a long press on Share from opening TikTok's quick share action.
 Stop analytics and tracking,Stop analytics and tracking
 Stop and save the feed capture,Stop and save the feed capture
 Stop feature gate recording,Stop feature gate recording
+Stop on-device AI profiling,Stop on-device AI profiling
 Stop search results playing on their own,Stop search results playing on their own
 Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.,Stop the brand animation that plays over the comments when what someone typed matches an advertiser's trigger.
 Stop the bubble TikTok floats at the top of the feed to point you to a LIVE.,Stop the bubble TikTok floats at the top of the feed to point you to a LIVE.

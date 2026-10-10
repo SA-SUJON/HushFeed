@@ -173,6 +173,7 @@ All Boolean choices in this table default off in the examined source. Saved choi
 | Limit background traffic / `limit_background_traffic` | Answers `PreloadStrategyConfig.isEnableBufferPreload()` false while on. When the patch was applied with its `skipPushSetup` option (default false), the same switch also returns from push initialization. Takes effect after a restart. [Patch][preload] | Despite the title, the preload gate is not restricted to OS background state. It may alter foreground buffering and start latency too. Push suppression affects notifications, including messages. |
 | Cache one frame of animated images / `drop_animated_image_cache` | Selects Fresco's keep-last-frame strategy and disables ahead-of-time animated frame preparation for animated images built while it's on. [Patch][cache] | Applies to animated images such as stickers/GIFs, not all video caching or downloads. Memory and CPU effects need observation with animated content. |
 | Skip update checks / `skip_update_checks` | Returns from two updater tasks, including the boot-triggered task. Takes effect after a restart. [Patch][updates] | Does not remove every potential update prompt or disable Play Store updates. |
+| Stop on-device AI profiling / `stop_ai_profiling` | Returns no Pitaya plugin and returns from the real and lite engine start paths while on. Takes effect after a restart. [Patch][ai] | Removes covered startup/processing opportunities, not proof of remote profiling prevention or a particular power saving. |
 
 ### Static patches that survive Pause
 
@@ -180,7 +181,6 @@ These optional patches default unselected in the examined source. A runtime sett
 
 | Patch | Exact intervention | Limit for interpretation |
 |---|---|---|
-| Stop on-device AI profiling | Returns no Pitaya plugin and prevents real/lite engine start paths. [Patch][ai] | Removes covered startup/processing opportunities, not proof of remote profiling prevention or a particular power saving. |
 | Block P2P video relay | Removes `libavmdlp2pv2.so` and `libp2plivevdp.so` for arm64-v8a and armeabi-v7a using verified resource profiles. [Patch][p2p] | Prevents use of these bundled relay libraries. Does not prove relaying was enabled in the comparison run, or identify all upload traffic as relay traffic. |
 
 Other static changes, including asset removal, screen-capture/login fixes, and signing/version metadata, must be listed from the actual artifact if present. Storage reduction is not equivalent to reduced runtime memory or battery use.
@@ -230,6 +230,6 @@ Other static changes, including asset removal, screen-capture/login fixes, and s
 [preload]: ../patches/src/main/kotlin/app/morphe/patches/tiktok/misc/optimizer/OptimizerBytecodePatches.kt#L121
 [cache]: ../patches/src/main/kotlin/app/morphe/patches/tiktok/misc/optimizer/OptimizerBytecodePatches.kt#L172
 [updates]: ../patches/src/main/kotlin/app/morphe/patches/tiktok/misc/optimizer/OptimizerBytecodePatches.kt#L255
-[ai]: ../patches/src/main/kotlin/app/morphe/patches/tiktok/privacy/AiProfilingGovernorPatch.kt#L12
+[ai]: ../patches/src/main/kotlin/app/morphe/patches/tiktok/privacy/AiProfilingGovernorPatch.kt#L45
 [p2p]: ../patches/src/main/kotlin/app/morphe/patches/tiktok/misc/optimizer/ResourceOptimizerPatches.kt#L18
 [network]: ../extensions/tiktok/src/main/java/app/morphe/extension/tiktok/privacy/NetworkRequests.java#L23

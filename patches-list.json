@@ -4575,10 +4575,13 @@
     },
     {
       "name": "Stop on-device AI profiling",
-      "description": "Stops TikTok's built-in AI engine from starting, so it doesn't get a copy of everything TikTok logs about your use. TikTok works as if the engine weren't there. It has no switch, so only patching again without it undoes it.",
+      "description": "Lets you stop TikTok's built-in AI engine from starting, so it doesn't get a copy of everything TikTok logs about your use. TikTok works as if the engine weren't there. Starts off. Turn it on in Hushfeed settings > Privacy.",
       "category": "Privacy",
-      "use": false,
-      "dependencies": [],
+      "use": true,
+      "dependencies": [
+        "BytecodePatch",
+        "Settings"
+      ],
       "compatiblePackages": {
         "com.zhiliaoapp.musically": [
           "47.1.4"

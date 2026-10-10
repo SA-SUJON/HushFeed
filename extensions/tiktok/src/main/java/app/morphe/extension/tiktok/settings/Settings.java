@@ -786,6 +786,9 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting GHOST_HIDE_ONLINE_STATUS =
             new BooleanSetting("ghost_hide_online_status", FALSE, false, Setting.parent(GHOST_MODE));
     public static final BooleanSetting DISABLE_ANALYTICS = new BooleanSetting("disable_analytics", FALSE);
+    // Stop on-device AI profiling, in the default selection with this off. TikTok starts the
+    // engine during launch, so a restart applies it.
+    public static final BooleanSetting STOP_AI_PROFILING = new BooleanSetting("stop_ai_profiling", FALSE, true);
     // One switch per device-access patch, off by default: the patches are in the default selection,
     // so TikTok reads as it ships until the reader turns a block on. Each is read at the
     // intercepted call, so none needs a restart.

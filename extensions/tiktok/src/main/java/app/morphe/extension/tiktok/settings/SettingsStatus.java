@@ -587,6 +587,13 @@ public class SettingsStatus {
         animatedImageCacheEnabled = true;
     }
 
+    /** Stop on-device AI profiling put its switch in front of the Pitaya start-up. */
+    public static boolean aiProfilingEnabled = false;
+
+    public static void enableAiProfiling() {
+        aiProfilingEnabled = true;
+    }
+
     static {
         // The patcher fills load() with selected registrations. Runtime hooks can run before settings opens.
         // Keep this after field initializers so their default values cannot overwrite those registrations.

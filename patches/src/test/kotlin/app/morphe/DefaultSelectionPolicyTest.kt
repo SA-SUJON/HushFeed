@@ -34,7 +34,6 @@ class DefaultSelectionPolicyTest {
         "Remove unused language packs" to "takes files out of the APK while patching",
         "Run beside the store app" to "registers a cloned package under TikTok's own name",
         "Skip first-launch setup" to "only helps with its switch on, since setup runs before settings can be reached",
-        "Stop on-device AI profiling" to "changes TikTok with no switch in front of it",
         "Trust user certificates" to "lets any user-installed certificate read TikTok's traffic, with no switch",
     )
 

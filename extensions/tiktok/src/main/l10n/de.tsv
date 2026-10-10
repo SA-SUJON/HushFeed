@@ -1904,3 +1904,5 @@ Stop TikTok loading upcoming videos ahead of time and setting up notifications. 
 Stop TikTok loading upcoming videos ahead of time. It uses less data, but videos may take a moment longer to start.	Verhindert, dass TikTok kommende Videos vorab lädt. Das spart Daten, aber Videos starten vielleicht etwas später.
 Cache one frame of animated images	Nur ein Bild animierter Grafiken zwischenspeichern
 Keep only the frame on screen for animated stickers and GIFs instead of every frame, so they use less memory. Applies to the next ones that load.	Behält bei animierten Stickern und GIFs nur das sichtbare Bild statt aller Einzelbilder, damit sie weniger Speicher brauchen. Gilt für die nächsten, die geladen werden.
+Stop on-device AI profiling	KI-Profiling auf dem Gerät stoppen
+Stop TikTok's built-in AI engine from starting, so it doesn't get a copy of everything TikTok logs about your use. TikTok works as if the engine weren't there.	Verhindert, dass TikToks eingebaute KI-Engine startet, damit sie keine Kopie von allem bekommt, was TikTok über deine Nutzung protokolliert. TikTok funktioniert, als gäbe es die Engine nicht.
