@@ -478,11 +478,11 @@ public final class VideoOverlayHider {
             // leaves it up in Clear display on a photo or video opened from search or a profile
             // (#84), so it goes then too and comes back with the controls. A video opens in the
             // detail pager, but on 47.1.4 a photo from search opens in the main activity
-            // (DetailSafRootFragment) with the same bar, so Clear display doesn't ask which
-            // window it's in: only an opened post has the bar, and the strip under it is left
-            // alone wherever the bar isn't found (see the pairing after the walk).
-            boolean detailCommentBar = (detailPager && Settings.HIDE_DETAIL_COMMENT_BAR.get())
-                    || clearLive;
+            // (DetailSafRootFragment) with the same bar, so neither the switch nor Clear display
+            // asks which window it's in: only an opened post has the bar, and the strip under it
+            // is left alone wherever the bar isn't found (see the pairing after the walk). Asked
+            // only in the detail pager, the switch left that photo's bar up.
+            boolean detailCommentBar = Settings.HIDE_DETAIL_COMMENT_BAR.get() || clearLive;
             // The faded Clear display keeps the anchor row and the search bar in sight but out of
             // reach, which is what hiding them was for.
             boolean anchor = clearLive && !fadedClear;

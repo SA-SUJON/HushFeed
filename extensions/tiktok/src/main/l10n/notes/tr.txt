@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Açılan videolarda yorum çubuğunu gizle artık aramadan açtığın bir fotoğraf gönderisinde de çubuğu kaldırır. Önceden bu gönderilerde yorum ekleme çubuğu kalıyordu.
+
 * **TikTok:** İndirilenler'deki yeni Ses biçimi seçeneği, Sesi de kaydet ve uzun basmadaki Orijinal sesi kaydet ile Opus dosyaları (.ogg) oluşturmayı sağlar. Bunlar TikTok'un M4A dosyasından küçüktür ve telefonun bunları oluşturmak için sesi yeniden kodlar. Android 10 veya üstü gerekir. Varsayılan TikTok'un gönderdiği gibi olarak kalır, bu yüzden bu kayıtlar eskisi gibi çıkar.
 
 * **TikTok:** Video kontrollerini soluklaştır artık Temiz ekranla da çalışıyor. 1 ile 99 arasında Temiz ekran, düğmeleri ve açıklamayı kaldırmak yerine seçtiğin seviyede ekranda tutuyor ve onlara dokunmak videoya gidiyor, böylece hiçbir şey yanlışlıkla açılmıyor. Basılı tutmak ya da iki parmağını birbirine yaklaştırmak seni yine Temiz ekrandan çıkarıyor, onun dışında soluk kontroller eskisi gibi dokunuşları alıyor (#84).
