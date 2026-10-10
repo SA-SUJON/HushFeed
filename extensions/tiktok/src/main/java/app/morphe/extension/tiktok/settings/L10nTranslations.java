@@ -1681,14 +1681,14 @@ public final class L10nTranslations {
                 "Hushfeed durdurulub");
         table.put("Hushfeed is paused. Ghost mode isn't active.",
                 "Hushfeed durdurulub. Xəyal rejimi aktiv deyil.");
-        table.put("Hushfeed runtime changes are paused. Your settings stay saved. Changes built into the APK remain.",
-                "Hushfeed-in tətbiq işləyərkən etdiyi dəyişikliklər dayandırılıb. Ayarlarınız saxlanılır. APK-ya daxil edilmiş dəyişikliklər qalır.");
         table.put("Hushfeed turns back on when TikTok restarts.",
                 "TikTok yenidən başlayanda Hushfeed yenidən yanır.");
         table.put("Hushfeed's downloader doesn't fill this in, so it's kept as typed: %1$s",
                 "Hushfeed-in yükləyicisi bunu doldurmur, ona görə yazdığınız kimi saxlanır: %1$s");
         table.put("Hushfeed's downloader: %1$s",
                 "Hushfeed yükləyicisi: %1$s");
+        table.put("Hushfeed's switches are paused. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "Hushfeed-in açarları dayandırılıb. Ayarlarınız saxlanılır. Yamaqlayanda edilən dəyişikliklər, məsələn tətbiqin adı və ya ikonu, qalır.");
     }
 
     private static void fillAz13(Map<String, String> table) {
@@ -2280,8 +2280,8 @@ public final class L10nTranslations {
                 "Fasilə");
         table.put("Pause Hushfeed",
                 "Hushfeed-i durdurun");
-        table.put("Pause runtime changes after restarting TikTok. Your settings stay saved. Changes built into the APK remain.",
-                "TikTok-u yenidən başladandan sonra tətbiq işləyərkən edilən dəyişiklikləri dayandırın. Ayarlarınız saxlanılır. APK-ya daxil edilmiş dəyişikliklər qalır.");
+        table.put("Pause Hushfeed's switches after TikTok restarts. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "TikTok yenidən başladıqdan sonra Hushfeed-in açarlarını dayandırın. Ayarlarınız saxlanılır. Yamaqlayanda edilən dəyişikliklər, məsələn tətbiqin adı və ya ikonu, qalır.");
         table.put("Paused",
                 "Dayandırılıb");
         table.put("Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.",
@@ -5576,14 +5576,14 @@ public final class L10nTranslations {
                 "Hushfeed ist pausiert");
         table.put("Hushfeed is paused. Ghost mode isn't active.",
                 "Hushfeed ist pausiert. Der Geistermodus ist nicht aktiv.");
-        table.put("Hushfeed runtime changes are paused. Your settings stay saved. Changes built into the APK remain.",
-                "Hushfeeds Änderungen zur Laufzeit sind pausiert. Deine Einstellungen bleiben gespeichert. Änderungen, die in die APK eingebaut sind, bleiben bestehen.");
         table.put("Hushfeed turns back on when TikTok restarts.",
                 "Hushfeed ist wieder aktiv, sobald TikTok neu startet.");
         table.put("Hushfeed's downloader doesn't fill this in, so it's kept as typed: %1$s",
                 "Hushfeeds Downloader füllt das nicht aus, daher bleibt es wie eingegeben: %1$s");
         table.put("Hushfeed's downloader: %1$s",
                 "Hushfeeds Downloader: %1$s");
+        table.put("Hushfeed's switches are paused. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "Hushfeeds Schalter sind pausiert. Deine Einstellungen bleiben gespeichert. Was du beim Patchen geändert hast, etwa Name oder Symbol der App, bleibt.");
     }
 
     private static void fillDe13(Map<String, String> table) {
@@ -6175,8 +6175,8 @@ public final class L10nTranslations {
                 "Pausieren");
         table.put("Pause Hushfeed",
                 "Hushfeed pausieren");
-        table.put("Pause runtime changes after restarting TikTok. Your settings stay saved. Changes built into the APK remain.",
-                "Pausiere Änderungen zur Laufzeit nach dem Neustart von TikTok. Deine Einstellungen bleiben gespeichert. Änderungen, die in die APK eingebaut sind, bleiben bestehen.");
+        table.put("Pause Hushfeed's switches after TikTok restarts. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "Pausiere Hushfeeds Schalter nach dem Neustart von TikTok. Deine Einstellungen bleiben gespeichert. Was du beim Patchen geändert hast, etwa Name oder Symbol der App, bleibt.");
         table.put("Paused",
                 "Pausiert");
         table.put("Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.",
@@ -9471,14 +9471,14 @@ public final class L10nTranslations {
                 "Hushfeed está en pausa");
         table.put("Hushfeed is paused. Ghost mode isn't active.",
                 "Hushfeed está en pausa. El modo fantasma no está activo.");
-        table.put("Hushfeed runtime changes are paused. Your settings stay saved. Changes built into the APK remain.",
-                "Los cambios de Hushfeed que se aplican durante la ejecución están en pausa. Tus ajustes siguen guardados. Los cambios integrados en el APK permanecen.");
         table.put("Hushfeed turns back on when TikTok restarts.",
                 "Hushfeed vuelve a activarse cuando TikTok se reinicie.");
         table.put("Hushfeed's downloader doesn't fill this in, so it's kept as typed: %1$s",
                 "El descargador de Hushfeed no rellena esto, así que se deja tal como lo escribiste: %1$s");
         table.put("Hushfeed's downloader: %1$s",
                 "Descargador de Hushfeed: %1$s");
+        table.put("Hushfeed's switches are paused. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "Los interruptores de Hushfeed están en pausa. Tus ajustes siguen guardados. Los cambios hechos al aplicar el parche, como el nombre o el icono de la app, se mantienen.");
     }
 
     private static void fillEs13(Map<String, String> table) {
@@ -10070,8 +10070,8 @@ public final class L10nTranslations {
                 "Pausar");
         table.put("Pause Hushfeed",
                 "Pausar Hushfeed");
-        table.put("Pause runtime changes after restarting TikTok. Your settings stay saved. Changes built into the APK remain.",
-                "Pausa los cambios que se aplican durante la ejecución después de reiniciar TikTok. Tus ajustes siguen guardados. Los cambios integrados en el APK permanecen.");
+        table.put("Pause Hushfeed's switches after TikTok restarts. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "Pausa los interruptores de Hushfeed después de reiniciar TikTok. Tus ajustes siguen guardados. Los cambios hechos al aplicar el parche, como el nombre o el icono de la app, se mantienen.");
         table.put("Paused",
                 "En pausa");
         table.put("Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.",
@@ -13366,14 +13366,14 @@ public final class L10nTranslations {
                 "Hushfeed dijeda");
         table.put("Hushfeed is paused. Ghost mode isn't active.",
                 "Hushfeed dijeda. Mode hantu tidak aktif.");
-        table.put("Hushfeed runtime changes are paused. Your settings stay saved. Changes built into the APK remain.",
-                "Perubahan Hushfeed yang diterapkan saat aplikasi berjalan sedang dijeda. Pengaturanmu tetap tersimpan. Perubahan yang tertanam dalam APK tetap ada.");
         table.put("Hushfeed turns back on when TikTok restarts.",
                 "Hushfeed aktif lagi saat TikTok dimulai ulang.");
         table.put("Hushfeed's downloader doesn't fill this in, so it's kept as typed: %1$s",
                 "Pengunduh Hushfeed tidak mengisi bagian ini, jadi tetap seperti yang diketik: %1$s");
         table.put("Hushfeed's downloader: %1$s",
                 "Pengunduh Hushfeed: %1$s");
+        table.put("Hushfeed's switches are paused. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "Sakelar Hushfeed sedang dijeda. Pengaturanmu tetap tersimpan. Perubahan yang dibuat saat kamu mem-patch, seperti nama atau ikon aplikasi, tetap ada.");
     }
 
     private static void fillIn13(Map<String, String> table) {
@@ -13965,8 +13965,8 @@ public final class L10nTranslations {
                 "Jeda");
         table.put("Pause Hushfeed",
                 "Jeda Hushfeed");
-        table.put("Pause runtime changes after restarting TikTok. Your settings stay saved. Changes built into the APK remain.",
-                "Jeda perubahan yang diterapkan saat aplikasi berjalan setelah TikTok dimulai ulang. Pengaturanmu tetap tersimpan. Perubahan yang tertanam dalam APK tetap ada.");
+        table.put("Pause Hushfeed's switches after TikTok restarts. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "Jeda sakelar Hushfeed setelah TikTok dimulai ulang. Pengaturanmu tetap tersimpan. Perubahan yang dibuat saat kamu mem-patch, seperti nama atau ikon aplikasi, tetap ada.");
         table.put("Paused",
                 "Dijeda");
         table.put("Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.",
@@ -17261,14 +17261,14 @@ public final class L10nTranslations {
                 "Hushfeed è in pausa");
         table.put("Hushfeed is paused. Ghost mode isn't active.",
                 "Hushfeed è in pausa. La modalità fantasma non è attiva.");
-        table.put("Hushfeed runtime changes are paused. Your settings stay saved. Changes built into the APK remain.",
-                "Le modifiche di Hushfeed applicate durante l'esecuzione sono in pausa. Le impostazioni restano salvate. Le modifiche integrate nell'APK rimangono.");
         table.put("Hushfeed turns back on when TikTok restarts.",
                 "Hushfeed si riattiva quando TikTok viene riavviato.");
         table.put("Hushfeed's downloader doesn't fill this in, so it's kept as typed: %1$s",
                 "Il downloader di Hushfeed non compila questa parte, quindi resta com'è stata scritta: %1$s");
         table.put("Hushfeed's downloader: %1$s",
                 "Downloader di Hushfeed: %1$s");
+        table.put("Hushfeed's switches are paused. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "Gli interruttori di Hushfeed sono in pausa. Le impostazioni restano salvate. Le modifiche fatte con la patch, come il nome o l'icona dell'app, restano.");
     }
 
     private static void fillIt13(Map<String, String> table) {
@@ -17860,8 +17860,8 @@ public final class L10nTranslations {
                 "Pausa");
         table.put("Pause Hushfeed",
                 "Metti in pausa Hushfeed");
-        table.put("Pause runtime changes after restarting TikTok. Your settings stay saved. Changes built into the APK remain.",
-                "Sospendi le modifiche applicate durante l'esecuzione dopo il riavvio di TikTok. Le impostazioni restano salvate. Le modifiche integrate nell'APK rimangono.");
+        table.put("Pause Hushfeed's switches after TikTok restarts. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "Sospendi gli interruttori di Hushfeed dopo il riavvio di TikTok. Le impostazioni restano salvate. Le modifiche fatte con la patch, come il nome o l'icona dell'app, restano.");
         table.put("Paused",
                 "In pausa");
         table.put("Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.",
@@ -21156,14 +21156,14 @@ public final class L10nTranslations {
                 "O Hushfeed está pausado");
         table.put("Hushfeed is paused. Ghost mode isn't active.",
                 "O Hushfeed está pausado. O modo fantasma não está ativo.");
-        table.put("Hushfeed runtime changes are paused. Your settings stay saved. Changes built into the APK remain.",
-                "As alterações do Hushfeed aplicadas durante a execução estão pausadas. Suas configurações continuam salvas. As alterações incorporadas ao APK permanecem.");
         table.put("Hushfeed turns back on when TikTok restarts.",
                 "O Hushfeed volta a funcionar quando o TikTok reiniciar.");
         table.put("Hushfeed's downloader doesn't fill this in, so it's kept as typed: %1$s",
                 "O downloader do Hushfeed não preenche isto, então fica como foi digitado: %1$s");
         table.put("Hushfeed's downloader: %1$s",
                 "Baixador do Hushfeed: %1$s");
+        table.put("Hushfeed's switches are paused. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "As chaves do Hushfeed estão pausadas. Suas configurações continuam salvas. As alterações feitas ao aplicar o patch, como o nome ou o ícone do app, permanecem.");
     }
 
     private static void fillPt_rBR13(Map<String, String> table) {
@@ -21755,8 +21755,8 @@ public final class L10nTranslations {
                 "Pausar");
         table.put("Pause Hushfeed",
                 "Pausar o Hushfeed");
-        table.put("Pause runtime changes after restarting TikTok. Your settings stay saved. Changes built into the APK remain.",
-                "Pausa as alterações aplicadas durante a execução após reiniciar o TikTok. Suas configurações continuam salvas. As alterações incorporadas ao APK permanecem.");
+        table.put("Pause Hushfeed's switches after TikTok restarts. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "Pausa as chaves do Hushfeed após reiniciar o TikTok. Suas configurações continuam salvas. As alterações feitas ao aplicar o patch, como o nome ou o ícone do app, permanecem.");
         table.put("Paused",
                 "Pausado");
         table.put("Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.",
@@ -25306,17 +25306,17 @@ public final class L10nTranslations {
                 "Hushfeed на паузе");
         table.put("Hushfeed is paused. Ghost mode isn't active.",
                 "Hushfeed на паузе. Режим призрака не активен.");
-        table.put("Hushfeed runtime changes are paused. Your settings stay saved. Changes built into the APK remain.",
-                "Изменения Hushfeed, применяемые во время работы приложения, приостановлены. Ваши настройки сохранены. Изменения, встроенные в APK, остаются.");
+        table.put("Hushfeed turns back on when TikTok restarts.",
+                "Hushfeed снова включится при перезапуске TikTok.");
     }
 
     private static void fillRu15(Map<String, String> table) {
-        table.put("Hushfeed turns back on when TikTok restarts.",
-                "Hushfeed снова включится при перезапуске TikTok.");
         table.put("Hushfeed's downloader doesn't fill this in, so it's kept as typed: %1$s",
                 "Загрузчик Hushfeed это не подставляет, поэтому оно остаётся как введено: %1$s");
         table.put("Hushfeed's downloader: %1$s",
                 "Загрузчик Hushfeed: %1$s");
+        table.put("Hushfeed's switches are paused. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "Переключатели Hushfeed приостановлены. Ваши настройки сохранены. Изменения, сделанные при патчинге, например название или значок приложения, остаются.");
         table.put("If that name is taken, Android adds a number to the new file.",
                 "Если такое имя уже занято, Android добавит к новому файлу номер.");
         table.put("If that name is taken, Hushfeed adds a number to the new file.",
@@ -25911,8 +25911,8 @@ public final class L10nTranslations {
                 "Пауза");
         table.put("Pause Hushfeed",
                 "Поставить Hushfeed на паузу");
-        table.put("Pause runtime changes after restarting TikTok. Your settings stay saved. Changes built into the APK remain.",
-                "Приостановить изменения во время работы приложения после перезапуска TikTok. Ваши настройки сохранятся. Изменения, встроенные в APK, останутся.");
+        table.put("Pause Hushfeed's switches after TikTok restarts. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "Приостановить переключатели Hushfeed после перезапуска TikTok. Ваши настройки сохранятся. Изменения, сделанные при патчинге, например название или значок приложения, останутся.");
         table.put("Paused",
                 "На паузе");
         table.put("Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.",
@@ -29294,14 +29294,14 @@ public final class L10nTranslations {
                 "Hushfeed duraklatıldı");
         table.put("Hushfeed is paused. Ghost mode isn't active.",
                 "Hushfeed duraklatıldı. Hayalet modu etkin değil.");
-        table.put("Hushfeed runtime changes are paused. Your settings stay saved. Changes built into the APK remain.",
-                "Hushfeed'in çalışma sırasında uyguladığı değişiklikler duraklatıldı. Ayarların kayıtlı kalır. APK'ya işlenmiş değişiklikler kalır.");
         table.put("Hushfeed turns back on when TikTok restarts.",
                 "Hushfeed, TikTok yeniden başladığında tekrar açılır.");
         table.put("Hushfeed's downloader doesn't fill this in, so it's kept as typed: %1$s",
                 "Hushfeed'in indiricisi bunu doldurmaz, bu yüzden yazdığın gibi kalır: %1$s");
         table.put("Hushfeed's downloader: %1$s",
                 "Hushfeed indiricisi: %1$s");
+        table.put("Hushfeed's switches are paused. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "Hushfeed'in anahtarları duraklatıldı. Ayarların kayıtlı kalır. Yamalarken yapılan değişiklikler, uygulamanın adı ya da simgesi gibi, kalır.");
     }
 
     private static void fillTr13(Map<String, String> table) {
@@ -29893,8 +29893,8 @@ public final class L10nTranslations {
                 "Duraklat");
         table.put("Pause Hushfeed",
                 "Hushfeed'i duraklat");
-        table.put("Pause runtime changes after restarting TikTok. Your settings stay saved. Changes built into the APK remain.",
-                "TikTok'u yeniden başlattıktan sonra çalışma sırasında uygulanan değişiklikleri duraklat. Ayarların kayıtlı kalır. APK'ya işlenmiş değişiklikler kalır.");
+        table.put("Pause Hushfeed's switches after TikTok restarts. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.",
+                "TikTok'u yeniden başlattıktan sonra Hushfeed'in anahtarlarını duraklat. Ayarların kayıtlı kalır. Yamalarken yapılan değişiklikler, uygulamanın adı ya da simgesi gibi, kalır.");
         table.put("Paused",
                 "Duraklatıldı");
         table.put("Pauses the video behind the comment sheet while you read. It plays on from the same spot when the sheet closes.",

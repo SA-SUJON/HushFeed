@@ -1317,12 +1317,12 @@ TikTok refused the follow with code %1$s	O TikTok recusou o seguir com o código
 TikTok refused the follow with code %1$s. A hidden CAPTCHA may be the cause.	O TikTok recusou o seguir com o código %1$s. Talvez a causa seja um CAPTCHA escondido.
 TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.	O TikTok recusou o seguir: %1$s Talvez a causa seja um CAPTCHA escondido.
 Hushfeed is paused	O Hushfeed está pausado
-Hushfeed runtime changes are paused. Your settings stay saved. Changes built into the APK remain.	As alterações do Hushfeed aplicadas durante a execução estão pausadas. Suas configurações continuam salvas. As alterações incorporadas ao APK permanecem.
+Hushfeed's switches are paused. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.	As chaves do Hushfeed estão pausadas. Suas configurações continuam salvas. As alterações feitas ao aplicar o patch, como o nome ou o ícone do app, permanecem.
 TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are.	O TikTok fechou três vezes no primeiro minuto depois de abrir, então o Hushfeed se pausou sozinho. Suas configurações continuam como estão.
 A file named hushfeed-safe-mode in TikTok's folder under Android/data paused Hushfeed. Your settings stay as they are.	Um arquivo chamado hushfeed-safe-mode na pasta do TikTok em Android/data pausou o Hushfeed. Suas configurações continuam como estão.
 Turn Hushfeed back on	Ativar o Hushfeed de novo
 Pause Hushfeed	Pausar o Hushfeed
-Pause runtime changes after restarting TikTok. Your settings stay saved. Changes built into the APK remain.	Pausa as alterações aplicadas durante a execução após reiniciar o TikTok. Suas configurações continuam salvas. As alterações incorporadas ao APK permanecem.
+Pause Hushfeed's switches after TikTok restarts. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.	Pausa as chaves do Hushfeed após reiniciar o TikTok. Suas configurações continuam salvas. As alterações feitas ao aplicar o patch, como o nome ou o ícone do app, permanecem.
 Hushfeed turns back on when TikTok restarts.	O Hushfeed volta a funcionar quando o TikTok reiniciar.
 The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.	Não foi possível remover o arquivo hushfeed-safe-mode. Apague-o da pasta do TikTok em Android/data para ativar o Hushfeed de novo.
 Hide TikTok Shop in search	Esconder o TikTok Shop na busca

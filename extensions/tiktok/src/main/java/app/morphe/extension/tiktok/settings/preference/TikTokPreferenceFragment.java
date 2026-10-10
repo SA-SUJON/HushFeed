@@ -66,7 +66,7 @@ import app.morphe.extension.tiktok.wellbeing.SessionLockOverlay;
 @SuppressWarnings("deprecation")
 public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     private static final String FEATURE_GATE_LAB_KEY = "action_feature_gate_lab";
-    private static final String PAUSE_SUMMARY = "Pause runtime changes after restarting TikTok. Your settings stay saved. Changes built into the APK remain.";
+    private static final String PAUSE_SUMMARY = "Pause Hushfeed's switches after TikTok restarts. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.";
     /** A switch from a patch left unticked in the Manager is on no page and in no index, and
      *  nothing else on the screen says so (#29 looked for Fill without its patch). */
     private static final String NO_MATCHES_SUMMARY = "Try a different word or clear the search. "

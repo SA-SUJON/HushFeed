@@ -1317,12 +1317,12 @@ TikTok refused the follow with code %1$s	TikTok takibi %1$s koduyla reddetti
 TikTok refused the follow with code %1$s. A hidden CAPTCHA may be the cause.	TikTok takibi %1$s koduyla reddetti. Nedeni gizlenmiş bir CAPTCHA olabilir.
 TikTok refused the follow: %1$s A hidden CAPTCHA may be the cause.	TikTok takibi reddetti: %1$s Nedeni gizlenmiş bir CAPTCHA olabilir.
 Hushfeed is paused	Hushfeed duraklatıldı
-Hushfeed runtime changes are paused. Your settings stay saved. Changes built into the APK remain.	Hushfeed'in çalışma sırasında uyguladığı değişiklikler duraklatıldı. Ayarların kayıtlı kalır. APK'ya işlenmiş değişiklikler kalır.
+Hushfeed's switches are paused. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.	Hushfeed'in anahtarları duraklatıldı. Ayarların kayıtlı kalır. Yamalarken yapılan değişiklikler, uygulamanın adı ya da simgesi gibi, kalır.
 TikTok closed three times within a minute of starting, so Hushfeed paused itself. Your settings stay as they are.	TikTok açıldıktan sonraki bir dakika içinde üç kez kapandı, bu yüzden Hushfeed kendini duraklattı. Ayarların olduğu gibi kalır.
 A file named hushfeed-safe-mode in TikTok's folder under Android/data paused Hushfeed. Your settings stay as they are.	Android/data altındaki TikTok klasöründe bulunan hushfeed-safe-mode adlı bir dosya Hushfeed'i duraklattı. Ayarların olduğu gibi kalır.
 Turn Hushfeed back on	Hushfeed'i yeniden aç
 Pause Hushfeed	Hushfeed'i duraklat
-Pause runtime changes after restarting TikTok. Your settings stay saved. Changes built into the APK remain.	TikTok'u yeniden başlattıktan sonra çalışma sırasında uygulanan değişiklikleri duraklat. Ayarların kayıtlı kalır. APK'ya işlenmiş değişiklikler kalır.
+Pause Hushfeed's switches after TikTok restarts. Your settings stay saved. Changes made when you patched, like the app's name or icon, stay.	TikTok'u yeniden başlattıktan sonra Hushfeed'in anahtarlarını duraklat. Ayarların kayıtlı kalır. Yamalarken yapılan değişiklikler, uygulamanın adı ya da simgesi gibi, kalır.
 Hushfeed turns back on when TikTok restarts.	Hushfeed, TikTok yeniden başladığında tekrar açılır.
 The file hushfeed-safe-mode couldn't be removed. Delete it from TikTok's folder under Android/data to turn Hushfeed back on.	hushfeed-safe-mode dosyası kaldırılamadı. Hushfeed'i yeniden açmak için onu Android/data altındaki TikTok klasöründen sil.
 Hide TikTok Shop in search	Aramada TikTok Shop'u gizle
