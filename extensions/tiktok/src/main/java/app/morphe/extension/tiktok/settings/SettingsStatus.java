@@ -137,6 +137,9 @@ public class SettingsStatus {
     public static boolean followStatusEnabled = false;
     public static boolean copyIdsEnabled = false;
     public static boolean hideFeedLiveButtonEnabled = false;
+    /** The side menu half of Hide feed LIVE button, which a build other than the declared one
+     *  can leave out while the LIVE half still applies. */
+    public static boolean hideFeedSidebarButtonEnabled = false;
     public static boolean hideFeedSearchButtonEnabled = false;
     public static boolean showSeekbarEnabled = false;
     public static boolean sanitizeShareUrlsEnabled = false;
@@ -503,6 +506,10 @@ public class SettingsStatus {
 
     public static void enableHideFeedLiveButton() {
         hideFeedLiveButtonEnabled = true;
+    }
+
+    public static void enableHideFeedSidebarButton() {
+        hideFeedSidebarButtonEnabled = true;
     }
 
     public static void enableHideFeedSearchButton() {

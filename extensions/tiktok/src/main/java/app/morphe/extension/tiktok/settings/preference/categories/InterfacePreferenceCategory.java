@@ -50,6 +50,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
                 || SettingsStatus.authorRegionEnabled
                 || SettingsStatus.engagementRateEnabled
                 || SettingsStatus.hideFeedLiveButtonEnabled
+                || SettingsStatus.hideFeedSidebarButtonEnabled
                 || SettingsStatus.hideFeedSearchButtonEnabled
                 || SettingsStatus.feedFilterEnabled
                 || SettingsStatus.promotionalBannersEnabled
@@ -297,6 +298,7 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
     private void addAroundTheVideo(Context context) {
         boolean any = SettingsStatus.videoOverlaysEnabled
                 || SettingsStatus.hideFeedLiveButtonEnabled
+                || SettingsStatus.hideFeedSidebarButtonEnabled
                 || SettingsStatus.hideFeedSearchButtonEnabled
                 || SettingsStatus.feedFilterEnabled;
         if (!any) return;
@@ -311,7 +313,8 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
         }
         // TikTok builds the side menu button in code with no view id, so only the LIVE patch's
         // toolbar check can take it away; the video overlay hider has nothing to find it by.
-        if (SettingsStatus.hideFeedLiveButtonEnabled) {
+        // A build the patch doesn't declare can leave that check out, so the row has its flag.
+        if (SettingsStatus.hideFeedSidebarButtonEnabled) {
             addPreference(new TogglePreference(
                     context,
                     "Hide the side menu button",
