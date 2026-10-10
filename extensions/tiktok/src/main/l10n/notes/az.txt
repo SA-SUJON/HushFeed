@@ -1,6 +1,6 @@
 ## Unreleased
 
-* **TikTok:** Video idarəetmələrini solğunlaşdır indi Təmiz ekranla da işləyir. 100-dən aşağı olanda Təmiz ekran düymələri və başlığı götürmək əvəzinə seçdiyiniz səviyyədə ekranda saxlayır, onlara toxunuş isə videoya gedir, buna görə heç nə təsadüfən açılmır. Basıb saxlamaq və ya çimdik jesti sizi yenə Təmiz ekrandan çıxarır, ondan kənarda isə solğunlaşdırılmış idarəetmələr əvvəlki kimi toxunuşları qəbul edir (#84).
+* **TikTok:** Video idarəetmələrini solğunlaşdır indi Təmiz ekranla da işləyir. 1 ilə 99 arasında olanda Təmiz ekran düymələri və başlığı götürmək əvəzinə seçdiyiniz səviyyədə ekranda saxlayır, onlara toxunuş isə videoya gedir, buna görə heç nə təsadüfən açılmır. Basıb saxlamaq və ya çimdik jesti sizi yenə Təmiz ekrandan çıxarır, ondan kənarda isə solğunlaşdırılmış idarəetmələr əvvəlki kimi toxunuşları qəbul edir (#84).
 
 * **TikTok:** Lent videolarını səssiz edin indi TikTok-u açıq və tünd arasında dəyişdikdən sonra da lenti səssiz saxlayır. Əvvəllər lentdən çıxıb geri qayıdana qədər növbəti videolar səslə oynaya bilirdi.
 

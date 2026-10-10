@@ -1,6 +1,6 @@
 ## Unreleased
 
-* **TikTok:** Video kontrollerini soluklaştır artık Temiz ekranla da çalışıyor. 100'ün altında Temiz ekran, düğmeleri ve açıklamayı kaldırmak yerine seçtiğin seviyede ekranda tutuyor ve onlara dokunmak videoya gidiyor, böylece hiçbir şey yanlışlıkla açılmıyor. Basılı tutmak ya da iki parmağını birbirine yaklaştırmak seni yine Temiz ekrandan çıkarıyor, onun dışında soluk kontroller eskisi gibi dokunuşları alıyor (#84).
+* **TikTok:** Video kontrollerini soluklaştır artık Temiz ekranla da çalışıyor. 1 ile 99 arasında Temiz ekran, düğmeleri ve açıklamayı kaldırmak yerine seçtiğin seviyede ekranda tutuyor ve onlara dokunmak videoya gidiyor, böylece hiçbir şey yanlışlıkla açılmıyor. Basılı tutmak ya da iki parmağını birbirine yaklaştırmak seni yine Temiz ekrandan çıkarıyor, onun dışında soluk kontroller eskisi gibi dokunuşları alıyor (#84).
 
 * **TikTok:** Akış videolarının sesini kapat, TikTok'u açık ve koyu arasında değiştirdikten sonra da akışı sessiz tutuyor. Önceden, akıştan çıkıp geri dönene kadar sonraki videolar sesli oynayabiliyordu.
 
