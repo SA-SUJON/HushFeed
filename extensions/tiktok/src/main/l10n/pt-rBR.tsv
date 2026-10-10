@@ -21,7 +21,7 @@ Translate into	Traduzir para
 Type one language code here, like en.	Digite aqui um código de idioma, como en.
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Use a exportação JSON do TikTok desta conta, com até %1$s MB e %2$s entradas. Datas sem fuso horário usam o fuso deste telefone.
 Sign in to TikTok before importing watch history.	Entre no TikTok antes de importar o histórico de visualização.
-When TikTok starts and decides the phone's language changed, it drops the language you picked in its settings and follows the phone. With this on, your pick stays. Counts from TikTok's next start.	Quando o TikTok abre e decide que o idioma do celular mudou, ele descarta o idioma que você escolheu nas configurações dele e segue o celular. Com isto ligado, sua escolha fica. Vale a partir da próxima abertura do TikTok.
+When TikTok starts and decides the phone's language changed, it forgets the language you picked in its settings and follows the phone. With this on, your pick stays. Counts from TikTok's next start.	Quando o TikTok abre e decide que o idioma do celular mudou, ele descarta o idioma que você escolheu nas configurações dele e segue o celular. Com isto ligado, sua escolha fica. Vale a partir da próxima abertura do TikTok.
 Write the username and caption on the video	Escrever o nome de usuário e a legenda no vídeo
 Writing the caption on the video	Escrevendo a legenda no vídeo
 Writing the caption on the video: %1$s	Escrevendo a legenda no vídeo: %1$s

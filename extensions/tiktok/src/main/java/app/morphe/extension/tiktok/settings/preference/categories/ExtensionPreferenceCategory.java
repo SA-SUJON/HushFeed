@@ -340,7 +340,7 @@ public class ExtensionPreferenceCategory extends ConditionalPreferenceCategory {
             addPreference(new TogglePreference(
                     context,
                     "Keep the language picked in TikTok",
-                    "When TikTok starts and decides the phone's language changed, it drops the "
+                    "When TikTok starts and decides the phone's language changed, it forgets the "
                             + "language you picked in its settings and follows the phone. With this "
                             + "on, your pick stays. Counts from TikTok's next start.",
                     Settings.KEEP_APP_LANGUAGE

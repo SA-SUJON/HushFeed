@@ -21,7 +21,7 @@ Translate into	Şu dile çevir
 Type one language code here, like en.	Buraya tek bir dil kodu yaz, örneğin en.
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Bu hesabın en fazla %1$s MB ve %2$s kayıt içeren TikTok JSON dışa aktarımını kullanın. Saat dilimi olmayan tarihler için bu telefonun saat dilimi kullanılır.
 Sign in to TikTok before importing watch history.	İzleme geçmişini içe aktarmadan önce TikTok'a giriş yapın.
-When TikTok starts and decides the phone's language changed, it drops the language you picked in its settings and follows the phone. With this on, your pick stays. Counts from TikTok's next start.	TikTok açılırken telefonun dilinin değiştiğine karar verirse, ayarlarında seçtiğin dili bırakır ve telefona uyar. Bu açıkken seçimin kalır. TikTok'un bir sonraki açılışından itibaren geçerlidir.
+When TikTok starts and decides the phone's language changed, it forgets the language you picked in its settings and follows the phone. With this on, your pick stays. Counts from TikTok's next start.	TikTok açılırken telefonun dilinin değiştiğine karar verirse, ayarlarında seçtiğin dili bırakır ve telefona uyar. Bu açıkken seçimin kalır. TikTok'un bir sonraki açılışından itibaren geçerlidir.
 Write the username and caption on the video	Kullanıcı adını ve açıklamayı videonun üzerine yaz
 Writing the caption on the video	Açıklama videonun üzerine yazılıyor
 Writing the caption on the video: %1$s	Açıklama videonun üzerine yazılıyor: %1$s
