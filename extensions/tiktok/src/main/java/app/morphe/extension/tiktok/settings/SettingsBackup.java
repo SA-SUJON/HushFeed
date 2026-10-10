@@ -232,7 +232,7 @@ public final class SettingsBackup {
             String text = create(true);
             Snapshot next;
             try {
-                next = parse(text);
+                next = parseDefaults(text);
             } catch (Exception error) {
                 throw RestoreException.rejected(error);
             }
@@ -496,12 +496,20 @@ public final class SettingsBackup {
     }
 
     /**
-     * A file from outside: an import, or the defaults a reset writes. Its feed rule lists are
-     * held to the limits a save enforces, so a hand-edited or foreign file can't load more than
-     * the filter can keep.
+     * A file from outside, an import. Its feed rule lists are held to the limits a save enforces,
+     * so a hand-edited or foreign file can't load more than the filter can keep, and its network
+     * proxy to {@link #keepTheProxyWhereTheDeviceHasIt}.
      */
     private static Snapshot parse(String text) throws JSONException, IOException {
         return decode(text, true);
+    }
+
+    /**
+     * The defaults a reset writes: held to the rule-list limits like a file, but not to the proxy
+     * guard, since putting the proxy back to its default is what a reset was asked to do.
+     */
+    private static Snapshot parseDefaults(String text) throws JSONException, IOException {
+        return decode(text, true, false);
     }
 
     /**
@@ -601,6 +609,12 @@ public final class SettingsBackup {
     }
 
     private static Snapshot decode(String text, boolean holdRuleLists) throws JSONException, IOException {
+        return decode(text, holdRuleLists, holdRuleLists);
+    }
+
+    /** With pickedFile, a file someone chose, whose network proxy is held back. */
+    private static Snapshot decode(String text, boolean holdRuleLists, boolean pickedFile)
+            throws JSONException, IOException {
         if (text == null || text.getBytes(StandardCharsets.UTF_8).length > MAX_BYTES) {
             throw new RejectedBackup(Reason.SIZE, "Invalid backup size");
         }
@@ -692,7 +706,7 @@ public final class SettingsBackup {
             updates.put(setting, setting.savedValue());
             absent++;
         }
-        ProxyHold proxyHold = holdRuleLists ? keepTheProxyWhereTheDeviceHasIt(updates) : ProxyHold.NONE;
+        ProxyHold proxyHold = pickedFile ? keepTheProxyWhereTheDeviceHasIt(updates) : ProxyHold.NONE;
         if (!holdRuleLists && root.has("local_budget_pending")) {
             Object pending = root.get("local_budget_pending");
             if (!(pending instanceof String)) throw new IOException("Invalid delayed budget journal");
