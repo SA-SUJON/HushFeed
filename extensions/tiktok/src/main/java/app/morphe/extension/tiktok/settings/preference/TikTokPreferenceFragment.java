@@ -982,6 +982,18 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         }
     }
 
+    /** Set by tests, which see Utils' empty release version and so never a pending What's new. */
+    private static volatile String releaseVersionForTests;
+
+    public static void setReleaseVersionForTests(String version) {
+        releaseVersionForTests = version;
+    }
+
+    private static String releaseVersion() {
+        String forTests = releaseVersionForTests;
+        return forTests != null ? forTests : Utils.getPatchesReleaseVersion();
+    }
+
     private List<SearchResult> buildSearchIndex(Context context, boolean featureGateLabInstalled) {
         List<SearchResult> results = new ArrayList<>();
         PreferenceScreen scratch = getPreferenceManager().createPreferenceScreen(context);
@@ -1048,7 +1060,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
                 "version"
         ));
         // What's new is on About Hushfeed only until its notes are read, and so is its result.
-        String releaseVersion = Utils.getPatchesReleaseVersion();
+        String releaseVersion = releaseVersion();
         if (ReleaseNotes.pending(context, releaseVersion)) {
             results.add(new SearchResult(
                     null,
@@ -1327,7 +1339,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
     }
 
     private void addReleaseNotes(Context context, PreferenceScreen screen) {
-        String releaseVersion = Utils.getPatchesReleaseVersion();
+        String releaseVersion = releaseVersion();
         if (!ReleaseNotes.pending(context, releaseVersion)) return;
         SettingsMenuPreference notes = new SettingsMenuPreference(context, "What's new",
                 L10n.f(context, "Changes in Hushfeed %1$s", ReleaseNotes.rowVersion(context, releaseVersion)),
