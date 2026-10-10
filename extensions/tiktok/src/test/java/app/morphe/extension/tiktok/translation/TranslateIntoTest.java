@@ -75,6 +75,10 @@ public class TranslateIntoTest {
         assertEquals("de", TranslateInto.target("de"));
         Settings.TRANSLATE_INTO.save("Spanish");
         assertEquals("de", TranslateInto.target("de"));
+        Settings.TRANSLATE_INTO.save("abc");
+        assertEquals("three letters that name no language", "de", TranslateInto.target("de"));
+        Settings.TRANSLATE_INTO.save("fil");
+        assertEquals("three letters for a language with no two", "fil", TranslateInto.target("de"));
     }
 
     @Test
@@ -97,6 +101,8 @@ public class TranslateIntoTest {
         assertNotNull(word);
         assertTrue(word, word.contains("Spanish"));
         assertNotNull("two letters that name no language", TranslateInto.languageProblem("xx"));
+        assertNotNull("three letters that name no language", TranslateInto.languageProblem("abc"));
+        assertNull(TranslateInto.languageProblem("fil"));
     }
 
     /** The row shows only where the patch hooked the service's answer, on the Comments page. */

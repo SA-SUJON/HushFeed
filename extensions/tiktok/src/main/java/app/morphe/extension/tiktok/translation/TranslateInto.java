@@ -56,11 +56,17 @@ public final class TranslateInto {
         if (value == null || value.trim().isEmpty()) return null;
         String primary = CaptionLanguageFilter.primary(value);
         if (primary == null) return null;
-        // Two letters are checked against the language list; three are only the ones without
-        // two (fil), which the list doesn't hold.
-        if (primary.length() == 2 && !TWO_LETTER.contains(primary)) return null;
+        // Two letters are checked against the language list. Three are left only for languages
+        // without two (fil), which the list doesn't hold, so they need a name the phone knows.
+        if (primary.length() == 2 ? !TWO_LETTER.contains(primary) : !named(primary)) return null;
         if (primary.equals("zh")) return DoNotAutoTranslate.traditional(value) ? "zh-Hant" : "zh-Hans";
         return primary;
+    }
+
+    /** Whether the phone has a name for the language {@code code}; it hands an unknown code back as its name. */
+    private static boolean named(String code) {
+        String name = new Locale(code).getDisplayLanguage(Locale.ENGLISH);
+        return !name.isEmpty() && !name.equalsIgnoreCase(code);
     }
 
     /** What is wrong with the typed language, for the row to say before it saves, or null. */
