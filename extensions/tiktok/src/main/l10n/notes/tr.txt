@@ -1,6 +1,8 @@
 ## Unreleased
 
-* **TikTok:** Bu dilleri otomatik çevirme artık zh-Hant, zh-TW, zh-HK veya zh-MO yazdığında Geleneksel Çince'yi yazıldığı gibi bırakıyor. Önceden bu girişler bunun yerine Basitleştirilmiş Çince'yi koruyordu (#121).
+* **TikTok:** Bir yedeği geri yüklemek artık Ağ proxy'sini açmıyor ya da zaten açık olanı değiştirmiyor, böylece başkasının hazırladığı bir yedek TikTok trafiğini kendi sunucusundan geçiremez. Proxy adresi kapalıyken yine de geliyor, bu yüzden yeni telefona geçtikten sonra anahtarı kendin yeniden aç.
+
+* **TikTok:** Bu dilleri otomatik çevirme artık zh-Hant, zh-TW, zh-HK veya zh-MO yazdığında Geleneksel Çince'yi yazıldığı gibi bırakıyor, zh-Hans-TW ise yine Basitleştirilmiş Çince anlamına geliyor. Önceden bu girişler bunun yerine Basitleştirilmiş Çince'yi koruyordu (#121).
 
 * **TikTok:** Hide feed LIVE button artık yan menü düğmesinin bulunamadığı bir TikTok sürümüne de uygulanıyor. O kısım atlanıyor ve Yan menü düğmesini gizle satırı yalnızca düğme bulunduysa görünüyor (#128).
 
@@ -15,6 +17,8 @@
 * **TikTok:** Derleme ayrıntılarını kopyalama başarısız olursa, mesaj artık Derleme ayrıntılarını kaydet seçeneğini kullanmanı söylüyor.
 
 * **TikTok:** Yenilikler artık ayar adlarının etrafında fazladan ters tırnak göstermiyor.
+
+* **TikTok:** Bir seriyi sürdür altındaki Ne zaman gönderilsin için saat seçici artık Hushfeed ayarlarına uyarak koyu ya da açık açılıyor.
 
 ## 0.70.0 (2026-10-09)
 

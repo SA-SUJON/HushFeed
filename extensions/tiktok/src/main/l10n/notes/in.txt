@@ -1,6 +1,8 @@
 ## Unreleased
 
-* **TikTok:** Jangan terjemahkan otomatis bahasa ini sekarang membiarkan bahasa Mandarin Tradisional seperti aslinya saat kamu mengetik zh-Hant, zh-TW, zh-HK, atau zh-MO. Sebelumnya, entri itu malah melindungi bahasa Mandarin Sederhana (#121).
+* **TikTok:** Memulihkan cadangan tidak lagi menyalakan Proksi jaringan atau mengubah proksi yang sudah menyala, jadi cadangan buatan orang lain tidak bisa mengalirkan lalu lintas TikTok-mu lewat server mereka. Alamat proksi tetap ikut selama proksinya mati, jadi setelah pindah ke ponsel baru, nyalakan lagi sakelarnya sendiri.
+
+* **TikTok:** Jangan terjemahkan otomatis bahasa ini sekarang membiarkan bahasa Mandarin Tradisional seperti aslinya saat kamu mengetik zh-Hant, zh-TW, zh-HK, atau zh-MO, sedangkan zh-Hans-TW tetap berarti Mandarin Sederhana. Sebelumnya, entri itu malah melindungi bahasa Mandarin Sederhana (#121).
 
 * **TikTok:** Hide feed LIVE button sekarang tetap bisa di-patch pada build TikTok yang tombol menu sampingnya tidak ditemukan. Bagian itu dilewati, dan baris Sembunyikan tombol menu samping hanya muncul kalau tombolnya ditemukan (#128).
 
@@ -15,6 +17,8 @@
 * **TikTok:** Kalau menyalin detail build gagal, pesannya sekarang menyuruhmu memakai Simpan detail build.
 
 * **TikTok:** Yang baru tidak lagi menampilkan tanda backtick yang tersisa di sekitar nama setelan.
+
+* **TikTok:** Pemilih waktu untuk Kapan dikirim di Pertahankan rentetan sekarang terbuka gelap atau terang sesuai setelan Hushfeed.
 
 ## 0.70.0 (2026-10-09)
 

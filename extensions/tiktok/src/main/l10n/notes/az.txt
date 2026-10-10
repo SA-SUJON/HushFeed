@@ -1,6 +1,8 @@
 ## Unreleased
 
-* **TikTok:** Bu dilləri avtomatik tərcümə etməyin indi zh-Hant, zh-TW, zh-HK və ya zh-MO yazanda ənənəvi Çin dilini yazıldığı kimi saxlayır. Əvvəllər bu girişlər bunun əvəzinə sadələşdirilmiş Çin dilini qoruyurdu (#121).
+* **TikTok:** Ehtiyat nüsxəni bərpa etmək artıq Şəbəkə proksisini açmır və ya artıq açıq olanı dəyişmir, ona görə də başqasının hazırladığı ehtiyat nüsxə TikTok trafikinizi onun serverindən keçirə bilməz. Proksinin ünvanı söndürülü olanda yenə də gəlir, buna görə yeni telefona keçəndən sonra açarı özünüz yenidən açın.
+
+* **TikTok:** Bu dilləri avtomatik tərcümə etməyin indi zh-Hant, zh-TW, zh-HK və ya zh-MO yazanda ənənəvi Çin dilini yazıldığı kimi saxlayır, zh-Hans-TW isə yenə sadələşdirilmiş Çin dili deməkdir. Əvvəllər bu girişlər bunun əvəzinə sadələşdirilmiş Çin dilini qoruyurdu (#121).
 
 * **TikTok:** Hide feed LIVE button indi yan menyu düyməsinin tapılmadığı TikTok versiyasına da tətbiq olunur. O hissə ötürülür, Yan menyu düyməsini gizlədin sətri isə yalnız düymə tapılanda görünür (#128).
 
@@ -15,6 +17,8 @@
 * **TikTok:** Build təfərrüatlarını kopyalamaq alınmasa, mesaj indi Build təfərrüatlarını saxlayın seçimindən istifadə etməyi deyir.
 
 * **TikTok:** Yeniliklər daha ayar adlarının ətrafında lazımsız tərs dırnaq işarələri göstərmir.
+
+* **TikTok:** Seriyanı davam etdirin bölməsindəki Nə vaxt göndərilsin üçün vaxt seçicisi indi Hushfeed ayarlarına uyğun olaraq tünd və ya açıq açılır.
 
 ## 0.70.0 (2026-10-09)
 

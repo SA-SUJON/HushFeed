@@ -1,6 +1,8 @@
 ## Unreleased
 
-* **TikTok:** Não traduzir automaticamente estes idiomas agora deixa o chinês tradicional como foi escrito quando você digita zh-Hant, zh-TW, zh-HK ou zh-MO. Antes, essas entradas protegiam o chinês simplificado no lugar dele (#121).
+* **TikTok:** Restaurar um backup não liga mais o Proxy de rede nem muda um que já esteja ligado, então um backup feito por outra pessoa não consegue mandar seu tráfego do TikTok pelo servidor dela. O endereço do proxy continua vindo junto enquanto ele está desligado, então depois de trocar de celular, ligue a chave de novo você mesmo.
+
+* **TikTok:** Não traduzir automaticamente estes idiomas agora deixa o chinês tradicional como foi escrito quando você digita zh-Hant, zh-TW, zh-HK ou zh-MO, enquanto zh-Hans-TW continua sendo chinês simplificado. Antes, essas entradas protegiam o chinês simplificado no lugar dele (#121).
 
 * **TikTok:** Hide feed LIVE button agora também é aplicado numa versão do TikTok em que o botão do menu lateral não é encontrado. Essa parte é pulada, e a linha Esconder o botão do menu lateral só aparece quando o botão foi encontrado (#128).
 
@@ -15,6 +17,8 @@
 * **TikTok:** Se copiar os detalhes da compilação falhar, a mensagem agora diz para usar Salvar detalhes da compilação.
 
 * **TikTok:** Novidades não mostra mais crases soltas em volta dos nomes das configurações.
+
+* **TikTok:** O seletor de horário de Quando enviar em Manter uma sequência agora abre escuro ou claro, igual às configurações do Hushfeed.
 
 ## 0.70.0 (2026-10-09)
 

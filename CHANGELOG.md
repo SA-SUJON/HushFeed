@@ -4,7 +4,9 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
-* **TikTok:** Don't auto translate these languages now keeps Traditional Chinese as it was written when you type zh-Hant, zh-TW, zh-HK or zh-MO. Before, those entries protected Simplified Chinese instead (#121).
+* **TikTok:** Restoring a backup no longer turns on the Network proxy, or changes one that's already on, so a backup someone else made can't send your TikTok traffic through their server. The proxy's address still comes along while it's off, so after a move to a new phone, turn the switch back on yourself.
+
+* **TikTok:** Don't auto translate these languages now keeps Traditional Chinese as it was written when you type zh-Hant, zh-TW, zh-HK or zh-MO, while zh-Hans-TW still means Simplified. Before, those entries protected Simplified Chinese instead (#121).
 
 * **TikTok:** Hide feed LIVE button still patches on a TikTok build where the side menu button can't be found. It skips that part, and the Hide the side menu button row only shows when the button was found (#128).
 
@@ -19,6 +21,8 @@ Every Hushfeed release, newest first.
 * **TikTok:** If copying the build details fails, the message now tells you to use Save build details instead.
 
 * **TikTok:** What's new no longer shows stray backticks around setting names.
+
+* **TikTok:** The time picker for When to send in Keep a streak going now opens dark or light to match Hushfeed settings.
 
 ## 0.70.0 (2026-10-09)
 

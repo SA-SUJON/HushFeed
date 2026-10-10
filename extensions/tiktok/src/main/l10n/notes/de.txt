@@ -1,6 +1,8 @@
 ## Unreleased
 
-* **TikTok:** Diese Sprachen nicht automatisch übersetzen lässt traditionelles Chinesisch jetzt so, wie es geschrieben wurde, wenn du zh-Hant, zh-TW, zh-HK oder zh-MO eingibst. Vorher haben diese Einträge stattdessen vereinfachtes Chinesisch geschützt (#121).
+* **TikTok:** Das Wiederherstellen einer Sicherung schaltet den Netzwerk-Proxy nicht mehr ein und ändert keinen, der schon an ist, damit eine Sicherung von jemand anderem deinen TikTok-Verkehr nicht über dessen Server leiten kann. Die Adresse des Proxys kommt mit, solange er aus ist, also schalte ihn nach dem Umzug auf ein neues Handy selbst wieder ein.
+
+* **TikTok:** Diese Sprachen nicht automatisch übersetzen lässt traditionelles Chinesisch jetzt so, wie es geschrieben wurde, wenn du zh-Hant, zh-TW, zh-HK oder zh-MO eingibst, während zh-Hans-TW weiter vereinfachtes Chinesisch bedeutet. Vorher haben diese Einträge stattdessen vereinfachtes Chinesisch geschützt (#121).
 
 * **TikTok:** Hide feed LIVE button lässt sich jetzt auch auf einer TikTok-Version patchen, in der der Seitenmenü-Knopf nicht gefunden wird. Der Teil wird übersprungen, und die Zeile Seitenmenü-Knopf ausblenden erscheint nur, wenn der Knopf gefunden wurde (#128).
 
@@ -15,6 +17,8 @@
 * **TikTok:** Wenn das Kopieren der Build-Informationen fehlschlägt, sagt dir die Meldung jetzt, dass du stattdessen Build-Informationen speichern nutzen sollst.
 
 * **TikTok:** Neu in Hushfeed zeigt keine überzähligen Backticks mehr um Namen von Einstellungen.
+
+* **TikTok:** Die Zeitauswahl für Wann senden unter Eine Serie am Laufen halten öffnet sich jetzt dunkel oder hell, passend zu den Hushfeed-Einstellungen.
 
 ## 0.70.0 (2026-10-09)
 
