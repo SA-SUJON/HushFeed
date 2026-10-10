@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Hushfeed ayarları üçün Ana səhifəni uzun basın TikTok-u açıq və tünd görünüş arasında dəyişdikdən sonra da işləyir. Əvvəllər TikTok yenidən başladılana qədər işləmirdi.
+
 * **TikTok:** Ehtiyat nüsxəni bərpa etmək artıq Şəbəkə proksisini açmır və artıq olan proksi ünvanınızı əvəz etmir, ona görə də başqasının hazırladığı ehtiyat nüsxə TikTok trafikinizi onun serverindən keçirə bilməz. Hələ proksi qurulmamış telefonda ünvan açar söndürülü halda gəlir və bərpadan sonra bu barədə qeyd göstərilir.
 
 * **TikTok:** Bu dilləri avtomatik tərcümə etməyin indi zh-Hant, zh-TW, zh-HK və ya zh-MO yazanda ənənəvi Çin dilini yazıldığı kimi saxlayır, zh-Hans-TW isə yenə sadələşdirilmiş Çin dili deməkdir. Əvvəllər bu girişlər bunun əvəzinə sadələşdirilmiş Çin dilini qoruyurdu (#121).

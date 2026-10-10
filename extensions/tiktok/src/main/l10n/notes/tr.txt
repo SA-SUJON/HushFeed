@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Hushfeed ayarları için Ana Sayfa'ya basılı tut, TikTok'u açık ve koyu tema arasında değiştirdikten sonra da çalışıyor. Önceden TikTok yeniden başlatılana kadar çalışmıyordu.
+
 * **TikTok:** Bir yedeği geri yüklemek artık Ağ proxy'sini açmıyor ya da zaten olan proxy adresini değiştirmiyor, böylece başkasının hazırladığı bir yedek TikTok trafiğini kendi sunucusundan geçiremez. Henüz proxy kurulmamış bir telefonda adres anahtar kapalı olarak geliyor ve geri yüklemeden sonra bir not bunu söylüyor.
 
 * **TikTok:** Bu dilleri otomatik çevirme artık zh-Hant, zh-TW, zh-HK veya zh-MO yazdığında Geleneksel Çince'yi yazıldığı gibi bırakıyor, zh-Hans-TW ise yine Basitleştirilmiş Çince anlamına geliyor. Önceden bu girişler bunun yerine Basitleştirilmiş Çince'yi koruyordu (#121).

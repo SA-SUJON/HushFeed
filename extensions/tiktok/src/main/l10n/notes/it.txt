@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Tieni premuto su Home per le impostazioni di Hushfeed continua a funzionare quando passi TikTok da chiaro a scuro o viceversa. Prima smetteva di funzionare finché non riavviavi TikTok.
+
 * **TikTok:** Ripristinare un backup non attiva più il Proxy di rete e non sostituisce l'indirizzo proxy che hai già, così un backup fatto da qualcun altro non può far passare il tuo traffico TikTok dal suo server. Su un telefono senza proxy configurato, l'indirizzo arriva con l'interruttore spento, e una nota dopo il ripristino lo dice.
 
 * **TikTok:** Non tradurre automaticamente queste lingue ora lascia il cinese tradizionale com'è stato scritto quando inserisci zh-Hant, zh-TW, zh-HK o zh-MO, mentre zh-Hans-TW resta cinese semplificato. Prima quelle voci proteggevano invece il cinese semplificato (#121).
