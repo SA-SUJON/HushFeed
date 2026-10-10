@@ -6,20 +6,6 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Feed screen has a new switch, Hide the side menu button, off until you turn it on. It takes away the button at the top left of the feed, next to LIVE, that opens TikTok's side menu with Your orders, TikTok Minis and more. Restart TikTok after you change it (#128).
 
-* **Project:** Added three settings design concepts with a category map and notes on search, accessibility and restart behavior. They're visual proposals for a smaller, clearer menu.
-
-* **Project:** Failed preference-test saves now retain the underlying logs and file state.
-
-* **Project:** Kept settings search and translated descriptions aligned with renamed rows, and updated their wording checks.
-
-* Documented the original 47.1.4 manifest, verified signer, SDK entry points, network security and backup rules, with a reusable sanitized inventory.
-
-* **Project:** Added measured TikTok network, CPU, background and battery observations from a physical phone, with sanitized datasets and a CPU chart. The report distinguishes the paused modified APK from an official build and records capture gaps, overlapping VPN counters and follow-up patch checks. The README now explains Pause's limits more clearly.
-
-* **Project:** Added a repeatable protocol for measuring TikTok traffic, background work and battery use, with a source map for the controls that can affect each result.
-
-* **Project:** Added app and patch development notes plus a TikTok audit covering ad routes, upstream issue evidence, tracking scope, factory onboarding, signed-in controls, and patch opportunities.
-
 * **TikTok:** Every patch description in Morphe Manager is rewritten in plain English. Each one now says what the patch changes, why you might want it, and whether its switch starts on or off and where to find it in Hushfeed settings. A few patch options read more clearly too, and Skip push setup is now called Skip notification setup.
 
 * **TikTok:** The rows in Hushfeed settings are reworded in plain English. Privacy, Comments, Downloads, Feed filter, Screen time, Region and other pages now say what each switch does and what you'll notice, without technical terms. A few titles changed too, like Stop TikTok's speed tests and Clean up shared links.
