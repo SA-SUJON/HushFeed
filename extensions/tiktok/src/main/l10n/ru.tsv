@@ -751,6 +751,8 @@ Likes range	Диапазон лайков
 Shares range	Диапазон репостов
 Use Save report for this large report	Используйте «Сохранить отчёт» для этого большого отчёта
 Video player settings	Настройки видеоплеера
+The network proxy from that file is off. Check its address before you turn it on	Сетевой прокси из этого файла выключен. Проверьте его адрес, прежде чем включать
+Your network proxy was kept, since a backup can't change it	Ваш сетевой прокси сохранён, так как резервная копия не может его менять
 Videos can't be saved to the folder in that file, so your video folder was kept	Видео нельзя сохранить в папку из этого файла, поэтому ваша папка для видео осталась прежней
 Views range	Диапазон просмотров
 Minimum	Минимум

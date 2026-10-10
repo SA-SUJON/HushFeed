@@ -1597,6 +1597,7 @@ The last report is still being saved,The last report is still being saved
 The live photo's clip couldn't be saved. Try again.,The live photo's clip couldn't be saved. Try again.
 The loaded-values file you chose couldn't be read. Try again.,The loaded-values file you chose couldn't be read. Try again.
 The message didn't go through. It tries again at %1$s.,The message didn't go through. It tries again at %1$s.
+The network proxy from that file is off. Check its address before you turn it on,The network proxy from that file is off. Check its address before you turn it on
 "The original photos aren't available, so TikTok's own save runs instead","The original photos aren't available, so TikTok's own save runs instead"
 The original photos aren't available. No video was saved.,The original photos aren't available. No video was saved.
 "The override changes no fields. Edit the field values, or reset the override.","The override changes no fields. Edit the field values, or reset the override."
@@ -1864,6 +1865,7 @@ Your TikTok account changed. Choose the file again for this account.,Your TikTok
 Your current settings already match Calm feed.,Your current settings already match Calm feed.
 Your filters hid everything TikTok just sent. Most were %1$s.,Your filters hid everything TikTok just sent. Most were %1$s.
 "Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.","Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s."
+"Your network proxy was kept, since a backup can't change it","Your network proxy was kept, since a backup can't change it"
 "Your operator's name, like T-Mobile.","Your operator's name, like T-Mobile."
 "Your operator's numeric code, like 310260.","Your operator's numeric code, like 310260."
 Your previous feed setup couldn't be restored. Nothing was changed.,Your previous feed setup couldn't be restored. Nothing was changed.

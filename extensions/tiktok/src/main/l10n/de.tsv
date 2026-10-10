@@ -691,6 +691,8 @@ Likes range	Spanne der Likes
 Shares range	Spanne der Shares
 Use Save report for this large report	Nutze für diesen großen Bericht „Bericht speichern“
 Video player settings	Einstellungen des Videoplayers
+The network proxy from that file is off. Check its address before you turn it on	Der Netzwerk-Proxy aus dieser Datei ist aus. Prüfe seine Adresse, bevor du ihn einschaltest
+Your network proxy was kept, since a backup can't change it	Dein Netzwerk-Proxy wurde behalten, weil eine Sicherung ihn nicht ändern kann
 Videos can't be saved to the folder in that file, so your video folder was kept	Im Ordner aus dieser Datei lassen sich keine Videos speichern, deshalb wurde dein Videoordner beibehalten
 Views range	Spanne der Aufrufe
 Minimum	Minimum

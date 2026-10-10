@@ -56,7 +56,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildAz() {
-        Map<String, String> table = new HashMap<>(3762);
+        Map<String, String> table = new HashMap<>(3766);
         fillAz0(table);
         fillAz1(table);
         fillAz2(table);
@@ -3367,6 +3367,8 @@ public final class L10nTranslations {
                 "Seçdiyiniz yüklənmiş dəyərlər faylı oxuna bilmədi. Yenidən cəhd edin.");
         table.put("The message didn't go through. It tries again at %1$s.",
                 "Mesaj göndərilmədi. %1$s vaxtında yenidən cəhd edəcək.");
+        table.put("The network proxy from that file is off. Check its address before you turn it on",
+                "Həmin fayldan gələn şəbəkə proksisi söndürülüb. Onu açmazdan əvvəl ünvanını yoxlayın");
         table.put("The original photos aren't available, so TikTok's own save runs instead",
                 "Orijinal fotolar əlçatan deyil, ona görə TikTok-un öz saxlaması işləyir");
         table.put("The original photos aren't available. No video was saved.",
@@ -3409,11 +3411,11 @@ public final class L10nTranslations {
                 "Ən kiçik dəyər ən böyükdən yüksəkdir");
         table.put("The sound couldn't be saved. Try again.",
                 "Səs saxlanıla bilmədi. Yenidən cəhd edin.");
-        table.put("The sticker couldn't be saved. Try again.",
-                "Stiker saxlanıla bilmədi. Yenidən cəhd edin.");
     }
 
     private static void fillAz27(Map<String, String> table) {
+        table.put("The sticker couldn't be saved. Try again.",
+                "Stiker saxlanıla bilmədi. Yenidən cəhd edin.");
         table.put("The sticker suggestion banner stops showing in a chat. Your own stickers are still in the sticker picker.",
                 "Stiker təklifi bannerı çatda göstərilməyi dayandırır. Öz stikerləriniz stiker seçicisində qalır.");
         table.put("The story couldn't be saved. Try again.",
@@ -3532,11 +3534,11 @@ public final class L10nTranslations {
                 "TikTok defoltu");
         table.put("TikTok default (hold to speed up, quick share)",
                 "TikTok defoltu (sürətləndirmək üçün basıb saxlama, sürətli paylaşma)");
-        table.put("TikTok default (open the creator's profile)",
-                "TikTok defoltu (yaradıcının profilini açın)");
     }
 
     private static void fillAz28(Map<String, String> table) {
+        table.put("TikTok default (open the creator's profile)",
+                "TikTok defoltu (yaradıcının profilini açın)");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok rəyi qəbul etmədi. Sonra yenidən cəhd edin.");
         table.put("TikTok didn't block %1$s. Try again in a moment.",
@@ -3655,11 +3657,11 @@ public final class L10nTranslations {
                 "Ekran keçidlərini söndürün");
         table.put("Turn off swipe to reply",
                 "Cavab üçün sürüşdürməni söndür");
-        table.put("Turn off the timer (TikTok closes at %1$s)",
-                "Taymeri söndür (TikTok-un bağlanma vaxtı: %1$s)");
     }
 
     private static void fillAz29(Map<String, String> table) {
+        table.put("Turn off the timer (TikTok closes at %1$s)",
+                "Taymeri söndür (TikTok-un bağlanma vaxtı: %1$s)");
         table.put("Turn on %1$s first.",
                 "Əvvəlcə %1$s seçimini yandırın.");
         table.put("Turn on Keep a streak going first",
@@ -3778,11 +3780,11 @@ public final class L10nTranslations {
                 "Dəyər");
         table.put("Value to return",
                 "Qaytarılacaq dəyər");
-        table.put("Value: %1$s to %2$s",
-                "Dəyər: %1$s - %2$s");
     }
 
     private static void fillAz30(Map<String, String> table) {
+        table.put("Value: %1$s to %2$s",
+                "Dəyər: %1$s - %2$s");
         table.put("Verified accounts",
                 "Təsdiqlənmiş hesablar");
         table.put("Version %1$s",
@@ -3901,11 +3903,11 @@ public final class L10nTranslations {
                 "YTDLnis endirmə növü");
         table.put("Yes",
                 "Bəli");
-        table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
-                "YouTube Music açıla bilmədi. Onu özünüz açın və səsi axtarın.");
     }
 
     private static void fillAz31(Map<String, String> table) {
+        table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
+                "YouTube Music açıla bilmədi. Onu özünüz açın və səsi axtarın.");
         table.put("YouTube Music isn't installed",
                 "YouTube Music quraşdırılmayıb");
         table.put("Your TikTok account changed. Choose the file again for this account.",
@@ -3916,6 +3918,8 @@ public final class L10nTranslations {
                 "Filtrləriniz TikTok-un indicə göndərdiyi hər şeyi gizlətdi. Çoxu %1$s idi.");
         table.put("Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.",
                 "Filtrləriniz TikTok-un göndərdiyi hər şeyi ardıcıl %1$d dəfə gizlətdi. Çoxu %2$s idi.");
+        table.put("Your network proxy was kept, since a backup can't change it",
+                "Şəbəkə proksiniz saxlanıldı, çünki ehtiyat nüsxə onu dəyişə bilməz");
         table.put("Your operator's name, like T-Mobile.",
                 "Operatorunuzun adı, məsələn T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",
@@ -3951,7 +3955,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildDe() {
-        Map<String, String> table = new HashMap<>(3762);
+        Map<String, String> table = new HashMap<>(3766);
         fillDe0(table);
         fillDe1(table);
         fillDe2(table);
@@ -7262,6 +7266,8 @@ public final class L10nTranslations {
                 "Die gewählte Datei mit geladenen Werten ließ sich nicht lesen. Versuch es noch einmal.");
         table.put("The message didn't go through. It tries again at %1$s.",
                 "Die Nachricht ist nicht durchgegangen. Um %1$s wird es erneut versucht.");
+        table.put("The network proxy from that file is off. Check its address before you turn it on",
+                "Der Netzwerk-Proxy aus dieser Datei ist aus. Prüfe seine Adresse, bevor du ihn einschaltest");
         table.put("The original photos aren't available, so TikTok's own save runs instead",
                 "Die Originalfotos sind nicht verfügbar, also speichert TikTok selbst");
         table.put("The original photos aren't available. No video was saved.",
@@ -7304,11 +7310,11 @@ public final class L10nTranslations {
                 "Der kleinste Wert liegt über dem größten");
         table.put("The sound couldn't be saved. Try again.",
                 "Der Ton konnte nicht gespeichert werden. Versuch es noch einmal.");
-        table.put("The sticker couldn't be saved. Try again.",
-                "Der Sticker konnte nicht gespeichert werden. Versuch es noch einmal.");
     }
 
     private static void fillDe27(Map<String, String> table) {
+        table.put("The sticker couldn't be saved. Try again.",
+                "Der Sticker konnte nicht gespeichert werden. Versuch es noch einmal.");
         table.put("The sticker suggestion banner stops showing in a chat. Your own stickers are still in the sticker picker.",
                 "Das Banner mit Sticker-Vorschlägen erscheint im Chat nicht mehr. Deine eigenen Sticker bleiben in der Sticker-Auswahl.");
         table.put("The story couldn't be saved. Try again.",
@@ -7427,11 +7433,11 @@ public final class L10nTranslations {
                 "TikTok-Standard");
         table.put("TikTok default (hold to speed up, quick share)",
                 "TikTok-Standard (halten zum Beschleunigen, schnelles Teilen)");
-        table.put("TikTok default (open the creator's profile)",
-                "TikTok-Standard (Profil des Creators öffnen)");
     }
 
     private static void fillDe28(Map<String, String> table) {
+        table.put("TikTok default (open the creator's profile)",
+                "TikTok-Standard (Profil des Creators öffnen)");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok hat die Rückmeldung nicht angenommen. Versuche es später noch einmal.");
         table.put("TikTok didn't block %1$s. Try again in a moment.",
@@ -7550,11 +7556,11 @@ public final class L10nTranslations {
                 "Bildschirmübergänge ausschalten");
         table.put("Turn off swipe to reply",
                 "Wischen zum Antworten ausschalten");
-        table.put("Turn off the timer (TikTok closes at %1$s)",
-                "Timer ausschalten (TikTok schließt um %1$s)");
     }
 
     private static void fillDe29(Map<String, String> table) {
+        table.put("Turn off the timer (TikTok closes at %1$s)",
+                "Timer ausschalten (TikTok schließt um %1$s)");
         table.put("Turn on %1$s first.",
                 "Zuerst %1$s einschalten.");
         table.put("Turn on Keep a streak going first",
@@ -7673,11 +7679,11 @@ public final class L10nTranslations {
                 "Wert");
         table.put("Value to return",
                 "Zurückgegebener Wert");
-        table.put("Value: %1$s to %2$s",
-                "Wert: %1$s zu %2$s");
     }
 
     private static void fillDe30(Map<String, String> table) {
+        table.put("Value: %1$s to %2$s",
+                "Wert: %1$s zu %2$s");
         table.put("Verified accounts",
                 "Verifizierte Konten");
         table.put("Version %1$s",
@@ -7796,11 +7802,11 @@ public final class L10nTranslations {
                 "YTDLnis-Downloadtyp");
         table.put("Yes",
                 "Ja");
-        table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
-                "YouTube Music konnte nicht geöffnet werden. Öffne es selbst und suche nach dem Sound.");
     }
 
     private static void fillDe31(Map<String, String> table) {
+        table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
+                "YouTube Music konnte nicht geöffnet werden. Öffne es selbst und suche nach dem Sound.");
         table.put("YouTube Music isn't installed",
                 "YouTube Music ist nicht installiert");
         table.put("Your TikTok account changed. Choose the file again for this account.",
@@ -7811,6 +7817,8 @@ public final class L10nTranslations {
                 "Deine Filter haben alles ausgeblendet, was TikTok gerade geschickt hat. Das meiste war %1$s.");
         table.put("Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.",
                 "Deine Filter haben %1$d Mal hintereinander alles ausgeblendet, was TikTok geschickt hat. Das meiste war %2$s.");
+        table.put("Your network proxy was kept, since a backup can't change it",
+                "Dein Netzwerk-Proxy wurde behalten, weil eine Sicherung ihn nicht ändern kann");
         table.put("Your operator's name, like T-Mobile.",
                 "Der Name deines Anbieters, etwa T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",
@@ -7846,7 +7854,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildEs() {
-        Map<String, String> table = new HashMap<>(3762);
+        Map<String, String> table = new HashMap<>(3766);
         fillEs0(table);
         fillEs1(table);
         fillEs2(table);
@@ -11157,6 +11165,8 @@ public final class L10nTranslations {
                 "No se pudo leer el archivo de valores cargados que elegiste. Inténtalo de nuevo.");
         table.put("The message didn't go through. It tries again at %1$s.",
                 "El mensaje no se envió. Se vuelve a intentar a las %1$s.");
+        table.put("The network proxy from that file is off. Check its address before you turn it on",
+                "El proxy de red de ese archivo está desactivado. Revisa su dirección antes de activarlo");
         table.put("The original photos aren't available, so TikTok's own save runs instead",
                 "Las fotos originales no están disponibles, así que se usa el guardado propio de TikTok");
         table.put("The original photos aren't available. No video was saved.",
@@ -11199,11 +11209,11 @@ public final class L10nTranslations {
                 "El valor mínimo es mayor que el máximo");
         table.put("The sound couldn't be saved. Try again.",
                 "No se pudo guardar el sonido. Inténtalo otra vez.");
-        table.put("The sticker couldn't be saved. Try again.",
-                "No se pudo guardar el sticker. Inténtalo otra vez.");
     }
 
     private static void fillEs27(Map<String, String> table) {
+        table.put("The sticker couldn't be saved. Try again.",
+                "No se pudo guardar el sticker. Inténtalo otra vez.");
         table.put("The sticker suggestion banner stops showing in a chat. Your own stickers are still in the sticker picker.",
                 "El banner de sugerencias de stickers deja de aparecer en un chat. Tus propios stickers siguen en el selector de stickers.");
         table.put("The story couldn't be saved. Try again.",
@@ -11322,11 +11332,11 @@ public final class L10nTranslations {
                 "Predeterminado de TikTok");
         table.put("TikTok default (hold to speed up, quick share)",
                 "Predeterminado de TikTok (mantener para acelerar, compartir rápido)");
-        table.put("TikTok default (open the creator's profile)",
-                "Predeterminado de TikTok (abrir el perfil del creador)");
     }
 
     private static void fillEs28(Map<String, String> table) {
+        table.put("TikTok default (open the creator's profile)",
+                "Predeterminado de TikTok (abrir el perfil del creador)");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok no aceptó el comentario. Inténtalo más tarde.");
         table.put("TikTok didn't block %1$s. Try again in a moment.",
@@ -11445,11 +11455,11 @@ public final class L10nTranslations {
                 "Desactivar las transiciones de pantalla");
         table.put("Turn off swipe to reply",
                 "Desactivar deslizar para responder");
-        table.put("Turn off the timer (TikTok closes at %1$s)",
-                "Apagar el temporizador (TikTok se cierra a las %1$s)");
     }
 
     private static void fillEs29(Map<String, String> table) {
+        table.put("Turn off the timer (TikTok closes at %1$s)",
+                "Apagar el temporizador (TikTok se cierra a las %1$s)");
         table.put("Turn on %1$s first.",
                 "Activa antes %1$s.");
         table.put("Turn on Keep a streak going first",
@@ -11568,11 +11578,11 @@ public final class L10nTranslations {
                 "Valor");
         table.put("Value to return",
                 "Valor que se devuelve");
-        table.put("Value: %1$s to %2$s",
-                "Valor: de %1$s a %2$s");
     }
 
     private static void fillEs30(Map<String, String> table) {
+        table.put("Value: %1$s to %2$s",
+                "Valor: de %1$s a %2$s");
         table.put("Verified accounts",
                 "Cuentas verificadas");
         table.put("Version %1$s",
@@ -11691,11 +11701,11 @@ public final class L10nTranslations {
                 "Tipo de descarga de YTDLnis");
         table.put("Yes",
                 "Sí");
-        table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
-                "No se pudo abrir YouTube Music. Ábrelo tú mismo y busca el sonido.");
     }
 
     private static void fillEs31(Map<String, String> table) {
+        table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
+                "No se pudo abrir YouTube Music. Ábrelo tú mismo y busca el sonido.");
         table.put("YouTube Music isn't installed",
                 "YouTube Music no está instalado");
         table.put("Your TikTok account changed. Choose the file again for this account.",
@@ -11706,6 +11716,8 @@ public final class L10nTranslations {
                 "Tus filtros ocultaron todo lo que TikTok acaba de enviar. La mayoría era %1$s.");
         table.put("Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.",
                 "Tus filtros ocultaron todo lo que TikTok envió, %1$d veces seguidas. La mayoría era %2$s.");
+        table.put("Your network proxy was kept, since a backup can't change it",
+                "Se mantuvo tu proxy de red, porque una copia de seguridad no puede cambiarlo");
         table.put("Your operator's name, like T-Mobile.",
                 "El nombre de tu operador, como T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",
@@ -11741,7 +11753,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIn() {
-        Map<String, String> table = new HashMap<>(3762);
+        Map<String, String> table = new HashMap<>(3766);
         fillIn0(table);
         fillIn1(table);
         fillIn2(table);
@@ -15052,6 +15064,8 @@ public final class L10nTranslations {
                 "Berkas nilai yang dimuat yang kamu pilih tidak bisa dibaca. Coba lagi.");
         table.put("The message didn't go through. It tries again at %1$s.",
                 "Pesan tidak terkirim. Akan dicoba lagi pukul %1$s.");
+        table.put("The network proxy from that file is off. Check its address before you turn it on",
+                "Proksi jaringan dari file itu mati. Periksa alamatnya sebelum kamu menyalakannya");
         table.put("The original photos aren't available, so TikTok's own save runs instead",
                 "Foto aslinya tidak tersedia, jadi TikTok yang menyimpannya");
         table.put("The original photos aren't available. No video was saved.",
@@ -15094,11 +15108,11 @@ public final class L10nTranslations {
                 "Nilai terkecil lebih besar daripada yang terbesar");
         table.put("The sound couldn't be saved. Try again.",
                 "Suara tidak bisa disimpan. Coba lagi.");
-        table.put("The sticker couldn't be saved. Try again.",
-                "Sticker tidak bisa disimpan. Coba lagi.");
     }
 
     private static void fillIn27(Map<String, String> table) {
+        table.put("The sticker couldn't be saved. Try again.",
+                "Sticker tidak bisa disimpan. Coba lagi.");
         table.put("The sticker suggestion banner stops showing in a chat. Your own stickers are still in the sticker picker.",
                 "Banner saran stiker tidak lagi muncul di obrolan. Stiker Anda sendiri tetap ada di pemilih stiker.");
         table.put("The story couldn't be saved. Try again.",
@@ -15217,11 +15231,11 @@ public final class L10nTranslations {
                 "Bawaan TikTok");
         table.put("TikTok default (hold to speed up, quick share)",
                 "Bawaan TikTok (tahan untuk mempercepat, bagikan cepat)");
-        table.put("TikTok default (open the creator's profile)",
-                "Bawaan TikTok (buka profil kreator)");
     }
 
     private static void fillIn28(Map<String, String> table) {
+        table.put("TikTok default (open the creator's profile)",
+                "Bawaan TikTok (buka profil kreator)");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok tidak menerima masukannya. Coba lagi nanti.");
         table.put("TikTok didn't block %1$s. Try again in a moment.",
@@ -15340,11 +15354,11 @@ public final class L10nTranslations {
                 "Matikan transisi layar");
         table.put("Turn off swipe to reply",
                 "Matikan geser untuk membalas");
-        table.put("Turn off the timer (TikTok closes at %1$s)",
-                "Matikan pengatur waktu (TikTok tutup pukul %1$s)");
     }
 
     private static void fillIn29(Map<String, String> table) {
+        table.put("Turn off the timer (TikTok closes at %1$s)",
+                "Matikan pengatur waktu (TikTok tutup pukul %1$s)");
         table.put("Turn on %1$s first.",
                 "Nyalakan %1$s dulu.");
         table.put("Turn on Keep a streak going first",
@@ -15463,11 +15477,11 @@ public final class L10nTranslations {
                 "Nilai");
         table.put("Value to return",
                 "Nilai yang dikembalikan");
-        table.put("Value: %1$s to %2$s",
-                "Nilai: %1$s menjadi %2$s");
     }
 
     private static void fillIn30(Map<String, String> table) {
+        table.put("Value: %1$s to %2$s",
+                "Nilai: %1$s menjadi %2$s");
         table.put("Verified accounts",
                 "Akun terverifikasi");
         table.put("Version %1$s",
@@ -15586,11 +15600,11 @@ public final class L10nTranslations {
                 "Jenis unduhan YTDLnis");
         table.put("Yes",
                 "Ya");
-        table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
-                "YouTube Music tidak bisa dibuka. Buka sendiri lalu cari suaranya.");
     }
 
     private static void fillIn31(Map<String, String> table) {
+        table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
+                "YouTube Music tidak bisa dibuka. Buka sendiri lalu cari suaranya.");
         table.put("YouTube Music isn't installed",
                 "YouTube Music belum terpasang");
         table.put("Your TikTok account changed. Choose the file again for this account.",
@@ -15601,6 +15615,8 @@ public final class L10nTranslations {
                 "Filtermu menyembunyikan semua yang baru dikirim TikTok. Sebagian besar %1$s.");
         table.put("Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.",
                 "Filtermu menyembunyikan semua yang dikirim TikTok, %1$d kali berturut-turut. Sebagian besar %2$s.");
+        table.put("Your network proxy was kept, since a backup can't change it",
+                "Proksi jaringanmu dipertahankan, karena cadangan tidak bisa mengubahnya");
         table.put("Your operator's name, like T-Mobile.",
                 "Nama operatormu, misalnya T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",
@@ -15636,7 +15652,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildIt() {
-        Map<String, String> table = new HashMap<>(3762);
+        Map<String, String> table = new HashMap<>(3766);
         fillIt0(table);
         fillIt1(table);
         fillIt2(table);
@@ -18947,6 +18963,8 @@ public final class L10nTranslations {
                 "Non è stato possibile leggere il file di valori caricati che hai scelto. Riprova.");
         table.put("The message didn't go through. It tries again at %1$s.",
                 "Il messaggio non è stato inviato. Verrà ritentato alle %1$s.");
+        table.put("The network proxy from that file is off. Check its address before you turn it on",
+                "Il proxy di rete di quel file è spento. Controlla il suo indirizzo prima di attivarlo");
         table.put("The original photos aren't available, so TikTok's own save runs instead",
                 "Le foto originali non sono disponibili, quindi viene eseguito il salvataggio di TikTok");
         table.put("The original photos aren't available. No video was saved.",
@@ -18989,11 +19007,11 @@ public final class L10nTranslations {
                 "Il valore minimo è superiore al massimo");
         table.put("The sound couldn't be saved. Try again.",
                 "Non è stato possibile salvare l'audio. Riprova.");
-        table.put("The sticker couldn't be saved. Try again.",
-                "Non è stato possibile salvare lo sticker. Riprova.");
     }
 
     private static void fillIt27(Map<String, String> table) {
+        table.put("The sticker couldn't be saved. Try again.",
+                "Non è stato possibile salvare lo sticker. Riprova.");
         table.put("The sticker suggestion banner stops showing in a chat. Your own stickers are still in the sticker picker.",
                 "Il banner dei suggerimenti di sticker non compare più in una chat. I tuoi sticker restano nel selettore degli sticker.");
         table.put("The story couldn't be saved. Try again.",
@@ -19112,11 +19130,11 @@ public final class L10nTranslations {
                 "Predefinito di TikTok");
         table.put("TikTok default (hold to speed up, quick share)",
                 "Predefinito di TikTok (tieni premuto per accelerare, condivisione rapida)");
-        table.put("TikTok default (open the creator's profile)",
-                "Predefinito di TikTok (apre il profilo del creator)");
     }
 
     private static void fillIt28(Map<String, String> table) {
+        table.put("TikTok default (open the creator's profile)",
+                "Predefinito di TikTok (apre il profilo del creator)");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok non ha accettato il feedback. Riprova più tardi.");
         table.put("TikTok didn't block %1$s. Try again in a moment.",
@@ -19235,11 +19253,11 @@ public final class L10nTranslations {
                 "Disattiva le transizioni tra schermate");
         table.put("Turn off swipe to reply",
                 "Disattiva lo scorrimento per rispondere");
-        table.put("Turn off the timer (TikTok closes at %1$s)",
-                "Spegni il timer (TikTok si chiude alle %1$s)");
     }
 
     private static void fillIt29(Map<String, String> table) {
+        table.put("Turn off the timer (TikTok closes at %1$s)",
+                "Spegni il timer (TikTok si chiude alle %1$s)");
         table.put("Turn on %1$s first.",
                 "Attiva prima %1$s.");
         table.put("Turn on Keep a streak going first",
@@ -19358,11 +19376,11 @@ public final class L10nTranslations {
                 "Valore");
         table.put("Value to return",
                 "Valore da restituire");
-        table.put("Value: %1$s to %2$s",
-                "Valore: da %1$s a %2$s");
     }
 
     private static void fillIt30(Map<String, String> table) {
+        table.put("Value: %1$s to %2$s",
+                "Valore: da %1$s a %2$s");
         table.put("Verified accounts",
                 "Account verificati");
         table.put("Version %1$s",
@@ -19481,11 +19499,11 @@ public final class L10nTranslations {
                 "Tipo di download di YTDLnis");
         table.put("Yes",
                 "Sì");
-        table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
-                "Non è stato possibile aprire YouTube Music. Aprila manualmente e cerca l'audio.");
     }
 
     private static void fillIt31(Map<String, String> table) {
+        table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
+                "Non è stato possibile aprire YouTube Music. Aprila manualmente e cerca l'audio.");
         table.put("YouTube Music isn't installed",
                 "YouTube Music non è installata");
         table.put("Your TikTok account changed. Choose the file again for this account.",
@@ -19496,6 +19514,8 @@ public final class L10nTranslations {
                 "I tuoi filtri hanno nascosto tutto quello che TikTok ha appena inviato. La maggior parte era %1$s.");
         table.put("Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.",
                 "I tuoi filtri hanno nascosto tutto quello che TikTok ha inviato, %1$d volte di fila. La maggior parte era %2$s.");
+        table.put("Your network proxy was kept, since a backup can't change it",
+                "Il tuo proxy di rete è stato mantenuto, perché un backup non può cambiarlo");
         table.put("Your operator's name, like T-Mobile.",
                 "Il nome del tuo operatore, ad esempio T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",
@@ -19531,7 +19551,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildPt_rBR() {
-        Map<String, String> table = new HashMap<>(3762);
+        Map<String, String> table = new HashMap<>(3766);
         fillPt_rBR0(table);
         fillPt_rBR1(table);
         fillPt_rBR2(table);
@@ -22842,6 +22862,8 @@ public final class L10nTranslations {
                 "Não foi possível ler o arquivo de valores carregados que você escolheu. Tente de novo.");
         table.put("The message didn't go through. It tries again at %1$s.",
                 "A mensagem não foi enviada. A próxima tentativa é às %1$s.");
+        table.put("The network proxy from that file is off. Check its address before you turn it on",
+                "O proxy de rede desse arquivo está desligado. Confira o endereço antes de ligar");
         table.put("The original photos aren't available, so TikTok's own save runs instead",
                 "As fotos originais não estão disponíveis, então o salvamento do próprio TikTok é usado");
         table.put("The original photos aren't available. No video was saved.",
@@ -22884,11 +22906,11 @@ public final class L10nTranslations {
                 "O valor mínimo está acima do máximo");
         table.put("The sound couldn't be saved. Try again.",
                 "Não foi possível salvar o som. Tente de novo.");
-        table.put("The sticker couldn't be saved. Try again.",
-                "Não foi possível salvar o sticker. Tente de novo.");
     }
 
     private static void fillPt_rBR27(Map<String, String> table) {
+        table.put("The sticker couldn't be saved. Try again.",
+                "Não foi possível salvar o sticker. Tente de novo.");
         table.put("The sticker suggestion banner stops showing in a chat. Your own stickers are still in the sticker picker.",
                 "O banner de sugestões de figurinhas deixa de aparecer em um chat. Suas próprias figurinhas continuam no seletor de figurinhas.");
         table.put("The story couldn't be saved. Try again.",
@@ -23007,11 +23029,11 @@ public final class L10nTranslations {
                 "Padrão do TikTok");
         table.put("TikTok default (hold to speed up, quick share)",
                 "Padrão do TikTok (segurar para acelerar, compartilhamento rápido)");
-        table.put("TikTok default (open the creator's profile)",
-                "Padrão do TikTok (abrir o perfil do criador)");
     }
 
     private static void fillPt_rBR28(Map<String, String> table) {
+        table.put("TikTok default (open the creator's profile)",
+                "Padrão do TikTok (abrir o perfil do criador)");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "O TikTok não aceitou o feedback. Tente mais tarde.");
         table.put("TikTok didn't block %1$s. Try again in a moment.",
@@ -23130,11 +23152,11 @@ public final class L10nTranslations {
                 "Desativar as transições de tela");
         table.put("Turn off swipe to reply",
                 "Desativar deslizar para responder");
-        table.put("Turn off the timer (TikTok closes at %1$s)",
-                "Desligar o timer (o TikTok fecha às %1$s)");
     }
 
     private static void fillPt_rBR29(Map<String, String> table) {
+        table.put("Turn off the timer (TikTok closes at %1$s)",
+                "Desligar o timer (o TikTok fecha às %1$s)");
         table.put("Turn on %1$s first.",
                 "Ative %1$s primeiro.");
         table.put("Turn on Keep a streak going first",
@@ -23253,11 +23275,11 @@ public final class L10nTranslations {
                 "Valor");
         table.put("Value to return",
                 "Valor devolvido");
-        table.put("Value: %1$s to %2$s",
-                "Valor: de %1$s para %2$s");
     }
 
     private static void fillPt_rBR30(Map<String, String> table) {
+        table.put("Value: %1$s to %2$s",
+                "Valor: de %1$s para %2$s");
         table.put("Verified accounts",
                 "Contas verificadas");
         table.put("Version %1$s",
@@ -23376,11 +23398,11 @@ public final class L10nTranslations {
                 "Tipo de download do YTDLnis");
         table.put("Yes",
                 "Sim");
-        table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
-                "O YouTube Music não pôde ser aberto. Abra você mesmo e procure o som.");
     }
 
     private static void fillPt_rBR31(Map<String, String> table) {
+        table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
+                "O YouTube Music não pôde ser aberto. Abra você mesmo e procure o som.");
         table.put("YouTube Music isn't installed",
                 "O YouTube Music não está instalado");
         table.put("Your TikTok account changed. Choose the file again for this account.",
@@ -23391,6 +23413,8 @@ public final class L10nTranslations {
                 "Seus filtros esconderam tudo o que o TikTok acabou de enviar. A maior parte era %1$s.");
         table.put("Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.",
                 "Seus filtros esconderam tudo o que o TikTok enviou, %1$d vezes seguidas. A maior parte era %2$s.");
+        table.put("Your network proxy was kept, since a backup can't change it",
+                "Seu proxy de rede foi mantido, porque um backup não pode alterá-lo");
         table.put("Your operator's name, like T-Mobile.",
                 "O nome da sua operadora, como T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",
@@ -23426,7 +23450,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildRu() {
-        Map<String, String> table = new HashMap<>(4098);
+        Map<String, String> table = new HashMap<>(4102);
         fillRu0(table);
         fillRu1(table);
         fillRu2(table);
@@ -27055,6 +27079,8 @@ public final class L10nTranslations {
                 "Не удалось прочитать выбранный файл загруженных значений. Повторите попытку.");
         table.put("The message didn't go through. It tries again at %1$s.",
                 "Сообщение не было отправлено. Попытка повторится в %1$s.");
+        table.put("The network proxy from that file is off. Check its address before you turn it on",
+                "Сетевой прокси из этого файла выключен. Проверьте его адрес, прежде чем включать");
         table.put("The original photos aren't available, so TikTok's own save runs instead",
                 "Оригинальные фото недоступны, поэтому вместо этого используется сохранение средствами TikTok");
         table.put("The original photos aren't available. No video was saved.",
@@ -27151,11 +27177,11 @@ public final class L10nTranslations {
                 "В этом файле нет загруженных значений.");
         table.put("This file isn't a loaded-values export from the Feature Gate Lab.",
                 "Этот файл не является экспортом загруженных значений из Feature Gate Lab.");
-        table.put("This gate type isn't supported.",
-                "Этот тип переключателя не поддерживается.");
     }
 
     private static void fillRu30(Map<String, String> table) {
+        table.put("This gate type isn't supported.",
+                "Этот тип переключателя не поддерживается.");
         table.put("This is the video's own sound, so YouTube Music won't have it",
                 "Это собственный звук видео, поэтому в YouTube Music его нет");
         table.put("This key isn't in Hushfeed's list, so its type can't be checked. Reset the override.",
@@ -27274,11 +27300,11 @@ public final class L10nTranslations {
                 "Сообщения TikTok не запустились вовремя. Попытка повторится в %1$s.");
         table.put("TikTok's own daily screen-time reminder sends the app to the background instead of waiting to be dismissed. Coming straight back leaves the reminder on screen, so the limit stays reachable. Needs a daily limit set under TikTok's Settings and privacy, under Time and well-being.",
                 "Собственное дневное напоминание TikTok об экранном времени сворачивает приложение в фон, вместо того чтобы ждать, пока его закроют. Если сразу вернуться, напоминание останется на экране, поэтому лимит по-прежнему можно достичь. Требует дневного лимита, заданного в TikTok в разделе Настройки и конфиденциальность > Время в соцсетях.");
-        table.put("TikTok's own name",
-                "Собственное имя TikTok");
     }
 
     private static void fillRu31(Map<String, String> table) {
+        table.put("TikTok's own name",
+                "Собственное имя TikTok");
         table.put("TikTok's own value",
                 "Собственное значение TikTok");
         table.put("TikTok's size",
@@ -27397,11 +27423,11 @@ public final class L10nTranslations {
                 "Введите пример текста, чтобы увидеть, подходят ли ему эти правила.");
         table.put("Type the other app's ID, like com.dv.adm. The save button sends the video's link there instead of saving. Leave empty to save here.",
                 "Введите идентификатор другого приложения, например com.dv.adm. Кнопка сохранения отправит туда ссылку на видео вместо сохранения. Оставьте пустым, чтобы сохранять здесь.");
-        table.put("Unavailable",
-                "Недоступно");
     }
 
     private static void fillRu32(Map<String, String> table) {
+        table.put("Unavailable",
+                "Недоступно");
         table.put("Unavailable on these TikTok builds. All verification challenges stay visible.",
                 "Недоступно в этих версиях TikTok. Все проверки остаются видимыми.");
         table.put("Unblock",
@@ -27520,11 +27546,11 @@ public final class L10nTranslations {
                 "Информация о видео");
         table.put("Video of photos",
                 "Видео из фото");
-        table.put("Video playback quality",
-                "Качество воспроизведения видео");
     }
 
     private static void fillRu33(Map<String, String> table) {
+        table.put("Video playback quality",
+                "Качество воспроизведения видео");
         table.put("Video player settings",
                 "Настройки видеоплеера");
         table.put("Video saved",
@@ -27631,6 +27657,8 @@ public final class L10nTranslations {
                 "Ваши фильтры скрыли всё, что только что прислал TikTok. В основном это было %1$s.");
         table.put("Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.",
                 "Ваши фильтры скрыли всё, что прислал TikTok, %1$d раз подряд. В основном это было %2$s.");
+        table.put("Your network proxy was kept, since a backup can't change it",
+                "Ваш сетевой прокси сохранён, так как резервная копия не может его менять");
         table.put("Your operator's name, like T-Mobile.",
                 "Название вашего оператора, например T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",
@@ -27641,13 +27669,13 @@ public final class L10nTranslations {
                 "Ваша предыдущая настройка ленты восстановлена.");
         table.put("Your previous feed setup is back. Restart TikTok to apply all changes.",
                 "Ваша предыдущая настройка ленты восстановлена. Перезапустите TikTok, чтобы применить все изменения.");
+    }
+
+    private static void fillRu34(Map<String, String> table) {
         table.put("Your seen history changed before the import finished. Choose the file again.",
                 "История просмотров изменилась до завершения импорта. Выберите файл заново.");
         table.put("Zero means no limit. Counts the videos Hushfeed advanced past for you, not the ones you swiped yourself, and starts again when the feed is rebuilt or you change this number.",
                 "Ноль означает отсутствие лимита. Считает видео, которые Hushfeed пролистал за вас, а не те, что вы пролистали сами, и начинает заново, когда лента перестраивается или вы меняете это число.");
-    }
-
-    private static void fillRu34(Map<String, String> table) {
         table.put("Zero means the way out of the hold is always there. Any other number is how many times a day it works. Once they're used up, the hold stays until the day starts over. Ignored while the budget is locked, which removes the way out.",
                 "Ноль означает, что выход из блокировки всегда доступен. Любое другое число показывает, сколько раз в день он работает. Когда они закончатся, блокировка остаётся до начала нового дня. Игнорируется, пока лимит заблокирован, так как при этом выхода нет.");
         table.put("Zero shows the notice and leaves the feed alone. Anything else covers the feed for that many minutes once a budget is reached. Messages, profiles and search keep working, and nothing in the feed is thrown away.",
@@ -27669,7 +27697,7 @@ public final class L10nTranslations {
     }
 
     private static Map<String, String> buildTr() {
-        Map<String, String> table = new HashMap<>(3762);
+        Map<String, String> table = new HashMap<>(3766);
         fillTr0(table);
         fillTr1(table);
         fillTr2(table);
@@ -30980,6 +31008,8 @@ public final class L10nTranslations {
                 "Seçtiğin yüklenen değerler dosyası okunamadı. Yeniden dene.");
         table.put("The message didn't go through. It tries again at %1$s.",
                 "Mesaj gitmedi. Saat %1$s olunca tekrar denenir.");
+        table.put("The network proxy from that file is off. Check its address before you turn it on",
+                "O dosyadaki ağ proxy'si kapalı. Açmadan önce adresini kontrol et");
         table.put("The original photos aren't available, so TikTok's own save runs instead",
                 "Orijinal fotoğraflar kullanılamıyor, bu yüzden TikTok'un kendi kaydetme işlemi çalışıyor");
         table.put("The original photos aren't available. No video was saved.",
@@ -31022,11 +31052,11 @@ public final class L10nTranslations {
                 "En küçük değer en büyük değerden yüksek");
         table.put("The sound couldn't be saved. Try again.",
                 "Ses kaydedilemedi. Yeniden dene.");
-        table.put("The sticker couldn't be saved. Try again.",
-                "Çıkartma kaydedilemedi. Yeniden dene.");
     }
 
     private static void fillTr27(Map<String, String> table) {
+        table.put("The sticker couldn't be saved. Try again.",
+                "Çıkartma kaydedilemedi. Yeniden dene.");
         table.put("The sticker suggestion banner stops showing in a chat. Your own stickers are still in the sticker picker.",
                 "Çıkartma önerisi bannerı sohbette artık gösterilmez. Kendi çıkartmaların çıkartma seçicide durur.");
         table.put("The story couldn't be saved. Try again.",
@@ -31145,11 +31175,11 @@ public final class L10nTranslations {
                 "TikTok varsayılanı");
         table.put("TikTok default (hold to speed up, quick share)",
                 "TikTok varsayılanı (hızlandırmak için basılı tut, hızlı paylaşım)");
-        table.put("TikTok default (open the creator's profile)",
-                "TikTok varsayılanı (içerik üreticisinin profilini aç)");
     }
 
     private static void fillTr28(Map<String, String> table) {
+        table.put("TikTok default (open the creator's profile)",
+                "TikTok varsayılanı (içerik üreticisinin profilini aç)");
         table.put("TikTok didn't accept the feedback. Try again later.",
                 "TikTok geri bildirimi kabul etmedi. Daha sonra yeniden dene.");
         table.put("TikTok didn't block %1$s. Try again in a moment.",
@@ -31268,11 +31298,11 @@ public final class L10nTranslations {
                 "Ekran geçişlerini kapat");
         table.put("Turn off swipe to reply",
                 "Yanıtlamak için kaydırmayı kapat");
-        table.put("Turn off the timer (TikTok closes at %1$s)",
-                "Zamanlayıcıyı kapat (TikTok'un kapanacağı saat: %1$s)");
     }
 
     private static void fillTr29(Map<String, String> table) {
+        table.put("Turn off the timer (TikTok closes at %1$s)",
+                "Zamanlayıcıyı kapat (TikTok'un kapanacağı saat: %1$s)");
         table.put("Turn on %1$s first.",
                 "Önce %1$s ayarını aç.");
         table.put("Turn on Keep a streak going first",
@@ -31391,11 +31421,11 @@ public final class L10nTranslations {
                 "Değer");
         table.put("Value to return",
                 "Döndürülecek değer");
-        table.put("Value: %1$s to %2$s",
-                "Değer: %1$s yerine %2$s");
     }
 
     private static void fillTr30(Map<String, String> table) {
+        table.put("Value: %1$s to %2$s",
+                "Değer: %1$s yerine %2$s");
         table.put("Verified accounts",
                 "Doğrulanmış hesaplar");
         table.put("Version %1$s",
@@ -31514,11 +31544,11 @@ public final class L10nTranslations {
                 "YTDLnis indirme türü");
         table.put("Yes",
                 "Evet");
-        table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
-                "YouTube Music açılamadı. Kendiniz açıp sesi arayın.");
     }
 
     private static void fillTr31(Map<String, String> table) {
+        table.put("YouTube Music couldn't be opened. Open it yourself and search for the sound.",
+                "YouTube Music açılamadı. Kendiniz açıp sesi arayın.");
         table.put("YouTube Music isn't installed",
                 "YouTube Music yüklü değil");
         table.put("Your TikTok account changed. Choose the file again for this account.",
@@ -31529,6 +31559,8 @@ public final class L10nTranslations {
                 "Filtrelerin TikTok'un az önce gönderdiği her şeyi gizledi. En çok gizlenen: %1$s.");
         table.put("Your filters hid everything TikTok sent, %1$d times in a row. Most were %2$s.",
                 "Filtrelerin TikTok'un gönderdiği her şeyi art arda %1$d kez gizledi. En çok gizlenen: %2$s.");
+        table.put("Your network proxy was kept, since a backup can't change it",
+                "Ağ proxy'n korundu, çünkü bir yedek onu değiştiremez");
         table.put("Your operator's name, like T-Mobile.",
                 "Operatörünün adı, örneğin T-Mobile.");
         table.put("Your operator's numeric code, like 310260.",

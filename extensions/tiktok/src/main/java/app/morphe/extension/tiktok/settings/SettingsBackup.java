@@ -130,21 +130,49 @@ public final class SettingsBackup {
         return setting.includeWithImportExport || setting == BaseSettings.DEBUG_LOG_FILTERS;
     }
 
+    /** What a picked file's network proxy came to on this phone. */
+    public enum ProxyHold {
+        /** Restored as the file has it. */
+        NONE,
+        /** The file had it on, and it was left off; its address came along. */
+        LEFT_OFF,
+        /** This phone's own proxy address was kept over the file's. */
+        KEPT_THIS_PHONES
+    }
+
     /**
-     * A file someone picked can't turn the network proxy on, or move one that's on: a shared
-     * backup would otherwise send TikTok's traffic through its author's server without a word.
-     * It can still turn the proxy off, and with the proxy off its address comes along, so a
-     * move to a new phone only needs the switch turned back on. The device's own undo copy
-     * isn't held to this.
+     * A file someone picked can't turn the network proxy on, or change an address this phone
+     * already has: a shared backup would otherwise send TikTok's traffic, and the sign-in saved
+     * here, through its author's server. It can still turn the proxy off, and on a phone with no
+     * address yet its address comes along, so a move to a new phone only needs the switch turned
+     * back on. The device's own undo copy isn't held to this.
      */
-    private static void keepTheProxyWhereTheDeviceHasIt(Map<Setting<?>, Object> updates) {
-        if (!Boolean.TRUE.equals(updates.get(Settings.NETWORK_PROXY))) return;
+    private static ProxyHold keepTheProxyWhereTheDeviceHasIt(Map<Setting<?>, Object> updates) {
         boolean onNow = Settings.NETWORK_PROXY.savedValue();
-        updates.put(Settings.NETWORK_PROXY, onNow);
-        if (!onNow) return;
-        updates.put(Settings.NETWORK_PROXY_TYPE, Settings.NETWORK_PROXY_TYPE.savedValue());
-        updates.put(Settings.NETWORK_PROXY_HOST, Settings.NETWORK_PROXY_HOST.savedValue());
-        updates.put(Settings.NETWORK_PROXY_PORT, Settings.NETWORK_PROXY_PORT.savedValue());
+        ProxyHold hold = ProxyHold.NONE;
+        if (onNow || !Settings.NETWORK_PROXY_HOST.savedValue().trim().isEmpty()) {
+            for (Setting<?> field : new Setting<?>[] {
+                    Settings.NETWORK_PROXY_TYPE, Settings.NETWORK_PROXY_HOST, Settings.NETWORK_PROXY_PORT }) {
+                Object own = field.savedValue();
+                if (own.equals(updates.get(field))) continue;
+                updates.put(field, own);
+                hold = ProxyHold.KEPT_THIS_PHONES;
+            }
+        }
+        if (!onNow && Boolean.TRUE.equals(updates.get(Settings.NETWORK_PROXY))) {
+            updates.put(Settings.NETWORK_PROXY, false);
+            if (hold == ProxyHold.NONE) hold = ProxyHold.LEFT_OFF;
+        }
+        return hold;
+    }
+
+    /** What restoring this file does to the network proxy. Ask before the restore changes it. */
+    public static ProxyHold proxyHold(String text) {
+        try {
+            return parse(text).proxyHold;
+        } catch (Exception ignored) {
+            return ProxyHold.NONE;
+        }
     }
 
     public static String create(boolean defaults) throws JSONException, IOException {
@@ -251,8 +279,9 @@ public final class SettingsBackup {
                 // Held to the budget, the restore wrote less than its file carries. What it did
                 // write goes on record, or a journal the delete below fails to clear would read as
                 // an interrupted restore, and the next start would put the old settings back.
-                // The same for a download folder kept because the file's could not hold its kind.
-                if (budget.heldBack() || !next.keptFolders.isEmpty()) {
+                // The same for a download folder kept because the file's could not hold its kind,
+                // and for a network proxy the file wasn't allowed to turn on or move.
+                if (budget.heldBack() || !next.keptFolders.isEmpty() || next.proxyHold != ProxyHold.NONE) {
                     operation.recordWritten(withPendingBudget(create(false),
                             Settings.SESSION_BUDGET_PENDING.savedValue()));
                 }
@@ -663,7 +692,7 @@ public final class SettingsBackup {
             updates.put(setting, setting.savedValue());
             absent++;
         }
-        if (holdRuleLists) keepTheProxyWhereTheDeviceHasIt(updates);
+        ProxyHold proxyHold = holdRuleLists ? keepTheProxyWhereTheDeviceHasIt(updates) : ProxyHold.NONE;
         if (!holdRuleLists && root.has("local_budget_pending")) {
             Object pending = root.get("local_budget_pending");
             if (!(pending instanceof String)) throw new IOException("Invalid delayed budget journal");
@@ -679,6 +708,7 @@ public final class SettingsBackup {
             snapshot.deviceState = !holdRuleLists;
             snapshot.skipped = keys.size();
             snapshot.keptFolders = keptFolders;
+            snapshot.proxyHold = proxyHold;
             return snapshot;
         }
         // Refused by name before the rules are read, so the reader hears what was wrong with
@@ -692,6 +722,7 @@ public final class SettingsBackup {
         snapshot.deviceState = !holdRuleLists;
         snapshot.skipped = keys.size();
         snapshot.keptFolders = keptFolders;
+        snapshot.proxyHold = proxyHold;
         return snapshot;
     }
 
@@ -811,6 +842,9 @@ public final class SettingsBackup {
 
         /** Download folders the file named that can't hold their kind, kept as the device had them. */
         List<DownloadDestination.Kind> keptFolders = Collections.emptyList();
+
+        /** Whether a picked file's network proxy was held back, which the restore's record needs. */
+        ProxyHold proxyHold = ProxyHold.NONE;
 
         Snapshot(Map<Setting<?>, Object> values, List<FeatureGateLabStore.Rule> rules,
                 boolean master, boolean acknowledged, boolean labIncluded, int absent) {

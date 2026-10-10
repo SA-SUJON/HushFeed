@@ -136,6 +136,33 @@ public class SettingsBackupTest {
      * behind by a failed delete, used to read at the next start as an interrupted restore and put
      * the old settings back over a restore that had finished.
      */
+    /** The same for a network proxy the file wasn't allowed to turn on: the file says on, the phone off. */
+    @Test public void aJournalLeftByARestoreThatHeldTheProxyBackReadsAsCommitted() throws Exception {
+        Settings.NETWORK_PROXY.save(true);
+        Settings.NETWORK_PROXY_HOST.save("theirs.example.com");
+        Settings.REGION_SPOOF.save(true);
+        String backup = SettingsBackup.create(false);
+        Settings.NETWORK_PROXY.save(false);
+        Settings.NETWORK_PROXY_HOST.save("");
+        Settings.REGION_SPOOF.save(false);
+
+        SettingsOperationJournal.failCommittedDeletesForTests(true);
+        try {
+            SettingsBackup.restore(Utils.getContext(), backup, true);
+        } finally {
+            SettingsOperationJournal.failCommittedDeletesForTests(false);
+        }
+        assertTrue("no journal was left behind, so this checks nothing",
+                new java.io.File(Utils.getContext().getFilesDir(), "hushfeed-settings-operation.json").isFile());
+
+        SettingsOperationJournal.acquire(Utils.getContext()).complete();
+
+        assertTrue("the next start put a committed restore back", Settings.REGION_SPOOF.get());
+        assertFalse(Settings.NETWORK_PROXY.get());
+        assertEquals(SettingsOperationJournal.Recovery.ALREADY_COMMITTED,
+                SettingsOperationJournal.consumeRecoveryNotice());
+    }
+
     @Test public void aJournalLeftByARestoreThatKeptAFolderReadsAsCommitted() throws Exception {
         Settings.DOWNLOAD_VIDEO_PATH.save("Pictures/Clips");
         Settings.REGION_SPOOF.save(true);
