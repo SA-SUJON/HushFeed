@@ -28,6 +28,7 @@ public class CommentsPreferenceCategory extends ConditionalPreferenceCategory {
     public static boolean isAvailable() {
         return SettingsStatus.commentToolsEnabled
                 || SettingsStatus.commentTranslationEnabled
+                || SettingsStatus.doNotAutoTranslateEnabled
                 || SettingsStatus.hideCommentQuickReactionsEnabled
                 || SettingsStatus.copyCommentsWithoutUsernameEnabled
                 || SettingsStatus.hideCommentEggsEnabled
@@ -43,6 +44,7 @@ public class CommentsPreferenceCategory extends ConditionalPreferenceCategory {
     @Override
     public void addPreferences(Context context) {
         boolean reading = SettingsStatus.commentTranslationEnabled
+                || SettingsStatus.doNotAutoTranslateEnabled
                 || SettingsStatus.commentSortControlsEnabled
                 || SettingsStatus.commentToolsEnabled
                 || SettingsStatus.copyCommentsWithoutUsernameEnabled;
