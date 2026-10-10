@@ -1407,10 +1407,13 @@
     },
     {
       "name": "Enable voice comments",
-      "description": "Turns on TikTok's voice comments, so you can record and post a spoken comment, for accounts that don't have them yet. It has no switch and hasn't been tried on a real account, so it may not work.",
+      "description": "Lets you turn on TikTok's voice comments, so you can record and post a spoken comment, for accounts that don't have them yet. It hasn't been tried on a real account, so it may not work. Starts off. Turn it on in Hushfeed settings > Comments.",
       "category": "Comments",
-      "use": false,
-      "dependencies": [],
+      "use": true,
+      "dependencies": [
+        "BytecodePatch",
+        "Settings"
+      ],
       "compatiblePackages": {
         "com.zhiliaoapp.musically": [
           "47.1.4"

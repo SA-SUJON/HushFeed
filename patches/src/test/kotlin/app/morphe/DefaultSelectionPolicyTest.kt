@@ -21,7 +21,6 @@ class DefaultSelectionPolicyTest {
         "Block P2P video relay" to "takes the relay's files out of the APK while patching",
         "Change app name" to "changes the name Android shows for the app",
         "Custom launcher icon" to "changes the launcher icon",
-        "Enable voice comments" to "flips TikTok's own gate with no switch and hasn't been checked on a device",
         "Feature Gate Recorder" to "a developer tool for reading TikTok's feature gates",
         "Hide Play Store update offer" to "raises the version code, so a lower-coded build won't install over it",
         "Hide the risk control CAPTCHA" to "sits on TikTok's account verification path and only records for now",

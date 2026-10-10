@@ -594,6 +594,13 @@ public class SettingsStatus {
         aiProfilingEnabled = true;
     }
 
+    /** Enable voice comments put its switch in front of TikTok's voice comment gate. */
+    public static boolean voiceCommentsEnabled = false;
+
+    public static void enableVoiceComments() {
+        voiceCommentsEnabled = true;
+    }
+
     static {
         // The patcher fills load() with selected registrations. Runtime hooks can run before settings opens.
         // Keep this after field initializers so their default values cannot overwrite those registrations.

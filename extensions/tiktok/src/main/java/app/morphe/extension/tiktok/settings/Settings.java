@@ -836,6 +836,9 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting HIDE_LIVE_RING = new BooleanSetting("hide_live_ring", FALSE);
     // Lift text length limits: comments, repost notes and the bio.
     public static final BooleanSetting LIFT_LENGTH_LIMITS = new BooleanSetting("lift_length_limits", FALSE);
+    // Enable voice comments, in the default selection with this off. A restart, since TikTok may
+    // keep the answer for a comment box it has already built.
+    public static final BooleanSetting ENABLE_VOICE_COMMENTS = new BooleanSetting("enable_voice_comments", FALSE, true);
     public static final BooleanSetting KEEP_FAVORITES_TAB =
             new BooleanSetting("keep_favorites_tab", TRUE, true);
     /** The Following and For You names above the feed; the pager under them keeps swiping (issue #32). */
