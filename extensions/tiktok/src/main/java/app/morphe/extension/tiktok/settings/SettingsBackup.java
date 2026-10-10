@@ -130,6 +130,23 @@ public final class SettingsBackup {
         return setting.includeWithImportExport || setting == BaseSettings.DEBUG_LOG_FILTERS;
     }
 
+    /**
+     * A file someone picked can't turn the network proxy on, or move one that's on: a shared
+     * backup would otherwise send TikTok's traffic through its author's server without a word.
+     * It can still turn the proxy off, and with the proxy off its address comes along, so a
+     * move to a new phone only needs the switch turned back on. The device's own undo copy
+     * isn't held to this.
+     */
+    private static void keepTheProxyWhereTheDeviceHasIt(Map<Setting<?>, Object> updates) {
+        if (!Boolean.TRUE.equals(updates.get(Settings.NETWORK_PROXY))) return;
+        boolean onNow = Settings.NETWORK_PROXY.savedValue();
+        updates.put(Settings.NETWORK_PROXY, onNow);
+        if (!onNow) return;
+        updates.put(Settings.NETWORK_PROXY_TYPE, Settings.NETWORK_PROXY_TYPE.savedValue());
+        updates.put(Settings.NETWORK_PROXY_HOST, Settings.NETWORK_PROXY_HOST.savedValue());
+        updates.put(Settings.NETWORK_PROXY_PORT, Settings.NETWORK_PROXY_PORT.savedValue());
+    }
+
     public static String create(boolean defaults) throws JSONException, IOException {
         Settings.REGION_SPOOF.get(); // Initialize the complete settings registry.
         JSONObject values = new JSONObject();
@@ -646,6 +663,7 @@ public final class SettingsBackup {
             updates.put(setting, setting.savedValue());
             absent++;
         }
+        if (holdRuleLists) keepTheProxyWhereTheDeviceHasIt(updates);
         if (!holdRuleLists && root.has("local_budget_pending")) {
             Object pending = root.get("local_budget_pending");
             if (!(pending instanceof String)) throw new IOException("Invalid delayed budget journal");

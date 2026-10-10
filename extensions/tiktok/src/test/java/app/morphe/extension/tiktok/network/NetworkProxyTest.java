@@ -584,6 +584,31 @@ public class NetworkProxyTest {
         assertEquals("", Settings.NETWORK_PROXY_PASSWORD.get());
     }
 
+    @Test public void aRestoredFileNeverTurnsTheProxyOnOrMovesIt() throws Exception {
+        turnOn(NetworkProxy.TYPE_SOCKS5, "theirs.example.com", "1080", "", "");
+        String theirs = SettingsBackup.create(false);
+
+        Settings.NETWORK_PROXY.save(false);
+        Settings.NETWORK_PROXY_HOST.save("");
+        SettingsBackup.restore(context, theirs, false);
+        assertFalse("a file can't turn the proxy on", Settings.NETWORK_PROXY.get());
+        assertEquals("its address comes along for the user to switch on", "theirs.example.com",
+                Settings.NETWORK_PROXY_HOST.get());
+
+        turnOn(NetworkProxy.TYPE_HTTP, "mine.example.com", "8080", USER, PASSWORD);
+        SettingsBackup.restore(context, theirs, false);
+        assertTrue(Settings.NETWORK_PROXY.get());
+        assertEquals("a file can't move a proxy that's on", "mine.example.com", Settings.NETWORK_PROXY_HOST.get());
+        assertEquals("8080", Settings.NETWORK_PROXY_PORT.get());
+        assertEquals(NetworkProxy.TYPE_HTTP, Settings.NETWORK_PROXY_TYPE.get());
+
+        Settings.NETWORK_PROXY.save(false);
+        String off = SettingsBackup.create(false);
+        Settings.NETWORK_PROXY.save(true);
+        SettingsBackup.restore(context, off, false);
+        assertFalse("a file can still turn it off", Settings.NETWORK_PROXY.get());
+    }
+
     // -- The rows -------------------------------------------------------------------------------------
 
     @Test public void thePasswordRowNeverShowsThePassword() {

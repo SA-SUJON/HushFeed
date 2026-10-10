@@ -81,6 +81,8 @@ public class SettingsBackupTest {
         for (Setting<?> setting : Setting.allLoadedSettings()) {
             if (setting.includeWithImportExport || setting == BaseSettings.DEBUG_LOG_FILTERS) expected.put(setting, setting.get());
         }
+        // The one switch a file can't turn on (NetworkProxyTest.aRestoredFileNeverTurnsTheProxyOnOrMovesIt).
+        expected.put(Settings.NETWORK_PROXY, false);
         FeatureGateLabStore.saveRule("abmock", "test_gate", "BOOLEAN", "true", true);
         FeatureGateLabStore.setMasterEnabled(true);
         FeatureGateLabStore.acknowledgeWarning();
