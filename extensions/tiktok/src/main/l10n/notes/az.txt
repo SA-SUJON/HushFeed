@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Remove LIVE extras indi başqasının LIVE-ına qonaq kimi qoşulmaq üçün faylları da sildiyini deyir, ona görə onunla səsli və ya videolu qoşulmaq işləməyə bilər (#132). LIVE-lara qoşulursunuzsa, onu seçməyin.
+
 * **TikTok:** Clear display yadda saxlananda və ya Automatic clear display gecikməsiz olanda, TikTok soyuq başlanğıcdan sonra yükləmə fırlanğacının altında tabları və ilk videonun düymələrini təxminən bir saniyə artıq göstərmir. Favorites və ya profildən açılan video da eyni şəkildə təmizlənmiş başlayır (#84).
 
 * **TikTok:** Show where a video was posted açıq olanda, sırada hər ikisinə yer varsa, yaradıcının adı artıq ölkəyə yer açmaq üçün qısaldılmır, ona görə "Rn D… · TR" yenə tam oxunur (#127). Həqiqətən çox uzun ad isə ölkə tam görünsün deyə yenə qısaldılır.

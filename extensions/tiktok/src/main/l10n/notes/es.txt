@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Remove LIVE extras ahora dice que quita los archivos para unirte al LIVE de otra persona como invitado, así que con él puede dejar de funcionar unirte por voz o video (#132). No lo incluyas si te unes a LIVEs.
+
 * **TikTok:** Cuando Clear display se recuerda, o Automatic clear display no tiene retraso, TikTok ya no muestra las pestañas bajo su círculo de carga ni los botones del primer video durante un segundo tras un arranque en frío. Un video abierto desde Favorites o un perfil también empieza despejado (#84).
 
 * **TikTok:** Con Show where a video was posted activado, el nombre del creador ya no se corta para que quepa el país cuando la fila tiene espacio para los dos, así que "Rn D… · TR" vuelve a leerse completo (#127). Un nombre que de verdad es demasiado largo se sigue acortando para que el país se vea entero.

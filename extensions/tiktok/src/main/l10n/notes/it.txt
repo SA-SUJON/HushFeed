@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Remove LIVE extras ora dice che toglie i file per entrare nella LIVE di qualcun altro come ospite, quindi con questa patch entrare con la voce o il video può smettere di funzionare (#132). Lasciala fuori se partecipi alle LIVE.
+
 * **TikTok:** Quando Clear display viene ricordato, o Automatic clear display non ha ritardo, TikTok non mostra più le schede sotto la rotellina di caricamento e i pulsanti del primo video per circa un secondo dopo un avvio a freddo. Anche un video aperto da Favorites o da un profilo parte già pulito (#84).
 
 * **TikTok:** Con Show where a video was posted attivo, il nome del creator non viene più accorciato per far stare il paese quando la riga ha spazio per entrambi, quindi "Rn D… · TR" si legge di nuovo per intero (#127). Un nome davvero troppo lungo viene ancora accorciato perché il paese resti intero.

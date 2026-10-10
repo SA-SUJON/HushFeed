@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Remove LIVE extras now says it takes out the files for joining someone's LIVE as a guest, so joining by voice or video may stop working with it in (#132). Leave it out if you join LIVEs.
+
 * **TikTok:** When Clear display is remembered, or Automatic clear display has no delay, TikTok no longer shows the tabs under its loading spinner and the first video's buttons for about a second after a cold start. A video opened from Favorites or a profile starts cleared the same way (#84).
 
 * **TikTok:** With Show where a video was posted on, the creator's name no longer gets cut short to fit the country when the row has room for both, so "Rn D… · TR" reads in full again (#127). A name that's really too long is still shortened so the country stays whole.

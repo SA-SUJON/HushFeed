@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Remove LIVE extras sagt jetzt, dass es die Dateien entfernt, mit denen du einem fremden LIVE als Gast beitrittst. Mit diesem Patch kann der Beitritt per Sprache oder Video also nicht mehr klappen (#132). Lass ihn weg, wenn du LIVEs beitrittst.
+
 * **TikTok:** Wenn Clear display gemerkt wird oder Automatic clear display keine Verzögerung hat, zeigt TikTok nach einem Kaltstart nicht mehr die Tabs unter dem Ladekreis und etwa eine Sekunde lang die Knöpfe des ersten Videos. Ein Video, das du aus Favorites oder einem Profil öffnest, startet genauso schon aufgeräumt (#84).
 
 * **TikTok:** Mit Show where a video was posted wird der Name des Creators nicht mehr für das Land gekürzt, wenn die Zeile Platz für beides hat. "Rn D… · TR" ist also wieder ganz lesbar (#127). Ein Name, der wirklich zu lang ist, wird weiter gekürzt, damit das Land ganz zu sehen bleibt.

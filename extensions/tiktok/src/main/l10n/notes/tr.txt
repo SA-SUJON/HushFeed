@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Remove LIVE extras artık başkasının LIVE yayınına konuk olarak katılma dosyalarını da kaldırdığını söylüyor. Yani bu yamayla sesli ya da görüntülü katılım çalışmayabilir (#132). LIVE yayınlarına katılıyorsan bu yamayı seçme.
+
 * **TikTok:** Clear display hatırlandığında ya da Automatic clear display gecikmesiz olduğunda, TikTok soğuk açılıştan sonra yükleme simgesinin altında sekmeleri ve ilk videonun düğmelerini yaklaşık bir saniye artık göstermiyor. Favorites'ten ya da bir profilden açılan video da aynı şekilde temiz başlıyor (#84).
 
 * **TikTok:** Show where a video was posted açıkken satırda ikisine de yer varsa, içerik üreticisinin adı artık ülkeye yer açmak için kısaltılmıyor. Yani "Rn D… · TR" yine tam okunuyor (#127). Gerçekten çok uzun bir ad ise ülke tam görünsün diye yine kısaltılıyor.

@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** O Remove LIVE extras agora avisa que tira os arquivos para entrar na LIVE de outra pessoa como convidado, então entrar por voz ou vídeo pode parar de funcionar com ele (#132). Deixe ele de fora se você entra em LIVEs.
+
 * **TikTok:** Quando o Clear display fica lembrado, ou o Automatic clear display não tem atraso, o TikTok não mostra mais as abas embaixo do ícone de carregamento nem os botões do primeiro vídeo por cerca de um segundo depois de abrir do zero. Um vídeo aberto pelos Favorites ou por um perfil também já começa limpo (#84).
 
 * **TikTok:** Com Show where a video was posted ligado, o nome do criador não é mais cortado para caber o país quando a linha tem espaço para os dois, então "Rn D… · TR" volta a aparecer inteiro (#127). Um nome que é longo demais de verdade continua sendo encurtado para o país aparecer inteiro.
