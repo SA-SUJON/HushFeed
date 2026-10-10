@@ -144,6 +144,13 @@ public final class VideoOverlayHider {
      */
     private static final String[] SEARCH_BAR_IDS = {"47.1.4:ll8"};
     /**
+     * What {@link #beforeClearDisplay} notes before TikTok's Clear display: the wrappers the rail's
+     * buttons and the search bar sit in, and the frames the anchor row and the music disc sit in.
+     * Constants, so the anchor test can trace the lookups.
+     */
+    private static final String[][] SHOWN_COLUMN_IDS = {ACTION_BAR_IDS, SEARCH_BAR_IDS};
+    private static final String[][] SHOWN_FRAME_IDS = {ANCHOR_IDS, MUSIC_COVER_IDS};
+    /**
      * The blank TikTok keeps above the video on tall screens, as tall as the status bar, so the
      * bar never covers the picture. With the bar hidden it's only a black strip (#97).
      */
@@ -1305,17 +1312,16 @@ public final class VideoOverlayHider {
             // Collection.removeIf is API 24, and the payload's floor is 23.
             List<Integer> columnIds = new ArrayList<>();
             List<Integer> frameIds = new ArrayList<>();
-            String packageName = activity.getPackageName();
             // The search bar holds its row in the same kind of wrapper the rail's buttons sit in.
-            for (String[] names : new String[][]{ACTION_BAR_IDS, SEARCH_BAR_IDS}) {
-                for (String name : names) {
-                    int id = resolveIdentifier(activity, packageName, name, false);
+            for (String[] columnNames : SHOWN_COLUMN_IDS) {
+                for (String columnName : columnNames) {
+                    int id = resolveIdentifier(activity, activity.getPackageName(), columnName, false);
                     if (id != 0) columnIds.add(id);
                 }
             }
-            for (String[] names : new String[][]{ANCHOR_IDS, MUSIC_COVER_IDS}) {
-                for (String name : names) {
-                    int id = resolveIdentifier(activity, packageName, name, false);
+            for (String[] frameNames : SHOWN_FRAME_IDS) {
+                for (String frameName : frameNames) {
+                    int id = resolveIdentifier(activity, activity.getPackageName(), frameName, false);
                     if (id != 0) frameIds.add(id);
                 }
             }
