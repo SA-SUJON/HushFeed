@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Temiz ekran altındaki yeni Ekran yanması koruması seçimi, 5 saniye dokunulmazsa videonun üzerindeki düğmeleri, açıklamayı ve sekmeleri dörtte bire kadar karartır, bir sonraki dokunuşun onları geri getirir. Boştayken karart ve kaydır seçiliyken akıştaki her şey ayrıca 2 dakikada bir birkaç piksel kayar, böylece OLED ekran hiç yer değiştirmeyen kontrollerin altında yanmaz.
+
 * **TikTok:** Açılan videolarda yorum çubuğunu gizle artık aramadan açtığın bir fotoğraf gönderisinde de çubuğu kaldırır. Önceden bu gönderilerde yorum ekleme çubuğu kalıyordu.
 
 * **TikTok:** İndirilenler'deki yeni Ses biçimi seçeneği, Sesi de kaydet ve uzun basmadaki Orijinal sesi kaydet ile Opus dosyaları (.ogg) oluşturmayı sağlar. Bunlar TikTok'un M4A dosyasından küçüktür ve telefonun bunları oluşturmak için sesi yeniden kodlar. Android 10 veya üstü gerekir. Varsayılan TikTok'un gönderdiği gibi olarak kalır, bu yüzden bu kayıtlar eskisi gibi çıkar.

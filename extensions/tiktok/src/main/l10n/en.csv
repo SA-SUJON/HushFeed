@@ -278,6 +278,7 @@ Browse,Browse
 Budgets and reminders,Budgets and reminders
 Build details,Build details
 Build details copied to the clipboard,Build details copied to the clipboard
+Burn-in guard,Burn-in guard
 Buttons on videos,Buttons on videos
 Cache one frame of animated images,Cache one frame of animated images
 Calm feed,Calm feed
@@ -449,6 +450,8 @@ Diagnostic data cleared. Tap again to put it back.,Diagnostic data cleared. Tap 
 Diagnostic data put back,Diagnostic data put back
 Diagnostic report copied to the clipboard,Diagnostic report copied to the clipboard
 Diagnostics,Diagnostics
+Dim when idle,Dim when idle
+Dim when idle and shift,Dim when idle and shift
 Disable,Disable
 Disabled,Disabled
 Discard edits,Discard edits
@@ -546,6 +549,7 @@ Focus,Focus
 Follow probe,Follow probe
 Following,Following
 Follows you,Follows you
+"For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim to a quarter, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes.","For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim to a quarter, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes."
 For You,For You
 "For You, Following and the other feed tabs stay behind a calm panel and won't swipe. Messages, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of the feed.","For You, Following and the other feed tabs stay behind a calm panel and won't swipe. Messages, profiles and search work as usual, a link to one video still opens that video, and the app opens on Inbox instead of the feed."
 Forced %1$d gates of %2$d. The rest don't take a true or false value. Restart TikTok to apply this.,Forced %1$d gates of %2$d. The rest don't take a true or false value. Restart TikTok to apply this.

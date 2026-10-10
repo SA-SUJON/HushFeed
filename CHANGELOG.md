@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** A new Burn-in guard choice under Clear display dims the buttons, caption and tabs over the video to a quarter after 5 seconds without a touch, and your next touch brings them back. With Dim when idle and shift, everything on the feed also moves a few pixels every 2 minutes, so an OLED screen doesn't wear in under controls that never move.
+
 * **TikTok:** Hide the comment bar on opened videos now also takes the bar off a photo post you open from search. Before, the Add comment bar stayed on those.
 
 * **TikTok:** A new Sound format choice in Downloads lets Save the sound as well and the Save the original sound long press make Opus files (.ogg). They're smaller than TikTok's M4A, and your phone encodes the sound again to make them. It needs Android 10 or later. As TikTok sent it stays the default, so those saves come out the same as before.

@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Uma nova opção Proteção contra burn-in em Tela limpa escurece os botões, a legenda e as abas sobre o vídeo para um quarto depois de 5 segundos sem toque, e o próximo toque os traz de volta. Com Escurecer quando parado e deslocar, tudo no feed também se move alguns pixels a cada 2 minutos, para a tela OLED não marcar embaixo de controles que nunca saem do lugar.
+
 * **TikTok:** Esconder a barra de comentários nos vídeos abertos agora também tira a barra de um post de fotos que você abre pela busca. Antes, a barra de adicionar comentário ficava nesses posts.
 
 * **TikTok:** Uma nova opção, Formato do som, em Downloads deixa Salvar o som também e Salvar o som original ao tocar e segurar criarem arquivos Opus (.ogg). Eles são menores que o M4A do TikTok, e o seu celular codifica o som de novo para criá-los. Precisa do Android 10 ou mais recente. Como o TikTok enviou continua sendo o padrão, então esses salvamentos saem iguais a antes.

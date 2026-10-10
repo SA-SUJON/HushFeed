@@ -199,6 +199,8 @@ public class FeedScreenCoverageTest {
         put("automatic_clear_display_delay", YES, YES, NONE);
         put("hide_clear_display_controls", YES, YES, NONE);
         put("fade_controls_opacity", YES, YES, NONE);
+        // The guard runs with the overlay pass, which walks both windows and no LIVE room.
+        put("burn_in_guard", YES, YES, NONE);
 
         // Gestures.
         put("swipe_levels", YES, YES, NONE);

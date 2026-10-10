@@ -673,6 +673,12 @@ public class Settings extends BaseSettings {
      */
     public static final IntegerSetting FADE_CONTROLS_OPACITY =
             new IntegerSetting("fade_controls_opacity", 100).withRange(0, 100);
+    /**
+     * Burn-in guard for OLED screens (BurnInGuard): "dim" draws the controls the fade covers at a
+     * quarter after a few seconds without a touch, "dim_shift" also moves the window's content a
+     * couple of dp every two minutes. Over the feed and an opened video only.
+     */
+    public static final StringSetting BURN_IN_GUARD = new StringSetting("burn_in_guard", "off");
     public static final BooleanSetting HIDE_SHARE_GUIDE = new BooleanSetting("hide_share_guide", FALSE);
     public static final BooleanSetting HIDE_RAIL_FOLLOW = new BooleanSetting("hide_rail_follow", FALSE);
     public static final BooleanSetting HIDE_RAIL_LIKE = new BooleanSetting("hide_rail_like", FALSE);

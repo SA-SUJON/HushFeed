@@ -461,6 +461,8 @@ Caption appearance and the clear display option are under Feed & layout > Feed s
 
 Fade the video controls sets the opacity of the buttons, caption and tabs over the video from 0 to 100. Faded controls still take taps. In Clear display the buttons and caption stay on screen at that level, and taps go through them to the video, so a press and hold or a pinch still gets you out. At 0, the buttons and caption are hidden and the tabs stay at 10.
 
+Burn-in guard is for OLED screens. Dim when idle takes the buttons, caption and tabs down to a quarter once you haven't touched the screen for 5 seconds, and the next touch brings them back. Dim when idle and shift also moves everything on the feed a few pixels every 2 minutes. It's off by default and leaves Clear display alone.
+
 The clear-display caption is removed as soon as you turn its switch off. Turning it back on restores the current cue when its video is still on screen.
 
 <img src="assets/settings/interface.png" alt="Feed screen settings" width="300" /> <img src="assets/settings/downloads.png" alt="Subtitle download settings" width="300" />

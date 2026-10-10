@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Pilihan baru Pelindung burn-in layar di bawah Tampilan bersih meredupkan tombol, keterangan, dan tab di atas video menjadi seperempat setelah 5 detik tanpa sentuhan, dan sentuhan berikutnya mengembalikannya. Dengan Redupkan saat diam dan geser, semua yang ada di feed juga bergeser beberapa piksel setiap 2 menit, supaya layar OLED tidak terbakar di bawah kontrol yang tidak pernah bergerak.
+
 * **TikTok:** Sembunyikan bilah komentar di video yang dibuka sekarang juga menghilangkan bilah itu dari postingan foto yang kamu buka dari pencarian. Sebelumnya, bilah untuk menambah komentar tetap muncul di sana.
 
 * **TikTok:** Pilihan baru Format suara di Unduhan membuat Simpan suaranya juga dan Simpan suara asli saat tekan lama bisa membuat berkas Opus (.ogg). Berkasnya lebih kecil daripada M4A dari TikTok, dan ponselmu mengodekan ulang suaranya untuk membuatnya. Butuh Android 10 atau yang lebih baru. Seperti yang dikirim TikTok tetap jadi bawaan, jadi hasil simpanan itu sama seperti sebelumnya.

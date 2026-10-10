@@ -1,5 +1,9 @@
 Applies to Save the sound as well and to Save the original sound on a long press. Opus makes a smaller file, but the sound is encoded again from TikTok's copy.	Vale per Salva anche l'audio e per Salva l'audio originale con la pressione prolungata. Opus crea un file più piccolo, ma l'audio viene ricodificato dalla copia di TikTok.
 As TikTok sent it (M4A or MP3)	Come lo invia TikTok (M4A o MP3)
+Burn-in guard	Protezione dal burn-in
+Dim when idle	Attenua quando inattivo
+Dim when idle and shift	Attenua quando inattivo e sposta
+For OLED screens. After 5 seconds without a touch, the buttons, caption and tabs over the video dim to a quarter, and your next touch brings them back. Shift also moves everything on the feed a few pixels every 2 minutes.	Per schermi OLED. Dopo 5 secondi senza tocchi, i pulsanti, la didascalia e le schede sopra il video si attenuano a un quarto, e il tocco successivo li riporta. Sposta muove anche tutto il feed di qualche pixel ogni 2 minuti.
 Importing new history ended Undo for the earlier clear. You can clear the imported history.	L'importazione di una nuova cronologia impedisce di annullare la cancellazione precedente. Puoi cancellare la cronologia importata.
 %1$d setting in that file can't be restored here and was skipped	%1$d impostazione del file non può essere ripristinata qui ed è stata saltata
 %1$d settings in that file can't be restored here and were skipped	%1$d impostazioni del file non possono essere ripristinate qui e sono state saltate

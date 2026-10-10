@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Una nueva opción Protección contra el quemado de pantalla en Controles ocultos atenúa los botones, la descripción y las pestañas sobre el vídeo a una cuarta parte tras 5 segundos sin tocar, y tu siguiente toque los devuelve. Con Atenuar en reposo y desplazar, todo el feed también se mueve unos píxeles cada 2 minutos, para que una pantalla OLED no se marque bajo controles que nunca se mueven.
+
 * **TikTok:** Ocultar la barra de comentarios en los videos abiertos ahora también quita la barra de una publicación de fotos que abres desde la búsqueda. Antes, la barra para añadir un comentario se quedaba en esas.
 
 * **TikTok:** Una nueva opción, Formato del sonido, en Descargas permite que Guardar también el sonido y Guardar el sonido original al mantener pulsado creen archivos Opus (.ogg). Son más pequeños que el M4A de TikTok, y tu teléfono vuelve a codificar el sonido para crearlos. Necesita Android 10 o posterior. Tal como lo envía TikTok sigue siendo la opción por defecto, así que esas descargas salen igual que antes.
