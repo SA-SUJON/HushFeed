@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Menekan kembali di video yang sudah bersih dari pencarian atau profil tidak lagi dihitung sebagai mematikan Clear display. Membuka video yang sama lagi akan membersihkannya seperti video lain, dan Clear display yang diingat tetap menyala (#84).
+
 * **TikTok:** Remove LIVE extras sekarang menyebutkan bahwa ia menghapus file untuk bergabung ke LIVE orang lain sebagai tamu, jadi bergabung lewat suara atau video bisa tidak berfungsi kalau patch ini dipakai (#132). Jangan pilih patch ini kalau kamu suka bergabung ke LIVE.
 
 * **TikTok:** Saat Clear display diingat, atau Automatic clear display tanpa jeda, TikTok tidak lagi menampilkan tab di bawah putaran loading dan tombol video pertama selama sekitar satu detik setelah dibuka dari awal. Video yang dibuka dari Favorites atau profil juga langsung mulai bersih (#84).

@@ -856,7 +856,7 @@ public class VideoOverlayHiderTest {
             // automatic transition itself.
             Settings.CLEAR_DISPLAY.save(false);
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(true, 0));
 
             // The two disagree on purpose: the live state says the controls are hidden, the
             // stored setting says nothing. Reading the setting here would leave the strip up.
@@ -873,7 +873,7 @@ public class VideoOverlayHiderTest {
 
             // The tap that leaves clear display brings it back.
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(false, 2));
             VideoOverlayHider.applyTo(activity);
             assertEquals(View.VISIBLE, tabStrip.getVisibility());
         }
@@ -907,19 +907,19 @@ public class VideoOverlayHiderTest {
             detail.get().setContentView(detailTabs);
 
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(true, 0));
             VideoOverlayHider.applyTo(main.get());
             assertEquals(View.GONE, tabs.getVisibility());
             VideoOverlayHider.applyTo(detail.get());
             assertEquals(View.VISIBLE, detailTabs.getVisibility());
 
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(false, 2));
             VideoOverlayHider.applyTo(main.get());
             assertEquals(View.VISIBLE, tabs.getVisibility());
         } finally {
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(false, 2));
         }
     }
 
@@ -946,7 +946,7 @@ public class VideoOverlayHiderTest {
             for (int visibility : new int[]{View.VISIBLE, View.INVISIBLE, View.GONE}) {
                 stories.setVisibility(visibility);
                 app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                        .rememberClearDisplayEvent(new ClearEvent(true, 1));
+                        .rememberClearDisplayEvent(new ClearEvent(true, 0));
                 Settings.CLEAR_DISPLAY.save(false);
                 VideoOverlayHider.applyTo(activity);
                 assertEquals(View.GONE, stories.getVisibility());
@@ -956,7 +956,7 @@ public class VideoOverlayHiderTest {
                     assertEquals(View.GONE, stories.getVisibility());
                 }
                 app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                        .rememberClearDisplayEvent(new ClearEvent(false, 1));
+                        .rememberClearDisplayEvent(new ClearEvent(false, 2));
                 VideoOverlayHider.applyTo(activity);
                 assertEquals(visibility, stories.getVisibility());
                 assertEquals(0.6f, stories.getAlpha(), 0f);
@@ -1013,7 +1013,7 @@ public class VideoOverlayHiderTest {
             app.morphe.extension.tiktok.blockauthor.FeedVisibility.resolveForTests(
                     activity.getPackageName(), "vp_story_collection", viewer.getId());
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(true, 0));
 
             VideoOverlayHider.applyTo(activity);
             assertEquals(View.GONE, stories.getVisibility());
@@ -1027,7 +1027,7 @@ public class VideoOverlayHiderTest {
             VideoOverlayHider.applyTo(activity);
             assertEquals(View.GONE, stories.getVisibility());
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(false, 2));
             VideoOverlayHider.applyTo(activity);
             assertEquals(View.VISIBLE, stories.getVisibility());
         }
@@ -1055,7 +1055,7 @@ public class VideoOverlayHiderTest {
             detailStories.setId(storyId);
             detail.get().setContentView(detailStories);
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(true, 0));
 
             VideoOverlayHider.applyTo(main.get());
             app.morphe.extension.shared.settings.PausedProcess.set(true);
@@ -1331,19 +1331,19 @@ public class VideoOverlayHiderTest {
             VideoOverlayHider.applyTo(detail);
             assertEquals(View.VISIBLE, bar.getVisibility());
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(true, 0));
             VideoOverlayHider.applyTo(detail);
             assertEquals("the comment bar stayed in Clear display", View.GONE, bar.getVisibility());
             assertEquals(View.GONE, strip.getVisibility());
 
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(false, 2));
             VideoOverlayHider.applyTo(detail);
             assertEquals("Restore display left the comment bar hidden", View.VISIBLE, bar.getVisibility());
             assertEquals(View.VISIBLE, strip.getVisibility());
         } finally {
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(false, 2));
             Settings.CLEAR_DISPLAY.save(false);
         }
     }
@@ -1370,13 +1370,13 @@ public class VideoOverlayHiderTest {
             mainController.resume();
 
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(true, 0));
             VideoOverlayHider.applyTo(main);
             assertEquals("the photo's comment bar stayed in Clear display", View.GONE, bar.getVisibility());
             assertEquals(View.GONE, strip.getVisibility());
 
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(false, 2));
             VideoOverlayHider.applyTo(main);
             assertEquals(View.VISIBLE, bar.getVisibility());
             assertEquals(View.VISIBLE, strip.getVisibility());
@@ -1384,12 +1384,12 @@ public class VideoOverlayHiderTest {
             // The feed itself: the strip with no bar over it stays in Clear display.
             root.removeView(bar);
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(true, 0));
             VideoOverlayHider.applyTo(main);
             assertEquals("the feed's strip went without a comment bar", View.VISIBLE, strip.getVisibility());
         } finally {
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(false, 2));
             Settings.CLEAR_DISPLAY.save(false);
         }
     }
@@ -1467,19 +1467,19 @@ public class VideoOverlayHiderTest {
             assertEquals("the anchor went with Clear display off", View.VISIBLE, anchor.getVisibility());
 
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(true, 0));
             VideoOverlayHider.applyTo(activity);
             assertEquals("the faded anchor still takes taps", View.INVISIBLE, anchor.getVisibility());
             assertEquals(View.GONE, putAway.getVisibility());
 
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(false, 2));
             VideoOverlayHider.applyTo(activity);
             assertEquals(View.VISIBLE, anchor.getVisibility());
             assertEquals(View.GONE, putAway.getVisibility());
         } finally {
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(false, 2));
             Settings.CLEAR_DISPLAY.save(false);
             VideoOverlayHider.resolveForTests("view_rootview", 0);
         }
@@ -1965,17 +1965,17 @@ public class VideoOverlayHiderTest {
             assertEquals(1f, bar.getAlpha(), 0f);
 
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(true, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(true, 0));
             VideoOverlayHider.applyTo(activity);
             assertEquals("Clear display leaves no bar to tap by accident", View.INVISIBLE, bar.getVisibility());
 
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(false, 2));
             VideoOverlayHider.applyTo(activity);
             assertEquals(View.VISIBLE, bar.getVisibility());
         } finally {
             app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch
-                    .rememberClearDisplayEvent(new ClearEvent(false, 1));
+                    .rememberClearDisplayEvent(new ClearEvent(false, 2));
             Settings.CLEAR_DISPLAY.save(false);
             Settings.FADE_CONTROLS_OPACITY.save(100);
             app.morphe.extension.tiktok.settings.SettingsStatus.videoOverlaysEnabled = overlays;

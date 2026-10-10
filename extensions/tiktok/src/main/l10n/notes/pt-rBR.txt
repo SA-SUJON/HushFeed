@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Apertar voltar em um vídeo limpo aberto pela busca ou por um perfil não conta mais como desligar o Clear display. Abrir o mesmo vídeo de novo limpa ele como qualquer outro, e um Clear display lembrado continua ligado (#84).
+
 * **TikTok:** O Remove LIVE extras agora avisa que tira os arquivos para entrar na LIVE de outra pessoa como convidado, então entrar por voz ou vídeo pode parar de funcionar com ele (#132). Deixe ele de fora se você entra em LIVEs.
 
 * **TikTok:** Quando o Clear display fica lembrado, ou o Automatic clear display não tem atraso, o TikTok não mostra mais as abas embaixo do ícone de carregamento nem os botões do primeiro vídeo por cerca de um segundo depois de abrir do zero. Um vídeo aberto pelos Favorites ou por um perfil também já começa limpo (#84).

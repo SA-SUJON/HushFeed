@@ -156,7 +156,7 @@ public class AutomaticClearDisplayTest {
         assertTrue(RememberClearDisplayPatch.isClearDisplayNow());
 
         // TikTok posts its own event when the user taps to bring the controls back.
-        RememberClearDisplayPatch.rememberClearDisplayEvent(new Event(false, 1));
+        RememberClearDisplayPatch.rememberClearDisplayEvent(new Event(false, 2));
         assertFalse(RememberClearDisplayPatch.isClearDisplayNow());
     }
 
@@ -310,7 +310,7 @@ public class AutomaticClearDisplayTest {
         assertTrue(RememberClearDisplayPatch.isCarryingClear());
 
         // Restore display, or any change TikTok makes itself, ends it.
-        RememberClearDisplayPatch.rememberClearDisplayEvent(new Event(false, 1));
+        RememberClearDisplayPatch.rememberClearDisplayEvent(new Event(false, 2));
         assertFalse("a manual restore kept the controls away", RememberClearDisplayPatch.isCarryingClear());
         RememberClearDisplayPatch.firstFrame("two", () -> true, events::add);
         Shadows.shadowOf(Looper.getMainLooper()).idle();
@@ -355,7 +355,7 @@ public class AutomaticClearDisplayTest {
             org.robolectric.util.ReflectionHelpers.callStaticMethod(hider, "applyTo", apply);
             assertEquals("the incoming video showed its caption", android.view.View.GONE, caption.getVisibility());
 
-            RememberClearDisplayPatch.rememberClearDisplayEvent(new Event(false, 1));
+            RememberClearDisplayPatch.rememberClearDisplayEvent(new Event(false, 2));
             org.robolectric.util.ReflectionHelpers.callStaticMethod(hider, "applyTo", apply);
             assertEquals("Restore display left the caption hidden", android.view.View.VISIBLE, caption.getVisibility());
         } finally {
@@ -385,7 +385,7 @@ public class AutomaticClearDisplayTest {
             assertTrue(RememberClearDisplayPatch.isCarryingClear());
 
             // Restore display saves the choice off, and nothing carries from there.
-            RememberClearDisplayPatch.rememberClearDisplayEvent(new Event(false, 1));
+            RememberClearDisplayPatch.rememberClearDisplayEvent(new Event(false, 2));
             assertFalse(Settings.CLEAR_DISPLAY.get());
             assertFalse(RememberClearDisplayPatch.isCarryingClear());
         } finally {
@@ -583,6 +583,43 @@ public class AutomaticClearDisplayTest {
             RememberClearDisplayPatch.firstFrame("next", () -> true, events::add);
             Shadows.shadowOf(Looper.getMainLooper()).idleFor(Duration.ofSeconds(1));
             assertEquals(List.of(false, false, true), events);
+        }
+    }
+    /**
+     * On a video opened from search or a profile, TikTok spends the first back press on leaving
+     * clear mode. That's the way out, not a choice to see the controls: counted as one, opening
+     * the same video again never cleared it (#84), and a remembered clear was saved off.
+     */
+    @Test public void tikToksOwnExitsDontStickToTheVideoOrOverwriteTheChoice() {
+        try (var page = Robolectric.buildActivity(android.app.Activity.class).setup().visible();
+             var again = Robolectric.buildActivity(android.app.Activity.class).setup().visible()) {
+            List<Boolean> events = new ArrayList<>();
+            RememberClearDisplayPatch.observeWindow(page.get().getWindow().getDecorView());
+            RememberClearDisplayPatch.firstFrame("same", () -> true, events::add);
+            Shadows.shadowOf(Looper.getMainLooper()).idleFor(Duration.ofSeconds(1));
+            RememberClearDisplayPatch.rememberClearDisplayEvent(new Event(false, 12));
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            assertFalse("the state didn't follow TikTok", RememberClearDisplayPatch.isClearDisplayNow());
+            RememberClearDisplayPatch.observeWindow(again.get().getWindow().getDecorView());
+            RememberClearDisplayPatch.firstFrame("same", () -> true, events::add);
+            Shadows.shadowOf(Looper.getMainLooper()).idleFor(Duration.ofSeconds(1));
+            assertEquals("the video opened again stayed uncleared", List.of(false, true, false, true), events);
+        }
+
+        Settings.AUTOMATIC_CLEAR_DISPLAY.save(false);
+        Settings.CLEAR_DISPLAY.save(true);
+        try {
+            for (int kind : new int[]{1, 11, 12}) {
+                RememberClearDisplayPatch.firstFrame("kind" + kind, () -> true, value -> true);
+                RememberClearDisplayPatch.rememberClearDisplayEvent(new Event(false, kind));
+                assertTrue("type " + kind + " saved the remembered clear off", Settings.CLEAR_DISPLAY.get());
+                assertFalse(RememberClearDisplayPatch.isCarryingClear());
+            }
+            // A tap that leaves clear mode is the reader's.
+            RememberClearDisplayPatch.rememberClearDisplayEvent(new Event(false, 2));
+            assertFalse(Settings.CLEAR_DISPLAY.get());
+        } finally {
+            Settings.CLEAR_DISPLAY.resetToDefault();
         }
     }
     @Test public void focusReturnCanClearTheFirstItemAfterItsInitialAttemptHadNoFocus() {

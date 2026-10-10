@@ -93,7 +93,7 @@ public class BurnInGuardTest {
     }
 
     private static void clear(boolean on) {
-        RememberClearDisplayPatch.rememberClearDisplayEvent(new VideoOverlayHiderTest.ClearEvent(on, 1));
+        RememberClearDisplayPatch.rememberClearDisplayEvent(new VideoOverlayHiderTest.ClearEvent(on, on ? 0 : 2));
     }
 
     /** Lets {@code millis} go by, running whatever the main thread had due in them. */

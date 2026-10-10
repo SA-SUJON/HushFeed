@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Axtarışdan və ya profildən açılmış təmizlənmiş videoda geri düyməsinə basmaq artıq Clear display-i söndürmək sayılmır. Eyni videonu yenidən açanda o da başqaları kimi təmizlənir, yadda saxlanmış Clear display isə açıq qalır (#84).
+
 * **TikTok:** Remove LIVE extras indi başqasının LIVE-ına qonaq kimi qoşulmaq üçün faylları da sildiyini deyir, ona görə onunla səsli və ya videolu qoşulmaq işləməyə bilər (#132). LIVE-lara qoşulursunuzsa, onu seçməyin.
 
 * **TikTok:** Clear display yadda saxlananda və ya Automatic clear display gecikməsiz olanda, TikTok soyuq başlanğıcdan sonra yükləmə fırlanğacının altında tabları və ilk videonun düymələrini təxminən bir saniyə artıq göstərmir. Favorites və ya profildən açılan video da eyni şəkildə təmizlənmiş başlayır (#84).

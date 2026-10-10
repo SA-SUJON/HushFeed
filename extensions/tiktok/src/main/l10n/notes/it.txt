@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Premere indietro su un video pulito aperto dalla ricerca o da un profilo non conta più come spegnere Clear display. Riaprendo lo stesso video si pulisce come gli altri, e un Clear display ricordato resta attivo (#84).
+
 * **TikTok:** Remove LIVE extras ora dice che toglie i file per entrare nella LIVE di qualcun altro come ospite, quindi con questa patch entrare con la voce o il video può smettere di funzionare (#132). Lasciala fuori se partecipi alle LIVE.
 
 * **TikTok:** Quando Clear display viene ricordato, o Automatic clear display non ha ritardo, TikTok non mostra più le schede sotto la rotellina di caricamento e i pulsanti del primo video per circa un secondo dopo un avvio a freddo. Anche un video aperto da Favorites o da un profilo parte già pulito (#84).

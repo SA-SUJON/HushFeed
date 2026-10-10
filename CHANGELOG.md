@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Pressing back on a cleared video from search or a profile no longer counts as turning Clear display off. Opening the same video again clears it like any other, and a remembered Clear display stays on (#84).
+
 * **TikTok:** Remove LIVE extras now says it takes out the files for joining someone's LIVE as a guest, so joining by voice or video may stop working with it in (#132). Leave it out if you join LIVEs.
 
 * **TikTok:** When Clear display is remembered, or Automatic clear display has no delay, TikTok no longer shows the tabs under its loading spinner and the first video's buttons for about a second after a cold start. A video opened from Favorites or a profile starts cleared the same way (#84).

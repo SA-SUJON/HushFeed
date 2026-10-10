@@ -274,13 +274,13 @@ public class PauseAnswersUnpatchedTest {
     @Test public void aClearModeToggleWhilePausedIsNotRememberedOverTheReadersChoice() {
         Settings.CLEAR_DISPLAY.save(false);
         Setting.setPausedForProcess(true);
-        RememberClearDisplayPatch.rememberClearDisplayEvent(new ClearEvent(true, 1));
+        RememberClearDisplayPatch.rememberClearDisplayEvent(new ClearEvent(true, 0));
         assertFalse(Settings.CLEAR_DISPLAY.savedValue());
         assertFalse("paused, the remembered clear mode is not applied", Settings.CLEAR_DISPLAY.get());
 
         // The control: running normally, the same toggle is remembered.
         Setting.setPausedForProcess(false);
-        RememberClearDisplayPatch.rememberClearDisplayEvent(new ClearEvent(true, 1));
+        RememberClearDisplayPatch.rememberClearDisplayEvent(new ClearEvent(true, 0));
         assertTrue(Settings.CLEAR_DISPLAY.savedValue());
     }
 
