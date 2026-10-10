@@ -10,6 +10,7 @@ Importing new history ended Undo for the earlier clear. You can clear the import
 %1$d setting in that file can't be restored here and was skipped	%1$d impostazione del file non può essere ripristinata qui ed è stata saltata
 %1$d settings in that file can't be restored here and were skipped	%1$d impostazioni del file non possono essere ripristinate qui e sono state saltate
 Import watch history	Importa cronologia di visualizzazione
+Keep the language picked in TikTok	Mantieni la lingua scelta in TikTok
 One language code, like en or es. Comments and captions TikTok translates come out in this language instead of the app's. Leave it empty to keep TikTok's choice.	Un codice lingua, come en o es. I commenti e le didascalie che TikTok traduce escono in questa lingua invece che in quella dell'app. Lascialo vuoto per tenere la scelta di TikTok.
 Opus (.ogg), a smaller file	Opus (.ogg), file più piccolo
 Opus didn't work on this phone. Saving the sound as TikTok sent it instead.	Opus non ha funzionato su questo telefono. Salvo l'audio come l'ha inviato TikTok.
@@ -20,6 +21,7 @@ Translate into	Traduci in
 Type one language code here, like en.	Scrivi qui un codice lingua, come en.
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Usa l'esportazione JSON di TikTok di questo account, fino a %1$s MB e %2$s voci. Le date senza fuso orario usano quello di questo telefono.
 Sign in to TikTok before importing watch history.	Accedi a TikTok prima di importare la cronologia di visualizzazione.
+When TikTok starts and decides the phone's language changed, it drops the language you picked in its settings and follows the phone. With this on, your pick stays. Counts from TikTok's next start.	Quando TikTok si avvia e decide che la lingua del telefono è cambiata, scarta la lingua che hai scelto nelle sue impostazioni e segue il telefono. Con questa opzione attiva, la tua scelta resta. Vale dal prossimo avvio di TikTok.
 Write the username and caption on the video	Scrivi nome utente e descrizione sul video
 Writing the caption on the video	Scrittura della descrizione sul video
 Writing the caption on the video: %1$s	Scrittura della descrizione sul video: %1$s

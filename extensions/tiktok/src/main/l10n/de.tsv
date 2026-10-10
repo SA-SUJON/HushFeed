@@ -10,6 +10,7 @@ Importing new history ended Undo for the earlier clear. You can clear the import
 %1$d setting in that file can't be restored here and was skipped	%1$d Einstellung in der Datei kann hier nicht wiederhergestellt werden und wurde übersprungen
 %1$d settings in that file can't be restored here and were skipped	%1$d Einstellungen in der Datei können hier nicht wiederhergestellt werden und wurden übersprungen
 Import watch history	Wiedergabeverlauf importieren
+Keep the language picked in TikTok	In TikTok gewählte Sprache behalten
 One language code, like en or es. Comments and captions TikTok translates come out in this language instead of the app's. Leave it empty to keep TikTok's choice.	Ein Sprachcode, zum Beispiel en oder es. Kommentare und Beschreibungen, die TikTok übersetzt, erscheinen in dieser Sprache statt in der Sprache der App. Lass das Feld leer, um TikToks Wahl zu behalten.
 Opus (.ogg), a smaller file	Opus (.ogg), kleinere Datei
 Opus didn't work on this phone. Saving the sound as TikTok sent it instead.	Opus hat auf diesem Handy nicht funktioniert. Der Ton wird stattdessen so gespeichert, wie TikTok ihn geschickt hat.
@@ -20,6 +21,7 @@ Translate into	Übersetzen in
 Type one language code here, like en.	Gib hier einen Sprachcode ein, zum Beispiel en.
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Wähle den TikTok-JSON-Export dieses Kontos mit höchstens %1$s MB und %2$s Einträgen. Datumsangaben ohne Zeitzone verwenden die Zeitzone dieses Telefons.
 Sign in to TikTok before importing watch history.	Melde dich bei TikTok an, bevor du den Wiedergabeverlauf importierst.
+When TikTok starts and decides the phone's language changed, it drops the language you picked in its settings and follows the phone. With this on, your pick stays. Counts from TikTok's next start.	Wenn TikTok startet und meint, die Sprache des Handys habe sich geändert, verwirft es die Sprache, die du in seinen Einstellungen gewählt hast, und folgt dem Handy. Ist das an, bleibt deine Wahl. Gilt ab dem nächsten Start von TikTok.
 Write the username and caption on the video	Benutzernamen und Beschreibung ins Video schreiben
 Writing the caption on the video	Beschreibung wird ins Video geschrieben
 Writing the caption on the video: %1$s	Beschreibung wird ins Video geschrieben: %1$s

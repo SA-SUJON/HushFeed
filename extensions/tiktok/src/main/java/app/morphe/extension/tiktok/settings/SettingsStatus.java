@@ -615,6 +615,13 @@ public class SettingsStatus {
         passkeySignInEnabled = true;
     }
 
+    /** Keep the app language put its switch in front of TikTok's language reset. */
+    public static boolean appLanguageEnabled = false;
+
+    public static void enableAppLanguage() {
+        appLanguageEnabled = true;
+    }
+
     static {
         // The patcher fills load() with selected registrations. Runtime hooks can run before settings opens.
         // Keep this after field initializers so their default values cannot overwrite those registrations.

@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Yeni Keep the app language yaması, Uygulama sayfasında Sistem altına TikTok'ta seçilen dili koru anahtarını ekler (#61). TikTok açılırken telefonun dilinin değiştiğine karar verirse, ayarlarında seçtiğin dili bırakır ve telefona uyar. Anahtar açıkken seçimin kalır. Kapalı başlar.
+
 * **TikTok:** İndirilenler altındaki yeni Kullanıcı adını ve açıklamayı videonun üzerine yaz anahtarı, Hushfeed'in kaydettiği videoların sol alt köşesine @kullanıcı adını ve açıklamanın ilk satırını yazar. Telefon bunun için videoyu yeniden kodlar, bu yüzden bu kayıtlar daha uzun sürer ve ilerlemelerini İptal düğmesiyle gösterir. Kapalı başlar.
 
 * **TikTok:** Remove creation tools artık bir oluşturma aracını, örneğin kameradaki efekt aramasını açmanın TikTok'u kapatabileceği konusunda uyarıyor (#133). Video çekiyorsan bu yamayı seçme.

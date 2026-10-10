@@ -10,6 +10,7 @@ Importing new history ended Undo for the earlier clear. You can clear the import
 %1$d setting in that file can't be restored here and was skipped	Bu fayldakı %1$d ayar burada bərpa edilə bilmir və ötürüldü
 %1$d settings in that file can't be restored here and were skipped	Bu fayldakı %1$d ayar burada bərpa edilə bilmir və ötürüldü
 Import watch history	İzləmə tarixçəsini idxal et
+Keep the language picked in TikTok	TikTok-da seçilən dili saxla
 One language code, like en or es. Comments and captions TikTok translates come out in this language instead of the app's. Leave it empty to keep TikTok's choice.	Bir dil kodu, məsələn en və ya es. TikTok-un tərcümə etdiyi şərhlər və başlıqlar tətbiqin dili əvəzinə bu dildə çıxır. TikTok-un seçimini saxlamaq üçün boş buraxın.
 Opus (.ogg), a smaller file	Opus (.ogg), daha kiçik fayl
 Opus didn't work on this phone. Saving the sound as TikTok sent it instead.	Opus bu telefonda işləmədi. Səs əvəzinə TikTok-un göndərdiyi kimi saxlanılır.
@@ -20,6 +21,7 @@ Translate into	Bu dilə tərcümə et
 Type one language code here, like en.	Buraya bir dil kodu yazın, məsələn en.
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Bu hesabın TikTok JSON ixracını seçin. Fayl ən çox %1$s MB və %2$s qeyd ola bilər. Saat qurşağı olmayan tarixlər üçün bu telefonun saat qurşağı istifadə edilir.
 Sign in to TikTok before importing watch history.	İzləmə tarixçəsini idxal etməzdən əvvəl TikTok-a daxil olun.
+When TikTok starts and decides the phone's language changed, it drops the language you picked in its settings and follows the phone. With this on, your pick stays. Counts from TikTok's next start.	TikTok açılanda telefonun dilinin dəyişdiyinə qərar verərsə, ayarlarında seçdiyiniz dili atır və telefona uyğunlaşır. Bu yandırılanda seçiminiz qalır. TikTok-un növbəti açılışından etibarən keçərlidir.
 Write the username and caption on the video	İstifadəçi adını və açıqlamanı videonun üzərinə yaz
 Writing the caption on the video	Açıqlama videonun üzərinə yazılır
 Writing the caption on the video: %1$s	Açıqlama videonun üzərinə yazılır: %1$s

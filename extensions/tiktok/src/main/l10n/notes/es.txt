@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Un parche nuevo, Keep the app language, añade el interruptor Mantener el idioma elegido en TikTok en Sistema, dentro de Aplicación (#61). Cuando TikTok se inicia y decide que el idioma del teléfono cambió, descarta el idioma que elegiste en sus ajustes y sigue al teléfono. Con el interruptor activado, tu elección se mantiene. Empieza desactivado.
+
 * **TikTok:** Un nuevo interruptor Escribir el nombre de usuario y la descripción en el video, en Descargas, pone el @nombre de usuario y la primera línea de la descripción en la esquina inferior izquierda de los videos que guarda Hushfeed. El teléfono vuelve a codificar el video para hacerlo, así que esos guardados tardan más y muestran su progreso con un botón Cancelar. Empieza desactivado.
 
 * **TikTok:** Remove creation tools ahora avisa de que abrir una herramienta de creación, como la búsqueda de efectos en la cámara, puede cerrar TikTok (#133). Déjalo fuera si haces videos.

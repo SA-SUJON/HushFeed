@@ -11,6 +11,7 @@ Importing new history ended Undo for the earlier clear. You can clear the import
 %1$d setting in that file can't be restored here and was skipped,%1$d pengaturan dalam berkas tidak dapat dipulihkan di sini dan dilewati
 %1$d settings in that file can't be restored here and were skipped,%1$d pengaturan dalam berkas tidak dapat dipulihkan di sini dan dilewati
 "Import watch history","Impor riwayat tontonan"
+Keep the language picked in TikTok,Pertahankan bahasa yang dipilih di TikTok
 "One language code, like en or es. Comments and captions TikTok translates come out in this language instead of the app's. Leave it empty to keep TikTok's choice.","Satu kode bahasa, seperti en atau es. Komentar dan keterangan yang diterjemahkan TikTok muncul dalam bahasa ini, bukan bahasa aplikasi. Biarkan kosong untuk memakai pilihan TikTok."
 "Opus (.ogg), a smaller file","Opus (.ogg), berkas lebih kecil"
 Opus didn't work on this phone. Saving the sound as TikTok sent it instead.,Opus tidak berfungsi di ponsel ini. Menyimpan suaranya seperti yang dikirim TikTok.
@@ -21,6 +22,7 @@ Translate into,Terjemahkan ke
 "Type one language code here, like en.","Ketik satu kode bahasa di sini, seperti en."
 "Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.","Gunakan ekspor JSON TikTok akun ini, maksimal %1$s MB dan %2$s entri. Tanggal tanpa zona waktu memakai zona waktu ponsel ini."
 "Sign in to TikTok before importing watch history.","Masuk ke TikTok sebelum mengimpor riwayat tontonan."
+"When TikTok starts and decides the phone's language changed, it drops the language you picked in its settings and follows the phone. With this on, your pick stays. Counts from TikTok's next start.","Saat TikTok dimulai dan menganggap bahasa ponsel berubah, TikTok membuang bahasa yang kamu pilih di pengaturannya dan mengikuti ponsel. Jika ini menyala, pilihanmu tetap. Berlaku sejak TikTok dimulai lagi."
 Write the username and caption on the video,Tulis nama pengguna dan keterangan di video
 Writing the caption on the video,Menulis keterangan di video
 Writing the caption on the video: %1$s,Menulis keterangan di video: %1$s

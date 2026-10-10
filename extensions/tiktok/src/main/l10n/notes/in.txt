@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Patch baru, Keep the app language, menambahkan sakelar Pertahankan bahasa yang dipilih di TikTok di Sistem pada Aplikasi (#61). Saat TikTok dimulai dan menganggap bahasa ponsel berubah, TikTok membuang bahasa yang kamu pilih di pengaturannya dan mengikuti ponsel. Dengan sakelar ini menyala, pilihanmu tetap. Awalnya mati.
+
 * **TikTok:** Sakelar baru Tulis nama pengguna dan keterangan di video di Unduhan menulis @nama pengguna dan baris pertama keterangan di pojok kiri bawah video yang disimpan Hushfeed. Ponsel mengenkode ulang videonya untuk itu, jadi simpanan seperti ini lebih lama dan menampilkan progresnya dengan tombol Batal. Awalnya mati.
 
 * **TikTok:** Remove creation tools sekarang memperingatkan bahwa membuka alat pembuatan, seperti pencarian efek di kamera, bisa menutup TikTok (#133). Jangan pilih patch ini kalau kamu membuat video.

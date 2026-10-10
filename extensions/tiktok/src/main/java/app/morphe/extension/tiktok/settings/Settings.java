@@ -842,6 +842,9 @@ public class Settings extends BaseSettings {
     // Skip passkey sign-in (#102), in the default selection with this off. Read each time a
     // sign-in screen asks whether this phone can use passkeys, so no restart.
     public static final BooleanSetting SKIP_PASSKEY_SIGN_IN = new BooleanSetting("skip_passkey_sign_in", FALSE);
+    // Keep the app language (#61), in the default selection with this off. TikTok's reset runs
+    // once early in each start, so a change counts from the next one, with no restart asked for.
+    public static final BooleanSetting KEEP_APP_LANGUAGE = new BooleanSetting("keep_app_language", FALSE);
     // App lock. Off until the reader turns it on, and read as each screen starts, so no restart.
     // The delay is whole minutes TikTok may spend in the background before it asks again.
     public static final BooleanSetting APP_LOCK = new BooleanSetting("app_lock", FALSE);

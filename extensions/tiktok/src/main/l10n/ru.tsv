@@ -13,6 +13,7 @@ Importing new history ended Undo for the earlier clear. You can clear the import
 %1$d settings in that file can't be restored here and were skipped|few	%1$d настройки из файла нельзя восстановить здесь, и они пропущены
 %1$d settings in that file can't be restored here and were skipped|many	%1$d настроек из файла нельзя восстановить здесь, и они пропущены
 Import watch history	Импортировать историю просмотров
+Keep the language picked in TikTok	Сохранять язык, выбранный в TikTok
 One language code, like en or es. Comments and captions TikTok translates come out in this language instead of the app's. Leave it empty to keep TikTok's choice.	Один код языка, например en или es. Комментарии и описания, которые переводит TikTok, будут на этом языке, а не на языке приложения. Оставьте поле пустым, чтобы TikTok выбирал сам.
 Opus (.ogg), a smaller file	Opus (.ogg), файл поменьше
 Opus didn't work on this phone. Saving the sound as TikTok sent it instead.	Opus не сработал на этом телефоне. Звук сохраняется в том виде, в каком его прислал TikTok.
@@ -23,6 +24,7 @@ Translate into	Переводить на
 Type one language code here, like en.	Введите здесь один код языка, например en.
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Выберите экспорт JSON из TikTok для этого аккаунта, до %1$s МБ и %2$s записей. Для дат без часового пояса используется часовой пояс этого телефона.
 Sign in to TikTok before importing watch history.	Войдите в TikTok перед импортом истории просмотров.
+When TikTok starts and decides the phone's language changed, it drops the language you picked in its settings and follows the phone. With this on, your pick stays. Counts from TikTok's next start.	Когда TikTok запускается и решает, что язык телефона изменился, он сбрасывает язык, выбранный в его настройках, и следует за телефоном. Если это включено, ваш выбор остаётся. Действует со следующего запуска TikTok.
 Write the username and caption on the video	Писать имя пользователя и описание на видео
 Writing the caption on the video	Описание пишется на видео
 Writing the caption on the video: %1$s	Описание пишется на видео: %1$s

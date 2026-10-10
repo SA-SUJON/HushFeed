@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Yeni Keep the app language patçı Tətbiq səhifəsində Sistem altına TikTok-da seçilən dili saxla açarını əlavə edir (#61). TikTok açılanda telefonun dilinin dəyişdiyinə qərar verərsə, öz ayarlarında seçdiyiniz dili atır və telefona uyğunlaşır. Açar yandırılanda seçiminiz qalır. Sönülü başlayır.
+
 * **TikTok:** Endirmələr bölməsindəki yeni İstifadəçi adını və açıqlamanı videonun üzərinə yaz açarı Hushfeed-in saxladığı videoların sol alt küncünə @istifadəçi adını və açıqlamanın ilk sətrini yazır. Bunun üçün telefon videonu yenidən kodlayır, ona görə belə saxlamalar daha uzun çəkir və gedişatı Ləğv edin düyməsi ilə göstərilir. Açar sönülü başlayır.
 
 * **TikTok:** Remove creation tools indi xəbərdarlıq edir ki, yaratma alətlərindən birini, məsələn kamerada effekt axtarışını açmaq TikTok-u bağlaya bilər (#133). Video çəkirsinizsə, onu seçməyin.
