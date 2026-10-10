@@ -30,6 +30,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** The time picker for When to send in Keep a streak going now opens dark or light to match Hushfeed settings.
 
+* **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling and Enable voice comments now each have a switch in Hushfeed settings, so Pause turns them off too and Morphe Manager's simple mode now picks them. Each of those switches starts off. If you patched with any of these before, turn its switch on after you update to keep it working. Skip the splash ad, Skip update checks, Limit background traffic and Cache one frame of animated images are under Performance in App. Stop on-device AI profiling is in Privacy and Allow voice comments is in Comments.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** Author text size now sizes the post date next to the creator's name too, so the two stay the same size (#66).

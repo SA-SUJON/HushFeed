@@ -26,6 +26,8 @@
 
 * **TikTok:** Die Zeitauswahl für Wann senden unter Eine Serie am Laufen halten öffnet sich jetzt dunkel oder hell, passend zu den Hushfeed-Einstellungen.
 
+* **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling und Enable voice comments haben jetzt jeweils einen Schalter in den Hushfeed-Einstellungen, sodass Pausieren sie ebenfalls ausschaltet und der einfache Modus von Morphe Manager sie jetzt mit auswählt. Jeder dieser Schalter ist zunächst aus. Wenn du schon mit einem dieser Patches gepatcht hast, schalte seinen Schalter nach dem Update ein, damit er weiter wirkt. Startwerbung überspringen, Update-Prüfungen überspringen, Hintergrund-Datenverkehr begrenzen und Nur ein Bild animierter Grafiken zwischenspeichern findest du unter Leistung in App. KI-Profiling auf dem Gerät stoppen steht unter Datenschutz und Sprachkommentare erlauben unter Kommentare.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** Textgröße des Creatornamens ändert jetzt auch die Größe des Datums neben dem Namen, damit beide gleich groß bleiben (#66).

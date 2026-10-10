@@ -26,6 +26,8 @@
 
 * **TikTok:** Bir seriyi sürdür altındaki Ne zaman gönderilsin için saat seçici artık Hushfeed ayarlarına uyarak koyu ya da açık açılıyor.
 
+* **TikTok:** Skip the splash ad, Skip update checks, Limit background traffic, Drop the animated image cache, Stop on-device AI profiling ve Enable voice comments artık Hushfeed ayarlarında kendi anahtarına sahip, yani Duraklat bunları da kapatıyor ve Morphe Manager'ın basit modu artık bunları da seçiyor. Bu anahtarların her biri kapalı başlıyor. Daha önce bu yamalardan biriyle yamaladıysan, çalışmaya devam etmesi için güncellemeden sonra anahtarını aç. Açılış reklamını atla, Güncelleme kontrollerini atla, Arka plan trafiğini sınırla ve Hareketli görsellerin tek karesini önbelleğe al, Uygulama sayfasında Performans altında. Cihaz üstü yapay zeka profillemesini durdur Gizlilik altında, Sesli yorumlara izin ver ise Yorumlar altında.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** İçerik üreticisinin ad boyutu artık adın yanındaki paylaşım tarihini de boyutlandırıyor, böylece ikisi aynı boyutta kalıyor (#66).
