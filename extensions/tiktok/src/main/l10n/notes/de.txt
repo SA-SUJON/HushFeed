@@ -8,6 +8,10 @@
 
 * **TikTok:** Die Option Dark background color in Morphe Manager sagt jetzt „Farbcode“ statt „Hex-Code“ und erklärt, dass Schwarz diese Pixel auf OLED-Bildschirmen komplett ausschaltet.
 
+## 0.70.1 (2026-10-09)
+
+* **TikTok:** Die Hushfeed-Einstellungen öffnen sich jetzt mit einem kompakten Status und der Suche über sieben Gruppen. Zusammengehörige Seiten stehen beieinander. Sicherungen, Diagnose und das Feature Gate Lab findest du unter App & erweiterte Optionen. Über Hushfeed vereint Build-Details und Lizenzen. Die Suche bringt dich weiterhin direkt zur Einstellung, und deine gespeicherten Auswahlmöglichkeiten bleiben erhalten. Die Beschreibung von Pause erklärt jetzt, dass gespeicherte Einstellungen und in die APK eingebaute Änderungen erhalten bleiben.
+
 ## 0.70.0 (2026-10-09)
 
 * **TikTok:** Hushfeed unterstützt jetzt nur noch TikTok 47.1.4. Wenn du 47.0.3 oder 47.1.3 nutzt, lade die APK von 47.1.4 bei APKMirror herunter und patche sie in Morphe Manager mit demselben Signaturschlüssel, damit Anmeldung und Einstellungen erhalten bleiben. Das Feature Gate Lab behält jede Überschreibung, deren Schalter es in 47.1.4 noch gibt, und schaltet die übrigen mit seinem üblichen Hinweis aus.
