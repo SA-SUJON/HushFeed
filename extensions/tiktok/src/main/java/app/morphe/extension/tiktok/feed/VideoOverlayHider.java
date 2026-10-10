@@ -282,6 +282,13 @@ public final class VideoOverlayHider {
      * that. The pre-draw pass reads them to fade a value TikTok wrote again.
      */
     private static final Map<View, float[]> FADED_TO = new WeakHashMap<>();
+    /**
+     * When each view still held at the whole level stopped being asked for it. A control TikTok
+     * rests below full opacity after Clear display (or hides by opacity) never reaches 1, so the
+     * hold lets go after {@link #WHOLE_HOLD_MS} either way, well past TikTok's restore animation.
+     */
+    private static final Map<View, Long> HELD_SINCE = new WeakHashMap<>();
+    private static final long WHOLE_HOLD_MS = 1000;
 
     /** The lowest opacity the tabs are faded to, so the way around the app stays findable. */
     static final int NAVIGATION_FADE_FLOOR = 10;
@@ -731,11 +738,16 @@ public final class VideoOverlayHider {
         for (Map.Entry<View, float[]> entry : FADED_TO.entrySet()) {
             View view = entry.getKey();
             float[] held = entry.getValue();
-            if (view == null || !view.isAttachedToWindow() || view.getAlpha() == held[1]) continue;
-            held[0] = view.getAlpha();
-            settleWhole(held);
-            held[1] = fadedAlpha(held);
-            view.setAlpha(held[1]);
+            if (view == null || !view.isAttachedToWindow()) continue;
+            // A hold past its time is let go here too, though TikTok wrote nothing since.
+            boolean holding = held[3] != 0f && held[4] == 0f;
+            if (view.getAlpha() == held[1] && !holding) continue;
+            if (view.getAlpha() != held[1]) held[0] = view.getAlpha();
+            settleWhole(view, held);
+            float next = fadedAlpha(held);
+            held[1] = next;
+            if (view.getAlpha() == next) continue;
+            view.setAlpha(next);
             corrected++;
         }
         long now = SystemClock.uptimeMillis();
@@ -1221,7 +1233,7 @@ public final class VideoOverlayHider {
         }
         held[2] = percent / 100f;
         held[4] = whole ? 1f : 0f;
-        settleWhole(held);
+        settleWhole(view, held);
         held[1] = fadedAlpha(held);
         if (view.getAlpha() != held[1]) view.setAlpha(held[1]);
     }
@@ -1229,10 +1241,23 @@ public final class VideoOverlayHider {
     /**
      * Keeps a view at the whole level while asked, and after that until TikTok's own opacity is
      * back at full. Leaving Clear display, TikTok animates the controls up from 0, and a share of
-     * that would drop them to nothing and bring them back; held, they stay where they were.
+     * that would drop them to nothing and bring them back; held, they stay where they were. The
+     * hold ends at full opacity or after {@link #WHOLE_HOLD_MS}, whichever comes first.
      */
-    private static void settleWhole(float[] held) {
-        held[3] = held[4] != 0f || (held[3] != 0f && held[0] < 1f) ? 1f : 0f;
+    private static void settleWhole(View view, float[] held) {
+        if (held[4] != 0f || held[3] == 0f || held[0] >= 1f) {
+            held[3] = held[4];
+            HELD_SINCE.remove(view);
+            return;
+        }
+        long now = SystemClock.uptimeMillis();
+        Long since = HELD_SINCE.get(view);
+        if (since == null) {
+            HELD_SINCE.put(view, now);
+        } else if (now - since > WHOLE_HOLD_MS) {
+            held[3] = 0f;
+            HELD_SINCE.remove(view);
+        }
     }
 
     private static float fadedAlpha(float[] held) {

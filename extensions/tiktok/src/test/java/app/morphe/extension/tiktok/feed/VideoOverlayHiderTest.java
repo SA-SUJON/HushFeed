@@ -51,6 +51,33 @@ public class VideoOverlayHiderTest {
         Utils.setContext(context);
     }
 
+    /**
+     * Leaving a faded Clear display holds the whole level until TikTok's own opacity is back at
+     * full (#84). A control TikTok rests lower never gets there, so the hold lets go after a second
+     * and the control goes back to a share of TikTok's opacity.
+     */
+    @Test
+    public void theWholeLevelLetsGoOfAControlTikTokRestsBelowFull() {
+        View control = new View(context);
+        VideoOverlayHider.setFaded(control, 50, true);
+        control.setAlpha(0f);
+        VideoOverlayHider.setFaded(control, 50, true);
+        assertEquals("kept in sight while TikTok clears it", 0.5f, control.getAlpha(), 0f);
+
+        control.setAlpha(0.6f);
+        VideoOverlayHider.setFaded(control, 50, false);
+        assertEquals("held while TikTok's restore runs", 0.5f, control.getAlpha(), 0f);
+        org.robolectric.shadows.ShadowSystemClock.advanceBy(java.time.Duration.ofMillis(500));
+        VideoOverlayHider.setFaded(control, 50, false);
+        assertEquals(0.5f, control.getAlpha(), 0f);
+
+        org.robolectric.shadows.ShadowSystemClock.advanceBy(java.time.Duration.ofMillis(600));
+        VideoOverlayHider.setFaded(control, 50, false);
+        assertEquals("half of the 0.6 TikTok rests it at", 0.3f, control.getAlpha(), 1e-6f);
+        VideoOverlayHider.setFaded(control, 100);
+        assertEquals(0.6f, control.getAlpha(), 1e-6f);
+    }
+
     @Test
     public void turningTheSwitchOffPutsTheViewBack() {
         View caption = new View(context);
