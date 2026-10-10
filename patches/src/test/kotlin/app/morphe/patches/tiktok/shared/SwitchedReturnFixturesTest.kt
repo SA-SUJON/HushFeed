@@ -226,7 +226,11 @@ class SwitchedReturnFixturesTest {
             "Z" -> listOf(Opcode.CONST_4, Opcode.RETURN)
             else -> listOf(Opcode.CONST_4, Opcode.RETURN_OBJECT)
         }
-        assertEquals("$where: what it does with the switch on", leave, body.subList(ask + 3, ask + 3 + leave.size).map { it.opcode })
+        // Above v15 the constant is written with const/16, the same value either way.
+        val written = body.subList(ask + 3, ask + 3 + leave.size).map {
+            if (it.opcode == Opcode.CONST_16) Opcode.CONST_4 else it.opcode
+        }
+        assertEquals("$where: what it does with the switch on", leave, written)
         if (hook.returnType != "V") {
             val value = (body[ask + 3] as NarrowLiteralInstruction).narrowLiteral
             val expected = if (hook.answer == true) 1 else 0
@@ -234,13 +238,14 @@ class SwitchedReturnFixturesTest {
         }
 
         // With the switch off the branch lands on TikTok's own first instruction, and everything
-        // TikTok wrote is still there in order (the in-place guard puts its label on a nop).
+        // TikTok wrote is still there in order. Nops are left out: the in-place guard puts its
+        // label on one, and the alignment nops before a switch or array payload come and go as
+        // the method is rebuilt.
         val addresses = body.runningFold(0) { at, instruction -> at + instruction.codeUnits }
         val landing = addresses.indexOf(addresses[ask + 2] + (test as OffsetInstruction).codeOffset)
         assertTrue("$where: the branch lands nowhere", landing > ask + 2)
-        var rest: List<Instruction> = body.drop(landing)
-        if (rest.first().opcode == Opcode.NOP && hook.opcodes.first() != Opcode.NOP) rest = rest.drop(1)
-        assertEquals("$where: TikTok's own code behind the switch", hook.opcodes, rest.map { it.opcode })
+        val rest = body.drop(landing).map { it.opcode }.filter { it != Opcode.NOP }
+        assertEquals("$where: TikTok's own code behind the switch", hook.opcodes.filter { it != Opcode.NOP }, rest)
     }
 
     /** The int in [register] goes through [bridge] at [index], and the rest of the method is TikTok's. */

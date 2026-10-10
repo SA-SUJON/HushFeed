@@ -26,7 +26,9 @@ private var switchedReturnLabels = 0
  * switch on, so a bare returnEarly keeps a patch out of it. This is the guard Disable telemetry
  * puts in front of AppLog. The answer needs a register nothing has written yet: a method with a
  * local gets it in v0 through [guardAtEntry], and one whose frame is all parameters is cloned
- * with room for them first, so the answer never lands on `this` or an argument.
+ * with room for them first, so the answer never lands on `this` or an argument. The clone takes
+ * the original's place in its class, and a fingerprint's `method` matched before still points at
+ * the original, so a cloned method (RealTimeSplashTask.run today) takes no other edit after this.
  */
 context(patchContext: BytecodePatchContext)
 internal fun MutableMethod.returnVoidWhenOn(patch: String, switch: String) {
