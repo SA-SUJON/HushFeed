@@ -15,10 +15,12 @@ import android.widget.TextView;
 
 import app.morphe.extension.shared.Utils;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 /**
@@ -31,6 +33,10 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk = 34, qualifiers = "w360dp-h800dp-mdpi")
 public class SettingsHeaderGeometryTest {
+    @Before public void installContext() {
+        Utils.setContext(RuntimeEnvironment.getApplication());
+    }
+
     @Test public void leftToRight() {
         assertWholeTarget(View.LAYOUT_DIRECTION_LTR);
     }
