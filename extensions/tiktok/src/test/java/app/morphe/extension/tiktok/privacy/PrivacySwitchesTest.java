@@ -367,10 +367,13 @@ public class PrivacySwitchesTest {
         }
     }
 
-    private static final app.morphe.extension.shared.settings.BooleanSetting[] DEVICE_ACCESS = {
-            Settings.BLOCK_CONTACT_LIST, Settings.BLOCK_INSTALLED_APPS, Settings.BLOCK_LOCATION,
-            Settings.BLOCK_CLIPBOARD_READS, Settings.BLOCK_MOTION_SENSORS, Settings.HIDE_VPN,
-            Settings.BLOCK_ADVERTISING_ID};
+    /** Built per test: a static field would load Settings before setUp has given it a context. */
+    private static app.morphe.extension.shared.settings.BooleanSetting[] deviceAccess() {
+        return new app.morphe.extension.shared.settings.BooleanSetting[]{
+                Settings.BLOCK_CONTACT_LIST, Settings.BLOCK_INSTALLED_APPS, Settings.BLOCK_LOCATION,
+                Settings.BLOCK_CLIPBOARD_READS, Settings.BLOCK_MOTION_SENSORS, Settings.HIDE_VPN,
+                Settings.BLOCK_ADVERTISING_ID};
+    }
 
     /** The read before the settings context names each switch by a key of its own. */
     @Test public void theEarlyKeysAreTheOnesTheSwitchesSaveUnder() {
@@ -385,7 +388,7 @@ public class PrivacySwitchesTest {
 
     /** The device-access blocks start off, so a read before Hushfeed has a context goes through too. */
     @Test public void beforeTheExtensionHasAContextNoDeviceReadIsBlockedWhileTheSwitchesAreOff() {
-        for (var setting : DEVICE_ACCESS) {
+        for (var setting : deviceAccess()) {
             assertEquals("the patch is in the default selection, so " + setting.key + " starts off",
                     Boolean.FALSE, setting.defaultValue);
         }
@@ -407,7 +410,10 @@ public class PrivacySwitchesTest {
      */
     @Test public void beforeTheExtensionHasAContextASwitchThatsOnStillBlocks() {
         DeviceReads reads = new DeviceReads();
-        for (var setting : DEVICE_ACCESS) setting.save(true);
+        for (var setting : deviceAccess()) {
+            setting.save(true);
+            saveInTheFile(setting.key, true);
+        }
         EarlyApplication.set(context);
         Utils.setContext(null);
         try {
@@ -420,8 +426,12 @@ public class PrivacySwitchesTest {
     /** Paused, the early read answers off the same way the switch does once the context is up. */
     @Test public void beforeTheExtensionHasAContextAPausedStartHandsEveryReadThrough() {
         DeviceReads reads = new DeviceReads();
-        for (var setting : DEVICE_ACCESS) setting.save(true);
+        for (var setting : deviceAccess()) {
+            setting.save(true);
+            saveInTheFile(setting.key, true);
+        }
         BaseSettings.PAUSED.save(true);
+        saveInTheFile(BaseSettings.PAUSED.key, true);
         EarlyApplication.set(context);
         Utils.setContext(null);
         try {
@@ -432,10 +442,21 @@ public class PrivacySwitchesTest {
         }
     }
 
+    /**
+     * The early read opens the application's own preferences file. Settings keep the handle from
+     * the first application this test JVM made, and Robolectric gives each test a fresh one, so a
+     * save through a setting alone doesn't reach the file this test's application reads. On a
+     * phone both are the same file.
+     */
+    private void saveInTheFile(String key, boolean value) {
+        context.getSharedPreferences(app.morphe.extension.shared.settings.Setting.PREFERENCES_NAME,
+                android.content.Context.MODE_PRIVATE).edit().putBoolean(key, value).commit();
+    }
+
     /** No application to read from yet: TikTok's read goes through as it would unpatched. */
     @Test public void beforeTikTokHasAnApplicationEveryReadGoesThrough() {
         DeviceReads reads = new DeviceReads();
-        for (var setting : DEVICE_ACCESS) setting.save(true);
+        for (var setting : deviceAccess()) setting.save(true);
         EarlyApplication.set(null);
         Utils.setContext(null);
         try {
