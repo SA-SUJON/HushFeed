@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Endirmələr bölməsindəki yeni Səs formatı seçimi Səsi də saxla və uzun basmadakı Orijinal səsi saxlayın əməliyyatlarına Opus faylları (.ogg) yaratmağa imkan verir. Onlar TikTok-un M4A faylından kiçikdir və telefonunuz onları yaratmaq üçün səsi yenidən kodlayır. Android 10 və ya daha yenisi lazımdır. Defolt olaraq TikTok-un göndərdiyi kimi qalır, ona görə bu saxlamalar əvvəlki kimi çıxır.
+
 * **TikTok:** Video idarəetmələrini solğunlaşdır indi Təmiz ekranla da işləyir. 1 ilə 99 arasında olanda Təmiz ekran düymələri və başlığı götürmək əvəzinə seçdiyiniz səviyyədə ekranda saxlayır, onlara toxunuş isə videoya gedir, buna görə heç nə təsadüfən açılmır. Basıb saxlamaq və ya çimdik jesti sizi yenə Təmiz ekrandan çıxarır, ondan kənarda isə solğunlaşdırılmış idarəetmələr əvvəlki kimi toxunuşları qəbul edir (#84).
 
 * **TikTok:** Lent videolarını səssiz edin indi TikTok-u açıq və tünd arasında dəyişdikdən sonra da lenti səssiz saxlayır. Əvvəllər lentdən çıxıb geri qayıdana qədər növbəti videolar səslə oynaya bilirdi.

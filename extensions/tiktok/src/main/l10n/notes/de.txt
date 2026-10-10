@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Eine neue Auswahl Tonformat unter Downloads lässt Ton ebenfalls speichern und Originalsound speichern beim langen Drücken Opus-Dateien (.ogg) erstellen. Sie sind kleiner als TikToks M4A, und dein Handy kodiert den Ton dafür neu. Dafür braucht es Android 10 oder neuer. Standard bleibt So, wie TikTok ihn liefert, damit diese Speicherungen wie bisher herauskommen.
+
 * **TikTok:** Videosteuerung ausblenden lassen funktioniert jetzt auch mit Freie Ansicht. Zwischen 1 und 99 lässt Freie Ansicht die Schaltflächen und die Beschreibung in der gewählten Stufe auf dem Bildschirm, statt sie wegzunehmen, und ein Tippen darauf geht an das Video, damit nichts aus Versehen aufgeht. Gedrückt halten oder zwei Finger zusammenziehen bringt dich weiterhin aus Freie Ansicht heraus, und außerhalb davon nehmen abgedunkelte Steuerelemente wie bisher Tippen an (#84).
 
 * **TikTok:** Feed-Videos stummschalten hält den Feed jetzt auch stumm, wenn du TikTok zwischen hell und dunkel umstellst. Vorher konnten die nächsten Videos mit Ton laufen, bis du den Feed verlassen hast und zurückgekommen bist.

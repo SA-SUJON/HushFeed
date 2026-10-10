@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Pilihan baru Format suara di Unduhan membuat Simpan suaranya juga dan Simpan suara asli saat tekan lama bisa membuat berkas Opus (.ogg). Berkasnya lebih kecil daripada M4A dari TikTok, dan ponselmu mengodekan ulang suaranya untuk membuatnya. Butuh Android 10 atau yang lebih baru. Seperti yang dikirim TikTok tetap jadi bawaan, jadi hasil simpanan itu sama seperti sebelumnya.
+
 * **TikTok:** Pudarkan kontrol video sekarang juga berlaku di Tampilan bersih. Antara 1 dan 99, Tampilan bersih membiarkan tombol dan keterangan tetap di layar pada tingkat yang kamu pilih alih-alih menghilangkannya, dan ketukan pada keduanya diteruskan ke video, jadi tidak ada yang terbuka tanpa sengaja. Tekan lama atau cubit tetap mengeluarkanmu dari Tampilan bersih, dan di luar itu kontrol yang dipudarkan tetap menerima ketukan seperti sebelumnya (#84).
 
 * **TikTok:** Senyapkan video feed sekarang tetap membuat feed tanpa suara setelah kamu mengganti TikTok antara terang dan gelap. Sebelumnya, video berikutnya bisa berbunyi sampai kamu keluar dari feed lalu kembali.

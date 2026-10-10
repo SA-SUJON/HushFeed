@@ -1,3 +1,5 @@
+Applies to Save the sound as well and to Save the original sound on a long press. Opus makes a smaller file, but the sound is encoded again from TikTok's copy.	Относится к «Сохранять звук тоже» и к «Сохранять оригинальный звук» по долгому нажатию. Opus даёт файл поменьше, но звук заново кодируется из копии TikTok.
+As TikTok sent it (M4A or MP3)	Как прислал TikTok (M4A или MP3)
 Importing new history ended Undo for the earlier clear. You can clear the imported history.	После импорта новой истории нельзя отменить предыдущую очистку. Вы можете очистить импортированную историю.
 %1$d setting in that file can't be restored here and was skipped	%1$d настройку из файла нельзя восстановить здесь, и она пропущена
 %1$d settings in that file can't be restored here and were skipped	%1$d настроек из файла нельзя восстановить здесь, и они пропущены
@@ -5,6 +7,9 @@ Importing new history ended Undo for the earlier clear. You can clear the import
 %1$d settings in that file can't be restored here and were skipped|few	%1$d настройки из файла нельзя восстановить здесь, и они пропущены
 %1$d settings in that file can't be restored here and were skipped|many	%1$d настроек из файла нельзя восстановить здесь, и они пропущены
 Import watch history	Импортировать историю просмотров
+Opus (.ogg), a smaller file	Opus (.ogg), файл поменьше
+Opus needs Android 10 or later, so sounds save as TikTok sent them.	Для Opus нужен Android 10 или новее, поэтому звук сохраняется так, как прислал TikTok.
+Sound format	Формат звука
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Выберите экспорт JSON из TikTok для этого аккаунта, до %1$s МБ и %2$s записей. Для дат без часового пояса используется часовой пояс этого телефона.
 Sign in to TikTok before importing watch history.	Войдите в TikTok перед импортом истории просмотров.
 Your TikTok account changed. Choose the file again for this account.	Аккаунт TikTok изменился. Выберите файл заново для этого аккаунта.
@@ -703,7 +708,7 @@ Last recording: 1 gate.	Последняя запись: 1 переключат�
 Layout	Раскладка
 Layout, search, profile and system	Раскладка, поиск, профиль и система
 Leave maximum empty to keep it unlimited.	Оставьте максимум пустым, чтобы снять ограничение.
-Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.	Не включать звук в сохранённое видео. «Сохранять звук тоже» по-прежнему запишет .m4a рядом, если нужно и то, и другое.
+Leave the sound out of the saved video. Save the sound as well still writes the sound file beside it if you want both.	Не включать звук в сохранённое видео. «Сохранять звук тоже» по-прежнему запишет звуковой файл рядом, если нужно и то, и другое.
 Length and views per like	Длительность и просмотры на лайк
 Less than a minute left	Осталось меньше минуты
 Let screenshots, screen recording and Circle to Search work on TikTok again. Restart TikTok to apply this.	Снова разрешить скриншоты, запись экрана и Circle to Search в TikTok. Перезапустите TikTok, чтобы это применить.
@@ -1324,7 +1329,7 @@ When a video ends in full screen, stay on it instead of moving to the next one. 
 While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.	Пока включено диагностическое логирование, сообщение называет часть Hushfeed, в которой произошёл сбой. При выключенном логировании сбои остаются только в отчёте.
 Window width needed to enable the layout. Restart TikTok to apply this.	Ширина окна, при которой включается макет. Перезапустите TikTok, чтобы это применить.
 Words, countries and languages	Слова, страны и языки
-Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos.	Сохранять звук видео рядом с ним в виде файла .m4a. На Android 10 и новее аудио хранится отдельно и попадает в Music, в папку с тем же именем, что и ваши видео.
+Write the video's sound beside it, in the format picked under Sound format. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos.	Сохранять звук видео рядом с ним в формате, выбранном в «Формат звука». На Android 10 и новее аудио хранится отдельно и попадает в Music, в папку с тем же именем, что и ваши видео.
 YTDLnis background mode	Фоновый режим YTDLnis
 YTDLnis download type	Тип загрузки YTDLnis
 Yes	Да

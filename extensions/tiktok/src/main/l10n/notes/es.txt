@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Una nueva opción, Formato del sonido, en Descargas permite que Guardar también el sonido y Guardar el sonido original al mantener pulsado creen archivos Opus (.ogg). Son más pequeños que el M4A de TikTok, y tu teléfono vuelve a codificar el sonido para crearlos. Necesita Android 10 o posterior. Tal como lo envía TikTok sigue siendo la opción por defecto, así que esas descargas salen igual que antes.
+
 * **TikTok:** Atenuar los controles del vídeo ahora funciona con Controles ocultos. Entre 1 y 99, Controles ocultos deja los botones y la descripción en pantalla al nivel que elijas en lugar de quitarlos, y un toque sobre ellos va al vídeo, así que nada se abre por accidente. Mantener presionado o pellizcar te sigue sacando de Controles ocultos, y fuera de ese modo los controles atenuados aceptan toques como antes (#84).
 
 * **TikTok:** Silenciar los videos del feed ahora mantiene el feed sin sonido después de cambiar TikTok entre claro y oscuro. Antes, los siguientes videos podían sonar hasta que salías del feed y volvías.

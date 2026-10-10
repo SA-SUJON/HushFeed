@@ -1,7 +1,12 @@
+Applies to Save the sound as well and to Save the original sound on a long press. Opus makes a smaller file, but the sound is encoded again from TikTok's copy.	Vale per Salva anche l'audio e per Salva l'audio originale con la pressione prolungata. Opus crea un file più piccolo, ma l'audio viene ricodificato dalla copia di TikTok.
+As TikTok sent it (M4A or MP3)	Come lo invia TikTok (M4A o MP3)
 Importing new history ended Undo for the earlier clear. You can clear the imported history.	L'importazione di una nuova cronologia impedisce di annullare la cancellazione precedente. Puoi cancellare la cronologia importata.
 %1$d setting in that file can't be restored here and was skipped	%1$d impostazione del file non può essere ripristinata qui ed è stata saltata
 %1$d settings in that file can't be restored here and were skipped	%1$d impostazioni del file non possono essere ripristinate qui e sono state saltate
 Import watch history	Importa cronologia di visualizzazione
+Opus (.ogg), a smaller file	Opus (.ogg), file più piccolo
+Opus needs Android 10 or later, so sounds save as TikTok sent them.	Opus richiede Android 10 o successivo, quindi l'audio viene salvato come lo invia TikTok.
+Sound format	Formato audio
 Use this account's TikTok JSON export, up to %1$s MB and %2$s entries. Dates without a time zone use this phone's time zone.	Usa l'esportazione JSON di TikTok di questo account, fino a %1$s MB e %2$s voci. Le date senza fuso orario usano quello di questo telefono.
 Sign in to TikTok before importing watch history.	Accedi a TikTok prima di importare la cronologia di visualizzazione.
 Your TikTok account changed. Choose the file again for this account.	Il tuo account TikTok è cambiato. Scegli di nuovo il file per questo account.
@@ -643,7 +648,7 @@ Last recording: 1 gate.	Ultima registrazione: 1 gate.
 Layout	Layout
 Layout, search, profile and system	Layout, ricerca, profilo e sistema
 Leave maximum empty to keep it unlimited.	Lascia il massimo vuoto per non avere limiti.
-Leave the sound out of the saved video. Save the sound as well still writes the .m4a beside it if you want both.	Non includere l'audio nel video salvato. Salva anche l'audio scrive comunque il file .m4a accanto al video, se vuoi entrambi.
+Leave the sound out of the saved video. Save the sound as well still writes the sound file beside it if you want both.	Non includere l'audio nel video salvato. Salva anche l'audio scrive comunque il file audio accanto al video, se vuoi entrambi.
 Length and views per like	Durata e visualizzazioni per Mi piace
 Less than a minute left	Meno di un minuto rimanente
 Let screenshots, screen recording and Circle to Search work on TikTok again. Restart TikTok to apply this.	Consenti di nuovo screenshot, registrazione dello schermo e Circle to Search su TikTok. Riavvia TikTok per applicare la modifica.
@@ -1231,7 +1236,7 @@ When a video ends in full screen, stay on it instead of moving to the next one. 
 While diagnostic logging is on, a message names the part of Hushfeed that failed. Off keeps failures in the report only.	Quando la registrazione diagnostica è attiva, un messaggio indica quale parte di Hushfeed ha avuto un problema. Se disattivata, gli errori restano solo nel rapporto.
 Window width needed to enable the layout. Restart TikTok to apply this.	Larghezza della finestra necessaria per attivare il layout. Riavvia TikTok per applicare la modifica.
 Words, countries and languages	Parole, paesi e lingue
-Write the video's sound beside it as an .m4a. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos.	Salva l'audio del video a fianco come file .m4a. Da Android 10 in poi l'audio viene archiviato separatamente, quindi finisce in Music nella cartella con lo stesso nome della tua cartella video.
+Write the video's sound beside it, in the format picked under Sound format. Android 10 and later file audio separately, so it lands in Music under the same folder name as your videos.	Salva l'audio del video a fianco, nel formato scelto in Formato audio. Da Android 10 in poi l'audio viene archiviato separatamente, quindi finisce in Music nella cartella con lo stesso nome della tua cartella video.
 YTDLnis background mode	Modalità in background di YTDLnis
 YTDLnis download type	Tipo di download di YTDLnis
 Yes	Sì
