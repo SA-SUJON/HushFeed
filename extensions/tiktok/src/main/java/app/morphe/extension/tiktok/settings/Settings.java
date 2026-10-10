@@ -390,6 +390,8 @@ public class Settings extends BaseSettings {
     public static final BooleanSetting HIDE_TAKO_AI = new BooleanSetting("hide_tako_ai", FALSE, true);
     public static final BooleanSetting HIDE_BOTTOM_SEARCH_BAR = new BooleanSetting("hide_bottom_search_bar", FALSE, true);
     public static final BooleanSetting COMMENT_BATCH_TRANSLATION = new BooleanSetting("comment_batch_translation", FALSE);
+    /** Languages TikTok's automatic translation leaves alone, added to its own Don't translate list (#121). */
+    public static final StringSetting DONT_AUTO_TRANSLATE_LANGUAGES = new StringSetting("dont_auto_translate_languages", "");
     // Restart-gated: the comment keyboard builds its slot tree once per session, and the
     // trigger that adds the emoji row is asked at that moment only.
     public static final BooleanSetting HIDE_COMMENT_QUICK_REACTIONS =

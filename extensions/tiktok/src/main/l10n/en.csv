@@ -452,6 +452,7 @@ Dismissed one suggested account,Dismissed one suggested account
 Display name last changed,Display name last changed
 Do nothing,Do nothing
 Doesn't follow you back,Doesn't follow you back
+Don't auto translate these languages,Don't auto translate these languages
 Don't save new searches,Don't save new searches
 Don't start the feed on returning,Don't start the feed on returning
 Don't start the first video,Don't start the first video
@@ -1326,6 +1327,7 @@ Sent to %1$d/%2$d chats. They won't get another message today.,Sent to %1$d/%2$d
 "Separate country codes with commas. Videos posted from these are hidden, whatever the list above says.","Separate country codes with commas. Videos posted from these are hidden, whatever the list above says."
 "Separate handles or user IDs with commas. Their videos stay when a filter on post type, labels, age, length or counts would hide them. Ads, blocked creators, words, sounds, countries, caption languages and seen videos still apply.","Separate handles or user IDs with commas. Their videos stay when a filter on post type, labels, age, length or counts would hide them. Ads, blocked creators, words, sounds, countries, caption languages and seen videos still apply."
 "Separate language codes with commas, like en, es. A video whose original caption is in another language is hidden. Videos with no caption, or only translated ones, always stay.","Separate language codes with commas, like en, es. A video whose original caption is in another language is hidden. Videos with no caption, or only translated ones, always stay."
+"Separate language codes with commas, like es, de. When TikTok translates for you, captions and comments in these languages stay as they were written. See translation still works when you tap it. TikTok's own Don't translate list stays the way it is.","Separate language codes with commas, like es, de. When TikTok translates for you, captions and comments in these languages stay as they were written. See translation still works when you tap it. TikTok's own Don't translate list stays the way it is."
 "Separate names with commas, exactly as the share sheet shows them. These can be friends in the Send to row, apps such as Facebook, or actions such as Create group or Repost. The words copy, save and dislike also work before the sheet has opened.","Separate names with commas, exactly as the share sheet shows them. These can be friends in the Send to row, apps such as Facebook, or actions such as Create group or Repost. The words copy, save and dislike also work before the sheet has opened."
 "Separate the titles of any other Inbox rows you want to hide with commas, spelled exactly. Use this for anything not listed above.","Separate the titles of any other Inbox rows you want to hide with commas, spelled exactly. Use this for anything not listed above."
 Separate usernames or display names with commas. Their comments are hidden.,Separate usernames or display names with commas. Their comments are hidden.

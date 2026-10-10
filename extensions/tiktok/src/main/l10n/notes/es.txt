@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Los ajustes de comentarios tienen una fila nueva, No traducir automáticamente estos idiomas. Está vacía hasta que la rellenes (#121). Escribe códigos de idioma como `es, de`, y cuando TikTok traduce por ti, las descripciones y los comentarios en esos idiomas se quedan como se escribieron. Ver traducción sigue funcionando cuando lo tocas, y la lista propia de TikTok de idiomas que no se traducen no cambia.
+
 * **TikTok:** Conservar los videos sin conexión hasta que los borres ahora cubre dos formas más en las que TikTok vaciaba tu lista. Con el interruptor activado, el Auto adjust de TikTok ya no baja tu límite de videos sin conexión ni recorta la lista al iniciar TikTok, y se omite la limpieza que TikTok hace cuando termina su prueba de activar los videos sin conexión por defecto (#123). Reinicia TikTok después de cambiar el interruptor.
 
 * **TikTok:** Al restaurar una copia de seguridad de ajustes hecha en una versión anterior de TikTok, ahora vuelven las anulaciones de Feature Gate Lab que todavía encajan con esta versión. Las que no encajan se conservan, pero desactivadas.

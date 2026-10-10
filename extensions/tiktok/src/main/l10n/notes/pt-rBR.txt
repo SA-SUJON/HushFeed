@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** As configurações de comentários têm uma linha nova, Não traduzir automaticamente estes idiomas. Ela fica vazia até você preenchê-la (#121). Digite códigos de idioma como `es, de`, e quando o TikTok traduz para você, legendas e comentários nesses idiomas ficam como foram escritos. Ver tradução continua funcionando quando você toca nele, e a lista própria do TikTok de idiomas que não se traduzem não muda.
+
 * **TikTok:** Manter vídeos offline até você apagá-los agora cobre mais duas formas de o TikTok esvaziar sua lista. Com a chave ligada, o Auto adjust do TikTok não reduz mais o seu limite de vídeos offline nem corta a lista quando o TikTok inicia, e a limpeza que o TikTok faz quando termina o teste de ativar vídeos offline por padrão é ignorada (#123). Reinicie o TikTok depois de mudar a chave.
 
 * **TikTok:** Ao restaurar um backup de configurações feito em uma versão mais antiga do TikTok, agora voltam as substituições do Feature Gate Lab que ainda servem para esta versão. As que não servem ficam guardadas, mas desligadas.

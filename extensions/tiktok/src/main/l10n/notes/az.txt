@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Şərhlər ayarlarında yeni sıra var, Bu dilləri avtomatik tərcümə etməyin. Siz doldurmayana qədər boşdur (#121). `es, de` kimi dil kodları yazın, TikTok sizin yerinizə tərcümə edəndə bu dillərdəki başlıqlar və şərhlər yazıldığı kimi qalır. Tərcüməyə bax toxunanda yenə işləyir, TikTok-un öz Tərcümə etmə siyahısı isə dəyişmir.
+
 * **TikTok:** Oflayn videoları siz silənə qədər saxlayın indi TikTok-un siyahını təmizlədiyi daha iki yolu əhatə edir. Açar aktiv olanda TikTok-un Auto adjust funksiyası TikTok açılanda oflayn video limitini azaltmır və siyahını kəsmir, oflayn videoları standart olaraq aktiv edən sınaq bitəndə TikTok-un işlətdiyi təmizləmə isə atlanır (#123). Açarı dəyişdikdən sonra TikTok-u yenidən başlat.
 
 * **TikTok:** Köhnə TikTok versiyasında hazırlanmış ayarlar ehtiyat nüsxəsini bərpa etdikdə, bu versiyaya hələ də uyğun gələn Feature Gate Lab əvəzləmələri geri qayıdır. Uyğun gəlməyənlər saxlanılır, amma söndürülür.

@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Comments settings has a new row, Don't auto translate these languages. It's empty until you fill it in (#121). Type language codes like `es, de`, and when TikTok translates for you, captions and comments in those languages stay as they were written. See translation still works when you tap it, and TikTok's own Don't translate list isn't changed.
+
 * **TikTok:** Keep offline videos until you delete them now covers two more ways TikTok cleared your list. With the switch on, TikTok's Auto adjust no longer lowers your offline videos limit or trims the list when TikTok starts, and the clean-up TikTok runs when its test of turning offline videos on by default ends is skipped (#123). Restart TikTok after you change the switch.
 
 * **TikTok:** Restoring a settings backup made on an older TikTok build now brings back the Feature Gate Lab overrides that still fit this build. The ones that don't are kept but turned off.
