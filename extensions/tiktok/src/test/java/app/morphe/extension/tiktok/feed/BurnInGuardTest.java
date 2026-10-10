@@ -103,16 +103,40 @@ public class BurnInGuardTest {
 
     /** A finger down and up the way the system delivers it: to the decor view, which hands it to the callback. */
     private void touch() {
-        long now = SystemClock.uptimeMillis();
-        for (int action : new int[]{MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP}) {
-            MotionEvent event = MotionEvent.obtain(now, now, action, 10f, 10f, 0);
-            try {
-                activity.getWindow().getDecorView().dispatchTouchEvent(event);
-            } finally {
-                event.recycle();
-            }
-        }
+        send(MotionEvent.ACTION_DOWN);
+        send(MotionEvent.ACTION_UP);
         Shadows.shadowOf(Looper.getMainLooper()).idle();
+    }
+
+    private void send(int action) {
+        long now = SystemClock.uptimeMillis();
+        MotionEvent event = MotionEvent.obtain(now, now, action, 10f, 10f, 0);
+        try {
+            activity.getWindow().getDecorView().dispatchTouchEvent(event);
+        } finally {
+            event.recycle();
+        }
+    }
+
+    /** A finger held still, for speed or a thumb resting on a paused video, is a touch until it lifts. */
+    @Test
+    public void aFingerHeldDownKeepsTheControlsUpAndTheWaitStartsAtTheLift() {
+        try (var controller = Robolectric.buildActivity(Activity.class).setup()) {
+            feed(controller.get());
+            Settings.BURN_IN_GUARD.save(BurnInGuard.DIM);
+            VideoOverlayHider.applyTo(activity);
+            send(MotionEvent.ACTION_DOWN);
+            after(BurnInGuard.IDLE_AFTER_MS * 3);
+            assertEquals("held for 15 s, still up", 1f, column.getAlpha(), 0f);
+            assertEquals("and no dim is timed while it's down", -1L, BurnInGuard.nextPassAtForTests());
+
+            send(MotionEvent.ACTION_UP);
+            Shadows.shadowOf(Looper.getMainLooper()).idle();
+            assertEquals("the lift asks for a pass that times the wait",
+                    SystemClock.uptimeMillis() + BurnInGuard.IDLE_AFTER_MS, BurnInGuard.nextPassAtForTests());
+            after(BurnInGuard.IDLE_AFTER_MS);
+            assertEquals("5 s after the lift it dims", DIMMED, column.getAlpha(), 0.0001f);
+        }
     }
 
     @Test

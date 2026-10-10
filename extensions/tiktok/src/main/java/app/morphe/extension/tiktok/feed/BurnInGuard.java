@@ -70,6 +70,13 @@ public final class BurnInGuard {
     private static WeakReference<Activity> passed = new WeakReference<>(null);
     /** When a finger last touched a guarded window, or 0 while nothing is guarded. */
     private static long touchedAt;
+    /**
+     * A finger is on the screen. Holding still is still a touch: a press and hold for speed or
+     * a paused video under a resting thumb mustn't dim, and the wait starts when it lifts.
+     */
+    private static boolean fingerDown;
+    /** The last pass guarded a window, so a lifted finger asks for one to start the wait. */
+    private static boolean guarding;
     private static boolean dimmed;
     /** When the next timed pass is due, or -1 when none is. */
     private static long tickAt = -1L;
@@ -103,11 +110,13 @@ public final class BurnInGuard {
         } else {
             touchedAt = 0L;
         }
+        guarding = on;
         boolean canDim = on && chosen > IDLE_LEVEL;
-        dimmed = canDim && now - touchedAt >= IDLE_AFTER_MS;
+        dimmed = canDim && !fingerDown && now - touchedAt >= IDLE_AFTER_MS;
         boolean shifting = on && DIM_AND_SHIFT.equals(mode);
         place(activity, shifting, now);
-        schedule(Math.min(canDim && !dimmed ? touchedAt + IDLE_AFTER_MS : Long.MAX_VALUE,
+        // No dim is timed while a finger is down; its lift asks for the pass that times one.
+        schedule(Math.min(canDim && !dimmed && !fingerDown ? touchedAt + IDLE_AFTER_MS : Long.MAX_VALUE,
                 shifting ? (now / SHIFT_EVERY_MS + 1) * SHIFT_EVERY_MS : Long.MAX_VALUE));
         return dimmed ? IDLE_LEVEL : chosen;
     }
@@ -162,10 +171,17 @@ public final class BurnInGuard {
         if (activity != null && !activity.isFinishing()) VideoOverlayHider.applyTo(activity);
     }
 
-    /** A finger on a guarded window: the dim waits again, and dimmed controls come back now. */
-    private static void touched() {
+    /**
+     * A finger on a guarded window ({@code action} is its MotionEvent action, or -1 for the window
+     * getting focus back): the dim waits again, dimmed controls come back now, and a lift asks
+     * for a pass so the wait is timed from it.
+     */
+    private static void touched(int action) {
         touchedAt = SystemClock.uptimeMillis();
-        if (!dimmed) return;
+        boolean lifted = action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL;
+        if (action == MotionEvent.ACTION_DOWN) fingerDown = true;
+        else if (lifted) fingerDown = false;
+        if (!guarding || !(dimmed || lifted)) return;
         dimmed = false;
         Handler main = handler();
         main.removeCallbacks(TICK);
@@ -190,8 +206,11 @@ public final class BurnInGuard {
                 try {
                     if (args != null && args.length == 1) {
                         String name = method.getName();
-                        if (args[0] instanceof MotionEvent && "dispatchTouchEvent".equals(name)) touched();
-                        else if (Boolean.TRUE.equals(args[0]) && "onWindowFocusChanged".equals(name)) touched();
+                        if (args[0] instanceof MotionEvent && "dispatchTouchEvent".equals(name)) {
+                            touched(((MotionEvent) args[0]).getActionMasked());
+                        } else if (Boolean.TRUE.equals(args[0]) && "onWindowFocusChanged".equals(name)) {
+                            touched(-1);
+                        }
                     }
                     return method.invoke(inner, args);
                 } catch (InvocationTargetException ex) {
@@ -214,6 +233,8 @@ public final class BurnInGuard {
         if (handler != null) handler.removeCallbacks(TICK);
         tickAt = -1L;
         touchedAt = 0L;
+        fingerDown = false;
+        guarding = false;
         dimmed = false;
         passed = new WeakReference<>(null);
         MOVED.clear();
