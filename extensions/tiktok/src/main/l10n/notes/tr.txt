@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Remove creation tools artık bir oluşturma aracını, örneğin kameradaki efekt aramasını açmanın TikTok'u kapatabileceği konusunda uyarıyor (#133). Video çekiyorsan bu yamayı seçme.
+
 * **TikTok:** Drop the animated image cache artık TikTok'un kare önbelleğini tek bir kare tutan bir önbellekle değiştirmiyor. Bu, yorumlardaki hareketli çıkartmaların ilk karede takılı kalmasına yol açabiliyordu (#130). Anahtarının adı artık Hareketli kareleri önceden çözme. Açıkken yalnızca TikTok'un kareleri gösterilmeden önce çözmesini engeller.
 
 * **TikTok:** Akışın üstündeki Takip Edilenler hikâye balonu Temiz ekran bitince geri gelir. TikTok onu Temiz ekran başlarken gizler ve önceden akış yenilenene kadar gizli kalırdı. Yalnızca daha önce görünüyorsa ve içinde hâlâ biri varsa geri gelir.

@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Remove creation tools ora avvisa che aprire uno strumento di creazione, come la ricerca degli effetti nella fotocamera, può chiudere TikTok (#133). Lascialo fuori se fai video.
+
 * **TikTok:** Drop the animated image cache non sostituisce più la cache dei fotogrammi di TikTok con una che ne tiene uno solo, cosa che poteva lasciare gli sticker animati nei commenti fermi sul primo fotogramma (#130). Il suo interruttore ora si chiama Non decodificare in anticipo i fotogrammi animati, e quando è attivo impedisce solo a TikTok di decodificare i fotogrammi prima che vengano mostrati.
 
 * **TikTok:** La bolla delle storie di Seguiti in cima al feed torna quando finisce Vista pulita. TikTok la nasconde quando inizia Vista pulita e prima restava nascosta finché il feed non si ricaricava. Torna solo se prima era visibile e contiene ancora qualcuno.

@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Remove creation tools sekarang memperingatkan bahwa membuka alat pembuatan, seperti pencarian efek di kamera, bisa menutup TikTok (#133). Jangan pilih patch ini kalau kamu membuat video.
+
 * **TikTok:** Drop the animated image cache tidak lagi mengganti cache bingkai TikTok dengan cache yang hanya menyimpan satu bingkai, yang bisa membuat stiker animasi di komentar macet di bingkai pertamanya (#130). Sakelarnya sekarang bernama Jangan dekode bingkai animasi lebih dulu, dan jika dinyalakan hanya mencegah TikTok mendekode bingkai sebelum ditampilkan.
 
 * **TikTok:** Gelembung cerita Mengikuti di bagian atas feed muncul lagi saat Tampilan bersih berakhir. TikTok menyembunyikannya saat Tampilan bersih dimulai, dan dulu gelembung itu tetap hilang sampai feed dimuat ulang. Gelembung hanya muncul lagi jika tadinya terlihat dan masih ada orang di dalamnya.

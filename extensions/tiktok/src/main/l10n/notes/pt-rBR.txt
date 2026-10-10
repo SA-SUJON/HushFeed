@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Remove creation tools agora avisa que abrir uma ferramenta de criação, como a busca de efeitos na câmera, pode fechar o TikTok (#133). Deixe ele de fora se você faz vídeos.
+
 * **TikTok:** Drop the animated image cache não troca mais o cache de quadros do TikTok por um que guarda um único quadro, o que podia deixar figurinhas animadas nos comentários travadas no primeiro quadro (#130). A chave dele agora se chama Não decodificar quadros animados com antecedência, e ligada ela só impede o TikTok de decodificar quadros antes de aparecerem.
 
 * **TikTok:** A bolha de stories de Seguindo no topo do feed volta quando a Tela limpa termina. O TikTok a esconde quando a Tela limpa começa, e antes ela ficava sumida até o feed recarregar. Ela só volta se estava aparecendo antes e ainda tem alguém nela.

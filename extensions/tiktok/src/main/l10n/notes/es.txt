@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Remove creation tools ahora avisa de que abrir una herramienta de creación, como la búsqueda de efectos en la cámara, puede cerrar TikTok (#133). Déjalo fuera si haces videos.
+
 * **TikTok:** Drop the animated image cache ya no cambia la caché de fotogramas de TikTok por una que guarda un solo fotograma, lo que podía dejar los stickers animados de los comentarios congelados en su primer fotograma (#130). Su interruptor ahora se llama No decodificar fotogramas animados por adelantado, y al activarlo solo evita que TikTok decodifique los fotogramas antes de mostrarlos.
 
 * **TikTok:** La burbuja de historias de Siguiendo arriba del feed vuelve cuando termina Controles ocultos. TikTok la oculta al empezar Controles ocultos y antes no volvía hasta que el feed se recargaba. Solo vuelve si se veía antes y todavía hay alguien en ella.

@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Remove creation tools indi xəbərdarlıq edir ki, yaratma alətlərindən birini, məsələn kamerada effekt axtarışını açmaq TikTok-u bağlaya bilər (#133). Video çəkirsinizsə, onu seçməyin.
+
 * **TikTok:** Drop the animated image cache artıq TikTok-un kadr keşini yalnız bir kadr saxlayan keşlə əvəz etmir. Bu, şərhlərdəki animasiyalı stikerlərin ilk kadrda ilişib qalmasına səbəb ola bilərdi (#130). Onun açarı indi Animasiya kadrlarını əvvəlcədən hazırlama adlanır və açıq olanda yalnız TikTok-un kadrları göstərilməzdən əvvəl hazırlamasının qarşısını alır.
 
 * **TikTok:** Lentin yuxarısındakı İzlənilənlər hekayələri balonu Təmiz ekran bitəndə geri qayıdır. TikTok onu Təmiz ekran başlayanda gizlədir və əvvəllər lent yenidən yüklənənə qədər gizli qalırdı. O, yalnız əvvəl görünürdüsə və içində hələ kimsə varsa geri qayıdır.

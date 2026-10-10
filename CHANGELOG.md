@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Remove creation tools now warns that opening a creation tool, like effect search on the camera, can close TikTok (#133). Leave it out if you make videos.
+
 * **TikTok:** Drop the animated image cache no longer swaps TikTok's frame cache for one that holds a single frame, which could leave animated stickers in comments stuck on their first frame (#130). Its switch is now called Don't decode animated frames ahead, and turning it on only stops TikTok from decoding frames before they're shown.
 
 * **TikTok:** The Following stories bubble at the top of the feed comes back when Clear display ends. TikTok hides it as Clear display starts and used to leave it gone until the feed reloaded. It only comes back if it was showing before and still has someone in it.
