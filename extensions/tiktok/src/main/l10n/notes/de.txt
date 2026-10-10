@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Offline-Videos behalten, bis du sie löschst deckt jetzt zwei weitere Wege ab, auf denen TikTok deine Liste geleert hat. Bei eingeschaltetem Schalter senkt TikToks Auto adjust dein Offline-Video-Limit beim Start nicht mehr und kürzt die Liste nicht, und die Bereinigung, die TikTok nach dem Ende seines Tests mit standardmäßig aktivierten Offline-Videos ausführt, wird übersprungen (#123). Starte TikTok neu, nachdem du den Schalter geändert hast.
+
 * **TikTok:** Wenn du eine Einstellungssicherung von einer älteren TikTok-Version wiederherstellst, kommen jetzt die Feature Gate Lab Überschreibungen zurück, die noch zu dieser Version passen. Die anderen bleiben erhalten, sind aber ausgeschaltet.
 
 * **TikTok:** Die Feed-Ansicht hat einen neuen Schalter, Seitenmenü-Knopf ausblenden, der aus bleibt, bis du ihn einschaltest. Er nimmt den Knopf oben links im Feed neben LIVE weg, der TikToks Seitenmenü mit Deine Bestellungen, TikTok Minis und mehr öffnet. Starte TikTok neu, nachdem du ihn geändert hast (#128).

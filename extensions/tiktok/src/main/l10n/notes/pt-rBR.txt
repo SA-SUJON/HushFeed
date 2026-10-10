@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Manter vídeos offline até você apagá-los agora cobre mais duas formas de o TikTok esvaziar sua lista. Com a chave ligada, o Auto adjust do TikTok não reduz mais o seu limite de vídeos offline nem corta a lista quando o TikTok inicia, e a limpeza que o TikTok faz quando termina o teste de ativar vídeos offline por padrão é ignorada (#123). Reinicie o TikTok depois de mudar a chave.
+
 * **TikTok:** Ao restaurar um backup de configurações feito em uma versão mais antiga do TikTok, agora voltam as substituições do Feature Gate Lab que ainda servem para esta versão. As que não servem ficam guardadas, mas desligadas.
 
 * **TikTok:** Tela do feed tem uma chave nova, Esconder o botão do menu lateral, desligada até você ligar. Ela tira o botão no canto superior esquerdo do feed, ao lado de LIVE, que abre o menu lateral do TikTok com Seus pedidos, TikTok Minis e mais. Reinicie o TikTok depois de mudar (#128).

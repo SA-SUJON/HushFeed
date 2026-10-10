@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Conservar los videos sin conexión hasta que los borres ahora cubre dos formas más en las que TikTok vaciaba tu lista. Con el interruptor activado, el Auto adjust de TikTok ya no baja tu límite de videos sin conexión ni recorta la lista al iniciar TikTok, y se omite la limpieza que TikTok hace cuando termina su prueba de activar los videos sin conexión por defecto (#123). Reinicia TikTok después de cambiar el interruptor.
+
 * **TikTok:** Al restaurar una copia de seguridad de ajustes hecha en una versión anterior de TikTok, ahora vuelven las anulaciones de Feature Gate Lab que todavía encajan con esta versión. Las que no encajan se conservan, pero desactivadas.
 
 * **TikTok:** Pantalla del feed tiene un interruptor nuevo, Ocultar el botón del menú lateral, desactivado hasta que lo actives. Quita el botón de la esquina superior izquierda del feed, junto a LIVE, que abre el menú lateral de TikTok con Tus pedidos, TikTok Minis y más. Reinicia TikTok después de cambiarlo (#128).
