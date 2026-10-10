@@ -4,6 +4,8 @@ Every Hushfeed release, newest first.
 
 ## Unreleased
 
+* **TikTok:** Hide already seen videos no longer takes videos out of a collection you open, so tapping a saved video plays that video again instead of the wrong one or nothing (#135). It still hides seen videos in For You, Following and Friends.
+
 * **TikTok:** A new patch, Keep the app language, adds a Keep the language picked in TikTok switch under System in App (#61). When TikTok starts and decides the phone's language changed, it drops the language you picked in its own settings and follows the phone. With the switch on, your pick stays. It starts off.
 
 * **TikTok:** A new Write the username and caption on the video switch in Downloads draws the @username and the first line of the caption in the bottom left corner of videos Hushfeed saves. The phone encodes the video again for it, so those saves take longer and show their progress with a Cancel button. It starts off.

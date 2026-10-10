@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Hide already seen videos não tira mais vídeos de uma coleção que você abre, então tocar num vídeo salvo volta a tocar esse vídeo, e não outro ou nada (#135). Ele continua escondendo vídeos já vistos em For You, Following e Friends.
+
 * **TikTok:** Um patch novo, Keep the app language, adiciona a chave Manter o idioma escolhido no TikTok em Sistema, dentro de Aplicativo (#61). Quando o TikTok abre e decide que o idioma do celular mudou, ele descarta o idioma que você escolheu nas configurações dele e segue o celular. Com a chave ligada, sua escolha fica. Ela começa desligada.
 
 * **TikTok:** Uma nova chave Escrever o nome de usuário e a legenda no vídeo, em Downloads, coloca o @nome de usuário e a primeira linha da legenda no canto inferior esquerdo dos vídeos que o Hushfeed salva. O celular codifica o vídeo de novo para isso, então esses salvamentos demoram mais e mostram o progresso com um botão Cancelar. Ela começa desligada.

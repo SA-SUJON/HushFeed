@@ -1,5 +1,7 @@
 ## Unreleased
 
+* **TikTok:** Hide already seen videos nimmt keine Videos mehr aus einer Sammlung, die du öffnest. Ein Tipp auf ein gespeichertes Video spielt also wieder dieses Video ab statt eines falschen oder gar keines (#135). In For You, Following und Friends blendet es gesehene Videos weiter aus.
+
 * **TikTok:** Ein neuer Patch, Keep the app language, bringt unter System in App den Schalter In TikTok gewählte Sprache behalten (#61). Wenn TikTok startet und meint, die Sprache des Handys habe sich geändert, verwirft es die Sprache, die du in seinen Einstellungen gewählt hast, und folgt dem Handy. Mit dem Schalter bleibt deine Wahl. Er ist zu Beginn aus.
 
 * **TikTok:** Ein neuer Schalter Benutzernamen und Beschreibung ins Video schreiben unter Downloads schreibt den @Benutzernamen und die erste Zeile der Beschreibung unten links in Videos, die Hushfeed speichert. Das Handy kodiert das Video dafür neu, solche Speicherungen dauern also länger und zeigen ihren Fortschritt mit einer Schaltfläche Abbrechen. Er ist zu Beginn aus.
