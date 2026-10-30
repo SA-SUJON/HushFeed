@@ -12,6 +12,8 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** Opening TikTok links from Telegram one after another no longer piles a whole For You feed under every profile. Memory stayed high and grew with each link, and Back went from feed to feed instead of out of TikTok. Now each link replaces the pages you'd opened from the last one, so Back from the profile goes to the main feed and TikTok's usual quick double Back leaves from there (#276).
 * **TikTok:** `Auto translate comments` works again on accounts TikTok moved to its newer comment list, where nothing got translated. Foreign comments switch to your language as they scroll in, and one you've flipped back with See original stays that way (#282).
+* **TikTok:** `Slide to change the hold speed` steps through your own `Speed menu choices` now, one choice per step, and the bubble doesn't flicker while you slide. A pull down to lock never shifts the speed you picked, and TikTok's lock banner gives way to the bubble. Your next hold starts at the speed you slid to, and unlocking plays your default speed when `Use a default playback speed` is on. The speed pill that sometimes stayed on screen after you let go is gone (#248).
+* **TikTok:** `Hide LIVE videos` catches the LIVEs TikTok slips into a For You page that's already on screen. Those used to get through because Hushfeed leaves TikTok's fresh inserts alone, and the other filters still do (#277).
 
 ## 0.80.0 (2026-10-27)
 
