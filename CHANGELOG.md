@@ -14,6 +14,10 @@ Every Hushfeed release, newest first.
 * **TikTok:** `Hide TikTok Shop` takes the shop buttons out from under captions too, the ones that link to a product or open a shopping search with the bag icon. A plain search tag under a caption still shows (#271).
 * **TikTok:** `Custom launcher icon` has a `Notification icon` option now. Pick Hushfeed's H and TikTok's notifications show a sharp H in the status bar instead of the note. TikTok ships that note as one small picture that gets stretched on most phones, so it often looks soft. Leave the option alone and nothing changes (Discussion #114).
 * **TikTok:** `Sound format` has a third choice, MP3. Both sound saves (the one beside a video and the long-press `Save the original sound`) can come out as a plain .mp3 that plays anywhere. A sound TikTok already sent as MP3 is saved untouched, and anything else is converted on the phone at its own sample rate. MP3 works on every Android version, so the row doesn't grey out below Android 10 anymore. If a conversion fails you get the sound the way TikTok sent it (#273).
+* **TikTok:** `Also on opened videos` (under `Hide the search button on the feed`) has a `Hide the Back button there too` switch now. It takes away the Back arrow beside that hidden search bar too, so a video opened from search or a profile shows nothing at the top. Your phone's back gesture still works (#251).
+* **TikTok:** With `Block author button` on, a LIVE that shows up in For You gets the block button too. One tap blocks its host, and the feed moves on like it does after a video. The sound, feedback and mute buttons stay off LIVEs, since they don't apply there (Discussion #138).
+* **TikTok:** Hushfeed builds on Morphe patcher 2.1.0 now, so it needs Morphe Manager 2.3.0 or newer.
+* **TikTok:** The patch bundle is signed with Morphe's own bundle signature, and the source lists the matching public key. Manager can use it to tell whether a later download really came from Hushfeed.
 
 ### Fixes
 
