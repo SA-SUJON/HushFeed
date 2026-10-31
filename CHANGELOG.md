@@ -13,6 +13,7 @@ Every Hushfeed release, newest first.
 * **TikTok:** The profile card in a LIVE room works like a profile now. Long press the bio to copy it, the name to copy the name, or the username to copy the user ID. A small copy mark after the username copies the handle with one tap (#268).
 * **TikTok:** `Hide TikTok Shop` takes the shop buttons out from under captions too, the ones that link to a product or open a shopping search with the bag icon. A plain search tag under a caption still shows (#271).
 * **TikTok:** `Custom launcher icon` has a `Notification icon` option now. Pick Hushfeed's H and TikTok's notifications show a sharp H in the status bar instead of the note. TikTok ships that note as one small picture that gets stretched on most phones, so it often looks soft. Leave the option alone and nothing changes (Discussion #114).
+* **TikTok:** `Sound format` has a third choice, MP3. Both sound saves (the one beside a video and the long-press `Save the original sound`) can come out as a plain .mp3 that plays anywhere. A sound TikTok already sent as MP3 is saved untouched, and anything else is converted on the phone at its own sample rate. MP3 works on every Android version, so the row doesn't grey out below Android 10 anymore. If a conversion fails you get the sound the way TikTok sent it (#273).
 
 ### Fixes
 
