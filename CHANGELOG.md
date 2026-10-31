@@ -12,6 +12,7 @@ Every Hushfeed release, newest first.
 * **TikTok:** With `Latest first on Following` on, every Following read after the first asks TikTok for 30 posts instead of its smaller count. A long list takes fewer reads, and fewer newer posts turn up after you've already scrolled past older ones (#226).
 * **TikTok:** The profile card in a LIVE room works like a profile now. Long press the bio to copy it, the name to copy the name, or the username to copy the user ID. A small copy mark after the username copies the handle with one tap (#268).
 * **TikTok:** `Hide TikTok Shop` takes the shop buttons out from under captions too, the ones that link to a product or open a shopping search with the bag icon. A plain search tag under a caption still shows (#271).
+* **TikTok:** `Custom launcher icon` has a `Notification icon` option now. Pick Hushfeed's H and TikTok's notifications show a sharp H in the status bar instead of the note. TikTok ships that note as one small picture that gets stretched on most phones, so it often looks soft. Leave the option alone and nothing changes (Discussion #114).
 
 ### Fixes
 
