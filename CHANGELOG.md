@@ -30,6 +30,7 @@ Every Hushfeed release, newest first.
 * **TikTok:** Saving a story on Automatic takes the sharpest copy the story has, the one the player shows. With `Show download progress` or a few other download switches on, it used to save a smaller 720p copy. Thanks to @jutochoppa (#287, #155).
 * **TikTok:** Recording a LIVE's screen doesn't film the Record button anymore. It hides as the recording starts and comes back once the file is saved. The recording's notification has a Stop button, and leaving the room still stops and saves it (#265).
 * **TikTok:** `Sign in without a passkey` says what to do when TikTok's 2-step check still asks only for a passkey. That page lists only the ways your account has set up, so add email or text as a way to verify on tiktok.com or another phone first, then sign in (#102).
+* **TikTok:** `Remove creation tools` leaves APKMirror's split bundle alone, which is what Morphe Manager patches for most people. That bundle doesn't carry the editor and effect files the patch takes out, so it only emptied the face model, and face effects and Beauty couldn't find a face (#285).
 
 ## 0.80.0 (2026-10-27)
 
