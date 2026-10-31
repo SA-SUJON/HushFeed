@@ -8,8 +8,16 @@ Every Hushfeed release, newest first.
 
 * **TikTok:** `Let other apps play until a video starts` sits under `Mute feed videos` in Playback. With it on, opening TikTok or going back and forth to your messages doesn't pause music from another app anymore. TikTok takes the sound once a video actually plays. It's off by default (#283).
 * **TikTok:** New `Keep unsent messages` switch in Inbox. When someone unsends a message to you, it stays in the chat, and `Mark kept messages` can add "(unsent)" after it. Messages you unsend yourself still go away, and `Clear kept messages` turns the kept ones back into TikTok's usual notice. It's off by default. Thanks to @maayan080 (#291).
+* **TikTok:** `Hide the Service+ row under LIVE previews` sits with the LIVE switches in Playback. A LIVE in the feed can carry a Service+ line under the creator's name, like "Ask me anything", and this keeps it off. The line also stays with its own LIVE now. It used to hang on from the LIVE before whenever the row came back on screen, so a LIVE with no Service+ item showed the last one's. The switch is off by default (#94).
+* **TikTok:** With `Latest first on Following` on, every Following read after the first asks TikTok for 30 posts instead of its smaller count. A long list takes fewer reads, and fewer newer posts turn up after you've already scrolled past older ones (#226).
+* **TikTok:** The profile card in a LIVE room works like a profile now. Long press the bio to copy it, the name to copy the name, or the username to copy the user ID. A small copy mark after the username copies the handle with one tap (#268).
 
 ### Fixes
+
+* **TikTok:** The cover still TikTok flashes between videos grows with the picture under `See-through status bar` and `See-through bottom bar`. Only the video grew before, so every swipe showed TikTok's bands for a frame (#232).
+* **TikTok:** `Remove feed ads` also refuses the ad microseries ask for in their player. That request went around the feed ad filter, so an episode could still bring one (#286).
+* **TikTok:** Typing in a LIVE room's comment box reads light on the AMOLED dark theme. The panel went black with the rest of the room, but its text box kept TikTok's dark text and hint, so what you typed was dark on black (#267).
+* **TikTok:** `Keep a streak going` reaches names with an emoji or a space in them, and group chats. Those entries were cut at the first character a username can't hold, and the field's keyboard wouldn't even let you type them. A group is named the way your Inbox shows it, and one you haven't opened since the last restart is named in the answer so you know to open it (#289).
 
 * **TikTok:** Opening TikTok links from Telegram one after another no longer piles a whole For You feed under every profile. Memory stayed high and grew with each link, and Back went from feed to feed instead of out of TikTok. Now each link replaces the pages you'd opened from the last one, so Back from the profile goes to the main feed and TikTok's usual quick double Back leaves from there (#276).
 * **TikTok:** `Auto translate comments` works again on accounts TikTok moved to its newer comment list, where nothing got translated. Foreign comments switch to your language as they scroll in, and one you've flipped back with See original stays that way (#282).
