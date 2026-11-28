@@ -7,22 +7,31 @@ package app.morphe.patches.tiktok.interaction.exactcounts
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.literal
+import app.morphe.patcher.methodCall
 import app.morphe.patcher.patch.PatchException
+import app.morphe.patcher.patch.mutableClassDefBy
+import app.morphe.patcher.patch.packageMetadata
 import app.morphe.patches.tiktok.misc.settings.configurableBytecodePatch as bytecodePatch
 import app.morphe.patcher.string
+import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patcher.util.smali.ExternalLabel
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.tiktok.misc.extension.sharedExtensionPatch
 import app.morphe.patches.tiktok.misc.settings.SettingsStatusLoadFingerprint
 import app.morphe.patches.tiktok.misc.settings.settingsPatch
+import app.morphe.patches.tiktok.misc.theme.declaredVersions
 import app.morphe.util.addInstruction
 import app.morphe.util.addInstructionsWithLabels
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.Method
+import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.WideLiteralInstruction
+import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
+import com.android.tools.smali.dexlib2.iface.reference.StringReference
 
 private const val EXACT_COUNTS_DESCRIPTOR = "Lapp/morphe/extension/tiktok/feed/ExactCounts;"
 
@@ -85,6 +94,74 @@ internal object CompactCountFormatterFingerprint : Fingerprint(
 /** How many compact count formatters a build may have. */
 internal val COMPACT_COUNT_FORMATTERS = 4..5
 
+/**
+ * TikTok LIVE's own count formatter class (LiveCountDisplayUtil, LX/0MCS on 48.0.2), found by the
+ * log line of its gift coin formatter. Its static long-to-string formatters print the supporters
+ * list's scores, gift coins and viewer counts, and none carries the "1.0M" CountFormatterFingerprint
+ * looks for (#552).
+ */
+internal object LiveCountDisplayFingerprint : Fingerprint(
+    returnType = "Ljava/lang/String;",
+    parameters = listOf("J"),
+    filters = listOf(string("getDisplayCountByNumberOfDigitsForCoin exception: ")),
+    custom = { method, _ -> method.isCountFormatter() },
+)
+
+/**
+ * A LIVE count formatter that rounds a count to whole K, M or B units (either case). One that
+ * prints an at-least figure, 1K+ or 1M+, is left alone: the supporters list hands it another
+ * viewer's score as a floor, so a whole number there would read as this viewer's own.
+ */
+internal fun Method.isLiveCountFormatter(): Boolean {
+    if (!isCountFormatter()) return false
+    val strings = implementation?.instructions?.toList().orEmpty().mapNotNull {
+        ((it as? ReferenceInstruction)?.reference as? StringReference)?.string
+    }
+    return strings.any { it.equals("M", ignoreCase = true) } && strings.none { it.matches(Regex("[KMBkmb]\\+")) }
+}
+
+/** How many LIVE count formatters a build may have: six on 48.0.2. */
+internal val LIVE_COUNT_FORMATTERS = 5..7
+
+private const val ONLINE_AUDIENCE_DISPLAY_STRATEGY =
+    "Lcom/bytedance/android/livesdk/livesetting/rank/OnlineAudienceDisplayStrategySetting;"
+
+/**
+ * The score text of a row in a LIVE's supporters list (LX/0MN4->LIZ on 48.0.2): static,
+ * (Z, J, row) to a string. Under TikTok's display strategy a viewer past the first few shows a
+ * floor like 1M+ taken from another score, or a text the server sent, instead of the row's own
+ * score, so the hook answers before any of that.
+ */
+internal object SupporterScoreTextFingerprint : Fingerprint(
+    returnType = "Ljava/lang/String;",
+    parameters = listOf("Z", "J", "L"),
+    filters = listOf(methodCall(definingClass = ONLINE_AUDIENCE_DISPLAY_STRATEGY, name = "getValue")),
+    // The hook needs three registers below the four parameter ones.
+    custom = { method, _ -> AccessFlags.STATIC.isSet(method.accessFlags) && (method.implementation?.registerCount ?: 0) >= 7 },
+)
+
+/**
+ * The row's own score: the long field of the row type that the method reads and hands straight
+ * to a static long-to-string formatter of [formatterClass] (LX/0MMs->LIZIZ, built from
+ * Rank.score, on 48.0.2). Null when no read does.
+ */
+internal fun Method.supporterScoreField(formatterClass: String): FieldReference? {
+    val rowType = parameterTypes.last().toString()
+    val instructions = implementation?.instructions?.toList() ?: return null
+    return instructions.indices.firstNotNullOfOrNull { at ->
+        val read = instructions[at]
+        val field = (read as? ReferenceInstruction)?.reference as? FieldReference ?: return@firstNotNullOfOrNull null
+        val call = instructions.getOrNull(at + 1) as? FiveRegisterInstruction ?: return@firstNotNullOfOrNull null
+        val callee = (call as? ReferenceInstruction)?.reference as? MethodReference ?: return@firstNotNullOfOrNull null
+        field.takeIf {
+            read.opcode == Opcode.IGET_WIDE && field.definingClass == rowType && field.type == "J" &&
+                call.opcode == Opcode.INVOKE_STATIC && callee.definingClass == formatterClass &&
+                callee.returnType == "Ljava/lang/String;" && callee.parameterTypes.map { it.toString() } == listOf("J") &&
+                call.registerC == (read as TwoRegisterInstruction).registerA
+        }
+    }
+}
+
 @Suppress("unused")
 val showExactCountsPatch = bytecodePatch(
     name = "Show exact counts",
@@ -115,19 +192,58 @@ val showExactCountsPatch = bytecodePatch(
                     "${compactFormatters.map { it.originalClassDef.type }}",
             )
         }
-        (formatters + compactFormatters).forEach { match ->
-            val method = match.method
-            // p0 and p1 hold the long. v0 is a local the method writes before it reads.
-            method.addInstructionsWithLabels(
-                0,
-                """
-                    invoke-static {p0, p1}, $EXACT_COUNTS_DESCRIPTOR->format(J)Ljava/lang/String;
-                    move-result-object v0
-                    if-eqz v0, :tiktok
-                    return-object v0
-                """,
-                ExternalLabel("tiktok", method.getInstruction(0)),
-            )
+        // #552: LIVE's own counts, the supporters list's scores among them. On a build the patch
+        // wasn't made for, LIVE counts it can't find stay as TikTok shows them.
+        val declaredBuild = packageMetadata.versionName in declaredVersions()
+        val coinFormatter = if (declaredBuild) LiveCountDisplayFingerprint.method else LiveCountDisplayFingerprint.methodOrNull
+        val liveFormatters = coinFormatter?.let { coin ->
+            mutableClassDefBy(coin.definingClass).methods.filter { it.isLiveCountFormatter() }
+        }.orEmpty()
+        if (declaredBuild && liveFormatters.size !in LIVE_COUNT_FORMATTERS) {
+            throw PatchException("Show exact counts: ${liveFormatters.size} LIVE count formatters")
         }
+        val scoreText = if (declaredBuild) SupporterScoreTextFingerprint.method else SupporterScoreTextFingerprint.methodOrNull
+        val scoreField = coinFormatter?.let { scoreText?.supporterScoreField(it.definingClass) }
+        if (declaredBuild && scoreField == null) {
+            throw PatchException("Show exact counts: the supporters list's score text reads no score")
+        }
+
+        (formatters.map { it.method } + compactFormatters.map { it.method } + liveFormatters).forEach {
+            it.hookCountFormatter()
+        }
+        if (scoreText != null && scoreField != null) scoreText.hookSupporterScoreText(scoreField)
     }
+}
+
+/** ExactCounts' answer first in a count formatter, and TikTok's text when it has none. */
+internal fun MutableMethod.hookCountFormatter() {
+    // p0 and p1 hold the long. v0 is a local the method writes before it reads.
+    addInstructionsWithLabels(
+        0,
+        """
+            invoke-static {p0, p1}, $EXACT_COUNTS_DESCRIPTOR->format(J)Ljava/lang/String;
+            move-result-object v0
+            if-eqz v0, :tiktok
+            return-object v0
+        """,
+        ExternalLabel("tiktok", getInstruction(0)),
+    )
+}
+
+/** The row's own score, whole, first in the supporters list's score text, and TikTok's text when there's none. */
+internal fun MutableMethod.hookSupporterScoreText(score: FieldReference) {
+    // p3 is the row, v20 on 48.0.2, past what iget-wide can name, so it's copied to v2 first.
+    // v0 to v2 are locals the method writes before it reads.
+    addInstructionsWithLabels(
+        0,
+        """
+            move-object/from16 v2, p3
+            iget-wide v0, v2, ${score.definingClass}->${score.name}:${score.type}
+            invoke-static {v0, v1}, $EXACT_COUNTS_DESCRIPTOR->supporterScore(J)Ljava/lang/String;
+            move-result-object v0
+            if-eqz v0, :tiktok
+            return-object v0
+        """,
+        ExternalLabel("tiktok", getInstruction(0)),
+    )
 }

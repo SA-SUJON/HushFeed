@@ -50,4 +50,24 @@ public class ExactCountsTest {
         Settings.SHOW_EXACT_COUNTS.save(true);
         assertNull(ExactCounts.format(-1L));
     }
+
+    /** #552: a supporter's score past a million shows whole, in the phone's grouping. */
+    @Test public void aSupportersScoreShowsWholeWithTheSwitchOn() {
+        Settings.SHOW_EXACT_COUNTS.save(true);
+        Locale.setDefault(Locale.US);
+        assertEquals("1,234,567", ExactCounts.supporterScore(1_234_567L));
+        assertEquals("3,000,000", ExactCounts.supporterScore(3_000_000L));
+        assertEquals("12,345", ExactCounts.supporterScore(12_345L));
+        assertEquals("7", ExactCounts.supporterScore(7L));
+        Locale.setDefault(Locale.GERMANY);
+        assertEquals("1.234.567", ExactCounts.supporterScore(1_234_567L));
+    }
+
+    @Test public void aRowWithNoScoreOrTheSwitchOffKeepsTikToksText() {
+        Settings.SHOW_EXACT_COUNTS.save(true);
+        assertNull("no score of its own: TikTok's text", ExactCounts.supporterScore(0L));
+        assertNull(ExactCounts.supporterScore(-5L));
+        Settings.SHOW_EXACT_COUNTS.save(false);
+        assertNull(ExactCounts.supporterScore(1_234_567L));
+    }
 }

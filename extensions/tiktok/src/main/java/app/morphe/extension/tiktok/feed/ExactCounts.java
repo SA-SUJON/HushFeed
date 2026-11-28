@@ -25,4 +25,14 @@ public final class ExactCounts {
         // counts off the main thread.
         return NumberFormat.getIntegerInstance().format(count);
     }
+
+    /**
+     * Called first in the score text of a LIVE supporters list row (#552), with the row's own
+     * score. TikTok shows the first few rows rounded (1.2M) and the rest as a floor taken from
+     * another score (1M+) or a text the server sent. With the switch on each row shows its own
+     * whole score. A row with no score keeps TikTok's text. Null leaves the text to TikTok.
+     */
+    public static String supporterScore(long score) {
+        return score > 0 ? format(score) : null;
+    }
 }

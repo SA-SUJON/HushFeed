@@ -36,7 +36,14 @@ import app.morphe.patches.tiktok.interaction.exactcounts.COMPACT_COUNT_FORMATTER
 import app.morphe.patches.tiktok.interaction.exactcounts.COUNT_FORMATTERS
 import app.morphe.patches.tiktok.interaction.exactcounts.CompactCountFormatterFingerprint
 import app.morphe.patches.tiktok.interaction.exactcounts.CountFormatterFingerprint
+import app.morphe.patches.tiktok.interaction.exactcounts.LIVE_COUNT_FORMATTERS
+import app.morphe.patches.tiktok.interaction.exactcounts.LiveCountDisplayFingerprint
+import app.morphe.patches.tiktok.interaction.exactcounts.SupporterScoreTextFingerprint
+import app.morphe.patches.tiktok.interaction.exactcounts.hookCountFormatter
+import app.morphe.patches.tiktok.interaction.exactcounts.hookSupporterScoreText
 import app.morphe.patches.tiktok.interaction.exactcounts.isCountFormatter
+import app.morphe.patches.tiktok.interaction.exactcounts.isLiveCountFormatter
+import app.morphe.patches.tiktok.interaction.exactcounts.supporterScoreField
 import app.morphe.patches.tiktok.interaction.engagement.ProfileGridBindFingerprint
 import app.morphe.patches.tiktok.interaction.engagement.ProfileGridHolderBindFingerprint
 import app.morphe.patches.tiktok.interaction.engagement.gridCountSite
@@ -89,6 +96,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OffsetInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.RegisterRangeInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.value.StringEncodedValue
 import com.android.tools.smali.dexlib2.iface.instruction.NarrowLiteralInstruction
@@ -102,6 +110,9 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+
+/** The score a LIVE supporters list row carries, as the server sent it (#552). */
+private const val RANK_SCORE = "Lcom/bytedance/android/livesdk/rank/api/model/Rank;->score:J"
 
 /**
  * Instruction-level anchors the patches use on TikTok remain unique on every
@@ -757,6 +768,101 @@ class TikTokPatchAnchorsMatchFixturesTest {
             assertTrue("${apk.name}: a formatter without the hook's register",
                 (formatters + compact).all { it.isCountFormatter() })
             assertTrue("${apk.name}: a formatter in both sets", formatters.none { it in compact })
+        }
+    }
+
+    /**
+     * #552: Show exact counts also hooks TikTok LIVE's own count formatters, found by the gift
+     * coin formatter's log line: six on 48.0.2, each rounding to whole K, M or B, and none taken
+     * by the feed's fingerprints. The class's 1K+ formatter, an at-least figure, stays TikTok's.
+     * The supporters list's score text is one method, and the long it formats is the one its row
+     * is built with from Rank.score.
+     */
+    @Test
+    fun `LIVE count formatters and the supporters score text resolve on every declared build`() {
+        Fixtures.forEachDeclared { apk ->
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            val classes = container.dexEntryNames.asSequence()
+                .flatMap { container.getEntry(it)!!.dexFile.classes.asSequence() }.toList()
+            val coin = classes.flatMap { cls -> cls.methods.filter { LiveCountDisplayFingerprint.takes(it, cls) } }
+            assertEquals("coin formatters", 1, coin.size)
+            val liveClass = classes.single { it.type == coin.single().definingClass }
+            val live = liveClass.methods.filter { it.isLiveCountFormatter() }
+            assertTrue("${live.size} LIVE count formatters", live.size in LIVE_COUNT_FORMATTERS)
+            assertTrue("the coin formatter is one of them", coin.single() in live)
+            assertTrue("the 1K+ formatter stays TikTok's",
+                liveClass.methods.any { it.isCountFormatter() && !it.isLiveCountFormatter() })
+            val feed = classes.flatMap { cls ->
+                cls.methods.filter { CountFormatterFingerprint.takes(it, cls) || CompactCountFormatterFingerprint.takes(it, cls) }
+            }
+            assertTrue("a LIVE formatter the feed's hooks take too", live.none { it in feed })
+
+            val texts = classes.flatMap { cls -> cls.methods.filter { SupporterScoreTextFingerprint.takes(it, cls) } }
+            assertEquals("supporters score texts", 1, texts.size)
+            val field = texts.single().supporterScoreField(liveClass.type)
+            assertNotNull("the score the row text formats", field)
+            val row = classes.single { it.type == field!!.definingClass }
+            // The row's constructor keeps its first long parameter in that field...
+            val init = row.methods.single { m ->
+                m.name == "<init>" && m.implementation!!.instructions.any {
+                    it.opcode == Opcode.IPUT_WIDE && ((it as ReferenceInstruction).reference as FieldReference).name == field!!.name
+                }
+            }
+            val params = init.parameterTypes.map(CharSequence::toString)
+            val firstLong = params.indexOf("J")
+            val thisRegister = init.implementation!!.registerCount -
+                (1 + params.sumOf { if (it == "J" || it == "D") 2 else 1 })
+            val scoreRegister = thisRegister + 1 + params.take(firstLong).sumOf { if (it == "J" || it == "D") 2 else 1 }
+            val stored = init.implementation!!.instructions.single {
+                it.opcode == Opcode.IPUT_WIDE && ((it as ReferenceInstruction).reference as FieldReference).name == field!!.name
+            }
+            assertEquals("the field holds the first long", scoreRegister, (stored as TwoRegisterInstruction).registerA)
+            // ...and the supporters list builds a row from Rank.score.
+            val fromRankScore = classes.any { cls ->
+                cls.methods.any { m -> m.buildsRowFrom(init, firstLong, params, RANK_SCORE) }
+            }
+            assertTrue("a row built from Rank.score", fromRankScore)
+
+            // The hooks land on the real methods: the row sits in a register past v15 on 48.0.2.
+            fun Method.code() = implementation!!.instructions.filter { it.opcode != Opcode.NOP }
+            val text = texts.single()
+            val hookedText = MutableMethod(text).apply { hookSupporterScoreText(field!!) }.code()
+            assertEquals(Opcode.MOVE_OBJECT_FROM16, hookedText[0].opcode)
+            assertEquals("the row is p3", text.implementation!!.registerCount - 1,
+                (hookedText[0] as TwoRegisterInstruction).registerB)
+            assertEquals(Opcode.IGET_WIDE, hookedText[1].opcode)
+            assertEquals(field!!.name, ((hookedText[1] as ReferenceInstruction).reference as FieldReference).name)
+            assertEquals(text.code().size + 6, hookedText.size)
+            assertEquals(text.code().first().opcode, hookedText[6].opcode)
+            live.forEach { formatter ->
+                val hooked = MutableMethod(formatter).apply { hookCountFormatter() }.code()
+                assertEquals("${formatter.name} asks first", "format",
+                    ((hooked[0] as ReferenceInstruction).reference as MethodReference).name)
+                assertEquals(formatter.code().size + 4, hooked.size)
+            }
+        }
+    }
+
+    /** Whether [this] calls [init] with the long at [firstLong] read from [source] just before. */
+    private fun Method.buildsRowFrom(init: Method, firstLong: Int, params: List<String>, source: String): Boolean {
+        val instructions = implementation?.instructions?.toList() ?: return false
+        return instructions.indices.any { at ->
+            val call = instructions[at]
+            val callee = (call as? ReferenceInstruction)?.reference as? MethodReference
+            if (call.opcode != Opcode.INVOKE_DIRECT && call.opcode != Opcode.INVOKE_DIRECT_RANGE) return@any false
+            if (callee == null || callee.definingClass != init.definingClass || callee.name != "<init>" ||
+                callee.parameterTypes.map(CharSequence::toString) != params) return@any false
+            val offset = 1 + params.take(firstLong).sumOf { if (it == "J" || it == "D") 2 else 1 }
+            val register = when (call) {
+                is RegisterRangeInstruction -> call.startRegister + offset
+                is FiveRegisterInstruction -> listOf(call.registerC, call.registerD, call.registerE, call.registerF, call.registerG)[offset]
+                else -> return@any false
+            }
+            val writer = (at - 1 downTo 0).map { instructions[it] }.firstOrNull {
+                it.opcode.setsRegister() && (it as? OneRegisterInstruction)?.registerA == register
+            }
+            writer?.opcode == Opcode.IGET_WIDE &&
+                ((writer as ReferenceInstruction).reference as FieldReference).let { "${it.definingClass}->${it.name}:${it.type}" } == source
         }
     }
 
