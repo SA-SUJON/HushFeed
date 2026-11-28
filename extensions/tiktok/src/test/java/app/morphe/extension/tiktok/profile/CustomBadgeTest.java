@@ -12,8 +12,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.ReplacementSpan;
 
+import app.morphe.extension.shared.diagnostics.HookStatus;
 import app.morphe.extension.shared.settings.PausedProcess;
 import app.morphe.extension.tiktok.SettingsContextRule;
 import app.morphe.extension.tiktok.SignedInUser;
@@ -62,9 +65,13 @@ public class CustomBadgeTest {
         SettingsStatus.followStatusEnabled = true;
         Settings.LOCAL_PROFILE_VERIFIED_BADGE.save(true);
         CustomBadge.remove(context);
+        LocalProfileAppearance.endBadgeRender();
+        HookStatus.clear();
     }
 
     @After public void tearDown() {
+        LocalProfileAppearance.endBadgeRender();
+        HookStatus.clear();
         CustomBadge.remove(context);
         PausedProcess.set(false);
         SignedInUser.idForTests = null;
@@ -155,6 +162,121 @@ public class CustomBadgeTest {
         assertEquals(CustomBadge.SIDE, kept.getWidth());
         assertEquals(CustomBadge.SIDE, kept.getHeight());
         assertTrue(CustomBadge.file(context).length() < 64 * 1024);
+    }
+
+    /** The S25 case: TikTok's own renderer lays the name out with our check, so the picture goes where it sets it. */
+    @Test public void everyHeaderTikTokDrawsOurCheckOnShowsThePicture() throws Exception {
+        pick(png(64, 64, Color.RED));
+        LocalProfileAppearance.beginBadgeRender(null, LocalProfileAppearance.NICKNAME);
+        assertTrue(placed(LocalProfileAppearance::headerBadgeSpan) instanceof CustomBadge.PictureSpan);
+        assertTrue(placed(LocalProfileAppearance::headerLayoutBadgeSpan) instanceof CustomBadge.PictureSpan);
+        LocalProfileAppearance.endBadgeRender();
+        LocalProfileAppearance.beginBadgeRender(null, LocalProfileAppearance.NAVBAR_NICKNAME);
+        assertTrue("the top bar name after you scroll", placed(LocalProfileAppearance::navbarBadgeSpan) instanceof CustomBadge.PictureSpan);
+        LocalProfileAppearance.endBadgeRender();
+        assertEquals(Boolean.TRUE, LocalProfileAppearance.legacyBadge(Boolean.FALSE, "account-a", LocalProfileAppearance.LEGACY_NICKNAME));
+        assertTrue("the older header", placed(LocalProfileAppearance::legacyBadgeSpan) instanceof CustomBadge.PictureSpan);
+        assertTrue(String.valueOf(HookStatus.report()),
+                HookStatus.report().contains(LocalProfileAppearance.BADGE_PICTURE + ": 4 found, 0 missing"));
+    }
+
+    @Test public void aRealVerifiedCheckKeepsTikToksOwnBadge() throws Exception {
+        pick(png(64, 64, Color.RED));
+        BlueCheck check = new BlueCheck();
+        LocalProfileAppearance.beginBadgeRender(LocalProfileAppearance.VERIFIED_BADGE, LocalProfileAppearance.NICKNAME);
+        assertSame(check, placed(LocalProfileAppearance::headerBadgeSpan, check));
+        assertSame(check, placed(LocalProfileAppearance::headerLayoutBadgeSpan, check));
+        LocalProfileAppearance.beginBadgeRender(LocalProfileAppearance.VERIFIED_BADGE, LocalProfileAppearance.NAVBAR_NICKNAME);
+        assertSame(check, placed(LocalProfileAppearance::navbarBadgeSpan, check));
+        assertEquals(Boolean.TRUE, LocalProfileAppearance.legacyBadge(Boolean.TRUE, "account-a", LocalProfileAppearance.LEGACY_NICKNAME));
+        assertSame("an account TikTok verified", check, placed(LocalProfileAppearance::legacyBadgeSpan, check));
+    }
+
+    @Test public void someoneElsesNameOrAnotherRenderKeepsTheirCheck() throws Exception {
+        pick(png(64, 64, Color.RED));
+        BlueCheck check = new BlueCheck();
+        // A verified creator's older header.
+        assertEquals(Boolean.FALSE, LocalProfileAppearance.legacyBadge(Boolean.FALSE, "account-b", LocalProfileAppearance.LEGACY_NICKNAME));
+        assertSame(check, placed(LocalProfileAppearance::legacyBadgeSpan, check));
+        // A mark for the top bar's render doesn't reach the header's, nor the reverse.
+        LocalProfileAppearance.beginBadgeRender(null, LocalProfileAppearance.NAVBAR_NICKNAME);
+        assertSame(check, placed(LocalProfileAppearance::headerBadgeSpan, check));
+        assertSame(check, placed(LocalProfileAppearance::legacyBadgeSpan, check));
+        LocalProfileAppearance.beginBadgeRender(null, LocalProfileAppearance.NICKNAME);
+        assertSame(check, placed(LocalProfileAppearance::navbarBadgeSpan, check));
+        // Once the render is over, the next name drawn is TikTok's again.
+        LocalProfileAppearance.endBadgeRender();
+        assertSame(check, placed(LocalProfileAppearance::headerBadgeSpan, check));
+        // A new bind starts clean too.
+        LocalProfileAppearance.beginBadgeRender(null, LocalProfileAppearance.NICKNAME);
+        LocalProfileAppearance.beginNicknameBind(new Object(), "account-b", LocalProfileAppearance.NICKNAME);
+        assertSame(check, placed(LocalProfileAppearance::headerBadgeSpan, check));
+        // Another component never marks a render.
+        LocalProfileAppearance.beginBadgeRender(null, LocalProfileAppearance.RESTRICTION_NOTICE);
+        assertSame(check, placed(LocalProfileAppearance::headerBadgeSpan, check));
+    }
+
+    @Test public void withNoPictureOrANonBadgeSpanTikToksSpanIsSetAsIs() {
+        BlueCheck check = new BlueCheck();
+        LocalProfileAppearance.beginBadgeRender(null, LocalProfileAppearance.NICKNAME);
+        assertSame(check, placed(LocalProfileAppearance::headerBadgeSpan, check));
+        SpannableStringBuilder text = new SpannableStringBuilder("me x");
+        ForegroundColorSpan color = new ForegroundColorSpan(Color.BLUE);
+        LocalProfileAppearance.headerBadgeSpan(text, color, 0, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        assertSame(color, text.getSpans(0, 2, ForegroundColorSpan.class)[0]);
+        assertEquals(Spanned.SPAN_EXCLUSIVE_EXCLUSIVE, text.getSpanFlags(color));
+        // A range TikTok's own wrapper would have caught doesn't throw out of the renderer.
+        LocalProfileAppearance.headerBadgeSpan(text, check, 3, 99, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        assertTrue(String.valueOf(HookStatus.report()),
+                HookStatus.report().contains(LocalProfileAppearance.BADGE_PICTURE + ": 2 found, 0 missing"));
+    }
+
+    /** TikTok's header check counts a gap beside its icon in its width: the picture takes the icon's height, centred in it. */
+    @Test public void thePictureIsDrawnAtTheIconsSizeNotTheGapsToo() throws Exception {
+        pick(png(64, 64, Color.RED));
+        ReplacementSpan spaced = new ReplacementSpan() {
+            @Override public int getSize(Paint paint, CharSequence text, int start, int end, Paint.FontMetricsInt fm) {
+                if (fm != null) {
+                    fm.ascent = fm.top = -26;
+                    fm.descent = fm.bottom = 6;
+                }
+                return 40;
+            }
+
+            @Override public void draw(Canvas canvas, CharSequence text, int start, int end, float x, int top, int y,
+                    int bottom, Paint paint) {
+            }
+        };
+        LocalProfileAppearance.beginBadgeRender(null, LocalProfileAppearance.NICKNAME);
+        ReplacementSpan badge = placed(LocalProfileAppearance::headerBadgeSpan, spaced);
+        assertTrue(badge instanceof CustomBadge.PictureSpan);
+        Paint paint = paint();
+        SpannableStringBuilder text = new SpannableStringBuilder("me x");
+        assertEquals("the line keeps TikTok's width", 40, badge.getSize(paint, text, 3, 4, null));
+        Bitmap drawn = draw(badge, text, paint);
+        int middle = middle(paint);
+        assertEquals(Color.RED, drawn.getPixel(20, middle));
+        assertEquals(Color.RED, drawn.getPixel(5, middle));
+        assertEquals("the gap stays clear", 0, Color.alpha(drawn.getPixel(2, middle)));
+        assertEquals(0, Color.alpha(drawn.getPixel(37, middle)));
+        assertEquals("32 pixels tall, not 40", 0, Color.alpha(drawn.getPixel(20, middle - 18)));
+        assertEquals(Color.RED, drawn.getPixel(20, middle - 14));
+    }
+
+    private interface SpanSetter {
+        void set(SpannableStringBuilder text, Object span, int start, int end, int flags);
+    }
+
+    private static ReplacementSpan placed(SpanSetter setter) {
+        return placed(setter, new BlueCheck());
+    }
+
+    /** Sets the span the way TikTok's renderer does, on the last character of the name, and reads what it set. */
+    private static ReplacementSpan placed(SpanSetter setter, ReplacementSpan nativeSpan) {
+        SpannableStringBuilder text = new SpannableStringBuilder("me x");
+        setter.set(text, nativeSpan, 3, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        assertEquals(Spanned.SPAN_EXCLUSIVE_EXCLUSIVE, text.getSpanFlags(badgeOf(text)));
+        return badgeOf(text);
     }
 
     private void pick(byte[] picture) throws Exception {

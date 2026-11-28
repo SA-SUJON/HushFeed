@@ -192,7 +192,11 @@ public final class CustomBadge {
         }
     }
 
-    /** The picture, as wide as the blue check would have been and centred on the name's letters. */
+    /**
+     * The picture, in the space the blue check would have taken and centred on the name's letters.
+     * TikTok's header check counts a small gap beside the icon in its width, so the picture is drawn
+     * at the icon's own height and the gap is left free.
+     */
     static final class PictureSpan extends ReplacementSpan {
         final Bitmap picture;
         private final ReplacementSpan nativeBadge;
@@ -216,9 +220,27 @@ public final class CustomBadge {
 
         @Override public void draw(@NonNull Canvas canvas, CharSequence text, int start, int end, float x,
                 int top, int y, int bottom, @NonNull Paint paint) {
-            float side = getSize(paint, text, start, end, null);
+            int slot = getSize(paint, text, start, end, null);
+            float side = iconSide(paint, text, start, end, slot);
+            float left = x + (slot - side) / 2f;
             float middle = y + (paint.ascent() + paint.descent()) / 2f;
-            canvas.drawBitmap(picture, null, new RectF(x, middle - side / 2f, x + side, middle + side / 2f), draw);
+            canvas.drawBitmap(picture, null, new RectF(left, middle - side / 2f, left + side, middle + side / 2f), draw);
+        }
+
+        /**
+         * The check's own height, the way TikTok's span reports it: handed empty font metrics, it
+         * stretches them to fit its icon. A span that says nothing gets the whole width.
+         */
+        private int iconSide(Paint paint, CharSequence text, int start, int end, int slot) {
+            if (nativeBadge == null) return slot;
+            Paint.FontMetricsInt probe = new Paint.FontMetricsInt();
+            try {
+                nativeBadge.getSize(paint, text, start, end, probe);
+            } catch (RuntimeException failure) {
+                return slot;
+            }
+            int side = probe.descent - probe.ascent;
+            return side > 0 && side < slot ? side : slot;
         }
     }
 }

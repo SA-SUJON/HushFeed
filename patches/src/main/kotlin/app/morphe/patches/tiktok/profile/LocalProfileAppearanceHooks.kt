@@ -79,6 +79,13 @@ internal const val APPEARANCE_CURRENT = "hushfeedCurrentNicknameRepaint"
 internal const val APPEARANCE_APPEND = "hushfeedAppendLocalNickname"
 internal const val APPEARANCE_ADD_NAME = "hushfeedAddNameText"
 internal const val APPEARANCE_CACHED = "hushfeedNativeNicknameCached"
+/** Extension calls that mark a render drawing the local check and set each renderer's badge span (#549). */
+internal const val BADGE_RENDER_BEGIN = "beginBadgeRender"
+internal const val BADGE_RENDER_END = "endBadgeRender"
+internal const val HEADER_BADGE_SPAN = "headerBadgeSpan"
+internal const val HEADER_LAYOUT_BADGE_SPAN = "headerLayoutBadgeSpan"
+internal const val NAVBAR_BADGE_SPAN = "navbarBadgeSpan"
+internal const val LEGACY_BADGE_SPAN = "legacyBadgeSpan"
 private const val STRING = "Ljava/lang/String;"
 private const val INTEGER = "Ljava/lang/Integer;"
 private const val BOOLEAN = "Ljava/lang/Boolean;"
@@ -394,6 +401,80 @@ private fun Instruction.setsSpan(): Boolean {
         wrapper.parameterTypes.map(CharSequence::toString) == listOf(SPANNABLE, OBJECT, "I", "I", "I")
 }
 
+/**
+ * Where a renderer sets its badge's own span (#549): the one host icon factory call whose configuration's
+ * resource (`LIZ`) is the renderer's badge, then each setSpan of that span until its register is written
+ * again. The badge is the first parameter, as an int or an unboxed Integer, or the older header's native
+ * blue badge literal; the account arrow and alert icons come from other resources and stay native.
+ */
+internal fun Method.badgeSpanSites(): List<Int>? {
+    val body = implementation ?: return null
+    if (AccessFlags.STATIC.isSet(accessFlags)) return null
+    val code = body.instructions.toList()
+    val parameters = parameterTypes.map(CharSequence::toString)
+    val firstParameter = body.registerCount - parameters.map { if (it == "J" || it == "D") 2 else 1 }.sum()
+    fun writes(at: Int, register: Int) =
+        code[at].opcode.setsRegister() && (code[at] as? OneRegisterInstruction)?.registerA == register
+    fun writer(register: Int, before: Int) = (before - 1 downTo 0).firstOrNull { at -> writes(at, register) }
+    fun badgeValue(register: Int, at: Int): Boolean {
+        val write = writer(register, at)
+            ?: return register == firstParameter && parameters.firstOrNull() == "I"
+        val value = code[write]
+        if (value is WideLiteralInstruction && value.opcode in setOf(Opcode.CONST, Opcode.CONST_4, Opcode.CONST_16)) {
+            return value.wideLiteral == NATIVE_BLUE_BADGE.toLong()
+        }
+        return value.opcode == Opcode.MOVE_RESULT && write >= 1 && parameters.firstOrNull() == INTEGER &&
+            code[write - 1].calls("$INTEGER->intValue()I") && code[write - 1].registers() == listOf(firstParameter) &&
+            writer(firstParameter, write - 1) == null
+    }
+    val factories = code.indices.filter { at -> at + 1 < code.size &&
+        code[at].calls("$BADGE_ICON->LIZIZ(I$CONTEXT)$BADGE_SPAN") && code[at + 1].opcode == Opcode.MOVE_RESULT_OBJECT
+    }.filter { at ->
+        val icon = code[at].registers()!!.first()
+        val created = (at - 1 downTo 0).firstOrNull { before -> code[before].opcode == Opcode.NEW_INSTANCE &&
+            code[before].namedRegisters() == listOf(icon) &&
+            code[before].getReference<TypeReference>()?.type == BADGE_ICON } ?: return@filter false
+        val configured = (at - 1 downTo created + 1).filter { before -> code[before].opcode == Opcode.IPUT &&
+            code[before].getReference<FieldReference>()?.toString() == "$BADGE_ICON->LIZ:I" &&
+            (code[before] as TwoRegisterInstruction).registerB == icon }
+        configured.size == 1 && badgeValue((code[configured.single()] as TwoRegisterInstruction).registerA, configured.single())
+    }
+    val factory = factories.singleOrNull() ?: return null
+    val span = (code[factory + 1] as OneRegisterInstruction).registerA
+    val rewritten = (factory + 2 until code.size).firstOrNull { at -> writes(at, span) } ?: code.size
+    val sites = (factory + 2 until rewritten).filter { at -> code[at].setsSpan() && code[at].registers()?.getOrNull(1) == span }
+    return sites.takeIf { it.isNotEmpty() && it.all { at -> code[at].registers()!!.let { args -> args.size == 5 && args.all { it in 0..15 } } } }
+}
+
+/** The four renderers that draw a profile name's badge, each with the extension call that sets its span. */
+internal fun badgeSpanRenderers(nickname: ClassDef, navbar: ClassDef, legacy: Method): List<Pair<Method, String>> {
+    fun ClassDef.renderer(name: String, parameters: List<String>) = methods.singleOrNull { it.name == name &&
+        it.returnType == "V" && it.parameterTypes.map(CharSequence::toString) == parameters && !AccessFlags.STATIC.isSet(it.accessFlags)
+    } ?: throw PatchException("$APPEARANCE: missing badge renderer $type->$name")
+    val header = nickname.renderer(NICKNAME_RENDER, listOf("I", "I", STRING))
+    // The header renderer hands its badge, boxed, to the measured layout (48.0.2 `LJJLJLI`) when TikTok's flag says so.
+    val layoutParameters = listOf(INTEGER, STRING, "I", "Z")
+    val layout = header.implementation!!.instructions.mapNotNull { it.getReference<MethodReference>() }.singleOrNull {
+        it.definingClass == NICKNAME_OWNER && it.returnType == "V" && it.parameterTypes.map(CharSequence::toString) == layoutParameters
+    }?.let { nickname.renderer(it.name, layoutParameters) } ?: throw PatchException("$APPEARANCE: missing measured header renderer")
+    return listOf(header to HEADER_BADGE_SPAN, layout to HEADER_LAYOUT_BADGE_SPAN,
+        navbar.renderer(NAVBAR_RENDER, listOf("I", "I", STRING, STRING, "Z")) to NAVBAR_BADGE_SPAN, legacy to LEGACY_BADGE_SPAN)
+}
+
+/**
+ * Each site keeps its registers; only the setSpan becomes the extension's, which sets the same span or
+ * the picture. Sites are read again here, after any earlier edit to the same method moved them.
+ */
+internal fun MutableMethod.replaceBadgeSpans(expected: Int, hook: String) {
+    val sites = badgeSpanSites()
+    if (sites?.size != expected) throw PatchException("$APPEARANCE: badge span in $name changed")
+    val code = implementation!!.instructions.toList()
+    for (at in sites) {
+        replaceInstruction(at, "invoke-static { ${code[at].registers()!!.joinToString { "v$it" }} }, " +
+            "$LOCAL_APPEARANCE->$hook($SPANNABLE$OBJECT" + "III)V")
+    }
+}
+
 /** The warning reads its text view by id (47.4.3 0x7f0a66a5, 47.5.3 0x7f0a66d0) and casts it straight to TextView. */
 private fun List<Instruction>.readsWarningText() = indices.any { at -> at + 2 < size &&
     this[at].calls("$VIEW->findViewById(I)$VIEW") && this[at + 2].opcode == Opcode.CHECK_CAST &&
@@ -458,6 +539,7 @@ internal fun legacyAppearanceBridge(getter: Method, original: MethodReference, i
     LEGACY_NICKNAME_OWNER, APPEARANCE_LEGACY, listOf(BOOLEAN, BOOLEAN), "Z", 5, instructions = """
         invoke-static { p1, p2 }, ${original.descriptor()}
         move-result v0
+        invoke-static {}, $LOCAL_APPEARANCE->$BADGE_RENDER_END()V
         if-nez v0, :native_badge
         if-eqz p1, :native_badge
         invoke-virtual { p0 }, $LEGACY_NICKNAME_OWNER->$identity()Z
@@ -503,16 +585,21 @@ internal fun nicknameAppearanceBridge(getter: Method, owner: String = NICKNAME_O
 /**
  * Native callbacks capture the original nullable resource, never a local replacement. The navbar's
  * renderer takes six registers, so the selected int replaces the resource in p1 for one range call.
+ * The native render is marked while it runs with whether TikTok had a badge of its own, so the badge
+ * span it sets can carry the picked picture only when the check is ours (#549).
  */
 internal fun nicknameRenderBridge(owner: String = NICKNAME_OWNER) = bridge(owner, APPEARANCE_RENDER,
     listOf(INTEGER, "I", STRING) + if (owner == NAVBAR_NICKNAME_OWNER) listOf(STRING, "Z") else emptyList(),
-    "V", 1, visible = true, instructions = """
+    "V", 2, visible = true, instructions = """
         invoke-direct { p0, p1 }, $owner->$APPEARANCE_SELECT($INTEGER)$INTEGER
         move-result-object v0
         if-eqz v0, :native_rebind
+        const-string v1, "${component(owner)}"
+        invoke-static { p1, v1 }, $LOCAL_APPEARANCE->$BADGE_RENDER_BEGIN($INTEGER$STRING)V
         invoke-virtual { v0 }, $INTEGER->intValue()I
         ${if (owner == NAVBAR_NICKNAME_OWNER) "move-result p1\n        invoke-virtual/range { p0 .. p5 }, $owner->$NAVBAR_RENDER($NAVBAR_RENDER_PARAMETERS)V"
           else "move-result v0\n        invoke-virtual { p0, v0, p2, p3 }, $owner->$NICKNAME_RENDER(II$STRING)V"}
+        invoke-static {}, $LOCAL_APPEARANCE->$BADGE_RENDER_END()V
         return-void
         :native_rebind
         invoke-virtual { p0 }, $owner->$PROTOCOL_BIND()Z
@@ -821,6 +908,9 @@ internal fun hookLocalProfileAppearance() {
         classDefBy(PROFILE_PROTOCOL).fields.none { it.name == PROTOCOL_DATA && it.type == BIZ_DATA && !AccessFlags.STATIC.isSet(it.accessFlags) }) {
         throw PatchException("$APPEARANCE: missing native icon configuration or nickname text view")
     }
+    val badgeSpans = badgeSpanRenderers(nicknameOwner, navbarOwner, legacy.first).map { (renderer, hook) ->
+        Triple(renderer, hook, renderer.badgeSpanSites()?.size ?: throw PatchException("$APPEARANCE: missing badge span in ${renderer.name}"))
+    }
     val added = mapOf(LEGACY_NICKNAME_OWNER to listOf(APPEARANCE_LEGACY),
         NICKNAME_OWNER to listOf(APPEARANCE_SELECT, APPEARANCE_RENDER, APPEARANCE_BEGIN, APPEARANCE_APPEND, APPEARANCE_ADD_NAME),
         NAVBAR_NICKNAME_OWNER to listOf(APPEARANCE_SELECT, APPEARANCE_RENDER, APPEARANCE_BEGIN, APPEARANCE_APPEND, APPEARANCE_CACHED),
@@ -847,6 +937,7 @@ internal fun hookLocalProfileAppearance() {
     }
     mutableClassDefBy(RESTRICTION_OWNER).methods.add(noticeAppearanceBridge(protocolGetter))
     mutable(legacy.first).replaceLegacyAppearance(legacy.second)
+    for ((renderer, hook, sites) in badgeSpans) mutable(renderer).replaceBadgeSpans(sites, hook)
     mutable(nickname.first).replaceNicknameAddName(addName)
     mutable(nickname.first).replaceNicknameAppearance(nickname.second)
     mutable(nickname.first).trackNicknameBinding()

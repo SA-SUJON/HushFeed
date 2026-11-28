@@ -207,13 +207,19 @@ class LocalProfileAppearanceAnchorsTest {
                     it.definingClass.endsWith("/User;") || it.definingClass.endsWith("/UserAccountInfo;") })
                 if (bridge.name == APPEARANCE_RENDER) {
                     assertTrue(AccessFlags.PUBLIC.isSet(bridge.accessFlags))
-                    assertEquals(listOf(APPEARANCE_SELECT, "intValue", NICKNAME_RENDER, PROTOCOL_BIND), calls.map { it.name })
+                    // The native render runs marked with TikTok's own nullable badge, and the mark ends with it (#549).
+                    assertEquals(listOf(APPEARANCE_SELECT, BADGE_RENDER_BEGIN, "intValue", NICKNAME_RENDER, BADGE_RENDER_END, PROTOCOL_BIND),
+                        calls.map { it.name })
                     assertEquals(INTEGER, calls.first().parameterTypes.single().toString())
+                    val begin = code.single { it.getReference<MethodReference>()?.name == BADGE_RENDER_BEGIN }
+                    assertEquals("$LOCAL_APPEARANCE->$BADGE_RENDER_BEGIN($INTEGER$STRING)V", begin.getReference<MethodReference>().toString())
+                    assertEquals(bridge.implementation!!.registerCount - bridge.parameterTypes.size, begin.namedRegisters().first())
+                    assertEquals(listOf("user_info_nickname"), code.mapNotNull { it.getReference<StringReference>()?.string })
                 } else {
                     assertTrue(AccessFlags.PRIVATE.isSet(bridge.accessFlags))
                     assertTrue(calls.any { it.definingClass == PROFILE_COMMON_INFO && it.name == "getUserProfileInfo" })
                     assertTrue(calls.any { it.definingClass == PROFILE_INFO && it.name == "getUid" })
-                    assertEquals(1, calls.count { it.definingClass == LOCAL_APPEARANCE })
+                    assertEquals(1, calls.count { it.definingClass == LOCAL_APPEARANCE && it.name != BADGE_RENDER_END })
                 }
             }
             val notice = bridges.last().implementation!!.instructions.toList()
@@ -221,7 +227,87 @@ class LocalProfileAppearanceAnchorsTest {
             assertEquals(NOTICE_VISIBILITY, notice.mapNotNull { it.getReference<MethodReference>() }.last().toString())
             val legacy = bridges.first().implementation!!.instructions.toList()
             assertEquals(found.legacy.second.original.toString(), legacy.first().getReference<MethodReference>().toString())
+            // A decision that ends on TikTok's own answer clears any earlier mark before the older header draws.
+            assertEquals("$LOCAL_APPEARANCE->$BADGE_RENDER_END()V", legacy[2].getReference<MethodReference>().toString())
             assertTrue(legacy.any { it.getReference<MethodReference>()?.toString() == "$LEGACY_NICKNAME_OWNER->$identity()Z" })
+        }
+    }
+
+    @Test fun `each profile name renderer hands only its own badge span to the picture hook`() {
+        Fixtures.forEachDeclared { apk ->
+            val found = find(apk)
+            val renderers = badgeSpanRenderers(found.classes.getValue(NICKNAME_OWNER), found.classes.getValue(NAVBAR_NICKNAME_OWNER),
+                found.legacy.first)
+            assertEquals(listOf(HEADER_BADGE_SPAN, HEADER_LAYOUT_BADGE_SPAN, NAVBAR_BADGE_SPAN, LEGACY_BADGE_SPAN), renderers.map { it.second })
+            assertEquals(listOf(NICKNAME_OWNER to NICKNAME_RENDER, NICKNAME_OWNER to "LJJLJLI", NAVBAR_NICKNAME_OWNER to NAVBAR_RENDER,
+                LEGACY_NICKNAME_OWNER to found.legacy.first.name), renderers.map { it.first.definingClass to it.first.name })
+            // 48.0.2: the header's plain and arrow layouts, the measured header's same two, the top bar's four
+            // arrow and alert layouts, and the older header's one blue badge.
+            assertEquals(listOf(2, 2, 4, 1), renderers.map { it.first.badgeSpanSites()?.size })
+            for ((renderer, hook) in renderers) {
+                val stock = renderer.implementation!!.instructions.toList()
+                val sites = renderer.badgeSpanSites()!!
+                val spans = sites.map { stock[it].namedRegisters()[1] }.toSet()
+                assertEquals("${renderer.name} sets one badge span", 1, spans.size)
+                // That span is the only one made from the badge's resource: the parameter, its unboxed Integer, or the native blue badge.
+                val factory = stock.indices.single { at -> stock[at].getReference<MethodReference>()?.toString() == "$BADGE_ICON->LIZIZ(I" +
+                    "Landroid/content/Context;)$BADGE_SPAN" && stock[at + 1].namedRegisters() == spans.toList() && sites.all { it > at } }
+                val icon = stock[factory].namedRegisters().first()
+                val resource = stock.indices.last { at -> at < factory && stock[at].getReference<FieldReference>()?.toString() == "$BADGE_ICON->LIZ:I" &&
+                    stock[at].namedRegisters()[1] == icon }
+                val value = stock[resource].namedRegisters()[0]
+                val first = renderer.implementation!!.registerCount - renderer.parameterTypes.size
+                when (hook) {
+                    HEADER_BADGE_SPAN, NAVBAR_BADGE_SPAN -> assertEquals(first, value)
+                    HEADER_LAYOUT_BADGE_SPAN -> assertEquals("$INTEGER->intValue()I", stock[resource - 2].getReference<MethodReference>().toString())
+                    else -> assertEquals(extensionBadge().toLong(), (stock[resource - 1] as WideLiteralInstruction).wideLiteral)
+                }
+                for (site in sites) {
+                    assertEquals("LX/00iY;->w2(Landroid/text/SpannableStringBuilder;Ljava/lang/Object;III)V",
+                        stock[site].getReference<MethodReference>().toString())
+                }
+                val patched = MutableMethod(renderer).apply { replaceBadgeSpans(sites.size, hook) }
+                val code = patched.implementation!!.instructions.toList()
+                assertEquals(stock.size, code.size)
+                for (at in stock.indices) {
+                    if (at in sites) {
+                        assertEquals(Opcode.INVOKE_STATIC, code[at].opcode)
+                        assertEquals("$LOCAL_APPEARANCE->$hook(Landroid/text/SpannableStringBuilder;Ljava/lang/Object;III)V",
+                            code[at].getReference<MethodReference>().toString())
+                        assertEquals(stock[at].namedRegisters(), code[at].namedRegisters())
+                    } else {
+                        assertEquals("${renderer.name} @$at", stock[at].opcode, code[at].opcode)
+                        assertEquals("${renderer.name} @$at", stock[at].getReference<MethodReference>()?.toString(),
+                            code[at].getReference<MethodReference>()?.toString())
+                    }
+                }
+                // The other spans (account arrow, alert, verified-elsewhere marks) keep TikTok's own setSpan.
+                assertTrue(code.count { it.getReference<MethodReference>()?.name == "w2" } > 0 || hook == LEGACY_BADGE_SPAN)
+                assertThrows(PatchException::class.java) { MutableMethod(renderer).replaceBadgeSpans(sites.size + 1, hook) }
+            }
+        }
+    }
+
+    @Test fun `a badge span from another resource or a moved badge parameter is not hooked`() {
+        Fixtures.forEachDeclared { apk ->
+            val found = find(apk)
+            val (header, _, _, legacy) = badgeSpanRenderers(found.classes.getValue(NICKNAME_OWNER),
+                found.classes.getValue(NAVBAR_NICKNAME_OWNER), found.legacy.first).map { it.first }
+            // The older header's literal turned into another icon's resource.
+            val code = legacy.implementation!!.instructions.toList()
+            val literal = code.indices.single { at -> (code[at] as? WideLiteralInstruction)?.wideLiteral == extensionBadge().toLong() &&
+                code[at].opcode == Opcode.CONST }
+            val register = code[literal].namedRegisters().single()
+            val otherIcon = MutableMethod(legacy).apply { replaceInstruction(literal, "const v$register, ${extensionBadge() + 1}") }
+            assertNull(otherIcon.badgeSpanSites())
+            // The header's badge configuration reading another parameter than the badge.
+            val stock = header.implementation!!.instructions.toList()
+            val first = header.implementation!!.registerCount - header.parameterTypes.size
+            val resource = stock.indices.single { at -> stock[at].getReference<FieldReference>()?.toString() == "$BADGE_ICON->LIZ:I" &&
+                stock[at].namedRegisters()[0] == first }
+            val icon = stock[resource].namedRegisters()[1]
+            val moved = MutableMethod(header).apply { replaceInstruction(resource, "iput v${first + 1}, v$icon, $BADGE_ICON->LIZ:I") }
+            assertNull(moved.badgeSpanSites())
         }
     }
 
