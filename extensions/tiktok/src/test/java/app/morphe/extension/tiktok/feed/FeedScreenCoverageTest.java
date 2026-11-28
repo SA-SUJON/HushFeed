@@ -184,10 +184,16 @@ public class FeedScreenCoverageTest {
         put("publish_date_everywhere", YES, YES, NONE);
         // Profile grids only.
         put("publish_date_on_grid", NONE, NONE, NONE);
+        // How that grid date is written and where it sits on the tile (#546), grids only too.
+        put("publish_date_grid_like_tiktok", NONE, NONE, NONE);
+        put("publish_date_grid_spot", NONE, NONE, NONE);
         put("video_length_on_grid", NONE, NONE, NONE);
         put("hide_grid_view_count", NONE, NONE, NONE);
         // The grid cell's own corners (#487), drawn in the profile grids, none of the three windows.
         put("rounded_grid_corners", NONE, NONE, NONE);
+        // That corner's size and the gap between tiles (#549), the same grids.
+        put("grid_corner_radius_dp", NONE, NONE, NONE);
+        put("grid_gap_dp", NONE, NONE, NONE);
         // The order of the profile, Liked, Favorites and sound page grids (#180). A cell opened from
         // the grid swipes through the grid's order on the video page (GridSort.beforeOpen), and a
         // grid narrowed to a search plays its matches first, so all of them reach the detail pager.
@@ -215,6 +221,8 @@ public class FeedScreenCoverageTest {
         put("show_author_region", YES, YES, NONE);
         // Only how the region label shows its code, so it reaches where the label does (#157).
         put("region_as_flag", YES, YES, NONE);
+        // The letters kept after that flag (#547), the same label again.
+        put("region_flag_with_code", YES, YES, NONE);
         // The same row's country and date, moved under the caption beside it (#410).
         put("country_date_under_caption", YES, YES, NONE);
         // How that line looks, so it reaches where the line does (#500).
