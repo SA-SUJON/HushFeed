@@ -505,6 +505,9 @@ val commentToolsPatch = bytecodePatch(
                 }
                 write
             },
+            // The expand button stretches the sheet to the window's height less 8dp, and the
+            // window runs under the status bar, so its top buttons went under the clock (#556).
+            { CommentSheetExpandClickFingerprint.method.resolveExpandedSheetHeight() },
         )
     }
 }

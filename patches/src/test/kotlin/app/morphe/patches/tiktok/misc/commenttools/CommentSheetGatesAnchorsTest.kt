@@ -7,6 +7,8 @@ package app.morphe.patches.tiktok.misc.commenttools
 import app.morphe.Fixtures
 import app.morphe.patches.tiktok.misc.absettings.APP_AB_INT
 import app.morphe.patches.tiktok.misc.absettings.MethodShape
+import app.morphe.takes
+import app.morphe.util.getFreeRegisterProvider
 import app.morphe.util.getReference
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.Opcodes
@@ -16,6 +18,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.NarrowLiteralInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.ThreeRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
@@ -94,6 +97,53 @@ class CommentSheetGatesAnchorsTest {
                 } == true
             },
         )
+    }
+
+    /**
+     * #556: the expand click has one height worked out before its animation, the window's height
+     * less a gap of 8dp, and that height is the animation's end value. The hook reads the sheet
+     * off the listener and needs one free 4-bit register there.
+     */
+    @Test
+    fun `the expand click stretches the sheet to one height the hook can reach`() = Fixtures.forEachDeclared { apk ->
+        val version = Fixtures.versionOf(apk)
+        val classes = classes(apk)
+        val clicks = classes.values.flatMap { classDef ->
+            classDef.methods.filter { CommentSheetExpandClickFingerprint.takes(it, classDef) }.map { classDef to it }
+        }
+        assertEquals("$version: expand clicks ${clicks.map { it.first.type }}", 1, clicks.size)
+        val (listener, click) = clicks.single()
+        val site = click.expandedSheetSite()
+        val code = click.code()
+
+        assertEquals("$version: the sheet is the listener's own view", listener.type, site.sheet.definingClass)
+        assertEquals("$version: the sheet's type", "Landroid/view/ViewGroup;", site.sheet.type)
+        val windowHeight = code.indexOfFirst { it.getReference<MethodReference>()?.name == "getSecond" }
+        assertTrue(
+            "$version: the gap is no longer 8dp",
+            (windowHeight until site.index).any { (code[it] as? NarrowLiteralInstruction)?.narrowLiteral == 8 },
+        )
+
+        // The animation runs from the sheet's height (index 0) to the hooked height (index 1).
+        val animator = code.indexOfFirst {
+            it.opcode == Opcode.INVOKE_STATIC && it.getReference<MethodReference>()?.name == "ofInt"
+        }
+        val ends = (site.index until animator).filter { at ->
+            val put = code[at]
+            put.opcode == Opcode.APUT && put is ThreeRegisterInstruction &&
+                literalIn(code, at, put.registerC) == 1
+        }
+        assertEquals("$version: the animation's end values", 1, ends.size)
+        assertEquals("$version: the end value is not the hooked height", site.height, (code[ends.single()] as OneRegisterInstruction).registerA)
+        assertTrue(
+            "$version: the height is written again before the animation reads it",
+            (site.index until ends.single()).none { at ->
+                code[at].opcode.setsRegister() && (code[at] as? OneRegisterInstruction)?.registerA == site.height
+            },
+        )
+
+        val free = click.getFreeRegisterProvider(site.index, 1, listOf(site.height, site.gap)).getFreeRegister4Bit()
+        assertTrue("$version: v$free is the height or the gap", free != site.height && free != site.gap)
     }
 
     /** The static lazy field a key's reader goes into: `<clinit>` news the reader and stores it. */

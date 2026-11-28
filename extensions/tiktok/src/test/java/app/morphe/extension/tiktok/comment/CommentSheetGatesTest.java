@@ -86,4 +86,40 @@ public class CommentSheetGatesTest {
         assertEquals(0, CommentSheetGates.answer(FULL_PAGE, 0));
         assertEquals(1, CommentSheetGates.answer(SHRINK, 1));
     }
+
+    /**
+     * #556: TikTok stretches the sheet to the window's height less 8dp (24 px at 3x), measured
+     * from bounds that take in the status bar, so on a 2992 px tall edge-to-edge window its top
+     * landed 24 px down, under a 150 px status bar. It now stops the same 24 px below the bar.
+     */
+    @Test public void theExpandedSheetsTopStaysTheGapBelowTheStatusBar() {
+        int window = 2992, gap = 24, statusBar = 150;
+        int tikTok = window - gap;
+        int fitted = CommentSheetGates.belowTopBar(tikTok, gap, window, statusBar);
+        assertEquals(window - statusBar - gap, fitted);
+        assertEquals("the top lands the gap below the bar", statusBar + gap, window - fitted);
+
+        // A sheet held above a 3-button bar keeps its bottom there and still stops below the clock.
+        int aboveNavBar = window - 144;
+        assertEquals(aboveNavBar - 72 - gap, CommentSheetGates.belowTopBar(tikTok, gap, aboveNavBar, 72));
+    }
+
+    @Test public void aSheetThatAlreadyFitsIsLeftAsTikTokAskedAndNeverGrows() {
+        assertEquals(2000, CommentSheetGates.belowTopBar(2000, 24, 2992, 150));
+        assertEquals("exactly at the limit", 2818, CommentSheetGates.belowTopBar(2818, 24, 2992, 150));
+        assertEquals("no status bar to stay under", 2968, CommentSheetGates.belowTopBar(2968, 24, 2992, 0));
+        assertEquals("a gap below zero counts as none", 2842, CommentSheetGates.belowTopBar(2968, -5, 2992, 150));
+    }
+
+    @Test public void numbersThatCantBeRightLeaveTikToksHeight() {
+        assertEquals("not laid out", 2968, CommentSheetGates.belowTopBar(2968, 24, 0, 150));
+        assertEquals("bottom above the bar", 2968, CommentSheetGates.belowTopBar(2968, 24, 100, 150));
+        assertEquals("nothing asked", 0, CommentSheetGates.belowTopBar(0, 24, 2992, 150));
+    }
+
+    @Test public void aSheetNotOnScreenKeepsTikToksHeight() {
+        assertEquals(2968, CommentSheetGates.expandedHeight(null, 2968, 24));
+        android.view.View loose = new android.view.View(org.robolectric.RuntimeEnvironment.getApplication());
+        assertEquals("not attached to a window", 2968, CommentSheetGates.expandedHeight(loose, 2968, 24));
+    }
 }
