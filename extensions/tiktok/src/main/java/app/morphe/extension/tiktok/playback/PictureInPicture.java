@@ -45,7 +45,12 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.IdentityHashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 /**
  * A video playing in the feed, or in a video opened from a profile, search or a sound, keeps going
@@ -65,6 +70,11 @@ import java.util.List;
  * Play and pause go through TikTok's own player controls, the session hold's bridge. The arrows
  * beside them (#413) move TikTok's pager to the video before or after, as a swipe would. Closing
  * the window stops the video, unless Keep playing in the background is on.
+ *
+ * <p>TikTok opens its LIVE window itself, and with this switch on that window is kept to the
+ * room's video too (#413): TikTok leaves the room's chat, gifts and banners in it once the room
+ * has been entered, and more come in as they arrive or as the arrows move to another room. Only
+ * Hushfeed's own LIVE lines stay beside the video ({@link #keepInLiveWindow}).
  *
  * <p>Read when the reader leaves, so the switch needs no restart. Paused, it answers off.
  */
@@ -124,10 +134,22 @@ public final class PictureInPicture {
     private static long openedAt;
     private static boolean readerPaused;
     private static final List<SetAside> setAside = new ArrayList<>();
-    private static WeakReference<View> asideVideo = new WeakReference<>(null);
+    /** What stays shown: the video, or in TikTok's LIVE window the room's videos and Hushfeed's LIVE lines. */
+    private static List<WeakReference<View>> asideKept = Collections.emptyList();
     private static WeakReference<View> asideRoot = new WeakReference<>(null);
     private static WeakReference<View> keptOn = new WeakReference<>(null);
     private static BroadcastReceiver toggle;
+
+    /** TikTok's own LIVE window while it's up and kept to the room's video (#413), or null. */
+    private static WeakReference<Activity> liveWindow = new WeakReference<>(null);
+    /** Hushfeed's own lines over a LIVE that stay in TikTok's LIVE window beside the video (#554). */
+    private static final Map<View, Boolean> OWN_LIVE_VIEWS = new WeakHashMap<>();
+    /**
+     * A video in TikTok's LIVE window this many times smaller than the largest is a preview, not
+     * the room's. A gift's animation can be drawn in a surface bigger than a landscape stream, so
+     * the window keeps every video near the largest's size rather than the largest alone.
+     */
+    static final int LIVE_VIDEO_SHARE = 8;
 
     private PictureInPicture() {
     }
@@ -301,8 +323,12 @@ public final class PictureInPicture {
 
     @RequiresApi(26)
     private static void follow(Activity activity, boolean inWindow) {
-        // Only the window this class opened: TikTok's own LIVE window is TikTok's.
-        if (activity == null || opened.get() != activity) return;
+        if (activity == null) return;
+        // A window this class didn't open is TikTok's own LIVE one.
+        if (opened.get() != activity) {
+            followLiveWindow(activity, inWindow);
+            return;
+        }
         View decor = activity.getWindow().getDecorView();
         decor.removeOnLayoutChangeListener(RESIZED);
         if (inWindow) {
@@ -322,6 +348,83 @@ public final class PictureInPicture {
             WeakReference<Activity> owner = new WeakReference<>(activity);
             Utils.runOnMainThreadDelayed(() -> stopIfClosed(owner.get()), CLOSED_CHECK_MS);
         }
+    }
+
+    /**
+     * TikTok's own LIVE window opening or closing (#413). With this switch on, only the room's
+     * video and Hushfeed's LIVE lines stay in it, Watch LIVEs unseen on or off, and the rest comes
+     * back when the window closes or grows back into the room. With it off the window is TikTok's.
+     */
+    private static void followLiveWindow(Activity activity, boolean inWindow) {
+        if (inWindow) {
+            if (!enabled()) return;
+            liveWindow = new WeakReference<>(activity);
+            keepAsideWhileUp(activity.getWindow().getDecorView());
+        } else if (liveWindow.get() == activity) {
+            bringBack();
+            liveWindow = new WeakReference<>(null);
+        }
+    }
+
+    /**
+     * An arrow in TikTok's LIVE window is about to move {@code pager} to another room (#413).
+     * The room pages beside the one shown were set aside with the rest, so everything inside the
+     * pager comes back for the next room to slide in, and frames stop setting things aside until
+     * {@link #liveRoomSettled} picks the new room's video. Main thread only. Never throws.
+     */
+    public static void liveRoomMoving(Activity activity, View pager) {
+        try {
+            if (activity == null || pager == null || liveWindow.get() != activity) return;
+            stopKeeping();
+            asideKept = Collections.emptyList();
+            for (Iterator<SetAside> entries = setAside.iterator(); entries.hasNext(); ) {
+                SetAside entry = entries.next();
+                View view = entry.view.get();
+                if (view != null && !inside(view, pager)) continue;
+                if (view != null && view.getVisibility() == View.INVISIBLE) view.setVisibility(entry.visibility);
+                entries.remove();
+            }
+        } catch (RuntimeException failure) {
+            Logger.printException(() -> "Picture-in-picture couldn't let the next LIVE in", failure);
+        }
+    }
+
+    /** The arrow's room has settled in TikTok's LIVE window: its video is kept alone again. Never throws. */
+    public static void liveRoomSettled(Activity activity) {
+        if (Build.VERSION.SDK_INT < 26) return;
+        try {
+            if (activity == null || liveWindow.get() != activity || !enabled()) return;
+            if (!activity.isInPictureInPictureMode() || activity.isFinishing()) return;
+            keepAsideWhileUp(activity.getWindow().getDecorView());
+        } catch (RuntimeException failure) {
+            Logger.printException(() -> "Picture-in-picture couldn't keep the LIVE alone", failure);
+        }
+    }
+
+    /** The LIVE's activity is going away, window and all. Never throws. */
+    public static void liveWindowGone(Activity activity) {
+        try {
+            if (activity == null || liveWindow.get() != activity) return;
+            bringBack();
+            liveWindow = new WeakReference<>(null);
+        } catch (RuntimeException failure) {
+            Logger.printException(() -> "Picture-in-picture couldn't let go of the LIVE window", failure);
+        }
+    }
+
+    /**
+     * Keeps {@code view}, one of Hushfeed's own lines over a LIVE, in TikTok's LIVE window beside
+     * the video while it's shown (#554). Main thread only.
+     */
+    public static void keepInLiveWindow(View view) {
+        if (view != null) OWN_LIVE_VIEWS.put(view, Boolean.TRUE);
+    }
+
+    private static boolean inside(View view, View ancestor) {
+        for (ViewParent parent = view.getParent(); parent instanceof View; parent = parent.getParent()) {
+            if (parent == ancestor) return true;
+        }
+        return false;
     }
 
     /** A window the reader makes bigger or smaller gets the buttons that fit it now. */
@@ -606,14 +709,58 @@ public final class PictureInPicture {
     /**
      * Sets aside every view showing beside the video and its parents, up to the window: the
      * captions, the right column, the tabs and the neighbouring cells. Each keeps what it was, and
-     * {@link #bringBack} restores only those TikTok left alone meanwhile.
+     * {@link #bringBack} restores only those TikTok left alone meanwhile. In TikTok's LIVE window
+     * the room's videos and Hushfeed's LIVE lines stay ({@link #liveKept}).
      */
     static void setAside(View root) {
-        View video = videoView(root);
-        if (video == null) return;
-        asideVideo = new WeakReference<>(video);
+        List<View> kept = keptIn(root);
+        if (kept.isEmpty()) return;
+        List<WeakReference<View>> held = new ArrayList<>(kept.size());
+        for (View view : kept) held.add(new WeakReference<>(view));
+        asideKept = held;
         asideRoot = new WeakReference<>(root);
-        hideBeside(video, root);
+        hideBeside(kept, root);
+    }
+
+    private static List<View> keptIn(View root) {
+        List<View> videos = videoViews(root);
+        if (videos.isEmpty()) return videos;
+        if (liveWindow.get() == null) {
+            List<View> video = new ArrayList<>(1);
+            video.add(videos.get(0));
+            return video;
+        }
+        List<View> kept = liveKept(videos);
+        addOwnLiveViews(kept, root);
+        return kept;
+    }
+
+    /**
+     * The room's videos in TikTok's LIVE window, largest first: every one at least a
+     * {@link #LIVE_VIDEO_SHARE}th of the largest's size on screen. A small one is a preview.
+     */
+    static List<View> liveKept(List<View> videos) {
+        List<View> kept = new ArrayList<>();
+        if (videos.isEmpty()) return kept;
+        long largest = shownArea(videos.get(0));
+        for (View video : videos) {
+            if (shownArea(video) * LIVE_VIDEO_SHARE >= largest) kept.add(video);
+        }
+        return kept;
+    }
+
+    private static long shownArea(View view) {
+        Rect bounds = new Rect();
+        return view.getGlobalVisibleRect(bounds) ? (long) bounds.width() * bounds.height() : 0;
+    }
+
+    private static void addOwnLiveViews(List<View> kept, View root) {
+        for (View own : new ArrayList<>(OWN_LIVE_VIEWS.keySet())) {
+            if (own != null && own.getVisibility() == View.VISIBLE && own.isAttachedToWindow()
+                    && own.getRootView() == root.getRootView() && !kept.contains(own)) {
+                kept.add(own);
+            }
+        }
     }
 
     /**
@@ -625,33 +772,59 @@ public final class PictureInPicture {
      */
     static void keepAsideWhileUp(View root) {
         stopKeeping();
+        asideKept = Collections.emptyList();
         setAside(root);
-        if (asideVideo.get() == null) return;
+        if (asideKept.isEmpty()) return;
         root.getViewTreeObserver().addOnPreDrawListener(KEEP_ASIDE);
         keptOn = new WeakReference<>(root);
     }
 
     private static final ViewTreeObserver.OnPreDrawListener KEEP_ASIDE = () -> {
-        View video = asideVideo.get();
         View root = asideRoot.get();
-        if (video != null && root != null && video.isAttachedToWindow()) hideBeside(video, root);
+        if (root == null) return true;
+        List<View> kept = new ArrayList<>(asideKept.size());
+        boolean gone = false;
+        for (WeakReference<View> held : asideKept) {
+            View view = held.get();
+            if (view != null && view.isAttachedToWindow()) kept.add(view);
+            else gone = true;
+        }
+        if (liveWindow.get() != null) {
+            if (gone || kept.isEmpty()) {
+                // TikTok swapped the room's player: everything comes back and the new one is
+                // kept, once it shows.
+                restore();
+                asideKept = Collections.emptyList();
+                setAside(root);
+                return true;
+            }
+            addOwnLiveViews(kept, root);
+        }
+        if (!kept.isEmpty()) hideBeside(kept, root);
         return true;
     };
 
-    private static void hideBeside(View video, View root) {
-        View child = video;
-        ViewParent parent = child.getParent();
-        while (parent instanceof ViewGroup) {
-            ViewGroup group = (ViewGroup) parent;
+    /**
+     * Sets aside what shows beside the kept views and their parents. A parent set aside earlier
+     * that holds a kept view now, a Hushfeed LIVE line shown after the window opened say, comes
+     * back, and what's beside it goes instead.
+     */
+    private static void hideBeside(List<View> kept, View root) {
+        Set<View> chain = Collections.newSetFromMap(new IdentityHashMap<>());
+        for (View view : kept) {
+            View at = view;
+            while (chain.add(at) && at != root && at.getParent() instanceof View) at = (View) at.getParent();
+        }
+        for (View member : chain) {
+            if (member == root || !(member.getParent() instanceof ViewGroup)) continue;
+            if (member.getVisibility() == View.INVISIBLE) bringBackOne(member);
+            ViewGroup group = (ViewGroup) member.getParent();
             for (int i = 0; i < group.getChildCount(); i++) {
                 View sibling = group.getChildAt(i);
-                if (sibling == child || sibling.getVisibility() != View.VISIBLE) continue;
+                if (chain.contains(sibling) || sibling.getVisibility() != View.VISIBLE) continue;
                 if (!isSetAside(sibling)) setAside.add(new SetAside(sibling));
                 sibling.setVisibility(View.INVISIBLE);
             }
-            if (group == root) break;
-            child = group;
-            parent = group.getParent();
         }
     }
 
@@ -660,6 +833,16 @@ public final class PictureInPicture {
             if (entry.view.get() == view) return true;
         }
         return false;
+    }
+
+    private static void bringBackOne(View view) {
+        for (Iterator<SetAside> entries = setAside.iterator(); entries.hasNext(); ) {
+            SetAside entry = entries.next();
+            if (entry.view.get() != view) continue;
+            view.setVisibility(entry.visibility);
+            entries.remove();
+            return;
+        }
     }
 
     private static void stopKeeping() {
@@ -672,8 +855,12 @@ public final class PictureInPicture {
 
     static void bringBack() {
         stopKeeping();
-        asideVideo = new WeakReference<>(null);
+        asideKept = Collections.emptyList();
         asideRoot = new WeakReference<>(null);
+        restore();
+    }
+
+    private static void restore() {
         for (SetAside entry : setAside) {
             View view = entry.view.get();
             if (view != null && view.getVisibility() == View.INVISIBLE) view.setVisibility(entry.visibility);

@@ -90,6 +90,7 @@ public class PictureInPictureTest {
     }
 
     @After public void tearDown() {
+        PictureInPicture.liveWindowGone(owner.get());
         PictureInPicture.bringBack();
         setPaused(false);
         SettingsStatus.pictureInPictureEnabled = false;
@@ -672,13 +673,136 @@ public class PictureInPictureTest {
         assertEquals(View.VISIBLE, tabs.getVisibility());
     }
 
-    /** A window the extension didn't open, TikTok's LIVE one for instance, is left to TikTok. */
-    @Test public void aWindowItDidntOpenIsLeftAlone() {
+    /**
+     * #413: TikTok's own LIVE window, the one window the extension doesn't open, kept the room's
+     * chat, gifts and banners over the stream once the room was entered. With the switch on only
+     * the room's video stays, and everything comes back as the window closes.
+     */
+    @Test public void tiktoksLiveWindowKeepsOnlyTheRoomsVideo() {
         Settings.PICTURE_IN_PICTURE.save(true);
+        Activity activity = owner.get();
+        PictureInPicture.onModeChanged(activity, true);
+        assertEquals(View.VISIBLE, video.getVisibility());
+        assertEquals(View.VISIBLE, cell.getVisibility());
+        assertEquals(View.INVISIBLE, caption.getVisibility());
+        assertEquals(View.INVISIBLE, tabs.getVisibility());
+        assertEquals("a small preview isn't the room's video", View.INVISIBLE, thumbnail.getVisibility());
+        caption.setVisibility(View.VISIBLE);
+        decor.getViewTreeObserver().dispatchOnPreDraw();
+        assertEquals("a comment shown later goes too", View.INVISIBLE, caption.getVisibility());
+
+        PictureInPicture.onModeChanged(activity, false);
+        assertEquals(View.VISIBLE, caption.getVisibility());
+        assertEquals(View.VISIBLE, tabs.getVisibility());
+        assertEquals(View.VISIBLE, thumbnail.getVisibility());
+        assertEquals(View.GONE, alreadyGone.getVisibility());
+        PictureInPicture.onModeChanged(null, true);
+    }
+
+    /** With the switch off, TikTok's LIVE window is TikTok's. */
+    @Test public void withTheSwitchOffTikToksLiveWindowIsLeftAlone() {
+        Settings.PICTURE_IN_PICTURE.save(false);
         PictureInPicture.onModeChanged(owner.get(), true);
         assertEquals(View.VISIBLE, caption.getVisibility());
         assertEquals(View.VISIBLE, tabs.getVisibility());
-        PictureInPicture.onModeChanged(null, true);
+        PictureInPicture.onModeChanged(owner.get(), false);
+        assertEquals(View.VISIBLE, caption.getVisibility());
+    }
+
+    /**
+     * A gift's animation can play in a surface bigger than a landscape stream, so the LIVE window
+     * keeps every video near the largest's size, and Hushfeed's own LIVE line (#554) stays too,
+     * even one shown inside something already set aside.
+     */
+    @Test public void aBigGiftSurfaceAndHushfeedsLiveLineStayInTheLiveWindow() {
+        Settings.PICTURE_IN_PICTURE.save(true);
+        Activity activity = owner.get();
+        FrameLayout content = (FrameLayout) cell.getParent();
+        TextureView gift = new TextureView(activity);
+        content.addView(gift, new FrameLayout.LayoutParams(400, 800));
+        FrameLayout banner = new FrameLayout(activity);
+        TextView bannerText = new TextView(activity);
+        banner.addView(bannerText, new FrameLayout.LayoutParams(400, 50));
+        content.addView(banner, new FrameLayout.LayoutParams(400, 50));
+        relayout();
+
+        PictureInPicture.onModeChanged(activity, true);
+        assertEquals("the stream, smaller than the gift's surface", View.VISIBLE, video.getVisibility());
+        assertEquals(View.VISIBLE, gift.getVisibility());
+        assertEquals(View.INVISIBLE, banner.getVisibility());
+        assertEquals(View.INVISIBLE, caption.getVisibility());
+
+        TextView line = new TextView(activity);
+        banner.addView(line, new FrameLayout.LayoutParams(400, 20));
+        PictureInPicture.keepInLiveWindow(line);
+        decor.getViewTreeObserver().dispatchOnPreDraw();
+        assertEquals(View.VISIBLE, banner.getVisibility());
+        assertEquals(View.VISIBLE, line.getVisibility());
+        assertEquals("what's beside the line goes instead", View.INVISIBLE, bannerText.getVisibility());
+        assertEquals(View.INVISIBLE, caption.getVisibility());
+
+        PictureInPicture.onModeChanged(activity, false);
+        assertEquals(View.VISIBLE, bannerText.getVisibility());
+        assertEquals(View.VISIBLE, caption.getVisibility());
+    }
+
+    /** TikTok can swap the room's player while the window is up: the window keeps the new one. */
+    @Test public void whenTikTokSwapsTheRoomsPlayerTheLiveWindowKeepsTheNewOne() {
+        Settings.PICTURE_IN_PICTURE.save(true);
+        Activity activity = owner.get();
+        PictureInPicture.onModeChanged(activity, true);
+        FrameLayout content = (FrameLayout) cell.getParent();
+        cell.removeView(video);
+        FrameLayout player = new FrameLayout(activity);
+        TextureView newVideo = new TextureView(activity);
+        player.addView(newVideo, new FrameLayout.LayoutParams(400, 700));
+        content.addView(player, new FrameLayout.LayoutParams(400, 700));
+        relayout();
+
+        decor.getViewTreeObserver().dispatchOnPreDraw();
+        assertEquals(View.VISIBLE, player.getVisibility());
+        assertEquals(View.VISIBLE, newVideo.getVisibility());
+        assertEquals("the old player's cell is beside the new one now", View.INVISIBLE, cell.getVisibility());
+        assertEquals(View.INVISIBLE, tabs.getVisibility());
+        PictureInPicture.onModeChanged(activity, false);
+        assertEquals(View.VISIBLE, cell.getVisibility());
+        assertEquals(View.VISIBLE, tabs.getVisibility());
+    }
+
+    /**
+     * #413: the rooms beside the one in the LIVE window were set aside with the rest, so the next
+     * arrow slid in a blank room. Moving lets everything in the pager back, and once the room has
+     * settled its video is kept alone again.
+     */
+    @Test public void anArrowLetsTheNextRoomInAndThenKeepsItsVideoAlone() {
+        Settings.PICTURE_IN_PICTURE.save(true);
+        Activity activity = owner.get();
+        activity.enterPictureInPictureMode(new PictureInPictureParams.Builder().build());
+        PictureInPicture.onModeChanged(activity, true);
+        View pager = cell;
+        assertEquals(View.INVISIBLE, caption.getVisibility());
+
+        PictureInPicture.liveRoomMoving(activity, pager);
+        assertEquals("inside the pager comes back", View.VISIBLE, caption.getVisibility());
+        assertEquals("outside it stays aside", View.INVISIBLE, tabs.getVisibility());
+        decor.getViewTreeObserver().dispatchOnPreDraw();
+        assertEquals("no frame sets it aside while the room moves", View.VISIBLE, caption.getVisibility());
+
+        PictureInPicture.liveRoomSettled(activity);
+        assertEquals(View.INVISIBLE, caption.getVisibility());
+        assertEquals(View.VISIBLE, video.getVisibility());
+
+        PictureInPicture.liveWindowGone(activity);
+        assertEquals(View.VISIBLE, caption.getVisibility());
+        assertEquals(View.VISIBLE, tabs.getVisibility());
+        PictureInPicture.liveRoomSettled(activity);
+        assertEquals("gone, so a late settle does nothing", View.VISIBLE, caption.getVisibility());
+    }
+
+    private void relayout() {
+        decor.measure(View.MeasureSpec.makeMeasureSpec(400, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(800, View.MeasureSpec.EXACTLY));
+        decor.layout(0, 0, 400, 800);
     }
 
     private static Intent sentBy(RemoteAction button) {

@@ -27,6 +27,7 @@ import androidx.annotation.RequiresApi;
 
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.tiktok.playback.PictureInPicture;
 import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
@@ -310,15 +311,22 @@ public final class LivePipRecord {
         Logger.printDebug(() -> "LIVE window arrow: " + direction + " from room " + from + " of " + count
                 + ", pager " + pager.getWidth() + "x" + pager.getHeight() + " shown " + pager.isShown());
         if (target < 0 || target >= count) return;
+        // The window keeps the room's video alone, with the rooms beside it set aside (#413).
+        PictureInPicture.liveRoomMoving(activity, pager);
         try {
             pager.getClass().getMethod("setCurrentItem", int.class).invoke(pager, target);
         } catch (ReflectiveOperationException | RuntimeException failure) {
             Logger.printException(() -> "Could not move the LIVE window to another room", failure);
+            PictureInPicture.liveRoomSettled(activity);
             return;
         }
         Logger.printDebug(() -> "LIVE window arrow: asked for room " + target + ", pager now on " + currentItem(pager));
-        // The new room may set TikTok's buttons again, and either way the arrows follow it.
-        Utils.runOnMainThreadDelayed(() -> update(activity), SETTLED_MS);
+        // The new room may set TikTok's buttons again, and either way the arrows follow it. Its
+        // video is then kept alone in the window, as the last room's was.
+        Utils.runOnMainThreadDelayed(() -> {
+            update(activity);
+            PictureInPicture.liveRoomSettled(activity);
+        }, SETTLED_MS);
     }
 
     static boolean fits(int state, int taken, int room) {
@@ -327,6 +335,7 @@ public final class LivePipRecord {
 
     /** The activity went away, and with it the window TikTok set its buttons on. */
     static void forget(Activity activity) {
+        PictureInPicture.liveWindowGone(activity);
         if (activity != theirsOn.get()) return;
         theirs = Collections.emptyList();
         theirsOn = new WeakReference<>(null);
