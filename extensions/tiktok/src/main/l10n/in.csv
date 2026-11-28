@@ -1033,6 +1033,9 @@ Search by name or gate key,Cari berdasarkan nama atau kunci gate
 "Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed isn't empty.","Detik. Nol menyimpan semua durasi. Kalau semua yang baru dikirim feed akan tersaring habis, video yang paling dekat dengan batasmu tetap ada agar feed tidak kosong."
 "Seconds. Zero keeps every length. Photo posts and videos without a known length stay. If everything the feed just sent would be filtered out, the video closest to your limit is kept.","Detik. Nol menyimpan semua durasi. Postingan foto dan video yang durasinya tidak diketahui tetap ada. Kalau semua yang baru dikirim feed akan tersaring habis, video yang paling dekat dengan batasmu tetap ada."
 Seek by,Jarak lompatan
+Seek back / forward,Mundur / maju
+Double tap seeks by,Jarak lompatan ketuk dua kali
+How far a double tap on the left or right third moves the video. A double tap in the middle still likes it.,Seberapa jauh ketuk dua kali di sepertiga kiri atau kanan memindahkan video. Ketuk dua kali di tengah tetap menyukai video.
 Seek from the edges,Lompat dari tepi layar
 Seen,Terlihat
 Seen this session,Terlihat di sesi ini

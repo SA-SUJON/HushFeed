@@ -29,6 +29,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
 private const val EXTENSION = "Lapp/morphe/extension/tiktok/interaction/GestureActions;"
+private const val SEEK_EXTENSION = "Lapp/morphe/extension/tiktok/interaction/FeedSeek;"
 private const val COMMENT_CLASS = "Lcom/ss/android/ugc/aweme/feed/assem/videocomment/VideoCommentAssem;"
 
 /**
@@ -90,6 +91,27 @@ internal fun Method.doubleTapTimeoutReads(): List<Int> {
     }.map { it + 1 }
 }
 
+/**
+ * PlayerController is one of the classes TikTok did not rename, and neither is this callback
+ * on it. It runs several times a second while a video plays and carries the source id, the
+ * position and the length, which is what a seek needs to know, and the controller it runs on
+ * is the one holding the player to seek. The other {@code onPlayProgressChange} on the class
+ * takes a single float and is empty, so the parameters pick the wanted one.
+ *
+ * Seek back / forward (#555) and Long-press controls' Seek from the edges both read it, and
+ * Long-press controls depends on this patch, so it is hooked here once for both.
+ *
+ * "Block the author", "Hide already seen videos" and "Stay paused after a scroll" also
+ * hook this method. The first two prepend like this one; the third finds its own site by
+ * searching the instructions, so a prepend at zero moves it along with everything else.
+ */
+private object PlayerProgressFingerprint : Fingerprint(
+    definingClass = "Lcom/ss/android/ugc/aweme/feed/controller/PlayerController;",
+    name = "onPlayProgressChange",
+    returnType = "V",
+    parameters = listOf("Ljava/lang/String;", "J", "J"),
+)
+
 private object CommentViewFingerprint : Fingerprint(
     definingClass = COMMENT_CLASS, name = "onViewCreated",
     parameters = listOf("Landroid/view/View;"), returnType = "V",
@@ -104,9 +126,9 @@ private object CommentBindFingerprint : Fingerprint(
 val doubleTapPatch = bytecodePatch(
     name = "Double-tap controls",
     description = "Lets a double tap on a video do nothing, open its comments, copy the link, save " +
-        "the sound or the frame on screen, name the song with Shazam, speed the video up, or set a " +
-        "sleep timer instead of liking it, so you don't like videos by accident. Each corner of the " +
-        "video can get its own action too. Starts off. Pick an action in Hushfeed settings > Feed screen.",
+        "the sound or the frame on screen, name the song with Shazam, speed the video up, jump back or " +
+        "forward, or set a sleep timer instead of liking it, so you don't like videos by accident. " +
+        "Each corner of the video can get its own action too. Starts off. Pick an action in Hushfeed settings > Feed screen.",
 ) {
     category("Interaction")
     compatibleWith(*AppCompatibilities.tiktok())
@@ -139,6 +161,13 @@ val doubleTapPatch = bytecodePatch(
                 """)
             }
         }
+        // p0 is the controller, p1 the source id, then the position and the length, each a
+        // pair of registers. The range form is what reaches them in a method this wide.
+        PlayerProgressFingerprint.method.addInstruction(
+            0,
+            "invoke-static/range { p0 .. p5 }, " +
+                "$SEEK_EXTENSION->recordProgress(Ljava/lang/Object;Ljava/lang/String;JJ)V",
+        )
         CommentViewFingerprint.method.addInstruction(0,
             "invoke-static/range { p0 .. p1 }, $EXTENSION->registerCommentView(Ljava/lang/Object;Landroid/view/View;)V")
         CommentBindFingerprint.method.addInstruction(0,

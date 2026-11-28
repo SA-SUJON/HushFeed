@@ -17,6 +17,7 @@ import app.morphe.extension.tiktok.cleardisplay.RememberClearDisplayPatch;
 import app.morphe.extension.tiktok.feed.BurnInGuard;
 import app.morphe.extension.tiktok.feed.FeedTextSize;
 import app.morphe.extension.tiktok.feed.GridSort;
+import app.morphe.extension.tiktok.interaction.GestureActions;
 import app.morphe.extension.tiktok.interaction.TapConfirmation;
 import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.tiktok.settings.Settings;
@@ -1166,17 +1167,19 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             // speed toggle changes the playing video's speed, so it needs the Playback speed patch's
             // player bridge, and Clear display posts TikTok's own event through Remember clear
             // display's bridge (#136). Like or unlike is the double tap's own: TikTok's default
-            // already likes, and only ever likes (#248).
+            // already likes, and only ever likes (#248). So is Seek back / forward, which a long
+            // press has as Seek from the edges (#555).
             List<String> tapLabels = new ArrayList<>(Arrays.asList("TikTok default", "Do nothing",
                     "Like or unlike the video", "Open comments",
                     "Save the original sound", "Copy the video link", "Copy the sound link",
                     "Find the sound on YouTube Music", "Identify the song with Shazam",
                     "Set a sleep timer that closes TikTok",
-                    "Save the frame on screen as a photo", "Save the video's cover", "Open the search page"));
+                    "Save the frame on screen as a photo", "Save the video's cover", "Open the search page",
+                    "Seek back / forward"));
             List<String> tapValues = new ArrayList<>(Arrays.asList("default", "nothing", "like_toggle", "comments",
                     "original_sound", "copy_link", "copy_sound_link", "youtube_music", "identify_song", "sleep_timer",
                     "save_frame",
-                    "save_cover", "open_search"));
+                    "save_cover", "open_search", GestureActions.SEEK));
             if (SettingsStatus.advancedDownloadsEnabled) {
                 // The save button's save, so it needs Advanced downloads (#463).
                 tapLabels.add("Save this video");
@@ -1198,6 +1201,11 @@ public final class InterfacePreferenceCategory extends ConditionalPreferenceCate
             String[] tapValueArray = tapValues.toArray(new String[0]);
             addPreference(new ChoicePreference(context, "Double tap", Settings.DOUBLE_TAP_ACTION,
                     tapLabelArray, tapValueArray));
+            // Seek back / forward's own jump, apart from the long press's edge seek (#555).
+            addPreference(new NumberInputPreference(context, "Double tap seeks by",
+                    "How far a double tap on the left or right third moves the video. "
+                            + "A double tap in the middle still likes it.",
+                    Settings.DOUBLE_TAP_SEEK_SECONDS, "%1$s s"));
             // Four corners with the same choices, after OmerKurdi79's version (#232).
             addPreference(new TogglePreference(context, "Double tap by corner",
                     "Give each quarter of the video its own double tap choice. The Double tap row above is used while this is off.",

@@ -284,6 +284,23 @@ public class Settings extends BaseSettings {
             "default", false, Setting.parent(DOUBLE_TAP_SPLIT_ZONES));
     public static final StringSetting DOUBLE_TAP_BOTTOM_RIGHT_ACTION = new StringSetting("double_tap_bottom_right_action",
             "default", false, Setting.parent(DOUBLE_TAP_SPLIT_ZONES));
+    /**
+     * How far a Seek back / forward double tap jumps (#555). It means something only while a double
+     * tap in use is set to it: the plain choice, or a corner's with Double tap by corner on.
+     */
+    public static final IntegerSetting DOUBLE_TAP_SEEK_SECONDS = new IntegerSetting("double_tap_seek_seconds", 10,
+            false, new Setting.Availability() {
+                @Override
+                public boolean isAvailable() {
+                    if (!DOUBLE_TAP_SPLIT_ZONES.savedValue()) {
+                        return GestureActions.SEEK.equals(DOUBLE_TAP_ACTION.savedValue());
+                    }
+                    return GestureActions.SEEK.equals(DOUBLE_TAP_TOP_LEFT_ACTION.savedValue())
+                            || GestureActions.SEEK.equals(DOUBLE_TAP_TOP_RIGHT_ACTION.savedValue())
+                            || GestureActions.SEEK.equals(DOUBLE_TAP_BOTTOM_LEFT_ACTION.savedValue())
+                            || GestureActions.SEEK.equals(DOUBLE_TAP_BOTTOM_RIGHT_ACTION.savedValue());
+                }
+            }).withRange(1, 60);
     /** What settings search was last used for, newest first, as a JSON array. Kept out of backups. */
     public static final StringSetting RECENT_SETTINGS_SEARCHES =
             new StringSetting("recent_settings_searches", "[]", false, false);

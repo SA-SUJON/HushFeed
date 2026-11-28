@@ -1592,6 +1592,9 @@ See-through bottom bar,透明底栏
 See-through status bar,透视状态栏
 Seek bar on video stories,在视频故事中搜索栏
 Seek by,寻找依据
+Seek back / forward,后退 / 快进
+Double tap seeks by,双击跳转时长
+How far a double tap on the left or right third moves the video. A double tap in the middle still likes it.,双击左侧或右侧三分之一区域时视频跳转的距离。双击中间仍会点赞.
 Seek from the edges,从边缘拖动
 Seen,见过
 Seen this session,看过这个会话

@@ -107,8 +107,9 @@ public final class GestureActions {
      *
      * <p>A double tap lands with the finger still down, as a long press does, so the Long press
      * actions run from here unchanged: the sleep timer's picker is posted until the touch is done
-     * with, and a frame is read at the tap. The edge seek stays with the long press. Where the tap
-     * landed matters only to Double tap by corner.
+     * with, and a frame is read at the tap. Seek from the edges stays with the long press. Where the
+     * tap landed matters to Double tap by corner and to Seek back / forward, the double tap's own
+     * jump on the left and right thirds (#555).
      *
      * <p>Each guard hands over the tap's event. A route that reached a second guard with the same
      * tap, rather than through the panel that swallows it, gets the first guard's answer back and
@@ -118,7 +119,7 @@ public final class GestureActions {
         if (event != null && event.getDownTime() == answeredTapDown && event.getEventTime() == answeredTapAt) {
             return answeredTap;
         }
-        boolean answer = runAction(doubleTapAction(event));
+        boolean answer = runDoubleTap(doubleTapAction(event), event);
         if (event != null) {
             answeredTapDown = event.getDownTime();
             answeredTapAt = event.getEventTime();
@@ -178,7 +179,31 @@ public final class GestureActions {
 
     /** {@link #onDoubleTap(MotionEvent)} for a tap with no event to tell it apart by. */
     public static boolean onDoubleTap() {
-        return runAction(doubleTapAction(null));
+        return runDoubleTap(doubleTapAction(null), null);
+    }
+
+    /** The double tap choice that jumps back or forward by which third the tap landed in (#555). */
+    public static final String SEEK = "seek";
+
+    /**
+     * Runs a double tap's choice. Seek back / forward is the double tap's own: it places the tap
+     * in a third of the window the way Seek from the edges places a long press, and moves the
+     * video on screen back on the left and forward on the right. A tap in the middle, or one with
+     * no event or window to place it against, goes on to TikTok's like.
+     */
+    private static boolean runDoubleTap(String action, MotionEvent event) {
+        if (!SEEK.equals(action)) return runAction(action);
+        long delta = doubleTapSeekDelta(event);
+        if (delta == 0) return false;
+        // Named, as the edge seek names it, so a post that never reported progress isn't moved.
+        String videoId = Reflect.string(onScreenAweme(), "getAid", "aid");
+        if (!FeedSeek.seekBy(videoId, delta)) Utils.showToastShort(L10n.t("Nothing is playing to seek"));
+        return true;
+    }
+
+    /** How far a Seek back / forward double tap at this event moves the video, in milliseconds. */
+    static long doubleTapSeekDelta(MotionEvent event) {
+        return sideDelta(sideOf(event), Settings.DOUBLE_TAP_SEEK_SECONDS.get());
     }
 
     /**
@@ -270,24 +295,33 @@ public final class GestureActions {
         if (!Settings.EDGE_SEEK.get()) return 0;
         int seconds = Settings.EDGE_SEEK_SECONDS.get();
         if (seconds <= 0) return 0;
-        // The dialog offers at most 60. A restored backup is never asked, and a press that
+        return sideDelta(sideOf(x), seconds);
+    }
+
+    /**
+     * The jump for a gesture in this third, shared by Seek from the edges and Seek back / forward:
+     * back on the left, forward on the right, none in the middle or with no window to place it.
+     */
+    static long sideDelta(int side, int seconds) {
+        if (seconds <= 0) return 0;
+        // The dialogs offer at most 60. A restored backup is never asked, and a gesture that
         // jumps an hour is indistinguishable from the video ending.
-        seconds = Math.min(60, seconds);
-        int side = sideOf(x);
-        if (side == SIDE_LEFT) return -seconds * 1000L;
-        if (side == SIDE_RIGHT) return seconds * 1000L;
+        long jump = Math.min(60, seconds) * 1000L;
+        if (side == SIDE_LEFT) return -jump;
+        if (side == SIDE_RIGHT) return jump;
         return 0;
     }
 
-    private static final int SIDE_LEFT = -1;
-    private static final int SIDE_MIDDLE = 0;
-    private static final int SIDE_RIGHT = 1;
+    static final int SIDE_LEFT = -1;
+    static final int SIDE_MIDDLE = 0;
+    static final int SIDE_RIGHT = 1;
     /** No window to place the press against. */
     private static final int SIDE_UNKNOWN = 2;
 
     /**
-     * Which third of the window a press at {@code x} landed in, shared by Seek from the edges and
-     * Only on the sides of the video (#136) so both draw the line in the same place.
+     * Which third of the window a press at {@code x} landed in, shared by Seek from the edges,
+     * Only on the sides of the video (#136) and Seek back / forward (#555) so all three draw the
+     * line in the same place.
      */
     private static int sideOf(float x) {
         // The window's width, not the display's: the press is placed against the window.

@@ -1046,6 +1046,9 @@ Search by name or gate key	Buscar por nombre o clave de gate
 Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed isn't empty.	Segundos. Cero acepta cualquier duración. Si se fuera a filtrar todo lo que el feed acaba de enviar, se deja el vídeo más cercano a tu límite para que el feed no quede vacío.
 Seconds. Zero keeps every length. Photo posts and videos without a known length stay. If everything the feed just sent would be filtered out, the video closest to your limit is kept.	Segundos. Cero acepta cualquier duración. Las publicaciones de fotos y los vídeos sin duración conocida se quedan. Si se fuera a filtrar todo lo que el feed acaba de enviar, se deja el vídeo más cercano a tu límite.
 Seek by	Avanzar
+Seek back / forward	Retroceder / avanzar
+Double tap seeks by	Avance con doble toque
+How far a double tap on the left or right third moves the video. A double tap in the middle still likes it.	Cuánto se mueve el vídeo con un doble toque en el tercio izquierdo o derecho. Un doble toque en el centro sigue dando me gusta.
 Seek from the edges	Avanzar desde los bordes
 Seen	Vistos
 Seen this session	Visto en esta sesión

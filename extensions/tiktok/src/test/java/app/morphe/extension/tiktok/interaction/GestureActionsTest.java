@@ -137,10 +137,11 @@ public class GestureActionsTest {
             new InterfacePreferenceCategory(activity, screen);
             ChoicePreference choice = (ChoicePreference) screen.findPreference("double_tap_action");
             assertNotNull(choice);
-            // #136: it offered only nothing and comments, and Long press had all the rest.
+            // #136: it offered only nothing and comments, and Long press had all the rest. Seek back /
+            // forward is the double tap's own (#555).
             assertArrayEquals(new String[]{"default", "nothing", "like_toggle", "comments", "original_sound",
                     "copy_link", "copy_sound_link", "youtube_music", "identify_song", "sleep_timer", "save_frame",
-                    "save_cover", "open_search"}, choice.getEntryValues());
+                    "save_cover", "open_search", "seek"}, choice.getEntryValues());
             assertEquals("every value needs a label to pick it by",
                     choice.getEntryValues().length, choice.getEntries().length);
             assertEquals("the row keeps its own name for TikTok's like",
@@ -266,6 +267,7 @@ public class GestureActionsTest {
     /**
      * The two rows offer the same actions, each under its own TikTok default, but for the like:
      * TikTok's own double tap already likes, so Double tap offers Like or unlike instead (#248).
+     * Seek back / forward is the double tap's own too; a long press has Seek from the edges (#555).
      */
     @Test public void doubleTapAndLongPressOfferTheSameActions() {
         try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
@@ -283,6 +285,8 @@ public class GestureActionsTest {
             java.util.Set<String> doubleTapButTheToggle = new java.util.TreeSet<>(doubleTap);
             assertTrue(doubleTapButTheToggle.remove("like_toggle"));
             assertFalse(longPress.contains("like_toggle"));
+            assertTrue(doubleTapButTheToggle.remove(GestureActions.SEEK));
+            assertFalse(longPress.contains(GestureActions.SEEK));
             assertEquals(longPressButTheLike, doubleTapButTheToggle);
         }
     }
@@ -341,11 +345,17 @@ public class GestureActionsTest {
             new InterfacePreferenceCategory(activity, screen);
             BlockAuthorPatch.setCurrentVideoParams(new Params("every-choice"));
             BlockAuthorPatch.setPlayingAweme("every-choice");
+            int width = activity.getResources().getDisplayMetrics().widthPixels;
             for (String value : entryValues(screen, "double_tap_action")) {
                 Settings.DOUBLE_TAP_ACTION.save(value);
-                assertEquals(value, !"default".equals(value), GestureActions.onDoubleTap());
+                boolean seek = GestureActions.SEEK.equals(value);
+                // Seek back / forward goes by where the tap landed, so it's handed a tap on the
+                // right third (#555). It isn't a long press choice.
+                assertEquals(value, !"default".equals(value), seek
+                        ? GestureActions.onDoubleTap(tapAt(width - 1f, 10f, 9_000L))
+                        : GestureActions.onDoubleTap());
                 assertEquals(value + " is Hushfeed's on one gesture and TikTok's on the other",
-                        GestureActions.takesLongPress(value), !"default".equals(value));
+                        GestureActions.takesLongPress(value), !"default".equals(value) && !seek);
                 org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle();
             }
             Settings.DOUBLE_TAP_ACTION.save("somewhere_new");
@@ -406,7 +416,7 @@ public class GestureActionsTest {
         }
     }
 
-    /** The edge seek stays with the long press: a double tap carries no place to seek from. */
+    /** Seek from the edges stays with the long press: only Seek back / forward seeks on a double tap. */
     @Test public void aDoubleTapNeverSeeks() {
         try (var controller = Robolectric.buildActivity(android.app.Activity.class).setup().visible()) {
             Utils.setContext(controller.get());
@@ -1194,6 +1204,148 @@ public class GestureActionsTest {
             Settings.DOUBLE_TAP_TOP_LEFT_ACTION.resetToDefault();
             Settings.DOUBLE_TAP_TOP_RIGHT_ACTION.resetToDefault();
             Settings.DOUBLE_TAP_BOTTOM_LEFT_ACTION.resetToDefault();
+            Settings.DOUBLE_TAP_BOTTOM_RIGHT_ACTION.resetToDefault();
+        }
+    }
+
+    /**
+     * #555: Seek back / forward jumps back on the left third and forward on the right, by its own
+     * length, and leaves the middle third to TikTok's like. The lines are Seek from the edges'.
+     */
+    @Test public void seekBackOrForwardPicksItsJumpByTheThirdTheTapLandsIn() {
+        try (var controller = Robolectric.buildActivity(android.app.Activity.class).setup().visible()) {
+            var activity = controller.get();
+            Utils.setContext(activity);
+            int width = activity.getResources().getDisplayMetrics().widthPixels;
+            assertTrue("the screen has a width to divide", width > 0);
+            int third = width / 3;
+            assertEquals("ten seconds to start with", 10, (int) Settings.DOUBLE_TAP_SEEK_SECONDS.get());
+
+            assertEquals(-10_000L, GestureActions.doubleTapSeekDelta(press(0f)));
+            assertEquals(-10_000L, GestureActions.doubleTapSeekDelta(press(third - 1)));
+            assertEquals(0, GestureActions.doubleTapSeekDelta(press(third)));
+            assertEquals(0, GestureActions.doubleTapSeekDelta(press(width / 2f)));
+            assertEquals(0, GestureActions.doubleTapSeekDelta(press(width - third - 1)));
+            assertEquals(10_000L, GestureActions.doubleTapSeekDelta(press(width - third)));
+            assertEquals(10_000L, GestureActions.doubleTapSeekDelta(press(width - 1f)));
+            assertEquals("no tap to place", 0, GestureActions.doubleTapSeekDelta(null));
+            // Every third agrees with the edge seek's, which uses the same lines.
+            Settings.EDGE_SEEK.save(true);
+            Settings.EDGE_SEEK_SECONDS.save(10);
+            for (float at : new float[]{0f, third - 1, third, width / 2f, width - third - 1, width - third, width - 1f}) {
+                assertEquals("at " + at, GestureActions.edgeSeekDelta(press(at)),
+                        GestureActions.doubleTapSeekDelta(press(at)));
+            }
+
+            // Its own length, whatever Seek from the edges is set to or whether it's on.
+            Settings.EDGE_SEEK.save(false);
+            Settings.EDGE_SEEK_SECONDS.save(5);
+            Settings.DOUBLE_TAP_SEEK_SECONDS.save(3);
+            assertEquals(-3_000L, GestureActions.doubleTapSeekDelta(press(0f)));
+            assertEquals(3_000L, GestureActions.doubleTapSeekDelta(press(width - 1f)));
+
+            // A length the dialog never offers, as a restored backup can carry, is held to 60 seconds.
+            assertEquals(60_000L, GestureActions.sideDelta(GestureActions.SIDE_RIGHT, 100000));
+            assertEquals(-60_000L, GestureActions.sideDelta(GestureActions.SIDE_LEFT, 100000));
+            assertEquals(0, GestureActions.sideDelta(GestureActions.SIDE_MIDDLE, 100000));
+            assertEquals(0, GestureActions.sideDelta(GestureActions.SIDE_RIGHT, 0));
+            assertEquals(0, GestureActions.sideDelta(GestureActions.SIDE_LEFT, -5));
+        } finally {
+            Settings.DOUBLE_TAP_SEEK_SECONDS.resetToDefault();
+            Settings.EDGE_SEEK.resetToDefault();
+            Settings.EDGE_SEEK_SECONDS.resetToDefault();
+        }
+    }
+
+    /**
+     * #555: a Seek back / forward double tap moves the player and never past either end. It counts
+     * on from where the last tap landed, the middle is left to TikTok's like, and a tap on a video
+     * that isn't playing says so rather than liking it.
+     */
+    @Test public void aSeekDoubleTapMovesThePlayerAndNeverPastEitherEnd() {
+        try (var controller = Robolectric.buildActivity(android.app.Activity.class).setup().visible()) {
+            var activity = controller.get();
+            Utils.setContext(activity);
+            int width = activity.getResources().getDisplayMetrics().widthPixels;
+            Settings.EDGE_SEEK.save(false);
+            Settings.DOUBLE_TAP_ACTION.save(GestureActions.SEEK);
+            Settings.DOUBLE_TAP_SEEK_SECONDS.save(10);
+            FakeController player = new FakeController();
+            FeedSeek.recordProgress(player, "jump", 12_000L, player.player.durationMs);
+            BlockAuthorPatch.setCurrentVideoParams(new Params("jump"));
+            BlockAuthorPatch.setPlayingAweme("jump");
+            long down = 20_000L;
+
+            // Right third: forward, and the tap is taken so TikTok doesn't like the video too.
+            assertTrue(GestureActions.onDoubleTap(tapAt(width * 0.9f, 10f, down += 1_000L)));
+            assertEquals(22_000f, player.player.sought, 1f);
+            // On from there, and a millisecond short of the end, since landing on it ends the video.
+            assertTrue(GestureActions.onDoubleTap(tapAt(width * 0.9f, 10f, down += 1_000L)));
+            assertEquals(29_999f, player.player.sought, 1f);
+            assertTrue(GestureActions.onDoubleTap(tapAt(width - 1f, 10f, down += 1_000L)));
+            assertEquals("never past the end", 29_999f, player.player.sought, 1f);
+
+            // Left third: back, and never before the start.
+            assertTrue(GestureActions.onDoubleTap(tapAt(width * 0.05f, 10f, down += 1_000L)));
+            assertEquals(19_999f, player.player.sought, 1f);
+            for (int i = 0; i < 3; i++) assertTrue(GestureActions.onDoubleTap(tapAt(0f, 10f, down += 1_000L)));
+            assertEquals("never before the start", 0f, player.player.sought, 0.5f);
+
+            // The middle third is TikTok's like, and so is a tap with nothing to place it by.
+            player.player.sought = Float.NaN;
+            assertFalse(GestureActions.onDoubleTap(tapAt(width / 2f, 10f, down += 1_000L)));
+            assertFalse(GestureActions.onDoubleTap());
+            assertTrue("the middle moved the video", Float.isNaN(player.player.sought));
+
+            // A video that never played: the side is still the seek's, and the toast says why.
+            BlockAuthorPatch.setCurrentVideoParams(new Params("photo-post"));
+            BlockAuthorPatch.setPlayingAweme("photo-post");
+            ShadowToast.reset();
+            assertTrue(GestureActions.onDoubleTap(tapAt(width - 1f, 10f, down += 1_000L)));
+            org.robolectric.Shadows.shadowOf(android.os.Looper.getMainLooper()).idle();
+            assertEquals(L10n.t("Nothing is playing to seek"), ShadowToast.getTextOfLatestToast());
+            assertTrue("another video's player moved", Float.isNaN(player.player.sought));
+        } finally {
+            Settings.DOUBLE_TAP_ACTION.resetToDefault();
+            Settings.DOUBLE_TAP_SEEK_SECONDS.resetToDefault();
+            Settings.EDGE_SEEK.resetToDefault();
+        }
+    }
+
+    /**
+     * #555: the jump row sits right under Double tap and waits greyed out until a double tap in
+     * use is set to Seek back / forward: the plain row, or a corner's with Double tap by corner on.
+     */
+    @Test public void theJumpRowSitsUnderDoubleTapAndWaitsForTheSeekChoice() {
+        try (var controller = Robolectric.buildActivity(TestActivity.class).setup()) {
+            var activity = controller.get();
+            Utils.setContext(activity);
+            SettingsStatus.doubleTapEnabled = true;
+            PreferenceScreen screen = activity.getPreferenceManager().createPreferenceScreen(activity);
+            new InterfacePreferenceCategory(activity, screen);
+            android.preference.Preference doubleTap = screen.findPreference("double_tap_action");
+            android.preference.Preference jump = screen.findPreference("double_tap_seek_seconds");
+            assertNotNull(jump);
+            android.preference.PreferenceGroup rows = doubleTap.getParent();
+            int at = -1;
+            for (int i = 0; i < rows.getPreferenceCount(); i++) {
+                if (rows.getPreference(i) == doubleTap) at = i;
+            }
+            assertTrue(at >= 0 && at + 1 < rows.getPreferenceCount());
+            assertSame("the jump row is right under Double tap", jump, rows.getPreference(at + 1));
+            assertTrue(entryValues(screen, "double_tap_top_left_action").contains(GestureActions.SEEK));
+
+            assertFalse(Settings.DOUBLE_TAP_SEEK_SECONDS.isAvailable());
+            Settings.DOUBLE_TAP_ACTION.save(GestureActions.SEEK);
+            assertTrue(Settings.DOUBLE_TAP_SEEK_SECONDS.isAvailable());
+            Settings.DOUBLE_TAP_SPLIT_ZONES.save(true);
+            assertFalse("the plain row is set aside while corners are on",
+                    Settings.DOUBLE_TAP_SEEK_SECONDS.isAvailable());
+            Settings.DOUBLE_TAP_BOTTOM_RIGHT_ACTION.save(GestureActions.SEEK);
+            assertTrue(Settings.DOUBLE_TAP_SEEK_SECONDS.isAvailable());
+        } finally {
+            Settings.DOUBLE_TAP_ACTION.resetToDefault();
+            Settings.DOUBLE_TAP_SPLIT_ZONES.resetToDefault();
             Settings.DOUBLE_TAP_BOTTOM_RIGHT_ACTION.resetToDefault();
         }
     }

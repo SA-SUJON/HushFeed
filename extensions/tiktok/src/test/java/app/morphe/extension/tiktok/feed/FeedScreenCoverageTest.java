@@ -104,7 +104,7 @@ public class FeedScreenCoverageTest {
             "caption_text_size", "caption_background", "keep_captions_clear_display", "caption_font_weight",
             "caption_bottom_offset", "caption_landscape_offset", "caption_clear_display_offset",
             "caption_clear_display_spot",
-            "double_tap_action", "double_tap_split_zones", "double_tap_top_left_action",
+            "double_tap_action", "double_tap_seek_seconds", "double_tap_split_zones", "double_tap_top_left_action",
             "double_tap_top_right_action", "double_tap_bottom_left_action", "double_tap_bottom_right_action",
             "confirm_quick_repost");
 
@@ -352,6 +352,8 @@ public class FeedScreenCoverageTest {
         put("swipe_levels_right", YES, YES, NONE);
         put("swipe_levels_strip_percent", YES, YES, NONE);
         put("double_tap_action", YES, UNCHECKED, NONE);
+        // Seek back / forward's jump, read by the same tap hook (#555).
+        put("double_tap_seek_seconds", YES, UNCHECKED, NONE);
         // The same tap hook, read by where the tap landed (#232).
         for (String corner : new String[]{"double_tap_split_zones", "double_tap_top_left_action",
                 "double_tap_top_right_action", "double_tap_bottom_left_action", "double_tap_bottom_right_action"}) {

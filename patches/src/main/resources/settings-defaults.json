@@ -241,6 +241,7 @@
     "Double-tap controls": [
       "double_tap_split_zones",
       "double_tap_action",
+      "double_tap_seek_seconds",
       "double_tap_top_left_action",
       "double_tap_top_right_action",
       "double_tap_bottom_left_action",
@@ -1752,6 +1753,14 @@
       "key": "double_tap_bottom_right_action",
       "type": "string",
       "default": "default"
+    },
+    "double_tap_seek_seconds": {
+      "field": "DOUBLE_TAP_SEEK_SECONDS",
+      "key": "double_tap_seek_seconds",
+      "type": "integer",
+      "default": 10,
+      "minimum": 1,
+      "maximum": 60
     },
     "double_tap_split_zones": {
       "field": "DOUBLE_TAP_SPLIT_ZONES",

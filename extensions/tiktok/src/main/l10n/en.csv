@@ -733,6 +733,7 @@ Done. %1$d removed.,Done. %1$d removed.
 Done. %1$d unfollowed.,Done. %1$d unfollowed.
 Double tap,Double tap
 Double tap by corner,Double tap by corner
+Double tap seeks by,Double tap seeks by
 Double tap to let the host see you,Double tap to let the host see you
 "Download lists the qualities this video comes in, with the size TikTok gives for each, and saves the one you pick. The quality above stays as it is for the next save.","Download lists the qualities this video comes in, with the size TikTok gives for each, and saves the one you pick. The quality above stays as it is for the next save."
 Download original photos,Download original photos
@@ -1204,6 +1205,7 @@ Home screen shortcuts,Home screen shortcuts
 Home tab name,Home tab name
 Hook status,Hook status
 "How big the bubble is drawn, from %1$d to %2$d. 100 is the normal size, which already grows with your phone's font size.","How big the bubble is drawn, from %1$d to %2$d. 100 is the normal size, which already grows with your phone's font size."
+How far a double tap on the left or right third moves the video. A double tap in the middle still likes it.,How far a double tap on the left or right third moves the video. A double tap in the middle still likes it.
 How far each edge press moves the video.,How far each edge press moves the video.
 How long each photo stays on screen in a video made from a photo post. A post with just one photo runs as long as its sound. A story's video runs as long as the story does.,How long each photo stays on screen in a video made from a photo post. A post with just one photo runs as long as its sound. A story's video runs as long as the story does.
 How many lines of a long comment show before more.,How many lines of a long comment show before more.
@@ -2198,6 +2200,7 @@ Security & permissions,Security & permissions
 See the saved videos that went away after Hushfeed remembered them,See the saved videos that went away after Hushfeed remembered them
 See-through bottom bar,See-through bottom bar
 See-through status bar,See-through status bar
+Seek back / forward,Seek back / forward
 Seek bar on sound previews,Seek bar on sound previews
 Seek bar on video stories,Seek bar on video stories
 Seek by,Seek by

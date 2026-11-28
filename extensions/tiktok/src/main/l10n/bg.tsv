@@ -1049,6 +1049,9 @@ Search by name or gate key	Търси по име или ключ на гейт
 Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed isn't empty.	Секунди. Нула запазва всяка дължина. Ако всичко, което лентата току-що е изпратила, би било филтрирано, остава видеото, най-близко до лимита ти, за да не е празна лентата.
 Seconds. Zero keeps every length. Photo posts and videos without a known length stay. If everything the feed just sent would be filtered out, the video closest to your limit is kept.	Секунди. Нула запазва всяка дължина. Публикациите със снимки и видеата без известна дължина остават. Ако всичко, което лентата току-що е изпратила, би било филтрирано, остава видеото, най-близко до лимита ти.
 Seek by	Превъртане с
+Seek back / forward	Превъртане назад / напред
+Double tap seeks by	Стъпка при двойно докосване
+How far a double tap on the left or right third moves the video. A double tap in the middle still likes it.	Колко се превърта видеото при двойно докосване в лявата или дясната третина. Двойно докосване в средата пак харесва видеото.
 Seek from the edges	Превъртане от краищата
 Seen	Гледано
 Seen this session	Гледано в тази сесия

@@ -1149,6 +1149,9 @@ Search by name or gate key	البحث بالاسم أو مفتاح البواب�
 Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed isn't empty.	بالثواني. صفر يبقي أي طول. إذا كان سيتم تصفية كل ما أرسلته الخلاصة للتو، فسيتم الاحتفاظ بالفيديو الأقرب إلى حدك حتى لا تصبح الخلاصة فارغة.
 Seconds. Zero keeps every length. Photo posts and videos without a known length stay. If everything the feed just sent would be filtered out, the video closest to your limit is kept.	بالثواني. الصفر يحافظ على كل طول. تبقى منشورات الصور ومقاطع الفيديو ذات الطول غير المعروف. إذا كان سيتم تصفية كل ما أرسلته الخلاصة للتو، يتم الاحتفاظ بالفيديو الأقرب إلى الحد الخاص بك.
 Seek by	التخطي بمقدار
+Seek back / forward	التخطي للخلف / للأمام
+Double tap seeks by	مقدار التخطي بالنقر المزدوج
+How far a double tap on the left or right third moves the video. A double tap in the middle still likes it.	مدى تحريك الفيديو عند النقر المزدوج على الثلث الأيسر أو الأيمن. النقر المزدوج في المنتصف لا يزال يسجّل إعجابًا.
 Seek from the edges	التمرير من الحواف
 Seen	شوهد
 Seen this session	شوهد في هذه الجلسة

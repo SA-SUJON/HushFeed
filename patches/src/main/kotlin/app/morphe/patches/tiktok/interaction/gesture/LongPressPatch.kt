@@ -31,7 +31,6 @@ import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
 private const val EXTENSION = "Lapp/morphe/extension/tiktok/interaction/GestureActions;"
-private const val SEEK_EXTENSION = "Lapp/morphe/extension/tiktok/interaction/FeedSeek;"
 private const val MOTION_EVENT = "Landroid/view/MotionEvent;"
 private const val EDGE_SPEEDUP = "Lcom/ss/android/ugc/aweme/feed/longvideo/edgespeedup/EdgeSpeedupAssem;"
 private const val FEED_PAGE_PARAMS = "Lcom/ss/android/ugc/aweme/feed/model/BaseFeedPageParams;"
@@ -189,24 +188,6 @@ internal object LikeViewFingerprint : Fingerprint(
 )
 
 /**
- * PlayerController is one of the classes TikTok did not rename, and neither is this callback
- * on it. It runs several times a second while a video plays and carries the source id, the
- * position and the length, which is what an edge seek needs to know, and the controller it
- * runs on is the one holding the player to seek. The other {@code onPlayProgressChange} on
- * the class takes a single float and is empty, so the parameters pick the wanted one.
- *
- * "Block the author", "Hide already seen videos" and "Stay paused after a scroll" also
- * hook this method. The first two prepend like this one; the third finds its own site by
- * searching the instructions, so a prepend at zero moves it along with everything else.
- */
-private object PlayerProgressFingerprint : Fingerprint(
-    definingClass = "Lcom/ss/android/ugc/aweme/feed/controller/PlayerController;",
-    name = "onPlayProgressChange",
-    returnType = "V",
-    parameters = listOf("Ljava/lang/String;", "J", "J"),
-)
-
-/**
  * Runs before TikTok's own long press handling, which is the 2x hold and the quick share
  * sheet. When the setting asks for something else the gesture is swallowed here, so those
  * two features and their switches only ever see a long press when the setting is left on
@@ -269,13 +250,8 @@ val longPressPatch = bytecodePatch(
                 "$EXTENSION->registerLikeView(Ljava/lang/Object;Landroid/view/View;)V",
         )
 
-        // p0 is the controller, p1 the source id, then the position and the length, each a
-        // pair of registers. The range form is what reaches them in a method this wide.
-        PlayerProgressFingerprint.method.addInstruction(
-            0,
-            "invoke-static/range { p0 .. p5 }, " +
-                "$SEEK_EXTENSION->recordProgress(Ljava/lang/Object;Ljava/lang/String;JJ)V",
-        )
+        // Seek from the edges reads the player's progress, which Double-tap controls records for
+        // its own seek (#555), and this patch depends on it.
 
         SettingsStatusLoadFingerprint.method.addInstruction(
             0,

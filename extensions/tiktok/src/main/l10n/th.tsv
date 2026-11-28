@@ -1049,6 +1049,9 @@ Search by name or gate key	ค้นหาตามชื่อหรือค�
 Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed isn't empty.	วินาที ค่าศูนย์จะเก็บความยาวทุกระดับไว้ หากทุกอย่างที่ฟีดเพิ่งส่งมาถูกกรองออก วิดีโอที่มีความยาวใกล้เคียงกับขีดจำกัดของคุณมากที่สุดจะถูกเก็บไว้เพื่อไม่ให้ฟีดว่างเปล่า
 Seconds. Zero keeps every length. Photo posts and videos without a known length stay. If everything the feed just sent would be filtered out, the video closest to your limit is kept.	วินาที ค่าศูนย์จะเก็บความยาวทุกระดับไว้ โพสต์รูปภาพและวิดีโอที่ไม่ทราบความยาวจะยังคงอยู่ หากทุกอย่างที่ฟีดเพิ่งส่งมาถูกกรองออก วิดีโอที่มีความยาวใกล้เคียงกับขีดจำกัดของคุณมากที่สุดจะถูกเก็บไว้
 Seek by	ข้ามทีละ
+Seek back / forward	ข้ามถอยหลัง / ไปข้างหน้า
+Double tap seeks by	ข้ามทีละเมื่อแตะสองครั้ง
+How far a double tap on the left or right third moves the video. A double tap in the middle still likes it.	ระยะที่วิดีโอจะเลื่อนเมื่อแตะสองครั้งที่หนึ่งในสามด้านซ้ายหรือขวา การแตะสองครั้งตรงกลางยังคงเป็นการถูกใจ
 Seek from the edges	ข้ามจากขอบจอ
 Seen	ดูแล้ว
 Seen this session	ดูแล้วในเซสชันนี้

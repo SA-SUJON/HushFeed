@@ -1068,6 +1068,9 @@ Search within comments	Şərhlər daxilində axtarın
 Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed isn't empty.	Saniyə. Sıfır bütün uzunluqları saxlayır. Lentin göndərdiyi hər şey süzüləcəksə, lent boş qalmasın deyə limitinizə ən yaxın video saxlanılır.
 Seconds. Zero keeps every length. Photo posts and videos without a known length stay. If everything the feed just sent would be filtered out, the video closest to your limit is kept.	Saniyə. Sıfır bütün uzunluqları saxlayır. Foto paylaşımlar və uzunluğu bilinməyən videolar qalır. Lentin göndərdiyi hər şey süzüləcəksə, limitinizə ən yaxın video saxlanılır.
 Seek by	İrəli-geri çəkmə addımı
+Seek back / forward	Geri / irəli çək
+Double tap seeks by	İki dəfə toxunma ilə çəkmə addımı
+How far a double tap on the left or right third moves the video. A double tap in the middle still likes it.	Sol və ya sağ üçdə birə iki dəfə toxunmanın videonu nə qədər çəkdiyi. Ortada iki dəfə toxunma yenə bəyənir.
 Seek from the edges	Kənarlardan irəli-geri çəkmə
 Seen	İzlənib
 Seen this session	Bu sessiyada izlənib

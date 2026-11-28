@@ -1124,6 +1124,9 @@ Search by name or gate key	Поиск по названию или ключу п
 Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed isn't empty.	Секунды. Ноль сохраняет любую длину. Если бы всё, что лента только что прислала, оказалось отфильтровано, остаётся видео, ближе всего подходящее к вашему лимиту, чтобы лента не была пустой.
 Seconds. Zero keeps every length. Photo posts and videos without a known length stay. If everything the feed just sent would be filtered out, the video closest to your limit is kept.	Секунды. Ноль сохраняет любую длину. Фотопосты и видео с неизвестной длительностью остаются. Если бы всё, что лента только что прислала, оказалось отфильтровано, остаётся видео, ближе всего подходящее к вашему лимиту.
 Seek by	Перемотка на
+Seek back / forward	Перемотка назад / вперёд
+Double tap seeks by	Перемотка двойным нажатием на
+How far a double tap on the left or right third moves the video. A double tap in the middle still likes it.	На сколько двойное нажатие в левой или правой трети сдвигает видео. Двойное нажатие в середине по-прежнему ставит лайк.
 Seek from the edges	Перематывать от краёв экрана
 Seen	Просмотрено
 Seen this session	Просмотрено в этом сеансе

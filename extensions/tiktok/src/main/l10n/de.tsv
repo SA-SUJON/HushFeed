@@ -1049,6 +1049,9 @@ Search by name or gate key	Nach Name oder Gate-Schlüssel suchen
 Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed isn't empty.	Sekunden. Null behält jede Länge. Würde alles wegfallen, was der Feed gerade geschickt hat, bleibt das Video, das deinem Limit am nächsten kommt, damit der Feed nicht leer ist.
 Seconds. Zero keeps every length. Photo posts and videos without a known length stay. If everything the feed just sent would be filtered out, the video closest to your limit is kept.	Sekunden. Null behält jede Länge. Fotobeiträge und Videos ohne bekannte Länge bleiben. Würde alles wegfallen, was der Feed gerade geschickt hat, bleibt das Video, das deinem Limit am nächsten kommt.
 Seek by	Sprungweite
+Seek back / forward	Zurück / vorwärts springen
+Double tap seeks by	Sprungweite beim Doppeltippen
+How far a double tap on the left or right third moves the video. A double tap in the middle still likes it.	Wie weit ein Doppeltippen im linken oder rechten Drittel das Video bewegt. In der Mitte gibt Doppeltippen weiter ein Like.
 Seek from the edges	Von den Rändern springen
 Seen	Gesehen
 Seen this session	In dieser Sitzung gesehen

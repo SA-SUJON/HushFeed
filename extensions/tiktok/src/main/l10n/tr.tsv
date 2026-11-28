@@ -1068,6 +1068,9 @@ Search within comments	Yorumların içinde ara
 Seconds. Zero keeps every length. If everything the feed just sent would be filtered out, the video closest to your limit is kept so the feed isn't empty.	Saniye. Sıfır, her uzunluğu tutar. Akışın az önce gönderdiği her şey filtrelenecekse akış boş kalmasın diye sınırına en yakın video tutulur.
 Seconds. Zero keeps every length. Photo posts and videos without a known length stay. If everything the feed just sent would be filtered out, the video closest to your limit is kept.	Saniye. Sıfır, her uzunluğu tutar. Fotoğraf gönderileri ve uzunluğu bilinmeyen videolar kalır. Akışın az önce gönderdiği her şey filtrelenecekse sınırına en yakın video tutulur.
 Seek by	Sarma miktarı
+Seek back / forward	Geri / ileri sar
+Double tap seeks by	Çift dokunma sarma miktarı
+How far a double tap on the left or right third moves the video. A double tap in the middle still likes it.	Sol veya sağ üçte bire çift dokunmanın videoyu ne kadar sardığı. Ortada çift dokunma yine beğenir.
 Seek from the edges	Kenarlardan sar
 Seen	Görüldü
 Seen this session	Bu oturumda görüldü
