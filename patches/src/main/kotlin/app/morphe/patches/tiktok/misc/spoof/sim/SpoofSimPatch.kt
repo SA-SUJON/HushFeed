@@ -164,6 +164,8 @@ val simSpoofPatch = bytecodePatch(
         val allClasses = mutableListOf<ClassDef>()
         classDefForEach { allClasses += it }
         val networkStack = planNetworkStackHooks(allClasses.asSequence()) { classDefByOrNull(it) }
+        // The image server addresses a feed response picks follow the same SIM (#415).
+        val feedAddresses = planFeedAddressHook(classDefByOrNull(FEED_COMPOSER))
 
         val replacements = mapOf(
             "getSimCountryIso" to "getCountryIso",
@@ -253,5 +255,6 @@ val simSpoofPatch = bytecodePatch(
             mutableClassDefBy(hook.method.definingClass).findMutableMethodOf(hook.method)
                 .writeNetworkStackHook(hook.bridge)
         }
+        mutableClassDefBy(FEED_COMPOSER).findMutableMethodOf(feedAddresses.method).writeFeedAddressHook()
     }
 }

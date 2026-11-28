@@ -16,6 +16,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -283,6 +284,15 @@ public final class ImageLoads implements LogBufferManager.ServerNamingSection {
                 ? "on, " + code(Settings.SIM_SPOOF_ISO.get()) : "off")
                 + (swapped > 0 ? ", network stack kept on the real SIM ("
                         + swapped + plural(swapped, " answer)", " answers)") : ""));
+        // Whether feed responses picked the image servers, and whether they were used (#415).
+        long used = NetworkStackSim.addressListsUsed();
+        long setAside = NetworkStackSim.addressListsSetAside();
+        if (used + setAside > 0) {
+            int hosts = NetworkStackSim.addressHosts().size();
+            lines.add("Image server addresses from the feed: " + (used + setAside)
+                    + plural(used + setAside, " list", " lists") + " for " + hosts + plural(hosts, " host", " hosts")
+                    + ", " + used + " used, " + setAside + " set aside so the hosts are looked up on the real network");
+        }
         if (context == null) return lines;
         try {
             SharedPreferences prefs = context.getSharedPreferences(STORE_PREFS, Context.MODE_PRIVATE);
@@ -335,6 +345,7 @@ public final class ImageLoads implements LogBufferManager.ServerNamingSection {
         }
         // Outside the lock: Fresco's fetches take it, and a first read of a preferences file waits on the disk.
         lines.addAll(placement(Utils.getContext()));
+        Set<String> fromTheFeed = NetworkStackSim.addressHosts();
         synchronized (HOSTS) {
             hosts = new ArrayList<>(HOSTS.entrySet());
             Collections.sort(hosts, (a, b) -> {
@@ -349,7 +360,8 @@ public final class ImageLoads implements LogBufferManager.ServerNamingSection {
                 + ", " + failed + " failed");
             for (Map.Entry<String, Host> entry : hosts) {
                 Host host = entry.getValue();
-                lines.add(entry.getKey() + ": " + host.fetched + " fetched, " + host.failed + " failed");
+                lines.add(entry.getKey() + ": " + host.fetched + " fetched, " + host.failed + " failed"
+                    + (fromTheFeed.contains(entry.getKey()) ? ", the feed named its addresses" : ""));
                 for (Map.Entry<String, long[]> kind : host.kinds.entrySet()) {
                     lines.add(entry.getKey() + ", " + kind.getKey() + ": " + kind.getValue()[0]
                         + plural(kind.getValue()[0], " time", " times"));

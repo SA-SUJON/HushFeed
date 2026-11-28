@@ -7,13 +7,19 @@ package app.morphe.patches.tiktok.misc.spoof.sim
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
+import app.morphe.util.addInstructions
 import app.morphe.util.addInstructionsAtControlFlowLabel
 import app.morphe.util.findInstructionIndicesReversedOrThrow
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.builder.MutableMethodImplementation
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
+import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 
 /** TTNet's app provider: what it answers here is what the native network stack routes by. */
 internal const val TTNET_ADAPTER = "Lcom/bytedance/ttnet/cronet/AbsCronetDependAdapter;"
@@ -119,6 +125,60 @@ internal fun planNetworkStackHooks(classes: Sequence<ClassDef>, classOf: (String
     hooks.firstOrNull { hook -> hook.method.implementation!!.instructions.none { it.opcode == Opcode.RETURN_OBJECT } }
         ?.let { throw PatchException("SIM spoof: ${it.method.definingClass}->${it.method.name} has no answer to hook") }
     return hooks
+}
+
+/** TikTok's feed response composer, on TikTok and TikTok Lite alike. */
+internal const val FEED_COMPOSER = "Lcom/ss/android/ugc/aweme/app/api/proto/ComposePbAndJson;"
+
+private const val MEDIA_BASIC_INFO = "Lcom/ss/android/ugc/aweme/feed/model/MediaBasicInfo;"
+private const val FEED_IMAGE_ADDRESSES = "httpDnsResultList"
+private const val LIST = "Ljava/util/List;"
+
+private fun Instruction.readsFeedImageAddresses(): Boolean {
+    if (opcode != Opcode.IGET_OBJECT) return false
+    val field = (this as ReferenceInstruction).reference as? FieldReference ?: return false
+    return field.definingClass == MEDIA_BASIC_INFO && field.name == FEED_IMAGE_ADDRESSES && field.type == LIST
+}
+
+internal class FeedAddressHook(val method: Method)
+
+/**
+ * #415, after the network stack went back to the real SIM: a feed response carries, for each
+ * image host, server addresses TikTok's servers picked for a request that still carries the
+ * preset, and the composer copies them into the table both image loaders connect by instead of
+ * looking the host up. The one read of that list in the composer goes through the extension.
+ * Throws before anything is written when the composer, the read, or a clean spot after it is gone.
+ */
+internal fun planFeedAddressHook(composer: ClassDef?): FeedAddressHook {
+    composer ?: throw PatchException("SIM spoof: TikTok's feed composer is gone")
+    val readers = composer.methods.filter { method ->
+        method.implementation?.instructions?.any { it.readsFeedImageAddresses() } == true
+    }
+    val reader = readers.singleOrNull()
+        ?: throw PatchException("SIM spoof: expected one feed composer method reading image server addresses, found ${readers.size}")
+    val code = MutableMethodImplementation(reader.implementation!!).instructions
+    val reads = code.indices.filter { code[it].readsFeedImageAddresses() }
+    val read = reads.singleOrNull()
+        ?: throw PatchException("SIM spoof: the feed composer reads its image server addresses ${reads.size} times, not once")
+    val next = code.getOrNull(read + 1)
+        ?: throw PatchException("SIM spoof: nothing follows the feed's image server addresses read")
+    if (next.location.labels.isNotEmpty()) {
+        throw PatchException("SIM spoof: something jumps to right after the feed's image server addresses are read")
+    }
+    return FeedAddressHook(reader)
+}
+
+/** Hands the feed's image server addresses to the extension, which may set them aside. */
+internal fun MutableMethod.writeFeedAddressHook() {
+    val read = implementation!!.instructions.indexOfFirst { it.readsFeedImageAddresses() }
+    val register = getInstruction<TwoRegisterInstruction>(read).registerA
+    addInstructions(
+        read + 1,
+        """
+            invoke-static/range { v$register .. v$register }, $NETWORK_STACK_DESCRIPTOR->imageAddresses($LIST)$LIST
+            move-result-object v$register
+        """,
+    )
 }
 
 /** Hands every answer of a TTNet getter to the extension, which may swap the real SIM back in. */

@@ -10,7 +10,16 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.telephony.TelephonyManager;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
 import app.morphe.extension.shared.Logger;
@@ -41,6 +50,14 @@ import app.morphe.extension.tiktok.spoof.region.RegionSpoof;
 @SuppressWarnings("unused")
 public final class NetworkStackSim {
     private static final AtomicLong SWAPPED = new AtomicLong();
+    private static final AtomicLong ADDRESS_LISTS_USED = new AtomicLong();
+    private static final AtomicLong ADDRESS_LISTS_SET_ASIDE = new AtomicLong();
+    private static final AtomicBoolean ADDRESSES_LOGGED = new AtomicBoolean();
+    static final int ADDRESS_HOST_LIMIT = 24;
+    /** Guarded by itself. */
+    private static final Set<String> ADDRESS_HOSTS = new LinkedHashSet<>();
+    private static final Object NO_DOMAIN_FIELD = new Object();
+    private static final Map<Class<?>, Object> DOMAIN_FIELDS = new ConcurrentHashMap<>();
 
     /**
      * Where TikTok isn't offered, so a SIM from there is the one the spoof hides: mainland China,
@@ -56,10 +73,8 @@ public final class NetworkStackSim {
         try {
             String preset = presetCountry();
             if (preset == null || value == null || !value.trim().equalsIgnoreCase(preset)) return value;
-            TelephonyManager phone = phone();
-            if (phone == null || keepsThePreset(phone)) return value;
-            String real = firstOf(phone.getSimCountryIso(), phone.getNetworkCountryIso());
-            if (real.isEmpty() || real.equalsIgnoreCase(preset)) return value;
+            String real = realCountry(preset);
+            if (real == null) return value;
             SWAPPED.incrementAndGet();
             return value.equals(value.toUpperCase(Locale.ROOT))
                     ? real.toUpperCase(Locale.ROOT) : real.toLowerCase(Locale.ROOT);
@@ -114,13 +129,146 @@ public final class NetworkStackSim {
         }
     }
 
+    /**
+     * The image server addresses a feed response hands TikTok's image loaders (#415). With 0.85.0
+     * the network stack was on the real SIM (30 answers swapped, no more 403s), yet 65 of 95
+     * images still failed through TikTok's image loader as "native error" or "task canceled"
+     * until the spoof or a VPN was turned on or off. A feed response can carry, for each image
+     * host, addresses TikTok's servers picked for the request, and the feed request still carries
+     * the preset. The loaders connect to those addresses instead of looking the host up, so a
+     * phone in Bangladesh was sent to the preset country's servers. While the stack is on the real
+     * SIM, the list goes back as one entry with no host: TikTok clears the addresses the last list
+     * left and adds none, and each host is looked up on the phone's own network. Anywhere else
+     * (spoof off, a VPN, a SIM from where TikTok isn't offered) the list goes through as it came.
+     * Never throws into the feed.
+     */
+    public static List<?> imageAddresses(List<?> addresses) {
+        if (addresses == null || addresses.isEmpty()) return addresses;
+        try {
+            String preset = presetCountry();
+            boolean setAside = preset != null && realCountry(preset) != null;
+            recordAddresses(addresses, setAside);
+            if (!setAside) return addresses;
+            if (ADDRESSES_LOGGED.compareAndSet(false, true)) {
+                Logger.printInfo(() -> "Feed image server addresses set aside: the network stack is on the real SIM");
+            }
+            return cleared(addresses);
+        } catch (RuntimeException failure) {
+            Logger.printException(() -> "Feed image server addresses", failure);
+            return addresses;
+        }
+    }
+
     /** How many answers went back to the real SIM since the app started, for the diagnostic export. */
     static long swapped() {
         return SWAPPED.get();
     }
 
+    /** Feed address lists handed on as they came since the app started. */
+    static long addressListsUsed() {
+        return ADDRESS_LISTS_USED.get();
+    }
+
+    /** Feed address lists set aside since the app started. */
+    static long addressListsSetAside() {
+        return ADDRESS_LISTS_SET_ASIDE.get();
+    }
+
+    /** The image hosts the feed's address lists named, at most {@link #ADDRESS_HOST_LIMIT}. */
+    static Set<String> addressHosts() {
+        synchronized (ADDRESS_HOSTS) {
+            return new LinkedHashSet<>(ADDRESS_HOSTS);
+        }
+    }
+
     static void resetForTests() {
         SWAPPED.set(0);
+        ADDRESS_LISTS_USED.set(0);
+        ADDRESS_LISTS_SET_ASIDE.set(0);
+        ADDRESSES_LOGGED.set(false);
+        synchronized (ADDRESS_HOSTS) {
+            ADDRESS_HOSTS.clear();
+        }
+    }
+
+    private static void recordAddresses(List<?> addresses, boolean setAside) {
+        (setAside ? ADDRESS_LISTS_SET_ASIDE : ADDRESS_LISTS_USED).incrementAndGet();
+        for (Object entry : addresses) {
+            String host = addressHost(entry);
+            if (host == null) continue;
+            synchronized (ADDRESS_HOSTS) {
+                if (ADDRESS_HOSTS.size() < ADDRESS_HOST_LIMIT) ADDRESS_HOSTS.add(host);
+            }
+        }
+    }
+
+    /** An entry's host, read from its public {@code domain} field, or null when it has none. */
+    private static String addressHost(Object entry) {
+        if (entry == null) return null;
+        Class<?> type = entry.getClass();
+        Object field = DOMAIN_FIELDS.get(type);
+        if (field == null) {
+            field = domainField(type);
+            DOMAIN_FIELDS.put(type, field);
+        }
+        if (field == NO_DOMAIN_FIELD) return null;
+        try {
+            Object value = ((Field) field).get(entry);
+            if (!(value instanceof String)) return null;
+            String host = ((String) value).trim().toLowerCase(Locale.ROOT);
+            return isHostName(host) ? host : null;
+        } catch (ReflectiveOperationException | RuntimeException unreadable) {
+            return null;
+        }
+    }
+
+    private static Object domainField(Class<?> type) {
+        try {
+            Field field = type.getField("domain");
+            return field.getType() == String.class && !Modifier.isStatic(field.getModifiers()) ? field : NO_DOMAIN_FIELD;
+        } catch (NoSuchFieldException | SecurityException missing) {
+            return NO_DOMAIN_FIELD;
+        }
+    }
+
+    /** Letters, digits, dots and hyphens only, so nothing else from a response reaches the export. */
+    private static boolean isHostName(String host) {
+        if (host.isEmpty() || host.length() > 253) return false;
+        for (int index = 0; index < host.length(); index++) {
+            char c = host.charAt(index);
+            if (!((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '.' || c == '-')) return false;
+        }
+        return true;
+    }
+
+    /**
+     * One blank entry of the list's own type. TikTok clears its address table when a list has
+     * anything in it and skips an entry with no host, so the table ends up empty. Null when no
+     * blank one can be made, which TikTok reads as no list: the table is left as it was.
+     */
+    private static List<?> cleared(List<?> addresses) {
+        Object first = addresses.get(0);
+        if (first == null) return null;
+        Object domain = domainField(first.getClass());
+        if (domain == NO_DOMAIN_FIELD) return null;
+        try {
+            Object blank = first.getClass().getConstructor().newInstance();
+            return ((Field) domain).get(blank) == null ? Collections.singletonList(blank) : null;
+        } catch (ReflectiveOperationException | RuntimeException unbuildable) {
+            return null;
+        }
+    }
+
+    /**
+     * The phone's own country when the network stack goes back to the real SIM instead of the
+     * preset, or null when the preset stays: no phone to read, a SIM or network from where TikTok
+     * isn't offered, a VPN, no country on the SIM or the network, or one that is the preset.
+     */
+    private static String realCountry(String preset) {
+        TelephonyManager phone = phone();
+        if (phone == null || keepsThePreset(phone)) return null;
+        String real = firstOf(phone.getSimCountryIso(), phone.getNetworkCountryIso());
+        return real.isEmpty() || real.equalsIgnoreCase(preset) ? null : real;
     }
 
     private static String operator(String value, boolean network) {

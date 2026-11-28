@@ -10,6 +10,8 @@ import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.RegisterRangeInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.iface.reference.StringReference
 import org.junit.Assert.assertEquals
@@ -128,6 +130,69 @@ class NetworkStackSimAnchorsTest {
             assertEquals(label, emptyList<BridgeTypeFlow.Problem>(), BridgeTypeFlow.check(method))
         }
         return hooks
+    }
+
+    /**
+     * #415 on 0.85.0: with the stack on the real SIM, 65 of 95 images still failed through TikTok's
+     * image loader. A feed response names image server addresses picked for a request that carries
+     * the preset, and the composer copies them into the table the loaders connect by. Its one
+     * read of that list goes through the extension, on every declared build and on TikTok Lite.
+     */
+    @Test
+    fun `each declared build hands the feed's image server addresses to the extension`() {
+        Fixtures.forEachDeclared { apk -> checkFeedAddresses(apk.name, classes(apk)) }
+    }
+
+    @Test
+    fun `TikTok Lite hands the feed's image server addresses to the extension`() {
+        val apk = Fixtures.liteApk()
+        checkFeedAddresses(apk.name, classes(apk))
+    }
+
+    private fun checkFeedAddresses(build: String, classes: Map<String, ClassDef>) {
+        val hook = planFeedAddressHook(classes[FEED_COMPOSER])
+        val method = MutableClass(classes.getValue(FEED_COMPOSER)).methods.single {
+            it.name == hook.method.name && it.returnType == hook.method.returnType &&
+                it.parameterTypes.map(CharSequence::toString) == hook.method.parameterTypes.map(CharSequence::toString)
+        }
+        val original = method.implementation!!.instructions.filter { it.opcode != Opcode.NOP }
+        method.writeFeedAddressHook()
+
+        val code = method.implementation!!.instructions.filter { it.opcode != Opcode.NOP }
+        val calls = code.indices.filter {
+            ((code[it] as? ReferenceInstruction)?.reference as? MethodReference)?.definingClass == NETWORK_STACK_DESCRIPTOR
+        }
+        assertEquals("$build: one call", 1, calls.size)
+        val call = calls.single()
+        assertEquals("$build: through imageAddresses", "imageAddresses",
+            ((code[call] as ReferenceInstruction).reference as MethodReference).name)
+        val read = code[call - 1]
+        val field = (read as ReferenceInstruction).reference as FieldReference
+        assertEquals("$build: right after the list is read", Opcode.IGET_OBJECT, read.opcode)
+        assertEquals("$build: the feed's image server addresses",
+            listOf("Lcom/ss/android/ugc/aweme/feed/model/MediaBasicInfo;", "httpDnsResultList", "Ljava/util/List;"),
+            listOf(field.definingClass, field.name, field.type))
+        val register = (read as TwoRegisterInstruction).registerA
+        assertEquals("$build: hands the list over", register, (code[call] as RegisterRangeInstruction).startRegister)
+        assertEquals("$build: one register", 1, (code[call] as RegisterRangeInstruction).registerCount)
+        assertEquals("$build: takes the answer back", Opcode.MOVE_RESULT_OBJECT, code[call + 1].opcode)
+        assertEquals("$build: into the same register", register, (code[call + 1] as OneRegisterInstruction).registerA)
+        assertEquals("$build: nothing else moves",
+            original.map { it.opcode }, code.filterIndexed { index, _ -> index != call && index != call + 1 }.map { it.opcode })
+        assertEquals(build, emptyList<BridgeTypeFlow.Problem>(), BridgeTypeFlow.check(method))
+    }
+
+    @Test
+    fun `a build without the feed composer or its addresses read fails the patch by name`() {
+        Fixtures.forEachDeclared { apk ->
+            val classes = classes(apk)
+            assertTrue(assertThrows(PatchException::class.java) { planFeedAddressHook(null) }
+                .message!!.startsWith("SIM spoof: "))
+            // A composer that never reads the list: TTNet's network library stands in.
+            val other = classes.getValue(TTNET_NETWORK_LIBRARY)
+            assertTrue(assertThrows(PatchException::class.java) { planFeedAddressHook(other) }
+                .message!!.startsWith("SIM spoof: "))
+        }
     }
 
     @Test
