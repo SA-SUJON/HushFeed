@@ -99,6 +99,7 @@ source,target
 %1$s was rejected. %2$s,%1$s was rejected. %2$s
 %1$s watched video added.,%1$s watched video added.
 %1$s watched videos added.,%1$s watched videos added.
+%1$s watching,%1$s watching
 %1$s were already saved,%1$s were already saved
 %1$s you saved before are left out,%1$s you saved before are left out
 %1$s · Hushfeed's list only,%1$s · Hushfeed's list only
@@ -1704,6 +1705,7 @@ Only the first %1$s are in the file.,Only the first %1$s are in the file.
 Only the first %1$s characters of the sample were checked.,Only the first %1$s characters of the sample were checked.
 Only these caption languages,Only these caption languages
 Open,Open
+Open %1$s's profile,Open %1$s's profile
 Open Hushfeed settings,Open Hushfeed settings
 Open TikTok on,Open TikTok on
 "Open a share sheet once, then return here to choose its actions.","Open a share sheet once, then return here to choose its actions."

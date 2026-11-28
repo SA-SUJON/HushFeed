@@ -34,6 +34,7 @@ import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.settings.Setting;
 import app.morphe.extension.tiktok.blockauthor.FeedVisibility;
 import app.morphe.extension.tiktok.blockauthor.Reflect;
+import app.morphe.extension.tiktok.ghostmode.LiveUnseen;
 import app.morphe.extension.tiktok.settings.L10n;
 import app.morphe.extension.tiktok.settings.Settings;
 import app.morphe.extension.tiktok.settings.SettingsStatus;
@@ -188,7 +189,8 @@ public final class LiveRoomInfo {
         Object roomObject = wanted ? LiveRecordChip.roomOf(pageInFront(activity)) : null;
         String room = LiveRecordChip.roomKey(roomObject);
         boolean showRoom = room != null && Settings.LIVE_ROOM_INFO.get();
-        String running = room != null && Settings.LIVE_RUNNING_TIME.get()
+        // A room Watch LIVEs unseen holds says how long it's been on in Ghost mode's own line (#554).
+        String running = room != null && Settings.LIVE_RUNNING_TIME.get() && !LiveUnseen.unbuilt(room)
                 ? runningLine(roomObject, System.currentTimeMillis()) : null;
         JSONObject stats = showRoom ? stats() : null;
         String text = showRoom ? text(room, stats) : "";
@@ -349,7 +351,7 @@ public final class LiveRoomInfo {
      * counts from the room's create time, in seconds; its start time is the fallback. A room
      * from the LIVE feed has neither until TikTok's enter answer fills the page's room in.
      */
-    static long startedAtMs(Object room) {
+    public static long startedAtMs(Object room) {
         if (room == null) return 0;
         long started = seconds(Reflect.readField(room, "createTime"));
         if (started <= 0) started = seconds(Reflect.readField(room, "startTime"));
@@ -362,7 +364,7 @@ public final class LiveRoomInfo {
     }
 
     /** "12:05" under an hour, "1:02:03" from one, hours counting on past a day. */
-    static String runningTime(long elapsedMs) {
+    public static String runningTime(long elapsedMs) {
         long total = Math.max(0, elapsedMs) / 1000;
         long hours = total / 3600;
         long minutes = total / 60 % 60;

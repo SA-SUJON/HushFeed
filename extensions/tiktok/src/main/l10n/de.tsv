@@ -3226,6 +3226,8 @@ Makes TikTok's whole interface smaller, text and buttons alike, so more fits on 
 Show how long a LIVE has been on	Zeigen, wie lange ein LIVE schon läuft
 Adds a small line to LIVE rooms with how long the host has been live, counted from when the room started. With the room ID on too, it goes under that. Tap the line to shrink it to a dot.	Zeigt in LIVE-Räumen eine kleine Zeile, wie lange der Host schon live ist, gezählt ab dem Start des Raums. Ist die Raum-ID auch an, steht sie darunter. Tippe auf die Zeile, um sie zu einem Punkt zu verkleinern.
 LIVE for %1$s	LIVE seit %1$s
+%1$s watching	%1$s schauen zu
+Open %1$s's profile	Profil von %1$s öffnen
 Show exact LIVE battle scores	Genaue LIVE-Battle-Punkte anzeigen
 In a LIVE battle, TikTok caps the big scores viewers see while the host sees the whole number. This shows the whole score in the battle bar and the co-host windows.	In einem LIVE-Battle deckelt TikTok große Punktzahlen für Zuschauer, während der Host die ganze Zahl sieht. Damit siehst du die ganze Punktzahl in der Battle-Leiste und in den Co-Host-Fenstern.
 Start LIVEs at	LIVEs starten mit

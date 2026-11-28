@@ -436,6 +436,12 @@ public final class BioMentions {
         return spans.length == 0 ? null : spans[0];
     }
 
+    /** TikTok's own link to [handle]'s profile, or null when [handle] isn't a TikTok username. */
+    @Nullable
+    public static String profileLink(@Nullable String handle) {
+        return handle != null && MENTION.matcher("@" + handle).matches() ? PROFILE_URL + handle : null;
+    }
+
     /** Opens [handle]'s profile, or a search for a display name, through TikTok's own links, never another app. */
     static boolean open(@Nullable Context context, String handle) {
         try {

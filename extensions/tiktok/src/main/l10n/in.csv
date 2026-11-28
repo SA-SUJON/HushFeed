@@ -3057,6 +3057,8 @@ UI size,Ukuran antarmuka
 Show how long a LIVE has been on,Tampilkan sudah berapa lama LIVE berlangsung
 "Adds a small line to LIVE rooms with how long the host has been live, counted from when the room started. With the room ID on too, it goes under that. Tap the line to shrink it to a dot.","Menambahkan baris kecil di ruang LIVE berisi sudah berapa lama host siaran langsung, dihitung sejak ruang dimulai. Jika ID ruang juga aktif, baris ini ada di bawahnya. Ketuk baris itu untuk mengecilkannya jadi titik."
 LIVE for %1$s,LIVE selama %1$s
+%1$s watching,%1$s menonton
+Open %1$s's profile,Buka profil %1$s
 Show exact LIVE battle scores,Tampilkan skor pertarungan LIVE yang tepat
 "In a LIVE battle, TikTok caps the big scores viewers see while the host sees the whole number. This shows the whole score in the battle bar and the co-host windows.","Dalam pertarungan LIVE, TikTok membatasi skor besar yang dilihat penonton, sementara host melihat angka lengkapnya. Ini menampilkan skor lengkap di bilah pertarungan dan jendela co-host."
 Start LIVEs at,Mulai LIVE dengan kualitas

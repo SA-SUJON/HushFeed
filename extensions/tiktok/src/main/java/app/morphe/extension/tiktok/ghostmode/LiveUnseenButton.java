@@ -110,11 +110,15 @@ public final class LiveUnseenButton {
         followed = new WeakReference<>(application);
         application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
             @Override public void onActivityPaused(Activity paused) {
-                if (paused == host.get()) removeButton();
+                if (paused == host.get()) {
+                    removeButton();
+                    LiveUnseenRoomBar.paused(paused);
+                }
             }
 
             @Override public void onActivityResumed(Activity resumed) {
                 if (resumed == host.get()) {
+                    LiveUnseenRoomBar.resumed(resumed);
                     refresh(resumed);
                     scheduleTick();
                 }
@@ -123,6 +127,7 @@ public final class LiveUnseenButton {
             @Override public void onActivityDestroyed(Activity destroyed) {
                 if (destroyed == host.get()) {
                     removeButton();
+                    LiveUnseenRoomBar.remove();
                     host = new WeakReference<>(null);
                 }
             }
@@ -147,6 +152,7 @@ public final class LiveUnseenButton {
             Activity activity = host.get();
             if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
                 removeButton();
+                LiveUnseenRoomBar.remove();
                 return;
             }
             refresh(activity);
@@ -209,9 +215,13 @@ public final class LiveUnseenButton {
         return enabled() && Settings.GHOST_LIVE_DOUBLE_TAP.get();
     }
 
-    /** Shows, hides or redraws the eye for the room open in {@code activity}. */
+    /**
+     * Shows, hides or redraws the eye for the room open in {@code activity}, and the held room's
+     * host and viewers beside it (#554).
+     */
     static void refresh(Activity activity) {
         if (activity == null) return;
+        LiveUnseenRoomBar.refresh(activity, pageInFront(activity));
         boolean room = !activity.isFinishing() && !activity.isDestroyed() && !FeedVisibility.isFeedWindow(activity);
         if (room && doubleTapInstead()) watchTaps(activity);
         // In the long-press menu, the eye is a row there and nothing covers the stream (D#359).
@@ -441,6 +451,7 @@ public final class LiveUnseenButton {
         ticking = false;
         PAGES.clear();
         removeButton();
+        LiveUnseenRoomBar.resetForTests();
         host = new WeakReference<>(null);
         watchedWindow = new WeakReference<>(null);
         revealing = false;

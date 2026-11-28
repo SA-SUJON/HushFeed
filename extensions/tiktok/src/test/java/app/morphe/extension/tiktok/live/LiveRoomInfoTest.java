@@ -177,6 +177,28 @@ public class LiveRoomInfoTest {
         assertEquals("Room ID 7301234567890123456", line().getText().toString());
     }
 
+    /** #554: a room watched unseen says how long it's been on in Ghost mode's own line, so not twice. */
+    @Test public void aRoomWatchedUnseenLeavesItsRunningTimeToGhostModesLine() {
+        Settings.LIVE_RUNNING_TIME.save(true);
+        front.room.createTime = System.currentTimeMillis() / 1000 - 125;
+        boolean ghost = SettingsStatus.ghostModeEnabled;
+        SettingsStatus.ghostModeEnabled = true;
+        Settings.GHOST_MODE.save(true);
+        Settings.GHOST_HIDE_LIVE_VIEWS.save(true);
+        try {
+            openRoom();
+            assertEquals("Room ID 7301234567890123456", line().getText().toString());
+            Settings.GHOST_HIDE_LIVE_VIEWS.save(false);
+            Shadows.shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(1100));
+            String text = line().getText().toString();
+            assertTrue(text, text.startsWith("Room ID 7301234567890123456\nLIVE for 2:0"));
+        } finally {
+            SettingsStatus.ghostModeEnabled = ghost;
+            Settings.GHOST_MODE.resetToDefault();
+            Settings.GHOST_HIDE_LIVE_VIEWS.resetToDefault();
+        }
+    }
+
     @Test public void theRunningTimeReadsHoursMinutesAndSeconds() {
         assertEquals("0:00", LiveRoomInfo.runningTime(0));
         assertEquals("0:00", LiveRoomInfo.runningTime(-5_000));

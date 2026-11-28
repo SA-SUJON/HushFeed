@@ -3226,6 +3226,8 @@ Makes TikTok's whole interface smaller, text and buttons alike, so more fits on 
 Show how long a LIVE has been on	Показване от колко време тече LIVE
 Adds a small line to LIVE rooms with how long the host has been live, counted from when the room started. With the room ID on too, it goes under that. Tap the line to shrink it to a dot.	Добавя малък ред в LIVE стаите с това от колко време водещият е на живо, броено от началото на стаята. Ако и ID на стаята е включено, редът е под него. Докосни реда, за да го смалиш до точка.
 LIVE for %1$s	На живо от %1$s
+%1$s watching	%1$s гледат
+Open %1$s's profile	Отвори профила на %1$s
 Show exact LIVE battle scores	Показване на точните резултати в LIVE битките
 In a LIVE battle, TikTok caps the big scores viewers see while the host sees the whole number. This shows the whole score in the battle bar and the co-host windows.	В LIVE битка TikTok съкращава големите резултати, които зрителите виждат, а водещият вижда цялото число. Това показва целия резултат в лентата на битката и в прозорците на съводещите.
 Start LIVEs at	Пускане на LIVE в качество

@@ -3055,6 +3055,8 @@ UI size,Kích thước giao diện
 Show how long a LIVE has been on,Hiện LIVE đã phát được bao lâu
 "Adds a small line to LIVE rooms with how long the host has been live, counted from when the room started. With the room ID on too, it goes under that. Tap the line to shrink it to a dot.","Thêm một dòng nhỏ vào phòng LIVE cho biết chủ phòng đã phát trực tiếp bao lâu, tính từ lúc phòng bắt đầu. Nếu ID phòng cũng đang bật, dòng này nằm bên dưới. Nhấn vào dòng để thu nhỏ thành một chấm."
 LIVE for %1$s,Đã LIVE %1$s
+%1$s watching,%1$s người xem
+Open %1$s's profile,Mở hồ sơ của %1$s
 Show exact LIVE battle scores,Hiện điểm đấu LIVE chính xác
 "In a LIVE battle, TikTok caps the big scores viewers see while the host sees the whole number. This shows the whole score in the battle bar and the co-host windows.","Trong một trận đấu LIVE, TikTok giới hạn điểm số lớn mà người xem thấy, còn chủ phòng thấy con số đầy đủ. Tùy chọn này hiện điểm đầy đủ trên thanh trận đấu và trong cửa sổ đồng chủ phòng."
 Start LIVEs at,Bắt đầu LIVE ở chất lượng

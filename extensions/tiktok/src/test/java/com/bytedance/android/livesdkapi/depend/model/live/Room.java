@@ -7,4 +7,6 @@ public class Room {
     /** Seconds since the epoch, as TikTok's own room keeps them. */
     public long createTime;
     public long startTime;
+    /** How many are watching, as the room loaded with the feed says. */
+    public int userCount;
 }
