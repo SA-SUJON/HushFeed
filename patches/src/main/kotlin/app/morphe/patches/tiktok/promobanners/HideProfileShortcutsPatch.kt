@@ -118,6 +118,15 @@ val hideProfileShortcutsPatch = bytecodePatch(
             println("[$PATCH_NAME] Left out Hide Balance in the profile menu on ${packageMetadata.versionName}: ${problem.message}")
             null
         }
+        // The same cells in TikTok's newer, server-built profile menu (#194), which some accounts
+        // get instead. Held by ProfileMenuCellsAnchorsTest.
+        val platformLists = try {
+            ProfilePlatformAssembleFingerprint.method
+        } catch (problem: Exception) {
+            if (packageMetadata.versionName in declaredVersions()) throw problem
+            println("[$PATCH_NAME] Left out Hide Balance in the newer profile menu on ${packageMetadata.versionName}: ${problem.message}")
+            null
+        }
         // Turn on Thoughts (#186), the other way round from hiding them: TikTok's two Thoughts
         // gates answer yes behind a switch that starts off. Held by SwitchedReturnFixturesTest.
         val thoughtsGates = try {
@@ -170,6 +179,9 @@ val hideProfileShortcutsPatch = bytecodePatch(
             lists.reportProfileMenuListFill(PATCH_NAME, cells)
             cells.hideProfileMenuCells(PATCH_NAME)
             sections.watchProfileMenuSections()
+        }
+        platformLists?.filterProfilePlatformComponents()
+        if (menuCells != null || platformLists != null) {
             SettingsStatusLoadFingerprint.method.addInstruction(
                 0,
                 "invoke-static {}, Lapp/morphe/extension/tiktok/settings/SettingsStatus;->enableProfileMenuCells()V",

@@ -8,6 +8,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -16,6 +17,12 @@ import android.os.Looper;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+
+import com.ss.android.ugc.profile.platform.base.data.ProfileComponents;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import app.morphe.extension.shared.Utils;
 import app.morphe.extension.shared.diagnostics.HookStatus;
@@ -274,6 +281,73 @@ public class ProfileMenuCellsTest {
             ProfileMenuCells.cellAnswered(!hidden && !tiktokDrops);
         }
         ProfileMenuCells.listFilled(list);
+    }
+
+    private static ProfileComponents node(String name, ProfileComponents... children) {
+        ProfileComponents node = new ProfileComponents();
+        node.componentName = name;
+        node.components = children.length == 0 ? null : new ArrayList<>(Arrays.asList(children));
+        return node;
+    }
+
+    /**
+     * #194 on the newer, server-built menu some accounts get: TikTok builds the sections, then each
+     * section's cells, from lists its server sent. Balance goes, and so does its Assets section,
+     * which held nothing else, while TikTok's own lists stay as they were.
+     */
+    @Test public void theNewerMenuLeavesOutBalanceAndTheSectionItEmptied() {
+        ProfileComponents balance = node(ProfileMenuCells.BALANCE);
+        ProfileComponents assets = node("content_section_assets", balance);
+        ProfileComponents activity = node("content_section_cell_activity_center");
+        ProfileComponents offline = node("content_section_cell_offline_video");
+        ProfileComponents tools = node("content_section_personal_tools", activity, offline);
+        List<Object> sections = new ArrayList<>(Arrays.asList(assets, tools));
+
+        assertSame("off, TikTok builds from its own list", sections, ProfileMenuCells.components(sections));
+
+        Settings.HIDE_PROFILE_MENU_BALANCE.save(true);
+        assertEquals("the Assets section held only Balance", List.of(tools), ProfileMenuCells.components(sections));
+        assertEquals("TikTok's own list is left as it was", List.of(assets, tools), sections);
+        assertSame("a section that kept every cell builds from its own list",
+                tools.components, ProfileMenuCells.components(tools.components));
+
+        // Balance beside another cell: the section stays and only Balance goes from its cells.
+        ProfileComponents wallet = node("content_section_cell_wallet");
+        ProfileComponents mixed = node("content_section_assets", wallet, balance);
+        assertEquals(List.of(mixed), ProfileMenuCells.components(new ArrayList<>(List.of(mixed))));
+        assertEquals(List.of(wallet), ProfileMenuCells.components(mixed.components));
+
+        // #230: the Minis icon card goes and the Minis entry stays.
+        ProfileComponents minis = node("content_section_cell_tiktok_minis");
+        ProfileComponents icons = node(ProfileMenuCells.MINIS_ICONS);
+        Settings.HIDE_PROFILE_MENU_MINIS_ICONS.save(true);
+        assertEquals(List.of(minis), ProfileMenuCells.components(new ArrayList<>(List.of(minis, icons))));
+
+        String report = String.join(" ", HookStatus.report());
+        assertTrue(report, report.contains("profile menu sections"));
+
+        PausedProcess.set(true);
+        assertSame("paused, TikTok's own menu", sections, ProfileMenuCells.components(sections));
+    }
+
+    /** The profile header's lists go through the same place, and a list with no hidden cell passes as it is. */
+    @Test public void aListWithNoHiddenCellPassesUntouched() {
+        Settings.HIDE_PROFILE_MENU_BALANCE.save(true);
+        Settings.HIDE_PROFILE_MENU_MINIS_ICONS.save(true);
+        List<Object> header = new ArrayList<>(Arrays.asList(
+                node("advanced_feature", node("advanced_feature_tiktok_studio")), node("bio"), "not a component"));
+        assertSame(header, ProfileMenuCells.components(header));
+        assertNull(ProfileMenuCells.components(null));
+        List<Object> empty = new ArrayList<>();
+        assertSame(empty, ProfileMenuCells.components(empty));
+        // A section that came with no cells is TikTok's to show or not.
+        List<Object> bare = new ArrayList<>(List.of(node("content_section_assets")));
+        assertSame(bare, ProfileMenuCells.components(bare));
+        // A section holding something that isn't a component stays.
+        ProfileComponents odd = node("content_section_assets", node(ProfileMenuCells.BALANCE));
+        odd.components.add("not a component");
+        List<Object> withOdd = new ArrayList<>(List.of(odd));
+        assertSame(withOdd, ProfileMenuCells.components(withOdd));
     }
 
     @Test public void aPausedHushfeedLeavesTheMenuAlone() {

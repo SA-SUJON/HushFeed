@@ -11,6 +11,7 @@ import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patches.tiktok.misc.popups.writes
 import app.morphe.patches.tiktok.shared.guardAtEntry
 import app.morphe.util.addInstruction
+import app.morphe.util.addInstructions
 import app.morphe.util.addInstructionsAtControlFlowLabel
 import app.morphe.util.getReference
 import com.android.tools.smali.dexlib2.AccessFlags
@@ -133,6 +134,37 @@ internal fun MutableMethod.reportProfileMenuListFill(patch: String, question: Me
         )
     }
 }
+
+/** Every container of TikTok's server-built profile layout is one of these. The class keeps its real name. */
+internal const val PROFILE_PLATFORM_CONTAINER = "Lcom/ss/android/ugc/profile/platform/business/header/base/HeaderBaseContainerComponent;"
+
+/**
+ * A container of TikTok's newer profile menu building its children from the list its server sent
+ * (#194): the menu's sections, and each section's cells. Some accounts get this menu instead of
+ * the SideBar one the other hooks reach (48.0.2, rows `e20` rather than `lr4`). Every list goes
+ * through here, the profile header's too, and each item is named by `componentName`, the cell's
+ * id (`content_section_cell_balance`).
+ */
+internal object ProfilePlatformAssembleFingerprint : Fingerprint(
+    definingClass = PROFILE_PLATFORM_CONTAINER,
+    returnType = "V",
+    parameters = listOf("Ljava/util/List;"),
+    strings = listOf("assembleComponent start container="),
+    custom = { method, classDef -> classDef.type == PROFILE_PLATFORM_CONTAINER && !AccessFlags.STATIC.isSet(method.accessFlags) },
+)
+
+/**
+ * Hands the list (p1) to the extension before the container reads it, and builds from what comes
+ * back: the same list, or a copy without the hidden cells and without a section that held only
+ * hidden ones.
+ */
+internal fun MutableMethod.filterProfilePlatformComponents() = addInstructions(
+    0,
+    """
+        invoke-static/range { p1 .. p1 }, $PROFILE_MENU_CELLS->components(Ljava/util/List;)Ljava/util/List;
+        move-result-object p1
+    """,
+)
 
 /**
  * Asks the extension about the cell's id (p1) before TikTok does. A hidden cell is answered false,

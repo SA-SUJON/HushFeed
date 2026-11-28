@@ -8,10 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import com.ss.android.ugc.profile.platform.base.data.ProfileComponents;
+
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.WeakHashMap;
 
+import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.diagnostics.HookStatus;
 import app.morphe.extension.tiktok.settings.Settings;
 
@@ -165,6 +170,13 @@ public final class ProfileMenuCells {
 
     /** Asked for each cell before TikTok adds it to the menu. True leaves the cell out. */
     public static boolean hide(String cell) {
+        boolean hide = hidden(cell);
+        FILLING.get()[LAST_HIDDEN] = hide ? 1 : 0;
+        return hide;
+    }
+
+    /** Whether a switch hides the cell with this id. */
+    private static boolean hidden(String cell) {
         boolean hide = false;
         if (BALANCE.equals(cell)) {
             hide = Settings.HIDE_PROFILE_MENU_BALANCE.get();
@@ -173,7 +185,60 @@ public final class ProfileMenuCells {
             hide = Settings.HIDE_PROFILE_MENU_MINIS_ICONS.get();
             HookStatus.bound("profile menu minis icons", hide ? "cell hidden" : "cell left");
         }
-        FILLING.get()[LAST_HIDDEN] = hide ? 1 : 0;
         return hide;
+    }
+
+    /**
+     * A list TikTok's newer profile menu is about to build from (#194): the menu's sections, or one
+     * section's cells, each named by its cell id. Some accounts get this server-built menu instead
+     * of the SideBar one {@link #hide} is asked in. Every list of the server-built profile goes
+     * through here, the header's too, so anything that isn't a hidden cell passes untouched.
+     *
+     * <p>A hidden cell is left out, and so is a section whose cells are all hidden, title and all,
+     * so Balance's own "Assets" section doesn't stay behind empty. The list itself is never changed:
+     * when something is left out, TikTok builds from a copy.
+     */
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public static List components(List components) {
+        try {
+            if (components == null || components.isEmpty()) return components;
+            if (!Settings.HIDE_PROFILE_MENU_BALANCE.get() && !Settings.HIDE_PROFILE_MENU_MINIS_ICONS.get()) {
+                return components;
+            }
+            List kept = null;
+            for (int i = 0; i < components.size(); i++) {
+                Object item = components.get(i);
+                boolean leaveOut = false;
+                if (item instanceof ProfileComponents) {
+                    ProfileComponents component = (ProfileComponents) item;
+                    if (hidden(component.componentName)) {
+                        leaveOut = true;
+                        HookStatus.bound("profile menu sections", "newer menu cell left out");
+                    } else if (holdsOnlyHiddenCells(component)) {
+                        leaveOut = true;
+                        HookStatus.bound("profile menu sections", "newer menu section left out");
+                    }
+                }
+                if (leaveOut && kept == null) {
+                    kept = new ArrayList(components.subList(0, i));
+                } else if (!leaveOut && kept != null) {
+                    kept.add(item);
+                }
+            }
+            return kept == null ? components : kept;
+        } catch (Throwable error) {
+            Logger.printException(() -> "Profile menu: could not read a list of the newer menu", error);
+            return components;
+        }
+    }
+
+    /** A section holding cells, every one of them hidden. */
+    private static boolean holdsOnlyHiddenCells(ProfileComponents section) {
+        List<?> cells = section.components;
+        if (cells == null || cells.isEmpty()) return false;
+        for (Object cell : cells) {
+            if (!(cell instanceof ProfileComponents) || !hidden(((ProfileComponents) cell).componentName)) return false;
+        }
+        return true;
     }
 }

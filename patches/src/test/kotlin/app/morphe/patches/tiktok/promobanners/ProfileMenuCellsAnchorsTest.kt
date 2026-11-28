@@ -94,6 +94,68 @@ class ProfileMenuCellsAnchorsTest {
     }
 
     /**
+     * #194 on the newer, server-built menu some accounts get: one method builds every container's
+     * children from the list its server sent, and the menu's content and its sections both build
+     * through it. The hook hands that list (p1) to the extension and builds from the answer,
+     * leaving TikTok's code after it as it was.
+     */
+    @Test
+    fun `the newer menu's lists go through the extension before they are built`() {
+        Fixtures.forEachDeclared { apk ->
+            val version = Fixtures.versionOf(apk)
+            val taken = mutableListOf<Method>()
+            val container = Fixtures.dexContainer(apk, Opcodes.getDefault())
+            for (entry in container.dexEntryNames) {
+                for (classDef in container.getEntry(entry)!!.dexFile.classes) {
+                    for (method in classDef.methods) {
+                        if (ProfilePlatformAssembleFingerprint.takes(method, classDef)) taken += method
+                    }
+                }
+            }
+            assertEquals("$version: assemble methods ${taken.map { it.name }}", 1, taken.size)
+            val native = taken.single()
+            assertEquals(PROFILE_PLATFORM_CONTAINER, native.definingClass)
+
+            val menuCallers = mutableSetOf<String>()
+            for (entry in container.dexEntryNames) {
+                for (classDef in container.getEntry(entry)!!.dexFile.classes) {
+                    if (!classDef.type.startsWith("Lcom/ss/android/ugc/profile/business/profile/menu/business/content/")) continue
+                    for (method in classDef.methods) {
+                        val calls = method.implementation?.instructions?.any { instruction ->
+                            instruction.getReference<MethodReference>()?.let {
+                                it.definingClass == native.definingClass && it.name == native.name &&
+                                    it.parameterTypes.map { type -> type.toString() } == listOf("Ljava/util/List;")
+                            } == true
+                        } == true
+                        if (calls) menuCallers += classDef.type.substringAfterLast('/')
+                    }
+                }
+            }
+            assertTrue("$version: the menu's content builds its sections there, callers $menuCallers",
+                "ContentBaseContainerComponent;" in menuCallers)
+            assertTrue("$version: and each section its cells, callers $menuCallers",
+                "ContentSectionListBaseComponent;" in menuCallers)
+
+            val registers = native.implementation!!.registerCount
+            val before = native.implementation!!.instructions.toList()
+            val patched = MutableMethod(native)
+            patched.filterProfilePlatformComponents()
+            val after = patched.implementation!!.instructions.toList()
+            assertEquals("$version: the hook", listOf(Opcode.INVOKE_STATIC_RANGE, Opcode.MOVE_RESULT_OBJECT), after.take(2).map { it.opcode })
+            val call = after[0].getReference<MethodReference>()!!
+            assertEquals("Lapp/morphe/extension/tiktok/profile/ProfileMenuCells;", call.definingClass)
+            assertEquals("components", call.name)
+            assertEquals(listOf("Ljava/util/List;"), call.parameterTypes.map { it.toString() })
+            assertEquals("Ljava/util/List;", call.returnType)
+            val list = after[0] as RegisterRangeInstruction
+            assertEquals("$version: the list is p1", registers - 1, list.startRegister)
+            assertEquals(1, list.registerCount)
+            assertEquals("$version: and the answer is what TikTok builds from", registers - 1, (after[1] as OneRegisterInstruction).registerA)
+            assertEquals(before.map { it.opcode }, after.drop(2).map { it.opcode })
+        }
+    }
+
+    /**
      * #194: the menu's sections, so one left empty by a hidden cell collapses. The section class
      * keeps its real name, makes its view in onViewCreated, and the hook hands that view (p1) to
      * the extension before anything else runs, leaving TikTok's code as it was.
