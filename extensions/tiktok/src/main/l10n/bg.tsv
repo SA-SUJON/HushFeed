@@ -2316,6 +2316,8 @@ This LIVE's stream can't be saved	Потокът на този LIVE не мож�
 There isn't enough room on the phone to record	На телефона няма достатъчно място за запис
 Nothing was recorded	Нищо не беше записано
 The recording couldn't be saved. Try again.	Записът не можа да се запази. Опитай пак.
+An earlier recording is waiting. Retry or delete it.	Предишен запис чака. Опитай пак или го изтрий.
+The recording couldn't start. Try again.	Записът не можа да започне. Опитай пак.
 Can't retry those photos. Save the post again.	Без нов опит за тези снимки. Запази публикацията пак.
 Show the time zone	Показване на часовата зона
 Puts your time zone after the time to the second, like EDT.	Добавя часовата ти зона след часа до секундата, например EET.

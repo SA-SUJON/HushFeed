@@ -2021,6 +2021,8 @@ The profile picture couldn't be saved. Try again.,无法保存个人资料图片
 The quality choice is still open,品质选择依然开放
 Couldn't read an interrupted change. Check your settings.,无法读取中断的更改。请检查你的设置.
 The recording couldn't be saved. Try again.,录音无法保存。再试一次.
+An earlier recording is waiting. Retry or delete it.,之前的录音还在等待。请重试或删除.
+The recording couldn't start. Try again.,录音无法开始。再试一次.
 Size limit reached. Recording saved to %1$s,已达大小上限，录制已保存到 %1$s
 2 GB reached. Recording goes on in a new video.,已达 2 GB，录制将在新视频中继续.
 The report couldn't be saved. Try again.,无法保存报告。再试一次.

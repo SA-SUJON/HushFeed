@@ -2313,6 +2313,8 @@ This LIVE's stream can't be saved	Bu LIVE-ın yayımını saxlamaq mümkün deyi
 There isn't enough room on the phone to record	Yazmaq üçün telefonda kifayət qədər yer yoxdur
 Nothing was recorded	Heç nə yazılmadı
 The recording couldn't be saved. Try again.	Yazı saxlanıla bilmədi. Yenidən cəhd et.
+An earlier recording is waiting. Retry or delete it.	Əvvəlki yazı gözləyir. Yenidən cəhd et və ya sil.
+The recording couldn't start. Try again.	Yazı başlaya bilmədi. Yenidən cəhd et.
 Can't retry those photos. Save the post again.	Fotoları təkrarlamaq olmur. Paylaşımı yenidən saxlayın.
 Show the time zone	Saat qurşağını göstərin
 Puts your time zone after the time to the second, like EDT.	Saniyəsinə qədər göstərilən vaxtın ardından saat qurşağınızı yazır, məsələn EDT.

@@ -725,13 +725,15 @@ public final class LiveRecordChip {
             start();
         } catch (Throwable failure) {
             Logger.printException(() -> "Could not use the LIVE record button", failure);
-            boolean stillSaving = LiveRecordingSaver.backgroundSavesFull(failure);
-            if (stillSaving) {
-                Utils.showToastShort(L10n.t("Saving the recording"));
-            } else {
-                Utils.showToastShort(L10n.t("The recording couldn't be saved. Try again."));
-            }
+            cantStart(failure, true);
         }
+    }
+
+    /** #551: says why Record didn't start, in a sentence the toast wrap check measures. */
+    private static void cantStart(Throwable reason, boolean longer) {
+        String text = LiveRecordingSaver.cantStartText(reason);
+        if (longer) Utils.showToastLong(text);
+        else Utils.showToastShort(text);
     }
 
     /** The LIVE room's activity, the one TikTok's picture-in-picture window belongs to. */
@@ -904,7 +906,7 @@ public final class LiveRecordChip {
             } catch (Throwable failure) {
                 Logger.printException(() -> "Could not start the screen recording", failure);
                 ScreenCapture.discardUnused();
-                Utils.showToastShort(L10n.t("The recording couldn't be saved. Try again."));
+                cantStart(failure, true);
                 refresh();
             }
         });
@@ -1160,7 +1162,7 @@ public final class LiveRecordChip {
                         } catch (Throwable failure) {
                             Logger.printException(() -> "Could not automatically record the PiP LIVE", failure);
                             if (LiveRecordingSaver.backgroundSavesFull(failure)) autoVisit.waitForSave();
-                            else Utils.showToastShort(L10n.t("The recording couldn't be saved. Try again."));
+                            else cantStart(failure, false);
                         }
                     }
                 } else {
@@ -1213,7 +1215,7 @@ public final class LiveRecordChip {
                         if (LiveRecordingSaver.backgroundSavesFull(failure)) {
                             autoVisit.waitForSave();
                         } else {
-                            Utils.showToastShort(L10n.t("The recording couldn't be saved. Try again."));
+                            cantStart(failure, true);
                         }
                     }
                 }

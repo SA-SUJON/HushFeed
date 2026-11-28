@@ -2313,6 +2313,8 @@ This LIVE's stream can't be saved	Bu LIVE'ın yayını kaydedilemiyor
 There isn't enough room on the phone to record	Kayıt için telefonda yeterli yer yok
 Nothing was recorded	Hiçbir şey kaydedilmedi
 The recording couldn't be saved. Try again.	Kayıt kaydedilemedi. Tekrar dene.
+An earlier recording is waiting. Retry or delete it.	Önceki bir kayıt bekliyor. Tekrar dene ya da sil.
+The recording couldn't start. Try again.	Kayıt başlatılamadı. Tekrar dene.
 Can't retry those photos. Save the post again.	Fotoğraflar denenemez. Gönderiyi tekrar kaydet.
 Show the time zone	Saat dilimini göster
 Puts your time zone after the time to the second, like EDT.	Saniyesine kadar gösterilen saatin ardına saat dilimini ekler, örneğin EDT.

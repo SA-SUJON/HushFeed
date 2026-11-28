@@ -2316,6 +2316,8 @@ This LIVE's stream can't be saved	ไม่สามารถบันทึก�
 There isn't enough room on the phone to record	โทรศัพท์มีพื้นที่ว่างไม่เพียงพอสำหรับการบันทึก
 Nothing was recorded	ไม่ได้บันทึกอะไรไว้
 The recording couldn't be saved. Try again.	ไม่สามารถบันทึกได้ โปรดลองอีกครั้ง
+An earlier recording is waiting. Retry or delete it.	มีไฟล์ที่อัดไว้ก่อนหน้ารออยู่ ลองอีกครั้งหรือลบทิ้ง
+The recording couldn't start. Try again.	เริ่มอัดไม่ได้ โปรดลองอีกครั้ง
 Can't retry those photos. Save the post again.	ไม่สามารถลองรูปภาพเหล่านั้นซ้ำได้ โปรดบันทึกโพสต์อีกครั้ง
 Show the time zone	แสดงเขตเวลา
 Puts your time zone after the time to the second, like EDT.	แสดงเขตเวลาของคุณต่อท้ายเวลาแบบระบุวินาที เช่น EDT

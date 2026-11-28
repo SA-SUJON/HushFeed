@@ -33,6 +33,20 @@ public final class LiveRecordingSaver {
         return failure instanceof RecordingRetention.BackgroundSaveLimit;
     }
 
+    /**
+     * #551: why Record couldn't begin a new recording. Nothing was recorded yet, so "couldn't be
+     * saved" was wrong, and an earlier recording that still waits for Retry, Export or Delete
+     * refuses every later one until it's dealt with (its list opens on its own).
+     */
+    public static String cantStartText(Throwable failure) {
+        if (failure instanceof RecordingRetention.RetainedRecordings)
+            return L10n.t("An earlier recording is waiting. Retry or delete it.");
+        if (failure instanceof RecordingRetention.BackgroundSaveLimit) return L10n.t("Saving the recording");
+        if (failure instanceof RecordingRetention.NotEnoughRoom)
+            return L10n.t("There isn't enough room on the phone to record");
+        return L10n.t("The recording couldn't start. Try again.");
+    }
+
     /** Where recordings are saved, which is where videos are. */
     public static String folder() {
         return DownloadsPatch.getVideoDownloadPath();
@@ -106,20 +120,34 @@ public final class LiveRecordingSaver {
     /**
      * #531: a stream recording that ended before a playable frame (a few bytes, or a remux with
      * no video) has nothing to keep. Left retained, its folder refused every later Record and
-     * Retry. Screen captures, and anything with a publication receipt, stay retained.
+     * Retry. #551: the same held for a screen capture that stopped before its first picture, so
+     * one is dropped too, but only when its own file shows no video sample at all. Anything with
+     * a publication receipt stays retained.
      */
-    private static boolean discardNothing(RecordingRetention.Record record) {
+    static boolean discardNothing(RecordingRetention.Record record) {
         String format = record.get("format");
+        boolean capture = "true".equals(record.get("capture"));
         if (record.quarantined || record.acknowledged() || !"CAPTURING".equals(record.get("state"))
-                || "true".equals(record.get("capture")) || !("flv".equals(format) || "ts".equals(format)))
+                || !("flv".equals(format) || "ts".equals(format)) || capture && !"flv".equals(format))
             return false;
         for (String receipt : new String[] {"final", "intentKey", "uri", "file", "legacy"})
             if (!record.get(receipt).isEmpty()) return false;
+        if (capture && !noCapturedVideo(record)) return false;
         try {
             record.update("state", "DISCARDED");
             return true;
         } catch (IOException failure) {
             Logger.printException(() -> "An empty LIVE recording could not be discarded", failure);
+            return false;
+        }
+    }
+
+    /** A capture whose file parses without a single video sample; unreadable files are kept. */
+    private static boolean noCapturedVideo(RecordingRetention.Record record) {
+        try {
+            File source = record.source();
+            return !source.exists() || !CaptureFlv.prefix(source).usable();
+        } catch (IOException | RuntimeException unreadable) {
             return false;
         }
     }
@@ -208,6 +236,10 @@ public final class LiveRecordingSaver {
                 LiveRecorder.Published published = publishRecord(app, record);
                 results.add(new LiveRecorder.Result(LiveRecorder.Outcome.SAVED_PARTIAL, LiveRecorder.End.APP_EXIT, 0, published.name, published.saved, null)
                         .withScreenAudio(LiveRecorder.ScreenAudio.valueOf(record.get("screenAudio"))));
+            } catch (LiveRemux.NothingRecorded nothing) {
+                // #551: an empty capture left by an older version clears at the next start.
+                if (record == null || !discardNothing(record))
+                    results.add(new LiveRecorder.Result(LiveRecorder.Outcome.FAILED, LiveRecorder.End.APP_EXIT, 0, null, null, null).withRetainedId(id));
             } catch (IOException | RuntimeException failure) {
                 results.add(new LiveRecorder.Result(LiveRecorder.Outcome.FAILED, LiveRecorder.End.APP_EXIT, 0, null, null, null).withRetainedId(id));
             } finally { if(record!=null)close(record); }

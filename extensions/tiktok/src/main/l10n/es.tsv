@@ -2313,6 +2313,8 @@ This LIVE's stream can't be saved	La transmisión de este LIVE no se puede guard
 There isn't enough room on the phone to record	No hay espacio suficiente en el teléfono para grabar
 Nothing was recorded	No se grabó nada
 The recording couldn't be saved. Try again.	No se guardó la grabación. Reintenta.
+An earlier recording is waiting. Retry or delete it.	Grabación pendiente. Reinténtala o bórrala.
+The recording couldn't start. Try again.	No se pudo iniciar la grabación. Reintenta.
 Can't retry those photos. Save the post again.	No se reintentan esas fotos. Vuelve a guardar el post.
 Show the time zone	Mostrar la zona horaria
 Puts your time zone after the time to the second, like EDT.	Pone tu zona horaria después de la hora al segundo, como EDT.

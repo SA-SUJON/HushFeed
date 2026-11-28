@@ -38,6 +38,20 @@ final class RecordingRetention {
             super("Too many LIVE recordings are still saving");
         }
     }
+
+    /** #551: an earlier recording's files wait for Retry, Export or Delete before another starts. */
+    static final class RetainedRecordings extends IOException {
+        RetainedRecordings() {
+            super("Recover retained recordings before recording again");
+        }
+    }
+
+    /** The phone has no room left for the recordings still being saved and a new one. */
+    static final class NotEnoughRoom extends IOException {
+        NotEnoughRoom() {
+            super("Not enough storage for recordings still saving");
+        }
+    }
     final File root;
     final File legacyRoot;
 
@@ -259,13 +273,13 @@ final class RecordingRetention {
      * recordings still block admission until they are recovered: a journal flag alone is never
      * evidence that another process still owns its source and destination. */
     private void checkCaptureAdmission() throws IOException {
-        if (hasLegacyDebt()) throw new IOException("Recover retained recordings before recording again");
+        if (hasLegacyDebt()) throw new RetainedRecordings();
         int saving = 0;
         long outstandingBytes = 0;
         for (File directory : directories()) {
             JSONObject data = read(directory);
             if (!data.optBoolean("captureClosed") || !currentlyLeased(directory)) {
-                throw new IOException("Recover retained recordings before recording again");
+                throw new RetainedRecordings();
             }
             if (++saving > MAX_BACKGROUND_SAVES)
                 throw new BackgroundSaveLimit();
@@ -287,7 +301,7 @@ final class RecordingRetention {
         long free = root.getUsableSpace();
         if (free > 0 && (outstandingBytes > Long.MAX_VALUE - LiveRecorder.RESERVE_BYTES
                 || free < outstandingBytes + LiveRecorder.RESERVE_BYTES)) {
-            throw new IOException("Not enough storage for recordings still saving");
+            throw new NotEnoughRoom();
         }
     }
 

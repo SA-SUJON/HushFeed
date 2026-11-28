@@ -2263,6 +2263,8 @@ Recording stopped early. Saved to %1$s,Rekaman berhenti lebih awal. Disimpan di 
 "There isn't enough room on the phone to record","Ruang di ponsel tidak cukup untuk merekam"
 "Nothing was recorded","Tidak ada yang terekam"
 The recording couldn't be saved. Try again.,Rekaman tidak bisa disimpan. Coba lagi.
+An earlier recording is waiting. Retry or delete it.,Rekaman lama menunggu. Coba lagi atau hapus.
+The recording couldn't start. Try again.,Rekaman tidak bisa dimulai. Coba lagi.
 Can't retry those photos. Save the post again.,Foto itu tak bisa diulang. Simpan postingan lagi.
 Show the time zone,Tampilkan zona waktu
 "Puts your time zone after the time to the second, like EDT.","Menaruh zona waktumu setelah waktu hingga detik, seperti EDT."

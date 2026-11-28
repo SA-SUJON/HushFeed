@@ -2316,6 +2316,8 @@ This LIVE's stream can't be saved	Der Stream dieses LIVE lässt sich nicht speic
 There isn't enough room on the phone to record	Auf dem Telefon ist nicht genug Platz für die Aufnahme
 Nothing was recorded	Es wurde nichts aufgenommen
 The recording couldn't be saved. Try again.	Aufnahme nicht gespeichert. Versuch es erneut.
+An earlier recording is waiting. Retry or delete it.	Frühere Aufnahme wartet. Wiederholen oder löschen.
+The recording couldn't start. Try again.	Aufnahme konnte nicht starten. Versuch es erneut.
 Can't retry those photos. Save the post again.	Fotos nicht erneut möglich. Speichere den Beitrag neu.
 Show the time zone	Zeitzone anzeigen
 Puts your time zone after the time to the second, like EDT.	Setzt deine Zeitzone hinter die sekundengenaue Uhrzeit, etwa MESZ.

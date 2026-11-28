@@ -2556,6 +2556,8 @@ This LIVE's stream can't be saved	لا يمكن حفظ بث هذا LIVE
 There isn't enough room on the phone to record	لا توجد مساحة كافية على الهاتف للتسجيل
 Nothing was recorded	لم يتم تسجيل أي شيء
 The recording couldn't be saved. Try again.	تعذر حفظ التسجيل. حاول مرة أخرى.
+An earlier recording is waiting. Retry or delete it.	تسجيل سابق ينتظر. أعد المحاولة أو احذفه.
+The recording couldn't start. Try again.	تعذر بدء التسجيل. حاول مرة أخرى.
 Can't retry those photos. Save the post again.	لا يمكن إعادة محاولة تلك الصور. احفظ المنشور مجددًا.
 Show the time zone	إظهار المنطقة الزمنية
 Puts your time zone after the time to the second, like EDT.	يضع منطقتك الزمنية بعد الوقت بالثانية، مثل EDT.

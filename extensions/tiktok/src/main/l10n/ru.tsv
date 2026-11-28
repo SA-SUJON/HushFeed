@@ -2493,6 +2493,8 @@ This LIVE's stream can't be saved	Трансляцию этого LIVE нель�
 There isn't enough room on the phone to record	На телефоне не хватает места для записи
 Nothing was recorded	Ничего не записано
 The recording couldn't be saved. Try again.	Не удалось сохранить запись. Попробуйте ещё раз.
+An earlier recording is waiting. Retry or delete it.	Предыдущая запись ждёт. Повторите или удалите её.
+The recording couldn't start. Try again.	Не удалось начать запись. Попробуйте ещё раз.
 Can't retry those photos. Save the post again.	Эти фото нельзя повторить. Сохраните публикацию снова.
 Show the time zone	Показывать часовой пояс
 Puts your time zone after the time to the second, like EDT.	Добавляет ваш часовой пояс после времени до секунды, например EDT.

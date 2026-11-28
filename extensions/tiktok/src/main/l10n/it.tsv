@@ -2313,6 +2313,8 @@ This LIVE's stream can't be saved	Lo stream di questo LIVE non può essere salva
 There isn't enough room on the phone to record	Non c'è abbastanza spazio sul telefono per registrare
 Nothing was recorded	Non è stato registrato nulla
 The recording couldn't be saved. Try again.	Registrazione non salvata. Riprova.
+An earlier recording is waiting. Retry or delete it.	Registrazione in attesa. Riprova o eliminala.
+The recording couldn't start. Try again.	Impossibile avviare la registrazione. Riprova.
 Can't retry those photos. Save the post again.	Impossibile riprovare. Salva di nuovo il post.
 Show the time zone	Mostra il fuso orario
 Puts your time zone after the time to the second, like EDT.	Mette il tuo fuso orario dopo l'ora al secondo, come EDT.
