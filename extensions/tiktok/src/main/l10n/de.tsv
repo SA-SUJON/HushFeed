@@ -2749,6 +2749,10 @@ Done. %1$d removed.	Fertig. %1$d entfernt.
 Stopped. %1$d removed.	Gestoppt. %1$d entfernt.
 TikTok refused. %1$d removed.	TikTok hat abgelehnt. %1$d entfernt.
 Network error. %1$d removed.	Netzwerkfehler. %1$d entfernt.
+Done. %1$d removed, %2$d skipped.	Fertig. %1$d entfernt, %2$d ausgelassen.
+Stopped. %1$d removed, %2$d skipped.	Gestoppt. %1$d entfernt, %2$d ausgelassen.
+TikTok refused. %1$d removed, %2$d skipped.	TikTok lehnte ab. %1$d entfernt, %2$d ausgelassen.
+Network error. %1$d removed, %2$d skipped.	Netzwerkfehler. %1$d entfernt, %2$d ausgelassen.
 Not available on this TikTok version	In dieser TikTok-Version nicht verfügbar
 Sign in to TikTok first	Melde dich zuerst bei TikTok an
 A removal is already running	Es läuft bereits eine Entfernung

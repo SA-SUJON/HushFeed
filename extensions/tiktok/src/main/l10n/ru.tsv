@@ -2932,6 +2932,10 @@ Done. %1$d removed.	Готово. Удалено: %1$d.
 Stopped. %1$d removed.	Остановлено. Удалено: %1$d.
 TikTok refused. %1$d removed.	TikTok отказал. Удалено: %1$d.
 Network error. %1$d removed.	Ошибка сети. Удалено: %1$d.
+Done. %1$d removed, %2$d skipped.	Готово. Удалено: %1$d, пропущено: %2$d.
+Stopped. %1$d removed, %2$d skipped.	Остановлено. Удалено: %1$d, пропущено: %2$d.
+TikTok refused. %1$d removed, %2$d skipped.	TikTok отказал. Удалено: %1$d, пропущено: %2$d.
+Network error. %1$d removed, %2$d skipped.	Ошибка сети. Удалено: %1$d, пропущено: %2$d.
 Not available on this TikTok version	Недоступно в этой версии TikTok
 Sign in to TikTok first	Сначала войдите в TikTok
 A removal is already running	Удаление уже идёт

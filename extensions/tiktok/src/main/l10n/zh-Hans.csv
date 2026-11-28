@@ -2685,6 +2685,10 @@ Done. %1$d removed.,完成。已移除 %1$d 项.
 Stopped. %1$d removed.,已停止。已移除 %1$d 项.
 TikTok refused. %1$d removed.,TikTok 拒绝了请求。已移除 %1$d 项.
 Network error. %1$d removed.,网络错误。已移除 %1$d 项.
+"Done. %1$d removed, %2$d skipped.",完成。已移除 %1$d 项，跳过 %2$d 项.
+"Stopped. %1$d removed, %2$d skipped.",已停止。已移除 %1$d 项，跳过 %2$d 项.
+"TikTok refused. %1$d removed, %2$d skipped.",TikTok 拒绝了请求。已移除 %1$d 项，跳过 %2$d 项.
+"Network error. %1$d removed, %2$d skipped.",网络错误。已移除 %1$d 项，跳过 %2$d 项.
 Not available on this TikTok version,此 TikTok 版本不支持
 Sign in to TikTok first,请先登录 TikTok
 A removal is already running,已有移除任务在进行

@@ -2746,6 +2746,10 @@ Done. %1$d removed.	Bitti. %1$d kaldırıldı.
 Stopped. %1$d removed.	Durduruldu. %1$d kaldırıldı.
 TikTok refused. %1$d removed.	TikTok reddetti. %1$d kaldırıldı.
 Network error. %1$d removed.	Ağ hatası. %1$d kaldırıldı.
+Done. %1$d removed, %2$d skipped.	Bitti. %1$d kaldırıldı, %2$d atlandı.
+Stopped. %1$d removed, %2$d skipped.	Durduruldu. %1$d kaldırıldı, %2$d atlandı.
+TikTok refused. %1$d removed, %2$d skipped.	TikTok reddetti. %1$d kaldırıldı, %2$d atlandı.
+Network error. %1$d removed, %2$d skipped.	Ağ hatası. %1$d kaldırıldı, %2$d atlandı.
 Not available on this TikTok version	Bu TikTok sürümünde kullanılamıyor
 Sign in to TikTok first	Önce TikTok'ta oturum aç
 A removal is already running	Bir kaldırma işlemi zaten sürüyor

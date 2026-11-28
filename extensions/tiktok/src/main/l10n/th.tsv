@@ -2749,6 +2749,10 @@ Done. %1$d removed.	เสร็จสิ้น ลบแล้ว %1$d รา�
 Stopped. %1$d removed.	หยุดแล้ว ลบแล้ว %1$d รายการ
 TikTok refused. %1$d removed.	TikTok ปฏิเสธ ลบแล้ว %1$d รายการ
 Network error. %1$d removed.	ข้อผิดพลาดเครือข่าย ลบแล้ว %1$d รายการ
+Done. %1$d removed, %2$d skipped.	เสร็จสิ้น ลบแล้ว %1$d รายการ ข้าม %2$d รายการ
+Stopped. %1$d removed, %2$d skipped.	หยุดแล้ว ลบแล้ว %1$d รายการ ข้าม %2$d รายการ
+TikTok refused. %1$d removed, %2$d skipped.	TikTok ปฏิเสธ ลบแล้ว %1$d รายการ ข้าม %2$d รายการ
+Network error. %1$d removed, %2$d skipped.	ข้อผิดพลาดเครือข่าย ลบแล้ว %1$d รายการ ข้าม %2$d รายการ
 Not available on this TikTok version	ไม่พร้อมใช้งานในเวอร์ชัน TikTok นี้
 Sign in to TikTok first	โปรดลงชื่อเข้าใช้ TikTok ก่อน
 A removal is already running	การลบกำลังดำเนินการอยู่แล้ว

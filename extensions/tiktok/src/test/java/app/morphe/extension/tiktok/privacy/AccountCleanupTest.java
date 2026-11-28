@@ -527,6 +527,16 @@ public class AccountCleanupTest {
         assertEquals("Removing the picked comments in 4",
                 AccountCleanup.countdownText(activity, Kind.COMMENTS, true, 4));
         assertEquals("Comments removed: 9", AccountCleanup.progressText(activity, Kind.COMMENTS, 9));
+        Kind comments = Kind.COMMENTS;
+        assertEquals("Done. 12 removed, 2 skipped.", AccountCleanup.endText(activity, comments, End.DONE, 12, 2));
+        assertEquals("Done. 0 removed, 1 skipped.", AccountCleanup.endText(activity, comments, End.DONE, 0, 1));
+        assertEquals("Stopped. 3 removed, 1 skipped.", AccountCleanup.endText(activity, comments, End.STOPPED, 3, 1));
+        assertEquals("TikTok refused. 3 removed, 4 skipped.",
+                AccountCleanup.endText(activity, comments, End.REFUSED, 3, 4));
+        assertEquals("Network error. 0 removed, 5 skipped.",
+                AccountCleanup.endText(activity, comments, End.NETWORK, 0, 5));
+        assertEquals("none skipped reads as before", "Done. 12 removed.",
+                AccountCleanup.endText(activity, comments, End.DONE, 12, 0));
 
         Kind unfollow = Kind.NOT_FOLLOWING_BACK;
         assertEquals("Unfollowed: 4", AccountCleanup.progressText(activity, unfollow, 4));
@@ -606,16 +616,72 @@ public class AccountCleanupTest {
         assertEquals("every request but the first waited", account.requests.size() - 1, pauses.size());
     }
 
-    @Test public void commentsStopAtTikToksFirstRefusal() {
-        FakeTikTok.Account account = new FakeTikTok.Account().withComments(3);
-        account.refuse = "c1";
+    @Test public void aCommentOnAVideoThatsGoneIsSkippedAndTheRestAreDeleted() {
+        // #557: TikTok refuses the delete of a comment whose video was deleted or made private
+        // with a status code about that comment. The run used to stop there with 0 removed.
+        FakeTikTok.Account account = new FakeTikTok.Account().withComments(5);
+        account.commentDeleteAnswers.put("c0", "{\"status_code\":2065,\"status_msg\":\"This video is unavailable\"}");
+        account.commentDeleteAnswers.put("c3", new FakeTikTok.ApiServerException(2065));
         AccountCleanup.servicesForTests = account;
 
         AccountCleanup.start(activity, Kind.COMMENTS);
         countDown();
 
-        assertEquals("TikTok refused. 1 removed.", bannerText());
-        assertEquals(List.of("c1", "c2"), account.comments);
+        assertEquals("Done. 3 removed, 2 skipped.", bannerText());
+        assertEquals(List.of("c0", "c3"), account.comments);
+        assertEquals("each comment was asked about once", 5,
+                account.requests.stream().filter(request -> request.startsWith("doPost ")).count());
+        assertFalse(AccountCleanup.running());
+    }
+
+    @Test public void aPickedCommentOnAVideoThatsGoneIsSkipped() {
+        FakeTikTok.Account account = new FakeTikTok.Account().withComments(4);
+        account.commentDeleteAnswers.put("c1", "{\"status_code\":2065,\"status_msg\":\"This video is unavailable\"}");
+        AccountCleanup.servicesForTests = account;
+
+        AccountCleanup.startPicked(activity, List.of("c1", "c2"));
+        countDown();
+
+        assertEquals("Done. 1 removed, 1 skipped.", bannerText());
+        assertEquals(List.of("c0", "c1", "c3"), account.comments);
+    }
+
+    @Test public void aCaptchaARateLimitOrSigningOutStillStopsTheCommentRun() {
+        Object[] refusals = {
+                new FakeTikTok.BdTuringCaptchaException(),
+                new FakeTikTok.HttpResponseException(429),
+                new FakeTikTok.HttpResponseException(403),
+                "{\"status_code\":8,\"status_msg\":\"Please log in\"}",
+                new FakeTikTok.ApiServerException(AccountCleanupSources.SIGNED_OUT_STATUS),
+                "<html>not JSON</html>",
+        };
+        for (Object refusal : refusals) {
+            FakeTikTok.Account account = new FakeTikTok.Account().withComments(3);
+            account.commentDeleteAnswers.put("c1", refusal);
+            AccountCleanup.servicesForTests = account;
+
+            AccountCleanup.start(activity, Kind.COMMENTS);
+            countDown();
+
+            assertEquals("after " + refusal, "TikTok refused. 1 removed.", bannerText());
+            assertEquals("after " + refusal, List.of("c1", "c2"), account.comments);
+            assertFalse(AccountCleanup.running());
+        }
+    }
+
+    @Test public void tenCommentsInARowRefusedOneByOneStopTheRun() {
+        FakeTikTok.Account account = new FakeTikTok.Account().withComments(14);
+        for (int index = 0; index < 14; index++) {
+            account.commentDeleteAnswers.put("c" + index, "{\"status_code\":2065,\"status_msg\":\"no\"}");
+        }
+        AccountCleanup.servicesForTests = account;
+
+        AccountCleanup.start(activity, Kind.COMMENTS);
+        countDown();
+
+        assertEquals("TikTok refused. 0 removed, 10 skipped.", bannerText());
+        assertEquals(10, account.requests.stream().filter(request -> request.startsWith("doPost ")).count());
+        assertEquals(14, account.comments.size());
     }
 
     @Test public void aCommentHistoryTikTokWontListEndsTheRun() {

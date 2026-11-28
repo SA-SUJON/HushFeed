@@ -144,16 +144,58 @@ final class FakeTikTok {
         }
     }
 
-    /** A Retrofit-like call: execute() answers the response. */
+    /** A Retrofit-like call: execute() answers the response, or throws what the request failed with. */
     public static final class Call {
         private final Object response;
+        private final RuntimeException failure;
 
         Call(Object response) {
+            this(response, null);
+        }
+
+        Call(Object response, RuntimeException failure) {
             this.response = response;
+            this.failure = failure;
         }
 
         public Object execute() {
+            if (failure != null) throw failure;
             return response;
+        }
+    }
+
+    /** What TikTok's network layer throws when the server raises a captcha for a request. */
+    public static final class BdTuringCaptchaException extends RuntimeException {
+        BdTuringCaptchaException() {
+            super("captcha");
+        }
+    }
+
+    /** What TikTok's network layer throws for a server answer with an error code. */
+    public static final class ApiServerException extends RuntimeException {
+        private final int errorCode;
+
+        ApiServerException(int errorCode) {
+            super("server error " + errorCode);
+            this.errorCode = errorCode;
+        }
+
+        public int getErrorCode() {
+            return errorCode;
+        }
+    }
+
+    /** What TikTok's network layer throws for an HTTP status other than 200. */
+    public static final class HttpResponseException extends RuntimeException {
+        private final int statusCode;
+
+        HttpResponseException(int statusCode) {
+            super("HTTP " + statusCode);
+            this.statusCode = statusCode;
+        }
+
+        public int getStatusCode() {
+            return statusCode;
         }
     }
 
@@ -209,6 +251,9 @@ final class FakeTikTok {
                 List<Object> headers, Object extraInfo) {
             account.log("doPost " + url + " " + fields);
             if ("/aweme/v1/commit/follow/user/".equals(url)) return new Call(new RenamedResponse(account.unfollow(fields)));
+            Object answer = account.commentDeleteAnswers.get(fields.get("cid"));
+            if (answer instanceof RuntimeException) return new Call(null, (RuntimeException) answer);
+            if (answer != null) return new Call(new RenamedResponse(answer));
             return new Call(new RenamedResponse(account.deleteComment(url, fields)));
         }
     }
@@ -341,6 +386,11 @@ final class FakeTikTok {
         volatile boolean refuseUnavailable;
         /** The status code the comment history answers with; zero lists. */
         volatile int commentHistoryStatus;
+        /**
+         * What deleting a comment answers instead of deleting it, by cid: a JSON body as text, or
+         * an exception the request throws. The comment stays on the account.
+         */
+        final Map<String, Object> commentDeleteAnswers = new java.util.concurrent.ConcurrentHashMap<>();
 
         Account withReposts(int count) {
             for (int index = 0; index < count; index++) reposts.add("r" + index);

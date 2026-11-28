@@ -31,6 +31,8 @@ public class CleanupRunnerTest {
         /** A list whose removed items keep being listed, as a cached list does. */
         boolean sticky;
         String failOn;
+        /** Items TikTok refuses one by one, marked as about that item alone. */
+        final java.util.Set<String> refusedAlone = new java.util.HashSet<>();
         End failure = End.REFUSED;
         int fetchFailureAt = -1;
         RuntimeException unexpected;
@@ -55,6 +57,9 @@ public class CleanupRunnerTest {
             requests.add("remove " + id);
             if (unexpected != null) throw unexpected;
             if (id.equals(failOn)) throw new Failure(failure, "removal refused");
+            if (refusedAlone.contains(id)) {
+                throw new Failure(End.REFUSED, "status code 2065 gone", 2065).forThisItemOnly();
+            }
             removed.add(id);
             if (!sticky) items.remove(id);
         }
@@ -289,6 +294,48 @@ public class CleanupRunnerTest {
                     listing.requests.get(listing.requests.size() - 1));
             assertEquals(List.of("v4", "v5", "v6", "v7", "v8", "v9"), listing.items.subList(1, 7));
         }
+    }
+
+    @Test public void aRefusalAboutOneItemSkipsItAndTheRunGoesOn() {
+        // #557: a comment on a video that's gone is refused on its own; the rest still go.
+        Listing listing = new Listing(30);
+        listing.refusedAlone.add("v0");
+        listing.refusedAlone.add("v21");
+        List<Integer> counts = new ArrayList<>();
+        CleanupRunner runner = runner(listing, new Clock(), counts);
+
+        assertEquals(End.DONE, runner.run());
+        assertEquals(28, runner.removed());
+        assertEquals(2, runner.skipped());
+        assertEquals(List.of("v0", "v21"), listing.items);
+        assertEquals("status code 2065 gone", runner.lastRefusal());
+        for (String id : List.of("v0", "v21", "v5")) {
+            assertEquals(id + " was asked once", 1,
+                    listing.requests.stream().filter(request -> request.equals("remove " + id)).count());
+        }
+        assertEquals("only removals are counted as they land", 28, counts.size());
+    }
+
+    @Test public void tenItemsInARowRefusedOneByOneEndTheRunAsRefused() {
+        Listing listing = new Listing(25);
+        for (int index = 0; index < 15; index++) listing.refusedAlone.add("v" + index);
+        CleanupRunner runner = runner(listing, new Clock(), new ArrayList<>());
+
+        assertEquals(End.REFUSED, runner.run());
+        assertEquals(0, runner.removed());
+        assertEquals(CleanupRunner.SKIPS_IN_A_ROW, runner.skipped());
+        assertEquals("nothing went out after the tenth", "remove v9",
+                listing.requests.get(listing.requests.size() - 1));
+    }
+
+    @Test public void aRemovalBetweenSkipsStartsTheRowAgain() {
+        Listing listing = new Listing(40);
+        for (int index = 0; index < 40; index += 2) listing.refusedAlone.add("v" + index);
+        CleanupRunner runner = runner(listing, new Clock(), new ArrayList<>());
+
+        assertEquals(End.DONE, runner.run());
+        assertEquals(20, runner.removed());
+        assertEquals(20, runner.skipped());
     }
 
     @Test public void aRefusedListReadEndsTheRun() {

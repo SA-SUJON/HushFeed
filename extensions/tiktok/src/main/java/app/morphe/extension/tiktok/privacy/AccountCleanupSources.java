@@ -499,10 +499,29 @@ public final class AccountCleanupSources {
         return new Comments(comments, next, flag(body.opt("has_more")));
     }
 
+    /**
+     * Deletes one comment with the comment panel's request. A status code TikTok answers for the
+     * comment itself, as it does for a comment on a video that's been deleted or made private
+     * since, marks the refusal as about this comment only, so a run skips it and goes on (#557).
+     * A captcha or verify check, a 401, 403 or 429, an answer that isn't JSON and the signed-out
+     * code still stop the run.
+     */
     static void deleteComment(Services services, String cid) throws Failure {
         Map<String, String> form = new LinkedHashMap<>();
         form.put("cid", cid);
-        answered(post(services.network(), COMMENT_DELETE, form));
+        try {
+            answered(post(services.network(), COMMENT_DELETE, form));
+        } catch (Failure refused) {
+            throw aboutThisCommentOnly(refused) ? refused.forThisItemOnly() : refused;
+        }
+    }
+
+    /** The status code TikTok answers a request with when nobody is signed in. */
+    static final int SIGNED_OUT_STATUS = 8;
+
+    /** Whether TikTok's refusal names a code about the comment asked for, not the account. */
+    static boolean aboutThisCommentOnly(Failure refused) {
+        return refused.end() == End.REFUSED && refused.code() != 0 && refused.code() != SIGNED_OUT_STATUS;
     }
 
     /** A GET through the general request service, with the app's usual query added. */
@@ -547,7 +566,7 @@ public final class AccountCleanupSources {
         }
         int status = json.optInt("status_code", 0);
         if (status != 0) {
-            throw new Failure(End.REFUSED, "status code " + status + " " + json.optString("status_msg", ""));
+            throw new Failure(End.REFUSED, "status code " + status + " " + json.optString("status_msg", ""), status);
         }
         return json;
     }

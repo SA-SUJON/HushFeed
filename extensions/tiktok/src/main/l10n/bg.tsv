@@ -2749,6 +2749,10 @@ Done. %1$d removed.	Готово. Премахнати: %1$d.
 Stopped. %1$d removed.	Прекъснато. Премахнати: %1$d.
 TikTok refused. %1$d removed.	TikTok отказа. Премахнати: %1$d.
 Network error. %1$d removed.	Грешка в мрежата. Премахнати: %1$d.
+Done. %1$d removed, %2$d skipped.	Готово. Премахнати: %1$d, пропуснати: %2$d.
+Stopped. %1$d removed, %2$d skipped.	Прекъснато. Премахнати: %1$d, пропуснати: %2$d.
+TikTok refused. %1$d removed, %2$d skipped.	TikTok отказа. Премахнати: %1$d, пропуснати: %2$d.
+Network error. %1$d removed, %2$d skipped.	Мрежова грешка. Премахнати: %1$d, пропуснати: %2$d.
 Not available on this TikTok version	Не е налично в тази версия на TikTok
 Sign in to TikTok first	Първо влез в TikTok
 A removal is already running	Вече тече премахване

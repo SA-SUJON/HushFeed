@@ -17,7 +17,9 @@ import java.util.Set;
  *
  * <p>Nothing here knows TikTok. A {@link Source} reads pages and removes items, a {@link Pacer}
  * waits, and the first refusal, captcha, rate limit or network error ends the run with the count
- * so far.</p>
+ * so far. The one exception is a refusal the source marks as about that item alone, such as a
+ * comment on a video that's gone (#557): the item is skipped and counted, and the run goes on
+ * unless {@link #SKIPS_IN_A_ROW} of them come back to back.</p>
  */
 public final class CleanupRunner {
     /** Shortest pause before a request, so a run reads like a person and not a script. */
@@ -29,6 +31,12 @@ public final class CleanupRunner {
      * keep coming back after they were removed would otherwise be walked forever.
      */
     static final int STALE_PAGES = 20;
+    /**
+     * Items in a row TikTok refused one by one before the run takes it as TikTok refusing them
+     * all. A refusal that only looks like it's about one item mustn't keep a run sending request
+     * after refused request down the whole list.
+     */
+    static final int SKIPS_IN_A_ROW = 10;
 
     /** How a run ended. */
     public enum End {
@@ -57,17 +65,46 @@ public final class CleanupRunner {
         }
     }
 
-    /** A request that ended the run. */
+    /** A request that ended the run, or with {@link #onlyThisItem()} one the run skips. */
     public static final class Failure extends Exception {
         final End end;
+        /** The code TikTok's server answered with, or 0 when it named none. */
+        final int code;
+        final boolean onlyThisItem;
 
         public Failure(End end, String detail) {
+            this(end, detail, 0, false);
+        }
+
+        public Failure(End end, String detail, int code) {
+            this(end, detail, code, false);
+        }
+
+        private Failure(End end, String detail, int code, boolean onlyThisItem) {
             super(detail);
             this.end = end;
+            this.code = code;
+            this.onlyThisItem = onlyThisItem;
         }
 
         public End end() {
             return end;
+        }
+
+        public int code() {
+            return code;
+        }
+
+        /** Whether the refusal was about the one item asked for, so the run can skip it. */
+        public boolean onlyThisItem() {
+            return onlyThisItem;
+        }
+
+        /** The same refusal, marked as about the one item asked for. */
+        public Failure forThisItemOnly() {
+            Failure item = new Failure(end, getMessage(), code, true);
+            item.setStackTrace(getStackTrace());
+            return item;
         }
     }
 
@@ -110,6 +147,9 @@ public final class CleanupRunner {
     private final Set<String> tried = new HashSet<>();
     private volatile boolean stopRequested;
     private volatile int removed;
+    private volatile int skipped;
+    /** What TikTok said about the last refusal, skipped or not, for the log. Null when none came. */
+    private volatile String lastRefusal;
 
     public CleanupRunner(Source source, Pacer pacer, Random random, Listener listener) {
         this.source = source;
@@ -133,6 +173,16 @@ public final class CleanupRunner {
         return removed;
     }
 
+    /** Items TikTok wouldn't remove one by one, which the run went past. */
+    public int skipped() {
+        return skipped;
+    }
+
+    /** What TikTok said about the last refusal, or null when none came. */
+    public String lastRefusal() {
+        return lastRefusal;
+    }
+
     /**
      * Works through the list and answers how it ended. Each page is read again from the same
      * place after it gave up items, since an offset list moves up the ones behind them and a
@@ -142,6 +192,7 @@ public final class CleanupRunner {
         long cursor = 0;
         boolean first = true;
         int stale = 0;
+        int skipsInARow = 0;
         try {
             while (true) {
                 if (!first && !pause()) return End.STOPPED;
@@ -152,7 +203,18 @@ public final class CleanupRunner {
                 for (String id : page.ids) {
                     if (id == null || id.isEmpty() || !tried.add(id)) continue;
                     if (!pause() || stopRequested) return End.STOPPED;
-                    source.remove(id);
+                    try {
+                        source.remove(id);
+                    } catch (Failure refused) {
+                        if (stopRequested || !refused.onlyThisItem) throw refused;
+                        // A skipped item stays listed, so the same page read again brings
+                        // nothing new from it and the run moves past it like a sticky one.
+                        lastRefusal = refused.getMessage();
+                        skipped++;
+                        if (++skipsInARow >= SKIPS_IN_A_ROW) return End.REFUSED;
+                        continue;
+                    }
+                    skipsInARow = 0;
                     removedAny = true;
                     removed++;
                     if (listener != null) listener.removed(removed);
@@ -165,6 +227,7 @@ public final class CleanupRunner {
                 cursor = page.next;
             }
         } catch (Failure failure) {
+            lastRefusal = failure.getMessage();
             return stopRequested ? End.STOPPED : failure.end;
         } catch (RuntimeException unexpected) {
             return stopRequested ? End.STOPPED : End.UNSUPPORTED;

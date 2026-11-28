@@ -2997,6 +2997,10 @@ Done. %1$d removed.	تم. تمت إزالة %1$d.
 Stopped. %1$d removed.	تم الإيقاف. تمت إزالة %1$d.
 TikTok refused. %1$d removed.	رفض TikTok. تمت إزالة %1$d.
 Network error. %1$d removed.	خطأ في الشبكة. تمت إزالة %1$d.
+Done. %1$d removed, %2$d skipped.	تم. تمت إزالة %1$d، وتم تخطي %2$d.
+Stopped. %1$d removed, %2$d skipped.	تم الإيقاف. تمت إزالة %1$d، وتم تخطي %2$d.
+TikTok refused. %1$d removed, %2$d skipped.	رفض TikTok. تمت إزالة %1$d، وتم تخطي %2$d.
+Network error. %1$d removed, %2$d skipped.	خطأ في الشبكة. تمت إزالة %1$d، وتم تخطي %2$d.
 Not available on this TikTok version	غير متاح في إصدار TikTok هذا
 Sign in to TikTok first	سجل الدخول إلى TikTok أولا
 A removal is already running	عملية الإزالة قيد التشغيل بالفعل

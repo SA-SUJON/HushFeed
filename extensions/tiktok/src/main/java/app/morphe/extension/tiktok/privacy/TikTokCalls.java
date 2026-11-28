@@ -351,7 +351,7 @@ final class TikTokCalls {
                 return new Failure(End.REFUSED, at.getClass().getName());
             }
             Integer code = number(Reflect.invoke(at, "getErrorCode"));
-            if (code != null && code != 0) return new Failure(End.REFUSED, "error code " + code);
+            if (code != null && code != 0) return new Failure(End.REFUSED, "error code " + code, code);
             Integer status = number(Reflect.invoke(at, "getStatusCode"));
             if (status != null && (status == 401 || status == 403 || status == 429)) {
                 return new Failure(End.REFUSED, "HTTP " + status);
@@ -373,7 +373,7 @@ final class TikTokCalls {
         Object status = Reflect.property(body, "getStatusCode", "status_code");
         if (status == null) status = Reflect.readField(body, "statusCode");
         Integer code = number(status);
-        if (code != null && code != 0) throw new Failure(End.REFUSED, "status code " + code);
+        if (code != null && code != 0) throw new Failure(End.REFUSED, "status code " + code, code);
     }
 
     private static Integer number(Object value) {

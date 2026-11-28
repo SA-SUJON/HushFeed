@@ -2687,6 +2687,10 @@ Done. %1$d removed.,Selesai. %1$d dihapus.
 Stopped. %1$d removed.,Dihentikan. %1$d dihapus.
 TikTok refused. %1$d removed.,TikTok menolak. %1$d dihapus.
 Network error. %1$d removed.,Kesalahan jaringan. %1$d dihapus.
+"Done. %1$d removed, %2$d skipped.","Selesai. %1$d dihapus, %2$d dilewati."
+"Stopped. %1$d removed, %2$d skipped.","Dihentikan. %1$d dihapus, %2$d dilewati."
+"TikTok refused. %1$d removed, %2$d skipped.","TikTok menolak. %1$d dihapus, %2$d dilewati."
+"Network error. %1$d removed, %2$d skipped.","Kesalahan jaringan. %1$d dihapus, %2$d dilewati."
 Not available on this TikTok version,Tidak tersedia di versi TikTok ini
 Sign in to TikTok first,Masuk ke TikTok terlebih dahulu
 A removal is already running,Penghapusan sedang berjalan

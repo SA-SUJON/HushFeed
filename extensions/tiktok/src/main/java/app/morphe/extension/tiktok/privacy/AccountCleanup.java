@@ -240,6 +240,26 @@ public final class AccountCleanup {
         }
     }
 
+    /**
+     * The last word with the items TikTok wouldn't remove one by one, which the run went past
+     * (#557). With none skipped it's the same as {@link #endText(Context, Kind, End, int)}.
+     */
+    static String endText(Context context, Kind kind, End end, int count, int skipped) {
+        if (skipped <= 0 || kind == Kind.NOT_FOLLOWING_BACK) return endText(context, kind, end, count);
+        switch (end) {
+            case DONE:
+                return L10n.f(context, "Done. %1$d removed, %2$d skipped.", count, skipped);
+            case STOPPED:
+                return L10n.f(context, "Stopped. %1$d removed, %2$d skipped.", count, skipped);
+            case REFUSED:
+                return L10n.f(context, "TikTok refused. %1$d removed, %2$d skipped.", count, skipped);
+            case NETWORK:
+                return L10n.f(context, "Network error. %1$d removed, %2$d skipped.", count, skipped);
+            default:
+                return L10n.t(context, "Not available on this TikTok version");
+        }
+    }
+
     static String endText(Context context, End end, int count) {
         switch (end) {
             case DONE:
@@ -453,19 +473,27 @@ public final class AccountCleanup {
                     end = End.UNSUPPORTED;
                 }
                 End result = end;
+                String refusal = started.lastRefusal();
+                // What TikTok answered goes in the log, so a report shows why a run stopped.
                 Logger.printInfo(() -> "Account cleanup " + kind + " ended " + result
-                        + " after " + started.removed());
-                Utils.runOnMainThread(() -> end(result, started.removed()));
+                        + " after " + started.removed()
+                        + (started.skipped() > 0 ? ", " + started.skipped() + " skipped" : "")
+                        + (refusal != null ? " (" + refusal + ")" : ""));
+                Utils.runOnMainThread(() -> end(result, started.removed(), started.skipped()));
             };
             background(work);
         }
 
         private void end(End end, int count) {
+            end(end, count, 0);
+        }
+
+        private void end(End end, int count, int skipped) {
             finished(this);
             SettingsActionBanner.dismissProgress(stop);
             Context ui = ui();
-            String text = end == End.STOPPED && count == 0 && SignedInUser.id() == null
-                    ? L10n.t(ui, "Sign in to TikTok first") : endText(ui, kind, end, count);
+            String text = end == End.STOPPED && count == 0 && skipped == 0 && SignedInUser.id() == null
+                    ? L10n.t(ui, "Sign in to TikTok first") : endText(ui, kind, end, count, skipped);
             // A notice in the settings window when it's open, a toast anywhere else.
             SettingsActionBanner.showNotice(ui, text);
         }
